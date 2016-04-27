@@ -30,7 +30,7 @@ prompt_setter() {
   fi
   # Save history
   _save-and-reload-history 1
-  PS1="($(clock_prompt)) $(scm_char) [${blue}\u${reset_color}@${green}\H${reset_color}] ${yellow}\w${reset_color}$(scm_prompt_info) ${reset_color}\n$(prompt_end) "
+  PS1="\n($(clock_prompt)) $(scm_char) [${blue}\u${reset_color}@${green}\H${reset_color}] ${yellow}\w${reset_color}$(scm_prompt_info) ${reset_color}\n$(prompt_end) "
   PS2='> '
   PS4='+ '
 }
