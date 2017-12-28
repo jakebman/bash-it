@@ -19,4 +19,4 @@ export JENV_ROOT="${JENV_ROOT:-$HOME/.jenv}"
   pathmunge "$JENV_ROOT/bin"
 
 # Initialize jenv
-eval "$(jenv init - bash)"
+eval "$(jenv init - bash --no-rehash)"
