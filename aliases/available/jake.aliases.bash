@@ -6,3 +6,4 @@ alias gti=git
 alias igt=git
 alias :q="echo You are not in vim"
 
+alias lsa='ls -a'
