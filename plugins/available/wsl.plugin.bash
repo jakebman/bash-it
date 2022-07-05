@@ -2,6 +2,7 @@ cite about-plugin
 about-plugin 'Windows Subsystem for Linux interop'
 
 __init_wsl() {
+  local WINDOWS_HOME='/mnt/c/Users/P2776931'
   local NPP='/mnt/c/Program Files (x86)/Notepad++'
   if [ -d "$NPP" ] ; then
     PATH="$PATH:$NPP"
@@ -16,6 +17,10 @@ __init_wsl() {
   if [ -d "$DOCK" ] ; then
     PATH="$PATH:$DOCK"
     alias docker=docker.exe
+  fi
+
+  if which mvn &>/dev/null ; then
+    export MAVEN_OPTS="-Dmaven.repo.local='${WINDOWS_HOME}/.m2/repository'"
   fi
 }
 
