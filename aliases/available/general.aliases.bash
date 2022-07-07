@@ -54,7 +54,7 @@ alias ..='cd ..'         # Go up one directory
 alias cd..='cd ..'       # Common misspelling for going up one directory
 alias ...='cd ../..'     # Go up two directories
 alias ....='cd ../../..' # Go up three directories
-alias -- -='cd -'        # Go back
+alias -- -='cd -'        # Go back with - (-- prevents -= from being considered a parameter)
 
 # Shell History
 alias h='history'
