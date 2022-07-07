@@ -20,22 +20,72 @@ __find_windows_user_home() {
   return
 }
 
-__init_wsl() {
-  local NPP='/mnt/c/Program Files (x86)/Notepad++'
-  if [ -d "$NPP" ] ; then
-    pathmunge "$NPP"
-    alias npp='notepad++.exe'
-    alias notepad++='notepad++.exe'
-    alias notepad='notepad++.exe'
-  fi
-  alias explorer='explorer.exe'
-  alias wsl='wsl.exe'
+function _command_exists_silently () {
+  _command_exists "$@" &>/dev/null
+}
 
-  local DOCK='/mnt/c/Program Files/Docker/Docker/resources/bin'
-  if [ -d "$DOCK" ] ; then
-    pathmunge "$DOCK"
-    alias docker=docker.exe
+__find_exe() {
+  #TODO: docs
+  EXE="${1?'need to find an exe'}"
+  if _command_exists_silently "$EXE" ; then
+    echo "$EXE"
+    return
   fi
+  shift # get $EXE out of $@ before we iterate over it
+  for dir in "$@"; do
+    if _command_exists_silently "${dir}/${EXE}" ; then
+      echo "${dir}/${EXE}"
+      return
+    fi
+  done
+}
+
+__check_exiting_commands () {
+  local BARE_NAME="$1"
+  if _command_exists_silently "$BARE_NAME" ; then
+    local EXE="$2"
+    if type "$BARE_NAME" | grep "${BARE_NAME} is aliased to \`'${EXE}''" &>/dev/null ; then
+      _log_debug "${BARE_NAME} is already aliased to ${EXE} (nothing to do)"
+      return 1
+    fi
+    _log_warning "An existing command supercedes ${BARE_NAME}: $(type "$BARE_NAME")"
+    return 1
+  fi
+}
+
+__do_the_obvious_alias() {
+  #TODO: docs
+  local BARE_NAME="${1%.exe}"
+  local EXE="$(__find_exe "$@")"
+
+  if ! _command_exists "$EXE" ; then
+    _log_debug "did not find ${EXE}"
+    return 1
+  fi
+
+  if __check_exiting_commands "$BARE_NAME" "$EXE" ; then
+    if alias "${BARE_NAME}='${EXE}'" ; then
+      _log_debug "created alias $BARE_NAME for $EXE"
+    else
+      _log_error "could not create alias $BARE_NAME for $EXE"
+    fi
+  else
+    return 1
+  fi
+}
+
+__init_wsl() {
+  if __do_the_obvious_alias notepad++.exe '/mnt/c/Program Files/Notepad++'\
+       '/mnt/c/Program Files (x86)/Notepad++' ; then
+    alias notepad=notepad++
+    alias npp=notepad++
+  fi
+  __do_the_obvious_alias explorer.exe
+  __do_the_obvious_alias wsl.exe
+  __do_the_obvious_alias WinMergeU.exe '/mnt/c/Program Files/WinMerge/' && alias winmerge=WinMergeU
+
+  __do_the_obvious_alias docker.exe  '/mnt/c/Program Files/Docker/Docker/resources/bin'
+  __do_the_obvious_alias kubectl.exe '/mnt/c/Program Files/Docker/Docker/resources/bin'
 
   if _command_exists mvn ; then
     if __find_windows_user_home ; then
