@@ -48,6 +48,15 @@ function _has_colors() {
 	[[ -t 1 && "${CLICOLOR:=$(tput colors 2> /dev/null)}" -ge 8 ]]
 }
 
+function _bash-it-timestamp() {
+  if [[ "${BASH_IT_LOG_INCLUDE_TIMESTAMP:-true}" = 'false' ]] ; then
+    # disabled by user choice
+    return
+  elif [[ "${BASH_IT_LOG_LEVEL:-0}" -ge "${BASH_IT_LOG_LEVEL_INFO?}" ]] ; then
+    echo "$(date +%X.%3N): "
+  fi
+}
+
 function _bash-it-log-message() {
 	: _about 'Internal function used for logging, uses BASH_IT_LOG_PREFIX as a prefix'
 	: _param '1: color of the message'
@@ -58,7 +67,8 @@ function _bash-it-log-message() {
 	local prefix="${BASH_IT_LOG_PREFIX:-default}"
 	local color="${1-${echo_cyan:-}}"
 	local level="${2:-TRACE}"
-	local message="${level%: }: ${prefix%: }: ${3?}"
+	local timestamp="$(_bash-it-timestamp)"
+	local message="${timestamp}${level%: }: ${prefix%: }: ${3?}"
 	if _has_colors; then
 		printf '%b%s%b\n' "${color}" "${message}" "${echo_normal:-}"
 	else

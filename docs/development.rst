@@ -21,6 +21,7 @@ using ``_log_error`` ``_log_warning`` and ``_log_debug``. This will help you sol
 and also propagate important notes to other users of Bash-it.
 You can see the logs by using ``bash-it doctor`` command to reload and see the logs.
 Alternatively, you can set ``BASH_IT_LOG_LEVEL`` to ``BASH_IT_LOG_LEVEL_ERROR``\ , ``BASH_IT_LOG_LEVEL_WARNING`` or ``BASH_IT_LOG_LEVEL_ALL``.
+A log level of ``BASH_IT_LOG_LEVEL_ALL`` or above will also include timestamps in the log messages. set ``BASH_IT_LOG_INCLUDE_TIMESTAMP=true`` to get this behavior in other log levels, or ``false`` to suppress it.
 
 Log Prefix/Context
 ^^^^^^^^^^^^^^^^^^
