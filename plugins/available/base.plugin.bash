@@ -101,7 +101,7 @@ function lsgrep() {
 }
 
 function quiet() {
-	about 'what *does* this do?'
+	about 'what *does* this do?' #TODO
 	group 'base'
 	nohup "$@" &> /dev/null < /dev/null &
 }
