@@ -6,7 +6,9 @@ export VISUAL=vim
 # https://stackoverflow.com/questions/2183900/how-do-i-prevent-git-diff-from-using-a-pager
 # no-init disables that weird 'second screen' behavior, which I don't like
 # RAW... enables color interpretation
-export LESS="--quit-if-one-screen --no-init --RAW-CONTROL-CHARS"
+# quit-at-eof gives you the change to scroll to the end, but if you keep
+#   scrolling it also exits (I like not feeling trapped)
+export LESS="--quit-if-one-screen --quit-at-eof --no-init --RAW-CONTROL-CHARS"
 
 function vars {
 	# magic incantation from the internet
