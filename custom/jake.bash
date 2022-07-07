@@ -11,10 +11,14 @@ export VISUAL=vim
 export LESS="--quit-if-one-screen --quit-at-eof --no-init --RAW-CONTROL-CHARS"
 
 function vars {
-	# magic incantation from the internet
-	# Basically, prints the variables and functions of 
-	# the current bash session, but doesn't print the functions
-	(set -o posix; set)
+  if [ "$#" -eq 0 ] ; then
+    # magic incantation from the internet
+    # Basically, prints the variables and functions of
+    # the current bash session, but doesn't print the functions
+    (set -o posix; set)
+  else
+     (set -o posix; set) | grep "$@"
+  fi
 }
 
 function jake_debug {
