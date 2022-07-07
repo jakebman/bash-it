@@ -13,4 +13,6 @@ alias lsa='ls -a'
 
 alias les=less
 
+alias vd=cd
+
 alias grpe=grep
