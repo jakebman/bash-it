@@ -88,6 +88,11 @@ function _git-upstream-branch-gone() {
 }
 
 function _git-hide-status() {
+	# this takes between 0.2 seconds and 0.4 seconds in windows directories
+	# I'm disabling it for speed, because I never anticipate using it
+	# -Jake
+	return 1
+	# original code below. We can leave it here because we unconditionally return before executing it
 	[[ "$(git config --get bash-it.hide-status)" == "1" ]]
 }
 
