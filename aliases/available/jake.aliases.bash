@@ -3,6 +3,7 @@ about-alias "Jake's custom aliases for common typos"
 
 alias vmi=vim
 alias gim=vim
+alias bim=vim
 
 alias gti=git
 alias igt=git
