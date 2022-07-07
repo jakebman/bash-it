@@ -19,8 +19,12 @@ function gitstatus_on_disable() {
 if [[ -d ${SCM_GIT_GITSTATUS_DIR} ]]; then
   source "${SCM_GIT_GITSTATUS_DIR}/gitstatus.plugin.sh"
   # Start the actual gitstatus binary
-  gitstatus_stop && gitstatus_start -s -1 -u -1 -c -1 -d -1
-  export SCM_GIT_USE_GITSTATUS=true
+  if gitstatus_stop && gitstatus_start -s 1 -u 1 -c 1 -d 1; then
+    _log_debug "gitstatus daemon pid: ${GITSTATUS_DAEMON_PID}"
+    export SCM_GIT_USE_GITSTATUS=true
+  else
+    _log_warning "gitstatus failed to start"
+  fi
 else
 	_log_warning "Could not find gitstatus directory in ${SCM_GIT_GITSTATUS_DIR}. Please specify directory location using SCM_GIT_GITSTATUS_DIR."
 fi
