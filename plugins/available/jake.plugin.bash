@@ -10,3 +10,13 @@ function cdd () {
     cd "$(dirname "$1")"
   fi
 }
+
+function cddd () {
+  if [ "$#" -eq 0 ] ; then
+    cd ../..
+  elif [ -d "$1" ] ; then
+    cd "$1/../.."
+  else
+    cd "$(dirname "$1")/.."
+  fi
+}
