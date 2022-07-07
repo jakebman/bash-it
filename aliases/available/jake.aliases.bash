@@ -10,5 +10,7 @@ alias vit=git
 alias :q="echo You are not in vim"
 
 alias lsa='ls -a'
+
 alias les=less
-alias grpe=gre
+
+alias grpe=grep
