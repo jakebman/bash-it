@@ -199,6 +199,11 @@ function scm_prompt_info_common() {
 			if [[ ${SCM_GIT_SHOW_MINIMAL_INFO:-false} == "true" ]]; then
 				# user requests minimal git status information
 				prompt_info="${SCM}_prompt_minimal_info"
+				# TODO: There's a unfortunate interaction between minimal_info
+				# and gitstatus. Basically, if you turn both on, minimal_info
+				# (the slower one) is executed, and gitstatus (faster) is not
+				# used. I'd love to fix it, but there's a lot of plumbing and
+				# I'm not certain the best path to do this.
 			else
 				# more detailed git status
 				prompt_info="${SCM}_prompt_info"
