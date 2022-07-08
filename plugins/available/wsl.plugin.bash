@@ -1,14 +1,12 @@
 cite about-plugin
 about-plugin 'Windows Subsystem for Linux interop'
 
-
 wsl-dos2unix() {
   about 'convert window console output to what wsl commands expect (some windows commands like wsl.exe use UTF-16, which goozles grep)'
   example 'wsl.exe --list | wsl-dos2unix | grep Ubuntu'
   group 'wsl'
   iconv --from-code UTF-16LE --to-code UTF-8 | dos2unix
 }
-
 
 _wsl-find-windows-user-home() {
   about "Try to auto-discover \$WSL_WINDOWS_USER_HOME, which is the Windows user's home directory. Respects this variable if you set it manually"
@@ -70,7 +68,7 @@ _check_exiting_commands () {
   if _command_exists_silently "$BARE_NAME" ; then
     local EXE="$2"
     if type "$BARE_NAME" | grep "${BARE_NAME} is aliased to \`'${EXE}''" &>/dev/null ; then
-      _log_debug "${BARE_NAME} is already aliased to ${EXE} (nothing to do)"
+      _log_debug "${EXE} is already aliased by ${BARE_NAME} (nothing to do)"
       return 1
     fi
     _log_warning "An existing command supercedes ${BARE_NAME}: $(type "$BARE_NAME")"
@@ -80,27 +78,31 @@ _check_exiting_commands () {
 
 _wsl-alias-a-windows-exe() {
   about "create a 'foo' alias for any 'foo.exe' found on the path"
-  param '1: the name of a windows executable'
+  param '1: the name of a windows executable. If fully-qualified, PATH is not checked'
   param '2*: (optional) paths where this executable could reside'
   example '_wsl-alias-a-windows-exe explorer.exe # equivalent to alias explorer=explorer.exe'
   group 'wsl'
 
-  local BARE_NAME="${1%.exe}"
-  local EXE="$(_wsl-find-a-windows-exe "$@")"
+  # use basename and dirname on $1 to allow for a fully-qualified first parameter
+  local basename="$(basename "$1")"
+  local dirname="$(dirname "$1")"
+  local EXE="$(_wsl-find-a-windows-exe "$basename" "$dirname" "$@")"
 
-  if ! _command_exists "$EXE" ; then
-    _log_debug "did not find ${EXE}"
+  if ! _command_exists_silently "$EXE" ; then
+    _log_warning "did not find an executable for '$1'"
     return 1
   fi
 
-  if _check_exiting_commands "$BARE_NAME" "$EXE" ; then
-    if alias "${BARE_NAME}='${EXE}'" ; then
-      _log_debug "created alias $BARE_NAME for $EXE"
-    else
-      _log_error "could not create alias $BARE_NAME for $EXE"
-    fi
-  else
+  local BARE_NAME="${basename%.exe}"
+
+  if ! _check_exiting_commands "$BARE_NAME" "$EXE" ; then
     return 1
+  fi
+
+  if alias "${BARE_NAME}='${EXE}'" ; then
+    _log_debug "created alias ${BARE_NAME} for ${EXE}"
+  else
+	  _log_error "could not create alias $BARE_NAME for $EXE"
   fi
 }
 
@@ -108,7 +110,7 @@ _wsl-init() {
   about "do a bunch of work to make wsl more bearable - set up aliases, and forwarding shims"
   group 'wsl'
 
-  if _wsl-alias-a-windows-exe notepad++.exe '/mnt/c/Program Files/Notepad++'\
+  if _wsl-alias-a-windows-exe '/mnt/c/Program Files/Notepad++/notepad++.exe'\
        '/mnt/c/Program Files (x86)/Notepad++' ; then
     alias notepad=notepad++
     alias npp=notepad++
@@ -116,10 +118,10 @@ _wsl-init() {
 
   _wsl-alias-a-windows-exe explorer.exe
   _wsl-alias-a-windows-exe wsl.exe
-  _wsl-alias-a-windows-exe WinMergeU.exe '/mnt/c/Program Files/WinMerge/' && alias winmerge=WinMergeU
+  _wsl-alias-a-windows-exe '/mnt/c/Program Files/WinMerge/WinMergeU.exe' && alias winmerge=WinMergeU
 
-  _wsl-alias-a-windows-exe docker.exe  '/mnt/c/Program Files/Docker/Docker/resources/bin'
-  _wsl-alias-a-windows-exe kubectl.exe '/mnt/c/Program Files/Docker/Docker/resources/bin'
+  _wsl-alias-a-windows-exe '/mnt/c/Program Files/Docker/Docker/resources/bin/docker.exe'
+  _wsl-alias-a-windows-exe '/mnt/c/Program Files/Docker/Docker/resources/bin/kubectl.exe'
 
   if _command_exists mvn ; then
     if _wsl-find-windows-user-home ; then
