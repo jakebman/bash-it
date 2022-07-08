@@ -8,30 +8,60 @@ wsl-dos2unix() {
   iconv --from-code UTF-16LE --to-code UTF-8 | dos2unix
 }
 
+_wsl-has-tools() {
+  about "Look for the wsl tools that the bash-it wsl plugin needs"
+  group 'wsl'
+  local success=0
+
+  if !  _command_exists wslpath ; then
+    success=1
+    _log_error "wslpath translates C:\\ to /mnt/c, and is usually added by WSL. You can try aliasing wsl_path from https://github.com/wslutilities/wslu to wslpath. (wsl_path is only deprecated because Microsoft has wslpath)"
+  fi
+
+  if ! _command_exists dos2unix ; then
+    success=1
+    _log_error "dos2unix is necessary to translate newlines across. It's a common linux package. Failing that, you can probably alias dos2unix as \`tr -d \"\\r\\0\"\`"
+  fi
+
+  if ! _command_exists cmd.exe ; then
+    if ! _command_exists wslvar ; then
+      success=1
+      _log_error "wslvar or cmd.exe help us read Windows environment variables"
+      _log_error "cmd.exe is usually on the Window path, so I'm not sure why you don't have it, but wslvar is avaible from https://github.com/wslutilities/wslu"
+    else
+      _log_warning "uncertain where cmd.exe is, but we have wslvar, which works but is slow"
+    fi
+  elif ! _command_exists wslvar ; then
+    _log_warning "the wslu suite might not be installed. It's useful, and available from https://github.com/wslutilities/wslu"]
+  fi
+
+  return $success
+}
+
 _wsl-find-windows-user-home() {
-  about "Try to auto-discover \$WSL_WINDOWS_USER_HOME, which is the Windows user's home directory. Respects this variable if you set it manually"
+  about "Try to auto-discover \$WSL_WINDOWS_USER_HOME, which is the Windows user's home directory. Does nothing if \$WSL_WINDOWS_USER_HOME is already set"
   group 'wsl'
   if [ -n "$WSL_WINDOWS_USER_HOME" ] ; then
     return # It's already been set by the user or calculated by us. Nothing more to do.
   fi
 
   # There's a lot of sturm und drang here to do the work automatically, but you can just specify it yourself
-  if ! _command_exists wslpath ; then
-    _log_error "wslpath not found - you might not be in WSL. If you are, you can fetch the deprecated wsl_path from wslu at https://github.com/wslutilities/wslu and alias it to wslpath"
+  local HELPFUL_MESSAGE="Set WSL_WINDOWS_USER_HOME to /mnt/c/Users/<your home dir> to not worry about this error"
+
+  if ! _wsl-has-tools ; then
+    _log_warning "Insufficient tools to find WSL_WINDOWS_USER_HOME. $HELPFUL_MESSAGE"
     return 1
   fi
 
-  if _command_exists wslvar ; then
-    _log_debug "discovering \$WSL_WINDOWS_USER_HOME. Speed this up by specifying it manually"
-    export WSL_WINDOWS_USER_HOME="$(wslpath "$(wslvar HOMEDRIVE)$(wslvar HOMEPATH)")"
-    _log_debug "Speed up this command next time via export WSL_WINDOWS_USER_HOME='${WSL_WINDOWS_USER_HOME}'"
-  elif _command_exists cmd.exe ; then
-    _log_warn "wslvar not found. Trying the more-fragile cmd.exe invocation"
-    # export WSL_WINDOWS_USER_HOME="$(wslpath "$(cd /mnt/c; cmd.exe /C "echo %HOMEDRIVE%%HOMEPATH%" | dos2unix)")"
-    local winpath= "$(cd /mnt/c; cmd.exe /C "echo %HOMEDRIVE%%HOMEPATH%" | dos2unix)"
+  if _command_exists_silently cmd.exe ; then
+    local winpath="$(cd /mnt/c; cmd.exe /C "echo %HOMEDRIVE%%HOMEPATH%" | dos2unix)"
     export WSL_WINDOWS_USER_HOME="$(wslpath "$winpath")"
+  elif _command_exists_silently wslvar ; then
+    _log_debug "discovering \$WSL_WINDOWS_USER_HOME via a slow method. You can specify it manually for a speedier startup"
+    export WSL_WINDOWS_USER_HOME="$(wslpath "$(wslvar HOMEDRIVE)$(wslvar HOMEPATH)")"
+    _log_warning "Speed up this command next time via export WSL_WINDOWS_USER_HOME='${WSL_WINDOWS_USER_HOME}'"
   else
-    _log_error "Specify WSL_WINDOWS_USER_HOME, enable cmd.exe, or get wslvar from wslu at https://github.com/wslutilities/wslu"
+    _log_error "internal logic error - _wsl-has-tools said we had cmd.exe or wslvar, and we have neither. $HELPFUL_MESSAGE"
     return 1
   fi
 }
