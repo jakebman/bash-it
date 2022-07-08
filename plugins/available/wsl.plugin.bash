@@ -11,28 +11,29 @@ wsl-dos2unix() {
 _wsl-find-windows-user-home() {
   about "Try to auto-discover \$WSL_WINDOWS_USER_HOME, which is the Windows user's home directory. Respects this variable if you set it manually"
   group 'wsl'
+  if [ -n "$WSL_WINDOWS_USER_HOME" ] ; then
+    return # It's already been set by the user or calculated by us. Nothing more to do.
+  fi
+
   # There's a lot of sturm und drang here to do the work automatically, but you can just specify it yourself
   # We need the wsl tools, which can be installed via an OS package named wslu or ubuntu-wsl
   # More details at https://wslutiliti.es/wslu/install.html
-  if [ -z "$WSL_WINDOWS_USER_HOME" ] ; then
-    if ! _command_exists wslpath ; then
-      _log_error "wslpath not found - you might not be in WSL. If you are, you can fetch the deprecated wsl_path from wslu at https://github.com/wslutilities/wslu"
-      return 1
-    elif _command_exists wslvar ; then
-      _log_debug "discovering \$WSL_WINDOWS_USER_HOME. Speed this up by specifying it manually"
-      export WSL_WINDOWS_USER_HOME="$(wslpath "$(wslvar HOMEDRIVE)$(wslvar HOMEPATH)")"
-      _log_debug "Speed up this command next time via export WSL_WINDOWS_USER_HOME='${WSL_WINDOWS_USER_HOME}'"
-    elif _command_exists cmd.exe ; then
-      _log_warn "wslvar not found. Trying the more-fragile cmd.exe invocation"
-      # export WSL_WINDOWS_USER_HOME="$(wslpath "$(cd /mnt/c; cmd.exe /C "echo %HOMEDRIVE%%HOMEPATH%" | dos2unix)")"
-      local winpath= "$(cd /mnt/c; cmd.exe /C "echo %HOMEDRIVE%%HOMEPATH%" | dos2unix)"
-      export WSL_WINDOWS_USER_HOME="$(wslpath "$winpath")"
-    else
-      _log_error "Specify WSL_WINDOWS_USER_HOME, enable cmd.exe, or get wslvar from wslu at https://github.com/wslutilities/wslu"
-      return 1
-    fi
+  if ! _command_exists wslpath ; then
+    _log_error "wslpath not found - you might not be in WSL. If you are, you can fetch the deprecated wsl_path from wslu at https://github.com/wslutilities/wslu"
+    return 1
+  elif _command_exists wslvar ; then
+    _log_debug "discovering \$WSL_WINDOWS_USER_HOME. Speed this up by specifying it manually"
+    export WSL_WINDOWS_USER_HOME="$(wslpath "$(wslvar HOMEDRIVE)$(wslvar HOMEPATH)")"
+    _log_debug "Speed up this command next time via export WSL_WINDOWS_USER_HOME='${WSL_WINDOWS_USER_HOME}'"
+  elif _command_exists cmd.exe ; then
+    _log_warn "wslvar not found. Trying the more-fragile cmd.exe invocation"
+    # export WSL_WINDOWS_USER_HOME="$(wslpath "$(cd /mnt/c; cmd.exe /C "echo %HOMEDRIVE%%HOMEPATH%" | dos2unix)")"
+    local winpath= "$(cd /mnt/c; cmd.exe /C "echo %HOMEDRIVE%%HOMEPATH%" | dos2unix)"
+    export WSL_WINDOWS_USER_HOME="$(wslpath "$winpath")"
+  else
+    _log_error "Specify WSL_WINDOWS_USER_HOME, enable cmd.exe, or get wslvar from wslu at https://github.com/wslutilities/wslu"
+    return 1
   fi
-  return
 }
 
 _command_exists_silently() {
