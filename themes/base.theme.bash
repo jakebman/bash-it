@@ -550,6 +550,12 @@ function hg_prompt_info() {
 	echo -ne "${SCM_PREFIX?}${SCM_BRANCH?}:${SCM_CHANGE#*:}${SCM_STATE?}${SCM_SUFFIX?}"
 }
 
+function NONE_prompt_info() {
+  # suppress _is_function's complaint within scm_prompt_info while we're generating the
+  # prompt for a non-SCM folder
+  :
+}
+
 function scm_char() {
 	scm_prompt_char
 	echo -ne "${SCM_THEME_CHAR_PREFIX?}${SCM_CHAR?}${SCM_THEME_CHAR_SUFFIX?}"
