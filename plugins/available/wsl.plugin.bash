@@ -16,12 +16,12 @@ _wsl-find-windows-user-home() {
   fi
 
   # There's a lot of sturm und drang here to do the work automatically, but you can just specify it yourself
-  # We need the wsl tools, which can be installed via an OS package named wslu or ubuntu-wsl
-  # More details at https://wslutiliti.es/wslu/install.html
   if ! _command_exists wslpath ; then
-    _log_error "wslpath not found - you might not be in WSL. If you are, you can fetch the deprecated wsl_path from wslu at https://github.com/wslutilities/wslu"
+    _log_error "wslpath not found - you might not be in WSL. If you are, you can fetch the deprecated wsl_path from wslu at https://github.com/wslutilities/wslu and alias it to wslpath"
     return 1
-  elif _command_exists wslvar ; then
+  fi
+
+  if _command_exists wslvar ; then
     _log_debug "discovering \$WSL_WINDOWS_USER_HOME. Speed this up by specifying it manually"
     export WSL_WINDOWS_USER_HOME="$(wslpath "$(wslvar HOMEDRIVE)$(wslvar HOMEPATH)")"
     _log_debug "Speed up this command next time via export WSL_WINDOWS_USER_HOME='${WSL_WINDOWS_USER_HOME}'"
