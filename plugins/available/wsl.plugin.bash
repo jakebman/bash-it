@@ -1,13 +1,6 @@
 cite about-plugin
 about-plugin 'Windows Subsystem for Linux interop'
 
-wsl-dos2unix() {
-  about 'convert window console output to what wsl commands expect (some windows commands like wsl.exe use UTF-16, which goozles grep)'
-  example 'wsl.exe --list | wsl-dos2unix | grep Ubuntu'
-  group 'wsl'
-  iconv --from-code UTF-16LE --to-code UTF-8 | dos2unix
-}
-
 _wsl-has-tools() {
   about "Look for the wsl tools that the bash-it wsl plugin needs"
   group 'wsl'
@@ -32,7 +25,7 @@ _wsl-has-tools() {
       _log_warning "uncertain where cmd.exe is, but we have wslvar, which works but is slow"
     fi
   elif ! _command_exists wslvar ; then
-    _log_warning "the wslu suite might not be installed. It's useful, and available from https://github.com/wslutilities/wslu"]
+    _log_warning "the wslu suite might not be installed. It's useful, and available from https://github.com/wslutilities/wslu"
   fi
 
   return $success
@@ -174,8 +167,8 @@ _wsl-init() {
     fi
   fi
 
-  # wsl.exe prints in window-y output (utf-16, CRLF), so we need to undo that for our unix tools
-  local BASH_IT_WSL_VERSION=$(wsl.exe --list --running --verbose | wsl-dos2unix | grep  --word-regex "${WSL_DISTRO_NAME}" | awk '{print $NF}')
+  # wsl.exe prints in window-y output (utf-16LE, CRLF), so we need to undo that for our unix tools
+  local BASH_IT_WSL_VERSION=$(wsl.exe --list --running --verbose | dos2unix --assume-utf16le | grep  --word-regex "${WSL_DISTRO_NAME}" | awk '{print $NF}')
 
   # git is slow on version 1 WSLs. We save a bunch by doing this minimally
   [ "$BASH_IT_WSL_VERSION" == 1 ] && export SCM_GIT_SHOW_MINIMAL_INFO=true
