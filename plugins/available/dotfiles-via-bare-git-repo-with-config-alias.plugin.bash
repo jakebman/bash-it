@@ -1,7 +1,7 @@
 
 # One of the options described in https://news.ycombinator.com/item?id=11070797
 # at https://news.ycombinator.com/item?id=11070797
-about "Following the ideas at https://www.atlassian.com/git/tutorials/dotfiles"
+about-plugin "Following the ideas at https://www.atlassian.com/git/tutorials/dotfiles"
 
 : "${BASH_IT_DOTFILES_GIT_REPO:=~/.cfg}"
 if ! [ -d "${BASH_IT_DOTFILES_GIT_REPO}" ] ; then
@@ -11,7 +11,4 @@ fi
 _log_debug ""
 alias config='/usr/bin/git --git-dir="${BASH_IT_DOTFILES_GIT_REPO}" --work-tree="$HOME"'
 config config --local status.showUntrackedFiles no
-
-
-
 
