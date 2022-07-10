@@ -5,5 +5,5 @@ about-plugin 'Initialization for fuck'
 
 if _command_exists thefuck; then
   # shellcheck disable=SC2046
-  eval $(thefuck --alias)
+  eval $(thefuck --alias please)
 fi
