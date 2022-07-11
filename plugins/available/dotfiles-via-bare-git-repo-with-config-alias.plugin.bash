@@ -3,7 +3,8 @@
 # at https://news.ycombinator.com/item?id=11070797
 about-plugin "Following the ideas at https://www.atlassian.com/git/tutorials/dotfiles"
 
-: "${BASH_IT_DOTFILES_GIT_REPO:=~/.cfg}"
+# Convention is that a bare git repo has a .git suffix
+: "${BASH_IT_DOTFILES_GIT_REPO:=~/.cfg.git}"
 if ! [ -d "${BASH_IT_DOTFILES_GIT_REPO}" ] ; then
   _log_error "${BASH_IT_DOTFILES_GIT_REPO} is not a valid git dir."
   _log_error "Try 'git init --bare ${BASH_IT_DOTFILES_GIT_REPO}' to create it,"
