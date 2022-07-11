@@ -5,10 +5,12 @@ about-plugin "Following the ideas at https://www.atlassian.com/git/tutorials/dot
 
 : "${BASH_IT_DOTFILES_GIT_REPO:=~/.cfg}"
 if ! [ -d "${BASH_IT_DOTFILES_GIT_REPO}" ] ; then
-  _log_error "${BASH_IT_DOTFILES_GIT_REPO} is not a valid git dir. Try 'git init --bare ${BASH_IT_DOTFILES_GIT_REPO}' to create it"
+  _log_error "${BASH_IT_DOTFILES_GIT_REPO} is not a valid git dir."
+  _log_error "Try 'git init --bare ${BASH_IT_DOTFILES_GIT_REPO}' to create it,"
+  _log_error "or set BASH_IT_DOTFILES_GIT_REPO to your bare git directory"
   return
 fi
-_log_debug ""
+_log_debug "found dotfiles repository at ${BASH_IT_DOTFILES_GIT_REPO}"
 alias config='/usr/bin/git --git-dir="${BASH_IT_DOTFILES_GIT_REPO}" --work-tree="$HOME"'
 config config --local status.showUntrackedFiles no
 
