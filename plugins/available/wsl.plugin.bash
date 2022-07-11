@@ -167,11 +167,14 @@ _wsl-init() {
     fi
   fi
 
-  # wsl.exe prints in window-y output (utf-16LE, CRLF), so we need to undo that for our unix tools
-  local BASH_IT_WSL_VERSION=$(wsl.exe --list --running --verbose | dos2unix --assume-utf16le | grep  --word-regex "${WSL_DISTRO_NAME}" | awk '{print $NF}')
+  # do work based on which version of WSL we're running in. This relies on knowing which distro we're running in
+  if [ -n "${WSL_DISTRO_NAME}" ] ; then
+    # wsl.exe prints in window-y output (utf-16LE, CRLF), so we need to undo that for our unix tools
+    local BASH_IT_WSL_VERSION=$(wsl.exe --list --running --verbose | dos2unix --assume-utf16le | grep  --word-regex "${WSL_DISTRO_NAME}" | awk '{print $NF}')
 
-  # git is slow on version 1 WSLs. We save a bunch by doing this minimally
-  [ "$BASH_IT_WSL_VERSION" == 1 ] && export SCM_GIT_SHOW_MINIMAL_INFO=true
+    # git is slow on version 1 WSLs. We save a bunch by doing this minimally
+    [ "$BASH_IT_WSL_VERSION" == 1 ] && export SCM_GIT_SHOW_MINIMAL_INFO=true
+  fi
 }
 
 _wsl-init
