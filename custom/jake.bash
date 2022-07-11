@@ -13,6 +13,8 @@ export LESS="--quit-if-one-screen --quit-at-eof --no-init --RAW-CONTROL-CHARS"
 if _command_exists pygmentize ; then
   # see `man less`, section "INPUT PREPROCESSOR"
   export  LESSOPEN='|- pygmentize -f 256 -O style="${BASH_IT_CLESS_STYLE:-default}" -g %s'
+else
+  _log_error "pygmentize is available via sudo apt install python-pygments"
 fi
 
 function vars {
