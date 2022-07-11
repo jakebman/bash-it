@@ -19,5 +19,13 @@ function cless() {
 	param '*: the files to paginate with less'
 	example 'cless mysite/manage.py'
 
+  # We could also accomplish this directly on less, entirely with less's environment variables:
+  # see `man less`, section "INPUT PREPROCESSOR"
+  # export LESSOPEN='|- pygmentize -f 256 -O style="${BASH_IT_CLESS_STYLE:-default}" -g %s' # apply formatting to input
+  # export LESS='-R' # assume -R on all less invocations
+  # less mysite/manage.py
+  # # or even:
+  # LESSOPEN='|- pygmentize -f 256 -O style="${BASH_IT_CLESS_STYLE:-default}" -g %s' LESS='-R' less mysite/manage.py
+
 	pygmentize -f 256 -O style="${BASH_IT_CLESS_STYLE:-default}" -g "$@" | command less -R
 }

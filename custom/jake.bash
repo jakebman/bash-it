@@ -10,6 +10,11 @@ export VISUAL=vim
 #   scrolling it also exits (I like not feeling trapped)
 export LESS="--quit-if-one-screen --quit-at-eof --no-init --RAW-CONTROL-CHARS"
 
+if _command_exists pygmentize ; then
+  # see `man less`, section "INPUT PREPROCESSOR"
+  export  LESSOPEN='|- pygmentize -f 256 -O style="${BASH_IT_CLESS_STYLE:-default}" -g %s'
+fi
+
 function vars {
   if [ "$#" -eq 0 ] ; then
     # magic incantation from the internet
