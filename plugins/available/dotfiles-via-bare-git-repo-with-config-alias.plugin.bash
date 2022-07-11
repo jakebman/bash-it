@@ -5,7 +5,7 @@ about-plugin "Following the ideas at https://www.atlassian.com/git/tutorials/dot
 
 : "${BASH_IT_DOTFILES_GIT_REPO:=~/.cfg}"
 if ! [ -d "${BASH_IT_DOTFILES_GIT_REPO}" ] ; then
-  _log_debug "${BASH_IT_DOTFILES_GIT_REPO} is not a valid git dir. Try 'git init --bare ${BASH_IT_DOTFILES_GIT_REPO}' to create it"
+  _log_error "${BASH_IT_DOTFILES_GIT_REPO} is not a valid git dir. Try 'git init --bare ${BASH_IT_DOTFILES_GIT_REPO}' to create it"
   return
 fi
 _log_debug ""
