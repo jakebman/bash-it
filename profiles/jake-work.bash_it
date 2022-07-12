@@ -9,6 +9,7 @@ plugins sdkman
 plugins wsl
 completion aliases
 completion bash-it
+completion sdkman
 completion system
 aliases general
 aliases jake
