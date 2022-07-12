@@ -8,7 +8,6 @@ plugins dotfiles-via-bare-git-repo-with-config-alias
 plugins git
 plugins gitstatus
 plugins jake
-plugins less-pretty-cat
 plugins sdkman
 plugins sudo
 plugins thefuck
