@@ -21,3 +21,5 @@ alias ree=tree
 alias vd=cd
 
 alias grpe=grep
+
+alias pull='git pull' # because sometimes I forget git
