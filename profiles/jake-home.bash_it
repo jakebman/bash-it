@@ -11,11 +11,11 @@ plugins jake
 plugins less-pretty-cat
 plugins sdkman
 plugins sudo
+plugins thefuck
 plugins wsl
 completion aliases
 completion bash-it
 completion dirs
-completion git
 completion maven
 completion sdkman
 completion ssh
