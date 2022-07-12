@@ -154,6 +154,8 @@ _wsl-init() {
 
   _wsl-alias-a-windows-exe '/mnt/c/Program Files/Docker/Docker/resources/bin/docker.exe'
   _wsl-alias-a-windows-exe '/mnt/c/Program Files/Docker/Docker/resources/bin/kubectl.exe'
+  _wsl-alias-a-windows-exe '/mnt/c/Program Files/Google/Chrome/Application/chrome.exe' '/mnt/c/Program Files (x86)/Google/Chrome/Application'
+
 
   if _command_exists mvn ; then
     if _wsl-find-windows-user-home ; then
