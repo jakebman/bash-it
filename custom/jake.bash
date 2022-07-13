@@ -18,7 +18,7 @@ if _command_exists pygmentize ; then
   # Adding the second '|' to the front of this command and piping errors to a temp file is a way
   # to silently ignore this error, but it'd be really cool to teach pygmentize to recognize
   # '-' as an input file
-  export  LESSOPEN='||- pygmentize -f 256 -O style="${BASH_IT_CLESS_STYLE:-default}" -g %s 2>/tmp/pygmentize-errors'
+  export  LESSOPEN='||- pygmentize -f 256 -O style="${LESSSTYLE:-default}" -g %s 2>/tmp/pygmentize-errors'
 else
   _log_error "pygmentize is available via sudo apt install python-pygments"
 fi
