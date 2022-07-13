@@ -6,6 +6,7 @@ plugins dotfiles-via-bare-git-repo-with-config-alias
 plugins gitstatus
 plugins jake
 plugins sdkman
+plugins thefuck
 plugins wsl
 completion aliases
 completion bash-it
