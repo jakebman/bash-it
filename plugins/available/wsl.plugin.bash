@@ -149,8 +149,10 @@ _wsl-alias-a-windows-exe() {
 
 
   if ! _wsl-find-a-windows-exe "$@" ; then
-    _log_warning "did not find an executable for '$1' in $@"
+    _log_warning "did not find an executable for '$1' (checked ${@:2} too)"
     return 1
+  else
+    _log_debug "did find an executable for '$1' at $WIN_EXE"
   fi
   # _wsl-find-a-windows-exe has set WIN_EXE
 
