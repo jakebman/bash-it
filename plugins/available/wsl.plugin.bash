@@ -140,10 +140,10 @@ _wsl-alias-a-windows-exe() {
   local dirname="$(dirname "$1")"
   if [ "$dirname" = '.' ] ; then # dirname returns '.' if the path is just a filename
      local basename="$1"
-     _wsl-find-a-windows-exe "$1" "$@"
+     _wsl-find-a-windows-exe "$1" "${@:2}"
   else
     local basename="$(basename "$1")"
-     _wsl-find-a-windows-exe "$basename" "$dirname" "$@"
+     _wsl-find-a-windows-exe "$basename" "$dirname" "${@:2}"
   fi
 
   if [ -z "$WIN_EXE" ] ; then
