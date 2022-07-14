@@ -4,22 +4,47 @@ about-plugin 'install the tools that Jake wants with jake-install-tools'
 
 function _jake-find-tool() {
   if ! _binary_exists "$1" ; then
-    TOOLS_TO_INSTALL="${TOOLS_TO_INSTALL} ${1}"
+    TOOLS_TO_INSTALL="${TOOLS_TO_INSTALL} ${2:${1}}"
   fi
 }
 
 function jake-install-tools() {
   about "installs the tools jake uses"
+  # tools that we can silently installl
+  _binary_exists ack || (echo "installing the single-file version of ack!" && _jake-update-ack-and-its-manpages)
+
+  # tools that can use apt
   TOOLS_TO_INSTALL=""
-  _jake-find-tool python3-pygments
+  _jake-find-tool pygmentize python3-pygments
   _jake-find-tool dos2unix
   _jake-find-tool tree
   _jake-find-tool jq
 
-  echo sudo apt install $TOOLS_TO_INSTALL
-       sudo apt install $TOOLS_TO_INSTALL
+  if [ -n "$TOOLS_TO_INSTALL" ] ; then
+    echo sudo apt install $TOOLS_TO_INSTALL
+         sudo apt install $TOOLS_TO_INSTALL
+  fi
+
+  # tools that require a manual intervention
+  if ! _command_exists sdk ; then
+    echo "sdkman not found! Install via instructions at https://sdkman.io/install."
+    echo "BE CAREFUL WHEN YOU PIPE TO BSH!!! THAT IS A BAD IDEA!!!"
+    echo "use at least some caution when you curl --silent --show-error 'https://get.sdkman.io' --output ~/install-sdkman.sh"
+  fi
+
+
+  # don't need these, but should report them anyway
+  jake-check-optional-tools
 }
-function update-ack-and-its-manpages {
+
+function jake-check-optional-tools() {
+  about "install tools that aren't necesarily required"
+  _command_exists gitstatus_check || echo "gitstatus is available via git clone git@github.com:romkatv/gitstatus.git"
+  _command_exists mvn || echo "maven is available via sdkman: sdk install maven <latest version>"
+}
+
+
+function _jake-update-ack-and-its-manpages {
   local bin_dir="${HOME}/bin"
   local man_dir="${bin_dir}/man"
   local ack_url="${1:-https://beyondgrep.com/ack-v3.5.0}"
