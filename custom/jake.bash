@@ -43,6 +43,11 @@ function update-ack-and-its-manpages {
   # I'm learning about manpages, so this first implementation is likely bad
   mkdir -p "${man_dir}/man1" # ack's manpage goes in man1. Add others here as needed
 
+  local previous_ack_version
+  if _command_exists ack ; then
+    previous_ack_version="$(ack --version)"
+  fi
+
   # instructions from https://beyondgrep.com/install/
   # I wish they had a -latest option.
   if ! curl https://beyondgrep.com/ack-v3.5.0 > "${bin_dir}/ack" && chmod 0755 "${bin_dir}/ack" ; then
@@ -86,6 +91,19 @@ END
   else
     echo "please install mandb. Otherwise, this won't work"
     return 1
+  fi
+
+  echo # spacing
+
+  if [ -n "$previous_ack_version" ] ; then
+    echo "Checking against previous ack version..."
+    if ack --version | grep "$previous_ack_version" ; then
+      echo # spacing
+      echo "This was the previous ack version. No update actually occurred"
+    else
+      echo "$previous_ack_version"
+      echo "This ack version differs from the previous one. Yay!"
+    fi
   fi
 }
 
