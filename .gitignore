@@ -3,7 +3,8 @@
 .DS_Store
 custom/*
 !custom/example.bash
-!custom/jake.bash
+# I have a carveout on custom bash scripts
+!custom/jake*.bash
 .rvmrc
 aliases/custom.aliases.bash
 completion/custom.completion.bash
