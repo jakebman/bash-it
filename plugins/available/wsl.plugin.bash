@@ -31,8 +31,10 @@ _wsl-has-tools() {
   return $success
 }
 
+#wsl.exe prints in window-y output (utf-16LE, CRLF), so we need to undo that for our unix tools
 wsl-dos2unix() {
- dos2unix --assume-utf16le "$@"
+  about "a dos2unix for the output of wsl.exe, which seems to have weird output from our linux perspective"
+  dos2unix --assume-utf16le "$@"
 }
 
 _wsl-find-windows-user-home() {
