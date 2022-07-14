@@ -10,7 +10,6 @@ plugins jake
 plugins sdkman
 plugins thefuck
 plugins wsl
-completion aliases
 completion bash-it
 completion maven
 completion sdkman
