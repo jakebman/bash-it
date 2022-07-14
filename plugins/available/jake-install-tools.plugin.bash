@@ -4,7 +4,9 @@ about-plugin 'install the tools that Jake wants with jake-install-tools'
 
 function _jake-find-tool() {
   if ! _binary_exists "$1" ; then
-    TOOLS_TO_INSTALL="${TOOLS_TO_INSTALL} ${2:${1}}"
+    local to_install="${2:-${1}}"
+    echo "did not find binary for $1. Adding $to_install to apt list"
+    TOOLS_TO_INSTALL="${TOOLS_TO_INSTALL} ${to_install}"
   fi
 }
 
@@ -17,7 +19,9 @@ function jake-install-tools() {
   TOOLS_TO_INSTALL=""
   _jake-find-tool pygmentize python3-pygments
   _jake-find-tool dos2unix
+  _jake-find-tool unzip
   _jake-find-tool tree
+  _jake-find-tool zip
   _jake-find-tool jq
 
   if [ -n "$TOOLS_TO_INSTALL" ] ; then
@@ -28,8 +32,8 @@ function jake-install-tools() {
   # tools that require a manual intervention
   if ! _command_exists sdk ; then
     echo "sdkman not found! Install via instructions at https://sdkman.io/install."
-    echo "BE CAREFUL WHEN YOU PIPE TO BSH!!! THAT IS A BAD IDEA!!!"
-    echo "use at least some caution when you curl --silent --show-error 'https://get.sdkman.io' --output ~/install-sdkman.sh"
+    echo -e "\t" "BE CAREFUL WHEN YOU PIPE TO BASH!!! THAT IS A BAD IDEA!!!"
+    echo -e "\t" "use at least some caution when you curl --silent --show-error 'https://get.sdkman.io' --output ~/install-sdkman.sh"
   fi
 
 
