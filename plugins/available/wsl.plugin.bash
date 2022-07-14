@@ -1,5 +1,5 @@
 cite about-plugin
-about-plugin 'Windows Subsystem for Linux interop'
+about-plugin "Windows Subsystem for Linux interop. While you're here, know about .wslconfig (WSL2 only): https://docs.microsoft.com/en-us/windows/wsl/wsl-config#configure-global-options-with-wslconfig"
 
 _wsl-has-tools() {
   about "Look for the wsl tools that the bash-it wsl plugin needs"
