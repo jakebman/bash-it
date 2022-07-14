@@ -40,6 +40,8 @@ alias var=vars # because I'm lazy
 function update-ack-and-its-manpages {
   local bin_dir="${HOME}/bin"
   local man_dir="${bin_dir}/man"
+  local ack_url="${1:-https://beyondgrep.com/ack-v3.5.0}"
+
   # I'm learning about manpages, so this first implementation is likely bad
   mkdir -p "${man_dir}/man1" # ack's manpage goes in man1. Add others here as needed
 
@@ -50,7 +52,7 @@ function update-ack-and-its-manpages {
 
   # instructions from https://beyondgrep.com/install/
   # I wish they had a -latest option.
-  if curl https://beyondgrep.com/ack-v3.5.0 > "${bin_dir}/ack" && chmod 0755 "${bin_dir}/ack" ; then
+  if curl "$ack_url" > "${bin_dir}/ack" && chmod 0755 "${bin_dir}/ack" ; then
     echo "created ack at ${bin_dir}/ack"
     # We disable color on ls because I don't want to have this one weird colored line
     ls -l --human-readable --color=never "${bin_dir}/ack"
@@ -106,6 +108,7 @@ END
     echo # spacing
     if ack --version | grep "$previous_ack_version" &>/dev/null ; then
       echo "This was the previous ack version. No update actually occurred. Check https://beyondgrep.com/install/ for a newer version"
+      echo "You can modify this script, or simply pass the new url to this script"
     else
       echo "This ack version differs from the previous one. Yay!"
     fi
