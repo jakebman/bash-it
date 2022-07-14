@@ -152,8 +152,7 @@ _wsl-alias-a-windows-exe() {
   fi
   # _wsl-find-a-windows-exe has set WIN_EXE
 
-  local basename="$(basename "$WIN_EXE")"
-  local bare_name="${basename%.exe}" # strips .exe suffix
+  local bare_name="$(basename "$WIN_EXE" | sed -e 's/\.exe$//g')" # strips .exe suffix
 
   if ! _check_exiting_commands "$bare_name" "$WIN_EXE" ; then
     return 1
