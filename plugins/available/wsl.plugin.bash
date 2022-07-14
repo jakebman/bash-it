@@ -24,8 +24,6 @@ _wsl-has-tools() {
     else
       _log_warning "uncertain where cmd.exe is, but we have wslvar, which works but is slow"
     fi
-  elif ! _command_exists wslvar ; then
-    _log_warning "the wslu suite might not be installed. It's useful, and available from https://github.com/wslutilities/wslu"
   fi
 
   return $success
