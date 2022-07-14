@@ -28,5 +28,9 @@ alias grpe=grep
 
 alias vile=file
 
-alias pull='git pull' # because sometimes I forget git
-alias push='git push' # because sometimes I forget git
+# git commands that... I don't care to add git to
+alias co='git co'
+alias pull='git pull'
+alias push='git push'
+alias status='git status'
+alias branch='git branch'
