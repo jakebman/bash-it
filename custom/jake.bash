@@ -118,7 +118,3 @@ END
     echo "This appears to be your first ack version - welcome to ack!"
   fi
 }
-
-function jake_debug {
-  echo `date +"%r"` "$@" >>~/jake-bashit-debug
-}
