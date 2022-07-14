@@ -63,6 +63,15 @@ _wsl-find-windows-user-home() {
   fi
 }
 
+_binary_exists_silently() {
+  _about 'checks for existence of a binary, silently'
+  _param '1: command to check (as per _binary_exists)'
+  _param '2: (optional) log message to include when command not found (as per _binary_exists)'
+  _example '$ _binary_exists_silently this-binary-probably-does-not-exist'
+  _group 'lib'
+  _binary_exists "$@" &>/dev/null
+}
+
 _command_exists_silently() {
   _about 'checks for existence of a command, silently'
   _param '1: command to check (as per _command_exists)'
@@ -156,8 +165,19 @@ _wsl-aliases() {
   _wsl-alias-a-windows-exe wsl.exe
   _wsl-alias-a-windows-exe '/mnt/c/Program Files/WinMerge/WinMergeU.exe' && alias winmerge=WinMergeU
 
-  _wsl-alias-a-windows-exe '/mnt/c/Program Files/Docker/Docker/resources/bin/docker.exe'
-  _wsl-alias-a-windows-exe '/mnt/c/Program Files/Docker/Docker/resources/bin/kubectl.exe'
+
+  if _binary_exists_silently docker ; then
+    # check docker integration
+    if _binary_exists_silently docker.exe && [ "$(dirname $(which docker))" = "$(dirname $(which docker.exe))" ] ; then
+      _log_warning "docker integration might not be set up properly. Aliasing docker and kubectly to their windows .exe(s)"
+      alias docker=docker.exe
+      alias kubectl=kubectl.exe
+    fi
+  else
+    _wsl-alias-a-windows-exe '/mnt/c/Program Files/Docker/Docker/resources/bin/docker.exe'
+    _wsl-alias-a-windows-exe '/mnt/c/Program Files/Docker/Docker/resources/bin/kubectl.exe'
+  fi
+
   _wsl-alias-a-windows-exe '/mnt/c/Program Files/Google/Chrome/Application/chrome.exe' '/mnt/c/Program Files (x86)/Google/Chrome/Application'
 
 
