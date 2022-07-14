@@ -31,7 +31,7 @@ _wsl-has-tools() {
   return $success
 }
 
-_wsl-dos2unix() {
+wsl-dos2unix() {
  dos2unix --assume-utf16le "$@"
 }
 
@@ -175,12 +175,40 @@ _wsl-init() {
 
   # do work based on which version of WSL we're running in. This relies on knowing which distro we're running in
   if [ -n "${WSL_DISTRO_NAME}" ] ; then
-    # wsl.exe prints in window-y output (utf-16LE, CRLF), so we need to undo that for our unix tools
-    local BASH_IT_WSL_VERSION=$(wsl.exe --list --running --verbose | _wsl-dos2unix | grep  --word-regex "${WSL_DISTRO_NAME}" | awk '{print $NF}')
+    # Calculate version if necessary. Doesn't always succeed
+    if [ -z "${BASH_IT_WSL_VERSION}" ] ; then
+      if _command_exists dos2unix ; then # wsl-dos2unix needs th real dos2unix
+        _log_warning "calculating BASH_IT_WSL_VERSION. This can be slow"
+        export BASH_IT_WSL_VERSION=$(wsl.exe --list --running --verbose | wsl-dos2unix | grep  --word-regex "${WSL_DISTRO_NAME}" | awk '{print $NF}')
+        _log_warning "use export BASH_IT_WSL_VERSION=${BASH_IT_WSL_VERSION} to speed this up in the future"
+      else
+        _log_warning "please install dos2unix or set BASH_IT_WSL_VERSION manually"
+      fi
+    fi
 
-    # git is slow on version 1 WSLs. We save a bunch by doing this minimally
-    [ "$BASH_IT_WSL_VERSION" == 1 ] && export SCM_GIT_SHOW_MINIMAL_INFO=true
+    _log_debug "WSL Version is ${BASH_IT_WSL_VERSION:-not known}"
+    case "${BASH_IT_WSL_VERSION}" in
+      1)
+        _wsl-wslversion1
+        ;;
+      2)
+        _wsl-wslversion2
+        ;;
+    esac
   fi
+
 }
+
+_wsl-wslversion1() {
+  about "WSL version 1 specific actions"
+  # git is slow on version 1 WSLs. We save a bunch by doing this minimally
+  export SCM_GIT_SHOW_MINIMAL_INFO=true
+
+}
+_wsl-wslversion2() {
+  about "WSL version 2 specific actions"
+  # nothing to do
+}
+
 
 _wsl-init
