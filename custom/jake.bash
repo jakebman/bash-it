@@ -52,7 +52,8 @@ function update-ack-and-its-manpages {
   # I wish they had a -latest option.
   if curl https://beyondgrep.com/ack-v3.5.0 > "${bin_dir}/ack" && chmod 0755 "${bin_dir}/ack" ; then
     echo "created ack at ${bin_dir}/ack"
-    ls -l "${bin_dir}/ack"
+    # We disable color on ls because I don't want to have this one weird colored line
+    ls -l --human-readable --color=never "${bin_dir}/ack"
   else
     echo "failed"
     return 1
@@ -80,7 +81,7 @@ END
     local manfile="${man_dir}/man1/ack.1p"
     pod2man ~/bin/ack >$manfile
     echo "manfile created at ${manfile}. It looks like:"
-    ls -l "$manfile"
+    ls -l --human-readable "$manfile"
   else
     echo "please install pod2man. Probably via apt install perl"
     return 1
@@ -101,13 +102,15 @@ END
 
   if [ -n "$previous_ack_version" ] ; then
     echo "Checking against previous ack version..."
-    if ack --version | grep "$previous_ack_version" ; then
-      echo # spacing
-      echo "This was the previous ack version. No update actually occurred"
+    echo "$previous_ack_version" | grep ack
+    echo # spacing
+    if ack --version | grep "$previous_ack_version" &>/dev/null ; then
+      echo "This was the previous ack version. No update actually occurred. Check https://beyondgrep.com/install/ for a newer version"
     else
-      echo "$previous_ack_version"
       echo "This ack version differs from the previous one. Yay!"
     fi
+  else
+    echo "This appears to be your first ack version - welcome to ack!"
   fi
 }
 
