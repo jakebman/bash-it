@@ -82,14 +82,15 @@ _command_exists_silently() {
 }
 
 _wsl-find-a-windows-exe() {
-  about "find a windows executable either on the path or in any provided folders"
+  about "sets WIN_EXE to a windows executable either on the path or in any provided folders (WIN_EXE is unset if no .exe is found)"
   param '1: the windows executable'
   param '2*: (optional) paths where this executable could reside'
   group 'wsl'
 
+  unset WIN_EXE
   EXE="${1?'need to specify an exe to find'}"
   if _command_exists_silently "$EXE" ; then
-    echo "$EXE"
+    export WIN_EXE="$EXE"
     return
   fi
 
@@ -97,10 +98,13 @@ _wsl-find-a-windows-exe() {
 
   for dir in "$@"; do
     if _command_exists_silently "${dir}/${EXE}" ; then
-      echo "${dir}/${EXE}"
+      export WIN_EXE="${dir}/${EXE}"
       return
     fi
   done
+
+  # failed to find
+  return 1
 }
 
 _check_exiting_commands () {
@@ -128,27 +132,34 @@ _wsl-alias-a-windows-exe() {
   example '_wsl-alias-a-windows-exe explorer.exe # equivalent to alias explorer=explorer.exe'
   group 'wsl'
 
-  # use basename and dirname on $1 to allow for a fully-qualified first parameter
-  local basename="$(basename "$1")"
+  # is $1 a fully-qualified path or not?
   local dirname="$(dirname "$1")"
-  local EXE="$(_wsl-find-a-windows-exe "$basename" "$dirname" "$@")"
+  if [ "$dirname" = '.' ] ; then # dirname returns '.' if the path is just a filename
+     local basename="$1"
+     _wsl-find-a-windows-exe "$1" "$@"
+  else
+    local basename="$(basename "$1")"
+     _wsl-find-a-windows-exe "$basename" "$dirname" "$@"
+  fi
 
-  if ! _command_exists_silently "$EXE" ; then
-    _log_warning "did not find an executable for '$1'"
+  if [ -z "$WIN_EXE" ] ; then
+    _log_warning "did not find an executable for '$1' in $@"
     return 1
   fi
 
   local BARE_NAME="${basename%.exe}"
 
-  if ! _check_exiting_commands "$BARE_NAME" "$EXE" ; then
+  if ! _check_exiting_commands "$BARE_NAME" "$WIN_EXE" ; then
     return 1
   fi
 
-  if alias "${BARE_NAME}='${EXE}'" ; then
-    _log_debug "created alias ${BARE_NAME} for ${EXE}"
+  if alias "${BARE_NAME}='${WIN_EXE}'" ; then
+    _log_debug "created alias '${BARE_NAME}' for '${WIN_EXE}'"
   else
-	  _log_error "could not create alias $BARE_NAME for $EXE"
+    _log_error "could not create alias '${BARE_NAME}' for '${WIN_EXE}'"
   fi
+
+  unset WIN_EXE # clear the env from the return code of _wsl-find-a-windows-exe
 }
 
 _wsl-aliases() {
