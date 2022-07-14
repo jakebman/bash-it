@@ -31,3 +31,6 @@ alias pull='git pull'
 alias push='git push'
 alias status='git status'
 alias branch='git branch'
+
+# custom config command to manage dotfiles
+alias confgi=config
