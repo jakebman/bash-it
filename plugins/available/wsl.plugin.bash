@@ -195,7 +195,10 @@ _wsl-aliases() {
 }
 
 _wsl-find-wsl-version() {
-    wsl.exe --list --running --verbose | wsl-dos2unix | egrep "^\W+${WSL_DISTRO_NAME}\W+Running\W+[[:digit:]]+\W?$" | awk '{print $NF}'
+    wsl.exe --list --running --verbose |
+      wsl-dos2unix |
+      egrep "^\W+${WSL_DISTRO_NAME}\W+Running\W+[[:digit:]]+\W?$" |
+      awk '{print $NF}'
 }
 _wsl-wslversion-specific() {
   about "do work based on which version of WSL we're running in. This relies on knowing which distro we're running in"
