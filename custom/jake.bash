@@ -1,6 +1,8 @@
 
+# the commonly-known env variables for common tools
 export EDITOR=vim
 export VISUAL=vim
+export PAGER=less
 
 # Allow less to simply dump the output to STDOUT when it would all fit on a single page
 # https://stackoverflow.com/questions/2183900/how-do-i-prevent-git-diff-from-using-a-pager
