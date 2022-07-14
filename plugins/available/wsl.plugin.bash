@@ -66,19 +66,19 @@ _wsl-find-windows-user-home() {
 _binary_exists_silently() {
   _about 'checks for existence of a binary, silently'
   _param '1: command to check (as per _binary_exists)'
-  _param '2: (optional) log message to include when command not found (as per _binary_exists)'
   _example '$ _binary_exists_silently this-binary-probably-does-not-exist'
   _group 'lib'
-  _binary_exists "$@" &>/dev/null
+  # from _binary_exists
+  type -P "$1" &>/dev/null
 }
 
 _command_exists_silently() {
   _about 'checks for existence of a command, silently'
   _param '1: command to check (as per _command_exists)'
-  _param '2: (optional) log message to include when command not found (as per _command_exists)'
   _example '$ _command_exists_silently this-command-probably-does-not-exist'
   _group 'lib'
-  _command_exists "$@" &>/dev/null
+  # from _command_exists
+  type -t "$1" &>/dev/null
 }
 
 _wsl-find-a-windows-exe() {
