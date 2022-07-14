@@ -19,6 +19,7 @@ function jake-install-tools() {
   TOOLS_TO_INSTALL=""
   _jake-find-tool pygmentize python3-pygments
   _jake-find-tool dos2unix
+  _jake-find-tool thefuck
   _jake-find-tool unzip
   _jake-find-tool tree
   _jake-find-tool zip
@@ -44,10 +45,10 @@ function jake-install-tools() {
 
 
   # don't need these, but should report them anyway
-  jake-check-optional-tools
+  _jake-check-optional-tools
 }
 
-function jake-check-optional-tools() {
+function _jake-check-optional-tools() {
   about "install tools that aren't necesarily required"
   _command_exists gitstatus_check || echo "gitstatus is available via git clone git@github.com:romkatv/gitstatus.git"
   _command_exists mvn || echo "maven is available via sdkman: sdk install maven <latest version>"
