@@ -93,7 +93,10 @@ _wsl-find-a-windows-exe() {
   local dirname="$(dirname "$1")"
   if [ "$dirname" = '.' ] ; then # dirname returns '.' if the path is just a filename; so we check the path
      local basename="$1"
-     if _command_exists_silently "$1" ; then
+
+     # this `which` invocation is 2x faster than _command_exists, and specifying a bare name means you're pretty
+     # confident that this invocation will succeed. We'll win about 0.1s startup time by doing this
+     if which "$1" &>/dev/null || _command_exists_silently "$1" ; then
        WIN_EXE="$1"
        return
      fi
@@ -147,6 +150,13 @@ _wsl-alias-a-windows-exe() {
   example '_wsl-alias-a-windows-exe explorer.exe # equivalent to alias explorer=explorer.exe'
   group 'wsl'
 
+  # early out, if the first guess wins
+  # Unfortunately, this is a net perf loss. We're generally the producer of these aliases,
+  # so this only speeds up the second bash shell
+  #if alias "$bare_name" &>/dev/null ; then
+  #  _log_debug "${bare_name} has an alias: $(alias "$bare_name")"
+  #  return
+  #fi
 
   if ! _wsl-find-a-windows-exe "$@" ; then
     _log_warning "did not find an executable for '$1' (checked ${@:2} too)"
