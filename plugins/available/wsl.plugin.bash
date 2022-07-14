@@ -31,6 +31,10 @@ _wsl-has-tools() {
   return $success
 }
 
+_wsl-dos2unix() {
+ dos2unix --assume-utf16le "$@"
+}
+
 _wsl-find-windows-user-home() {
   about "Try to auto-discover \$WSL_WINDOWS_USER_HOME, which is the Windows user's home directory. Does nothing if \$WSL_WINDOWS_USER_HOME is already set"
   group 'wsl'
@@ -172,7 +176,7 @@ _wsl-init() {
   # do work based on which version of WSL we're running in. This relies on knowing which distro we're running in
   if [ -n "${WSL_DISTRO_NAME}" ] ; then
     # wsl.exe prints in window-y output (utf-16LE, CRLF), so we need to undo that for our unix tools
-    local BASH_IT_WSL_VERSION=$(wsl.exe --list --running --verbose | dos2unix --assume-utf16le | grep  --word-regex "${WSL_DISTRO_NAME}" | awk '{print $NF}')
+    local BASH_IT_WSL_VERSION=$(wsl.exe --list --running --verbose | _wsl-dos2unix | grep  --word-regex "${WSL_DISTRO_NAME}" | awk '{print $NF}')
 
     # git is slow on version 1 WSLs. We save a bunch by doing this minimally
     [ "$BASH_IT_WSL_VERSION" == 1 ] && export SCM_GIT_SHOW_MINIMAL_INFO=true
