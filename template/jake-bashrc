@@ -81,5 +81,17 @@ export SCM_GIT_GITSTATUS_DIR="$HOME/gitstatus"
 # Uncomment this to make Bash-it create alias reload.
 # export BASH_IT_RELOAD_LEGACY=1
 
+# Uncomment and modify this line if sdkman is installed somewhere else
+# export SDKMAN_DIR="${HOME}/.sdkman"
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+
+# The sdkman install script looks for "sdkman-init.sh" in your .bashrc file,               ### THIS LINE SUPPRESSES sdkman installer!
+# which is expected to match a line that looks a lot like this:
+# [[ -s "${SDKMAN_DIR}/bin/sdkman-init.sh" ]] && source "${SDKMAN_DIR}/bin/sdkman-init.sh" ### THIS LINE SUPPRESSES sdkman installer!
+# in order to decide whether to add its snippet.
+# The bash-it convention is for that to be provided through the plugin sdkman
+# This comment block is intended to 'sniff' like sdkman has already been here.
+# Delete this block if it is impeding you
+
 # Load Bash It
 source "$BASH_IT"/bash_it.sh

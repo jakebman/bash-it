@@ -37,7 +37,7 @@ function jake-install-tools() {
     echo -e "\t" "BE CAREFUL WHEN YOU PIPE TO BASH!!! THAT IS A BAD IDEA!!!"
     echo -e "\t" "curl --silent --show-error 'https://get.sdkman.io' --output ~/install-sdkman.sh"
     echo -e "\t" "vim ~/install-sdkman.sh"
-    echo -e "\t" "sdkman_init_snippet= ~/install-sdkman.sh"
+    echo -e "\t" "~/install-sdkman.sh"
     echo -e "\t" "bash-it enable plugin sdkman"
     echo # spacing
   fi
