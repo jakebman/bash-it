@@ -2,19 +2,14 @@
 
 # plugins
 plugins base
-plugins colors
-plugins dirs
 plugins dotfiles-via-bare-git-repo-with-config-alias
-plugins git
 plugins gitstatus
 plugins jake
 plugins sdkman
-plugins sudo
 plugins thefuck
 plugins wsl
 completion aliases
 completion bash-it
-completion dirs
 completion maven
 completion sdkman
 completion ssh
