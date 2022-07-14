@@ -29,11 +29,17 @@ function jake-install-tools() {
          sudo apt install $TOOLS_TO_INSTALL
   fi
 
+  echo # spacing
+
   # tools that require a manual intervention
   if ! _command_exists sdk ; then
     echo "sdkman not found! Install via instructions at https://sdkman.io/install."
     echo -e "\t" "BE CAREFUL WHEN YOU PIPE TO BASH!!! THAT IS A BAD IDEA!!!"
-    echo -e "\t" "use at least some caution when you curl --silent --show-error 'https://get.sdkman.io' --output ~/install-sdkman.sh"
+    echo -e "\t" "curl --silent --show-error 'https://get.sdkman.io' --output ~/install-sdkman.sh"
+    echo -e "\t" "vim ~/install-sdkman.sh"
+    echo -e "\t" "sdkman_init_snippet= ~/install-sdkman.sh"
+    echo -e "\t" "bash-it enable plugin sdkman"
+    echo # spacing
   fi
 
 
