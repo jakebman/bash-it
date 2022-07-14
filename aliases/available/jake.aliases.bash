@@ -9,6 +9,7 @@ alias gti=git
 alias igt=git
 alias vit=git
 alias bit=git
+alias fit=git
 alias gitt=git
 
 alias :q="echo You are not in vim"
