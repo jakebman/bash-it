@@ -1,9 +1,6 @@
 # shellcheck shell=bash
 about-alias "Jake's custom aliases for common typos"
 
-# Not actually a typo
-alias tree='tree -C' # color tree
-
 alias vmi=vim
 alias gim=vim
 alias bim=vim
