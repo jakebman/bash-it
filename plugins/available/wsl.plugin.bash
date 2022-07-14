@@ -127,7 +127,9 @@ _check_exiting_commands () {
     if [[ "${BASH_IT_LOG_LEVEL:-0}" -lt "${BASH_IT_LOG_LEVEL_TRACE?}" ]] ; then
       return 1 # no need to check most of the time
     fi
-    _log_debug "log level is ${BASH_IT_LOG_LEVEL:-0}, finding previous commands of $bare_name"
+
+    # this logging is noisy:
+    # _log_debug "log level is ${BASH_IT_LOG_LEVEL:-0}, finding previous commands of $bare_name"
     local exe_file="$2"
     if type "$bare_name" | grep "${bare_name} is aliased to \`'${exe_file}''" &>/dev/null ; then
       _log_debug "${exe_file} is already aliased by ${bare_name} (nothing to do)"
