@@ -122,18 +122,18 @@ _check_exiting_commands () {
   param "2: the expected value of an existing alias (if the bare name already references this alias, no warning is emitted)"
   group 'wsl'
 
-  local BARE_NAME="$1"
-  if _command_exists_silently "$BARE_NAME" ; then
+  local bare_name="$1"
+  if _command_exists_silently "$bare_name" ; then
     if [[ "${BASH_IT_LOG_LEVEL:-0}" -lt "${BASH_IT_LOG_LEVEL_TRACE?}" ]] ; then
       return 1 # no need to check most of the time
     fi
-    _log_debug "log level is ${BASH_IT_LOG_LEVEL:-0}, finding previous commands of $BARE_NAME"
-    local EXE="$2"
-    if type "$BARE_NAME" | grep "${BARE_NAME} is aliased to \`'${EXE}''" &>/dev/null ; then
-      _log_debug "${EXE} is already aliased by ${BARE_NAME} (nothing to do)"
+    _log_debug "log level is ${BASH_IT_LOG_LEVEL:-0}, finding previous commands of $bare_name"
+    local exe_file="$2"
+    if type "$bare_name" | grep "${bare_name} is aliased to \`'${exe_file}''" &>/dev/null ; then
+      _log_debug "${exe_file} is already aliased by ${bare_name} (nothing to do)"
       return 1
     fi
-    _log_warning "An existing command supercedes ${BARE_NAME}: $(type "$BARE_NAME")"
+    _log_warning "An existing command supercedes ${bare_name}: $(type "$bare_name")"
     return 1
   fi
 }
@@ -153,16 +153,16 @@ _wsl-alias-a-windows-exe() {
   # _wsl-find-a-windows-exe has set WIN_EXE
 
   local basename="$(basename "$WIN_EXE")"
-  local BARE_NAME="${basename%.exe}"
+  local bare_name="${basename%.exe}" # strips .exe suffix
 
-  if ! _check_exiting_commands "$BARE_NAME" "$WIN_EXE" ; then
+  if ! _check_exiting_commands "$bare_name" "$WIN_EXE" ; then
     return 1
   fi
 
-  if alias "${BARE_NAME}='${WIN_EXE}'" ; then
-    _log_debug "created alias '${BARE_NAME}' for '${WIN_EXE}'"
+  if alias "${bare_name}='${WIN_EXE}'" ; then
+    _log_debug "created alias '${bare_name}' for '${WIN_EXE}'"
   else
-    _log_error "could not create alias '${BARE_NAME}' for '${WIN_EXE}'"
+    _log_error "could not create alias '${bare_name}' for '${WIN_EXE}'"
   fi
 
   unset WIN_EXE # clear the env from the return code of _wsl-find-a-windows-exe
