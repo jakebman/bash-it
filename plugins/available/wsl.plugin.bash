@@ -83,22 +83,31 @@ _command_exists_silently() {
 
 _wsl-find-a-windows-exe() {
   about "sets WIN_EXE to a windows executable either on the path or in any provided folders (WIN_EXE is unset if no .exe is found)"
-  param '1: the windows executable'
-  param '2*: (optional) paths where this executable could reside'
+  param '1: the windows executable - either fully-qualified or a bare name (bare names are checked against the PATH, including whatever Windows gave us)'
+  param '2*: (optional) more paths where this executable could reside'
   group 'wsl'
 
   unset WIN_EXE
-  EXE="${1?'need to specify an exe to find'}"
-  if _command_exists_silently "$EXE" ; then
-    export WIN_EXE="$EXE"
-    return
+
+  # is $1 a fully-qualified path or not?
+  local dirname="$(dirname "$1")"
+  if [ "$dirname" = '.' ] ; then # dirname returns '.' if the path is just a filename; so we check the path
+     local basename="$1"
+     if _command_exists_silently "$1" ; then
+       WIN_EXE="$1"
+       return
+     fi
+  else # a fully-qualified path
+    local basename="$(basename "$1")"
+    if [ -x "$1" ] ; then
+      WIN_EXE="$1"
+      return
+    fi
   fi
 
-  shift # get $EXE out of $@ before we iterate over it
-
-  for dir in "$@"; do
-    if _command_exists_silently "${dir}/${EXE}" ; then
-      export WIN_EXE="${dir}/${EXE}"
+  for dir in "${@:2}"; do
+    if [ -x "${dir}/${basename}" ] ; then
+      export WIN_EXE="${dir}/${basename}"
       return
     fi
   done
@@ -136,21 +145,14 @@ _wsl-alias-a-windows-exe() {
   example '_wsl-alias-a-windows-exe explorer.exe # equivalent to alias explorer=explorer.exe'
   group 'wsl'
 
-  # is $1 a fully-qualified path or not?
-  local dirname="$(dirname "$1")"
-  if [ "$dirname" = '.' ] ; then # dirname returns '.' if the path is just a filename
-     local basename="$1"
-     _wsl-find-a-windows-exe "$1" "${@:2}"
-  else
-    local basename="$(basename "$1")"
-     _wsl-find-a-windows-exe "$basename" "$dirname" "${@:2}"
-  fi
 
-  if [ -z "$WIN_EXE" ] ; then
+  if ! _wsl-find-a-windows-exe "$@" ; then
     _log_warning "did not find an executable for '$1' in $@"
     return 1
   fi
+  # _wsl-find-a-windows-exe has set WIN_EXE
 
+  local basename="$(basename "$WIN_EXE")"
   local BARE_NAME="${basename%.exe}"
 
   if ! _check_exiting_commands "$BARE_NAME" "$WIN_EXE" ; then
