@@ -50,7 +50,10 @@ function update-ack-and-its-manpages {
 
   # instructions from https://beyondgrep.com/install/
   # I wish they had a -latest option.
-  if ! curl https://beyondgrep.com/ack-v3.5.0 > "${bin_dir}/ack" && chmod 0755 "${bin_dir}/ack" ; then
+  if curl https://beyondgrep.com/ack-v3.5.0 > "${bin_dir}/ack" && chmod 0755 "${bin_dir}/ack" ; then
+    echo "created ack at ${bin_dir}/ack"
+    ls -l "${bin_dir}/ack"
+  else
     echo "failed"
     return 1
   fi
@@ -65,8 +68,9 @@ function update-ack-and-its-manpages {
     cat <<END | tee --append "${HOME}/.manpath"
 # this section was added automatically by my ackrc-creation script. I really hope it didn't break anything
 # -Jake Boeckerman
-MANDATORY_MANPATH ${man_dir}
-MANPATH_MAP ${bin_dir} ${man_dir}
+MANDATORY_MANPATH		${man_dir}
+MANPATH_MAP		${bin_dir}		${man_dir}
+# END section
 END
   fi
 
@@ -108,5 +112,5 @@ END
 }
 
 function jake_debug {
-	echo `date +"%r"` "$@" >>~/jake-bashit-debug
+  echo `date +"%r"` "$@" >>~/jake-bashit-debug
 }
