@@ -115,6 +115,10 @@ _check_exiting_commands () {
 
   local BARE_NAME="$1"
   if _command_exists_silently "$BARE_NAME" ; then
+    if [[ "${BASH_IT_LOG_LEVEL:-0}" -lt "${BASH_IT_LOG_LEVEL_TRACE?}" ]] ; then
+      return 1 # no need to check most of the time
+    fi
+    _log_debug "log level is ${BASH_IT_LOG_LEVEL:-0}, finding previous commands of $BARE_NAME"
     local EXE="$2"
     if type "$BARE_NAME" | grep "${BARE_NAME} is aliased to \`'${EXE}''" &>/dev/null ; then
       _log_debug "${EXE} is already aliased by ${BARE_NAME} (nothing to do)"
