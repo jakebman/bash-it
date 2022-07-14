@@ -142,8 +142,8 @@ _wsl-alias-a-windows-exe() {
   fi
 }
 
-_wsl-init() {
-  about "do a bunch of work to make wsl more bearable - set up aliases, and forwarding shims"
+_wsl-aliases() {
+  about "set up aliases to common Windows .exes"
   group 'wsl'
 
   if _wsl-alias-a-windows-exe '/mnt/c/Program Files/Notepad++/notepad++.exe'\
@@ -172,31 +172,35 @@ _wsl-init() {
       _log_warning "unable to find Window's Maven repository. You might end up duplicating effort and files"
     fi
   fi
+}
 
-  # do work based on which version of WSL we're running in. This relies on knowing which distro we're running in
-  if [ -n "${WSL_DISTRO_NAME}" ] ; then
-    # Calculate version if necessary. Doesn't always succeed
-    if [ -z "${BASH_IT_WSL_VERSION}" ] ; then
-      if _command_exists dos2unix ; then # wsl-dos2unix needs th real dos2unix
-        _log_warning "calculating BASH_IT_WSL_VERSION. This can be slow"
-        export BASH_IT_WSL_VERSION=$(wsl.exe --list --running --verbose | wsl-dos2unix | grep  --word-regex "${WSL_DISTRO_NAME}" | awk '{print $NF}')
-        _log_warning "use export BASH_IT_WSL_VERSION=${BASH_IT_WSL_VERSION} to speed this up in the future"
-      else
-        _log_warning "please install dos2unix or set BASH_IT_WSL_VERSION manually"
-      fi
+_wsl-find-wsl-version() {
+    wsl.exe --list --running --verbose | wsl-dos2unix | egrep "^\W+${WSL_DISTRO_NAME}\W+Running\W+[[:digit:]]+\W?$" | awk '{print $NF}'
+}
+_wsl-wslversion-specific() {
+  about "do work based on which version of WSL we're running in. This relies on knowing which distro we're running in"
+  if [ -z "${BASH_IT_WSL_VERSION}" ] ; then
+    if [ -z "${WSL_DISTRO_NAME}" ] ; then
+      _log_error "Could not find WSL_DISTRO_NAME. We might not be in WSL"
+      return 1
+    fi
+    if ! _command_exists dos2unix ; then # wsl-dos2unix needs the real dos2unix
+      _log_warning "please install dos2unix or set BASH_IT_WSL_VERSION manually"
+      return 1
     fi
 
-    _log_debug "WSL Version is ${BASH_IT_WSL_VERSION:-not known}"
-    case "${BASH_IT_WSL_VERSION}" in
-      1)
-        _wsl-wslversion1
-        ;;
-      2)
-        _wsl-wslversion2
-        ;;
-    esac
+    export BASH_IT_WSL_VERSION=$(_wsl-find-wsl-version)
   fi
 
+  _log_debug "WSL Version is ${BASH_IT_WSL_VERSION:-not known}"
+  case "${BASH_IT_WSL_VERSION}" in
+    1)
+      _wsl-wslversion1
+      ;;
+    2)
+      _wsl-wslversion2
+      ;;
+  esac
 }
 
 _wsl-wslversion1() {
@@ -211,4 +215,5 @@ _wsl-wslversion2() {
 }
 
 
-_wsl-init
+_wsl-aliases
+_wsl-wslversion-specific
