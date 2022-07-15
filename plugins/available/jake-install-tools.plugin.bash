@@ -50,7 +50,17 @@ function jake-install-tools() {
 
 function _jake-check-optional-tools() {
   about "install tools that aren't necesarily required"
-  _command_exists gitstatus_check || echo "gitstatus is available via git clone git@github.com:romkatv/gitstatus.git"
+
+  if ! _command_exists gitstatus_check ; then
+    echo "gitstatus not found! Install it via git-clone from git@github.com:romkatv/gitstatus.git into ~/bin:"
+    echo -e "\t" "git clone git@github.com:romkatv/gitstatus.git ~/bin/gitstatus"
+    echo -e "\t" '# then, enable the gitstatus bash-it plugin and export SCM_GIT_GITSTATUS_DIR="${HOME}/bin/gitstatus"' # single-quote saves escaping
+    echo -e "\t" "# Or do both of these with:"
+    echo -e "\t" "cp ~/.bashrc ~/.bashrc-backup-$$-$(date +%Y%m%d-%T) # optional if you don't care"
+    echo -e "\t" 'cp "${BASH_IT}/themes/jake-bashrc" ~/.bashrc' # single-quote saves escaping
+    echo -e "\t" "bash-it profile load jake-home # or similar - use the one that is most appropriate"
+  fi
+
   _command_exists mvn || echo "maven is available via sdkman: sdk install maven <latest version>"
 }
 
