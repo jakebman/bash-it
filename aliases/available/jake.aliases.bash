@@ -17,6 +17,9 @@ alias q="echo no need to quit - you are already out"
 
 alias lsa='ls -a'
 alias lls='ll --color | less'
+alias lle=lls
+alias lles=lls
+alias lless=lls
 
 alias les=less
 alias ree=tree
