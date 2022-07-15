@@ -69,7 +69,9 @@ _binary_exists_silently() {
   _example '$ _binary_exists_silently this-binary-probably-does-not-exist'
   _group 'lib'
   # from _binary_exists
-  type -P "$1" &>/dev/null
+  # type -P "$1" &>/dev/null
+  # But this is slightly faster:
+  which "$1" &>/dev/null
 }
 
 _command_exists_silently() {
