@@ -119,25 +119,25 @@ _wsl-find-a-windows-exe() {
   return 1
 }
 
-_has_existing_commands () {
-  about "Whether \$1 has any aliases or names that aren't \$2"
+_check_has_existing_commands () {
+  about "Logs facts about whether \$1 has any aliases or names that aren't \$2"
   param "1: the bare name you expect to exist"
   param "2: the expected value of an existing alias (if the bare name already references this alias, no warning is emitted)"
   group 'wsl'
 
   local bare_name="$1"
-  if _command_exists_silently "$bare_name" ; then
-    local exe_file="$2"
-    if type "$bare_name" | grep "${bare_name} is aliased to \`'${exe_file}''" &>/dev/null ; then
-      _log_debug "${exe_file} is already aliased by ${bare_name} (nothing to do)"
-      return
-    fi
-    _log_warning "An existing command supercedes ${bare_name}: $(type "$bare_name")"
+  if ! _command_exists_silently "$bare_name" ; then
+    _log_debug "No existing command found for ${bare_name}"
     return
   fi
 
-  _log_debug "No existing command found for ${bare_name}"
-  return 1
+  local exe_file="$2"
+  if type "$bare_name" | grep "${bare_name} is aliased to \`'${exe_file}''" &>/dev/null ; then
+    _log_debug "${exe_file} is already aliased by ${bare_name} (nothing to do)"
+    return
+  fi
+
+  _log_warning "An existing command supercedes ${bare_name}: $(type "$bare_name")"
 }
 
 _wsl-alias-a-windows-exe() {
@@ -162,9 +162,8 @@ _wsl-alias-a-windows-exe() {
 
   local bare_name="$(basename "$WIN_EXE" | sed -e 's/\.exe$//g')" # strips .exe suffix
 
-  if [ "${BASH_IT_LOG_LEVEL:-0}" -ge "${BASH_IT_LOG_LEVEL_INFO?}" ] &&  _has_existing_commands "$bare_name" "$WIN_EXE" ; then
-    unset WIN_EXE # clear the env from the return code of _wsl-find-a-windows-exe
-    return 1
+  if [ "${BASH_IT_LOG_LEVEL:-0}" -ge "${BASH_IT_LOG_LEVEL_INFO?}" ] ; then
+    _check_has_existing_commands "$bare_name" "$WIN_EXE" # slow diagnostics
    fi
 
   alias "${bare_name}='${WIN_EXE}'" || _log_error "could not create alias '${bare_name}' for '${WIN_EXE}'"
