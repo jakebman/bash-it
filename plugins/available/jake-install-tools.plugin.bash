@@ -18,10 +18,11 @@ function jake-install-tools() {
   # tools that can use apt
   TOOLS_TO_INSTALL=""
   _jake-find-tool pygmentize python3-pygments
+  _jake-find-tool make build-essential
+  _jake-find-tool http httpie
+  _jake-find-tool mr myrepos
   _jake-find-tool dos2unix
   _jake-find-tool thefuck
-  _jake-find-tool myrepos
-  _jake-find-tool httpie
   _jake-find-tool unzip
   _jake-find-tool tree
   _jake-find-tool zip
