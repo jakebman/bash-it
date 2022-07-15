@@ -2,14 +2,16 @@
 
 # plugins
 plugins base
+plugins dircolors
 plugins dotfiles-via-bare-git-repo-with-config-alias
 plugins gitstatus
+plugins jake-install-tools
 plugins jake
 plugins sdkman
 plugins thefuck
 plugins wsl
-completion aliases
 completion bash-it
+completion maven
 completion sdkman
 completion system
 aliases general
