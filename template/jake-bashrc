@@ -11,8 +11,8 @@ esac
 # export BASH_IT_LOG_LEVEL=7 # BASH_IT_LOG_LEVEL_TRACE, which is the highes available. Only wsl seems to use it
 
 # Path to the bash it configuration
-export BASH_IT="/home/jakebman/.bash-it"
-export BASH_IT_DOTFILES_GIT_REPO="$HOME/.jake-dotfiles.git" # convention recommends bare repos end in .git
+export BASH_IT="${HOME}/.bash-it"
+export BASH_IT_DOTFILES_GIT_REPO="${HOME}/.jake-dotfiles.git" # convention recommends bare repos end in .git
 # Lock and Load a custom theme file.
 # Leave empty to disable theming.
 # location /.bash_it/themes/
@@ -49,7 +49,7 @@ export TODO="t"
 export SCM_CHECK=true
 # Set to actual location of gitstatus directory if installed
 # clone from git@github.com:romkatv/gitstatus.git
-export SCM_GIT_GITSTATUS_DIR="$HOME/gitstatus"
+export SCM_GIT_GITSTATUS_DIR="${HOME}/gitstatus"
 # per default gitstatus uses 2 times as many threads as CPU cores, you can change this here if you must
 #export GITSTATUS_NUM_THREADS=8
 
