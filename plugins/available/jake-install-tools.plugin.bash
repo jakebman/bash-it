@@ -61,6 +61,8 @@ function _jake-check-optional-tools() {
     echo -e "\t" "bash-it profile load jake-home # or similar - use the one that is most appropriate"
   fi
 
+  _command_exists httpx ||  echo "httpx not found! Install it from https://github.com/httpx-sh/httpx/releases"
+
   _command_exists mvn || echo "maven is available via sdkman: sdk install maven <latest version>"
 }
 
