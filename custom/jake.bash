@@ -45,6 +45,6 @@ function diff {
   if [[ "$#" -eq 0 ]] ; then
     git diff
   else
-    diff "$@"
+    /usr/bin/env diff "$@"
   fi
 }
