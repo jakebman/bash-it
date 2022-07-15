@@ -135,7 +135,7 @@ _check_exiting_commands () {
     # _log_debug "log level is ${BASH_IT_LOG_LEVEL:-0}, finding previous commands of $bare_name"
     local exe_file="$2"
     if type "$bare_name" | grep "${bare_name} is aliased to \`'${exe_file}''" &>/dev/null ; then
-      _log_debug "${exe_file} is already aliased by ${bare_name} (nothing to do)"
+      # _log_debug "${exe_file} is already aliased by ${bare_name} (nothing to do)"
       return 1
     fi
     _log_warning "An existing command supercedes ${bare_name}: $(type "$bare_name")"
@@ -159,10 +159,7 @@ _wsl-alias-a-windows-exe() {
   #fi
 
   if ! _wsl-find-a-windows-exe "$@" ; then
-    _log_warning "did not find an executable for '$1' (checked ${@:2} too)"
     return 1
-  else
-    _log_debug "did find an executable for '$1' at $WIN_EXE"
   fi
   # _wsl-find-a-windows-exe has set WIN_EXE
 
@@ -172,11 +169,7 @@ _wsl-alias-a-windows-exe() {
     return 1
   fi
 
-  if alias "${bare_name}='${WIN_EXE}'" ; then
-    _log_debug "created alias '${bare_name}' for '${WIN_EXE}'"
-  else
-    _log_error "could not create alias '${bare_name}' for '${WIN_EXE}'"
-  fi
+  alias "${bare_name}='${WIN_EXE}'" || _log_error "could not create alias '${bare_name}' for '${WIN_EXE}'"
 
   unset WIN_EXE # clear the env from the return code of _wsl-find-a-windows-exe
 }
