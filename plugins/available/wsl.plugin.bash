@@ -128,18 +128,18 @@ _check_has_existing_commands () {
   group 'wsl'
 
   local bare_name="$1"
-  if ! _command_exists_silently "$bare_name" ; then
-    _log_debug "No existing command found for ${bare_name}"
-    return
-  fi
-
   local exe_file="$2"
-  if type "$bare_name" | grep "${bare_name} is aliased to \`'${exe_file}''" &>/dev/null ; then
-    _log_debug "${exe_file} is already aliased by ${bare_name} (nothing to do)"
+  if ! _command_exists_silently "$bare_name" ; then
+    _log_debug "No existing command found for ${bare_name} - no problem if we alias it to ${exe_file}"
     return
   fi
 
-  _log_warning "An existing command supercedes ${bare_name}: $(type "$bare_name")"
+  if type "$bare_name" | grep "${bare_name} is aliased to \`\"${exe_file}\"'" &>/dev/null ; then
+    _log_debug "${bare_name} is already an alias for ${exe_file} (nothing to do)"
+    return
+  fi
+
+  _log_warning "We are overwriting ${bare_name} with ${exe_file} ($(type "$bare_name" | head -n1 | sed -e 's/is/was previously/'))"
 }
 
 _wsl-alias-a-windows-exe() {
@@ -168,7 +168,7 @@ _wsl-alias-a-windows-exe() {
     _check_has_existing_commands "$bare_name" "$WIN_EXE" # slow diagnostics
    fi
 
-  alias "${bare_name}='${WIN_EXE}'" || _log_error "could not create alias '${bare_name}' for '${WIN_EXE}'"
+  alias "${bare_name}=\"${WIN_EXE}\"" || _log_error "could not create alias '${bare_name}' for '${WIN_EXE}'"
 
   unset WIN_EXE # clear the env from the return code of _wsl-find-a-windows-exe
 }
