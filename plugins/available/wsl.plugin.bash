@@ -165,9 +165,10 @@ _wsl-alias-a-windows-exe() {
 
   local bare_name="$(basename "$WIN_EXE" | sed -e 's/\.exe$//g')" # strips .exe suffix
 
-  if ! _check_exiting_commands "$bare_name" "$WIN_EXE" ; then
-    return 1
-  fi
+  #if ! _check_exiting_commands "$bare_name" "$WIN_EXE" ; then
+  #  unset WIN_EXE # clear the env from the return code of _wsl-find-a-windows-exe
+  #  return 1
+  # fi
 
   alias "${bare_name}='${WIN_EXE}'" || _log_error "could not create alias '${bare_name}' for '${WIN_EXE}'"
 
