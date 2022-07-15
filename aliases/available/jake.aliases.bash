@@ -16,6 +16,7 @@ alias :q="echo You are not in vim"
 alias q="echo no need to quit - you are already out"
 
 alias lsa='ls -a'
+alias lls='ll --color | less'
 
 alias les=less
 alias ree=tree
