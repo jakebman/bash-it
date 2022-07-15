@@ -16,13 +16,9 @@ export LESS="--quit-if-one-screen --quit-at-eof --no-init --RAW-CONTROL-CHARS"
 
 if _command_exists pygmentize ; then
   # see `man less`, section "INPUT PREPROCESSOR"
-  # TODO: when using less as ack's pager, this error occurs:
-  #  # Error: cannot read infile: [Errno 2] No such file or directory: '-'
-  # because pygmentize doesn't follow the convention that - is stdin (they use the absence of arguments to communicate that)
-  # Adding the second '|' to the front of this command and piping errors to a temp file is a way
-  # to silently ignore this error, but it'd be really cool to teach pygmentize to recognize
-  # '-' as an input file
-  export  LESSOPEN='||- pygmentize -f 256 -O style="${LESSSTYLE:-default}" -g %s 2>/tmp/pygmentize-errors'
+  # We only use pygmentize on named files (not '||-') because
+  # I don't really like the default colors that are guessed
+  export  LESSOPEN='|| pygmentize -f 256 -O style="${LESSSTYLE:-default}" -g %s 2>/tmp/pygmentize-errors'
 else
   _log_error "pygmentize is available via sudo apt install python-pygments"
 fi
