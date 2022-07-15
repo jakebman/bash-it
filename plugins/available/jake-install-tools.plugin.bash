@@ -50,6 +50,8 @@ function jake-install-tools() {
 
   # don't need these, but should report them anyway
   _jake-check-optional-tools
+
+  echo "btw, check out https://devblogs.microsoft.com/commandline/updating-the-windows-console-colors/"
 }
 
 function _jake-check-optional-tools() {
