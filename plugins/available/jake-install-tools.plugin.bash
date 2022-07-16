@@ -21,6 +21,7 @@ function jake-install-tools() {
   _jake-find-tool make build-essential
   _jake-find-tool http httpie
   _jake-find-tool mr myrepos
+  _jake-find-tool perldoc perl-doc # for man mr
   _jake-find-tool dos2unix
   _jake-find-tool thefuck
   _jake-find-tool unzip
