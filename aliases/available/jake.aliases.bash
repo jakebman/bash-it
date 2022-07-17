@@ -25,6 +25,7 @@ alias lless=lls
 
 alias les=less
 alias ree=tree
+alias treee=tree
 
 alias vd=cd
 
