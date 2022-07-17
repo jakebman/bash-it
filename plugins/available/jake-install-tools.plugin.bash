@@ -54,6 +54,42 @@ function jake-install-tools() {
     echo # spacing
   fi
 
+  # I would really prefer to use the latest git
+  local GIT_VERSION="$(git --version)"
+  local EXPECTED_VERSION='git version 2.37.1'
+  if [ "$GIT_VERSION_MAJOR" != "$EXPECTED_VERSION" ] ; then
+    local GIT_VERSION_MAJOR=$(echo $GIT_VERSION | sed -E -n 's/.* ([0-9]+)\..*/\1/p')
+    local GIT_VERSION_MINOR=$(echo $GIT_VERSION | sed -E -n 's/.* ([0-9]+)\.([0-9]+)\..*/\2/p')
+    local EXPECTED_MAJOR=$(echo $EXPECTED_VERSION | sed -E -n 's/.* ([0-9]+)\..*/\1/p')
+    local EXPECTED_MINOR=$(echo $EXPECTED_VERSION | sed -E -n 's/.* ([0-9]+)\.([0-9]+)\..*/\2/p')
+    local STANCE='too old'
+    if [ "$GIT_VERSION_MAJOR" -gt "$EXPECTED_MAJOR" ] ; then
+      STANCE='newer'
+    elif [ "$GIT_VERSION_MAJOR" -eq "$EXPECTED_MAJOR" ] ; then
+      if [ "$GIT_VERSION_MINOR" -gt "$EXPECTED_MINOR" ] ; then
+        STANCE='newer'
+      elif  [ "$GIT_VERSION_MINOR" -eq "$EXPECTED_MINOR" ] ; then
+        STANCE='identical'
+      fi
+    fi # no need to check too-old state
+    case "$STANCE" in
+      'too old')
+        echo "git is not very new... try grabbing their ppa:"
+        echo -e "\t" "sudo add-apt-repository ppa:git-core/ppa"
+        echo -e "\t" "sudo apt update"
+        echo # spacing
+        ;;
+      newer)
+        echo "It's worth updating this upgrade script's line [local EXPECTED_VERSION='git version 2.37.1']"
+        echo "to reflect the new version of '$GIT_VERSION'"
+        echo # spacing
+        ;;
+      identical)
+        echo "(Git is at the version this script expects - '$GIT_VERSION')"
+        echo # spacing
+        ;;
+    esac
+  fi
 
   # don't need these, but should report them anyway
   _jake-check-optional-tools
