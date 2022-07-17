@@ -5,6 +5,7 @@ alias vmi=vim
 alias gim=vim
 alias bim=vim
 
+alias it=git
 alias gti=git
 alias igt=git
 alias vit=git
