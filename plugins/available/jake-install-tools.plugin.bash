@@ -56,7 +56,14 @@ function jake-install-tools() {
   # don't need these, but should report them anyway
   _jake-check-optional-tools
 
-  echo "btw, check out https://devblogs.microsoft.com/commandline/updating-the-windows-console-colors/"
+  echo -en "btw, "
+  echo -en "${echo_blue}if ${echo_reset_color}"
+  echo -en "this blue "
+  echo -en "${echo_blue}is ${echo_reset_color}"
+  echo -en "hard "
+  echo -en "${echo_blue}to ${echo_reset_color}"
+  echo -e  "read,"
+  echo     "check out https://devblogs.microsoft.com/commandline/updating-the-windows-console-colors/"
 }
 
 function _jake-check-optional-tools() {
