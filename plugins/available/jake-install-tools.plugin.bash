@@ -34,8 +34,9 @@ function jake-install-tools() {
   _jake-find-tool perldoc perl-doc # for man mr
 
   if [ -n "$TOOLS_TO_INSTALL" ] ; then
+    echo ===== Your Installation Command ===========
     echo sudo apt install $TOOLS_TO_INSTALL
-         sudo apt install $TOOLS_TO_INSTALL
+    echo ===== Your Installation Command ===========
   fi
 
   echo # spacing
