@@ -39,9 +39,9 @@ function jake-install-tools() {
     echo ===== Your Installation Command ===========
     echo sudo apt install $TOOLS_TO_INSTALL diffutils-doc # (I don't know how to check for diffutils-doc, but it seems helpful)
     echo ===== Your Installation Command ===========
+    echo # spacing
   fi
 
-  echo # spacing
 
   # tools that require a manual intervention
   if ! _command_exists sdk ; then
@@ -77,18 +77,19 @@ function jake-install-tools() {
         echo "git is not very new... try grabbing their ppa:"
         echo -e "\t" "sudo add-apt-repository ppa:git-core/ppa"
         echo -e "\t" "sudo apt update"
-        echo # spacing
         ;;
       newer)
-        echo "It's worth updating this upgrade script's line [local EXPECTED_VERSION='git version 2.37.1']"
-        echo "to reflect the new version of '$GIT_VERSION'"
-        echo # spacing
+        echo "the installed git is newer than the one that I'd ask you to install"
+        echo "It's worth updating this upgrade script's line from:"
+        echo -e "\t" "local EXPECTED_VERSION='$EXPECTED_VERSION'"
+        echo "to:"
+        echo -e "\t" "local EXPECTED_VERSION='$GIT_VERSION'"
         ;;
       identical)
         echo "(Git is at the version this script expects - '$GIT_VERSION')"
-        echo # spacing
         ;;
     esac
+    echo # spacing
   fi
 
   # don't need these, but should report them anyway
