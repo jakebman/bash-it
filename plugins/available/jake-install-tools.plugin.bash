@@ -58,6 +58,7 @@ function jake-install-tools() {
   # don't need these, but should report them anyway
   _jake-check-optional-tools
 
+  # let's make sure blue is readable while we're here
   echo -en "btw, "
   echo -en "${echo_blue}if ${echo_reset_color}"
   echo -en "this blue "
