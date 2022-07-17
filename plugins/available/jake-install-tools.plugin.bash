@@ -20,8 +20,6 @@ function jake-install-tools() {
   _jake-find-tool pygmentize python3-pygments
   _jake-find-tool make build-essential
   _jake-find-tool http httpie
-  _jake-find-tool mr myrepos
-  _jake-find-tool perldoc perl-doc # for man mr
   _jake-find-tool dos2unix
   _jake-find-tool thefuck
   _jake-find-tool unzip
@@ -29,6 +27,11 @@ function jake-install-tools() {
   _jake-find-tool tree
   _jake-find-tool zip
   _jake-find-tool jq
+
+  # playing with these
+  _jake-find-tool mr myrepos
+  _jake-find-tool vcsh
+  _jake-find-tool perldoc perl-doc # for man mr
 
   if [ -n "$TOOLS_TO_INSTALL" ] ; then
     echo sudo apt install $TOOLS_TO_INSTALL
