@@ -35,6 +35,8 @@ alias vile=file
 
 # git commands that... I don't care to add git to
 alias co='git co'
+alias commit='git commit'
+alias  comit='git commit'
 alias pull='git pull'
 alias push='git push'
 alias status='git status'
