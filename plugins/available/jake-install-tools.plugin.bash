@@ -37,7 +37,7 @@ function jake-install-tools() {
 
   if [ -n "$TOOLS_TO_INSTALL" ] ; then
     echo ===== Your Installation Command ===========
-    echo sudo apt install $TOOLS_TO_INSTALL
+    echo sudo apt install $TOOLS_TO_INSTALL diffutils-doc # (I don't know how to check for diffutils-doc, but it seems helpful)
     echo ===== Your Installation Command ===========
   fi
 
