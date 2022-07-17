@@ -19,6 +19,7 @@ function jake-install-tools() {
   TOOLS_TO_INSTALL=""
   _jake-find-tool pygmentize python3-pygments
   _jake-find-tool make build-essential
+  _jake-find-tool ifconfig net-tools
   _jake-find-tool http httpie
   _jake-find-tool dos2unix
   _jake-find-tool thefuck
