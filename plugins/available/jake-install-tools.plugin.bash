@@ -13,7 +13,14 @@ function _jake-find-tool() {
 function jake-install-tools() {
   about "installs the tools jake uses"
   # tools that we can silently installl
-  _binary_exists ack || (echo "installing the single-file version of ack!" && _jake-update-ack-and-its-manpages)
+  if ! _binary_exists ack ; then
+    echo "installing the single-file version of ack!"
+    _jake-update-ack-and-its-manpages
+    echo # spacing
+  else
+    echo "Nothing to do for ack - ack is happy"
+  fi
+
 
   # tools that can use apt
   TOOLS_TO_INSTALL=""
@@ -40,6 +47,8 @@ function jake-install-tools() {
     echo sudo apt install $TOOLS_TO_INSTALL diffutils-doc # (I don't know how to check for diffutils-doc, but it seems helpful)
     echo ===== Your Installation Command ===========
     echo # spacing
+  else
+    echo "Nothing to do for all the apt packages - nothing to install there; apt is happy"
   fi
 
 
@@ -52,6 +61,8 @@ function jake-install-tools() {
     echo -e "\t" "~/install-sdkman.sh"
     echo -e "\t" "bash-it enable plugin sdkman"
     echo # spacing
+  else
+    echo "Nothing to do for sdkman - sdkman is happy"
   fi
 
   # I would really prefer to use the latest git
@@ -77,6 +88,7 @@ function jake-install-tools() {
         echo "git is not very new... try grabbing their ppa:"
         echo -e "\t" "sudo add-apt-repository ppa:git-core/ppa"
         echo -e "\t" "sudo apt update"
+        echo # spacing
         ;;
       newer)
         echo "the installed git is newer than the one that I'd ask you to install"
@@ -84,12 +96,12 @@ function jake-install-tools() {
         echo -e "\t" "local EXPECTED_VERSION='$EXPECTED_VERSION'"
         echo "to:"
         echo -e "\t" "local EXPECTED_VERSION='$GIT_VERSION'"
+        echo # spacing
         ;;
       identical)
-        echo "(Git is at the version this script expects - '$GIT_VERSION')"
+        echo "Nothing to do for git - git is happy at '$GIT_VERSION'"
         ;;
     esac
-    echo # spacing
   fi
 
   # don't need these, but should report them anyway
@@ -117,11 +129,21 @@ function _jake-check-optional-tools() {
     echo -e "\t" "cp ~/.bashrc ~/.bashrc-backup-$$-$(date +%Y%m%d-%T) # optional if you don't care"
     echo -e "\t" 'cp "${BASH_IT}/themes/jake-bashrc" ~/.bashrc' # single-quote saves escaping
     echo -e "\t" "bash-it profile load jake-home # or similar - use the one that is most appropriate"
+  else
+    echo "Nothing to do for gitstatus - gitstatus is happy"
   fi
 
-  _command_exists httpx ||  echo "httpx not found! Install it from https://github.com/httpx-sh/httpx/releases"
+  if _command_exists httpx ; then
+    echo "Nothing to do for httpx - httpx is happy"
+  else
+    echo "httpx not found! Install it from https://github.com/httpx-sh/httpx/releases"
+  fi
 
-  _command_exists mvn || echo "maven is available via sdkman: sdk install maven <latest version>"
+  if _command_exists mvn ; then
+    echo "Nothing to do for maven - maven is happy"
+  else
+    echo "maven is available via sdkman: sdk install maven <latest version>"
+  fi
 }
 
 
