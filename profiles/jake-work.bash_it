@@ -9,6 +9,7 @@ plugins jake-install-tools
 plugins jake
 plugins sdkman
 plugins wsl
+completion ack
 completion bash-it
 completion maven
 completion sdkman
