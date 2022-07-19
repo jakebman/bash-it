@@ -116,6 +116,8 @@ function jake-install-tools() {
   echo -en "${echo_blue}to ${echo_reset_color}"
   echo -e  "read,"
   echo     "check out https://devblogs.microsoft.com/commandline/updating-the-windows-console-colors/"
+
+  # TODO: recommend git config --set core.fsmonitor true for windows
 }
 
 function _jake-check-optional-tools() {
