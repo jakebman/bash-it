@@ -14,4 +14,4 @@ completion maven
 completion sdkman
 completion system
 aliases general
-aliases jake
+aliases jake-typos
