@@ -6,6 +6,7 @@ plugins dircolors
 plugins dotfiles-via-bare-git-repo-with-config-alias
 plugins gitstatus
 plugins jake-install-tools
+plugins jake-path
 plugins jake
 plugins sdkman
 plugins wsl
