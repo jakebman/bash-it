@@ -67,6 +67,7 @@ function _bash-it-log-message() {
 	local prefix="${BASH_IT_LOG_PREFIX:-default}"
 	local color="${1-${echo_cyan:-}}"
 	local level="${2:-TRACE}"
+	# shellcheck disable=SC2155 # we don't care for the return code
 	local timestamp="$(_bash-it-timestamp)"
 	local message="${timestamp}${level%: }: ${prefix%: }: ${3?}"
 	if _has_colors; then
