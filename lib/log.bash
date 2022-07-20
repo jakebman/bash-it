@@ -49,12 +49,12 @@ function _has_colors() {
 }
 
 function _bash-it-timestamp() {
-  if [[ "${BASH_IT_LOG_INCLUDE_TIMESTAMP:-true}" = 'false' ]] ; then
-    # disabled by user choice
-    return
-  elif [[ "${BASH_IT_LOG_LEVEL:-0}" -ge "${BASH_IT_LOG_LEVEL_INFO?}" ]] ; then
-    echo "$(date +%X.%3N): "
-  fi
+	if [[ "${BASH_IT_LOG_INCLUDE_TIMESTAMP:-true}" = 'false' ]]; then
+		# disabled by user choice
+		return
+	elif [[ "${BASH_IT_LOG_LEVEL:-0}" -ge "${BASH_IT_LOG_LEVEL_INFO?}" ]]; then
+		echo "$(date +%X.%3N): "
+	fi
 }
 
 function _bash-it-log-message() {

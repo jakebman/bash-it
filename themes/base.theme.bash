@@ -551,9 +551,9 @@ function hg_prompt_info() {
 }
 
 function NONE_prompt_info() {
-  # suppress _is_function's complaint within scm_prompt_info while we're generating the
-  # prompt for a non-SCM folder
-  :
+	# suppress _is_function's complaint within scm_prompt_info while we're generating the
+	# prompt for a non-SCM folder
+	:
 }
 
 function scm_char() {
