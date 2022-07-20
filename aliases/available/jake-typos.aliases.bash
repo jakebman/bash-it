@@ -1,5 +1,5 @@
 # shellcheck shell=bash
-about-alias "Jake's custom aliases for common typos"
+about-alias "Jake's custom aliases for common typos and less-assuming commands"
 
 alias vmi=vim
 alias gim=vim
@@ -17,6 +17,10 @@ alias :q="echo You are not in vim"
 alias q="echo no need to quit - you are already out"
 
 alias lsa='ls -a'
+alias les=less
+
+# not a typo - presumes less on a command I like
+# ... plus its typos
 alias lls='ll --color | less'
 alias lll=lls
 alias llss=lls
@@ -24,9 +28,15 @@ alias lle=lls
 alias lles=lls
 alias lless=lls
 
-alias les=less
+alias tre=tree
 alias ree=tree
 alias treee=tree
+
+# not a typo - presumes less on a command I like
+# ... plus its typos
+alias ltree='tree | less'
+alias ltre=ltree
+alias ltreee=ltree
 
 alias vd=cd
 
