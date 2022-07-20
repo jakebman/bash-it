@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 cite 'about-alias'
 about-alias 'import the existing aliases in .bash_aliases'
 
