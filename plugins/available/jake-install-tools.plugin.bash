@@ -18,7 +18,7 @@ function jake-install-tools() {
     _jake-update-ack-and-its-manpages
     echo # spacing
   else
-    echo "Nothing to do for ack - ack is happy"
+    echo "Nothing to do for ack - ack is happy (but might be old. That's probably fine)"
   fi
 
 
@@ -104,6 +104,8 @@ function jake-install-tools() {
     esac
   fi
 
+   _jake-update-lesspipe-and-its-manpages
+
   # don't need these, but should report them anyway
   _jake-check-optional-tools
 
@@ -146,6 +148,49 @@ function _jake-check-optional-tools() {
   else
     echo "maven is available via sdkman: sdk install maven <latest version>"
   fi
+}
+
+function _jake-update-lesspipe-and-its-manpages {
+  # tools that can use apt
+  TOOLS_TO_INSTALL=""
+  _jake-find-tool bsdtar libarchive-tools
+  _jake-find-tool 7za p7zip-full
+  _jake-find-tool pdftohtml poppler-utils
+  _jake-find-tool pandoc
+  _jake-find-tool lzip
+  _jake-find-tool lynx
+
+  # necessary for installation only
+  _binary_exists lesspipe.sh || _jake-find-tool pkg-config
+
+  if [ -n "$TOOLS_TO_INSTALL" ] ; then
+    echo '===== lesspipe could use the following tools ==========='
+    echo sudo apt install $TOOLS_TO_INSTALL
+    echo '===== lesspipe could use the previous tools  ==========='
+    echo # spacing
+  else
+    echo "lesspipe probably has all the tools it would like. Probably. Run make test after ./configure over there"
+  fi
+
+  if _binary_exists lesspipe.sh ; then
+    if ! (echo "$LESSOPEN" | grep --silent "lesspipe.sh") ; then
+      echo "lesspipe exists, but you need to set LESSOPEN. Run lesspipe.sh to get the shell command for that"
+    else
+      echo "Nothing to do for lesspipe - lesspipe is happy"
+    fi
+    return # done here
+  fi
+
+  echo "lesspipe not found! Install it via git-clone and some work:"
+  echo -e "\t" "git clone git@github.com:wofr06/lesspipe.git ~/bin/lesspipe"
+  echo -e "\t" "# Then we're going to configure it to install to ~/bin, by preference"
+  echo -e "\t" "cd ~/bin/lesspipe && ./configure --prefix=~/bin"
+  echo -e "\t" "# This.. doesn't work, because it conflates my ~ with my .manpath-configured space"
+  echo -e "\t" "# So, read the Makefile and do what it thinks it should, but feel free to run"
+  echo -e "\t" "make test"
+  echo -e "\t" "# And then just copy the files based on the makefile"
+  echo -e "\t" "cp ./code2color ./sxw2txt ./archive_color ./lesspipe.sh ./vimcolor ./lesscomplete ~/bin"
+  echo -e "\t" "cp ./lesspipe.1 ~/bin/man/man1 # this needs to exist, but the ack install script creates it"
 }
 
 

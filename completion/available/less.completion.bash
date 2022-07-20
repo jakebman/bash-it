@@ -1,0 +1,44 @@
+# bash completion for less, from https://github.com/wofr06/lesspipe
+
+_list_archive()
+{
+	local cur prev words cword
+	if declare -F _init_completions >/dev/null 2>&1; then
+		_init_completion
+	else
+		COMPREPLY=()
+		_get_comp_words_by_ref cur prev words cword
+	fi
+
+	local fn
+
+	set -- "${words[@]}"
+	if [[ "${words[@]}" == *[:=]* && $COMP_LINE != *\  ]]; then
+		local i=${#words[*]}
+		fn="${words[$i]}"
+		while ((i-- > 2)); do
+		[[ "${words[$i]}" == : ]] && fn="${words[$i-1]}:$fn"
+		done
+		fn="${fn%[:=]*}"
+		cur=${cur#$fn[:=]}
+		cur=${cur#:}
+		local IFS=$'\n'
+		COMPREPLY=($(compgen -o filenames -W "$(
+			lesscomplete "$fn"|
+				while read line; do
+					printf "%q\n" "$(printf %q"\n" "$line")"
+				done
+		)" -- "$cur"))
+		return 0
+	else
+		_filedir
+	fi
+}
+
+if [[ ${COMP_LESS_INTERNAL_PATHS-} ]]; then
+	complete -F _list_archive -o dirnames less
+else
+	complete -F _list_archive less
+fi
+
+# ex: filetype=sh

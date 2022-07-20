@@ -14,7 +14,9 @@ export CLICOLOR_FORCE= # force tree to use colors so we don't need to alias tree
 #   scrolling it also exits (I like not feeling trapped)
 export LESS="--quit-if-one-screen --quit-at-eof --no-init --RAW-CONTROL-CHARS"
 
-if _command_exists pygmentize ; then
+if _command_exists lesspipe.sh ; then
+  export LESSOPEN="|| lesspipe.sh %s"
+elif _command_exists pygmentize ; then
   # see `man less`, section "INPUT PREPROCESSOR"
   # We only use pygmentize on named files (not '||-') because
   # I don't really like the default colors that are guessed

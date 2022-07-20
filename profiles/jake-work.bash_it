@@ -12,6 +12,7 @@ plugins sdkman
 plugins wsl
 completion ack
 completion bash-it
+completion less
 completion maven
 completion sdkman
 completion system
