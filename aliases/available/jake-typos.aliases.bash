@@ -4,6 +4,9 @@ about-alias "Jake's custom aliases for common typos and less-assuming commands"
 alias vmi=vim
 alias gim=vim
 alias bim=vim
+alias cim=vim
+alias fim=vim
+alias im=vim
 
 alias it=git
 alias gti=git
