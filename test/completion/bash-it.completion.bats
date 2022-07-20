@@ -115,7 +115,7 @@ function __check_completion () {
 
 @test "completion bash-it: profile load - show options" {
   run __check_completion 'bash-it profile load '
-  assert_line -n 0 "default"
+  assert_line -n 0 "default jake-home jake-work" # jake-specific change, because I'm keeping my profiles in this repo
 }
 
 @test "completion bash-it: show - show options" {
