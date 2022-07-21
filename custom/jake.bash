@@ -14,11 +14,15 @@ export CLICOLOR_FORCE= # force tree to use colors so we don't need to alias tree
 #   scrolling it also exits (I like not feeling trapped)
 export LESS="--quit-if-one-screen --quit-at-eof --no-init --RAW-CONTROL-CHARS"
 
-if _command_exists pygmentize ; then
+if _command_exists lesspipe ; then # most likely; gets zip files too
+  eval `lesspipe`
+elif _command_exists "$HOME/.lessfilter" ; then # my custom shim for coloring lesspipe. lesspipe calls it
+  export LESSOPEN="|| $HOME/.lessfilter %s"
+elif _command_exists pygmentize ; then # fallback if somehow we don't have anything else useful
   # see `man less`, section "INPUT PREPROCESSOR"
   # We only use pygmentize on named files (not '||-') because
   # I don't really like the default colors that are guessed
-  export  LESSOPEN='|| pygmentize -f 256 -O style="${LESSSTYLE:-default}" -g %s 2>/tmp/pygmentize-errors'
+  export LESSOPEN='|| pygmentize -f 256 -O style="${LESSSTYLE:-default}" -g %s 2>/tmp/pygmentize-errors'
 else
   _log_error "pygmentize is available via sudo apt install python-pygments"
 fi
