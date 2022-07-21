@@ -13,6 +13,7 @@ export CLICOLOR_FORCE= # force tree to use colors so we don't need to alias tree
 # quit-at-eof gives you the change to scroll to the end, but if you keep
 #   scrolling it also exits (I like not feeling trapped)
 export LESS="--quit-if-one-screen --quit-at-eof --no-init --RAW-CONTROL-CHARS"
+export LESSHISTFILE="${HOME}/.config/lesshst" # I like editing ~/.lessfilter, and this keeps getting in the way
 
 if _command_exists lesspipe ; then # most likely; gets zip files too
   eval `lesspipe`
