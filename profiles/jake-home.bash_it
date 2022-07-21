@@ -18,5 +18,5 @@ completion sdkman
 completion ssh
 completion system
 aliases general
+aliases jake-aliases
 aliases jake-typos
-aliases jake
