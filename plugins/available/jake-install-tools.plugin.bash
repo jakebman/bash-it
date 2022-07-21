@@ -146,6 +146,12 @@ function _jake-check-optional-tools() {
   else
     echo "maven is available via sdkman: sdk install maven <latest version>"
   fi
+
+  if _command_exists apt-file ; then
+    echo "Nothing to do for apt-file - apt-file is happy"
+  else
+    echo "apt-file is available via: sudo apt install apt-file; sudo apt-file update"
+  fi
 }
 
 
