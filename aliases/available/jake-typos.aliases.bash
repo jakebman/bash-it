@@ -42,6 +42,7 @@ alias ltre=ltree
 alias ltreee=ltree
 
 alias vd=cd
+alias dc=cd
 
 alias grpe=grep
 
