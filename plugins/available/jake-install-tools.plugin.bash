@@ -56,7 +56,7 @@ function jake-install-tools() {
   if ! _command_exists sdk ; then
     echo "sdkman not found! Install via instructions at https://sdkman.io/install."
     echo -e "\t" "BE CAREFUL WHEN YOU PIPE TO BASH!!! THAT IS A BAD IDEA!!!"
-    echo -e "\t" "curl --silent --show-error 'https://get.sdkman.io' --output ~/install-sdkman.sh"
+    echo -e "\t" "curl --silent --show-error 'https://get.sdkman.io?rcupdate=false' --output ~/install-sdkman.sh"
     echo -e "\t" "vim ~/install-sdkman.sh"
     echo -e "\t" "~/install-sdkman.sh"
     echo -e "\t" "bash-it enable plugin sdkman"
