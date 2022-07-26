@@ -152,6 +152,12 @@ function _jake-check-optional-tools() {
   else
     echo "apt-file is available via: sudo apt install apt-file; sudo apt-file update"
   fi
+
+  if _command_exists procyon ; then
+    echo "Nothing to do for procyon - procyon is happy"
+  else
+    echo "procyon is available via: sudo apt install procyon-decompiler"
+  fi
 }
 
 
