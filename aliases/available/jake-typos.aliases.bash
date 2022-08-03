@@ -1,6 +1,8 @@
 # shellcheck shell=bash
 about-alias "Jake's custom aliases for common typos and less-assuming commands"
 
+alias viim=vim
+alias vimm=vim # speculative
 alias vmi=vim
 alias gim=vim
 alias bim=vim
@@ -22,9 +24,7 @@ alias q="echo no need to quit - you are already out"
 alias lsa='ls -a'
 alias les=less
 
-# not a typo - presumes less on a command I like
-# ... plus its typos
-alias lls='ll --color | less'
+# lls is define in jake-aliases. Basically ls | less
 alias lll=lls
 alias llss=lls
 alias lle=lls
@@ -35,9 +35,7 @@ alias tre=tree
 alias ree=tree
 alias treee=tree
 
-# not a typo - presumes less on a command I like
-# ... plus its typos
-alias ltree='tree | less'
+# "less tree" - basically tree | less
 alias ltre=ltree
 alias ltreee=ltree
 
