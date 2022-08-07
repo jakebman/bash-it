@@ -14,6 +14,8 @@ if [ -d "$HOME/.local/bin" ] ; then
 fi
 
 # Now, emit an error if .profile will double-add these:
-if grep -q /bin ~/.profile ; then
+# -q -s is --quiet --no-messages (--silent is a synonym of --quiet). Means "no success output"; "no error output"
+# I use the short forms here because alpine (busybox) doesn't know the long names
+if grep -q -s /bin ~/.profile ; then
   _log_error "~/.profile will potentially double-add PATH entries for your bin folders. Please check this: $(grep -C2 /bin ~/.profile)"
 fi
