@@ -14,6 +14,6 @@ if [ -d "$HOME/.local/bin" ] ; then
 fi
 
 # Now, emit an error if .profile will double-add these:
-if grep --silent /bin ~/.profile ; then
+if grep -q /bin ~/.profile ; then
   _log_error "~/.profile will potentially double-add PATH entries for your bin folders. Please check this: $(grep -C2 /bin ~/.profile)"
 fi
