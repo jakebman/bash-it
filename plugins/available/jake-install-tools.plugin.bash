@@ -188,7 +188,7 @@ function _jake-update-ack-and-its-manpages {
   echo # spacing
 
   # set up the manpath within ~/bin; I don't want to have to maintain ~/man
-  if grep "$man_dir" "${HOME}/.manpath" &>/dev/null ; then
+  if grep -q "$man_dir" "${HOME}/.manpath" ; then
     echo "your user-specific manpath config already knows about ${man_dir}. Woohoo!"
   else
     echo "adding a section to your ~/.manpath file that looks like this:"
@@ -230,7 +230,7 @@ END
     echo "Checking against previous ack version..."
     echo "$previous_ack_version" | grep ack
     echo # spacing
-    if ack --version | grep "$previous_ack_version" &>/dev/null ; then
+    if ack --version | grep -q "$previous_ack_version" ; then
       echo "This was the previous ack version. No update actually occurred. Check https://beyondgrep.com/install/ for a newer version"
       echo "You can modify this script, or simply pass the new url to this script"
     else

@@ -134,7 +134,7 @@ _check_has_existing_commands () {
     return
   fi
 
-  if type "$bare_name" | grep "${bare_name} is aliased to \`\"${exe_file}\"'" &>/dev/null ; then
+  if type "$bare_name" | grep -q "${bare_name} is aliased to \`\"${exe_file}\"'" ; then
     _log_debug "${bare_name} is already an alias for ${exe_file} (nothing to do)"
     return
   fi
@@ -205,7 +205,7 @@ _wsl-aliases() {
 
   if _command_exists mvn ; then
     if _wsl-find-windows-user-home ; then
-      if echo "${WSL_WINDOWS_USER_HOME}" | grep ' ' &>/dev/null ; then
+      if echo "${WSL_WINDOWS_USER_HOME}" | grep -q ' ' ; then
         _log_warning "I'm sorry - I haven't been able to figure out how to escape spaces in the repostiory path - you might end up duplicating mvn repository between windows and linux"
       else
         export MAVEN_OPTS="-Dmaven.repo.local=${WSL_WINDOWS_USER_HOME}/.m2/repository"
