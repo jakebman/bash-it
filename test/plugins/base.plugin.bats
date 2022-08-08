@@ -17,8 +17,8 @@ function local_setup_file() {
 @test 'plugins base: myip()' {
   run myip
   assert_success
-  declare -r mask_ip=$(echo $output | tr -s '[0-9]' '?')
-  [[ $mask_ip == 'Your public IP is:'*'?.?.?.?'* ]]
+  # show the failures - we're looking for ##.##.##.##
+  assert_line --regexp "Your public IP is:.*([0-9]+\.){3}[0-9]+"
 }
 
 @test 'plugins base: pickfrom()' {
