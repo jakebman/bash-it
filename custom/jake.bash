@@ -34,9 +34,9 @@ function vars {
     # magic incantation from the internet
     # Basically, prints the variables and functions of
     # the current bash session, but doesn't print the functions
-    (set -o posix; set)
+    (set -o posix; set) | less
   else
-     (set -o posix; set) | grep "$@"
+     (set -o posix; set) | grep "$@" | less
   fi
 }
 alias var=vars # because I'm lazy
