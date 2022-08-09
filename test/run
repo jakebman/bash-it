@@ -7,7 +7,10 @@ export MAIN_BASH_IT_DIR="${test_directory%/*}"
 export MAIN_BASH_IT_GITDIR="${MAIN_BASH_IT_DIR}/.git"
 
 # The rest of this script assumes you're running in $test_directory. Might as well make that true
-cd "$test_directory"
+if ! cd "$test_directory" ; then
+	echo "test directory not found at $test_directory"
+	exit 1
+fi
 
 # Make sure BATS is available:
 git submodule init && git submodule update
