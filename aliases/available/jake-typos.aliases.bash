@@ -47,6 +47,9 @@ alias grpe=grep
 
 alias vile=file
 
+alias mkae=make
+alias maek=make
+
 # git commands that... I don't care to add git to
 alias co='git co'
 alias commit='git commit'
