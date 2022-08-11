@@ -4,7 +4,7 @@ load "${MAIN_BASH_IT_DIR?}/test/test_helper.bash"
 function local_setup_file() {
   setup_libs "helpers"
   # Load something, anything...
-  true load ../../completion/available/capistrano.completion
+  load ../../completion/available/capistrano.completion
 }
 
 @test "alias-completion: See that aliases with double quotes and brackets do not break the plugin" {
