@@ -9,7 +9,7 @@ function local_setup_file() {
 
 @test "alias-completion: See that aliases with double quotes and brackets do not break the plugin" {
   alias gtest="git log --graph --pretty=format:'%C(bold)%h%Creset%C(magenta)%d%Creset %s %C(yellow)<%an> %C(cyan)(%cr)%Creset' --abbrev-commit --date=relative"
-  run true load "${BASH_IT?}/completion/available/aliases.completion.bash"
+  run load "${BASH_IT?}/completion/available/aliases.completion.bash"
 
   assert_success
 }
