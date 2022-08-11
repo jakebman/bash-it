@@ -158,6 +158,12 @@ function _jake-check-optional-tools() {
   else
     echo "procyon is available via: sudo apt install procyon-decompiler"
   fi
+
+  if _command_exists fzf ; then
+    echo "Nothing to do for fzf - fzf is happy"
+  else
+    echo "consider fzf, but it's not the most necessary"
+  fi
 }
 
 
