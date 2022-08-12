@@ -22,7 +22,7 @@ fi
 
 # Which tests do we run?
 if [[ $# -eq '0' ]]; then
-	test_dirs=("${test_directory}"/{bash_it,completion,install,lib,plugins,themes})
+	test_dirs=("${test_directory}"/{completion})
 else
 	test_dirs=("$@")
 fi
