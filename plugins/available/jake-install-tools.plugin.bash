@@ -42,6 +42,11 @@ function jake-install-tools() {
   _jake-find-tool vcsh
   _jake-find-tool perldoc perl-doc # for man mr
 
+  if ! [ -f /usr/share/dict/words ] ; then
+    echo "did not find words list. Adding wamerican to apt list"
+    TOOLS_TO_INSTALL="${TOOLS_TO_INSTALL} wamerican"
+  fi
+
   if [ -n "$TOOLS_TO_INSTALL" ] ; then
     echo ===== Your Installation Command ===========
     echo sudo apt install $TOOLS_TO_INSTALL diffutils-doc # (I don't know how to check for diffutils-doc, but it seems helpful)
