@@ -2,9 +2,11 @@
 
 load "${MAIN_BASH_IT_DIR?}/test/test_helper.bash"
 function local_setup_file() {
+  echo >&3 "# alias test local setup files start"
   setup_libs "helpers"
   # Load something, anything...
   load ../../completion/available/capistrano.completion
+  echo >&3 "# alias test local setup files end"
 }
 
 @test "alias-completion: See that aliases with double quotes and brackets do not break the plugin" {
