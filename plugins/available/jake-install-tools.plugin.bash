@@ -49,7 +49,7 @@ function jake-install-tools() {
 
   if [ -n "$TOOLS_TO_INSTALL" ] ; then
     echo ===== Your Installation Command ===========
-    echo sudo apt install $TOOLS_TO_INSTALL diffutils-doc # (I don't know how to check for diffutils-doc, but it seems helpful)
+    echo sudo apt install $TOOLS_TO_INSTALL
     echo ===== Your Installation Command ===========
     echo # spacing
   else
