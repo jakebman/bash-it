@@ -38,11 +38,17 @@ function jake-install-tools() {
   _jake-find-tool jq
 
   # playing with these
-  _jake-find-tool jekyll # Github pages; wish there were a headless way to get this
   _jake-find-tool mr myrepos
   _jake-find-tool vcsh
   _jake-find-tool perldoc perl-doc # for man mr
 
+
+  # https://jekyllrb.com/docs/installation/ubuntu/:
+  _jake-find-tool ri ruby-full # ruby-full is ruby + ruby-dev + ri. ri seems like the most appropriate executable to test
+  if ! [ -f /usr/include/zlib.h ] ; then
+    echo "did not find zlib.h for jekyll for https://jekyllrb.com/docs/installation/ubuntu/"
+    TOOLS_TO_INSTALL="${TOOLS_TO_INSTALL} zlib1g-dev"
+  fi
   if ! [ -f /usr/share/dict/words ] ; then
     echo "did not find words list. Adding wamerican to apt list"
     TOOLS_TO_INSTALL="${TOOLS_TO_INSTALL} wamerican"
