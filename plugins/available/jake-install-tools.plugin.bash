@@ -56,10 +56,7 @@ function jake-install-tools() {
   _jake-find-tool vcsh
   _jake-find-tool perldoc perl-doc "for man mr"
 
-
-  # https://jekyllrb.com/docs/installation/ubuntu/:
-  _jake-find-tool ri ruby-full "ruby-full is ruby + ruby-dev + ri. ri seems like the most appropriate executable to test"
-  _jake-find-file /usr/include/zlib.h zlib1g-dev "for jekyll, per https://jekyllrb.com/docs/installation/ubuntu/"
+  _jake-find-jekyll
   _jake-find-file /usr/share/dict/words wamerican "the words list"
 
   if [ -n "$TOOLS_TO_INSTALL" ] ; then
@@ -138,6 +135,15 @@ function jake-install-tools() {
   echo     "check out https://devblogs.microsoft.com/commandline/updating-the-windows-console-colors/"
 
   # TODO: recommend git config --set core.fsmonitor true for windows
+}
+
+function _jake-install-jekyll() {
+  # https://jekyllrb.com/docs/installation/ubuntu/:
+  _jake-find-tool ri ruby-full "ruby-full is ruby + ruby-dev + ri. ri seems like the most appropriate executable to test"
+  _jake-find-file /usr/include/zlib.h zlib1g-dev "for jekyll, per https://jekyllrb.com/docs/installation/ubuntu/"
+  if ! gem list jenkins | grep -q jenkins ; then
+    echo "gem for jenkins not found - install it with 'gem install jenkins bundler'"
+  fi
 }
 
 function _jake-check-optional-tools() {
