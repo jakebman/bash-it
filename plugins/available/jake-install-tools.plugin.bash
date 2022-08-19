@@ -5,7 +5,21 @@ about-plugin 'install the tools that Jake wants with jake-install-tools'
 function _jake-find-tool() {
   if ! _binary_exists "$1" ; then
     local to_install="${2:-${1}}"
-    echo "did not find binary for $1. Adding $to_install to apt list"
+    if [ $# -gt 2 ] ; then
+      local comment=" ($3)"
+    fi
+    echo "Did not find binary for ${1}${comment}. Adding $to_install to apt list"
+    TOOLS_TO_INSTALL="${TOOLS_TO_INSTALL} ${to_install}"
+  fi
+}
+
+function _jake-find-file() {
+  if ! [ -f "$1" ] ; then
+    local to_install="${2:-$(basename ${1})}"
+    if [ $# -gt 2 ] ; then
+      local comment=" ($3)"
+    fi
+    echo "Did not find file at ${1}${comment}. Adding $to_install to apt list"
     TOOLS_TO_INSTALL="${TOOLS_TO_INSTALL} ${to_install}"
   fi
 }
@@ -40,19 +54,13 @@ function jake-install-tools() {
   # playing with these
   _jake-find-tool mr myrepos
   _jake-find-tool vcsh
-  _jake-find-tool perldoc perl-doc # for man mr
+  _jake-find-tool perldoc perl-doc "for man mr"
 
 
   # https://jekyllrb.com/docs/installation/ubuntu/:
-  _jake-find-tool ri ruby-full # ruby-full is ruby + ruby-dev + ri. ri seems like the most appropriate executable to test
-  if ! [ -f /usr/include/zlib.h ] ; then
-    echo "did not find zlib.h for jekyll for https://jekyllrb.com/docs/installation/ubuntu/"
-    TOOLS_TO_INSTALL="${TOOLS_TO_INSTALL} zlib1g-dev"
-  fi
-  if ! [ -f /usr/share/dict/words ] ; then
-    echo "did not find words list. Adding wamerican to apt list"
-    TOOLS_TO_INSTALL="${TOOLS_TO_INSTALL} wamerican"
-  fi
+  _jake-find-tool ri ruby-full "ruby-full is ruby + ruby-dev + ri. ri seems like the most appropriate executable to test"
+  _jake-find-file /usr/include/zlib.h zlib1g-dev "for jekyll, per https://jekyllrb.com/docs/installation/ubuntu/"
+  _jake-find-file /usr/share/dict/words wamerican "the words list"
 
   if [ -n "$TOOLS_TO_INSTALL" ] ; then
     echo ===== Your Installation Command ===========
