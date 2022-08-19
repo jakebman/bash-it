@@ -38,6 +38,7 @@ function jake-install-tools() {
   _jake-find-tool jq
 
   # playing with these
+  _jake-find-tool jekyll # Github pages; wish there were a headless way to get this
   _jake-find-tool mr myrepos
   _jake-find-tool vcsh
   _jake-find-tool perldoc perl-doc # for man mr
