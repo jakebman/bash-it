@@ -36,10 +36,6 @@ alias tre=tree
 alias ree=tree
 alias treee=tree
 
-# "less tree" - basically tree | less
-alias ltre=ltree
-alias ltreee=ltree
-
 alias vd=cd
 alias dc=cd
 
@@ -49,18 +45,6 @@ alias vile=file
 
 alias mkae=make
 alias maek=make
-
-# git commands that... I don't care to add git to
-alias co='git co'
-alias commit='git commit'
-alias comit='git commit'
-alias pull='git pull'
-alias push='git push'
-alias status='git status'
-alias branch='git branch'
-alias log='git log'
-alias remote='git remote'
-alias staged='git diff --staged'
 
 # custom config command to manage dotfiles
 alias confgi=config

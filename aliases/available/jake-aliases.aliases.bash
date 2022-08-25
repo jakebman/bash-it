@@ -15,6 +15,23 @@ function ltree {
 	tree -C "$@" | less
 }
 
+# Technically typos, these are just convenience names
+alias ltre=ltree
+alias ltreee=ltree
+
+
 function jqless {
 	jq --color-output "$@" | less
 }
+
+# git commands that... I don't care to add git to
+alias co='git checkout' # I have a git alias for `co`, but the bash alias shouldn't depend on that
+alias commit='git commit'
+alias comit='git commit' # typo
+alias pull='git pull'
+alias push='git push'
+alias status='git status'
+alias branch='git branch'
+alias log='git log'
+alias remote='git remote'
+alias staged='git diff --staged'
