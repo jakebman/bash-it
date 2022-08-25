@@ -59,6 +59,8 @@ alias push='git push'
 alias status='git status'
 alias branch='git branch'
 alias log='git log'
+alias remote='git remote'
+alias staged='git diff --staged'
 
 # custom config command to manage dotfiles
 alias confgi=config
