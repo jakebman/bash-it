@@ -39,6 +39,7 @@ function jake-install-tools() {
   # tools that can use apt
   TOOLS_TO_INSTALL=""
   _jake-find-tool pygmentize python3-pygments
+  _jake-find-tool python python-is-python3
   _jake-find-tool make build-essential
   _jake-find-tool ifconfig net-tools
   _jake-find-tool http httpie
