@@ -4,7 +4,7 @@
 about-plugin "Following the ideas at https://www.atlassian.com/git/tutorials/dotfiles"
 
 # Convention is that a bare git repo has a .git suffix
-: "${BASH_IT_DOTFILES_GIT_REPO:=~/.cfg.git}"
+: "${BASH_IT_DOTFILES_GIT_REPO:=~/.dotfiles-repo.git}"
 
 if ! [ -d "${BASH_IT_DOTFILES_GIT_REPO}" ] ; then
   _log_error "${BASH_IT_DOTFILES_GIT_REPO} is not a valid git dir."
