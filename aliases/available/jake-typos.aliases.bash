@@ -36,6 +36,8 @@ alias tre=tree
 alias ree=tree
 alias treee=tree
 
+alias dif=diff
+
 alias vd=cd
 alias dc=cd
 
