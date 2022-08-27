@@ -41,10 +41,21 @@ function vars {
 }
 alias var=vars # because I'm lazy
 
+function _jake-special-single-args-for-diff {
+  case $1 in
+    --help) return ;;
+    --version) return ;;
+    -h) return ;;
+    -v) return ;;
+  esac
+  return 1;
+}
 
 function diff {
   about "allow you to type the bare word 'diff' and get an automatic git diff, while still not harming the diff command"
   if [[ "$#" -eq 0 ]] ; then
+    git diff
+  elif [[ "$#" -eq 1 ]] && ! _jake-special-single-args-for-diff "$1" ; then
     git diff
   else
     /usr/bin/env diff "$@"
