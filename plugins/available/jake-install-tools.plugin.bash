@@ -138,12 +138,12 @@ function jake-install-tools() {
   # TODO: recommend git config --set core.fsmonitor true for windows
 }
 
-function _jake-install-jekyll() {
+function _jake-find-jekyll() {
   # https://jekyllrb.com/docs/installation/ubuntu/:
   _jake-find-tool ri ruby-full "ruby-full is ruby + ruby-dev + ri. ri seems like the most appropriate executable to test"
   _jake-find-file /usr/include/zlib.h zlib1g-dev "for jekyll, per https://jekyllrb.com/docs/installation/ubuntu/"
-  if ! gem list jenkins | grep -q jenkins ; then
-    echo "gem for jenkins not found - install it with 'gem install jenkins bundler'"
+  if ! gem list jekyll | grep -q jekyll ; then
+    echo "gem for jekyll not found - install it with 'gem install jekyll bundler'"
   fi
 }
 
