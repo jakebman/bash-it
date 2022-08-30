@@ -85,12 +85,14 @@ function jake-install-tools() {
 
   # I would really prefer to use the latest git
   local GIT_VERSION="$(git --version)"
-  local EXPECTED_VERSION='git version 2.37.1'
+  local EXPECTED_VERSION='git version 2.37.2'
   if [ "$GIT_VERSION_MAJOR" != "$EXPECTED_VERSION" ] ; then
     local GIT_VERSION_MAJOR=$(echo $GIT_VERSION | sed -E -n 's/.* ([0-9]+)\..*/\1/p')
     local GIT_VERSION_MINOR=$(echo $GIT_VERSION | sed -E -n 's/.* ([0-9]+)\.([0-9]+)\..*/\2/p')
+    local GIT_VERSION_PATCH=$(echo $GIT_VERSION | sed -E -n 's/.* ([0-9]+)\.([0-9]+)\.([0-9]+).*/\3/p') # n.b.: no trailing dot on this version #
     local EXPECTED_MAJOR=$(echo $EXPECTED_VERSION | sed -E -n 's/.* ([0-9]+)\..*/\1/p')
     local EXPECTED_MINOR=$(echo $EXPECTED_VERSION | sed -E -n 's/.* ([0-9]+)\.([0-9]+)\..*/\2/p')
+    local EXPECTED_PATCH=$(echo $EXPECTED_VERSION | sed -E -n 's/.* ([0-9]+)\.([0-9]+)\.([0-9]+).*/\3/p') # n.b.: no trailing do on this version #
     local STANCE='too old'
     if [ "$GIT_VERSION_MAJOR" -gt "$EXPECTED_MAJOR" ] ; then
       STANCE='newer'
@@ -98,7 +100,13 @@ function jake-install-tools() {
       if [ "$GIT_VERSION_MINOR" -gt "$EXPECTED_MINOR" ] ; then
         STANCE='newer'
       elif  [ "$GIT_VERSION_MINOR" -eq "$EXPECTED_MINOR" ] ; then
-        STANCE='identical'
+        if [ "$GIT_VERSION_PATCH" -gt "$EXPECTED_PATCH" ] ; then
+          STANCE='newer'
+        elif [ "$GIT_VERSION_PATCH" -lt "$EXPECTED_PATCH" ] ; then
+          STANCE='patch' #forgivable
+        else
+          STANCE='identical'
+        fi
       fi
     fi # no need to check too-old state
     case "$STANCE" in
@@ -106,6 +114,11 @@ function jake-install-tools() {
         echo "git is not very new... try grabbing their ppa:"
         echo -e "\t" "sudo add-apt-repository ppa:git-core/ppa"
         echo -e "\t" "sudo apt update"
+        echo # spacing
+        ;;
+      patch)
+        echo "git is only off by a patch version - not super important, but consider:"
+        echo -e "\t" "sudo add-apt-repository ppa:git-core/ppa; sudo apt update"
         echo # spacing
         ;;
       newer)
