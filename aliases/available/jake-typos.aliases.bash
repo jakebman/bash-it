@@ -11,6 +11,7 @@ alias fim=vim
 alias im=vim
 
 alias it=git
+alias gi=git
 alias gti=git
 alias igt=git
 alias vit=git
@@ -24,6 +25,9 @@ alias q="echo no need to quit - you are already out"
 
 alias lsa='ls -a'
 alias les=less
+
+alias ach=ack
+alias akc=ack
 
 # lls is define in jake-aliases. Basically ls | less
 alias lll=lls
