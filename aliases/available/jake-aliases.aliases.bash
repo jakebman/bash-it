@@ -29,6 +29,7 @@ alias commit='git commit'
 alias comit='git commit' # typo
 alias pull='git pull'
 alias push='git push'
+alias add='git add'
 alias status='git status'
 alias branch='git branch'
 alias log='git log'
