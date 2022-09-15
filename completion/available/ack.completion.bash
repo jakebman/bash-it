@@ -5,7 +5,7 @@
 # Copyright Jonas B. Nielsen (jonasbn) 2017
 # Extentions Copyright Robert P. Goldman (rpgoldman) and SIFT, LLC (siftech) 2022
 # MIT License
-# added to Jake's bash-it from https://github.com/jonasbn/bash_completion_ack/blob/be82e814f161c0779f416c3cf976dfcb45a89864/ack
+# added to Jake's bash-it from https://github.com/jonasbn/bash_completion_ack/raw/9f387108a813b7e214b47e4e269392ae89217e82/ack
 
 _acktypes=$(ack --help-types | tail +10 | awk '{gsub(/^[ \t]+/,"",$1); print$1;}')
 _acktypeargs=$(echo "${_acktypes}" | perl -ne 'chomp; print("--${_} ");')
@@ -78,8 +78,8 @@ _ack()
 
     if [[ "$cur" == -* ]]; then
         COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
-    # else
-    #     compopt -o default
+    else
+        compopt -o default
     fi
 }
 
