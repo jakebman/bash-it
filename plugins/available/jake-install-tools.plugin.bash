@@ -85,7 +85,7 @@ function jake-install-tools() {
 
   # I would really prefer to use the latest git
   local GIT_VERSION="$(git --version)"
-  local EXPECTED_VERSION='git version 2.37.2'
+  local EXPECTED_VERSION='git version 2.37.3'
   if [ "$GIT_VERSION_MAJOR" != "$EXPECTED_VERSION" ] ; then
     local GIT_VERSION_MAJOR=$(echo $GIT_VERSION | sed -E -n 's/.* ([0-9]+)\..*/\1/p')
     local GIT_VERSION_MINOR=$(echo $GIT_VERSION | sed -E -n 's/.* ([0-9]+)\.([0-9]+)\..*/\2/p')
@@ -133,6 +133,19 @@ function jake-install-tools() {
         echo "Nothing to do for git - git is happy at '$GIT_VERSION'"
         ;;
     esac
+  fi
+
+  local VIM_EDITORCONFIG_DIR='~/.vim/pack/editorconfig/start' # NO SPACES!!!!
+  if ! [ -d "$VIM_EDITORCONFIG_DIR" ] ; then
+    echo "Vim would like having editorconfig support - install it with:"
+    echo -en "\t"
+    echo "# mkdir -p $VIM_EDITORCONFIG_DIR; cd $VIM_EDITORCONFIG_DIR; git clone https://github.com/editorconfig/editorconfig-vim.git"
+    echo -en "\t"
+    echo "# or use submodules:"
+    echo -en "\t"
+    echo "config submodule init"
+  else
+    echo "Nothing to do for vim editorconfig - vim's editorconfig is happy at ~/.vim/pack/editorconfig"
   fi
 
   # don't need these, but should report them anyway
