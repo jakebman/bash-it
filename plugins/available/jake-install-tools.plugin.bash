@@ -143,7 +143,7 @@ function jake-install-tools() {
     echo -en "\t"
     echo "# or use submodules:"
     echo -en "\t"
-    echo "config submodule init"
+    echo "config submodule update --init"
   else
     echo "Nothing to do for vim editorconfig - vim's editorconfig is happy at ~/.vim/pack/editorconfig"
   fi
