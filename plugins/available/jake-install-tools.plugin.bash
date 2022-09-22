@@ -135,6 +135,7 @@ function jake-install-tools() {
     esac
   fi
 
+  # TODO: this is broken. Need $HOME - ~ fails.
   local VIM_EDITORCONFIG_DIR='~/.vim/pack/editorconfig/start' # NO SPACES!!!!
   if ! [ -d "$VIM_EDITORCONFIG_DIR" ] ; then
     echo "Vim would like having editorconfig support - install it with:"
@@ -143,7 +144,11 @@ function jake-install-tools() {
     echo -en "\t"
     echo "# or use submodules:"
     echo -en "\t"
-    echo "config submodule update --init"
+    echo "config submodule update --init --remote"
+  elif true ; then
+    echo "How do you keep the editorconfig submodule up to date? This might work. But how to know if it is needed?"
+    echo -en "\t"
+    echo "config submodule update --remote"
   else
     echo "Nothing to do for vim editorconfig - vim's editorconfig is happy at ~/.vim/pack/editorconfig"
   fi
