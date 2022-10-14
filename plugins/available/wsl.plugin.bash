@@ -219,7 +219,7 @@ _wsl-aliases() {
 _wsl-find-wsl-version() {
     wsl.exe --list --running --verbose |
       wsl-dos2unix |
-      egrep "^\W+${WSL_DISTRO_NAME}\W+Running\W+[[:digit:]]+\W?$" |
+      grep -E "^\W+${WSL_DISTRO_NAME}\W+Running\W+[[:digit:]]+\W?$" |
       awk '{print $NF}'
 }
 _wsl-wslversion-specific() {
