@@ -56,6 +56,8 @@ function jake-install-tools() {
   _jake-find-tool mr myrepos
   _jake-find-tool vcsh
   _jake-find-tool perldoc perl-doc "for man mr"
+  _jake-find-tool figlet
+  _jake-find-tool rakudo
 
   _jake-find-jekyll
   _jake-find-file /usr/share/dict/words wamerican "the words list"
