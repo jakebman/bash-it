@@ -58,6 +58,7 @@ function jake-install-tools() {
   _jake-find-tool perldoc perl-doc "for man mr"
   _jake-find-tool figlet
   _jake-find-tool rakudo
+  # 228MB - only when you need it: _jake-find-tool ffmpeg
 
   _jake-find-jekyll
   _jake-find-file /usr/share/dict/words wamerican "the words list"
