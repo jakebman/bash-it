@@ -15,4 +15,8 @@ fi
 
 _log_debug "found dotfiles repository at ${BASH_IT_DOTFILES_GIT_REPO}"
 alias config='/usr/bin/git --git-dir="${BASH_IT_DOTFILES_GIT_REPO}" --work-tree="$HOME"'
-config config --local status.showUntrackedFiles no
+
+if [ "no" != "$(config config status.showUntrackedFiles)" ] ; then
+  _log_error "config dotfiles repo is not configured to hide untracked files - this is very likely to be a huge performance burden"
+  _log_error "Try 'config config --local status.showUntrackedFiles no' to set this"
+fi
