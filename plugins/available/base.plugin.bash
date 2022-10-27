@@ -125,7 +125,7 @@ function t() {
 	param 'if not set, display todo item'
 	param '1: todo text'
 
-	local todotxt="${XDG_STATE_HOME:-~/.local/state}/bash_it/todo.txt"
+	local todotxt="${XDG_STATE_HOME:-${HOME}/.local/state}/bash_it/todo.txt"
 
 	if _bash-it-component-item-is-enabled plugin todo; then
 		todo.sh "$@"
