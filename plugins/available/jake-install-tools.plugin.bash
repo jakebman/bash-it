@@ -138,8 +138,7 @@ function jake-install-tools() {
     esac
   fi
 
-  # TODO: this is broken. Need $HOME - ~ fails.
-  local VIM_EDITORCONFIG_DIR='~/.vim/pack/editorconfig/start' # NO SPACES!!!!
+  local VIM_EDITORCONFIG_DIR="${HOME}/.vim/pack/editorconfig/start"
   if ! [ -d "$VIM_EDITORCONFIG_DIR" ] ; then
     echo "Vim would like having editorconfig support - install it with:"
     echo -en "\t"
