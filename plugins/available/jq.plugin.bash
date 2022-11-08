@@ -14,3 +14,4 @@ function _jq-ify {
 
 alias jqdiff="_jq-ify diff"
 alias jqvimdiff="_jq-ify vimdiff"
+alias vimjqdiff="_jq-ify vimdiff"
