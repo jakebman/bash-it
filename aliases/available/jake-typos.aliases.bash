@@ -55,5 +55,7 @@ alias vile=file
 alias mkae=make
 alias maek=make
 
+alias ssg=ssh
+
 # custom config command to manage dotfiles
 alias confgi=config
