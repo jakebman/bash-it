@@ -4,6 +4,7 @@ about-alias "Jake's custom aliases for common typos and less-assuming commands"
 alias viim=vim
 alias vimm=vim # speculative
 alias vmi=vim
+alias vun=vim # right hand shifted left by one
 alias gim=vim
 alias bim=vim
 alias cim=vim
