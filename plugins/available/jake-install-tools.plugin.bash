@@ -172,7 +172,8 @@ function jake-install-tools() {
   echo "Apt would love to install these updates:"
   apt list --upgradeable
   # https://askubuntu.com/questions/410247/how-to-know-last-time-apt-get-update-was-executed
-  echo "And the apt update is from $(stat --format %y /var/lib/apt/periodic/update-success-stamp)"
+  local when="$(date -d "$(stat --format %y /var/lib/apt/periodic/update-success-stamp)")"
+  echo -e "And the apt update is from ${echo_red}${when}${echo_reset_color}"
   echo "Thanks, apt!"
 
   # let's make sure blue is readable while we're here
