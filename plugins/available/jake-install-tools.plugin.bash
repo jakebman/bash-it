@@ -30,6 +30,8 @@ function jake-update-expected-git-version() {
 	# ' reduces backslashes
 	# " holds ' and interpolates variables
 	sed --follow-symlinks --in-place -E 's/(^\s+)local EXPECTED_VERSION=.*/\1local EXPECTED_VERSION='"'${GIT_VERSION}'/" "$BASH_SOURCE"
+	echo "The updated version is now: (if there is no output, we likely failed)"
+	grep "'${GIT_VERSION}'" "$BASH_SOURCE"
 }
 
 function jake-install-tools() {
