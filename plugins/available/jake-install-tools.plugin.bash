@@ -24,6 +24,14 @@ function _jake-find-file() {
   fi
 }
 
+function jake-update-expected-git-version() {
+	local GIT_VERSION="$(git --version)"
+	# careful - there are two different quoting styles on this same s///:
+	# ' reduces backslashes
+	# " holds ' and interpolates variables
+	sed --follow-symlinks --in-place -E 's/(^\s+)local EXPECTED_VERSION=.*/\1local EXPECTED_VERSION='"'${GIT_VERSION}'/" "$BASH_SOURCE"
+}
+
 function jake-install-tools() {
   about "installs the tools jake uses"
   # tools that we can silently installl
@@ -130,6 +138,7 @@ function jake-install-tools() {
         echo -e "\t" "local EXPECTED_VERSION='$EXPECTED_VERSION'"
         echo "to:"
         echo -e "\t" "local EXPECTED_VERSION='$GIT_VERSION'"
+        echo "via jake-update-expected-git-version"
         echo # spacing
         ;;
       identical)
