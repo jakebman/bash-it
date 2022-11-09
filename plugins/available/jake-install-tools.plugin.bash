@@ -161,7 +161,7 @@ function jake-install-tools() {
   elif true ; then
     echo "How do you keep the editorconfig submodule up to date? This might work. But how to know if it is needed?"
     echo -en "\t"
-    echo "config submodule update --remote"
+    echo "config submodule update --remote; config add '$VIM_EDITORCONFIG_DIR'"
   else
     echo "Nothing to do for vim editorconfig - vim's editorconfig is happy at ~/.vim/pack/editorconfig"
   fi
