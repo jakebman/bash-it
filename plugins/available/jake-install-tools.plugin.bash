@@ -169,6 +169,12 @@ function jake-install-tools() {
   # don't need these, but should report them anyway
   _jake-check-optional-tools
 
+  echo "Apt would love to install these updates:"
+  apt list --upgradeable
+  # https://askubuntu.com/questions/410247/how-to-know-last-time-apt-get-update-was-executed
+  echo "And the apt update is from $(stat --format %y /var/lib/apt/periodic/update-success-stamp)"
+  echo "Thanks, apt!"
+
   # let's make sure blue is readable while we're here
   echo -en "btw, "
   echo -en "${echo_blue}if ${echo_reset_color}"
