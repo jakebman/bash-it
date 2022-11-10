@@ -48,6 +48,7 @@ alias treee=tree
 alias dif=diff
 
 alias vd=cd
+alias vf=cd
 alias dc=cd
 
 alias grpe=grep
