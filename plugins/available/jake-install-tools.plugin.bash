@@ -195,7 +195,10 @@ function _jake-find-jekyll() {
   # https://jekyllrb.com/docs/installation/ubuntu/:
   _jake-find-tool ri ruby-full "ruby-full is ruby + ruby-dev + ri. ri seems like the most appropriate executable to test"
   _jake-find-file /usr/include/zlib.h zlib1g-dev "for jekyll, per https://jekyllrb.com/docs/installation/ubuntu/"
-  if ! gem list jekyll | grep -q jekyll ; then
+  if ! _command_exists gem ; then
+    echo "gem isn't installed - comes with ruby-full"
+    echo "gem for jekyll not found - install it with 'gem install jekyll bundler'"
+  elif ! gem list jekyll | grep -q jekyll ; then
     echo "gem for jekyll not found - install it with 'gem install jekyll bundler'"
   fi
 }
