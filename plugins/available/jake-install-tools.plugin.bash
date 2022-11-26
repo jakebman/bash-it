@@ -13,6 +13,18 @@ function _jake-find-tool() {
   fi
 }
 
+function _jake-find-spelling() {
+  if ! _binary_exists "spell" ; then
+    if ! _binary_exists "aspell" ; then
+      local to_install="spell"
+      echo "Did not find binary for spell or aspell. Adding $to_install to apt list"
+      TOOLS_TO_INSTALL="${TOOLS_TO_INSTALL} ${to_install}"
+    fi
+  fi
+}
+
+
+
 function _jake-find-file() {
   if ! [ -f "$1" ] ; then
     local to_install="${2:-$(basename ${1})}"
@@ -61,6 +73,7 @@ function jake-install-tools() {
   _jake-find-tool tree
   _jake-find-tool zip
   _jake-find-tool jq
+  _jake-find-spelling
 
   # playing with these
   _jake-find-tool mr myrepos
