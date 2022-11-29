@@ -48,13 +48,13 @@ function jake-update-expected-git-version() {
 
 function jake-install-tools() {
   about "installs the tools jake uses"
-  # tools that we can silently installl
+  # tools that we can silently install
   if ! _binary_exists ack ; then
     echo "installing the single-file version of ack!"
     _jake-update-ack-and-its-manpages
     echo # spacing
   else
-    echo "Nothing to do for ack - ack is happy"
+    echo "Nothing to do for ack - ack already exists"
   fi
 
 
@@ -267,14 +267,14 @@ function _jake-check-optional-tools() {
 function _jake-update-ack-and-its-manpages {
   local bin_dir="${HOME}/bin"
   local man_dir="${bin_dir}/man"
-  local ack_url="${1:-https://beyondgrep.com/ack-v3.5.0}"
+  local ack_url="${1:-https://beyondgrep.com/ack-v3.6.0}"
 
   # I'm learning about manpages, so this first implementation is likely bad
   mkdir -p "${man_dir}/man1" # ack's manpage goes in man1. Add others here as needed
 
   local previous_ack_version
   if _command_exists ack ; then
-    previous_ack_version="$(ack --version)"
+    previous_ack_version="$(ack --version | grep ack)"
   fi
 
   # instructions from https://beyondgrep.com/install/
