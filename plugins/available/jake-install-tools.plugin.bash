@@ -137,13 +137,13 @@ function jake-install-tools() {
     fi # no need to check too-old state
     case "$STANCE" in
       'too old')
-        echo "git is not very new... try grabbing their ppa:"
+        echo "git is not very new - ${GIT_VERSION}, behind ${EXPECTED_VERSION}. Try grabbing their ppa:"
         echo -e "\t" "sudo add-apt-repository ppa:git-core/ppa"
         echo -e "\t" "sudo apt update"
         echo # spacing
         ;;
       patch)
-        echo "git is only off by a patch version - not super important, but consider:"
+        echo "git is only off by a patch version - not super important, but know that ${GIT_VERSION} is behind ${EXPECTED_VERSION}. Try grabbing their ppa:"
         echo -e "\t" "sudo add-apt-repository ppa:git-core/ppa; sudo apt update"
         echo # spacing
         ;;
