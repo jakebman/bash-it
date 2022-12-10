@@ -62,5 +62,8 @@ alias maek=make
 
 alias ssg=ssh
 
+# from jake-aliases
+alias stage=staged
+
 # custom config command to manage dotfiles
 alias confgi=config
