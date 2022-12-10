@@ -1,10 +1,6 @@
 cite about-plugin
 about-plugin "Fire-and-forget-fast form of Windows Subsystem for Linux interop. While you're here, know about .wslconfig (WSL2 only): https://docs.microsoft.com/en-us/windows/wsl/wsl-config#configure-global-options-with-wslconfig"
 
-# Especially useful for WSL 1. Disable for WSL 2
-export SCM_GIT_SHOW_MINIMAL_INFO=true
-export WSL_WINDOWS_USER_HOME="/mnt/c/Users/Jake"
-
 if [ -d "$WSL_WINDOWS_USER_HOME" ] ; then
 	export MAVEN_OPTS="-Dmaven.repo.local=${WSL_WINDOWS_USER_HOME}/.m2/repository"
 else

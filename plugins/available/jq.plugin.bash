@@ -15,3 +15,9 @@ function _jq-ify {
 alias jqdiff="_jq-ify diff"
 alias jqvimdiff="_jq-ify vimdiff"
 alias vimjqdiff="_jq-ify vimdiff"
+
+function jqgrep {
+	about "grep for content in files, but implicity apply JQ_FILTER to the files we're grepping"
+	echo "TODO, sorry"
+	false
+}
