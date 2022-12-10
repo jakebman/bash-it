@@ -9,9 +9,7 @@ plugins jake-cdd
 plugins jake-install-tools
 plugins jake-path
 plugins jq
-plugins ruby
 plugins sdkman
-plugins thefuck
 plugins wsl
 completion ack
 completion bash-it
