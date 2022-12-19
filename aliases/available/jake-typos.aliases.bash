@@ -65,5 +65,7 @@ alias ssg=ssh
 # from jake-aliases
 alias stage=staged
 
+# super eager with that second s
+alias bashs=bash
 # custom config command to manage dotfiles
 alias confgi=config
