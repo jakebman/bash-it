@@ -66,3 +66,8 @@ function diff {
     /usr/bin/env diff "$@"
   fi
 }
+
+function doctor {
+	about "just run bash-it doctor"
+	time bash-it doctor
+}
