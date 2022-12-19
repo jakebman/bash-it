@@ -7,8 +7,9 @@ about-plugin "Following the ideas at https://www.atlassian.com/git/tutorials/dot
 : "${BASH_IT_DOTFILES_GIT_REPO:=~/.dotfiles-repo.git}"
 
 if ! [ -d "${BASH_IT_DOTFILES_GIT_REPO}" ] ; then
-  _log_error "${BASH_IT_DOTFILES_GIT_REPO} is not a valid git dir."
-  _log_error "Try 'git init --bare ${BASH_IT_DOTFILES_GIT_REPO}' to create it,"
+  _log_error "${BASH_IT_DOTFILES_GIT_REPO} (\${BASH_IT_DOTFILES_GIT_REPO}) is not a valid git dir."
+  _log_error "Try 'git init --bare \${BASH_IT_DOTFILES_GIT_REPO}' to create it,"
+  _log_error "Or 'git clone \${YOUR_GIT_URL} --bare {BASH_IT_DOTFILES_GIT_REPO}' to get it from somewhere else"
   _log_error "or set BASH_IT_DOTFILES_GIT_REPO to your bare git directory"
   return
 fi
