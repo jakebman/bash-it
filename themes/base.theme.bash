@@ -250,10 +250,14 @@ function git_prompt_minimal_info() {
 }
 
 function git_prompt_vars() {
-	if [[ "${SCM_GIT_USE_GITSTATUS:-false}" != "false" ]] && _command_exists gitstatus_query && gitstatus_query && [[ "${VCS_STATUS_RESULT:-}" == "ok-sync" ]]; then
-		# we can use faster gitstatus
-		# use this variable in githelpers and below to choose gitstatus output
-		SCM_GIT_GITSTATUS_RAN=true
+	if [[ "${SCM_GIT_USE_GITSTATUS:-false}" != "false" ]] && _command_exists gitstatus_query ; then
+		if gitstatus_query -t 0.25 && [[ "${VCS_STATUS_RESULT:-}" == "ok-sync" ]]; then
+			# we can use faster gitstatus
+			# use this variable in githelpers and below to choose gitstatus output
+			SCM_GIT_GITSTATUS_RAN=true
+		else
+			_log_warning "gitstatus_query failed: $?"
+		fi
 	else
 		SCM_GIT_GITSTATUS_RAN=false
 	fi
