@@ -109,6 +109,31 @@ function _git-status() {
 	fi
 	git status --porcelain "${git_status_flags:---}" 2> /dev/null
 }
+# Optimized use case - uses gitstatus if possible
+# succeeds if _git-status would return any output
+# fails otherwise
+# Heads up: this is vulnerable to gitstatus's -m (max_dirty/--dirty-max-index-size) setting. Uncertain whether "I dunno" should mean clean, dirty, or take slow git path. Currently, it is taken as 'dirty'
+function _git-status-is-dirty() {
+	if [[ "${SCM_GIT_GITSTATUS_RAN:-}" == "true" ]]; then
+		# A series of yes/no answers encoded as 1/0 strings
+		# VCS_STATUS_HAS_UNSTAGED and _UNTRACKED can return -1 for "didn't check"
+		# For now, we'll consider that to be identical to "is dirty"
+		local git_status;
+		if [[ "${SCM_GIT_IGNORE_UNTRACKED:-}" == "true" ]]; then
+			git_status="${VCS_STATUS_HAS_STAGED}${VCS_STATUS_HAS_CONFLICTED}${VCS_STATUS_HAS_UNSTAGED}"
+		else
+			git_status="${VCS_STATUS_HAS_STAGED}${VCS_STATUS_HAS_CONFLICTED}${VCS_STATUS_HAS_UNSTAGED}${VCS_STATUS_HAS_UNTRACKED}"
+		fi
+		case "$git_status" in
+			*1*) return 0 # found a status-like fact
+				;;
+			*) return 1 # failed to find a status-like fact
+				;;
+		esac
+	fi # fast path done
+	# TODO: wish there were a way to notify the user which path was used - fast or slow
+	[[ -n "$(_git-status | tail -n1)" ]]
+}
 
 function _git-status-counts() {
 	_git-status | awk '
