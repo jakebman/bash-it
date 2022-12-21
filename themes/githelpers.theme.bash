@@ -89,9 +89,15 @@ function _git-upstream-branch-gone() {
 
 function _git-hide-status() {
 	# this takes between 0.2 seconds and 0.4 seconds in windows directories
-	# I'm disabling it for speed, because I never anticipate using it
+	# I'm choosing this to just avoid window directories, because that lets
+	# the work flow faster
 	# -Jake
-	return 1
+	case "$(realpath $(pwd))" in
+		/mnt/c/*)
+			return 0 ;; # true - hide status
+		*)
+			return 1 ;;
+	esac
 	# original code below. We can leave it here because we unconditionally return before executing it
 	[[ "$(git config --get bash-it.hide-status)" == "1" ]]
 }
