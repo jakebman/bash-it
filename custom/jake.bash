@@ -59,14 +59,13 @@ function hgrep {
 function diff {
   about "allow you to type the bare word 'diff' and get an automatic git diff, while still not harming the diff command"
   if [[ "$#" -eq 0 ]] ; then
-    git diff
+    git diff "$@" # $@ is unecessary, as it's empty. Keeps parallel structure, though.
   elif [[ "$#" -eq 1 ]] && ! _jake-special-single-args-for-diff "$1" ; then
-    git diff
+    git diff "$@"
   else
     /usr/bin/env diff "$@"
   fi
 }
-
 function doctor {
 	about "just run bash-it doctor"
 	time bash-it doctor
