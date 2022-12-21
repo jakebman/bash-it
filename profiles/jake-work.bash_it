@@ -10,7 +10,7 @@ plugins jake-install-tools
 plugins jake-path
 plugins jq
 plugins sdkman
-plugins wsl
+plugins wsl-fast
 completion ack
 completion bash-it
 completion maven
