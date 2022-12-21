@@ -251,7 +251,10 @@ _wsl-wslversion-specific() {
 _wsl-wslversion1() {
   about "WSL version 1 specific actions"
   # git is slow on version 1 WSLs. We save a bunch by doing this minimally
-  export SCM_GIT_SHOW_MINIMAL_INFO=true
+  if [[ "$SCM_GIT_SHOW_MINIMAL_INFO" != 'true' ]]; then
+    _log_warn "Enabling minimal git info in WSL 1, because it's slow"
+    export SCM_GIT_SHOW_MINIMAL_INFO=true
+  fi
 
 }
 _wsl-wslversion2() {
