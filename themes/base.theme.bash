@@ -236,9 +236,11 @@ function git_prompt_minimal_info() {
 
 	_git-hide-status && return
 
+	# gitstatus can help us with speed even in the minimal case
+	git_prompt_gitstatus_check
 	SCM_BRANCH="${SCM_THEME_BRANCH_PREFIX-}\$(_git-friendly-ref)"
 
-	if [[ -n "$(_git-status | tail -n1)" ]]; then
+	if _git-status-is-dirty; then
 		SCM_DIRTY=1
 		SCM_STATE="${SCM_THEME_PROMPT_DIRTY?}"
 	fi
@@ -249,19 +251,20 @@ function git_prompt_minimal_info() {
 	echo -ne "${SCM_PREFIX}${SCM_BRANCH}${SCM_STATE}${SCM_SUFFIX}"
 }
 
-function git_prompt_vars() {
+function git_prompt_gitstatus_check() {
 	if [[ "${SCM_GIT_USE_GITSTATUS:-false}" != "false" ]] && _command_exists gitstatus_query ; then
 		if gitstatus_query -t 0.25 && [[ "${VCS_STATUS_RESULT:-}" == "ok-sync" ]]; then
 			# we can use faster gitstatus
 			# use this variable in githelpers and below to choose gitstatus output
 			SCM_GIT_GITSTATUS_RAN=true
-		else
-			_log_warning "gitstatus_query failed: $?"
-		fi
+		fi # TODO: I wish we could log the timeout somewhere
 	else
 		SCM_GIT_GITSTATUS_RAN=false
 	fi
+}
 
+function git_prompt_vars() {
+	git_prompt_gitstatus_check
 	if _git-branch &> /dev/null; then
 		SCM_GIT_DETACHED="false"
 		SCM_BRANCH="${SCM_THEME_BRANCH_PREFIX}\$(_git-friendly-ref)$(_git-remote-info)"
