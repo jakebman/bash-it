@@ -214,7 +214,8 @@ function scm_prompt_info_common() {
 			prompt_info="${SCM}_prompt_info"
 			;;
 	esac
-	_is_function "${prompt_info}" && "${prompt_info}"
+	#_is_function "${prompt_info}" && "${prompt_info}"
+	"${prompt_info}" # always succeeds thanks to NONE_prompt_info
 }
 
 function terraform_workspace_prompt() {
