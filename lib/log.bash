@@ -53,7 +53,7 @@ function _bash-it-timestamp() {
 		# disabled by user choice
 		return
 	elif [[ "${BASH_IT_LOG_LEVEL:-0}" -ge "${BASH_IT_LOG_LEVEL_INFO?}" ]]; then
-		echo "$(date +%X.%3N): "
+		echo "$EPOCHREALTIME: "
 	fi
 }
 
