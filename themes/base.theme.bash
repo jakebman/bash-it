@@ -239,7 +239,7 @@ function git_prompt_minimal_info() {
 
 	# gitstatus can help us with speed even in the minimal case
 	git_prompt_gitstatus_check
-	SCM_BRANCH="${SCM_THEME_BRANCH_PREFIX-}\$(_git-friendly-ref)"
+	SCM_BRANCH="${SCM_THEME_BRANCH_PREFIX-}$(_git-friendly-ref)"
 
 	if _git-status-is-dirty; then
 		SCM_DIRTY=1
@@ -268,7 +268,7 @@ function git_prompt_vars() {
 	git_prompt_gitstatus_check
 	if _git-branch &> /dev/null; then
 		SCM_GIT_DETACHED="false"
-		SCM_BRANCH="${SCM_THEME_BRANCH_PREFIX}\$(_git-friendly-ref)$(_git-remote-info)"
+		SCM_BRANCH="${SCM_THEME_BRANCH_PREFIX}$(_git-friendly-ref)$(_git-remote-info)"
 	else
 		SCM_GIT_DETACHED="true"
 
@@ -278,7 +278,7 @@ function git_prompt_vars() {
 		else
 			detached_prefix="${SCM_THEME_DETACHED_PREFIX}"
 		fi
-		SCM_BRANCH="${detached_prefix}\$(_git-friendly-ref)"
+		SCM_BRANCH="${detached_prefix}$(_git-friendly-ref)"
 	fi
 
 	if [[ "${SCM_GIT_GITSTATUS_RAN:-}" == "true" ]]; then
