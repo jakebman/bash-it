@@ -92,12 +92,7 @@ function _git-hide-status() {
 	# I'm choosing this to just avoid window directories, because that lets
 	# the work flow faster
 	# -Jake
-	case "$(realpath $(pwd))" in
-		/mnt/c/*)
-			return 0 ;; # true - hide status
-		*)
-			return 1 ;;
-	esac
+	return 1 # do not hide status
 	# original code below. We can leave it here because we unconditionally return before executing it
 	[[ "$(git config --get bash-it.hide-status)" == "1" ]]
 }
