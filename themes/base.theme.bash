@@ -258,8 +258,10 @@ function git_prompt_gitstatus_check() {
 			# we can use faster gitstatus
 			# use this variable in githelpers and below to choose gitstatus output
 			SCM_GIT_GITSTATUS_RAN=true
+			echo -n "{ran gitstatus $EPOCHSECONDS}"
 		fi # TODO: I wish we could log the timeout somewhere
 	else
+		echo -n "{failed gitstatus $EPOCHSECONDS}"
 		SCM_GIT_GITSTATUS_RAN=false
 	fi
 }
