@@ -105,6 +105,8 @@ if [[ -n "${BASH_IT_RELOAD_LEGACY:-}" ]] && ! _command_exists reload; then
 fi
 
 for _bash_it_library_finalize_f in "${_bash_it_library_finalize_hook[@]:-}"; do
+	_log_debug "Running library finalizer ${_bash_it_library_finalize_f?}"
 	eval "${_bash_it_library_finalize_f?}" # Use `eval` to achieve the same behavior as `$PROMPT_COMMAND`.
 done
+_log_debug "Done."
 unset "${!_bash_it_library_finalize_@}" "${!_bash_it_main_file_@}"
