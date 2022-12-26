@@ -6,11 +6,16 @@
 # Extentions Copyright Robert P. Goldman (rpgoldman) and SIFT, LLC (siftech) 2022
 # MIT License
 # added to Jake's bash-it from https://github.com/jonasbn/bash_completion_ack/raw/9f387108a813b7e214b47e4e269392ae89217e82/ack
+# and modified since then, to reduce perl calls for _acktypeargs and _negacktypes
+# for a .5s speedup on WSL startup
 
-_acktypes=$(ack --help-types | tail +10 | awk '{gsub(/^[ \t]+/,"",$1); print$1;}')
-_acktypeargs=$(echo "${_acktypes}" | perl -ne 'chomp; print("--${_} ");')
-_negacktypes=$(echo "${_acktypes}" | perl -ne 'chomp; print("no${_} ");')
-_acktypes=$(echo "${_acktypes}" | perl -ne 'chomp; print("${_} ");')
+_acktypes=( $(ack --help-types | tail +10 | awk '{gsub(/^[ \t]+/,"",$1); print$1;}') )
+_acktypeargs=()
+_negacktypes=()
+for arg in "${_acktypes[@]}"; do
+	_acktypeargs+=("--$arg")
+	_negacktypes+=("no$arg")
+done
 
 _ack()
 {
@@ -18,7 +23,7 @@ _ack()
     COMPREPLY=()
     cur="${COMP_WORDS[COMP_CWORD]}"
     prev="${COMP_WORDS[COMP_CWORD-1]}"
-    local opts="${_acktypeargs}"
+    local opts="${_acktypeargs[@]}"
     # File select actions:
     opts+=" -f -g -l"
     # File listing actions
@@ -67,11 +72,12 @@ _ack()
             return
             ;;
         -t | -T)
-            COMPREPLY=($(compgen -W "${_acktypes}"))
+            COMPREPLY=( "${_acktypes[@]}" ) # direct copy acktypes
             return
             ;;
         --type)
-            COMPREPLY=($(compgen -W "${_acktypes}${_negacktypes}"))
+            COMPREPLY=( "${_acktypes[@]}" )
+            COMPREPLY+=( "${_negacktypes[@]}" )
             return
             ;;
     esac
