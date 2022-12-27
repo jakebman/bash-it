@@ -30,6 +30,7 @@ alias comit='git commit' # typo
 alias pull='git pull'
 alias push='git push'
 alias rebase='git rebase'
+alias merge='git merge'
 alias add='git add'
 alias status='git status'
 alias branch='git branch'
