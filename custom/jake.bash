@@ -63,9 +63,18 @@ function diff {
   elif [[ "$#" -eq 1 ]] && ! _jake-special-single-args-for-diff "$1" ; then
     git diff "$@"
   else
-    /usr/bin/env diff "$@"
+    command diff "$@"
   fi
 }
+function realpath {
+  about "allow you to type the bare word 'realpath' and automatically be cd'd there"
+  if [[ "$#" -eq 0 ]] ; then
+		cd "$(command realpath .)"
+  else
+    command realpath "$@"
+  fi
+}
+
 function doctor {
 	about "just run bash-it doctor"
 	time bash-it doctor
