@@ -24,6 +24,7 @@ alias fit=git
 alias tit=git
 alias got=git
 alias gut=git
+alias ghit=git
 alias gitt=git
 alias jgti=git # it's like... sometimes I just mash the keyboard while thinking really hard about the command
 
