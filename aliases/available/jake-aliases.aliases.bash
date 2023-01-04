@@ -25,6 +25,7 @@ function jqless {
 
 # git commands that... I don't care to add git to
 alias co='git checkout' # I have a git alias for `co`, but the bash alias shouldn't depend on that
+alias ignored='git status --ignored' # I also have a git alias for `ignored`
 alias commit='git commit'
 alias comit='git commit' # typo
 alias pull='git pull'
