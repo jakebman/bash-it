@@ -12,6 +12,7 @@ plugins jq
 plugins sdkman
 plugins wsl-fast
 completion ack
+completion aliases
 completion bash-it
 completion maven
 completion sdkman
