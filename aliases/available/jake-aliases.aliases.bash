@@ -23,6 +23,9 @@ function jqless {
 	jq --color-output "$@" | less
 }
 
+# I really like permament differences
+alias watch='watch --differences permanent'
+
 # git commands that... I don't care to add git to
 alias co='git checkout' # I have a git alias for `co`, but the bash alias shouldn't depend on that
 alias ignored='git status --ignored' # I also have a git alias for `ignored`
