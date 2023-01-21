@@ -7,6 +7,7 @@ plugins dotfiles-via-bare-git-repo-with-config-alias
 plugins gitstatus
 plugins jake-cdd
 plugins jake-install-tools
+plugins jake-maintenance
 plugins jake-path
 plugins jq
 plugins sdkman
