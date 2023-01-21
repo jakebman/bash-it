@@ -7,12 +7,13 @@ else
 	_log_warning "Set WSL_WINDOWS_USER_HOME to /mnt/c/Users/<your home dir> to unify maven repos"
 fi
 
-alias chrome='/mnt/c/Program Files/Google/Chrome/Application/chrome.exe'
-alias notepad='/mnt/c/Program Files/Notepad++/notepad++.exe'
-alias npp='/mnt/c/Program Files/Notepad++/notepad++.exe'
+# TODO: these programs might live in Program Files (x86) instead
+alias chrome="'/mnt/c/Program Files/Google/Chrome/Application/chrome.exe'"
+alias notepad="'/mnt/c/Program Files/Notepad++/notepad++.exe'"
+alias npp="'/mnt/c/Program Files/Notepad++/notepad++.exe'"
 alias explorer=explorer.exe
 alias wsl=wsl.exe
-alias winmerge='/mnt/c/Program Files/WinMerge/WinMergeU.exe'
+alias winmerge="'/mnt/c/Program Files/WinMerge/WinMergeU.exe'"
 
 # don't worry about aliasing docker if it's already here
 if ! type docker &>/dev/null ; then
