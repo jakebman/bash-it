@@ -4,12 +4,13 @@ about-plugin 'update things that need update and call out TODOs in the places I 
 function jake-maintain-system() {
   about "perform a bunch of maintenance tasks"
   : ${BASH_IT_MAINENANCE_DIR:=$HOME/.jake-maintenance-reports}
-  mkdir -p "${BASH_IT_MAINENANCE_DIR}"
   function jake-log() {
 	tee -a maintenance-log
   }
   (
-  cd "${BASH_IT_MAINENANCE_DIR}"
+  # $$ is the pid of the outer bash. This subshell's PID is $BASHPID
+  mkdir -p "${BASH_IT_MAINENANCE_DIR}/$BASHPID"
+  cd "${BASH_IT_MAINENANCE_DIR}/$BASHPID"
   # |& is shorthand for 2>&1 |
   sdk update |& tee sdk-man-update &
   echo "$! spawned for sdkman update" | jake-log
