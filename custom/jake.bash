@@ -16,14 +16,19 @@ export LESS="--quit-if-one-screen --quit-at-eof --no-init --RAW-CONTROL-CHARS"
 export LESSHISTFILE="${HOME}/.config/lesshst" # I like editing ~/.lessfilter, and this keeps getting in the way
 export LESSSTYLE=sas
 
+# TODO: I'd like to be able to apply these to stdin as well (the "||- your-command %s" variation).
+# That'll take more infrastructure.
+# Read more in $HOME/.lessfilter
 if _command_exists lesspipe ; then # most likely; gets zip files too
   eval `lesspipe`
 elif _command_exists "$HOME/.lessfilter" ; then # my custom shim for coloring lesspipe. lesspipe calls it
+  _log_warn "lesspipe is not available, but ~/.lessfilter is present. Using that"
   export LESSOPEN="|| $HOME/.lessfilter %s"
 elif _command_exists pygmentize ; then # fallback if somehow we don't have anything else useful
   # see `man less`, section "INPUT PREPROCESSOR"
   # We only use pygmentize on named files (not '||-') because
   # I don't really like the default colors that are guessed
+  _log_warn "lesspipe and ~/.lessfilter are missing. Using pygmentize bare"
   export LESSOPEN='|| pygmentize -f 256 -O style="${LESSSTYLE:-default}" -g %s 2>/tmp/pygmentize-errors'
 else
   _log_error "pygmentize is available via sudo apt install python-pygments"
