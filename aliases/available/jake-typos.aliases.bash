@@ -63,11 +63,14 @@ alias maek=make
 
 alias ssg=ssh
 
-# from jake-aliases
+# from jake-aliases - these are git command which drop the "git " prefix
 alias stage=staged
+alias sttatus=status
+alias statsus=status
 
 # super eager with that second s
 alias bashs=bash
 # custom config command to manage dotfiles
 alias confgi=config
 alias conifg=config
+
