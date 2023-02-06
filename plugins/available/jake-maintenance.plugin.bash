@@ -10,8 +10,10 @@ function jake-maintain-system() {
   (
   # $$ is the pid of the outer bash. This subshell's PID is $BASHPID
   mkdir -p "${BASH_IT_MAINENANCE_DIR}/$BASHPID"
+  ln -s -f "$BASHPID" "${BASH_IT_MAINENANCE_DIR}/latest"
   cd "${BASH_IT_MAINENANCE_DIR}/$BASHPID"
   # |& is shorthand for 2>&1 |
+  echo "Logging begins. Check $(realpath maintenance-log) for updates" | jake-log
 
   (config pull; config submodule update --init --remote && echo "(logging note that submodule succeeded)") |& tee config-pull &
   echo "$! spawned for config (and submodules!) pull" | jake-log
