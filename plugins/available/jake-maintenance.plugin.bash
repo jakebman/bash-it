@@ -13,8 +13,8 @@ function jake-maintain-system() {
   cd "${BASH_IT_MAINENANCE_DIR}/$BASHPID"
   # |& is shorthand for 2>&1 |
 
-  config pull |& tee config-pull &
-  echo "$! spawned for config pull" | jake-log
+  (config pull; config submodule update --init --remote && echo "(logging note that submodule succeeded)") |& tee config-pull &
+  echo "$! spawned for config (and submodules!) pull" | jake-log
   (cd "${BASH_IT}" && git pull) |& tee bash-it-pull &
   echo "$! spawned for bash-it pull" | jake-log
   for pid in `jobs -p`; do
