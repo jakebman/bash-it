@@ -15,7 +15,7 @@ function jake-maintain-system() {
   # |& is shorthand for 2>&1 |
   echo "Logging begins. Check $(realpath maintenance-log) for updates" | jake-log
 
-  (config pull; config submodule update --init --remote && echo "(logging note that submodule succeeded)") |& tee config-pull &
+  (config pull; config submodule update --init --remote --jobs 4 && echo "(logging note that submodule succeeded)") |& tee config-pull &
   echo "$! spawned for config (and submodules!) pull" | jake-log
   (cd "${BASH_IT}" && git pull) |& tee bash-it-pull &
   echo "$! spawned for bash-it pull" | jake-log
