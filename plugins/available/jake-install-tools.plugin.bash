@@ -182,6 +182,14 @@ function jake-install-tools() {
   # don't need these, but should report them anyway
   _jake-check-optional-tools
 
+  if grep 'systemd=true' /etc/wsl.conf ; then
+	  echo "Systemd is enabled in WSL!"
+  else
+	  echo "systemd is not enabled in wsl. Enable it with the instructions here:"
+	  echo "https://devblogs.microsoft.com/commandline/systemd-support-is-now-available-in-wsl/"
+  fi
+
+
   echo "Apt would love to install these updates:"
   apt list --upgradeable
   # https://askubuntu.com/questions/410247/how-to-know-last-time-apt-get-update-was-executed
