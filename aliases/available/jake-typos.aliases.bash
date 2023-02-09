@@ -21,6 +21,7 @@ alias bit=git
 alias dit=git
 alias did=git
 alias fit=git
+alias fig=git
 alias tit=git
 alias got=git
 alias gut=git
