@@ -67,6 +67,7 @@ alias ssg=ssh
 alias stage=staged
 alias sttatus=status
 alias statsus=status
+alias pul=pull
 
 # super eager with that second s
 alias bashs=bash
