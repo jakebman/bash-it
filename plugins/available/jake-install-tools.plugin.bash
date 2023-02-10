@@ -182,7 +182,7 @@ function jake-install-tools() {
   # don't need these, but should report them anyway
   _jake-check-optional-tools
 
-  if grep 'systemd=true' /etc/wsl.conf ; then
+  if grep -q 'systemd=true' /etc/wsl.conf ; then
 	  echo "Systemd is enabled in WSL!"
   else
 	  echo "systemd is not enabled in wsl. Enable it with the instructions here:"
