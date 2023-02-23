@@ -25,7 +25,7 @@ function jake-maintain-system() {
   echo "Done with git fetches"
   sleep 2
 
-  sdk update |& tee sdk-man-update &
+  (sdk selfupdate && echo updating sdk candidates && sdk update) |& tee sdk-man-update &
   echo "$! spawned for sdkman update" | jake-log
   sudo apt update |& tee apt-update &
   echo "$! spawned for apt update" | jake-log
