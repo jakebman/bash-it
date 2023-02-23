@@ -62,6 +62,8 @@ alias vile=file
 alias mkae=make
 alias maek=make
 
+alias suod=sudo
+
 alias ssg=ssh
 
 # from jake-aliases - these are git command which drop the "git " prefix
