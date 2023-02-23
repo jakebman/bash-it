@@ -27,6 +27,8 @@ function jake-maintain-system() {
 
   (sdk selfupdate && echo updating sdk candidates && sdk update) |& tee sdk-man-update &
   echo "$! spawned for sdkman update" | jake-log
+  # TODO: https://unix.stackexchange.com/questions/342663/how-is-unattended-upgrades-started-and-how-can-i-modify-its-schedule
+  echo "We should probably look into unattended-upgrade at https://unix.stackexchange.com/q/342663, and put that in the jake-install... script"
   sudo apt update |& tee apt-update &
   echo "$! spawned for apt update" | jake-log
 
