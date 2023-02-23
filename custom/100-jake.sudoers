@@ -1,0 +1,16 @@
+
+#
+# This file MUST be edited with the 'visudo' command as root.
+#
+# You should add this file as local content in /etc/sudoers.d/
+# The file should be readable only by root and the root group
+# It should not be writable (that's what visudo is for!)
+#
+# See the man page for details on how to write a sudoers file.
+#
+
+# This snippet copied and enabled from primary /etc/sudoers file:
+
+# This allows running arbitrary commands, but so does ALL, and it means
+# different sudoers have their choice of editor respected.
+Defaults:%sudo env_keep += "EDITOR"
