@@ -296,6 +296,12 @@ function _jake-check-optional-tools() {
   else
     echo "consider fzf, but it's not the most necessary"
   fi
+
+  if _command_exists bat || _command_exists batcat ; then
+	  echo "Nothing to do for bat - bat is happy"
+  else
+	  echo "consider bat, the cool cat clone with git integration"
+  fi
 }
 
 
