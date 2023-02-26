@@ -1,5 +1,5 @@
 # shellcheck shell=bash
-about-alias "Jake's custom aliases for common typos and less-assuming commands"
+about-alias "Jake's custom aliases for common typos in common and jake-custom scripts"
 
 alias viim=vim
 alias vimm=vim # speculative
