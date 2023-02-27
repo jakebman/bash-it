@@ -5,6 +5,7 @@ custom/*
 !custom/example.bash
 # I have a carveout on custom bash scripts and my sudoers file
 !custom/*jake*
+custom/charter*
 .rvmrc
 aliases/custom.aliases.bash
 completion/custom.completion.bash
