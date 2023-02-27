@@ -173,10 +173,6 @@ function jake-install-tools() {
     echo "config submodule update --init --remote"
   else
     echo "Nothing to do for vim editorconfig - vim's editorconfig is happy at ~/.vim/pack/editorconfig"
-    echo "You can keep the editorconfig submodule up to date with this command:"
-    echo -en "\t"
-    echo "config submodule update --remote ; config add '$VIM_EDITORCONFIG_DIR'"
-	echo "(This is provided in jake-maintain-system)"
   fi
 
   # don't need these, but should report them anyway
@@ -210,7 +206,7 @@ function jake-install-tools() {
   fi
 
   if grep -q 'systemd=true' /etc/wsl.conf ; then
-	  echo "Systemd is enabled in WSL!"
+	  echo "Nothing to do for systemd - systemd is enabled in WSL!"
   else
 	  echo "systemd is not enabled in wsl. Enable it with the instructions here:"
 	  echo "https://devblogs.microsoft.com/commandline/systemd-support-is-now-available-in-wsl/"
