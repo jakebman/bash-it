@@ -41,6 +41,7 @@ alias branch='git branch'
 alias log='git log'
 alias remote='git remote'
 alias ls-files='git ls-files'
+alias rainbow='git rainbow' # an exception to 'Alias' aliases - this *could* change
 
 # 'Alias' aliases
 # These could all be `alias X='git X'` because X is a git alias, but they're not.
