@@ -27,10 +27,9 @@ function jqless {
 alias watch='watch --differences permanent'
 
 # git commands that... I don't care to add git to
-alias co='git checkout' # I have a git alias for `co`, but the bash alias shouldn't depend on that
-alias ignored='git status --ignored' # I also have a git alias for `ignored`
+
+# 'Vanilla' aliases
 alias commit='git commit'
-alias comit='git commit' # typo
 alias pull='git pull'
 alias push='git push'
 alias rebase='git rebase'
@@ -41,5 +40,15 @@ alias show='git show'
 alias branch='git branch'
 alias log='git log'
 alias remote='git remote'
+
+# 'Alias' aliases
+# These could all be `alias X='git X'` because X is a git alias, but they're not.
+# Because I don't ever expect to change what the underlying git alias does,
+# I'd rather skip the indirection and just specify the correct behavior in the alias
+alias co='git checkout'
+alias ignored='git status --ignored'
 alias staged='git diff --staged'
+alias comit='git commit' # typo, which also has an alias
+
+# Safety valve (kept at end to have the final say):
 alias restore='echo "Running git restore without thinking is a way to hurt yourself"'
