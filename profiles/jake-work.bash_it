@@ -17,6 +17,7 @@ completion bash-it
 completion maven
 completion sdkman
 completion system
+aliases batcat
 aliases general
 aliases jake-aliases
 aliases jake-typos
