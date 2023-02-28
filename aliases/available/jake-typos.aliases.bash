@@ -52,7 +52,7 @@ alias treee=tree
 alias dif=diff
 
 alias vd=cd
-alias vf=cd
+alias vf=cd # left hand misaligned
 alias dc=cd
 
 alias grpe=grep
