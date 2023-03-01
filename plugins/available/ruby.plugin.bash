@@ -5,7 +5,8 @@ about-plugin 'ruby and rubygems specific functions and settings'
 # Make commands installed with 'gem install --user-install' available
 # ~/.gem/ruby/${RUBY_VERSION}/bin/
 if _command_exists ruby && _command_exists gem; then
-	export GEM_HOME="$(ruby -e 'print Gem.user_dir')"
+	GEM_HOME="$(ruby -e 'print Gem.user_dir')"
+	export GEM_HOME
 	pathmunge "${GEM_HOME}/bin" after
 fi
 
