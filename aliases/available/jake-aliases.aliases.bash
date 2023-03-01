@@ -30,6 +30,7 @@ alias watch='watch --differences permanent'
 
 # 'Vanilla' aliases
 alias commit='git commit'
+alias clone='git clone'
 alias pull='git pull'
 alias push='git push'
 alias rebase='git rebase'
