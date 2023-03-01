@@ -110,16 +110,18 @@ function _git-status-is-dirty() {
 		# A series of yes/no answers encoded as 1/0 strings
 		# VCS_STATUS_HAS_UNSTAGED and _UNTRACKED can return -1 for "didn't check"
 		# For now, we'll consider that to be identical to "is dirty"
-		local git_status;
+		local git_status
 		if [[ "${SCM_GIT_IGNORE_UNTRACKED:-}" == "true" ]]; then
 			git_status="${VCS_STATUS_HAS_STAGED}${VCS_STATUS_HAS_CONFLICTED}${VCS_STATUS_HAS_UNSTAGED}"
 		else
 			git_status="${VCS_STATUS_HAS_STAGED}${VCS_STATUS_HAS_CONFLICTED}${VCS_STATUS_HAS_UNSTAGED}${VCS_STATUS_HAS_UNTRACKED}"
 		fi
 		case "$git_status" in
-			*1*) return 0 # found a status-like fact
+			*1*)
+				return 0 # found a status-like fact
 				;;
-			*) return 1 # failed to find a status-like fact
+			*)
+				return 1 # failed to find a status-like fact
 				;;
 		esac
 	fi # fast path done

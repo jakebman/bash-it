@@ -253,7 +253,7 @@ function git_prompt_minimal_info() {
 }
 
 function git_prompt_gitstatus_check() {
-	if [[ "${SCM_GIT_USE_GITSTATUS:-false}" != "false" ]] && _command_exists gitstatus_query ; then
+	if [[ "${SCM_GIT_USE_GITSTATUS:-false}" != "false" ]] && _command_exists gitstatus_query; then
 		if gitstatus_query -t "${SCM_GIT_GITSTATUS_TIMEOUT:-.6}" && [[ "${VCS_STATUS_RESULT:-}" == "ok-sync" ]]; then
 			# we can use faster gitstatus
 			# use this variable in githelpers and below to choose gitstatus output
