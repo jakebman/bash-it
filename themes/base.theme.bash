@@ -258,9 +258,14 @@ function git_prompt_gitstatus_check() {
 			# we can use faster gitstatus
 			# use this variable in githelpers and below to choose gitstatus output
 			SCM_GIT_GITSTATUS_RAN=true
-			echo -n "{ran gitstatus $EPOCHSECONDS}"
+			# TODO: echoing in this moment is a HORRIBLE plan - it's a HIDDEN modification to
+			# the result of git_prompt_info
+			echo -n " ${green}♥${normal}"
 		else
-			echo -n "{timeout gitstatus $EPOCHSECONDS}"
+			# TODO: use the sloth emoji:
+			# echo -n " 🦥
+			# TODO: same caveat as above, re:HORRIBLE plan
+			echo -n " ${red}(slow)${normal}"
 		fi # TODO: I wish we could log the timeout somewhere
 	else
 		echo -n "{failed gitstatus $EPOCHSECONDS}"
