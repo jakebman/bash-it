@@ -307,7 +307,7 @@ function _jake-check-optional-tools() {
 function _jake-update-ack-and-its-manpages {
   local bin_dir="${HOME}/bin"
   local man_dir="${bin_dir}/man"
-  local ack_url="${1:-https://beyondgrep.com/ack-v3.6.0}"
+  local ack_url="${1:-https://beyondgrep.com/ack-v3.7.0}"
 
   # I'm learning about manpages, so this first implementation is likely bad
   mkdir -p "${man_dir}/man1" # ack's manpage goes in man1. Add others here as needed
