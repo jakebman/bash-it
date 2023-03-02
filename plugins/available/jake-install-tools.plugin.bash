@@ -64,6 +64,7 @@ function jake-install-tools() {
   _jake-find-tool python python-is-python3
   _jake-find-tool make build-essential
   _jake-find-tool ifconfig net-tools
+  _jake-find-tool xeyes x11-apps "because I really like googly eyes"
   _jake-find-tool http httpie
   _jake-find-tool dos2unix
   _jake-find-tool thefuck
