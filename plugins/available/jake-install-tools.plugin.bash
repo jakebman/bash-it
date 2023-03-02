@@ -75,6 +75,9 @@ function jake-install-tools() {
   _jake-find-tool jq
   _jake-find-spelling
 
+  # not necessary, but nice:
+  _jake-find-tool lynx
+
   # playing with these
   _jake-find-tool mr myrepos
   _jake-find-tool vcsh
