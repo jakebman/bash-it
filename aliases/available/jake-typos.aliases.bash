@@ -62,6 +62,9 @@ alias vile=file
 alias mkae=make
 alias maek=make
 
+alias mcn=mvn
+alias vmn=mvn
+
 alias suod=sudo
 
 alias ssg=ssh
