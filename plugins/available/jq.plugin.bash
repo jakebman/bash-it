@@ -16,6 +16,23 @@ alias jqdiff="_jq-ify diff"
 alias jqvimdiff="_jq-ify vimdiff"
 alias vimjqdiff="_jq-ify vimdiff"
 
+
+function jqless {
+	local args
+	# color output so that less can see it
+	args+=(--color-output)
+
+	if [[ $# -le 1 ]] || [[ -f "$1" ]] ; then
+		# If the user doesn't specify a filter as the first argument,
+		# or the first argument is actually, and obviously, a file
+		# assume they wanted to use $JQ_FILTER
+		args+=("${JQ_FILTER:-.}")
+	fi
+
+	args+=("$@")
+	jq "${args[@]}" | less
+}
+
 function jqgrep {
 	about "grep for content in files, but implicity apply JQ_FILTER to the files we're grepping"
 	echo "TODO, sorry"

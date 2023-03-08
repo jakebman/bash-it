@@ -19,10 +19,6 @@ function ltree {
 alias ltre=ltree
 alias ltreee=ltree
 
-function jqless {
-	jq --color-output "$@" | less
-}
-
 # I really like permament differences
 alias watch='watch --differences permanent'
 
