@@ -277,7 +277,7 @@ function _jake-check-optional-tools() {
   if _command_exists mvn ; then
     echo "Nothing to do for maven - maven is happy"
   else
-    echo "maven is available via sdkman: sdk install maven <latest version>"
+    echo "maven is available via sdkman: sdk install maven # latest version chosen by default"
   fi
 
   if _command_exists apt-file ; then
