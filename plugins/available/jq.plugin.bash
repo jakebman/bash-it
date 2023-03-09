@@ -20,6 +20,7 @@ alias vimjqdiff="_jq-ify vimdiff"
 function jqless {
 	local args
 	# color output so that less can see it
+	# (NB/TODO: requires less to allow color control characters via -R or -r)
 	args+=(--color-output)
 
 	if [[ $# -le 1 ]] || [[ -f "$1" ]] ; then
