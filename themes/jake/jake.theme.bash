@@ -30,6 +30,7 @@ prompt_setter() {
   fi
   # Save history
   _save-and-reload-history 1
+  # ${WSL_DISTRO_NAME} is provided by WSL
   PS1="($(clock_prompt)) $(scm_char) [${blue}\u${reset_color}@${green}${WSL_DISTRO_NAME:-\H}${reset_color}] ${yellow}\w${reset_color}$(scm_prompt_info) ${reset_color}\n$(prompt_end) "
   # Jake: custom line above the prompt
   PS1="\n$PS1"
