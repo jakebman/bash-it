@@ -197,16 +197,17 @@ function jake-install-tools() {
 
   # Allowing the $EDITOR environment variables to pass through sudo
   # ref for script: https://superuser.com/questions/869144/why-does-the-system-have-etc-sudoers-d-how-should-i-edit-it
-  if ! [ -f /etc/sudoers.d/100-jake.sudoers ] ; then
+  if ! [ -f /etc/sudoers.d/100-jake-sudoers ] ; then
 	  echo "I'd like to preserve my \$EDITOR environment variable when editing. Please make sure we have that in /etc/sudoers.d"
-	  echo "You can find that file in ${BASH_IT_CUSTOM}/100-jake.sudoers"
+	  echo "You can find that file in ${BASH_IT_CUSTOM}/100-jake-sudoers"
+	  echo "(Heads up: files in sudoers.d can't have dots in them or they're ignored!)"
 	  echo "Copy it into the /etc/sudoers.d directory, but it needs to be root-owned, and only root-group-readable:"
 	  echo -en "\t"
-	  echo 'visudo -c -q -f ${BASH_IT_CUSTOM}/100-jake.sudoers &&'
+	  echo 'visudo -c -q -f ${BASH_IT_CUSTOM}/100-jake-sudoers &&'
 	  echo -en "\t"
-	  echo 'sudo chmod 400 ${BASH_IT_CUSTOM}/100-jake.sudoers &&'
+	  echo 'sudo chmod 400 ${BASH_IT_CUSTOM}/100-jake-sudoers &&'
 	  echo -en "\t"
-	  echo 'sudo cp ${BASH_IT_CUSTOM}/100-jake.sudoers /etc/sudoers.d/'
+	  echo 'sudo cp ${BASH_IT_CUSTOM}/100-jake-sudoers /etc/sudoers.d/'
   fi
 
   if grep -q 'systemd=true' /etc/wsl.conf ; then
