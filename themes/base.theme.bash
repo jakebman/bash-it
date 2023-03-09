@@ -260,12 +260,12 @@ function git_prompt_gitstatus_check() {
 			SCM_GIT_GITSTATUS_RAN=true
 			# TODO: echoing in this moment is a HORRIBLE plan - it's a HIDDEN modification to
 			# the result of git_prompt_info
-			echo -n " ${green}♥${normal}"
+			echo -n " ${green?}♥${normal?}"
 		else
 			# TODO: use the sloth emoji:
 			# echo -n " 🦥
 			# TODO: same caveat as above, re:HORRIBLE plan
-			echo -n " ${red}(slow)${normal}"
+			echo -n " ${red?}(slow)${normal?}"
 		fi # TODO: I wish we could log the timeout somewhere
 	else
 		echo -n "{failed gitstatus $EPOCHSECONDS}"
