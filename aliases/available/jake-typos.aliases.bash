@@ -73,6 +73,8 @@ alias suod=sudo
 
 alias ssg=ssh
 
+alias pws=pwd
+
 # from jake-aliases - these are git command which drop the "git " prefix
 alias stage=staged
 alias sttatus=status
