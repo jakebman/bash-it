@@ -14,3 +14,6 @@
 # This allows running arbitrary commands, but so does ALL, and it means
 # different sudoers have their choice of editor respected.
 Defaults:%sudo env_keep += "EDITOR"
+
+# TODO: I'd like to run *only certain* apt commands without requiring a password
+# effectively: https://askubuntu.com/a/724157
