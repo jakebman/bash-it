@@ -4,7 +4,7 @@ export EDITOR=vim
 export VISUAL=vim
 export PAGER=less
 
-export CLICOLOR_FORCE= # force tree to use colors so we don't need to alias tree='tree -C'. See man(1) tree
+export CLICOLOR_FORCE="setting this value to ANYTHING forces 'tree' to use colors so we don't need to alias tree='tree -C'. See man(1) tree"
 
 # Allow less to simply dump the output to STDOUT when it would all fit on a single page
 # https://stackoverflow.com/questions/2183900/how-do-i-prevent-git-diff-from-using-a-pager
