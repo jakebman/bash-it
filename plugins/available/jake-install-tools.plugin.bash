@@ -210,6 +210,14 @@ function jake-install-tools() {
 	  echo 'sudo cp ${BASH_IT_CUSTOM}/100-jake-sudoers /etc/sudoers.d/'
   fi
 
+  if _command_exists apt-upgrade-only && _command_exists apt-update-only ; then
+    echo "apt-upgrade-only and apt-update-only are happy!"
+  else
+    echo "please copy the apt* files from ${BASH_IT_CUSTOM}/sbin to /usr/local/sbin"
+    echo -en "\t"
+    echo 'sudo cp ${BASH_IT_CUSTOM}/sbin/* /usr/local/sbin'
+  fi
+
   if grep -q 'systemd=true' /etc/wsl.conf ; then
 	  echo "Nothing to do for systemd - systemd is enabled in WSL!"
   else
