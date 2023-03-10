@@ -87,3 +87,4 @@ alias bashs=bash
 # custom config command to manage dotfiles
 alias confgi=config
 alias conifg=config
+alias  onfig=config
