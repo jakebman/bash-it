@@ -17,5 +17,8 @@ Defaults:%sudo env_keep += "EDITOR"
 # TODO: add the editor config so that EDITOR is constrained to only certain values
 
 
-# TODO: I'd like to run *only certain* apt commands without requiring a password
-# effectively: https://askubuntu.com/a/724157
+# I'd like to run *only certain* apt commands without requiring a password
+# https://askubuntu.com/a/724157
+# https://unix.stackexchange.com/questions/18830/how-to-run-a-specific-program-as-root-without-a-password-prompt
+%sudo ALL = (root) NOPASSWD: /usr/local/sbin/apt-upgrade-only
+%sudo ALL = (root) NOPASSWD: /usr/local/sbin/apt-update-only
