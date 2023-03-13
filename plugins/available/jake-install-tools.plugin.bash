@@ -211,7 +211,7 @@ function jake-install-tools() {
   fi
 
   if _command_exists apt-upgrade-only && _command_exists apt-update-only ; then
-    echo "Nothing to do for apt-*-only - upgrade and update are happy!"
+    echo "Nothing to do for apt-*-only - upgrade and update are happy"
   else
     echo "please copy the apt* files from ${BASH_IT_CUSTOM}/sbin to /usr/local/sbin"
     echo -en "\t"
@@ -219,7 +219,7 @@ function jake-install-tools() {
   fi
 
   if grep -q 'systemd=true' /etc/wsl.conf ; then
-	  echo "Nothing to do for systemd - systemd is enabled in WSL!"
+	  echo "Nothing to do for systemd - systemd is enabled in WSL"
   else
 	  echo "systemd is not enabled in wsl. Enable it with the instructions here:"
 	  echo "https://devblogs.microsoft.com/commandline/systemd-support-is-now-available-in-wsl/"
