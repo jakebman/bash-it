@@ -40,11 +40,13 @@ alias blame='git blame'
 alias log='git log'
 alias remote='git remote'
 alias ls-files='git ls-files'
-alias rainbow='git rainbow' # an exception to 'Alias' aliases - this *could* change
+# Exceptions to 'Duplicating' aliases, below. These *could* change
+alias rainbow='git rainbow'
 
-# 'Alias' aliases
-# These could all be `alias X='git X'` because X is a git alias, but they're not.
-# Because I don't ever expect to change what the underlying git alias does,
+# 'Duplicating' aliases
+# These could have been written as `alias X='git X'`, because they're
+# all bash aliases for git aliases I've written.
+# But! because I don't ever expect to change what the underlying git alias does,
 # I'd rather skip the indirection and just specify the correct behavior in the alias
 alias co='git checkout'
 alias ignored='git status --ignored'
