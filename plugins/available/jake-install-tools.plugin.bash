@@ -211,7 +211,7 @@ function jake-install-tools() {
   fi
 
   if _command_exists apt-upgrade-only && _command_exists apt-update-only ; then
-    echo "apt-upgrade-only and apt-update-only are happy!"
+    echo "Nothing to do for apt-*-only - upgrade and update are happy!"
   else
     echo "please copy the apt* files from ${BASH_IT_CUSTOM}/sbin to /usr/local/sbin"
     echo -en "\t"
@@ -226,7 +226,7 @@ function jake-install-tools() {
   fi
 
 
-  echo "Apt would love to install these updates:"
+  echo "Apt would love to install these updates (use sudo apt-upgrade-only to apply!):"
   apt list --upgradeable
   # https://askubuntu.com/questions/410247/how-to-know-last-time-apt-get-update-was-executed
   local when="$(date -d "$(stat --format %y /var/lib/apt/periodic/update-success-stamp)")"
