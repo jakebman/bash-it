@@ -225,9 +225,17 @@ function jake-install-tools() {
 	  echo "https://devblogs.microsoft.com/commandline/systemd-support-is-now-available-in-wsl/"
   fi
 
-
-  echo "Apt would love to install these updates (use sudo apt-upgrade-only to apply!):"
-  apt list --upgradeable
+  # Caveat: apt does not have a stable CLI output, and so this ^Listing grep:
+  # 1) Might not be necessary later
+  # 2) Might completely suppress desired output
+  # ... I'm not super worried
+  local apt_output=`apt list --upgradeable 2>/dev/null | grep -v ^Listing`
+  if [ -z "${apt_output}" ] ; then
+	  echo "Nothing to do for apt updates - apt finds no upgradeable packages"
+  else
+	  echo "Apt would love to install these updates (use sudo apt-upgrade-only to apply):"
+	  echo "$apt_output"
+  fi
   # https://askubuntu.com/questions/410247/how-to-know-last-time-apt-get-update-was-executed
   local when="$(date -d "$(stat --format %y /var/lib/apt/periodic/update-success-stamp)")"
   echo -e "And the apt update is from ${echo_red}${when}${echo_reset_color}"
