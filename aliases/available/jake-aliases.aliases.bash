@@ -42,6 +42,7 @@ alias remote='git remote'
 alias ls-files='git ls-files'
 # Exceptions to 'Duplicating' aliases, below. These *could* change
 alias rainbow='git rainbow'
+alias logp='git logp'
 
 # 'Duplicating' aliases
 # These could have been written as `alias X='git X'`, because they're
