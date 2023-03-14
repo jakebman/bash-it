@@ -41,6 +41,7 @@ alias akc=ack
 
 alias cata=cat
 alias vat=cat
+alias ca=cat
 alias catg=cat
 
 # lls is define in jake-aliases. Basically ls | less
