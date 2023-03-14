@@ -203,7 +203,7 @@ function jake-install-tools() {
 	  echo "(Heads up: files in sudoers.d can't have dots in them or they're ignored!)"
 	  echo "Copy it into the /etc/sudoers.d directory, but it needs to be root-owned, and only root-group-readable:"
 	  echo -en "\t"
-	  echo 'visudo -c -q -f ${BASH_IT_CUSTOM}/100-jake-sudoers &&'
+	  echo 'visudo --check --quiet --file="${BASH_IT_CUSTOM}/100-jake-sudoers" &&'
 	  echo -en "\t"
 	  echo 'sudo install --compare --mode 0440 "${BASH_IT_CUSTOM}/100-jake-sudoers" /etc/sudoers.d/'
   fi
