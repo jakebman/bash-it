@@ -4,6 +4,9 @@ export EDITOR=vim
 export VISUAL=vim
 export PAGER=less
 
+# Gonna try this out for a bit
+alias cat=bat
+
 export CLICOLOR_FORCE="setting this value to ANYTHING forces 'tree' to use colors so we don't need to alias tree='tree -C'. See man(1) tree"
 
 # Allow less to simply dump the output to STDOUT when it would all fit on a single page
