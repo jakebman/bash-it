@@ -32,6 +32,7 @@ alias jgti=git # it's like... sometimes I just mash the keyboard while thinking 
 alias :q="echo You are not in vim"
 alias q="echo no need to quit - you are already out"
 
+alias lss=ls
 alias lsa='ls -a'
 alias les=less
 
