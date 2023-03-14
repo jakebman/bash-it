@@ -205,9 +205,7 @@ function jake-install-tools() {
 	  echo -en "\t"
 	  echo 'visudo -c -q -f ${BASH_IT_CUSTOM}/100-jake-sudoers &&'
 	  echo -en "\t"
-	  echo 'sudo chmod 400 ${BASH_IT_CUSTOM}/100-jake-sudoers &&'
-	  echo -en "\t"
-	  echo 'sudo cp ${BASH_IT_CUSTOM}/100-jake-sudoers /etc/sudoers.d/ # TODO: this could use the install program instead' #TODO!!!
+	  echo 'sudo install --compare --mode 0440 "${BASH_IT_CUSTOM}/100-jake-sudoers" /etc/sudoers.d/'
   fi
 
   if _command_exists apt-upgrade-only && _command_exists apt-update-only ; then
