@@ -67,7 +67,11 @@ function hgrep {
 function diff {
   about "allow you to type the bare word 'diff' and get an automatic git diff, while still not harming the diff command"
   if [[ "$#" -eq 0 ]] ; then
-    git diff "$@" # $@ is unecessary, as it's empty. Keeps parallel structure, though.
+    # $@ is unecessary, as it's empty. Keeps parallel structure, though.
+    # Here, we ask git diff to exit with success if there was no diff
+    # and use that knowledge to make an implicit call to status to see if
+    # there might be any other relevant changes
+    git diff --exit-code "$@" && git status
   elif [[ "$#" -eq 1 ]] && ! _jake-special-single-args-for-diff "$1" ; then
     git diff "$@"
   else
