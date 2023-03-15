@@ -10,7 +10,9 @@ function jake-maintain-system() {
   (
   # $$ is the pid of the outer bash. This subshell's PID is $BASHPID
   mkdir -p "${BASH_IT_MAINENANCE_DIR}/$BASHPID"
-  ln -s -f "$BASHPID" "${BASH_IT_MAINENANCE_DIR}/latest"
+  # symbolic, overwriting, and not treating the destination as a directory for the link to be added to
+  # (but rather as a (symbolic link) file to be overwritten)
+  ln -s -f -T "$BASHPID" "${BASH_IT_MAINENANCE_DIR}/latest"
   cd "${BASH_IT_MAINENANCE_DIR}/$BASHPID"
   # |& is shorthand for 2>&1 |
   echo "Logging begins. Check $(realpath maintenance-log) for updates" | jake-log
