@@ -71,12 +71,8 @@ function diff {
   about "allow you to type the bare word 'diff' and get an automatic git diff, while still not harming the diff command"
   if [[ "$#" -eq 0 ]] ; then
     # $@ is unecessary, as it's empty. Keeps parallel structure, though.
-    # Here, we ask git diff to exit with success if there was no diff
-    # and use that knowledge to make an implicit call to status to see if
-    # there might be any other relevant changes
-    # TODO: this calls out "I'm the custom git indirection" twice. Maybe I can make an alias for this
-    # TODO: when called outside a git directory, this produces annoyingly long output
-    git diff --exit-code "$@" && git status
+    # implicitdiff is my own tool, which does diff, but also falls back to git status
+    git implicitdiff "$@"
   elif [[ "$#" -eq 1 ]] && ! _jake-special-single-args-for-diff "$1" ; then
     git diff "$@"
   else
