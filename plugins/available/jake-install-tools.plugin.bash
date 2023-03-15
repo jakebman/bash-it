@@ -48,6 +48,9 @@ function jake-update-expected-git-version() {
 
 function jake-install-tools() {
   about "installs the tools jake uses"
+
+  _jake-remove-motd-junk
+
   # tools that we can silently install
   if ! _binary_exists ack ; then
     echo "installing the single-file version of ack!"
@@ -319,6 +322,26 @@ function _jake-check-optional-tools() {
   fi
 }
 
+function _jake-remove-motd-junk {
+	_jake-remove-motd-news
+	_jake-remove-pro-news
+}
+
+function _jake-remove-motd-news {
+	if grep -q ENABLED=1 /etc/default/motd-news ; then
+		echo "ubuntu news is polluting the MOTD. Fix it with:"
+		echo -en "\t"
+		echo "sudo  sed -i -e 's/^ENABLED=1/ENABLED=0 # disabled by Jake/' /etc/default/motd-news"
+	fi
+}
+
+function _jake-remove-pro-news {
+	if  pro config show apt_news | grep -q True ; then
+		echo "Pro news is showing in apt. I don't like that."
+		echo -en "\t"
+		echo "sudo pro config set apt_news=False"
+	fi
+}
 
 function _jake-update-ack-and-its-manpages {
   local bin_dir="${HOME}/bin"
