@@ -71,6 +71,7 @@ function diff {
     # Here, we ask git diff to exit with success if there was no diff
     # and use that knowledge to make an implicit call to status to see if
     # there might be any other relevant changes
+    # TODO: this calls out "I'm the custom git indirection" twice. Maybe I can make an alias for this
     git diff --exit-code "$@" && git status
   elif [[ "$#" -eq 1 ]] && ! _jake-special-single-args-for-diff "$1" ; then
     git diff "$@"
