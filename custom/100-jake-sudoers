@@ -20,5 +20,5 @@ Defaults:%sudo env_keep += "EDITOR"
 # I'd like to run *only certain* apt commands without requiring a password
 # https://askubuntu.com/a/724157
 # https://unix.stackexchange.com/questions/18830/how-to-run-a-specific-program-as-root-without-a-password-prompt
-%sudo ALL = (root) NOPASSWD: /usr/local/sbin/apt-upgrade-only
-%sudo ALL = (root) NOPASSWD: /usr/local/sbin/apt-update-only
+Cmnd_Alias MINOR_APT_TOOLS = /usr/local/sbin/apt-upgrade-only, /usr/local/sbin/apt-update-only
+%sudo ALL = (root) NOPASSWD: MINOR_APT_TOOLS
