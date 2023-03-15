@@ -60,6 +60,13 @@ function jake-install-tools() {
     echo "Nothing to do for ack - ack already exists"
   fi
 
+  if ! _binary_exists git-jump ; then
+	  echo "installing git-jump"
+  else
+	  echo "updating git-jump"
+  fi
+  install /usr/share/doc/git/contrib/git-jump/git-jump -t ~/bin -p
+
 
   # tools that can use apt
   TOOLS_TO_INSTALL=""
