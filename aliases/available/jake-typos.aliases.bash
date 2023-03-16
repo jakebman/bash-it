@@ -44,6 +44,9 @@ alias vat=cat
 alias ca=cat
 alias catg=cat
 
+# G is closer to B than C on the keyboard
+alias gat=bat
+
 # lls is define in jake-aliases. Basically ls | less
 alias lll=lls
 alias llss=lls
