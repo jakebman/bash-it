@@ -247,12 +247,12 @@ function jake-install-tools() {
   else
 	  echo "Apt would love to install these updates (use sudo apt-upgrade-only to apply):"
 	  echo "$apt_output"
+	  echo "Thanks, apt!"
   fi
   # https://askubuntu.com/questions/410247/how-to-know-last-time-apt-get-update-was-executed
   local when="$(date -d "$(stat --format %y /var/lib/apt/periodic/update-success-stamp)")"
   echo -e "And the apt update is from ${echo_red}${when}${echo_reset_color}"
   echo -e "      A reminder: today is $(date)"
-  echo "Thanks, apt!"
 
   # let's make sure blue is readable while we're here
   echo -en "btw, "
