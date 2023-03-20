@@ -94,4 +94,5 @@ alias confgi=config
 alias conifg=config
 alias  cofig=config
 alias  onfig=config
+alias   nfig=config
 alias   conf=config
