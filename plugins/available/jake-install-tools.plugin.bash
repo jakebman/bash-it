@@ -320,12 +320,15 @@ function _jake-check-optional-tools() {
     echo "procyon is available via: sudo apt install procyon-decompiler"
   fi
 
+  # TODO: fzf from apt is old. grab fzf's exe and manpage 'manually' here
   if _command_exists fzf ; then
     echo "Nothing to do for fzf - fzf is happy"
   else
     echo "consider fzf, but it's not the most necessary"
   fi
 
+  # TODO: bat has a downloadable deb package that's newer than what ubuntu has
+  # Just.. install it from there?
   if _command_exists bat || _command_exists batcat ; then
 	  echo "Nothing to do for bat - bat is happy"
   else
