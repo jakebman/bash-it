@@ -329,7 +329,7 @@ function _jake-check-optional-tools() {
 
   # TODO: bat has a downloadable deb package that's newer than what ubuntu has
   # Just.. install it from there?
-  if _command_exists bat || _command_exists batcat ; then
+  if _command_exists bat ; then
 	  echo "Nothing to do for bat - bat is happy"
   else
 	  echo "consider bat, the cool cat clone with git integration"
