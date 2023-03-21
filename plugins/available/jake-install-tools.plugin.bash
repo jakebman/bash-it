@@ -320,19 +320,22 @@ function _jake-check-optional-tools() {
     echo "procyon is available via: sudo apt install procyon-decompiler"
   fi
 
-  # TODO: fzf from apt is old. grab fzf's exe and manpage 'manually' here
   if _command_exists fzf ; then
     echo "Nothing to do for fzf - fzf is happy"
   else
-    echo "consider fzf, but it's not the most necessary"
+	echo "Please install fzf - a dependency for my j script. Apt has an old version. I like 0.38.0"
+	echo "Get the new executable from a .gz at https://github.com/junegunn/fzf/releases, plus the manpage:"
+	echo -en "\t"
+	echo 'sudo wget --directory-prefix /usr/share/man/man1/ https://raw.githubusercontent.com/junegunn/fzf/master/man/man1/fzf.1'
   fi
 
-  # TODO: bat has a downloadable deb package that's newer than what ubuntu has
-  # Just.. install it from there?
   if _command_exists bat ; then
 	  echo "Nothing to do for bat - bat is happy"
   else
-	  echo "consider bat, the cool cat clone with git integration"
+	echo "Please install bat - a dependency for my j script. Apt has an old version. I like 0.22.1"
+	echo "Get the new .deb from https://github.com/sharkdp/bat/releases and then"
+	echo -en "\t"
+	echo 'sudo dpkg -i bat*.deb'
   fi
 }
 
