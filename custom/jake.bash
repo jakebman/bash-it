@@ -12,6 +12,7 @@ alias jdif=jdiff
 alias jdf=jdiff
 alias jf=jdiff
 alias jd=jdiff
+alias jws='j --ws'
 
 # Because... tree should basically always be paged
 alias tree=ltree
