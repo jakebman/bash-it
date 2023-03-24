@@ -227,7 +227,7 @@ function jake-install-tools() {
   else
     echo "please copy the apt* files from ${BASH_IT_CUSTOM}/sbin to /usr/local/sbin"
     echo -en "\t"
-    echo 'sudo cp ${BASH_IT_CUSTOM}/sbin/* /usr/local/sbin'
+    echo 'sudo install ${BASH_IT_CUSTOM}/sbin/* /usr/local/sbin'
   fi
 
   if grep -q 'systemd=true' /etc/wsl.conf ; then
