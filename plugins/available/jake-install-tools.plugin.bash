@@ -290,7 +290,7 @@ function _jake-check-optional-tools() {
     echo -e "\t" '# then, enable the gitstatus bash-it plugin and export SCM_GIT_GITSTATUS_DIR="${HOME}/bin/gitstatus"' # single-quote saves escaping
     echo -e "\t" "# Or do both of these with:"
     echo -e "\t" "cp ~/.bashrc ~/.bashrc-backup-$$-$(date +%Y%m%d-%T) # optional if you don't care"
-    echo -e "\t" 'cp "${BASH_IT}/themes/jake-bashrc" ~/.bashrc' # single-quote saves escaping
+    echo -e "\t" 'cp "${BASH_IT}/template/jake-bashrc" ~/.bashrc' # single-quote saves escaping
     echo -e "\t" "bash-it profile load jake-home # or similar - use the one that is most appropriate"
   else
     echo "Nothing to do for gitstatus - gitstatus is happy"
