@@ -55,4 +55,5 @@ alias staged='git diff --staged'
 alias comit='git commit' # typo, which also has an alias
 
 # Safety valve (kept at end to have the final say):
-alias restore='echo "Running git restore without thinking is a way to hurt yourself"'
+# Cheap trick - the args are also echoed, so the last part of this message actually includes your args
+alias restore='echo "Running git restore without thinking is a way to hurt yourself. Try running this: git restore"'
