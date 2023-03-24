@@ -31,7 +31,7 @@ function jake-maintain-system() {
   echo "$! spawned for sdkman update" | jake-log
   # TODO: https://unix.stackexchange.com/questions/342663/how-is-unattended-upgrades-started-and-how-can-i-modify-its-schedule
   echo "We should probably look into unattended-upgrade at https://unix.stackexchange.com/q/342663, and put that in the jake-install... script"
-  sudo apt-update-only |& tee apt-update &
+  (sudo apt-update-only && echo "Listing..." && apt list --upgradable) |& tee apt-update &
   echo "$! spawned for apt update" | jake-log
 
   for pid in `jobs -p`; do
