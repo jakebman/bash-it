@@ -337,6 +337,15 @@ function _jake-check-optional-tools() {
 	echo -en "\t"
 	echo 'sudo dpkg -i bat*.deb'
   fi
+
+  if _command_exists delta ; then
+	echo "Nothing to do for delta - delta is happy"
+  else
+	echo "Pleas install delta - a bat-smart diff."
+	echo "Get the new .deb from https://github.com/dandavison/delta/releases and then (or use cargo per their notes)"
+	echo -en "\t"
+	echo 'sudo dpkg -i git-delta*.deb'
+  fi
 }
 
 function _jake-remove-motd-junk {

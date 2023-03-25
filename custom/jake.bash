@@ -86,6 +86,21 @@ function diff {
     command diff "$@"
   fi
 }
+
+function delta {
+  about "allow you to type the bare word 'delta' and get an automatic git delta, while still not harming the delta command"
+  if [[ "$#" -eq 0 ]] ; then
+    # $@ is unecessary, as it's empty. Keeps parallel structure, though.
+    # we choose implicitdiff here, because it serves diff well too
+    git -c core.pager=delta implicitdiff "$@"
+  elif [[ "$#" -eq 1 ]] && ! _jake-special-single-args-for-diff "$1" ; then
+    # git-delta is aliased in git to to a git diff with delta as the pager
+    git delta "$@"
+  else
+    command diff "$@"
+  fi
+}
+
 function realpath {
   about "allow you to type the bare word 'realpath' and automatically be cd'd there"
   if [[ "$#" -eq 0 ]] ; then
