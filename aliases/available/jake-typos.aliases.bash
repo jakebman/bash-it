@@ -95,6 +95,7 @@ alias bashs=bash
 alias confgi=config
 alias cofngi=config
 alias conifg=config
+alias  confg=config
 alias  cofig=config
 alias  onfig=config
 alias   nfig=config
