@@ -2,6 +2,7 @@
 
 # plugins
 plugins base
+plugins cht-sh
 plugins dircolors
 plugins dotfiles-via-bare-git-repo-with-config-alias
 plugins gitstatus
