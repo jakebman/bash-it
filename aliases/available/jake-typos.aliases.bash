@@ -93,6 +93,7 @@ alias pul=pull
 alias bashs=bash
 # custom config command to manage dotfiles
 alias confgi=config
+alias cofngi=config
 alias conifg=config
 alias  cofig=config
 alias  onfig=config
