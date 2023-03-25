@@ -22,6 +22,8 @@ alias ltreee=ltree
 # I really like permament differences
 alias watch='watch --differences permanent'
 
+alias cht=cht.sh
+
 # git commands that... I don't care to add git to
 
 # 'Vanilla' aliases
