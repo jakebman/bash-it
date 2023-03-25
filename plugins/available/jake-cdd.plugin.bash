@@ -20,3 +20,23 @@ function cddd () {
     cd "$(dirname "$1")/.."
   fi
 }
+
+function cdddd () {
+  if [ "$#" -eq 0 ] ; then
+    cd ../../..
+  elif [ -d "$1" ] ; then
+    cd "$1/../../.."
+  else
+    cd "$(dirname "$1")/../.."
+  fi
+}
+
+function cddddd () {
+  if [ "$#" -eq 0 ] ; then
+    cd ../../../..
+  elif [ -d "$1" ] ; then
+    cd "$1/../../../.."
+  else
+    cd "$(dirname "$1")/../../.."
+  fi
+}
