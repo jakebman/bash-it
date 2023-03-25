@@ -29,6 +29,10 @@ export LESS="--quit-if-one-screen --quit-at-eof --no-init --RAW-CONTROL-CHARS"
 export LESSHISTFILE="${HOME}/.config/lesshst" # I like editing ~/.lessfilter, and this keeps getting in the way
 export LESSSTYLE=sas
 
+if [ -f "$HOME/.cargo/env" ] ; then
+	source "$HOME/.cargo/env"
+fi
+
 # TODO: I'd like to be able to apply these to stdin as well (the "||- your-command %s" variation).
 # That'll take more infrastructure.
 # Read more in $HOME/.lessfilter
