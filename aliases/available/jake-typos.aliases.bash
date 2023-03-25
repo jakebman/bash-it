@@ -71,6 +71,8 @@ alias vile=file
 alias mkae=make
 alias maek=make
 
+alias tiem=time
+
 alias mcn=mvn
 alias vmn=mvn
 
