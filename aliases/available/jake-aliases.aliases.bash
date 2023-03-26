@@ -63,9 +63,5 @@ alias jd='git j --diff'
 alias jws='git j --ws'
 
 
-# Safety valve (kept at end to have the final say):
-function _hidden_restore_warning {
-	echo "Running git restore without thinking is a way to hurt yourself."
-	echo "Be safe!"
-}
-alias restore=_hidden_restore_warning
+# Safety valve (kept at end to have the final say). It's REALLY IMPORTANT to keep the -p
+alias restore='git restore -p'
