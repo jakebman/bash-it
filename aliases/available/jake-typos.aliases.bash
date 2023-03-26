@@ -59,6 +59,7 @@ alias ree=tree
 alias treee=tree
 
 alias dif=diff
+alias dfif=diff
 
 alias vd=cd
 alias vf=cd # left hand misaligned
