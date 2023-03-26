@@ -32,8 +32,10 @@ alias jgti=git # it's like... sometimes I just mash the keyboard while thinking 
 alias :q="echo You are not in vim"
 alias q="echo no need to quit - you are already out"
 
+alias ks=ls
 alias lss=ls
 alias lsa='ls -a'
+alias lsl='ls -l'
 alias les=less
 
 alias ach=ack
@@ -91,6 +93,8 @@ alias stauts=status
 alias tatus=status
 alias pul=pull
 alias pus=push
+alias lgop=logp
+alias lopg=logp
 
 # super eager with that second s
 alias bashs=bash
