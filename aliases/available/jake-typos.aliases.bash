@@ -60,6 +60,7 @@ alias tre=tree
 alias ree=tree
 alias treee=tree
 
+alias d=diff
 alias dif=diff
 alias dfif=diff
 
