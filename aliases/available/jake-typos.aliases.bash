@@ -88,7 +88,9 @@ alias stage=staged
 alias sttatus=status
 alias statsus=status
 alias stauts=status
+alias tatus=status
 alias pul=pull
+alias pus=push
 
 # super eager with that second s
 alias bashs=bash
