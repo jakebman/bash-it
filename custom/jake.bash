@@ -7,6 +7,9 @@ export PAGER=less
 # Gonna try this out for a bit
 alias cat=bat
 
+# Allow j!! to work for a previous ack query
+alias jack=j
+
 # Because... tree should basically always be paged
 alias tree=ltree
 
