@@ -55,6 +55,13 @@ alias co='git checkout'
 alias ignored='git status --ignored'
 alias staged='git diff --staged'
 alias comit='git commit' # typo, which also has an alias
+alias jdiff='git j --diff'
+alias jdif='git j --diff'
+alias jdf='git j --diff'
+alias jfd='git j --diff' # typo
+alias jd='git j --diff'
+alias jws='git j --ws'
+
 
 # Safety valve (kept at end to have the final say):
 function _hidden_restore_warning {

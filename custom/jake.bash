@@ -7,13 +7,6 @@ export PAGER=less
 # Gonna try this out for a bit
 alias cat=bat
 
-alias jdiff='j --diff'
-alias jdif=jdiff
-alias jdf=jdiff
-alias jf=jdiff
-alias jd=jdiff
-alias jws='j --ws'
-
 # Because... tree should basically always be paged
 alias tree=ltree
 
