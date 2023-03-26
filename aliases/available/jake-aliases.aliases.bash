@@ -55,12 +55,15 @@ alias co='git checkout'
 alias ignored='git status --ignored'
 alias staged='git diff --staged'
 alias comit='git commit' # typo, which also has an alias
+
+# 'Not exactly duplicating' aliases
+# Not all of these are duplicating a git alias, but they're not exactly typos either
 alias jdiff='git j --diff'
 alias jdif='git j --diff'
-alias jdf='git j --diff'
-alias jfd='git j --diff' # typo
+alias jdf='git j --diff' # has a git alias
+alias jfd='git j --diff'
 alias jd='git j --diff'
-alias jws='git j --ws'
+alias jws='git j --ws' # has a git alias
 
 
 # Safety valve (kept at end to have the final say). It's REALLY IMPORTANT to keep the -p
