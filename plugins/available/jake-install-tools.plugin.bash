@@ -97,6 +97,7 @@ function jake-install-tools() {
   _jake-find-tool mr myrepos
   _jake-find-tool vcsh
   _jake-find-tool perldoc perl-doc "for man mr"
+  _jake-find-tool ctags universal-ctags "for vim navigation"
   _jake-find-tool figlet
   _jake-find-tool rakudo
   # 228MB - only when you need it: _jake-find-tool ffmpeg
