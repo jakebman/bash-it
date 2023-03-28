@@ -339,7 +339,7 @@ function _jake-check-optional-tools() {
 	echo 'sudo dpkg -i bat*.deb'
   fi
 
-  if _command_exists delta ; then
+  if _binary_exists delta ; then
 	echo "Nothing to do for delta - delta is happy"
   else
 	echo "Pleas install delta - a bat-smart diff."
