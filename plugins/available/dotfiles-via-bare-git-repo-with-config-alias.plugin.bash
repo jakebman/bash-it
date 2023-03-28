@@ -13,7 +13,7 @@ if ! [ -d "${BASH_IT_DOTFILES_GIT_REPO}" ] ; then
   _log_error "or set BASH_IT_DOTFILES_GIT_REPO to your bare git directory"
   _log_error 'And once you have that, remove the core.bare setting and replace it with core.worktree=$HOME'
   _log_error "(This lets my (modified) bat work with my custom j jumping script)"
-  _log_error 'GIT_DIR=$BASH_IT_DOTFILES_GIT_REPO (git config --unset core.bare; git config --add core.worktree="$HOME")'
+  _log_error 'GIT_DIR=$BASH_IT_DOTFILES_GIT_REPO (git config --unset core.bare; git config --add core.worktree "$HOME")'
   return
 fi
 
@@ -30,5 +30,5 @@ if ! config config core.worktree &>/dev/null ; then
   # GIT_WORK_TREE, but since bat uses libgit2's rust bindings, *it* doesn't support GIT_WORK_TREE.
   # And therefore I ultimately don't get git integration unless we do it this way
   _log_error "Please set core.worktree to the proper location (probably \$HOME)"
-  _log_error 'config config --unset core.bare; config config --add core.worktree="$HOME"'
+  _log_error 'config config --unset core.bare; config config --add core.worktree "$HOME"'
 fi
