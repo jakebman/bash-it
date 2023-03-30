@@ -33,7 +33,15 @@ alias pull='git pull'
 alias push='git push'
 alias rebase='git rebase'
 alias merge='git merge'
-alias add='git add'
+# git errors if add has no args (prints advice.addEmptyPathspec)
+# TODO: this might not belong in an 'aliases' item
+function add {
+	if [ "$#" -eq 0 ] ; then
+		git add -p "$@" # $@ is empty, but this is more consistent with the other branch
+	else
+		git add "$@"
+	fi
+}
 alias status='git status'
 alias stash='git stash'
 alias show='git show'
