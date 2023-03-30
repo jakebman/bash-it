@@ -10,6 +10,9 @@ alias cat='bat --plain'
 # Allow j!! to work for a previous ack query
 alias jack=j
 
+# I want jq to work like the jqless I created for the jq.plugin.bash
+alias jq=jqless
+
 # Because... tree should basically always be paged
 alias tree=ltree
 
