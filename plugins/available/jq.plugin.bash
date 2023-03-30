@@ -23,15 +23,17 @@ function jqless {
 	# (NB/TODO: requires less to allow color control characters via -R or -r)
 	args+=(--color-output)
 
-	if [[ $# -le 1 ]] || [[ -f "$1" ]] ; then
+	if [[ $# -eq 0 ]] || [[ -f "$1" ]] ; then
 		# If the user doesn't specify a filter as the first argument,
-		# or the first argument is actually, and obviously, a file
+		# which means:
+		# * no arguments (presume STDIN) or
+		# * first argument is actually a file
 		# assume they wanted to use $JQ_FILTER
 		args+=("${JQ_FILTER:-.}")
 	fi
 
 	args+=("$@")
-	jq "${args[@]}" | less
+	command jq "${args[@]}" | less
 }
 
 function jqgrep {
