@@ -63,6 +63,7 @@ alias treee=tree
 alias d=diff
 alias dif=diff
 alias dfif=diff
+alias didd=diff
 
 alias vd=cd
 alias vf=cd # left hand misaligned
