@@ -19,9 +19,11 @@ alias vimjqdiff="_jq-ify vimdiff"
 
 function jqless {
 	local args
-	# color output so that less can see it
-	# (NB/TODO: requires less to allow color control characters via -R or -r)
-	args+=(--color-output)
+
+	if [ -t 1 ] ; then
+		# terminal output - color it
+		args+=(--color-output)
+	fi
 
 	if [[ $# -eq 0 ]] || [[ -f "$1" ]] ; then
 		# If the user doesn't specify a filter as the first argument,
@@ -33,7 +35,7 @@ function jqless {
 	fi
 
 	args+=("$@")
-	command jq "${args[@]}" | less
+	command jq "${args[@]}" | less --RAW-CONTROL-CHARS # Raw isn't necessary if we're not coloring output, but it doesn't *hurt* either
 }
 
 function jqgrep {
