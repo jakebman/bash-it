@@ -1,7 +1,7 @@
 
 # One of the options described in https://news.ycombinator.com/item?id=11070797
 # at https://news.ycombinator.com/item?id=11070797
-about-plugin "Following the ideas at https://www.atlassian.com/git/tutorials/dotfiles"
+about-plugin "Following the ideas at https://www.atlassian.com/git/tutorials/dotfiles. Becoming more and more 'vcsh, without vcsh'"
 
 # Convention is that a bare git repo has a .git suffix
 : "${BASH_IT_DOTFILES_GIT_REPO:=~/.dotfiles-repo.git}"
