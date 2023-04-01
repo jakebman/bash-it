@@ -1,3 +1,17 @@
 #! /bin/bash
 
-apt upgrade
+# Trampoline - automatically re-run this current script with sudo
+# Our script is permitted to be automatically sudo'd
+# (because of how simple it is, and the singular invocation is "safe enough" by Jake's standards)
+# Additionally, this script... doesn't work without sudo.
+# So instead of obviously failing, we'll re-invoke ourself with sudo
+# Security issues - I don't know how safe "sudo $0"
+
+# https://stackoverflow.com/questions/18215973/how-to-check-if-running-as-root-in-a-bash-script
+if (( $EUID == 0 )) ; then
+  # root - can update
+  apt upgrade
+else
+  # not root - use implicit sudo
+  sudo "$0"
+fi
