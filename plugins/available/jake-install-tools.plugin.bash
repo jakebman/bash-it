@@ -223,12 +223,20 @@ function jake-install-tools() {
 	  echo 'sudo install --compare --mode 0440 "${BASH_IT_CUSTOM}/100-jake-sudoers" /etc/sudoers.d/'
   fi
 
-  if _command_exists apt-upgrade-only && _command_exists apt-update-only ; then
-    echo "Nothing to do for apt-*-only - upgrade and update are happy"
-  else
+  local sbin_files;
+  for sbin_file in `ls "${BASH_IT_CUSTOM}/sbin"`; do
+	if ! cmp -s "${BASH_IT_CUSTOM}/sbin/${sbin_file}" "/usr/local/sbin/${sbin_file}" ; then
+	  sbin_files+=( $sbin_file )
+	fi
+  done
+
+  # https://serverfault.com/questions/477503/check-if-array-is-empty-in-bash
+  if (( ${#sbin_files[@]} )) ; then
     echo "please copy the apt* files from ${BASH_IT_CUSTOM}/sbin to /usr/local/sbin"
     echo -en "\t"
     echo 'sudo install ${BASH_IT_CUSTOM}/sbin/* /usr/local/sbin'
+  else
+    echo "Nothing to do for apt-*-only - sbin files are installed and are happy"
   fi
 
   if grep -q 'systemd=true' /etc/wsl.conf ; then
