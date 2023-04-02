@@ -13,5 +13,8 @@ if (( $EUID == 0 )) ; then
   apt update
 else
   # not root - use implicit sudo
-  sudo "$0"
+  # Warning: $0 is tempting, but capable of failure. see https://stackoverflow.com/a/31872769/285944
+  # This script lives in sbin, so we invoke ourselves by our own known full path
+  # (which, btw is the only one permitted by sudo anyway)
+  sudo /usr/local/sbin/apt-update-only
 fi
