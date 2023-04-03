@@ -97,6 +97,7 @@ alias stauts=status
 alias tatus=status
 alias pul=pull
 alias puhs=push
+alias pulll=pull
 alias pus=push
 alias loig=log
 alias lgop=logp
