@@ -71,6 +71,9 @@ alias jdif='git j --diff'
 alias jdf='git j --diff' # has a git alias
 alias jfd='git j --diff'
 alias jd='git j --diff'
+alias jmerge='git j --merge'
+alias jmg='git j --merge' # has a git alias
+alias jm='git j --merge'
 alias jws='git j --ws' # has a git alias
 
 
