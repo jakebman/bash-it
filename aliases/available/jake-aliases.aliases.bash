@@ -20,7 +20,7 @@ alias ltre=ltree
 alias ltreee=ltree
 
 # I really like permament differences
-alias watch='watch --differences permanent'
+alias watch='watch --differences=permanent'
 
 alias cht=cht.sh
 
