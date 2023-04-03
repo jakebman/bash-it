@@ -90,6 +90,7 @@ alias pws=pwd
 
 # from jake-aliases - these are git command which drop the "git " prefix
 alias stage=staged
+alias stsaged=staged
 alias stg=staged
 alias sttatus=status
 alias statsus=status
