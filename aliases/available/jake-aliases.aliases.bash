@@ -34,7 +34,7 @@ alias push='git push'
 alias rebase='git rebase'
 alias merge='git merge'
 # git errors if add has no args (prints advice.addEmptyPathspec)
-# TODO: this might not belong in an 'aliases' item
+# And this is another for the "it's functionally an alias, so sue me" pile
 function add {
 	if [ "$#" -eq 0 ] ; then
 		git add -p "$@" # $@ is empty, but this is more consistent with the other branch
