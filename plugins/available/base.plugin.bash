@@ -101,7 +101,7 @@ function lsgrep() {
 }
 
 function quiet() {
-	about 'what *does* this do?' #TODO
+	about 'what *does* this do?-' #TODO - is probably "run a command in the background, with no input or output"
 	group 'base'
 	nohup "$@" &> /dev/null < /dev/null &
 }
