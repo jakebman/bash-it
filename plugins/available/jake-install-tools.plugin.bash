@@ -355,6 +355,12 @@ function _jake-check-optional-tools() {
 	echo -en "\t"
 	echo 'sudo dpkg -i git-delta*.deb'
   fi
+
+  if _command_exists makedeb ; then
+	  echo "Nothing to do for makedeb - makedeb is happy"
+  else
+	  echo "consider looking into makedeb for my own packages - https://www.makedeb.org/"
+  fi
 }
 
 function _jake-remove-motd-junk {
