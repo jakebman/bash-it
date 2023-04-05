@@ -83,6 +83,7 @@ alias mcn=mvn
 alias vmn=mvn
 
 alias suod=sudo
+alias audo=sudo
 
 alias ssg=ssh
 
