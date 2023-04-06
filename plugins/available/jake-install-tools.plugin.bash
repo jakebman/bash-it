@@ -361,6 +361,18 @@ function _jake-check-optional-tools() {
   else
 	  echo "consider looking into makedeb for my own packages - https://www.makedeb.org/"
   fi
+
+  if _command_exists dgit ; then
+	  echo "Nothing to do for dgit - dgit is happy"
+  else
+	  echo "consider installing dgit for my own packages"
+  fi
+
+  if _command_exists git-big-picture ; then
+	  echo "Nothing to do for git big picture - git-big-picture is happy"
+  else
+	  echo "consider installing git big picture, because it looks pretty"
+  fi
 }
 
 function _jake-remove-motd-junk {
