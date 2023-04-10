@@ -98,6 +98,7 @@ alias comm9t=commit
 alias comm0t=commit
 alias comm-t=commit
 alias sttatus=status
+alias statuat=status
 alias statsus=status
 alias stauts=status
 alias tatus=status
