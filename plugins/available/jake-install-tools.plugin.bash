@@ -223,20 +223,20 @@ function jake-install-tools() {
 	  echo 'sudo install --compare --mode 0440 "${BASH_IT_CUSTOM}/100-jake-sudoers" /etc/sudoers.d/'
   fi
 
-  local sbin_files;
-  for sbin_file in `ls "${BASH_IT_CUSTOM}/sbin"`; do
-	if ! cmp -s "${BASH_IT_CUSTOM}/sbin/${sbin_file}" "/usr/local/sbin/${sbin_file}" ; then
-	  sbin_files+=( $sbin_file )
+  local bin_files;
+  for bin_file in `ls "${BASH_IT_CUSTOM}/bin"`; do
+	if ! cmp -s "${BASH_IT_CUSTOM}/bin/${bin_file}" "/usr/local/bin/${bin_file}" ; then
+	  bin_files+=( $bin_file )
 	fi
   done
 
   # https://serverfault.com/questions/477503/check-if-array-is-empty-in-bash
-  if (( ${#sbin_files[@]} )) ; then
-    echo "please copy the apt* files from ${BASH_IT_CUSTOM}/sbin to /usr/local/sbin"
+  if (( ${#bin_files[@]} )) ; then
+    echo "please copy the apt* files from ${BASH_IT_CUSTOM}/bin to /usr/local/bin"
     echo -en "\t"
-    echo 'sudo install ${BASH_IT_CUSTOM}/sbin/* /usr/local/sbin'
+    echo 'sudo install ${BASH_IT_CUSTOM}/bin/* /usr/local/bin'
   else
-    echo "Nothing to do for apt-*-only - sbin files are installed and are happy"
+    echo "Nothing to do for apt-*-only - bin files are installed and are happy"
   fi
 
   if grep -q 'systemd=true' /etc/wsl.conf ; then

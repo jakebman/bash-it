@@ -9,12 +9,12 @@
 
 # https://stackoverflow.com/questions/18215973/how-to-check-if-running-as-root-in-a-bash-script
 if (( $EUID == 0 )) ; then
-  # root - can upgrade
-  apt upgrade
+  # root - can autoremove
+  apt autoremove
 else
   # not root - use implicit sudo
   # Warning: $0 is tempting, but capable of failure. see https://stackoverflow.com/a/31872769/285944
-  # This script lives in sbin, so we invoke ourselves by our own known full path
+  # This script lives in a known directory, so we invoke ourselves by our own known full path
   # (which, btw is the only one permitted by sudo anyway)
-  sudo /usr/local/sbin/apt-upgrade-only
+  sudo /usr/local/bin/apt-autoremove-only
 fi
