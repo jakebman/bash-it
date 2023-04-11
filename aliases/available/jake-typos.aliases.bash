@@ -89,6 +89,8 @@ alias ssg=ssh
 
 alias pws=pwd
 
+alias tyep=type
+
 # from jake-aliases - these are git command which drop the "git " prefix
 alias stage=staged
 alias stsaged=staged
