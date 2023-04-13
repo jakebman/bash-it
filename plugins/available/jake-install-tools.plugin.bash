@@ -75,9 +75,11 @@ function jake-install-tools() {
   # tools that can use apt
   TOOLS_TO_INSTALL=""
   _jake-find-tool pygmentize python3-pygments
+  _jake-find-tool procyon procyon-decompiler
   _jake-find-tool python python-is-python3
   _jake-find-tool make build-essential
   _jake-find-tool ifconfig net-tools
+  _jake-find-tool apt-file apt-file 'and run `sudo apt-file update` after!'
   _jake-find-tool xeyes x11-apps "because I really like googly eyes"
   _jake-find-tool http httpie
   _jake-find-tool dos2unix
@@ -315,18 +317,6 @@ function _jake-check-optional-tools() {
     echo "Nothing to do for maven - maven is happy"
   else
     echo "maven is available via sdkman: sdk install maven # latest version chosen by default"
-  fi
-
-  if _command_exists apt-file ; then
-    echo "Nothing to do for apt-file - apt-file is happy"
-  else
-    echo "apt-file is available via: sudo apt install apt-file; sudo apt-file update"
-  fi
-
-  if _command_exists procyon ; then
-    echo "Nothing to do for procyon - procyon is happy"
-  else
-    echo "procyon is available via: sudo apt install procyon-decompiler"
   fi
 
   if _command_exists fzf ; then
