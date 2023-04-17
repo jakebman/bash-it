@@ -61,6 +61,7 @@ function vars {
   fi
 }
 alias var=vars # because I'm lazy
+alias cars=vars # typo
 
 function _jake-special-single-args-for-diff {
   case $1 in
