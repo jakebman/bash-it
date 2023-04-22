@@ -107,6 +107,7 @@ alias sttatus=status
 alias statuat=status
 alias statsus=status
 alias stauts=status
+alias statu=status
 alias tatus=status
 alias pul=pull
 alias puhs=push
