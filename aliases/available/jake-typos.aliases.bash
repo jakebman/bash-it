@@ -102,6 +102,7 @@ alias stg=staged
 alias comm9t=commit
 alias comm0t=commit
 alias comm-t=commit
+alias commt=commit
 alias sttatus=status
 alias statuat=status
 alias statsus=status
