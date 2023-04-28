@@ -103,6 +103,7 @@ alias comm9t=commit
 alias comm0t=commit
 alias comm-t=commit
 alias commt=commit
+alias ignroed=ignored
 alias sstatus=status
 alias sttatus=status
 alias statuat=status
