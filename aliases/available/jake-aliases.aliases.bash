@@ -26,6 +26,8 @@ alias watch='watch --differences=permanent'
 
 alias cht=cht.sh
 
+alias m=mr
+
 # git commands that... I don't care to add git to
 
 # 'Vanilla' aliases
