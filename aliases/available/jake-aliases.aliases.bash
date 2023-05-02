@@ -33,7 +33,14 @@ alias m=mr
 # 'Vanilla' aliases
 alias commit='git commit'
 alias clone='git clone'
-alias pull='git pull'
+# pull can have special meaning in $HOME
+function pull {
+	if [ "$PWD" == ~ ] ; then
+		mr --jobs 4 up
+	else
+		git pull "$@"
+	fi
+}
 alias push='git push'
 alias rebase='git rebase'
 alias merge='git merge'
