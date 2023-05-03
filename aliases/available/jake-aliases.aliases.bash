@@ -65,6 +65,7 @@ alias ls-files='git ls-files'
 alias rainbow='git rainbow'
 alias logp='git logp'
 alias logs='git logs'
+alias logn='git logn'
 
 # 'Duplicating' aliases
 # These could have been written as `alias X='git X'`, because they're
