@@ -61,11 +61,11 @@ alias blame='git blame'
 alias log='git log'
 alias remote='git remote'
 alias ls-files='git ls-files'
-# Exceptions to 'Duplicating' aliases, below. These *could* change
-alias rainbow='git rainbow'
-alias logp='git logp'
-alias logs='git logs'
-alias logn='git logn'
+# Exceptions to 'Duplicating' aliases, below. These *could* change, but they should nominally still look like:
+alias rainbow='git rainbow' # colored graphlines in the terminal
+alias logp='git logp' # log with patch
+alias logs='git logs' # log with stats (+++-- indicators)
+alias logn='git logn' # log with numstats
 
 # 'Duplicating' aliases
 # These could have been written as `alias X='git X'`, because they're
