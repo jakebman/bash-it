@@ -307,7 +307,8 @@ function _jake-check-optional-tools() {
   if _command_exists httpx ; then
     echo "Nothing to do for httpx - httpx is happy"
   else
-    echo "httpx not found! Install it from https://github.com/httpx-sh/httpx/releases"
+    echo "httpx not found! Install it from one of these: (it's a zip file with the executable in it)"
+    _jake-git-repo-release-urls httpx-sh/httpx | grep linux | grep -v alligator # final nonsense to remove highlighting
   fi
 
   if _command_exists mvn ; then
@@ -320,9 +321,10 @@ function _jake-check-optional-tools() {
     echo "Nothing to do for fzf - fzf is happy"
   else
 	echo "Please install fzf - a dependency for my j script. Apt has an old version. I like 0.38.0"
-	echo "Get the new executable from a .gz at https://github.com/junegunn/fzf/releases, plus the manpage:"
+	_jake-git-repo-release-urls junegunn/fzf | grep linux | grep amd | grep -v alligator # alligator is nonsense to remove highlighting
+	echo "plus the manpage:"
 	echo -en "\t"
-	echo 'sudo wget --directory-prefix /usr/share/man/man1/ https://raw.githubusercontent.com/junegunn/fzf/master/man/man1/fzf.1'
+	echo 'wget --directory-prefix ${HOME}/bin/man/man1/ https://raw.githubusercontent.com/junegunn/fzf/master/man/man1/fzf.1 && mandb --user-db'
   fi
 
   if _command_exists bat ; then
@@ -370,8 +372,10 @@ function _jake-git-repo-release-urls {
 	about "list download urls for a release"
 	param "1: repo, in <user>/<repo> format. Like sharkdp/bat"
 
-	curl -s "https://api.github.com/repos/${1}/releases/latest" |
-		jq -r '.assets[].browser_download_url'
+	# --location follows 301 redirects, like for httpx-sh/httpx, which goes to a numeric value
+	curl -s --location "https://api.github.com/repos/${1}/releases/latest" |
+		jq -r '.assets[].browser_download_url' ||
+	echo "failure to read from https://api.github.com/repos/${1}/releases/latest"
 }
 
 function _jake-remove-motd-junk {
