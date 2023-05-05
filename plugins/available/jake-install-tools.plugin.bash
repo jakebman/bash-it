@@ -329,7 +329,8 @@ function _jake-check-optional-tools() {
 	  echo "Nothing to do for bat - bat is happy"
   else
 	echo "Please install bat - a dependency for my j script. Apt has an old version. I like 0.22.1"
-	echo "Get the new .deb from https://github.com/sharkdp/bat/releases and then"
+	echo "Get the new .deb from one of these:"
+	_jake-git-repo-release-urls sharkdp/bat | grep deb$ | grep amd | grep -v musl
 	echo -en "\t"
 	echo 'sudo dpkg -i bat*.deb'
   fi
@@ -338,7 +339,8 @@ function _jake-check-optional-tools() {
 	echo "Nothing to do for delta - delta is happy"
   else
 	echo "Please install delta - a bat-smart diff."
-	echo "Get the new .deb from https://github.com/dandavison/delta/releases and then (or use cargo per their notes)"
+	echo "Get the new .deb from one of these, or via cargo from https://github.com/dandavison/delta"
+	_jake-git-repo-release-urls dandavison/delta | grep deb$ | grep amd | grep -v musl
 	echo -en "\t"
 	echo 'sudo dpkg -i git-delta*.deb'
   fi
@@ -360,6 +362,16 @@ function _jake-check-optional-tools() {
   else
 	  echo "consider installing git big picture, because it looks pretty"
   fi
+}
+
+# TODO: both users of this method would like progressive filtering
+# Basically: give me the deb that is amd, and non-musl, but if nothing is found, print the best list available
+function _jake-git-repo-release-urls {
+	about "list download urls for a release"
+	param "1: repo, in <user>/<repo> format. Like sharkdp/bat"
+
+	curl -s "https://api.github.com/repos/${1}/releases/latest" |
+		jq -r '.assets[].browser_download_url'
 }
 
 function _jake-remove-motd-junk {
