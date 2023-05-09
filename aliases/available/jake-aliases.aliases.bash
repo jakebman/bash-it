@@ -28,6 +28,9 @@ alias cht=cht.sh
 
 alias m=mr
 
+# Not a 'typo' so much as a brain fart
+alias maven=mvn
+
 # git commands that... I don't care to add git to
 
 # 'Vanilla' aliases
