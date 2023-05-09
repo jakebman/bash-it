@@ -36,7 +36,7 @@ alias clone='git clone'
 # pull can have special meaning in $HOME
 function pull {
 	if [ "$PWD" == ~ ] ; then
-		mr --jobs 4 up
+		mr up
 	else
 		git pull "$@"
 	fi
