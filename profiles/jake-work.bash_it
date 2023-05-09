@@ -3,6 +3,7 @@
 # plugins
 plugins base
 plugins cht-sh
+plugins curl-logging
 plugins dircolors
 plugins dotfiles-via-bare-git-repo-with-config-alias
 plugins gitstatus
