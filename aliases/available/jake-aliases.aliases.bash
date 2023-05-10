@@ -38,7 +38,9 @@ alias commit='git commit'
 alias clone='git clone'
 # pull can have special meaning in $HOME
 function pull {
-	if [ "$PWD" == ~ ] ; then
+	# yes, there's a .mrconfig in ~, but there's no disk access to check $PWD first
+	# (and the $PWD check was here first - the .mrconfig check shouldn't feel bolted-on, but it does)
+	if [ "$PWD" == ~ ] || [ -f .mrconfig ] ; then
 		mr up "$@"
 	else
 		git pull "$@"
