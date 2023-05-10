@@ -119,6 +119,11 @@ function realpath {
   fi
 }
 
+function xml {
+	# two-space indent, forcing newlines between elements w/o children
+	xmlindent -i 2 -f "$@" | bat -pl xml
+}
+
 function doctor {
 	about "just run bash-it doctor"
 	time bash-it doctor
