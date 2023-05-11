@@ -19,8 +19,7 @@ function jake-maintain-system() {
 
 	  (config pull --autostash; config submodule update --init --remote --jobs 4 && echo "(logging note that submodule succeeded)") |& tee config-pull &
 	  echo "$! spawned for config pull with autostash (and submodules!) pull" | jake-log
-	  (cd "${BASH_IT}" && git pull) |& tee bash-it-pull &
-	  echo "$! spawned for bash-it pull" | jake-log
+	  echo "(bash-it pulling has been moved to pull function, which delegates to mr)"
 	  for pid in `jobs -p`; do
 		  wait $pid || echo PID $pid failed somehow | jake-log
 	  done
