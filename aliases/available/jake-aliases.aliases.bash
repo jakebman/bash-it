@@ -46,7 +46,15 @@ function pull {
 		git pull "$@"
 	fi
 }
-alias push='git push'
+function push {
+	# see pull, above
+	if [ "$PWD" == ~ ] || [ -f .mrconfig ] ; then
+		mr push "$@"
+	else
+		git push "$@"
+	fi
+}
+
 alias rebase='git rebase'
 alias merge='git merge'
 # git errors if add has no args (prints advice.addEmptyPathspec)
