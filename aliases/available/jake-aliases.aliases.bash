@@ -54,7 +54,7 @@ function push {
 		git push "$@"
 	fi
 }
-
+alias fetch='git fetch'
 alias rebase='git rebase'
 alias merge='git merge'
 # git errors if add has no args (prints advice.addEmptyPathspec)
