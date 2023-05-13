@@ -54,6 +54,14 @@ function push {
 		git push "$@"
 	fi
 }
+function status {
+	# see pull, above
+	if [ "$PWD" == ~ ] || [ -f .mrconfig ] ; then
+		mr status "$@"
+	else
+		git status "$@"
+	fi
+}
 alias fetch='git fetch'
 alias rebase='git rebase'
 alias merge='git merge'
@@ -66,7 +74,6 @@ function add {
 		git add "$@"
 	fi
 }
-alias status='git status'
 alias stash='git stash'
 alias show='git show'
 alias branch='git branch'
