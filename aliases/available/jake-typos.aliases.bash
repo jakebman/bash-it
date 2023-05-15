@@ -118,6 +118,7 @@ alias pul=pull
 alias pulll=pull
 alias puhs=push
 alias pusl=push
+alias psh=push
 alias pus=push
 alias loig=log
 alias lgop=logp
