@@ -108,6 +108,7 @@ function delta {
 # Inspired by https://github.com/tpope/vim-obsession/issues/11
 function vim {
 	if [[ "$#" -eq 0 ]] ; then
+		# $@ is unecessary, as it's empty. Keeps parallel structure, though.
 		command vim -S ~/.vim/jake-autosaved-session "$@"
 	else
 		command vim -c "Obsession ${HOME}/.vim/jake-autosaved-session" "$@"
