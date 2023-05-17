@@ -111,6 +111,9 @@ alias addp='git add --patch'
 # Not all of these are duplicating a git alias, but they're not exactly typos either
 # They exist to make my CLI invocations easier, and would be more properly considered
 # as useful `j` aliases, than git alises (they allow j to be invoked in a git context)
+alias jstg='git j --staged'
+alias jst='git j --staged'
+alias jsg='git j --staged'
 alias jdiff='git j --diff'
 alias jdif='git j --diff'
 alias jdf='git j --diff' # has a git alias
