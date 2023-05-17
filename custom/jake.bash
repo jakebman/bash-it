@@ -73,6 +73,11 @@ function _jake-special-single-args-for-diff {
   return 1;
 }
 
+function typo {
+	vim "${BASH_IT}/aliases/available/jake-typos.aliases.bash"
+}
+alias tyop=typo
+
 function hgrep {
   about "grep your history"
   history | grep "$@"
