@@ -45,6 +45,10 @@ alias ltreee=ltree
 alias ach=ack
 alias akc=ack
 
+# mt is actually a real command, but I don't plan on doing stuff with magnetic tape
+alias mt=mr
+alias m=mr
+
 alias cata=cat
 alias vat=cat
 alias ca=cat
