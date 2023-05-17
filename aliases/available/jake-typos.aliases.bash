@@ -113,6 +113,7 @@ alias comm-t=commit
 alias commt=commit
 alias ignroed=ignored
 alias restoer=restore
+alias rianbow=rainbow
 alias sstatus=status
 alias sttatus=status
 alias statuat=status
