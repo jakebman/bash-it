@@ -63,7 +63,7 @@ function add {
 
 # commit with one argument is either add/commit the file, or commit with the given message
 function commit {
-	if [ "$#" -eq 1 ] && ! [[ "" =~ '^-' ]] ; then
+	if [ "$#" -eq 1 ] && ! [[ "$1" == -* ]] ; then
 		# exactly one argument, and it's not a flag. (don't eat --message=typo, for instance)
 		if [ -f "$1" ] ; then
 			add "$1"
