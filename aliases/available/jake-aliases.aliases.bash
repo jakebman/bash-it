@@ -84,6 +84,7 @@ alias logn='git logn' # log with numstats
 alias co='git checkout'
 alias ignored='git status --ignored'
 alias staged='git diff --staged'
+alias addp='git add --patch'
 
 # 'Not exactly duplicating' aliases
 # Not all of these are duplicating a git alias, but they're not exactly typos either
