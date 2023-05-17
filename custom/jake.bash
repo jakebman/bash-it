@@ -112,7 +112,7 @@ function vim {
 		# $@ is unecessary, as it's empty. Keeps parallel structure, though.
 		command vim -S "$file" "$@"
 	else
-		command vim -c "Obsession ${file}" "$@"
+		command vim "$@"
 	fi
 }
 export -f vim # so that j receives it!
