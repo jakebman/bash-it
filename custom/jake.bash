@@ -115,7 +115,7 @@ function vim {
 		command vim -c "Obsession ${file}" "$@"
 	fi
 }
-
+export -f vim # so that j receives it!
 
 function realpath {
   about "allow you to type the bare word 'realpath' and automatically be cd'd there"
