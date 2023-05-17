@@ -61,8 +61,22 @@ function add {
 	fi
 }
 
+# commit with one argument is either add/commit the file, or commit with the given message
+function commit {
+	if [ "$#" -eq 1 ] && ! [ "" =~ '^-' ] ; then
+		# exactly one argument, and it's not a flag.
+		if [ -f "$1" ] ; then
+			add "$1"
+			git commit
+		else
+			git commit -m "$1"
+		fi
+	else
+		git commit "$@"
+	fi
+}
+
 # 'Vanilla' aliases - these commands simply add 'git' at the beginning
-alias commit='git commit'
 alias clone='git clone'
 alias push='git push'
 alias fetch='git fetch'
