@@ -64,6 +64,7 @@ alias treee=tree
 alias d=diff
 alias dif=diff
 alias iff=diff
+alias idff=diff
 alias dfif=diff
 alias didd=diff
 
