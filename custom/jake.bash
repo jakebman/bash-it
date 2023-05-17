@@ -105,10 +105,15 @@ function delta {
   fi
 }
 
-# TODO: implicit arguments for vim - allow a bare vim invocation to invoke
-# either '0 or :browse oldfiles
-# https://stackoverflow.com/a/3171327/285944
-# (This might need to be in .vimrc instead, but it can live here next to the other 'no-arg becomes meaningful' commands)
+# Inspired by https://github.com/tpope/vim-obsession/issues/11
+function vim {
+	if [[ "$#" -eq 0 ]] ; then
+		command vim -S ~/.vim/jake-autosaved-session "$@"
+	else
+		command vim -c "Obsession ${HOME}/.vim/jake-autosaved-session" "$@"
+	fi
+}
+
 
 function realpath {
   about "allow you to type the bare word 'realpath' and automatically be cd'd there"
