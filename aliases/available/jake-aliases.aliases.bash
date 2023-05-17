@@ -17,10 +17,6 @@ function ltree {
 	command tree -C "$@" | less
 }
 
-# Technically typos, these are just convenience names
-alias ltre=ltree
-alias ltreee=ltree
-
 # I really like permament differences
 alias watch='watch --differences=permanent'
 
@@ -28,7 +24,7 @@ alias cht=cht.sh
 
 alias m=mr
 
-# Not a 'typo' so much as a brain fart
+# Sometimes I use this name for the command rather than its normal name. Oops.
 alias maven=mvn
 
 # git commands that... I don't care to add git to
@@ -88,7 +84,6 @@ alias logn='git logn' # log with numstats
 alias co='git checkout'
 alias ignored='git status --ignored'
 alias staged='git diff --staged'
-alias comit='git commit' # typo, which also has an alias
 
 # 'Not exactly duplicating' aliases
 # Not all of these are duplicating a git alias, but they're not exactly typos either
@@ -97,7 +92,6 @@ alias comit='git commit' # typo, which also has an alias
 alias jdiff='git j --diff'
 alias jdif='git j --diff'
 alias jdf='git j --diff' # has a git alias
-alias jfd='git j --diff' # typo
 alias jd='git j --diff'
 alias jmerge='git j --merge'
 alias jmg='git j --merge' # has a git alias

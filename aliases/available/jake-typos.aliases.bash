@@ -39,6 +39,9 @@ alias lsa='ls -a'
 alias lsl='ls -l'
 alias les=less
 
+alias ltre=ltree
+alias ltreee=ltree
+
 alias ach=ack
 alias akc=ack
 
@@ -99,7 +102,11 @@ alias ipconfig=ifconfig
 alias stage=staged
 alias stsaged=staged
 alias stg=staged
-# alias comit=commit # handled by a "duplicating alias"
+# some of these are handled by a "duplicating alias" too, but it's better for them to be here than in jake-aliases
+# which would imply that these are legitimate git commands.
+# To handle these both with and without git requires duplication. I'd rather have that duplication in here than
+# in jake-aliases. These are typo words, not git-command words.
+alias comit=commit
 alias comm9t=commit
 alias comm0t=commit
 alias comm-t=commit
@@ -124,6 +131,7 @@ alias pus=push
 alias loig=log
 alias lgop=logp
 alias lopg=logp
+alias jfd=jdf
 
 # super eager with that second s
 alias bashs=bash
