@@ -120,6 +120,7 @@ alias statuat=status
 alias statsus=status
 alias stauts=status
 alias statu=status
+alias staut=status
 alias tatus=status
 alias pu=pull
 alias up=pull # Technically not a typo, but it's a typo of a typo, so I'm keeping it here
