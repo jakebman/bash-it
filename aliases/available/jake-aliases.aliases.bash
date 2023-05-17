@@ -27,11 +27,10 @@ alias m=mr
 # Sometimes I use this name for the command rather than its normal name. Oops.
 alias maven=mvn
 
-# git commands that... I don't care to add git to
+# The rest of the file is entirely git commands that... I don't care to add git to
 
-# 'Vanilla' aliases
-alias commit='git commit'
-alias clone='git clone'
+# 'Magic' aliases - smarter than their corresponding git command (they can see more Jake context)
+
 # pull can have special meaning in $HOME
 function pull {
 	# yes, there's a .mrconfig in ~, but there's no disk access to check $PWD first
@@ -42,6 +41,7 @@ function pull {
 		git pull "$@"
 	fi
 }
+
 function status {
 	# see pull, above
 	if [ "$PWD" == ~ ] || [ -f .mrconfig ] ; then
@@ -50,10 +50,7 @@ function status {
 		git status "$@"
 	fi
 }
-alias push='git push'
-alias fetch='git fetch'
-alias rebase='git rebase'
-alias merge='git merge'
+
 # git errors if add has no args (prints advice.addEmptyPathspec)
 # And this is another for the "it's functionally an alias, so sue me" pile
 function add {
@@ -63,6 +60,14 @@ function add {
 		git add "$@"
 	fi
 }
+
+# 'Vanilla' aliases - these commands simply add 'git' at the beginning
+alias commit='git commit'
+alias clone='git clone'
+alias push='git push'
+alias fetch='git fetch'
+alias rebase='git rebase'
+alias merge='git merge'
 alias stash='git stash'
 alias show='git show'
 alias branch='git branch'
