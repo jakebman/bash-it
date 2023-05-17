@@ -24,7 +24,7 @@ export CLICOLOR_FORCE="setting this value to ANYTHING forces 'tree' to use color
 # RAW... enables color interpretation
 # quit-at-eof gives you the change to scroll to the end, but if you keep
 #   scrolling it also exits (I like not feeling trapped)
-export LESS="--quit-if-one-screen --quit-at-eof --no-init --RAW-CONTROL-CHARS"
+export LESS="--quit-if-one-screen --quit-at-eof --no-init --RAW-CONTROL-CHARS --tabs=2"
 export LESSHISTFILE="${HOME}/.config/lesshst" # I like editing ~/.lessfilter, and this keeps getting in the way
 export LESSSTYLE=sas
 
