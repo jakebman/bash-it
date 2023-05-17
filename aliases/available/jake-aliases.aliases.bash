@@ -75,7 +75,9 @@ alias blame='git blame'
 alias log='git log'
 alias remote='git remote'
 alias ls-files='git ls-files'
-# Exceptions to 'Duplicating' aliases, below. These *could* change, but they should nominally still look like:
+# Exceptions to 'Duplicating' aliases, below. The git alias's behavior *could* change, and I want the
+# bare command's behavior to continue to track as-if it were just adding git to it. I do expect their
+# behavior to remain how it's described here, though.
 alias rainbow='git rainbow' # colored graphlines in the terminal
 alias logp='git logp' # log with patch
 alias logs='git logs' # log with stats (+++-- indicators)
