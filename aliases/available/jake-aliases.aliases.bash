@@ -62,16 +62,23 @@ function add {
 
 # commit with one argument is either add/commit the file, or commit with the given message
 function commit {
+	# stash some flags (just -a for now) before determining if there is 'only' one argument
+	local -a args
+	if [[ "$1" == "-a" ]] ; then
+		args+=($1)
+		shift
+	fi
+
 	if [ "$#" -eq 1 ] && ! [[ "$1" == -* ]] ; then
 		# exactly one argument, and it's not a flag. (don't eat --message=typo, for instance)
 		if [ -f "$1" ] ; then
 			add "$1"
 			git commit
 		else
-			git commit -m "$1"
+			git commit "${args[@]}" -m "$1"
 		fi
 	else
-		git commit "$@"
+		git commit "${args[@]}" "$@"
 	fi
 }
 
