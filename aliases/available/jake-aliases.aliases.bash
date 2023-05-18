@@ -53,6 +53,7 @@ function status {
 # And this is another for the "it's functionally an alias, so sue me" pile
 function add {
 	if [ "$#" -eq 0 ] ; then
+		figlet -t -f mini GIT ADD 2>/dev/null || true # print the banner, but don't care if it fails
 		git add -p "$@" # $@ is empty, but this is more consistent with the other branch
 	else
 		git add "$@"
@@ -73,6 +74,24 @@ function commit {
 		git commit "$@"
 	fi
 }
+
+# Print a header warning that this is NOT ADD, and DESTUCTIVE
+function restore {
+	echo -ne "$echo_red"
+	# print the banner, but don't care if it fails
+	# heredoc notes:
+	# << indicates heredoc
+	# - indicates leading tabs on the heredoc are stripped
+	# "" indicates that the contenents are verbatim (no varible substitution)
+	# MESSAGE is the heredoc stopword
+	figlet -c -f mini 2>/dev/null <<-"MESSAGE" || true
+		!!! GIT RESTORE !!!
+		!!!!! TAKE CARE !!!!!
+	MESSAGE
+	echo -ne "$echo_reset_color"
+	git restore -p "$@"
+}
+
 
 # 'Vanilla' aliases - these commands simply add 'git' at the beginning
 alias clone='git clone'
@@ -120,7 +139,3 @@ alias jmerge='git j --merge'
 alias jmg='git j --merge' # has a git alias
 alias jm='git j --merge'
 alias jws='git j --ws' # has a git alias
-
-
-# Safety valve (kept at end to have the final say). It's REALLY IMPORTANT to keep the -p
-alias restore='git restore -p'
