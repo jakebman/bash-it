@@ -115,6 +115,7 @@ alias blame='git blame'
 alias log='git log'
 alias remote='git remote'
 alias ls-files='git ls-files'
+alias authors='git authors'
 # Exceptions to 'Duplicating' aliases, below. The git alias's behavior *could* change, and I want the
 # bare command's behavior to continue to track as-if it were just adding git to it. I do expect their
 # behavior to remain how it's described here, though.
