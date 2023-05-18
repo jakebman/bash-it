@@ -69,12 +69,14 @@ function commit {
 		shift
 	fi
 
+	# exactly one argument, and it's not a flag. (don't eat --message=typo, for instance)
 	if [ "$#" -eq 1 ] && ! [[ "$1" == -* ]] ; then
-		# exactly one argument, and it's not a flag. (don't eat --message=typo, for instance)
 		if [ -f "$1" ] ; then
+			# is a file. add, then interactive commit
 			add "$1"
 			git commit
 		else
+			# is a commit message. Commit with that message
 			git commit "${args[@]}" -m "$1"
 		fi
 	else
