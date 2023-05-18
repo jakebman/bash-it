@@ -101,6 +101,15 @@ function restore {
 	git restore -p "$@"
 }
 
+function unstage {
+	if [ "$#" -eq 0 ] ; then
+		figlet -t -f mini -- GIT RESTORE --STAGED 2>/dev/null || true # print the banner, but don't care if it fails
+		git unstage -p "$@" # $@ is empty, but this is more consistent with the other branch
+	else
+		git unstage "$@"
+	fi
+}
+
 
 # 'Vanilla' aliases - these commands simply add 'git' at the beginning
 alias clone='git clone'
