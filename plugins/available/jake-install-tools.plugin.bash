@@ -351,6 +351,12 @@ function _jake-check-optional-tools() {
 	echo 'sudo dpkg -i git-delta*.deb'
   fi
 
+  if _binary_exists git-delta ; then
+		echo "git-extras's git-delta shadows my git-delta alias. Pleas remove it with"
+		echo -en "\t"
+		echo 'sudo rm "$(which git-delta)"'
+  fi
+
   if _command_exists makedeb ; then
 	  echo "Nothing to do for makedeb - makedeb is happy"
   else
