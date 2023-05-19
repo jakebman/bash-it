@@ -124,6 +124,7 @@ alias commita='commit -a'
 alias ignroed=ignored
 alias restoer=restore
 alias rianbow=rainbow
+alias stsatus=status
 alias sstatus=status
 alias sttatus=status
 alias statuat=status
