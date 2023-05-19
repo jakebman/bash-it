@@ -75,6 +75,8 @@ alias idff=diff
 alias dfif=diff
 alias didd=diff
 alias difff=diff
+alias diiff=diff
+
 
 alias vd=cd
 alias vf=cd # left hand misaligned
