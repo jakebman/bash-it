@@ -67,12 +67,14 @@ function add {
 
 # commit with one argument is either add/commit the file, or commit with the given message
 function commit {
-	# stash some flags (just -a for now) before determining if there is 'only' one argument
+	# stash some flags that can be "transparent" to this feature
 	local -a args
-	if [[ "$1" == "-a" ]] ; then
-		args+=($1)
-		shift
-	fi
+	case "$1" in
+		-a|--all|--amend )
+			args+=("$1")
+			shift
+			;;
+	esac
 
 	# exactly one argument, and it's not a flag. (don't eat --message=typo, for instance)
 	if [ "$#" -eq 1 ] && ! [[ "$1" == -* ]] ; then
