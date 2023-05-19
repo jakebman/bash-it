@@ -49,11 +49,16 @@ function status {
 	fi
 }
 
+function _jake-banner-display {
+	about "display a banner, but don't care if it fails"
+	figlet -t -f mini "$@" 2>/dev/null || true
+}
+
 # git errors if add has no args (prints advice.addEmptyPathspec)
 # And this is another for the "it's functionally an alias, so sue me" pile
 function add {
 	if [ "$#" -eq 0 ] ; then
-		figlet -t -f mini GIT ADD 2>/dev/null || true # print the banner, but don't care if it fails
+		_jake-banner-display "GIT ADD"
 		git add -p "$@" # $@ is empty, but this is more consistent with the other branch
 	else
 		git add "$@"
@@ -87,23 +92,18 @@ function commit {
 # Print a header warning that this is NOT ADD, and DESTUCTIVE
 function restore {
 	echo -ne "$echo_red"
-	# print the banner, but don't care if it fails
-	# heredoc notes:
-	# << indicates heredoc
-	# - indicates leading tabs on the heredoc are stripped
-	# "" indicates that the contenents are verbatim (no varible substitution)
-	# MESSAGE is the heredoc stopword
-	figlet -c -f mini 2>/dev/null <<-"MESSAGE" || true
-		!!! GIT RESTORE !!!
-		!!!!! TAKE CARE !!!!!
-	MESSAGE
+	_jake-banner-display "!!! GIT RESTORE !!!"
+	sleep .2
+	_jake-banner-display "!!!!! TAKE CARE !!!!!"
 	echo -ne "$echo_reset_color"
+
+	sleep .3
 	git restore -p "$@"
 }
 
 function unstage {
 	if [ "$#" -eq 0 ] ; then
-		figlet -t -f mini -- GIT RESTORE --STAGED 2>/dev/null || true # print the banner, but don't care if it fails
+		_jake-banner-display "GIT RESTORE --STAGED"
 		git unstage -p "$@" # $@ is empty, but this is more consistent with the other branch
 	else
 		git unstage "$@"
