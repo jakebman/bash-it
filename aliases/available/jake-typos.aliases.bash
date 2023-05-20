@@ -85,6 +85,7 @@ alias dc=cd
 alias grpe=grep
 
 alias vile=file
+alias fiel=file
 
 alias mkae=make
 alias maek=make
