@@ -21,6 +21,7 @@ function ltree {
 alias watch='watch --differences=permanent'
 
 alias cht=cht.sh
+alias ch=cht.sh
 
 # Sometimes I use this name for the command rather than its normal name. Oops.
 alias maven=mvn
