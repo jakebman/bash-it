@@ -18,6 +18,9 @@ alias tree=ltree
 
 export CLICOLOR_FORCE="setting this value to ANYTHING forces 'tree' to use colors so we don't need to alias tree='tree -C'. See man(1) tree"
 
+# requires maven 3.9+ https://maven.apache.org/configure.html#maven_args-environment-variable
+export MAVEN_ARGS="-T1C"
+
 # Allow less to simply dump the output to STDOUT when it would all fit on a single page
 # https://stackoverflow.com/questions/2183900/how-do-i-prevent-git-diff-from-using-a-pager
 # no-init disables that weird 'second screen' behavior, which I don't like
