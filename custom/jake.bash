@@ -21,12 +21,14 @@ export CLICOLOR_FORCE="setting this value to ANYTHING forces 'tree' to use color
 # requires maven 3.9+ https://maven.apache.org/configure.html#maven_args-environment-variable
 export MAVEN_ARGS="-T1C"
 
-# Allow less to simply dump the output to STDOUT when it would all fit on a single page
-# https://stackoverflow.com/questions/2183900/how-do-i-prevent-git-diff-from-using-a-pager
-# no-init disables that weird 'second screen' behavior, which I don't like
-# RAW... enables color interpretation
+# quit-if-one-screen allows less to simply dump the output to STDOUT when it would all fit on a single page
+#   see https://stackoverflow.com/questions/2183900/how-do-i-prevent-git-diff-from-using-a-pager
 # quit-at-eof gives you the change to scroll to the end, but if you keep
 #   scrolling it also exits (I like not feeling trapped)
+# no-init disables that weird 'second screen' behavior, which I don't like
+# RAW-CONTROL-CHARS enables color interpretation without allowing every raw control code through
+#   (b/c that would make lines hard to track)
+# tabs=2 condenses tabs to only two characters wide
 export LESS="--quit-if-one-screen --quit-at-eof --no-init --RAW-CONTROL-CHARS --tabs=2"
 export LESSHISTFILE="${HOME}/.config/lesshst" # I like editing ~/.lessfilter, and this keeps getting in the way
 export LESSSTYLE=sas
