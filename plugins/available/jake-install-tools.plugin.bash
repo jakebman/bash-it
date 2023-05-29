@@ -263,11 +263,13 @@ function jake-install-tools() {
 	  echo "$apt_output"
 	  echo "Thanks, apt!"
   fi
-  # https://askubuntu.com/questions/410247/how-to-know-last-time-apt-get-update-was-executed
-  # TODO: this seems broken on... only one of my WSL instances? (file is missing)
-  local when="$(date -d "$(stat --format %y /var/lib/apt/periodic/update-success-stamp)")"
-  echo -e "And the apt update is from ${echo_red}${when}${echo_reset_color}"
-  echo -e "      A reminder: today is $(date)"
+  local when
+  if when="$(_jake-last-update)" ; then
+	  echo -e "And the apt update is from ${echo_red}${when}${echo_reset_color}"
+	  echo -e "      A reminder: today is $(date)"
+  else
+	  echo -e "${echo_red}${when}${echo_reset_color}"
+  fi
 
   # let's make sure blue is readable while we're here
   echo -en "btw, "
@@ -282,6 +284,16 @@ function jake-install-tools() {
   echo -en "${echo_reset_color}"
 
   # TODO: recommend git config --set core.fsmonitor true for windows
+}
+
+# https://askubuntu.com/questions/410247/how-to-know-last-time-apt-get-update-was-executed
+function _jake-last-update {
+	if [ -f /var/lib/apt/periodic/update-success-stamp ]; then
+		date -d "$(stat --format %y /var/lib/apt/periodic/update-success-stamp)"
+	else
+		echo "(apt's update-success-stamp file is missing)"
+		return 1
+	fi
 }
 
 function _jake-find-jekyll() {
