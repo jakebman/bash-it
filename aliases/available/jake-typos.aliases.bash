@@ -59,6 +59,7 @@ alias gat=bat
 
 # lls is define in jake-aliases. Basically ls | less
 alias lll=lls
+alias llls=lls
 alias llss=lls
 alias lle=lls
 alias lles=lls
