@@ -16,6 +16,9 @@ alias jq=jqless
 # Because... tree should basically always be paged
 alias tree=ltree
 
+# because I want to know
+alias pkill='pkill -e'
+
 export CLICOLOR_FORCE="setting this value to ANYTHING forces 'tree' to use colors so we don't need to alias tree='tree -C'. See man(1) tree"
 
 # requires maven 3.9+ https://maven.apache.org/configure.html#maven_args-environment-variable
