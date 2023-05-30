@@ -151,6 +151,7 @@ alias jfd=jdf
 
 # super eager with that second s
 alias bashs=bash
+alias bas=bash
 # custom config command to manage dotfiles
 alias confgi=config
 alias cofngi=config
