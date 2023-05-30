@@ -68,7 +68,7 @@ function jake-install-tools() {
 	  else
 		echo "Updating git-jump"
 	  fi
-	  install /usr/share/doc/git/contrib/git-jump/git-jump -t ~/bin -p
+	  install --preserve-timestamps /usr/share/doc/git/contrib/git-jump/git-jump --target-directory ~/bin
   fi
 
 
