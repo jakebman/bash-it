@@ -145,8 +145,27 @@ function realpath {
 }
 
 function xml {
-	# two-space indent, forcing newlines between elements w/o children
-	xmlindent -i 2 -f "$@" | bat -pl xml
+	local -a args
+	if [[ "$#" -eq 0 ]] ; then
+		args=('-')
+		# no args, read from stdin
+	else
+		args=("$@")
+	fi
+
+	xmllint --format "${args[@]}" | bat -pl xml
+}
+
+function xpath {
+	local -a args
+	args=("$@")
+	if ! [[ -t 0 ]] ; then
+		# stdin not from terminal. assume it's xml
+		args+=('-')
+	fi
+
+	# TODO: it'd be nice if I could figure out how to format the snippits this returns properly
+	xmllint --xpath "${args[@]}"
 }
 
 function doctor {

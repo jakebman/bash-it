@@ -78,13 +78,14 @@ function jake-install-tools() {
   _jake-find-tool procyon procyon-decompiler
   _jake-find-tool python python-is-python3
   # _jake-find-tool xmlformat xmlformat-perl # I think xmlindent is cleaner, partially because it has fewer options
+  _jake-find-tool xmllint libxml2-utils # multi-function - has xpath output (that it... can't prettyprint itself for some reason)
   _jake-find-tool make build-essential
   _jake-find-tool ifconfig net-tools
   _jake-find-tool apt-file apt-file 'and run `sudo apt-file update` after!'
   _jake-find-tool xeyes x11-apps "because I really like googly eyes"
   _jake-find-tool http httpie
   _jake-find-tool git-extras
-  _jake-find-tool xmlindent # doesn't have --long-options, which is a little weird
+  #_jake-find-tool xmlindent # doesn't have --long-options, which is a little weird
   _jake-find-tool dos2unix
   _jake-find-tool thefuck
   _jake-find-tool unzip
