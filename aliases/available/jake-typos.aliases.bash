@@ -70,6 +70,7 @@ alias ree=tree
 alias treee=tree
 
 alias d=diff
+alias idf=diff
 alias dif=diff
 alias iff=diff
 alias idff=diff
@@ -112,6 +113,7 @@ alias ipconfig=ifconfig
 alias stage=staged # NB: `git stage` is an alias for `git add`. This here is a TYPO of staged, not an attempt to use `git stage` conveniently
 alias stsaged=staged
 alias setaged=staged
+alias stagerd=staged
 alias stg=staged
 # some of these are handled by a "duplicating alias" too, but it's better for them to be here than in jake-aliases
 # which would imply that these are legitimate git commands.
