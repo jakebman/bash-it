@@ -1,0 +1,7 @@
+#! /bin/bash
+
+# It's only appropriate to do both if your autocomplete can't pick between them
+# (This script is named at the autocomplete divergence between the two scripts below)
+apt-update-only
+apt-upgrade-only
+
