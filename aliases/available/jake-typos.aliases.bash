@@ -146,6 +146,7 @@ alias puhs=push
 alias pusl=push
 alias psh=push
 alias pus=push
+alias ush=push
 alias addd=add
 alias loig=log
 alias lgop=logp
