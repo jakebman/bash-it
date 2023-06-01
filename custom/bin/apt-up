@@ -5,3 +5,6 @@
 apt-update-only
 apt-upgrade-only
 
+# might as well do the next maintenance task too
+apt-autoremove-only
+
