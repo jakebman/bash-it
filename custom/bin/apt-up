@@ -2,6 +2,9 @@
 
 # It's only appropriate to do both if your autocomplete can't pick between them
 # (This script is named at the autocomplete divergence between the two scripts below)
+# NB: the current script *should NOT* be auto-sudoable. The whole point of this script
+# is to *invoke OTHER* scripts that are auto-sudoable. If those scripts aren't auto-sudoable,
+# it's important that the user receive a prompt
 apt-update-only
 apt-upgrade-only
 
