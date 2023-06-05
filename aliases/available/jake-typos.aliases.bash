@@ -141,6 +141,7 @@ alias tatus=status
 alias pu=pull
 alias up=pull # Technically not a typo, but it's a typo of a typo, so I'm keeping it here
 alias pul=pull
+alias ull=pull
 alias pulll=pull
 alias puhs=push
 alias pusl=push
