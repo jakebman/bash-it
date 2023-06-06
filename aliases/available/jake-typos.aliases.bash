@@ -11,6 +11,7 @@ alias bim=vim
 alias cim=vim
 alias fim=vim
 alias im=vim
+alias v=vim
 
 alias it=git
 alias gi=git
