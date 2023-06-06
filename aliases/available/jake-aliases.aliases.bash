@@ -113,6 +113,14 @@ function unstage {
 	fi
 }
 
+function remote {
+	if [ "$#" -eq 0 ] || [[ "$1" == 'show' ]]; then
+		git remote -v "$@"
+	else
+		git remote "$@"
+	fi
+}
+
 
 # 'Vanilla' aliases - these commands simply add 'git' at the beginning
 alias clone='git clone'
@@ -125,7 +133,6 @@ alias show='git show'
 alias branch='git branch'
 alias blame='git blame'
 alias log='git log'
-alias remote='git remote'
 alias ls-files='git ls-files'
 # git-extras
 alias authors='git authors'
