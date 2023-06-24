@@ -80,6 +80,8 @@ alias didd=diff
 alias difff=diff
 alias diiff=diff
 
+# my own tool that does apt updates
+alias apt0up=apt-up
 
 alias vd=cd
 alias vf=cd # left hand misaligned
