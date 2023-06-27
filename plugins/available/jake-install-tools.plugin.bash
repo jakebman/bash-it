@@ -90,6 +90,7 @@ function jake-install-tools() {
   _jake-find-tool thefuck
   _jake-find-tool unzip
   _jake-find-tool clang
+  _jake-find-tool iotop
   # _jake-find-tool g++ # I prefer clang for now
   _jake-find-tool tree
   _jake-find-tool zip
