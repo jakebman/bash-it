@@ -155,15 +155,8 @@ function realpath {
 }
 
 function xml {
-	local -a args
-	if [[ "$#" -eq 0 ]] ; then
-		args=('-')
-		# no args, read from stdin
-	else
-		args=("$@")
-	fi
-
-	xmllint --format "${args[@]}" | bat -pl xml
+	# two-space indent, forcing newlines between elements w/o children
+	xmlindent -i 2 -f "$@" | bat -pl xml
 }
 
 function xpath {
@@ -174,8 +167,8 @@ function xpath {
 		args+=('-')
 	fi
 
-	# TODO: it'd be nice if I could figure out how to format the snippits this returns properly
-	xmllint --xpath "${args[@]}"
+	# Pass the output through the `xml` formatter, because xmllint --format --xpath is a one-result-per-line type of work.
+	xmllint --xpath "${args[@]}" | xml
 }
 alias xmlpath=xpath
 
