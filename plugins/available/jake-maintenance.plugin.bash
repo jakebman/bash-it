@@ -1,6 +1,12 @@
 # shellcheck shell=bash
 about-plugin 'update things that need update and call out TODOs in the places I like'
 
+function jake-sdkman-update() {
+	sdk selfupdate
+	echo updating sdk candidates
+	sdk update
+}
+
 function jake-maintain-system() {
   about "perform a bunch of maintenance tasks"
   : ${BASH_IT_MAINENANCE_DIR:=$HOME/.jake-maintenance-reports}
@@ -26,7 +32,7 @@ function jake-maintain-system() {
 	  echo "Done with git fetches"
 	  sleep 2
 
-	  (sdk selfupdate && echo updating sdk candidates && sdk update) |& tee sdk-man-update &
+	  jake-sdkman-update |& tee sdk-man-update &
 	  echo "$! spawned for sdkman update" | jake-log
 	  # TODO: https://unix.stackexchange.com/questions/342663/how-is-unattended-upgrades-started-and-how-can-i-modify-its-schedule
 	  echo "We should probably look into unattended-upgrade at https://unix.stackexchange.com/q/342663, and put that in the jake-install... script"
