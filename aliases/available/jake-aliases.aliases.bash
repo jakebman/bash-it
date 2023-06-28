@@ -85,7 +85,12 @@ function commit {
 			git commit
 		else
 			# is a commit message. Commit with that message
-			git commit "${args[@]}" -m "$1"
+			# TODO: this fallback logic to perform an add if the commit fails is...
+			# probably not optimal. Is there a way to check beforehand?
+			if ! git commit "${args[@]}" -m "$1" ; then
+				# git commit failed. Likely because the commit was empty
+				add && git commit "${args[@]}" -m "$1"
+			fi
 		fi
 	else
 		git commit "${args[@]}" "$@"
