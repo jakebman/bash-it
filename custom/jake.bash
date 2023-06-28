@@ -78,6 +78,19 @@ function _jake-special-single-args-for-diff {
   return 1;
 }
 
+function fidget {
+	type fidget
+	sleep 12
+	up
+	apt-up
+	if _command_exists win-git-up &>/dev/null ; then
+		echo updating window git stuff too
+		win-git-update
+	fi
+	jake-sdkman-update
+}
+
+
 function typo {
 	vim "${BASH_IT}/aliases/available/jake-typos.aliases.bash"
 }
