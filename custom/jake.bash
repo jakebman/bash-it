@@ -13,8 +13,10 @@ alias jack=j
 # Because... tree should basically always be paged
 alias tree=ltree
 
-# because I want to know
-alias pkill='pkill -e'
+# because I want to know what the command *is*.
+# These commands share many common flags, but these two flags are "(<command> only)", despite being very similar
+alias pkill='pkill --echo'
+alias pgrep='pgrep --list-full'
 
 export CLICOLOR_FORCE="setting this value to ANYTHING forces 'tree' to use colors so we don't need to alias tree='tree -C'. See man(1) tree"
 
