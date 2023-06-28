@@ -90,10 +90,11 @@ function commit {
 			if JAKE_SUPPRESS_GIT_SQUAWK=1 git diff --staged --quiet ; then
 				JAKE_SUPPRESS_GIT_SQUAWK=1 add # dunno which file you wanted, but go ahead and do an interactive add
 				# STILL no changes. Commit will obviously fail. User probably a little confused
-				if git diff --staged --quiet ; then
+				if JAKE_SUPPRESS_GIT_SQUAWK=1 git diff --staged --quiet ; then
 					echo
 					echo "no changes for commit message '$1'. No commit created. Thank you."
 					echo
+					git diff --staged --quiet # get the git squawk, but only if the outer test failed
 					return 1
 				fi
 			fi
