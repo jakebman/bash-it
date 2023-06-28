@@ -81,23 +81,23 @@ function commit {
 	if [ "$#" -eq 1 ] && ! [[ "$1" == -* ]] ; then
 		if [ -f "$1" ] ; then
 			# is a file. add, then interactive commit
-			add "$1"
+			JAKE_SUPPRESS_GIT_SQUAWK=1 add "$1"
 			git commit
 		else
 			# is a commit message. Commit with that message
 
 			# No staged changes. Commit will fail. User probably wants to select some changes to add
-			if git diff --staged --quiet ; then
-				add # dunno which file you wanted, but go ahead and do an interactive add
+			if JAKE_SUPPRESS_GIT_SQUAWK=1 git diff --staged --quiet ; then
+				JAKE_SUPPRESS_GIT_SQUAWK=1 add # dunno which file you wanted, but go ahead and do an interactive add
+				# STILL no changes. Commit will obviously fail. User probably a little confused
+				if git diff --staged --quiet ; then
+					echo
+					echo "no changes for commit message '$1'. No commit created. Thank you."
+					echo
+					return 1
+				fi
 			fi
 
-			# STILL no changes. Commit will obviously fail. User probably a little confused
-			if git diff --staged --quiet ; then
-				echo
-				echo "no changes for commit message '$1'. No commit created. Thank you."
-				echo
-				return 1
-			fi
 
 
 			git commit "${args[@]}" -m "$1"
