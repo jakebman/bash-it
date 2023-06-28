@@ -272,7 +272,7 @@ function jake-install-tools() {
   echo     "check out https://devblogs.microsoft.com/commandline/updating-the-windows-console-colors/"
   echo -en "${echo_reset_color}"
 
-  # TODO: recommend git config --set core.fsmonitor true for windows
+  # TODO: recommend git config --global --set core.fsmonitor true for windows
 }
 
 # https://askubuntu.com/questions/410247/how-to-know-last-time-apt-get-update-was-executed
