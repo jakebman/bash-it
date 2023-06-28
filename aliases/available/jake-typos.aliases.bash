@@ -50,6 +50,8 @@ alias akc=ack
 alias mt=mr
 alias m=mr
 
+alias map=man # I'm kinda surprised there was no existing map command that this overrides
+
 alias cata=cat
 alias vat=cat
 alias ca=cat
