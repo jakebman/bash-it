@@ -177,6 +177,7 @@ function xpath {
 	# TODO: it'd be nice if I could figure out how to format the snippits this returns properly
 	xmllint --xpath "${args[@]}"
 }
+alias xmlpath=xpath
 
 function doctor {
 	about "just run bash-it doctor"
