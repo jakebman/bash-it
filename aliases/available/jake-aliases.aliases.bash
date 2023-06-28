@@ -91,6 +91,15 @@ function commit {
 				add # dunno which file you wanted, but go ahead and do an interactive add
 			fi
 
+			# STILL no changes. Commit will obviously fail. User probably a little confused
+			if git diff --staged --quiet ; then
+				echo
+				echo "no changes for commit message '$1'. No commit created. Thank you."
+				echo
+				return 1
+			fi
+
+
 			git commit "${args[@]}" -m "$1"
 		fi
 	else
