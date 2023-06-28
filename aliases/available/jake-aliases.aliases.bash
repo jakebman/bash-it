@@ -52,6 +52,7 @@ function status {
 
 function _jake-banner-display {
 	about "display a banner, but don't care if it fails"
+	# (TODO: I'd like to call add, but include additional context. See ~/bin/git's $HOW variable)
 	figlet -t -f mini "$@" 2>/dev/null || true
 }
 
