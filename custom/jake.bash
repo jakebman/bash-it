@@ -155,6 +155,13 @@ function realpath {
 }
 
 function xml {
+	if [[ "$#" -eq 0 ]] && [[ -t 0 ]]; then
+		# reading from terminal, but no arguments on the CLI
+		echo "insufficient arguments (this command doesn't take an implicit stdin well :( )"
+		echo "usage: ${FUNCNAME[0]} <file>..."
+		return 1
+	fi
+
 	# two-space indent, forcing newlines between elements w/o children
 	xmlindent -i 2 -f "$@" | bat -pl xml
 }
@@ -165,6 +172,13 @@ function xpath {
 	if ! [[ -t 0 ]] ; then
 		# stdin not from terminal. assume it's xml
 		args+=('-')
+	fi
+
+	# insufficient args. Reading from stdin *does* add to this count
+	if [[ "${#args[@]}" -lt 2 ]] ; then
+		echo "insufficient arguments:"
+		echo "usage: ${FUNCNAME[0]} <xpath> <file>..."
+		return 1
 	fi
 
 	# Pass the output through the `xml` formatter, because xmllint --format --xpath is a one-result-per-line type of work.
