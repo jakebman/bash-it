@@ -52,8 +52,7 @@ function status {
 
 function _jake-banner-display {
 	about "display a banner, but don't care if it fails"
-	# (TODO: I'd like to call add, but include additional context. See ~/bin/git's $HOW variable)
-	figlet -t -f mini "$@" 2>/dev/null || true
+	figlet -t -f mini "$@" "$JAKE_BANNER_WHY" 2>/dev/null || true
 }
 
 # git errors if add has no args (prints advice.addEmptyPathspec)
@@ -78,6 +77,8 @@ function commit {
 			;;
 	esac
 
+	# Internal banner note
+	local JAKE_BANNER_WHY="... TO COMMIT"
 	# exactly one argument, and it's not a flag. (don't eat --message=typo, for instance)
 	if [ "$#" -eq 1 ] && ! [[ "$1" == -* ]] ; then
 		if [ -f "$1" ] ; then
