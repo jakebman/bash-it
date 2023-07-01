@@ -96,6 +96,7 @@ function commit {
 					echo "no changes for commit message '$1'. No commit created. Thank you."
 					echo
 					git diff --staged --quiet # get the git squawk, but only if the outer test failed
+					# TODO: no squawk occurs if Ctrl+C kills us
 					return 1
 				fi
 			fi
