@@ -69,6 +69,7 @@ function add {
 # commit with one argument is either add/commit the file, or commit with the given message
 function commit {
 	# stash some flags that can be "transparent" to this feature
+	# (these can only be BEFORE the message for now... potentially always)
 	local -a args
 	case "$1" in
 		-a|--all|--amend )
