@@ -3,6 +3,7 @@ about-alias "Jake's custom aliases for common typos in common and jake-custom sc
 
 alias viim=vim
 alias vimm=vim # speculative
+alias ivm=vim
 alias vmi=vim
 alias vin=vim
 alias vun=vim # right hand shifted left by one
