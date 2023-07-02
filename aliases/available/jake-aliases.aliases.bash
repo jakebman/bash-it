@@ -80,6 +80,7 @@ function commit {
 
 	# Internal banner note
 	local JAKE_BANNER_WHY="... TO COMMIT"
+
 	# exactly one argument, and it's not a flag. (don't eat --message=typo, for instance)
 	if [ "$#" -eq 1 ] && ! [[ "$1" == -* ]] ; then
 		if [ -f "$1" ] ; then
@@ -102,8 +103,6 @@ function commit {
 					return 1
 				fi
 			fi
-
-
 
 			git commit "${args[@]}" -m "$1"
 		fi
