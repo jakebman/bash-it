@@ -94,6 +94,8 @@ function fidget {
 		jake-sdkman-update
 	)
 }
+alias fid=fidget
+aias f=fidget
 
 
 function typo {
