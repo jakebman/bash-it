@@ -95,7 +95,7 @@ function fidget {
 	)
 }
 alias fid=fidget
-aias f=fidget
+alias f=fidget
 
 
 function typo {
