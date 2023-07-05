@@ -83,13 +83,16 @@ function _jake-special-single-args-for-diff {
 function fidget {
 	type fidget
 	sleep 12
-	up
-	apt-up
-	if _command_exists win-git-up &>/dev/null ; then
-		echo updating window git stuff too
-		win-git-update
-	fi
-	jake-sdkman-update
+	( # subshell. Automatically undoes the cd ~
+		cd ~
+		up
+		apt-up
+		if _command_exists win-git-up &>/dev/null ; then
+			echo updating window git stuff too
+			win-git-update
+		fi
+		jake-sdkman-update
+	)
 }
 
 
