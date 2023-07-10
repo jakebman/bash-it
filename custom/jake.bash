@@ -85,13 +85,13 @@ function fidget {
 	sleep 12
 	( # subshell. Automatically undoes the cd ~
 		cd ~
+		jake-sdkman-update
 		up
-		apt-up
 		if _command_exists win-git-up &>/dev/null ; then
 			echo updating window git stuff too
 			win-git-update
 		fi
-		jake-sdkman-update
+		apt-up
 	)
 }
 alias fid=fidget
