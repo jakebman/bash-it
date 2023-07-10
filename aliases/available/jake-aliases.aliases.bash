@@ -90,8 +90,10 @@ function commit {
 		else
 			# is a commit message. Commit with that message
 
-			# No staged changes. Commit will fail. User probably wants to select some changes to add
-			if JAKE_SUPPRESS_GIT_SQUAWK=1 git diff --staged --quiet ; then
+			if [ -v args ] ; then
+				: # TODO: this only really checks if I added *something* to args; not specifically '-a'
+			elif JAKE_SUPPRESS_GIT_SQUAWK=1 git diff --staged --quiet ; then
+				# No staged changes. Commit will fail. User probably wants to select some changes to add
 				JAKE_SUPPRESS_GIT_SQUAWK=1 add # dunno which file you wanted, but go ahead and do an interactive add
 				# STILL no changes. Commit will obviously fail. User probably a little confused
 				if JAKE_SUPPRESS_GIT_SQUAWK=1 git diff --staged --quiet ; then
