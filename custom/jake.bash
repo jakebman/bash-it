@@ -87,7 +87,7 @@ function fidget {
 		cd ~
 		jake-sdkman-update
 		up
-		if _command_exists win-git-up &>/dev/null ; then
+		if _command_exists win-git-update &>/dev/null ; then
 			echo updating window git stuff too
 			win-git-update
 		fi
