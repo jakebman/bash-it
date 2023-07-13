@@ -178,6 +178,9 @@ alias ignored='git status --ignored'
 alias staged='git diff --staged'
 alias addp='git add --patch'
 
+# shorthand command
+alias s=status
+
 # 'Not exactly duplicating' aliases
 # Not all of these are duplicating a git alias, but they're not exactly typos either
 # They exist to make my CLI invocations easier, and would be more properly considered
