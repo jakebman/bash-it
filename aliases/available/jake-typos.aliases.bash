@@ -90,6 +90,7 @@ alias apt0up=apt-up
 alias vd=cd
 alias vf=cd # left hand misaligned
 alias dc=cd
+alias ce=cd
 
 alias grpe=grep
 
