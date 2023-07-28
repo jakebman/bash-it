@@ -26,6 +26,10 @@ alias ch=cht.sh
 # Sometimes I use this name for the command rather than its normal name. Oops.
 alias maven=mvn
 
+
+# ll, plus -a
+alias lla='ll -a'
+
 # The rest of the file is entirely git commands that... I don't care to add git to
 
 # 'Magic' aliases - smarter than their corresponding git command (they can see more Jake context)
