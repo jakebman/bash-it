@@ -57,6 +57,7 @@ alias cata=cat
 alias vat=cat
 alias ca=cat
 alias catg=cat
+alias qcat=cat
 
 # G is closer to B than C on the keyboard
 alias gat=bat
@@ -114,6 +115,7 @@ alias ssg=ssh
 alias pws=pwd
 
 alias tyep=type
+alias typeo=typo
 
 alias ipconfig=ifconfig
 
