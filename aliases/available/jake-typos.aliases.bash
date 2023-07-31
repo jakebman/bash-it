@@ -40,6 +40,7 @@ alias lss=ls
 alias lsa='ls -a'
 alias lsl='ls -l'
 alias les=less
+alias lesss=less
 
 alias ltre=ltree
 alias ltreee=ltree
