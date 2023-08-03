@@ -27,8 +27,9 @@ alias ch=cht.sh
 alias maven=mvn
 
 
-# ll, plus -a
+# ll, plus other flags
 alias lla='ll -a'
+alias llh='ll -h'
 
 # The rest of the file is entirely git commands that... I don't care to add git to
 
