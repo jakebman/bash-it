@@ -31,7 +31,7 @@ if _command_exists gshuf; then
 	alias shuf=gshuf
 fi
 
-alias c='clear'
+alias c='cd'
 alias cls='clear'
 
 alias edit='${EDITOR:-${ALTERNATE_EDITOR:-nano}}'
