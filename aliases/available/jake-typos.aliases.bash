@@ -12,6 +12,7 @@ alias gim=vim
 alias bim=vim
 alias cim=vim
 alias fim=vim
+alias vm=vim
 alias im=vim
 alias v=vim
 
