@@ -81,13 +81,13 @@ function jake-install-tools() {
   _jake-find-tool xmllint libxml2-utils # multi-function, but only used for --xpath queries, because --format makes --xpath return one-line results
   _jake-find-tool make build-essential
   _jake-find-tool ifconfig net-tools
+  _jake-find-tool nslookup dnsutils "for wsl-vpnkit, but I'm not certain nslookup is the required command. Could be dig or similar"
   _jake-find-tool apt-file apt-file 'and run `sudo apt-file update` after!'
   _jake-find-tool xeyes x11-apps "because I really like googly eyes"
   _jake-find-tool http httpie
   _jake-find-tool git-extras
   _jake-find-tool xmlindent # doesn't have --long-options, which is a little weird, but formats all XML (incl. xmllint --xpath results), so that's good
   _jake-find-tool dos2unix
-  _jake-find-tool dnsutils # for wsl-vpnkit
   _jake-find-tool thefuck
   _jake-find-tool unzip
   _jake-find-tool clang
