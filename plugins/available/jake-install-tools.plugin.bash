@@ -107,7 +107,6 @@ function jake-install-tools() {
   _jake-find-tool perldoc perl-doc "for man mr"
   _jake-find-tool ctags universal-ctags "for vim navigation"
   _jake-find-tool figlet "for my git no-args tools"
-  _jake-find-tool cpanm cpanminus "to install perlbrew and/or rakubrew"
   # 228MB - only when you need it: _jake-find-tool ffmpeg
 
   _jake-find-jekyll
@@ -375,6 +374,14 @@ function _jake-check-optional-tools() {
 	  echo "Nothing to do for git big picture - git-big-picture is happy"
   else
 	  echo "consider installing git big picture, because it looks pretty"
+  fi
+
+  if _command_exists raku ; then
+	  echo "Nothing to do for raku - raku is happy"
+  else
+	  echo "Consider installing rakudo, either via apt install rakudo or the more-complex:"
+	  echo -en "\t"
+	  echo "sudo apt install cpanminus; cpanm CPAN && cpan  Log::Log4perl && cpan App::Rakubrew && rakubrew mode shim && rakubrew download 2023.08 # or the latest version marked with D from rakubrew list-available"
   fi
 }
 
