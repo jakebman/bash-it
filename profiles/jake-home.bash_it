@@ -12,6 +12,7 @@ plugins jake-install-tools
 plugins jake-maintenance
 plugins jake-path
 plugins jq
+plugins rakubrew
 plugins sdkman
 plugins wsl-fast
 completion ack
