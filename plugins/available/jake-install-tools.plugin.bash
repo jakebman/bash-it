@@ -107,7 +107,7 @@ function jake-install-tools() {
   _jake-find-tool perldoc perl-doc "for man mr"
   _jake-find-tool ctags universal-ctags "for vim navigation"
   _jake-find-tool figlet "for my git no-args tools"
-  _jake-find-tool rakudo
+  _jake-find-tool cpanm cpanminus "to install perlbrew and/or rakubrew"
   # 228MB - only when you need it: _jake-find-tool ffmpeg
 
   _jake-find-jekyll
