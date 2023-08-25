@@ -172,6 +172,7 @@ alias rainbow='git rainbow' # colored graphlines in the terminal
 alias logp='git logp' # log with patch
 alias logs='git logs' # log with stats (+++-- indicators)
 alias logn='git logn' # log with numstats
+alias tags='git tags'
 
 # 'Duplicating' aliases
 # These could have been written as `alias X='git X'`, because they're
