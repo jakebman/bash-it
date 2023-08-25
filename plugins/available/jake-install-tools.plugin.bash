@@ -381,7 +381,7 @@ function _jake-check-optional-tools() {
   else
 	  echo "Consider installing rakudo, either via apt install rakudo or the more-complex:"
 	  echo -en "\t"
-	  echo "sudo apt install cpanminus; cpanm CPAN && cpan Log::Log4perl && cpan App::Rakubrew && \\"
+	  echo "sudo apt install cpanminus; sudo cpanm CPAN && cpan Log::Log4perl && cpan YAML && cpan App::Rakubrew && \\"
 	  echo -en "\t"
 	  echo "rakubrew mode shim && rakubrew download 2023.08 # or the latest version marked with D from rakubrew list-available"
 	  echo -en "\t"
