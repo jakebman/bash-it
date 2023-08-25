@@ -156,6 +156,7 @@ alias stauts=status
 alias statu=status
 alias staut=status
 alias tatus=status
+alias stashs=stash
 alias pu=pull
 alias up=pull # Technically not a typo, but it's a typo of a typo, so I'm keeping it here
 alias uop=pull # Actually a typo of up, which I'm using more as an alias of up, apparently
