@@ -153,6 +153,7 @@ alias sttatus=status
 alias statuat=status
 alias statsus=status
 alias stauts=status
+alias statud=status
 alias statu=status
 alias staut=status
 alias tatus=status
