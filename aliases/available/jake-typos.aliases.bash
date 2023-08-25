@@ -96,6 +96,7 @@ alias vd=cd
 alias vf=cd # left hand misaligned
 alias dc=cd
 alias ce=cd
+alias xs=cd
 
 alias grpe=grep
 
@@ -120,6 +121,8 @@ alias pws=pwd
 
 alias tyep=type
 alias typeo=typo
+
+alias whick=which # (to be fair, I was drinking at the time :| )
 
 alias ipconfig=ifconfig
 
