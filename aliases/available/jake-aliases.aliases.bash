@@ -160,6 +160,7 @@ alias branch='git branch'
 alias blame='git blame'
 alias log='git log'
 alias ls-files='git ls-files'
+alias tag='git tag'
 # git-extras
 alias authors='git authors'
 alias lock='git lock'
@@ -172,7 +173,7 @@ alias rainbow='git rainbow' # colored graphlines in the terminal
 alias logp='git logp' # log with patch
 alias logs='git logs' # log with stats (+++-- indicators)
 alias logn='git logn' # log with numstats
-alias tags='git tags'
+alias tags='git tags' # list the tags
 
 # 'Duplicating' aliases
 # These could have been written as `alias X='git X'`, because they're
