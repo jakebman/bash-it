@@ -36,7 +36,9 @@ function _bash-it-component-completion-callback-on-init-aliases() {
 	# read in "<alias> '<aliased command>' '<command args>'" lines from defined aliases
 	# some aliases do have backslashes that needs to be interpreted
 	# shellcheck disable=SC2162
+	local count=0
 	while read line; do
+		(( count += 1 ))
 		line="${line#alias -- }"
 		line="${line#alias }"
 		alias_name="${line%%=*}"
@@ -105,6 +107,7 @@ function _bash-it-component-completion-callback-on-init-aliases() {
 			echo "$new_completion" >> "$tmp_file"
 		fi
 	done < <(alias -p)
+	_log_debug "ran $count alias completions"
 	# shellcheck source=/dev/null
 	source "$tmp_file" && command rm -f "$tmp_file"
 }
