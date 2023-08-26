@@ -2,6 +2,7 @@
 about-alias "Jake's custom aliases for common typos in common and jake-custom scripts"
 
 alias viim=vim
+alias vimi=vim
 alias vimn=vim # actual
 alias vimm=vim # speculative
 alias ivm=vim
