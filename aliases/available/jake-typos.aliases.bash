@@ -163,6 +163,7 @@ alias up=pull # Technically not a typo, but it's a typo of a typo, so I'm keepin
 alias uop=pull # Actually a typo of up, which I'm using more as an alias of up, apparently
 alias pul=pull
 alias ull=pull
+alias upll=pull
 alias pulll=pull
 alias puhs=push
 alias pusl=push
