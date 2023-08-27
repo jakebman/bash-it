@@ -37,12 +37,14 @@ alias llh='ll -h'
 
 # pull can have special meaning in $HOME
 function pull {
-	# yes, there's a .mrconfig in ~, but there's no disk access to check $PWD first
-	# (and the $PWD check was here first - the .mrconfig check shouldn't feel bolted-on, but it does)
-	if [ "$PWD" == ~ ] || [ -f .mrconfig ] ; then
+	if [ "$#" -ne 0 ] ; then
+		# If we have arguments, it's because I'm thinking this is a git pull
+		git pull "$@"
+	elif [ "$PWD" == ~ ] || [ -f .mrconfig ] ; then
+		# yes, there's a .mrconfig in ~, but there's no disk access to check $PWD first
 		mr up "$@"
 	else
-		git pull "$@"
+		git pull "$@" # Technically, we know there are no args here.
 	fi
 }
 
