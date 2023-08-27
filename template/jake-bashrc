@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+# I want my .curlrc file in ~/.config, which is the default XDG_CONFIG_HOME
+# But curl doesn't recognize that properly, so I define it to its default
+# value here
+: ${XDG_CONFIG_HOME:=${HOME}/.config}
+export XDG_CONFIG_HOME
+
 # If not running interactively, don't do anything
 case $- in
   *i*) ;;
@@ -12,15 +18,17 @@ esac
 
 # Path to the bash it configuration
 export BASH_IT="${HOME}/.bash-it"
-export BASH_IT_DOTFILES_GIT_REPO="${HOME}/.jake-dotfiles.git" # convention recommends bare repos end in .git
+export VCSH_REPO_D="${XDG_CONFIG_HOME}/vcsh/repo.d" # exporting the variable as its own self
+export BASH_IT_DOTFILES_GIT_REPO="${VCSH_REPO_D}/config.git" # convention recommends bare repos end in .git
 export WSL_WINDOWS_USER_HOME="/mnt/c/Users/Jake"
+BASH_IT_PROJECT_PATHS="${HOME}/projects:${HOME}/wsl-projects"
 # We're on WSL1, so might need this:
 #export SCM_GIT_SHOW_MINIMAL_INFO=true
 
 # Lock and Load a custom theme file.
 # Leave empty to disable theming.
 # location /.bash_it/themes/
-export BASH_IT_THEME='nwinkler'
+export BASH_IT_THEME='jake'
 
 # Some themes can show whether `sudo` has a current token or not.
 # Set `$THEME_CHECK_SUDO` to `true` to check every prompt:
