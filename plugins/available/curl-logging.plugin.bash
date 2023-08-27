@@ -12,6 +12,6 @@ function _curl-logging-helper {
 }
 
 function curl {
-	command curl --dump-header >(_curl-logging-helper "$@") "$@"
+	command curl "$@" --dump-header >(_curl-logging-helper "$@")
 }
 
