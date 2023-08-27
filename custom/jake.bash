@@ -32,7 +32,8 @@ export MAVEN_ARGS="-T1C"
 #   (b/c that would make lines hard to track)
 # tabs=2 condenses tabs to only two characters wide
 export LESS="--quit-if-one-screen --quit-at-eof --no-init --RAW-CONTROL-CHARS --tabs=2"
-export LESSHISTFILE="${HOME}/.config/lesshst" # I like editing ~/.lessfilter, and this keeps getting in the way
+# I like editing ~/.lessfilter, and this keeps getting in the way. This is the 'other' default for this setting
+export LESSHISTFILE="${XDG_DATA_HOME:-${HOME}/.local/share}/lesshst"
 export LESSSTYLE=sas
 
 if [ -f "$HOME/.cargo/env" ] ; then
