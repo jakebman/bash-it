@@ -8,6 +8,12 @@ alias tulpn='netstat -tulpn'
 function lls {
 	ll --color "$@" | less
 }
+# WARNING!!!! CONCERNING OVER-RELIANCE ON BASH MINUTAE:
+# The alias ll='ls -alF' already exists. We used it above.
+# We're overwriting it here, using a function that... uses *it*.
+# This is FINE by the rules of bash! The prior alias was *expanded* during
+# the creation of the function, so there's no circular reference
+alias ll=lls
 
 function ltree {
 	# I already set CLICOLOR_FORCE, so -C is not required, but it's more consistent to set it here
