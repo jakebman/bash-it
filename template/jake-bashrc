@@ -22,7 +22,6 @@ export BASH_IT="${HOME}/.bash-it"
 export VCSH_REPO_D="${XDG_CONFIG_HOME}/vcsh/repo.d" # exporting the variable as its own self
 export BASH_IT_DOTFILES_GIT_REPO="${VCSH_REPO_D}/config.git" # convention recommends bare repos end in .git
 export WSL_WINDOWS_USER_HOME="/mnt/c/Users/Jake"
-BASH_IT_PROJECT_PATHS="${HOME}/projects:${HOME}/wsl-projects"
 # We're on WSL1, so might need this:
 #export SCM_GIT_SHOW_MINIMAL_INFO=true
 
@@ -56,7 +55,7 @@ export IRC_CLIENT='irssi'
 export TODO="t"
 
 # Set this to the location of your work or project folders
-#BASH_IT_PROJECT_PATHS="${HOME}/Projects:/Volumes/work/src"
+BASH_IT_PROJECT_PATHS="${HOME}/projects:${HOME}/wsl-projects"
 
 # Set this to false to turn off version control status checking within the prompt for all themes
 export SCM_CHECK=true
