@@ -5,6 +5,7 @@
 # value here
 : ${XDG_CONFIG_HOME:=${HOME}/.config}
 export XDG_CONFIG_HOME
+export ACKRC="${XDG_CONFIG_HOME}/.ackrc"
 
 # If not running interactively, don't do anything
 case $- in
