@@ -4,8 +4,10 @@
 # But curl doesn't recognize that properly, so I define it to its default
 # value here
 : ${XDG_CONFIG_HOME:=${HOME}/.config}
+: ${XDG_STATE_HOME:=${HOME}/.local/state} # for convenience below (not exported because nobody needs it)
 export XDG_CONFIG_HOME
 export ACKRC="${XDG_CONFIG_HOME}/.ackrc"
+export HISTFILE="${XDG_STATE_HOME}/bash/history"
 
 # If not running interactively, don't do anything
 case $- in
