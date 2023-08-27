@@ -15,6 +15,12 @@ function lls {
 # the creation of the function, so there's no circular reference
 alias ll=lls
 
+# This overrides one from general
+unalias h
+function h {
+	history "$@" | less
+}
+
 function ltree {
 	# I already set CLICOLOR_FORCE, so -C is not required, but it's more consistent to set it here
 	# minor rant: why doesn't tree have a long option for this?

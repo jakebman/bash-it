@@ -105,8 +105,8 @@ function typo {
 alias tyop=typo
 
 function hgrep {
-  about "grep your history"
-  history | grep "$@"
+	about "grep your history (using ack)"
+	history | ack "$@"
 }
 
 function vimwhich {
