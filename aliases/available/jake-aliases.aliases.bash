@@ -68,6 +68,7 @@ function status {
 		git status "$@"
 	fi
 }
+alias gstatus='git status' # Sometimes, I want to run status in ~
 
 function _jake-banner-display {
 	about "display a banner, but don't care if it fails"
