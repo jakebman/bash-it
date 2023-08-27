@@ -145,6 +145,7 @@ alias comm9t=commit
 alias comm0t=commit
 alias comm-t=commit
 alias commt=commit
+alias cimmit=commit
 alias commit-a='commit -a'
 alias commita='commit -a'
 alias ignroed=ignored
