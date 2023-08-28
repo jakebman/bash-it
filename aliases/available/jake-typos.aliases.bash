@@ -90,6 +90,8 @@ alias didd=diff
 alias difff=diff
 alias diiff=diff
 
+alias bash0t=bash-it
+alias bash0-t=bash-it
 # my own tool that does apt updates
 alias apt0up=apt-up
 
