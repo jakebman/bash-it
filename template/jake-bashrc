@@ -4,10 +4,19 @@
 # But curl doesn't recognize that properly, so I define it to its default
 # value here
 : ${XDG_CONFIG_HOME:=${HOME}/.config}
-: ${XDG_STATE_HOME:=${HOME}/.local/state} # for convenience below (not exported because nobody needs it)
 export XDG_CONFIG_HOME
 export ACKRC="${XDG_CONFIG_HOME}/.ackrc"
-export HISTFILE="${XDG_STATE_HOME}/bash/history"
+
+# Defined here to parallel above, and to be explicit for the next few lines
+# No need to export it because I don't know of any programs that need this defined to work
+: ${XDG_STATE_HOME:=${HOME}/.local/state}
+
+# These next few lines are verbatim from history-eternal plugin. I want 'something' like this, in order to automatically
+# create the XDG directory for $HISTFILE. And *this code* is very much something like itself.
+# WARNING TVTROPES LINK: https://tvtropes.org/pmwiki/pmwiki.php/Main/ShapedLikeItself
+HISTDIR="${XDG_STATE_HOME:-${HOME?}/.local/state}/bash"
+[[ -d ${HISTDIR?} ]] || mkdir -p "${HISTDIR?}"
+readonly HISTFILE="${HISTDIR?}/history" 2> /dev/null || true
 
 # If not running interactively, don't do anything
 case $- in
