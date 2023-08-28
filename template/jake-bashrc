@@ -40,8 +40,6 @@ export BASH_IT="${HOME}/.bash-it"
 export VCSH_REPO_D="${XDG_CONFIG_HOME}/vcsh/repo.d" # exporting the variable as its own self
 export BASH_IT_DOTFILES_GIT_REPO="${VCSH_REPO_D}/config.git" # convention recommends bare repos end in .git
 export WSL_WINDOWS_USER_HOME="/mnt/c/Users/Jake"
-# We're on WSL1, so might need this:
-#export SCM_GIT_SHOW_MINIMAL_INFO=true
 
 # Lock and Load a custom theme file.
 # Leave empty to disable theming.
