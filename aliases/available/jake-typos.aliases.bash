@@ -153,6 +153,7 @@ alias commit-a='commit -a'
 alias commita='commit -a'
 alias ignroed=ignored
 alias restoer=restore
+alias rainow=rainbow
 alias rianbow=rainbow
 alias rainboiw=rainbow
 alias stsatus=status
