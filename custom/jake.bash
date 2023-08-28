@@ -65,7 +65,7 @@ function vars {
     # the current bash session, but doesn't print the functions
     (set -o posix; set) | less
   else
-     (set -o posix; set) | grep "$@" | less
+     (set -o posix; set) | ack "$@"
   fi
 }
 alias var=vars # because I'm lazy
