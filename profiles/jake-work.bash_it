@@ -12,11 +12,13 @@ plugins jake-install-tools
 plugins jake-maintenance
 plugins jake-path
 plugins jq
+plugins projects
 plugins sdkman
 plugins wsl-fast
 completion ack
 completion bash-it
 completion maven
+completion projects
 completion sdkman
 completion system
 aliases general
