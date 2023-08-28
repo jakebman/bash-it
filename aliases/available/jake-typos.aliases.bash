@@ -40,6 +40,7 @@ alias :q="echo You are not in vim"
 alias q="echo no need to quit - you are already out"
 
 alias ks=ls
+alias lks=ls
 alias lss=ls
 alias lsa='ls -a'
 alias lsl='ls -l'
