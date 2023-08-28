@@ -43,6 +43,7 @@ alias ks=ls
 alias lss=ls
 alias lsa='ls -a'
 alias lsl='ls -l'
+alias los=ls
 alias lh=llh
 alias les=less
 alias lesss=less
