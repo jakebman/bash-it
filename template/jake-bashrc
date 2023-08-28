@@ -22,6 +22,7 @@ readonly HISTFILE="${HISTDIR?}/history" 2> /dev/null || true
 if [[ ~/.bash_history -nt "$HISTFILE" ]] ; then
   # -nt is false on missing first files, true on missing second files
   mv ~/.bash_history "$HISTFILE"
+  touch ~/.bash_history-moved-to-XDG-because-jake-custom-bash-it
 fi
 
 # If not running interactively, don't do anything
