@@ -18,6 +18,12 @@ HISTDIR="${XDG_STATE_HOME:-${HOME?}/.local/state}/bash"
 [[ -d ${HISTDIR?} ]] || mkdir -p "${HISTDIR?}"
 readonly HISTFILE="${HISTDIR?}/history" 2> /dev/null || true
 
+# Grab old HISTFILE, if it exists, and seems newer than the new HISTFILE
+if [[ ~/.bash_history -nt "$HISTFILE" ]] ; then
+  # -nt is false on missing first files, true on missing second files
+  mv ~/.bash_history "$HISTFILE"
+fi
+
 # If not running interactively, don't do anything
 case $- in
   *i*) ;;
