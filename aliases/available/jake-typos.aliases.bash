@@ -180,6 +180,7 @@ alias psh=push
 alias pus=push
 alias ush=push
 alias addd=add
+alias ass=add
 alias loig=log
 alias lgop=logp
 alias lopg=logp
