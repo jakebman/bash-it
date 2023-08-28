@@ -35,6 +35,7 @@ alias ghit=git
 alias gitt=git
 alias jgti=git # it's like... sometimes I just mash the keyboard while thinking really hard about the command
 
+# Not technically typos, but a common misstep:
 alias :q="echo You are not in vim"
 alias q="echo no need to quit - you are already out"
 
