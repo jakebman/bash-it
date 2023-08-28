@@ -83,6 +83,7 @@ function jake-install-tools() {
   _jake-find-tool ifconfig net-tools
   _jake-find-tool nslookup dnsutils "for wsl-vpnkit, but I'm not certain nslookup is the required command. Could be dig or similar"
   _jake-find-tool apt-file apt-file 'and run `sudo apt-file update` after!'
+  _jake-find-tool sponge moreutils 'a tee that can write back to the original file of a pipeline :)'
   _jake-find-tool xeyes x11-apps "because I really like googly eyes"
   _jake-find-tool http httpie
   _jake-find-tool git-extras
