@@ -80,6 +80,8 @@ export SCM_CHECK=true
 # Set to actual location of gitstatus directory if installed
 # clone from git@github.com:romkatv/gitstatus.git
 export SCM_GIT_GITSTATUS_DIR="${HOME}/bin/gitstatus"
+# To enable gitstatus logging:
+# export GITSTATUS_LOG_LEVEL=INFO # or DEBUG (see gitstatus@github/src/logging.h)
 # per default gitstatus uses 2 times as many threads as CPU cores, you can change this here if you must
 #export GITSTATUS_NUM_THREADS=8
 
