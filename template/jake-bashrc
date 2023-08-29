@@ -5,8 +5,13 @@
 # value here
 : ${XDG_CONFIG_HOME:=${HOME}/.config}
 export XDG_CONFIG_HOME
-export ACKRC="${XDG_CONFIG_HOME}/.ackrc"
+export ACKRC="${XDG_CONFIG_HOME}/.ackrc" # TODO: this doesn't need to be a hidden file
 export JARVIZ_DIR="${XDG_CONFIG_HOME}" # a jar analyzer, from sdkman
+export PERL_CPANM_HOME="${XDG_CONFIG_HOME}/cpanm" # cpanm command in the cpanminus package from apt (for rakubrew)
+export GNUPGHOME="${XDG_CONFIG_HOME}/gnupg"
+# TODO: ~/.vim (in .vimrc), .sdkman (might become less convenient for me?), .m2 (*definitely* less convenient), ...
+# raku, rakubrew, and zef (requires an env setting for config file, plus config line to identify where to store the rest)
+
 
 # Defined here to parallel above, and to be explicit for the next few lines
 # No need to export it because I don't know of any programs that need this defined to work
