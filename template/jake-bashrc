@@ -6,6 +6,7 @@
 : ${XDG_CONFIG_HOME:=${HOME}/.config}
 export XDG_CONFIG_HOME
 export ACKRC="${XDG_CONFIG_HOME}/.ackrc"
+export JARVIZ_DIR="${XDG_CONFIG_HOME}" # a jar analyzer, from sdkman
 
 # Defined here to parallel above, and to be explicit for the next few lines
 # No need to export it because I don't know of any programs that need this defined to work
