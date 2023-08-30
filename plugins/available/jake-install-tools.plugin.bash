@@ -449,22 +449,6 @@ function _jake-update-ack-and-its-manpages {
 
   echo # spacing
 
-  # set up the manpath within ~/bin; I don't want to have to maintain ~/man
-  if grep -q "$man_dir" "${HOME}/.manpath" ; then
-    echo "your user-specific manpath config already knows about ${man_dir}. Woohoo!"
-  else
-    echo "adding a section to your ~/.manpath file that looks like this:"
-    cat <<END | tee --append "${HOME}/.manpath"
-# this section was added automatically by my ackrc-creation script. I really hope it didn't break anything
-# -Jake Boeckerman
-MANDATORY_MANPATH		${man_dir}
-MANPATH_MAP		${bin_dir}		${man_dir}
-# END section
-END
-  fi
-
-  echo # spacing
-
   if _command_exists pod2man ; then
     local manfile="${man_dir}/man1/ack.1p"
     pod2man ~/bin/ack >$manfile
