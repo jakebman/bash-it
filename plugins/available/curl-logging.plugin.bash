@@ -7,8 +7,11 @@ _command_exists curl || return # don't create the function if the binary is miss
 
 function _curl-logging-helper {
 	# TODO: log rotation/storage concerns
-	echo "# curl $@" >> ~/curlheaders.txt
-	cat >> ~/curlheaders.txt
+	(
+		printf '# '
+		shell-quote curl "$@"
+		cat
+	)>> ~/curlheaders.txt
 }
 
 function curl {
