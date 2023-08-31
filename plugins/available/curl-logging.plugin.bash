@@ -12,6 +12,7 @@ function _curl-logging-helper {
 }
 
 function curl {
+	# TODO: enhancement request - what if we auto-jq the result? Potentially should be in a different plugin
 	command curl "$@" --dump-header >(_curl-logging-helper "$@")
 }
 
