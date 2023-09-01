@@ -9,13 +9,31 @@ export ACKRC="${XDG_CONFIG_HOME}/.ackrc" # TODO: this doesn't need to be a hidde
 export JARVIZ_DIR="${XDG_CONFIG_HOME}" # a jar analyzer, from sdkman
 export PERL_CPANM_HOME="${XDG_CONFIG_HOME}/cpanm" # cpanm command in the cpanminus package from apt (for rakubrew)
 export GNUPGHOME="${XDG_CONFIG_HOME}/gnupg"
-# TODO: ~/.vim (in .vimrc), .sdkman (might become less convenient for me?), .m2 (*definitely* less convenient), ...
-# raku, rakubrew, and zef (requires an env setting for config file, plus config line to identify where to store the rest)
 
+# XDG list:
+# .bashrc, .profile - requires decent high-powered intervention to loop in so early. Potentially an /etc/profile.d entry?
+# .bash-it - inconvenient for me - it's easier to come in here and change stuff without it being a level deeper
+# .cache, .config, ... .local - the XDG solution folders
+# .editorconfig - currently not supported by all involved parties
+# .gitignore.d - vcsh, created by default. Not changeable right now?
+# .gi_list - not supported. git-ignore-io in git-extras writes this
+# .gitmodules - required because I'm keeping subrepos in my conf vcsh repo (needs to live in $GIT_WORK_TREE)
+# .lessfilter - It's referenced by /usr/bin/lesspipe, which doesn't respect XDG
+# .m2 - requires cli argument to move settings.xml, which is the only thing I keep there anyway :(
+# .motd_shown - probably not doable
+# .mrconfig - cannot be moved without a code change in mr tool
+# .python_history - not currently configurable
+# .rakubrew, .raku - not worth changing right now. Still TODO
+# .sdkman - inconvenient for me, same as .bash-it
+# .ssh - Not generally possible
+# .vim - requires intervention at a level I'm not happy with. Either overwrite the "system" location, or do crazy stuff
+# .wget-hsts - inconvenient to change (only via cli argument)
+# .zef - requires env variable, and the file the env var points to also needs to reference the new location
 
 # Defined here to parallel above, and to be explicit for the next few lines
 # No need to export it because I don't know of any programs that need this defined to work
 : ${XDG_STATE_HOME:=${HOME}/.local/state}
+export BASH_IT_MAINENANCE_DIR="${XDG_STATE_HOME}/jake-maintenance-reports"
 
 # These next few lines are verbatim from history-eternal plugin. I want 'something' like this, in order to automatically
 # create the XDG directory for $HISTFILE. And *this code* is very much something like itself.
