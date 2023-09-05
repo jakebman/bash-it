@@ -5,7 +5,7 @@
 # value here
 : ${XDG_CONFIG_HOME:=${HOME}/.config}
 export XDG_CONFIG_HOME
-export ACKRC="${XDG_CONFIG_HOME}/.ackrc" # TODO: this doesn't need to be a hidden file
+export ACKRC="${XDG_CONFIG_HOME}/ack/ackrc"
 export JARVIZ_DIR="${XDG_CONFIG_HOME}" # a jar analyzer, from sdkman
 export PERL_CPANM_HOME="${XDG_CONFIG_HOME}/cpanm" # cpanm command in the cpanminus package from apt (for rakubrew)
 export GNUPGHOME="${XDG_CONFIG_HOME}/gnupg"
