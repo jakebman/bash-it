@@ -9,19 +9,19 @@ function jake-sdkman-update() {
 
 function jake-maintain-system() {
   about "perform a bunch of maintenance tasks"
-  : ${BASH_IT_MAINENANCE_DIR:=${HOME}/.jake-maintenance-reports}
+  : ${BASH_IT_MAINTENANCE_DIR:=${HOME}/.jake-maintenance-reports}
   function jake-log() {
 	tee -a maintenance-log
   }
   (
 	  # $$ is the pid of the outer bash. This subshell's PID is $BASHPID
-	  mkdir -p "${BASH_IT_MAINENANCE_DIR}/$BASHPID"
+	  mkdir -p "${BASH_IT_MAINTENANCE_DIR}/$BASHPID"
 	  # symbolic, overwriting, and not treating the destination as a directory for the link to be added to
 	  # (but rather as a (symbolic link) file to be overwritten)
-	  ln -s -f -T "$BASHPID" "${BASH_IT_MAINENANCE_DIR}/latest"
-	  cd "${BASH_IT_MAINENANCE_DIR}/$BASHPID"
+	  ln -s -f -T "$BASHPID" "${BASH_IT_MAINTENANCE_DIR}/latest"
+	  cd "${BASH_IT_MAINTENANCE_DIR}/$BASHPID"
 	  # |& is shorthand for 2>&1 |
-	  echo "Logging begins. Check" '${BASH_IT_MAINENANCE_DIR}/latest' "($(realpath maintenance-log)) for updates" | jake-log
+	  echo "Logging begins. Check" '${BASH_IT_MAINTENANCE_DIR}/latest' "($(realpath maintenance-log)) for updates" | jake-log
 
 	  (config pull --autostash; config submodule update --init --remote --jobs 4 && echo "(logging note that submodule succeeded)") |& tee config-pull &
 	  echo "$! spawned for config pull with autostash (and submodules!) pull" | jake-log
@@ -43,7 +43,7 @@ function jake-maintain-system() {
 		  wait $pid || echo PID $pid failed somehow | jake-log
 	  done
 	  echo "done with all spawned processes" | jake-log
-	  echo "find this log and others in" '${BASH_IT_MAINENANCE_DIR} -' "specifically $(realpath maintenance-log)" | jake-log
+	  echo "find this log and others in" '${BASH_IT_MAINTENANCE_DIR} -' "specifically $(realpath maintenance-log)" | jake-log
   )
   unset -f jake-log
 }

@@ -33,7 +33,7 @@ export GNUPGHOME="${XDG_CONFIG_HOME}/gnupg"
 # Defined here to parallel above, and to be explicit for the next few lines
 # No need to export it because I don't know of any programs that need this defined to work
 : ${XDG_STATE_HOME:=${HOME}/.local/state}
-export BASH_IT_MAINENANCE_DIR="${XDG_STATE_HOME}/jake-maintenance-reports"
+export BASH_IT_MAINTENANCE_DIR="${XDG_STATE_HOME}/jake-maintenance-reports"
 
 # These next few lines are verbatim from history-eternal plugin. I want 'something' like this, in order to automatically
 # create the XDG directory for $HISTFILE. And *this code* is very much something like itself.
