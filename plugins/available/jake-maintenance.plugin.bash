@@ -21,7 +21,7 @@ function jake-maintain-system() {
 	  ln -s -f -T "$BASHPID" "${BASH_IT_MAINENANCE_DIR}/latest"
 	  cd "${BASH_IT_MAINENANCE_DIR}/$BASHPID"
 	  # |& is shorthand for 2>&1 |
-	  echo "Logging begins. Check $(realpath maintenance-log) for updates" | jake-log
+	  echo "Logging begins. Check" '${BASH_IT_MAINENANCE_DIR}/latest' "($(realpath maintenance-log)) for updates" | jake-log
 
 	  (config pull --autostash; config submodule update --init --remote --jobs 4 && echo "(logging note that submodule succeeded)") |& tee config-pull &
 	  echo "$! spawned for config pull with autostash (and submodules!) pull" | jake-log
@@ -43,7 +43,7 @@ function jake-maintain-system() {
 		  wait $pid || echo PID $pid failed somehow | jake-log
 	  done
 	  echo "done with all spawned processes" | jake-log
-	  echo "find this log and others in $(realpath maintenance-log)" | jake-log
+	  echo "find this log and others in" '${BASH_IT_MAINENANCE_DIR} -' "specifically $(realpath maintenance-log)" | jake-log
   )
   unset -f jake-log
 }
