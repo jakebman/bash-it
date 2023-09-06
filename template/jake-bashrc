@@ -10,21 +10,29 @@ export JARVIZ_DIR="${XDG_CONFIG_HOME}" # a jar analyzer, from sdkman
 export GNUPGHOME="${XDG_CONFIG_HOME}/gnupg"
 
 # XDG list:
+# .aws - not configurable
+# .azure - symlinked into $WSL_WINDOWS_USER_HOME. Can probably remove it without damage.
+# .bash - symlinked to .bashrc as tab-completion fodder to win over .bash{_history,_logout}
 # .bashrc, .profile - requires decent high-powered intervention to loop in so early. Potentially an /etc/profile.d entry?
 # .bash-it - inconvenient for me - it's easier to come in here and change stuff without it being a level deeper
 # .cache, .config, ... .local - the XDG solution folders
+# .docker (needs WSL compatibility. Probably not muckable)
 # .editorconfig - currently not supported by all involved parties
 # .gi_list - not supported. git-ignore-io in git-extras writes this
 # .gitignore.d - vcsh, created by default. Not changeable right now?
 # .gitmodules - required because I'm keeping subrepos in my conf vcsh repo (needs to live in $GIT_WORK_TREE)
+# .java - for jshell, and other users of the jdk's java.util.prefs.Preferences API
+# .landscape - ubuntu-ism
 # .lessfilter - It's referenced by /usr/bin/lesspipe, which doesn't respect XDG
 # .m2 - requires cli argument to move settings.xml, which is the only thing I keep there anyway :(
 # .motd_shown - probably not doable
-# .mrconfig - cannot be moved without a code change in mr tool
+# .mrconfig (& .mr which symlinks to beat .mrtrust at tab completion) - cannot be moved without a code change in mr tool
+# .netrc - conventional file name, from telnet. Location configurable in curl, but not telnet.
 # .python_history - not currently configurable
 # .rakubrew, .raku - not worth changing right now. Still TODO
 # .sdkman - inconvenient for me, same as .bash-it
 # .ssh - Not generally possible
+# .sudo_as_admin_successful - SUPER(user) unlikely
 # .vim - requires intervention at a level I'm not happy with. Either overwrite the "system" location, or do crazy stuff
 # .wget-hsts - inconvenient to change (only via cli argument)
 # .zef - requires env variable, and the file the env var points to also needs to reference the new location
