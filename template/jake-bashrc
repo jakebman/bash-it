@@ -7,7 +7,6 @@
 export XDG_CONFIG_HOME
 export ACKRC="${XDG_CONFIG_HOME}/ack/ackrc"
 export JARVIZ_DIR="${XDG_CONFIG_HOME}" # a jar analyzer, from sdkman
-export PERL_CPANM_HOME="${XDG_CONFIG_HOME}/cpanm" # cpanm command in the cpanminus package from apt (for rakubrew)
 export GNUPGHOME="${XDG_CONFIG_HOME}/gnupg"
 
 # XDG list:
@@ -34,6 +33,7 @@ export GNUPGHOME="${XDG_CONFIG_HOME}/gnupg"
 # No need to export it because I don't know of any programs that need this defined to work
 : ${XDG_STATE_HOME:=${HOME}/.local/state}
 
+export PERL_CPANM_HOME="${XDG_STATE_HOME}/cpanm" # cpanm command in the cpanminus package from apt (for rakubrew)
 # These next few lines are verbatim from history-eternal plugin. I want 'something' like this, in order to automatically
 # create the XDG directory for $HISTFILE. And *this code* is very much something like itself.
 # WARNING TVTROPES LINK: https://tvtropes.org/pmwiki/pmwiki.php/Main/ShapedLikeItself
