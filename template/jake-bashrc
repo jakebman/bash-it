@@ -14,8 +14,8 @@ export GNUPGHOME="${XDG_CONFIG_HOME}/gnupg"
 # .bash-it - inconvenient for me - it's easier to come in here and change stuff without it being a level deeper
 # .cache, .config, ... .local - the XDG solution folders
 # .editorconfig - currently not supported by all involved parties
-# .gitignore.d - vcsh, created by default. Not changeable right now?
 # .gi_list - not supported. git-ignore-io in git-extras writes this
+# .gitignore.d - vcsh, created by default. Not changeable right now?
 # .gitmodules - required because I'm keeping subrepos in my conf vcsh repo (needs to live in $GIT_WORK_TREE)
 # .lessfilter - It's referenced by /usr/bin/lesspipe, which doesn't respect XDG
 # .m2 - requires cli argument to move settings.xml, which is the only thing I keep there anyway :(
