@@ -77,6 +77,53 @@ function _bash-it-log-message() {
 	fi
 }
 
+function _log_stacktrace() {
+	: _about 'prints the bash function calls arriving at the current _log_stacktrace invocation'
+	: _param '1: formatting option. Either "--flat" for "[a, b, c]" style, "--newlines" to set each entry on its own line within another string (like the message printed by _log_trace), or "--stdout" (the default) for entries on separate lines, but without the leading empty line'
+	: _group 'log'
+
+	# --stdout style. First entry has a tab in front. Newline+tab between all, and a final newline at the end
+	# These strings have trusted value, so are safe to pass as the first argument to printf
+	local format="%s:%s(%d)"
+	local prefix="\t"
+	local suffix="\n"
+	local delimiter="\n\t"
+
+	if [[ "--flat" == "$1" ]]; then
+		prefix="["
+		suffix="]"
+		delimiter=", "
+	elif [[ '--newlines' == "$1" ]];  then
+		prefix="\n\t"
+	fi
+
+	printf "$prefix" # careful!!!
+
+	local len=${#BASH_LINENO[@]}
+	local index
+	# TODO: we could start index at 1 to ignore the current _log_stacktrace invocation. If so, then update the _about section above too
+	# I'm using zero here to have all the debug cards on the table
+	for (( index = 0; index < len; index++ )); do
+		printf "$format" "${BASH_SOURCE[${index}]}" "${FUNCNAME[${index}]}" "${BASH_LINENO[${index}]}"
+		if (( index < len - 1 )); then
+			printf "$delimiter" # careful!!!
+		fi
+	done
+
+	printf "$suffix" # careful!!!
+}
+
+function _log_trace() {
+	: _about 'log a debug message with stack trace by echoing to the screen. needs BASH_IT_LOG_LEVEL >= BASH_IT_LOG_LEVEL_TRACE'
+	: _param '1: message to log'
+	: _example '$ _log_trace "Failed to take action. Please debug me"'
+	: _group 'log'
+
+	if [[ "${BASH_IT_LOG_LEVEL:-0}" -ge "${BASH_IT_LOG_LEVEL_TRACE?}" ]]; then
+		_bash-it-log-message "${echo_green:-}" "TRACE: " "${1} $(_log_stacktrace --newlines)"
+	fi
+}
+
 function _log_debug() {
 	: _about 'log a debug message by echoing to the screen. needs BASH_IT_LOG_LEVEL >= BASH_IT_LOG_LEVEL_INFO'
 	: _param '1: message to log'
