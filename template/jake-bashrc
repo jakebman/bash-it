@@ -6,7 +6,6 @@
 : ${XDG_CONFIG_HOME:=${HOME}/.config}
 export XDG_CONFIG_HOME
 export ACKRC="${XDG_CONFIG_HOME}/ack/ackrc"
-export JARVIZ_DIR="${XDG_CONFIG_HOME}" # a jar analyzer, from sdkman
 export GNUPGHOME="${XDG_CONFIG_HOME}/gnupg"
 
 # XDG list:
@@ -37,6 +36,7 @@ export GNUPGHOME="${XDG_CONFIG_HOME}/gnupg"
 # .wget-hsts - inconvenient to change (only via cli argument)
 # .zef - requires env variable, and the file the env var points to also needs to reference the new location
 
+
 # Defined here to parallel above, and to be explicit for the next few lines
 # No need to export it because I don't know of any programs that need this defined to work
 : ${XDG_STATE_HOME:=${HOME}/.local/state}
@@ -55,6 +55,11 @@ if [[ ~/.bash_history -nt "$HISTFILE" ]] ; then
   mv ~/.bash_history "$HISTFILE"
   touch ~/.bash_history-moved-to-XDG-because-jake-custom-bash-it
 fi
+
+
+: ${XDG_CACHE_HOME:=${HOME}/.cache}
+export JARVIZ_DIR="${XDG_CACHE_HOME}" # a jar analyzer, from sdkman
+
 
 # If not running interactively, don't do anything
 case $- in
