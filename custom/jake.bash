@@ -114,6 +114,11 @@ function vimwhich {
 }
 alias vimw=vimwhich
 
+function filewhich {
+	file "$(which "$1")"
+}
+alias filew=filewhich
+
 function diff {
   about "allow you to type the bare word 'diff' and get an automatic git diff, while still not harming the diff command"
   if [[ "$#" -eq 0 ]] ; then
