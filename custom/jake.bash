@@ -109,6 +109,7 @@ function hgrep {
 	history | ack "$@"
 }
 
+# TODO: these *-whiches are becoming a pattern. Can this be a bash-it plugin, maybe using _jq-ify tech?
 function vimwhich {
 	vim "$(which "$1")"
 }
