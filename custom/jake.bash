@@ -119,6 +119,15 @@ function filewhich {
 }
 alias filew=filewhich
 
+function catwhich {
+	local where="$(which "$1")"
+	cat "$(which "$1")"
+	if [[ -t 1 ]] ; then # stdout is terminal. Cool to add info (see jake's bin/git)
+		echo "${FUNCNAME[0]}: this file lives at '$where'"
+	fi
+}
+alias catw=catwhich
+
 function diff {
   about "allow you to type the bare word 'diff' and get an automatic git diff, while still not harming the diff command"
   if [[ "$#" -eq 0 ]] ; then
