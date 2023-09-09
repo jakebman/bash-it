@@ -162,6 +162,7 @@ alias rain=rainbow
 alias rainow=rainbow
 alias rianbow=rainbow
 alias rainboiw=rainbow
+alias setatus=status
 alias stsatus=status
 alias sstatus=status
 alias sttatus=status
