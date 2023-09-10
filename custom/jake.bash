@@ -110,6 +110,7 @@ function hgrep {
 }
 
 # TODO: these *-whiches are becoming a pattern. Can this be a bash-it plugin, maybe using _jq-ify tech?
+# TODO: they need completions
 function vimwhich {
 	vim "$(which "$1")"
 }
