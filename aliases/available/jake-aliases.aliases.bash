@@ -80,6 +80,8 @@ function _jake-banner-display {
 function add {
 	if [ "$#" -eq 0 ] ; then
 		_jake-banner-display "GIT ADD"
+		# TODO: if there is *exactly* one trivial change, automatically add it and print the diff
+		# (Not sure what 'trivial' means yet, but it could be counting lines, or diff sections, or changed files)
 		git add -p "$@" # $@ is empty, but this is more consistent with the other branch
 	else
 		git add "$@"
