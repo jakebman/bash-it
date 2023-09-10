@@ -42,6 +42,10 @@ alias q="echo no need to quit - you are already out"
 
 alias hsitory=history
 
+# TODO: probably could have these depend on the presence of the cht.sh plugin
+alias cht=cht.sh
+alias ch=cht.sh
+
 alias ks=ls
 alias lks=ls
 alias lss=ls
