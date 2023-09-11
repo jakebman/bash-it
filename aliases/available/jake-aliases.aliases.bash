@@ -132,6 +132,7 @@ function commit {
 		git commit "${args[@]}" "$@"
 	fi
 }
+alias amend='commit --amend'
 
 # Print a header warning that this is NOT ADD, and DESTUCTIVE
 function restore {
