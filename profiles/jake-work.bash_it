@@ -17,6 +17,7 @@ plugins sdkman
 plugins wsl-fast
 completion ack
 completion bash-it
+completion complete-alias
 completion maven
 completion projects
 completion sdkman
