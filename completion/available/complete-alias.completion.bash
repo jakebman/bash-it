@@ -11,6 +11,13 @@ about-plugin "Use cykerway's complete-alias project to complete aliases"
 
 if [ -f "${COMPLETE_ALIAS_FILE}" ]; then
 	source "${COMPLETE_ALIAS_FILE}"
+
+	# Allow complete-alias to behave better on sudo
+	# See https://github.com/cykerway/complete-alias#:~:text=why%20is-,sudo%20completion,-not%20working%20correctly
+	# which leverages 'A trailing space in VALUE causes the next word to be checked for alias substitution when
+	# the alias is expanded.' from `help alias`
+	alias sudo='sudo '
+
 	complete -F _complete_alias "${!BASH_ALIASES[@]}"
 else
 	ALIAS_CLONE_COMMAND="git clone git@github.com:cykerway/complete-alias.git \"\$(dirname \"\${COMPLETE_ALIAS_FILE:-${COMPLETE_ALIAS_FILE}}\")\""
