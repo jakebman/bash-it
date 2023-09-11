@@ -33,6 +33,7 @@ function _bash-it-component-completion-callback-on-init-aliases() {
 		completion_loader=""
 	fi
 
+	_log_debug "beginning alias completions"
 	# read in "<alias> '<aliased command>' '<command args>'" lines from defined aliases
 	# some aliases do have backslashes that needs to be interpreted
 	# shellcheck disable=SC2162
@@ -51,6 +52,10 @@ function _bash-it-component-completion-callback-on-init-aliases() {
 			alias_args="${alias_defn#*[[:space:]]}" # everything after first word
 		fi
 
+		if ! (( $count % 50 )); then
+			_log_debug "running line '$line' ($count of ....)"
+		fi
+
 		# skip aliases to pipes, boolean control structures and other command lists
 		chars=$'|&;()<>\n'
 		if [[ "${alias_defn}" =~ [$chars] ]]; then
@@ -65,9 +70,13 @@ function _bash-it-component-completion-callback-on-init-aliases() {
 				# force loading of completions for the aliased command
 				"${completion_loader:?}" "${alias_cmd}"
 				# 124 means completion loader was successful
-				[[ $? -eq 124 ]] || continue
+				if [[ $? -ne 124 ]] ; then
+					_log_debug "completion failed for '$alias_cmd'"
+					continue
+				fi
 				completions+=("$alias_cmd")
 			else
+				_log_debug "no completion loader for alias '$alias_cmd'"
 				continue
 			fi
 		fi
@@ -107,9 +116,11 @@ function _bash-it-component-completion-callback-on-init-aliases() {
 			echo "$new_completion" >> "$tmp_file"
 		fi
 	done < <(alias -p)
-	_log_debug "ran $count alias completions"
+	_log_debug "generated $count alias completions. Evaluating $(wc -l "$tmp_file") lines"
+	cp "$tmp_file" ~/alias-completions-peek
 	# shellcheck source=/dev/null
 	source "$tmp_file" && command rm -f "$tmp_file"
+	_log_debug "completed alias evaluation"
 }
 
 _bash-it-component-completion-callback-on-init-aliases
