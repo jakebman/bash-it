@@ -56,6 +56,7 @@ function pull {
 		git pull "$@" # Technically, we know there are no args here.
 	fi
 }
+alias gpull='git pull' # sometimes I want to pull in ~
 
 function status {
 	# see pull, above
