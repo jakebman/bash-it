@@ -89,6 +89,7 @@ function jake-install-tools() {
   _jake-find-tool git-extras
   _jake-find-tool xmlindent # doesn't have --long-options, which is a little weird, but formats all XML (incl. xmllint --xpath results), so that's good
   _jake-find-tool dos2unix
+  _jake-find-tool neofetch
   _jake-find-tool thefuck
   _jake-find-tool unzip
   _jake-find-tool clang
