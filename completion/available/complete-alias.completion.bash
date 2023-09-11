@@ -11,8 +11,8 @@ about-plugin "Use cykerway's complete-alias project to complete aliases"
 
 if [ -f "${COMPLETE_ALIAS_FILE}" ]; then
 	source "${COMPLETE_ALIAS_FILE}"
+	complete -F _complete_alias "${!BASH_ALIASES[@]}"
 else
 	_log_error "please install complete-alias from https://github.com/cykerway/complete-alias, or point \$COMPLETE_ALIAS_FILE to the complete_alias file within the place you checked it out from"
 fi
 
-complete -F _complete_alias "${!BASH_ALIASES[@]}"
