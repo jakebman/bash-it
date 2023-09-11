@@ -117,11 +117,13 @@ function vimwhich {
 alias vimw=vimwhich
 
 function filewhich {
+	# TODO: what if this was also able to call out that $1 is a function and/or alias, in addition to the executable it masks
 	file "$(which "$1")"
 }
 alias filew=filewhich
 
 function catwhich {
+	# TODO: what if this was also able to print functions and aliases, too?
 	local where="$(which "$1")"
 	cat "$(which "$1")"
 	if [[ -t 1 ]] ; then # stdout is terminal. Cool to add info (see jake's bin/git)
