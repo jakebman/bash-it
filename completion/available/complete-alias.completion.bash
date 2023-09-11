@@ -13,6 +13,9 @@ if [ -f "${COMPLETE_ALIAS_FILE}" ]; then
 	source "${COMPLETE_ALIAS_FILE}"
 	complete -F _complete_alias "${!BASH_ALIASES[@]}"
 else
-	_log_error "please install complete-alias from https://github.com/cykerway/complete-alias, or point \$COMPLETE_ALIAS_FILE to the complete_alias file within the place you checked it out from"
+	ALIAS_CLONE_COMMAND="git clone git@github.com:cykerway/complete-alias.git \"\$(dirname \"\${COMPLETE_ALIAS_FILE:-${COMPLETE_ALIAS_FILE}}\")\""
+	_log_error "please install complete-alias or point \$COMPLETE_ALIAS_FILE to the complete_alias file within the place you checked it out from"
+	_log_error "You might try: ${ALIAS_CLONE_COMMAND}"
+	unset ALIAS_CLONE_COMMAND
 fi
 
