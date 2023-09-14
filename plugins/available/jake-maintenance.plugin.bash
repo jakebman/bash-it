@@ -9,6 +9,7 @@ function jake-sdkman-update() {
 
 function jake-maintain-system() {
   about "perform a bunch of maintenance tasks"
+  echo "TODO: use the script terminal-recording tech"
   : ${BASH_IT_MAINTENANCE_DIR:=${XDG_STATE_HOME:-${HOME:-~}/.local/state}/jake-maintenance-reports}
   mkdir -p -- "${BASH_IT_MAINTENANCE_DIR}"
   function jake-log() {

@@ -83,6 +83,7 @@ function _jake-special-single-args-for-diff {
 
 function fidget {
 	type fidget
+	echo "TODO: loop this into jake-maintain-system tech"
 	sleep 12
 	( # subshell. Automatically undoes the cd ~
 		cd ~
