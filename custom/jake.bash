@@ -124,6 +124,7 @@ alias filew=filewhich
 
 function catwhich {
 	# TODO: what if this was also able to print functions and aliases, too?
+	# TODO: what if we follow aliases down to their roots?
 	local where="$(which "$1")"
 	cat "$(which "$1")"
 	if [[ -t 1 ]] ; then # stdout is terminal. Cool to add info (see jake's bin/git)
