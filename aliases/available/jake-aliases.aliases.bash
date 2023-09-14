@@ -53,7 +53,11 @@ function pull {
 		# yes, there's a .mrconfig in ~, but there's no disk access to check $PWD first
 		mr up "$@"
 	else
-		git pull "$@" # Technically, we know there are no args here.
+		# Technically, we know there are no args to pass to pull here, but it keeps parallel structure
+		# And we should fallback to git fetch in case we're in a situation where the remote branch is deleted (merged)
+		# or never existed (local draft branch). I don't expect fetch to take the same arguments as pull even if
+		# they're both empty
+		git pull "$@" || git fetch
 	fi
 }
 alias gpull='git pull' # sometimes I want to pull in ~
