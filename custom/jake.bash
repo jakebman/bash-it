@@ -134,6 +134,12 @@ function catwhich {
 }
 alias catw=catwhich
 
+function llwhich {
+	ls -al "$(which "$1")"
+}
+alias llw=llwhich
+alias lsw=llwhich
+
 function diff {
   about "allow you to type the bare word 'diff' and get an automatic git diff, while still not harming the diff command"
   if [[ "$#" -eq 0 ]] ; then
