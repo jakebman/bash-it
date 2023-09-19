@@ -67,6 +67,9 @@ alias mt=mr
 alias m=mr
 
 alias map=man # I'm kinda surprised there was no existing map command that this overrides
+alias mabn=man
+
+alias sork=sort
 
 alias cata=cat
 alias vat=cat
