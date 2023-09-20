@@ -27,3 +27,4 @@ aliases general
 aliases jake-aliases
 aliases jake-typos
 aliases jq-implicit-less
+aliases sudo-expands-aliases
