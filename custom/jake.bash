@@ -98,6 +98,8 @@ function fidget {
 }
 alias fid=fidget
 alias f=fidget
+alias asdf=fidget
+alias sdf=fidget
 
 
 function typo {
