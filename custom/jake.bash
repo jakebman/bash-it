@@ -114,6 +114,8 @@ function hgrep {
 
 # TODO: these *-whiches are becoming a pattern. Can this be a bash-it plugin, maybe using _jq-ify tech?
 # TODO: they need completions
+# TODO: potentially try to use (shopt -s extdebug; declare -F quote) tech to jump to functions
+#		see https://askubuntu.com/questions/354915/quote-command-in-the-shell/354929#354929
 function vimwhich {
 	vim "$(which "$1")"
 }
