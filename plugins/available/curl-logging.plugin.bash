@@ -8,8 +8,10 @@ _command_exists curl || return # don't create the function if the binary is miss
 function _curl-logging-helper {
 	# TODO: log rotation/storage concerns
 	(
-		printf '# '
-		shell-quote curl "$@"
+		# NB: I prefer %q over shell-quote for shell quoting. This note lives here to remind myself
+		# TODO: I'm honestly a little curious the difference between `shell-quote` and printf "%q" ...
+		# See https://askubuntu.com/a/354929
+		printf '# %q %q\n' curl "$@"
 		cat
 	)>> ~/curlheaders.txt
 }
