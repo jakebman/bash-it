@@ -11,7 +11,9 @@ function _curl-logging-helper {
 		# NB: I prefer %q over shell-quote for shell quoting. This note lives here to remind myself
 		# TODO: I'm honestly a little curious the difference between `shell-quote` and printf "%q" ...
 		# See https://askubuntu.com/a/354929
-		printf '# %q %q\n' curl "$@"
+		printf '#'
+		printf ' %q' curl "$@" # rely on printf's "re-used as necessary" behavior
+		printf '\n'
 		cat
 	)>> ~/curlheaders.txt
 }
