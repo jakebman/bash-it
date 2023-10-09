@@ -159,6 +159,7 @@ alias stg=staged
 # which would imply that these are legitimate git commands.
 # To handle these both with and without git requires duplication. I'd rather have that duplication in here than
 # in jake-aliases. These are typo words, not git-command words.
+# TODO: I wish there were a way to auto-correct `commit --amened` to `commit --amend`
 alias comit=commit
 alias comm9t=commit
 alias comm0t=commit
