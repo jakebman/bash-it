@@ -3,8 +3,6 @@ about-plugin "Use cykerway's complete-alias project to complete aliases"
 # Load after all aliases and completions to understand what needs to be completed
 # BASH_IT_LOAD_PRIORITY: 800
 
-# TODO: this name doesn't autocomplete after bash-it enable completion [$name]
-
 # From https://github.com/cykerway/complete-alias
 
 : "${COMPLETE_ALIAS_FILE:=${HOME}/.complete-alias/complete_alias}"
