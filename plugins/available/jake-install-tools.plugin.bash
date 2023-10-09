@@ -75,8 +75,8 @@ function jake-install-tools() {
   # tools that can use apt
   TOOLS_TO_INSTALL=""
   _jake-find-tool pygmentize python3-pygments
-  _jake-find-tool procyon procyon-decompiler
-  _jake-find-tool python python-is-python3
+  _jake-find-tool procyon procyon-decompiler # java class files
+  _jake-find-tool python python-is-python3 # also grabs python3, as a bonus
   # _jake-find-tool xmlformat xmlformat-perl # I think xmlindent is cleaner, partially because it has fewer options
   _jake-find-tool xmllint libxml2-utils # multi-function, but only used for --xpath queries, because --format makes --xpath return one-line results
   _jake-find-tool make build-essential
@@ -89,9 +89,9 @@ function jake-install-tools() {
   _jake-find-tool git-extras
   _jake-find-tool xmlindent # doesn't have --long-options, which is a little weird, but formats all XML (incl. xmllint --xpath results), so that's good
   _jake-find-tool dos2unix
-  _jake-find-tool neofetch
-  _jake-find-tool debtree
-  _jake-find-tool thefuck
+  _jake-find-tool neofetch # to print pretty version info
+  _jake-find-tool debtree # to backtrace apt packages
+  _jake-find-tool thefuck # potentially not super compatible with bash-it :(
   _jake-find-tool unzip
   _jake-find-tool clang
   _jake-find-tool iotop
