@@ -40,6 +40,9 @@ alias jgti=git # it's like... sometimes I just mash the keyboard while thinking 
 alias :q="echo You are not in vim"
 alias q="echo no need to quit - you are already out"
 
+alias explorer.='explorer .'
+alias exploer.=explorer. # happened while I was writing the alias above
+
 alias hsitory=history
 
 # TODO: probably could have these depend on the presence of the cht.sh plugin
