@@ -24,6 +24,8 @@ function _git-tag() {
 	if [[ "${SCM_GIT_GITSTATUS_RAN:-}" == "true" ]]; then
 		if [[ -n "${VCS_STATUS_TAG:-}" ]]; then
 			echo "${VCS_STATUS_TAG}"
+		else
+			false
 		fi
 	else
 		git describe --tags --exact-match 2> /dev/null
