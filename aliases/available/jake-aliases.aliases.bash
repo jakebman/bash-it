@@ -181,6 +181,7 @@ alias blame='git blame'
 alias log='git log'
 alias ls-files='git ls-files'
 alias submodule='git submodule'
+alias cherry-pick='git cherry-pick'
 alias tag='git tag'
 # git-extras
 alias authors='git authors'
