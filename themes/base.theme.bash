@@ -318,6 +318,10 @@ function git_prompt_vars() {
 	SCM_STATE="${GIT_THEME_PROMPT_CLEAN:-${SCM_THEME_PROMPT_CLEAN:-}}"
 	if ! _git-hide-status; then
 		if [[ "${SCM_GIT_GITSTATUS_RAN:-}" == "true" ]]; then
+			# TODO: git-status-counts counts unresolved merge conflicts as "unmerged" for both X and Y (`UU filename`)
+			# That counts as both staged, and unstaged
+			# gitstatus_query stashes that in VCS_STATUS_NUM_CONFLICTED
+			# So basically, we just add that variable to both places here to match that behavior
 			untracked_count="${VCS_STATUS_NUM_UNTRACKED?}"
 			unstaged_count="${VCS_STATUS_NUM_UNSTAGED?}"
 			staged_count="${VCS_STATUS_NUM_STAGED?}"
