@@ -105,6 +105,7 @@ function _git-status() {
 # fails otherwise
 # Heads up: this is vulnerable to gitstatus's -m (max_dirty/--dirty-max-index-size) setting. Uncertain whether "I dunno" should mean clean, dirty, or take slow git path. Currently, it is taken as 'dirty'
 function _git-status-is-dirty() {
+	pwd >>~/jake-checking-dirty
 	if [[ "${SCM_GIT_GITSTATUS_RAN:-}" == "true" ]]; then
 		# A series of yes/no answers encoded as 1/0 strings
 		# VCS_STATUS_HAS_UNSTAGED and _UNTRACKED can return -1 for "didn't check"
@@ -115,14 +116,18 @@ function _git-status-is-dirty() {
 		else
 			git_status="${VCS_STATUS_HAS_STAGED}${VCS_STATUS_HAS_CONFLICTED}${VCS_STATUS_HAS_UNSTAGED}${VCS_STATUS_HAS_UNTRACKED}"
 		fi
-		case "$git_status" in
-			*1*)
-				return 0 # found a status-like fact
-				;;
-			*)
-				return 1 # failed to find a status-like fact
-				;;
-		esac
+		if [[ "$git_status" =~ '1' ]]; then
+			# found a status-like fact
+			pwd >>~/jake-status
+			return 0
+		elif [[ -n "$VCS_STATUS_ACTION" ]]; then
+			pwd >>~/jake-action
+			# There's an action in progress
+			return 0
+		else
+			pwd >>~/jake-clean
+			return 1
+		fi
 	fi # fast path done
 	# TODO: wish there were a way to notify the user which path was used - fast or slow
 	[[ -n "$(_git-status | tail -n1)" ]]
