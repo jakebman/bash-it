@@ -31,7 +31,14 @@ export MAVEN_ARGS="-T1C"
 # RAW-CONTROL-CHARS enables color interpretation without allowing every raw control code through
 #   (b/c that would make lines hard to track)
 # tabs=2 condenses tabs to only two characters wide
-export LESS="--quit-if-one-screen --quit-at-eof --no-init --RAW-CONTROL-CHARS --tabs=2"
+# jump-target=.2 puts the searched-for line 2/10ths of the way down the screen, rather than at the top line
+#   (Heads up! 0.2 does not work. I tried, and learned that)
+#   This also applies to 'go to line' and 'go to tag' commands
+# SEARCH-SKIP-SCREEN ensures that new searches start below the jump-target line, and not the top of the screen
+#   Repeated searches (with n/N) already did this, but if you search for something new
+#        you would otherwise be searching 2/10ths of the screen *up* from where you started
+#   It's also worth noting that this is *per line*, so following matches on the same line are also skipped
+export LESS="--quit-if-one-screen --quit-at-eof --no-init --RAW-CONTROL-CHARS --tabs=2 --jump-target=.2 --SEARCH-SKIP-SCREEN"
 # I like editing ~/.lessfilter, and this keeps getting in the way. This is the 'other' default for this setting
 # That means that I could export XDG_DATA_HOME here instead of LESSHISTFILE, and less would implicitly use it
 # I... don't want to do that :\ - I really want to preserve the 'should use the default' quality of these variables,
