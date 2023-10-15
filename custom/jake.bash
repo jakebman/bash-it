@@ -33,6 +33,9 @@ export MAVEN_ARGS="-T1C"
 # tabs=2 condenses tabs to only two characters wide
 export LESS="--quit-if-one-screen --quit-at-eof --no-init --RAW-CONTROL-CHARS --tabs=2"
 # I like editing ~/.lessfilter, and this keeps getting in the way. This is the 'other' default for this setting
+# That means that I could export XDG_DATA_HOME here instead of LESSHISTFILE, and less would implicitly use it
+# I... don't want to do that :\ - I really want to preserve the 'should use the default' quality of these variables,
+# and this shim lets me ~sorta~ do that
 export LESSHISTFILE="${XDG_DATA_HOME:-${HOME}/.local/share}/lesshst"
 export LESSSTYLE=sas
 
