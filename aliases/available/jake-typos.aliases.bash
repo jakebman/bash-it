@@ -128,6 +128,7 @@ alias mkae=make
 alias maek=make
 
 alias tiem=time
+alias ype=type
 
 alias mcn=mvn
 alias vmn=mvn
