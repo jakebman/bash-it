@@ -167,6 +167,16 @@ function remote {
 	fi
 }
 
+function reset {
+	if echo "$@" | grep -q HEAD ; then
+		echo "You probably meant git reset. Don't just do this willy-nilly!" >&2
+	fi
+	command reset "$@"
+	if echo "$@" | grep -q HEAD ; then
+		echo "You probably meant git reset. Don't just do this willy-nilly!" >&2
+	fi
+}
+
 
 # 'Vanilla' aliases - these commands simply add 'git' at the beginning
 alias clone='git clone'
