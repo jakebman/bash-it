@@ -193,6 +193,7 @@ alias ls-files='git ls-files'
 alias submodule='git submodule'
 alias cherry-pick='git cherry-pick'
 alias tag='git tag'
+alias reflog='git reflog'
 # git-extras
 alias authors='git authors'
 alias lock='git lock'
