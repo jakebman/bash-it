@@ -117,6 +117,7 @@ alias vf=cd # left hand misaligned
 alias dc=cd
 alias ce=cd
 alias xs=cd
+alias qcd=cd # I quit less *twice*, then wanted to cd
 
 alias grpe=grep
 
