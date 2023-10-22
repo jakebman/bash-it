@@ -211,6 +211,7 @@ alias ush=push
 alias addd=add
 alias ass=add
 alias loig=log
+alias lop=logp
 alias lgop=logp
 alias lopg=logp
 alias jfd=jdf
