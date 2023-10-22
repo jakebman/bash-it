@@ -174,10 +174,11 @@ function delta {
     # we choose implicitdiff here, because it serves diff well too
     git -c core.pager=delta implicitdiff "$@"
   elif [[ "$#" -eq 1 ]] && ! _jake-special-single-args-for-diff "$1" ; then
-    # git-delta is aliased in git to to a git diff with delta as the pager
-    git delta "$@"
+    # git-delta is aliased in git to run git with delta as the pager
+	# and git-deltaDiff uses that to run diff
+    git deltaDiff "$@"
   else
-    command diff "$@"
+    command delta "$@"
   fi
 }
 
