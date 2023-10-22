@@ -172,7 +172,7 @@ function delta {
   if [[ "$#" -eq 0 ]] ; then
     # $@ is unecessary, as it's empty. Keeps parallel structure, though.
     # we choose implicitdiff here, because it serves diff well too
-    git -c core.pager=delta implicitdiff "$@"
+    git delta implicitdiff "$@"
   elif [[ "$#" -eq 1 ]] && ! _jake-special-single-args-for-diff "$1" ; then
     # git-delta is aliased in git to run git with delta as the pager
 	# and git-deltaDiff uses that to run diff
