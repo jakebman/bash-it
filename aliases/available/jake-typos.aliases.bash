@@ -104,6 +104,7 @@ alias idff=diff
 alias duff=diff
 alias dfif=diff
 alias didd=diff
+alias dfiff=diff
 alias difff=diff
 alias diiff=diff
 
