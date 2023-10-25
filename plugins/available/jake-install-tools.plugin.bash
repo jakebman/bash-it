@@ -355,6 +355,27 @@ function _jake-check-optional-tools() {
 	echo 'sudo dpkg -i git-delta*.deb'
   fi
 
+  if _command_exists asciinema ; then
+	# -w -q -s is --word-regexp --quiet --no-messages (--silent is a synonym of --quiet).
+	# Means "surround with word barriers"; "no success output"; "no error output"
+	# I use the short forms here because alpine (busybox) doesn't know the long names
+	if grep -w -q -s asciinema /etc/apt/sources.list /etc/apt/sources.list.d/* ; then
+		echo "Nothing to do for asciinema - we have the ppa and asciinema is happy"
+	else
+		echo "asciinema is installed, but please add the ppa via:"
+		echo -en "\t"
+		echo 'sudo apt-add-repository ppa:zanchey/asciinema'
+	fi
+  else
+	echo "Please install asciinema via:"
+	echo -en "\t"
+	echo 'sudo apt-add-repository ppa:zanchey/asciinema'
+	echo -en "\t"
+	echo 'sudo apt-get update # potentially already done by adding the ppa'
+	echo -en "\t"
+	echo 'sudo apt install asciinema'
+  fi
+
   if _binary_exists git-delta ; then
 		echo "git-extras's git-delta shadows my git-delta alias. Pleas remove it with"
 		echo -en "\t"
