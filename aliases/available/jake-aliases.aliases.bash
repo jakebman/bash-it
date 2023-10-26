@@ -72,6 +72,16 @@ function status {
 }
 alias gstatus='git status' # Sometimes, I want to run status in ~
 
+function status-or-show {
+	if git diff --quiet && git diff --staged --quiet ; then
+		# status is basically bunk
+		git show
+	else
+		git status
+	fi
+}
+alias s=status-or-show
+
 function _jake-banner-display {
 	about "display a banner, but don't care if it fails"
 	figlet -t -f mini "$@" "$JAKE_BANNER_WHY" 2>/dev/null || true
@@ -221,7 +231,7 @@ alias staged='git diff --staged'
 alias addp='git add --patch'
 
 # shorthand command
-alias s=status
+alias s=status-or-show
 
 # 'Not exactly duplicating' aliases
 # Not all of these are duplicating a git alias, but they're not exactly typos either
