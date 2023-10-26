@@ -84,6 +84,7 @@ function add {
 		_jake-banner-display "GIT ADD"
 		# TODO: if there is *exactly* one trivial change, automatically add it and print the diff
 		# (Not sure what 'trivial' means yet, but it could be counting lines, or diff sections, or changed files)
+		# For instance, diff sections might not be super smart - I've wanted to split 'a single' diff section when adding before
 		git add -p "$@" # $@ is empty, but this is more consistent with the other branch
 	else
 		git add "$@"
