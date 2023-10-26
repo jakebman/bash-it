@@ -75,9 +75,9 @@ alias gstatus='git status' # Sometimes, I want to run status in ~
 function status-or-show {
 	if git diff --quiet && git diff --staged --quiet ; then
 		# status is basically bunk
-		git show
+		git show "$@"
 	else
-		git status
+		git status "$@"
 	fi
 }
 alias s=status-or-show
