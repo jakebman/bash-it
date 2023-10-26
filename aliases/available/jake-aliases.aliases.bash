@@ -73,7 +73,7 @@ function status {
 alias gstatus='git status' # Sometimes, I want to run status in ~
 
 function status-or-show {
-	if git diff --quiet && git diff --staged --quiet ; then
+	if JAKE_SUPPRESS_GIT_SQUAWK=1 git diff --quiet && JAKE_SUPPRESS_GIT_SQUAWK=1 git diff --staged --quiet ; then
 		# status is basically bunk
 		git show "$@"
 	else
