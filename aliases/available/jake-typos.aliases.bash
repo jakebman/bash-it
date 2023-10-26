@@ -46,7 +46,7 @@ alias exploer.=explorer. # happened while I was writing the alias above
 
 alias hsitory=history
 
-# TODO: probably could have these depend on the presence of the cht.sh plugin
+# It's faster to just alias these to cht.sh and let the invocation fail later instead of checking for the existence of cht.sh
 alias cht=cht.sh
 alias ch=cht.sh
 
