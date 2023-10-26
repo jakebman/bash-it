@@ -160,8 +160,8 @@ alias setaged=staged
 alias stagerd=staged
 alias stg=staged
 alias sho=show
-# some of these are handled by a "duplicating alias" too, but it's better for them to be here than in jake-aliases
-# which would imply that these are legitimate git commands.
+# some of these are handled by a "duplicating alias" too (so alias comm0t='git comm0t' would work) but it's better for
+# them to be here than in jake-aliases which would imply that these are legitimate git commands.
 # To handle these both with and without git requires duplication. I'd rather have that duplication in here than
 # in jake-aliases. These are typo words, not git-command words.
 # TODO: I wish there were a way to auto-correct `commit --amened` to `commit --amend`
