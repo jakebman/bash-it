@@ -193,6 +193,7 @@ alias statu=status
 alias staut=status
 alias tatus=status
 alias staus=status
+alias st=status # first unique difference from s's status-or-show magic
 alias staqsh=stashs
 alias stashs=stash
 alias u=pull # more likely I was thinking of 'up', but that's just 'pull' anyway
