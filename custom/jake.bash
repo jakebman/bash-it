@@ -39,12 +39,13 @@ export MAVEN_ARGS="-T1C"
 #        you would otherwise be searching 2/10ths of the screen *up* from where you started
 #   It's also worth noting that this is *per line*, so following matches on the same line are also skipped
 export LESS="--quit-if-one-screen --quit-at-eof --no-init --RAW-CONTROL-CHARS --tabs=2 --jump-target=.2 --SEARCH-SKIP-SCREEN"
-# I like editing ~/.lessfilter, and this keeps getting in the way. This is the 'other' default for this setting
-# That means that I could export XDG_DATA_HOME here instead of LESSHISTFILE, and less would implicitly use it
-# I... don't want to do that :\ - I really want to preserve the 'should use the default' quality of these variables,
+# I liked editing ~/.lessfilter (which is now in XDG_CONFIG_HOME), and this kept getting in the way.
+# Still, this is the proper XDG-like location for this file. Since it's the 'other' default for this setting,
+# I could export XDG_DATA_HOME here instead of LESSHISTFILE, and less would implicitly use it.
+# BUT I don't want to do that :\ - I really want to preserve the 'should use the default' quality of the XDG variables,
 # and this shim lets me ~sorta~ do that
 export LESSHISTFILE="${XDG_DATA_HOME:-${HOME}/.local/share}/lesshst"
-export LESSSTYLE=sas
+export LESSSTYLE=sas # respected by lessfilter in XDG_CONFIG_HOME (not actually a LESS env variable)
 
 if [ -f "$HOME/.cargo/env" ] ; then
 	source "$HOME/.cargo/env"
@@ -52,17 +53,20 @@ fi
 
 # TODO: I'd like to be able to apply these to stdin as well (the "||- your-command %s" variation).
 # That'll take more infrastructure.
-# Read more in $HOME/.lessfilter
+# Read more in $XDG_CONFIG_HOME/lessfilter or ~/.lessfilter
 if _command_exists lesspipe ; then # most likely; gets zip files too
   eval `lesspipe`
-elif _command_exists "$HOME/.lessfilter" ; then # my custom shim for coloring lesspipe. lesspipe calls it
+elif _command_exists "${XDG_CONFIG_HOME:-${HOME}/.config}/lessfilter" ; then # my custom shim for coloring lesspipe. lesspipe calls it
+  _log_warn "lesspipe is not available, but XDG_CONFIG_HOME/lessfilter is present at ${XDG_CONFIG_HOME:-${HOME}/.config}/lessfilter. Using that"
+  export LESSOPEN="|| ${XDG_CONFIG_HOME:-${HOME}/.config}/lessfilter %s"
+elif _command_exists "$HOME/.lessfilter" ; then # a legacy location for lessfilter
   _log_warn "lesspipe is not available, but ~/.lessfilter is present. Using that"
   export LESSOPEN="|| $HOME/.lessfilter %s"
 elif _command_exists pygmentize ; then # fallback if somehow we don't have anything else useful
   # see `man less`, section "INPUT PREPROCESSOR"
   # We only use pygmentize on named files (not '||-') because
   # I don't really like the default colors that are guessed
-  _log_warn "lesspipe and ~/.lessfilter are missing. Using pygmentize bare"
+  _log_warn "lesspipe is mising and lessfilter is missing from both ~ and XDG_CONFIG_HOME. Using pygmentize bare"
   export LESSOPEN='|| pygmentize -f 256 -O style="${LESSSTYLE:-default}" -g %s 2>/tmp/pygmentize-errors'
 else
   _log_error "pygmentize is available via sudo apt install python-pygments"

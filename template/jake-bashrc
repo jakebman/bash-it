@@ -22,7 +22,6 @@ export GNUPGHOME="${XDG_CONFIG_HOME}/gnupg"
 # .gitmodules - required because I'm keeping subrepos in my conf vcsh repo (needs to live in $GIT_WORK_TREE)
 # .java - for jshell, and other users of the jdk's java.util.prefs.Preferences API
 # .landscape - ubuntu-ism
-# .lessfilter - It's referenced by /usr/bin/lesspipe, which doesn't respect XDG
 # .m2 - requires cli argument to move settings.xml, which is the only thing I keep there anyway :(
 # .motd_shown - probably not doable
 # .mrconfig (& .mr which symlinks to beat .mrtrust at tab completion) - cannot be moved without a code change in mr tool
