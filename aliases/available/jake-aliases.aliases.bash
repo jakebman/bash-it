@@ -229,6 +229,7 @@ alias co='git checkout'
 alias ignored='git status --ignored'
 alias staged='git diff --staged'
 alias addp='git add --patch'
+alias autostash='git pull --autostash'
 
 # shorthand command
 alias s=status-or-show
