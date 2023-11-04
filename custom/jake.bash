@@ -181,6 +181,11 @@ function delta {
     # git-delta is aliased in git to run git with delta as the pager
 	# and git-deltaDiff uses that to run diff
     git deltaDiff "$@"
+  # TODO: with a command that can say if `delta X Y Z` should act like `git X Y Z`,
+  # I can then dispatch wisely to `git delta X Y Z`. It's possible that only X really
+  # matters for that evaluation
+  # elif _jake-is-git-command "$1";
+  #    git delta "$@"
   else
     command delta "$@"
   fi
