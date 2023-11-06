@@ -229,7 +229,7 @@ alias co='git checkout'
 alias ignored='git status --ignored'
 alias staged='git diff --staged'
 alias addp='git add --patch'
-alias autostash='git pull --autostash'
+alias autostash='git pull --rebase --autostash' # I ususally mean rebase as well as autostash
 
 # shorthand command
 alias s=status-or-show
