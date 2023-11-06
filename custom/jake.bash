@@ -73,6 +73,8 @@ else
 fi
 
 function vars {
+  # TODO: this is both better and worse than printenv (printenv recognizes functions, but doesn't do partial matching)
+  # compare/contrast their results for vars vim, printenv vim, and printenv | ack vim
   if [ "$#" -eq 0 ] ; then
     # magic incantation from the internet
     # Basically, prints the variables and functions of
