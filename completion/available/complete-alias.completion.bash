@@ -4,7 +4,7 @@ about-plugin "Use cykerway's complete-alias project to complete aliases"
 # BASH_IT_LOAD_PRIORITY: 800
 
 # From https://github.com/cykerway/complete-alias
-
+# TODO: this can actually live in the /vendor folder
 : "${COMPLETE_ALIAS_FILE:=${HOME}/.complete-alias/complete_alias}"
 
 if [[ -f "${COMPLETE_ALIAS_FILE}" ]]; then
