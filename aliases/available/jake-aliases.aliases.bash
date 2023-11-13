@@ -206,6 +206,7 @@ alias cherry-pick='git cherry-pick'
 alias tag='git tag'
 alias reflog='git reflog'
 alias rev-parse='git rev-parse'
+alias untracked='git untracked' # a git alias, probably 'status --untracked'
 # git-extras
 alias authors='git authors'
 alias lock='git lock'
