@@ -34,7 +34,7 @@ function pj() {
 		1)
 			dest="${dests[*]}/${proj}"
 			;;
-		*)
+		*) # TODO: what if we print the others, but go to the FIRST match
 			PS3="Multiple project directories found. Please select one: "
 			dests+=("cancel")
 			select d in "${dests[@]}"; do
