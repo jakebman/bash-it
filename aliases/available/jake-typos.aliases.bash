@@ -235,4 +235,5 @@ alias  onfig=config
 alias   nfig=config
 alias   conf=config
 
+alias ci=co
 alias coi=co
