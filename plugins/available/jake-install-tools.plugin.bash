@@ -371,8 +371,6 @@ function _jake-check-optional-tools() {
 	echo -en "\t"
 	echo 'sudo apt-add-repository ppa:zanchey/asciinema'
 	echo -en "\t"
-	echo 'sudo apt-get update # potentially already done by adding the ppa'
-	echo -en "\t"
 	echo 'sudo apt install asciinema'
   fi
 
