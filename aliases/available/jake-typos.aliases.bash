@@ -112,6 +112,8 @@ alias dfiff=diff
 alias difff=diff
 alias diiff=diff
 
+alias renite=remote
+
 alias bash0t=bash-it
 alias bash0-t=bash-it
 # my own tool that does apt updates
