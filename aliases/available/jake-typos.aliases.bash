@@ -35,6 +35,7 @@ alias agit=git
 alias ghit=git
 alias ghti=git
 alias gitt=git
+alias gitr=git
 alias qgit=git
 alias jgti=git # it's like... sometimes I just mash the keyboard while thinking really hard about the command
 
