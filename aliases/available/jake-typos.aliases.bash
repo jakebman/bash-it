@@ -131,6 +131,7 @@ alias grpe=grep
 alias vile=file
 alias fiel=file
 alias fild=file
+alias fil=file
 
 alias mkae=make
 alias maek=make
