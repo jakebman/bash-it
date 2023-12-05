@@ -380,6 +380,12 @@ function _jake-check-optional-tools() {
 		echo 'sudo rm "$(which git-delta)"'
   fi
 
+  if _command_exists git-vendor ; then
+		echo "Nothing to do for git-vendor - git-vendor is happy"
+  else
+		echo "Consider installing git-vendor - it's a tool for bash-it vendor management from https://github.com/Tyrben/git-vendor"
+  fi
+
   if _command_exists makedeb ; then
 	  echo "Nothing to do for makedeb - makedeb is happy"
   else
