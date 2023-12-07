@@ -119,6 +119,7 @@ function fidget {
 }
 alias fid=fidget
 alias f=fidget
+alias ff="fidget --fast"
 alias asdf=fidget
 alias sdf=fidget
 
