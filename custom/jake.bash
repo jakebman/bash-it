@@ -100,7 +100,12 @@ function _jake-special-single-args-for-diff {
 function fidget {
 	type fidget
 	echo "TODO: loop this into jake-maintain-system tech"
-	sleep 12
+	if [[ "$#" -eq 0 ]] ; then
+		echo "giving you a chance to cancel"
+		sleep 12
+	else
+		echo "literally any argument works as-if it were '--quickly'"
+	fi
 	( # subshell. Automatically undoes the cd ~
 		cd ~
 		jake-sdkman-update
