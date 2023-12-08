@@ -15,8 +15,18 @@ wsl2unix() {
 
 # TODO: these programs might live in Program Files (x86) instead
 alias chrome="'/mnt/c/Program Files/Google/Chrome/Application/chrome.exe'"
-alias notepad="'/mnt/c/Program Files/Notepad++/notepad++.exe'"
-alias npp="'/mnt/c/Program Files/Notepad++/notepad++.exe'"
+
+# TODO: Not sure I like this pattern, but it's an interesting first pass:
+NOTEPAD="/mnt/c/Program Files/Notepad++/notepad++.exe"
+NOTEPAD_LEGACY="/mnt/c/Program Files (x86)/Notepad++/notepad++.exe"
+if [[ -f "$NOTEPAD_LEGACY" ]] && [[ ! -f "$NOTEPAD" ]] ; then
+	NOTEPAD="$NOTEPAD_LEGACY"
+fi
+alias notepad="'$NOTEPAD'"
+alias npp="'$NOTEPAD'"
+unset NOTEPAD
+unset NOTEPAD_LEGACY
+
 alias explorer=explorer.exe
 alias wsl=wsl.exe
 alias winmerge="'/mnt/c/Program Files/WinMerge/WinMergeU.exe'"
