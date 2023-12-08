@@ -129,6 +129,8 @@ alias qcd=cd # I quit less *twice*, then wanted to cd
 
 alias grpe=grep
 
+alias pgre=pgrep
+
 alias vile=file
 alias fiel=file
 alias fild=file
