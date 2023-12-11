@@ -83,6 +83,7 @@ alias sork=sort
 alias cata=cat
 alias vat=cat
 alias ca=cat
+alias cag=cat
 alias catg=cat
 alias qcat=cat
 
