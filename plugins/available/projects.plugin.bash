@@ -1,6 +1,7 @@
 # shellcheck shell=bash
 about-plugin 'quickly navigate configured project paths'
 
+# TODO: is there a way to more-naturally emulate CDPATH?
 : "${BASH_IT_PROJECT_PATHS:=$HOME/Projects:$HOME/src:$HOME/work}"
 
 function pj() {
