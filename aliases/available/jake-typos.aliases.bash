@@ -231,6 +231,8 @@ alias lgop=logp
 alias lopg=logp
 alias jfd=jdf
 
+alias dockar=docker
+
 # super eager with that second s
 alias bashs=bash
 alias bas=bash
