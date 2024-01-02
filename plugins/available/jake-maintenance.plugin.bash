@@ -40,7 +40,7 @@ function jake-maintain-system() {
 	  echo "We should probably look into unattended-upgrade at https://unix.stackexchange.com/q/342663, and put that in the jake-install... script"
 	  (sudo apt-update-only && echo "Listing..." && apt list --upgradable) |& tee apt-update &
 	  echo "$! spawned for apt update" | jake-log
-
+	  echo "TODO: clean up docker images if docker is present: https://rzymek.github.io/post/docker-prune/ (or docker system prune)"
 	  for pid in `jobs -p`; do
 		  wait $pid || echo PID $pid failed somehow | jake-log
 	  done
