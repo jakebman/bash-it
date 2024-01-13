@@ -115,6 +115,7 @@ alias difff=diff
 alias diiff=diff
 
 alias renite=remote
+alias remotes=remote # technically, a different word, but should do the same thing
 
 alias bash0t=bash-it
 alias bash0-t=bash-it
