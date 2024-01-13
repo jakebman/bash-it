@@ -7,6 +7,7 @@ plugins curl-logging
 plugins dircolors
 plugins dotfiles-via-bare-git-repo-with-config-alias
 plugins gitstatus
+plugins history-eternal
 plugins jake-cdd
 plugins jake-install-tools
 plugins jake-maintenance
