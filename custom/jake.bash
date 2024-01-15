@@ -199,6 +199,16 @@ function delta {
   fi
 }
 
+function browse {
+	about "allow you to type the bare word 'browse' and get an automatic gh browse, while not stepping on the toes of xdg-utils's browse command, which takes arguments"
+	if [[ "$#" -eq 0 ]] ; then
+		gh browse "$@"
+	else
+		command browse "$@"
+	fi
+}
+
+
 # Inspired by https://github.com/tpope/vim-obsession/issues/11
 function vim {
 	local file="${HOME}/.vim/jake-autosaved-session"
