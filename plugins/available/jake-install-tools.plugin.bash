@@ -86,7 +86,7 @@ function jake-install-tools() {
   _jake-find-tool browse xdg-utils "slightly heavy, but a nice enhancement to open urls or files. Maybe --no-install-recommends?"
   _jake-find-tool sponge moreutils 'a tee that can write back to the original file of a pipeline :)'
   _jake-find-tool xeyes x11-apps "because I really like googly eyes"
-  _jake-find-tool wslview wslu "installs wslview, which is an /etc's alternative x-www-browser"
+  _jake-find-tool wslview wslu "installs wslview, which is an /etc's alternative x-www-browser (but not www-browser - lynx wins that bid)"
   _jake-find-tool http httpie
   _jake-find-tool git-extras
   _jake-find-tool xmlindent # doesn't have --long-options, which is a little weird, but formats all XML (incl. xmllint --xpath results), so that's good
