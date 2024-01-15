@@ -33,6 +33,7 @@ alias got=git
 alias gut=git
 alias agit=git
 alias ghit=git
+alias gith=git
 alias ghti=git
 alias gitt=git
 alias gitr=git
