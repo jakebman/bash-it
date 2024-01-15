@@ -82,3 +82,12 @@ function realpath {
     command realpath "$@"
   fi
 }
+
+function file {
+	about "allow file to implicitly work against all files in the current folder"
+	if [[ "$#" -eq 0 ]] ; then
+		file *
+	else
+		command file "$@"
+	fi
+}
