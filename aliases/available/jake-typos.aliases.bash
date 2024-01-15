@@ -185,6 +185,7 @@ alias commt=commit
 alias cmmit=commit
 alias cimmit=commit
 alias vimmit=commit
+alias commmit=commit
 alias committ=commit
 alias commit-a='commit -a'
 alias commita='commit -a'
