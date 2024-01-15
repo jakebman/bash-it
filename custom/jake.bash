@@ -200,7 +200,7 @@ function delta {
 }
 
 function browse {
-	about "allow you to type the bare word 'browse' and get an automatic gh browse, while not stepping on the toes of xdg-utils's browse command, which takes arguments"
+	about "allow you to type the bare word 'browse' and get an automatic gh browse, while not stepping on the toes of xdg-utils's browse command (a symlink to xdg-open), which takes arguments"
 	if [[ "$#" -eq 0 ]] ; then
 		gh browse "$@"
 	else
@@ -208,6 +208,14 @@ function browse {
 	fi
 }
 
+function open {
+	about "essentially identical to 'browse' - implicit gh browse, but runs the open command instead. (open is an alternatives, which usually picks xdg-open)"
+	if [[ "$#" -eq 0 ]] ; then
+		gh browse "$@"
+	else
+		command open "$@"
+	fi
+}
 
 # Inspired by https://github.com/tpope/vim-obsession/issues/11
 function vim {
