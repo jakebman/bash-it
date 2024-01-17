@@ -244,6 +244,7 @@ alias bas=bash
 alias confgi=config
 alias cofngi=config
 alias conifg=config
+alias cofnig=config
 alias  confg=config
 alias  cofig=config
 alias  onfig=config
