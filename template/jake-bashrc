@@ -40,6 +40,9 @@ export GNUPGHOME="${XDG_CONFIG_HOME}/gnupg"
 # No need to export it because I don't know of any programs that need this defined to work
 : ${XDG_STATE_HOME:=${HOME}/.local/state}
 
+export GRADLE_USER_HOME="${XDG_STATE_HOME}/gradle" # unfortunately,
+[ -d ~/.gradle ] && echo "heads up - you have a dangling ~/.gradle folder. It lives in $GRADLE_USER_HOME now"
+
 export PERL_CPANM_HOME="${XDG_STATE_HOME}/cpanm" # cpanm command in the cpanminus package from apt (for rakubrew)
 # These next few lines are verbatim from history-eternal plugin. I want 'something' like this, in order to automatically
 # create the XDG directory for $HISTFILE. And *this code* is very much something like itself.
