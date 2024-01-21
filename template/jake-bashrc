@@ -72,6 +72,7 @@ case $- in
 esac
 
 # Uncomment either of these lines to enable bash-it doctor-like debugging
+# n.b. There is no BASH_IT_LOG_LEVEL_DEBUG, but I keep thinking that's the name for trace when I ack for it
 # export BASH_IT_LOG_LEVEL=6 # BASH_IT_LOG_LEVEL_INFO, ... which isn't available yet
 # export BASH_IT_LOG_LEVEL=7 # BASH_IT_LOG_LEVEL_TRACE, which is the highes available. Only wsl seems to use it
 
