@@ -12,6 +12,9 @@ alias jack=j
 # I want j!! to work for a previous pj query, too
 alias jpj=j
 
+# Alias to look for my files
+alias jake='j --jake'
+
 # Because... tree should basically always be paged
 alias tree=ltree
 
