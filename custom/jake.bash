@@ -158,6 +158,26 @@ function llwhich {
 alias llw=llwhich
 alias lsw=llwhich
 
+function cdwhich {
+	about "technically, cddwhich - [cd] into the [d]irectory of [which] executable we're talking about"
+	# TODO: what if this could move to the directory of the source of a function, too?
+	if [[ "$#" -eq 0 ]]; then
+		echo "${FUNCNAME[0]}: need an argument"
+		return 1
+	fi
+	local where # needs a separate line, otherwise the failure of `which` could be eaten by the success of `local`
+	where="$(which "$1")"
+	if [[ "$?" -eq 0 ]]; then
+		cdd "$where"
+	else
+		echo "${FUNCNAME[0]} - ${1} is not found. Cannot change to its parent directory"
+		return 1
+	fi
+}
+alias cddwhich=cdwhich
+alias cddw=cdwhich
+alias cdw=cdwhich
+
 function xml {
 	if [[ "$#" -eq 0 ]] && [[ -t 0 ]]; then
 		# reading from terminal, but no arguments on the CLI
