@@ -24,6 +24,15 @@ function diff {
   fi
 }
 
+# TODO: I've gotten to the point of being frustrated at line wrapping messing with my diffs.
+# TODO: I'd love it if this also looped into git diff, too
+function diff-ignore-wrapping {
+	about "Interpretting the input files as if they were markdown, calculate the diff. Basically, ignore line wrapping in the diff"
+	echo "TODO"
+}
+alias markdown-diff=diff-ignore-wrapping
+alias mddiff=markdown-diff
+
 function delta {
   about "allow you to type the bare word 'delta' and get an automatic git delta, while still not harming the delta command"
   if [[ "$#" -eq 0 ]] ; then
