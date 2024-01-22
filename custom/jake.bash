@@ -9,6 +9,8 @@ alias cat='bat --plain'
 
 # Allow j!! to work for a previous ack query
 alias jack=j
+# I want j!! to work for a previous pj query, too
+alias jpj=j
 
 # Because... tree should basically always be paged
 alias tree=ltree
