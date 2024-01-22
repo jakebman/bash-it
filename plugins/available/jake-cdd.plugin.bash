@@ -21,7 +21,9 @@ function _cdd_any () {
 	param "2: cd-like argument, optional. Defaults to '.' (pwd)"
 
 	local arg="${2:-.}"
-	cd "$(_cdd_dirname "${arg}")/${1}"
+	local dir="$(_cdd_dirname "${arg}")"
+
+	cd "${dir}/${1}"
 }
 
 function cdd () {
