@@ -22,8 +22,16 @@ function _cdd_any () {
 
 	local arg="${2:-.}"
 	local dir="$(_cdd_dirname "${arg}")"
+	local suffix="$1"
 
-	cd "${dir}/${1}"
+	if [[ "$dir" = "." ]] && [[ -z "$suffix" ]] ; then
+		# Good job, silly goose. You.. sent yourself back to the current directory
+		# This special case only seems to apply to situations like `cdd asdf`
+		# (I currently can't think of a reason for any `cddd <something here>` to fail in this way)
+		return 1
+	else
+		cd "${dir}/${suffix}"
+	fi
 }
 
 function cdd () {
