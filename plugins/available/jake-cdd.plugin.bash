@@ -11,7 +11,7 @@ function _cdd_dirname () {
 			echo "${1}/.."
 			;;
 		*)
-			dirname "$dir"
+			dirname "${1}"
 			;;
 	esac
 }
