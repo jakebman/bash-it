@@ -213,6 +213,7 @@ alias staus=status
 alias st=status # first unique difference from s's status-or-show magic
 alias staqsh=stashs
 alias stashs=stash
+alias gup=gpull # shortened form - not really a good name, so 'typo'
 alias u=pull # more likely I was thinking of 'up', but that's just 'pull' anyway
 alias p=pull
 alias pu=pull
