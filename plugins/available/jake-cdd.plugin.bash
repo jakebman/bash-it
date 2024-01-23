@@ -1,7 +1,7 @@
 # shellcheck shell=bash
 about-plugin 'some functions (cdd - go to parent folder of; cddd - go to grandparent folder of)'
 
-# TODO: it might make an interesting exercise for these commands to *also* search in $CDPATH
+# TODO: it might make an interesting exercise for these commands to *also* search in $CDPATH or respect other cd flags
 
 function _cdd_dirname () {
 	about "dirname doesn't know about . and .. entries. This method does"
