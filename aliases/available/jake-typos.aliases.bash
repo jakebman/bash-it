@@ -145,7 +145,6 @@ alias mkae=make
 alias maek=make
 
 alias tiem=time
-alias ype=type
 
 alias mcn=mvn
 alias vmn=mvn
@@ -158,7 +157,9 @@ alias ssg=ssh
 
 alias pws=pwd
 
+alias ype=type
 alias tyep=type
+alias tyoe=type
 alias typeo=typo
 
 alias whick=which # (to be fair, I was drinking at the time :| )
