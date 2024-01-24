@@ -129,34 +129,70 @@ function hgrep {
 	history | ack "$@"
 }
 
+function _jake-success {
+	# Stash our success before a success from `local` or `about` overwrites it
+	local success="$?"
+	about 'succeeds if the prior command succeeds. Essentially an alias for [[ "$?" -eq 0 ]], aside from implementation details'
+	[[ "$success" -eq 0 ]]
+}
+
 # TODO: these *-whiches are becoming a pattern. Can this be a bash-it plugin, maybe using _jq-ify tech?
 # TODO: they need completions
-# TODO: potentially try to use (shopt -s extdebug; declare -F quote) tech to jump to functions
-#		see https://askubuntu.com/questions/354915/quote-command-in-the-shell/354929#354929
 function vimwhich {
-	vim "$(which "$1")"
+	# TODO: what if this were able to also jump to the source of a function or alias
+	# We could try to use the (shopt -s extdebug; declare -F quote) tech to jump to functions
+	# see https://askubuntu.com/questions/354915/quote-command-in-the-shell/354929#354929
+	local where
+	where="$(which "$1")"
+	if _jake-success; then
+		echo "success finding '$1' at '$where'"
+		vim "$where"
+	else
+		echo "${FUNCNAME[0]} - ${1} is not found. Cannot open it for editing"
+		return 1
+	fi
 }
 alias vimw=vimwhich
 
 function filewhich {
 	# TODO: what if this was also able to call out that $1 is a function and/or alias, in addition to the executable it masks
-	file "$(which "$1")"
+	local where
+	where="$(which "$1")"
+	if _jake-success; then
+		file "$where"
+	else
+		# Borrow file's error reporting... or potentially a successful fallback!
+		file "$1"
+	fi
 }
 alias filew=filewhich
 
 function catwhich {
 	# TODO: what if this was also able to print functions and aliases, too?
 	# TODO: what if we follow aliases down to their roots?
-	local where="$(which "$1")"
-	cat "$(which "$1")"
-	if [[ -t 1 ]] ; then # stdout is terminal. Cool to add info (see jake's bin/git)
-		echo "${FUNCNAME[0]}: this file lives at '$where'"
+	local where
+	where="$(which "$1")"
+	if _jake-success; then
+		cat "$where"
+		if [[ -t 1 ]] ; then # stdout is terminal. Cool to add info (see jake's bin/git)
+			echo "${FUNCNAME[0]}: this file lives at '$where'"
+		fi
+	else
+		echo "${FUNCNAME[0]} - ${1} is not found. Cannot display its contents"
+		return 1
 	fi
 }
 alias catw=catwhich
 
 function llwhich {
-	ls -al "$(which "$1")"
+	local where
+	where="$(which "$1")"
+	if _jake-success; then
+		ls -al "$where"
+	else
+		# Borrow ls's error reporting... or potentially a successful fallback!
+		ls -al "$1"
+	fi
 }
 alias llw=llwhich
 alias lsw=llwhich
@@ -170,9 +206,10 @@ function cdwhich {
 	fi
 	local where # needs a separate line, otherwise the failure of `which` could be eaten by the success of `local`
 	where="$(which "$1")"
-	if [[ "$?" -eq 0 ]]; then
+	if _jake-success; then
 		cdd "$where"
 	else
+		# a deviation from cdd behavior - `cdd ""` is the 'silly goose, you cd'd into the parent directory of a current file!' case
 		echo "${FUNCNAME[0]} - ${1} is not found. Cannot change to its parent directory"
 		return 1
 	fi
