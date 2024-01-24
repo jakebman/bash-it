@@ -20,7 +20,7 @@ function _cdd_any () {
 	param "1: any number of additional '../..' suffixes to add to the first implicit .. (see the definition of cdd and cddd to see base cases for this)"
 	param "2: cd-like argument, optional. Defaults to '.' (pwd)"
 
-	local arg="${2:-.}"
+	local arg="${2-.}"
 	local dir="$(_cdd_dirname "${arg}")"
 	local suffix="$1"
 
