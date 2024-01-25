@@ -26,6 +26,7 @@ function ltree {
 	# minor rant: why doesn't tree have a long option for this?
 	# invoke tree via `command`, even though it's unambiguous at this time, because
 	# if we move `alias tree=ltree` above this line, we end up in infinite recursion
+	# TODO: it'd be cool if this had an implicit depth limit (-L) that I can override
 	command tree -C "$@" | less
 }
 
