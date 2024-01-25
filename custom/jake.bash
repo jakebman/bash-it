@@ -57,6 +57,8 @@ if [ -f "$HOME/.cargo/env" ] ; then
 	source "$HOME/.cargo/env"
 fi
 
+# TODO: I currently don't have a diff-sorted/sorted-diff/sortdiff/diffsort command (a `sort` variant of jqdiff), and I want one
+
 # TODO: I'd like to be able to apply these to stdin as well (the "||- your-command %s" variation).
 # That'll take more infrastructure.
 # Read more in $XDG_CONFIG_HOME/lessfilter or ~/.lessfilter
