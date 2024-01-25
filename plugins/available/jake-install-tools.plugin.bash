@@ -450,6 +450,8 @@ function _jake-gitlab-repo-release-urls {
 	about "list download urls for a release"
 	param "1: the numeric identifier of a project. Like 34675721 for https://gitlab.com/gitlab-org/cli. Requires a little work to figure out (I peeked at web requests to the API, myself)"
 
+	# TODO: you might be able to use the <user-or-group>/<repo> system here, if you translate / into %2F, per:
+	# https://docs.gitlab.com/ee/api/rest/#namespaced-path-encoding
 	local URL="https://gitlab.com/api/v4/projects/${1}/releases/permalink/latest"
 	# --location follows 301 redirects, like for httpx-sh/httpx, whicah goes to a numeric value
 	curl -s --location "$URL" |
