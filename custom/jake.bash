@@ -113,6 +113,7 @@ function fidget {
 		cd ~
 		jake-sdkman-update
 		up
+		echo "TODO: check for 'mr-able' repos - ones that are in the same folder as an mr-tracked repo, but aren't mr-tracked"
 		if _command_exists win-git-update &>/dev/null ; then
 			echo updating window git stuff too
 			win-git-update
