@@ -92,6 +92,7 @@ alias qcat=cat
 alias gat=bat
 
 # lls is define in jake-aliases. Basically ls | less
+alias qls=ls # I quit less *twice* then wanted to ls
 alias lll=lls
 alias llls=lls
 alias llss=lls
