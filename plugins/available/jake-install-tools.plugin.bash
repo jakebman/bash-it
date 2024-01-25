@@ -321,7 +321,7 @@ function _jake-check-optional-tools() {
     echo "Nothing to do for httpx - httpx is happy"
   else
     echo "httpx not found! Install it from one of these: (it's a zip file with the executable in it)"
-    _jake-git-repo-release-urls httpx-sh/httpx | grep linux | grep -v alligator # final nonsense to remove highlighting
+    _jake-github-repo-release-urls httpx-sh/httpx | grep linux | grep -v alligator # final nonsense to remove highlighting
   fi
 
   if _command_exists mvn ; then
@@ -334,7 +334,7 @@ function _jake-check-optional-tools() {
     echo "Nothing to do for fzf - fzf is happy"
   else
 	echo "Please install fzf - a dependency for my j script. Apt has an old version. I like 0.38.0"
-	_jake-git-repo-release-urls junegunn/fzf | grep linux | grep amd | grep -v alligator # alligator is nonsense to remove highlighting
+	_jake-github-repo-release-urls junegunn/fzf | grep linux | grep amd | grep -v alligator # alligator is nonsense to remove highlighting
 	echo "plus the manpage:"
 	echo -en "\t"
 	echo 'wget --directory-prefix ${HOME}/bin/man/man1/ https://raw.githubusercontent.com/junegunn/fzf/master/man/man1/fzf.1 && mandb --user-db'
@@ -345,7 +345,7 @@ function _jake-check-optional-tools() {
   else
 	echo "Please install bat - a dependency for my j script. Apt has an old version. I like 0.22.1"
 	echo "Get the new .deb from one of these:"
-	_jake-git-repo-release-urls sharkdp/bat | grep deb$ | grep amd | grep -v musl
+	_jake-github-repo-release-urls sharkdp/bat | grep deb$ | grep amd | grep -v musl
 	echo -en "\t"
 	echo 'sudo dpkg -i bat*.deb'
   fi
@@ -355,9 +355,19 @@ function _jake-check-optional-tools() {
   else
 	echo "Please install delta - a bat-smart diff."
 	echo "Get the new .deb from one of these, or via cargo from https://github.com/dandavison/delta"
-	_jake-git-repo-release-urls dandavison/delta | grep deb$ | grep amd | grep -v musl
+	_jake-github-repo-release-urls dandavison/delta | grep deb$ | grep amd | grep -v musl
 	echo -en "\t"
 	echo 'sudo dpkg -i git-delta*.deb'
+  fi
+
+  if _binary_exists glab ; then
+	echo "Nothing to do for glab - glab is happy"
+  else
+	echo "Please install glab - gitlab's cli tool (parallels github's gh)"
+	echo "Get the new .deb from one of these, or via https://gitlab.com/gitlab-org/cli/-/releases"
+	_jake-gitlab-repo-release-urls 34675721 | grep deb$ | grep x86_64 | grep -v musl
+	echo -en "\t"
+	echo 'sudo dpkg -i glab_*.deb'
   fi
 
   if _command_exists asciinema ; then
@@ -424,14 +434,26 @@ function _jake-check-optional-tools() {
 
 # TODO: both users of this method would like progressive filtering
 # Basically: give me the deb that is amd, and non-musl, but if nothing is found, print the best list available
-function _jake-git-repo-release-urls {
+function _jake-github-repo-release-urls {
 	about "list download urls for a release"
 	param "1: repo, in <user>/<repo> format. Like sharkdp/bat"
 
+	local URL="https://api.github.com/repos/${1}/releases/latest"
 	# --location follows 301 redirects, like for httpx-sh/httpx, which goes to a numeric value
-	curl -s --location "https://api.github.com/repos/${1}/releases/latest" |
+	curl -s --location "$URL" |
 		jq -r '.assets[].browser_download_url' ||
-	echo "failure to read from https://api.github.com/repos/${1}/releases/latest"
+	echo "failure to read from ${URL}"
+}
+# variant for gitlab
+function _jake-gitlab-repo-release-urls {
+	about "list download urls for a release"
+	param "1: the numeric identifier of a project. Like 34675721 for https://gitlab.com/gitlab-org/cli. Requires a little work to figure out (I peeked at web requests to the API, myself)"
+
+	local URL="https://gitlab.com/api/v4/projects/${1}/releases/permalink/latest"
+	# --location follows 301 redirects, like for httpx-sh/httpx, whicah goes to a numeric value
+	curl -s --location "$URL" |
+		jq -r '.assets.links[].url' ||
+	echo "failure to read from ${URL}"
 }
 
 function _jake-remove-motd-junk {
