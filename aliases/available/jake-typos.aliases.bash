@@ -160,6 +160,9 @@ alias pws=pwd
 alias ype=type
 alias tyep=type
 alias tyoe=type
+# because that's what I was trying to type at the time, and I figure if I most-common'd
+# 'type asdf' into 'typ easdf', it wouldn't work anyway
+alias typ=typo
 alias typeo=typo
 
 alias whick=which # (to be fair, I was drinking at the time :| )
@@ -182,6 +185,7 @@ alias sho=show
 # in jake-aliases. These are typo words, not git-command words.
 # TODO: I wish there were a way to auto-correct `commit --amened` to `commit --amend`
 alias ammend=amend
+alias amned=amend
 alias comit=commit
 alias comm9t=commit
 alias comm0t=commit
