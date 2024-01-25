@@ -44,7 +44,7 @@ alias llh='ll -h'
 
 # 'Magic' aliases - smarter than their corresponding git command (they can see more Jake context)
 
-# pull can have special meaning in $HOME
+# pull can have special meaning in $HOME, or other places with mr configs
 function pull {
 	if [ "$#" -ne 0 ] ; then
 		# If we have arguments, it's because I'm thinking this is a git pull
@@ -60,7 +60,6 @@ function pull {
 		git pull "$@" || git fetch
 	fi
 }
-alias gpull='git pull' # sometimes I want to pull in ~
 
 function status {
 	# see pull, above
@@ -70,7 +69,6 @@ function status {
 		git status "$@"
 	fi
 }
-alias gstatus='git status' # Sometimes, I want to run status in ~
 
 function status-or-show {
 	if JAKE_SUPPRESS_GIT_SQUAWK=1 git diff --quiet && JAKE_SUPPRESS_GIT_SQUAWK=1 git diff --staged --quiet ; then
@@ -188,6 +186,12 @@ function reset {
 	fi
 }
 
+# non-standard plan - use the prefix g to disambiguate the desired `git help` from
+# the full automatic invocation of an existing command. Mostly, this lets me pick
+# `git pull` over `mr up` where `pull` would otherwise pick the second one
+alias ghelp='git help' # help is actually a bash builtin
+alias gpull='git pull'
+alias gstatus='git status'
 
 # 'Vanilla' aliases - these commands simply add 'git' at the beginning
 alias clone='git clone'
