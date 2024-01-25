@@ -56,7 +56,11 @@ function delta {
 function browse {
 	about "allow you to type the bare word 'browse' and get an automatic gh browse, while not stepping on the toes of xdg-utils's browse command (a symlink to xdg-open), which takes arguments"
 	if [[ "$#" -eq 0 ]] ; then
-		gh browse "$@"
+		if remotes | grep --quiet gitlab ; then
+			glab glab repo view -w "$@"
+		else
+			gh browse "$@"
+		fi
 	else
 		command browse "$@"
 	fi
