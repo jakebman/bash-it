@@ -80,6 +80,8 @@ fi
 
 function files {
 	about "list the files of an apt package"
+	# TODO: apt-file has a 'progress bar'-like thing. It'd be cool to be able to borrow that
+	echo "(This command takes a long time, and it's eating apt-file's progress bar. Sorry.)"
 	apt-file list "$@" | less
 }
 
