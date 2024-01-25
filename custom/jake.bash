@@ -78,6 +78,11 @@ else
   _log_error "pygmentize is available via sudo apt install python-pygments"
 fi
 
+function files {
+	about "list the files of an apt package"
+	apt-file list "$@" | less
+}
+
 function vars {
   # TODO: this is both better and worse than printenv (printenv recognizes functions, but doesn't do partial matching)
   # compare/contrast their results for vars vim, printenv vim, and printenv | ack vim
