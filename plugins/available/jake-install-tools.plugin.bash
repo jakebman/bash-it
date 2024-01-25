@@ -434,6 +434,7 @@ function _jake-check-optional-tools() {
 
 # TODO: both users of this method would like progressive filtering
 # Basically: give me the deb that is amd, and non-musl, but if nothing is found, print the best list available
+# (this might be a cool use-case for fzf... aside from the fact that I'm 100% intending to run this code *in order to* prompt myself to install fzf)
 function _jake-github-repo-release-urls {
 	about "list download urls for a release"
 	param "1: repo, in <user>/<repo> format. Like sharkdp/bat"
