@@ -222,6 +222,7 @@ alias unlock='git unlock'
 # bare command's behavior to continue to track as-if it were just adding git to it. I do expect their
 # behavior to remain how it's described here, though.
 alias rainbow='git rainbow' # colored graphlines in the terminal
+alias rainbow-here='git rainbow-here' # same, but only the current history (no --all)
 # TODO: why does quitting `less` with q cause these commands to fail?
 # Testing seems to indicate that git considers a failure to get to the end of output
 # to be a failure in this way
