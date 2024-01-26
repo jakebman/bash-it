@@ -36,6 +36,17 @@ alias watch='watch --differences=permanent'
 # Sometimes I use this name for the command rather than its normal name. Oops.
 alias maven=mvn
 
+# Single-letter/alphabetical shortcut alaises. Formatting to match comments
+  alias b=browse
+# alias d=diff # currently in jake-typos.aliases.bash because it was a typo first
+# alias f=fidget # defined in custom/jake.bash
+  alias g=git
+# alias m=mr # typo
+# alias p=pull # typo
+# alias q="echo no need to quit - you are already out"
+  alias s=status-or-show # defined below, but fine to alias here
+# alias u=pull # typo; actually for 'up', but shortcutting
+# alias v=vim # typo
 
 # ll, plus other flags
 alias lla='ll -a'
@@ -79,7 +90,6 @@ function status-or-show {
 		git status "$@"
 	fi
 }
-alias s=status-or-show
 
 function _jake-banner-display {
 	about "display a banner, but don't care if it fails"
@@ -241,9 +251,6 @@ alias ignored='git status --ignored'
 alias staged='git diff --staged'
 alias addp='git add --patch'
 alias autostash='git pull --rebase --autostash' # I ususally mean rebase as well as autostash
-
-# shorthand command
-alias s=status-or-show
 
 # 'Not exactly duplicating' aliases
 # Not all of these are duplicating a git alias, but they're not exactly typos either
