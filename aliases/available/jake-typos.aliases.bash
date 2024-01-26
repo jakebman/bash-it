@@ -66,9 +66,6 @@ alias lh=llh
 alias les=less
 alias lesss=less
 
-alias ltre=ltree
-alias ltreee=ltree
-
 alias ach=ack
 alias akc=ack
 

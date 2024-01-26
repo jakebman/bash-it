@@ -21,15 +21,6 @@ function h {
 	history "$@" | less
 }
 
-function ltree {
-	# I already set CLICOLOR_FORCE, so -C is not required, but it's more consistent to set it here
-	# minor rant: why doesn't tree have a long option for this?
-	# invoke tree via `command`, even though it's unambiguous at this time, because
-	# if we move `alias tree=ltree` above this line, we end up in infinite recursion
-	# TODO: it'd be cool if this had an implicit depth limit (-L) that I can override
-	command tree -C "$@" | less
-}
-
 # I really like permament differences
 alias watch='watch --differences=permanent'
 
