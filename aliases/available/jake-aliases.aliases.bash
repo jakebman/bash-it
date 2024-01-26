@@ -35,6 +35,7 @@ alias maven=mvn
 # alias m=mr # typo
 # alias p=pull # typo
 # alias q="echo no need to quit - you are already out"
+  alias r=realpath # convenient shortcut to de-symlink where I currently am
   alias s=status-or-show # defined below, but fine to alias here
 # alias u=pull # typo; actually for 'up', but shortcutting
 # alias v=vim # typo
