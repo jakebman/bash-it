@@ -28,7 +28,7 @@ alias watch='watch --differences=permanent'
 alias maven=mvn
 
 # Single-letter/alphabetical shortcut alaises. Formatting to match comments
-  alias b=browse
+  alias b=browse # or bash?
 # alias d=diff # currently in jake-typos.aliases.bash because it was a typo first
 # alias f=fidget # defined in custom/jake.bash
   alias g=git
