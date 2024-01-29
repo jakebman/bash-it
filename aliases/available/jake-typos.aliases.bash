@@ -205,6 +205,7 @@ alias restoer=restore
 alias rain=rainbow
 alias rainow=rainbow
 alias rianbow=rainbow
+alias ranibow=rainbow
 alias rainboiw=rainbow
 alias setatus=status
 alias stsatus=status
