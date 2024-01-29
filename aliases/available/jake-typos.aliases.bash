@@ -109,6 +109,7 @@ alias idff=diff
 alias duff=diff
 alias dfif=diff
 alias didd=diff
+alias difdf=diff
 alias dfiff=diff
 alias difff=diff
 alias diiff=diff
@@ -161,6 +162,7 @@ alias tyoe=type
 # because that's what I was trying to type at the time, and I figure if I most-common'd
 # 'type asdf' into 'typ easdf', it wouldn't work anyway
 alias typ=typo
+alias fypo=typo
 alias typeo=typo
 
 alias whick=which # (to be fair, I was drinking at the time :| )
