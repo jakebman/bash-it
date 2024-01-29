@@ -157,6 +157,8 @@ alias ssg=ssh
 
 alias pws=pwd
 
+alias vasr=vars
+
 alias ype=type
 alias tyep=type
 alias tyoe=type
