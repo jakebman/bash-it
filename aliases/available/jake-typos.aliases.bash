@@ -245,6 +245,7 @@ alias lop=logp
 alias lgop=logp
 alias lopg=logp
 alias jfd=jdf
+alias jdkf=jdf
 
 alias dockar=docker
 
