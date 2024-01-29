@@ -86,11 +86,11 @@ function status-or-show {
 function realpath-or-rainbow {
 	if [[ "$#" -ne 0 ]] ; then
 		git rainbow "$@"
-	elif [[ "$(realpath "$PWD")" = "$PWD" ]] ; then
-		# realpath would do nothing
-		git rainbow "$@" # empty args
 	else
-		realpath "$@" # empty args
+		# realpath function calls out that we're a silly goose and fails if it would be idempotent
+		# We rely on that here:
+		# (And rainbow is defined as an alias below. It's inlined here)
+		realpath 2>/dev/null || git rainbow-all
 	fi
 }
 
