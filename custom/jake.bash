@@ -111,6 +111,10 @@ function vars {
 }
 alias var=vars # because I'm lazy
 
+#function funs {
+	# TODO: Let's get a function-printing equivalent of vars
+#}
+
 function fidget {
 	type fidget
 	echo "TODO: loop this into jake-maintain-system tech"
