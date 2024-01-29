@@ -43,6 +43,7 @@ alias jgti=git # it's like... sometimes I just mash the keyboard while thinking 
 # Not technically typos, but a common misstep:
 alias :q="echo You are not in vim"
 alias :wq=:q
+alias wq=:q
 # TODO: this could be a function to check if our parent is also bash, and exit to it. Only print this message at top level
 # Basically: exit, but don't exit if we'd lose the terminal
 alias q="echo no need to quit - you are already out"
