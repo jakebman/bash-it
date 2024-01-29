@@ -88,6 +88,8 @@ function vars {
   # TODO: this is both better and worse than printenv (printenv recognizes functions, but doesn't do partial matching)
   # compare/contrast their results for vars vim, printenv vim, printenv BASH_FUNC_vim%%, and printenv | ack vim
 
+  # TODO: it'd be nice if the query were implicitly over the variable NAMES, unless there's "something"
+  # indicating a desire to search VALUES as well. (ex: equals sign in search query)
   local -a ignore_list
   # CAREFUL!!!! these values will be interpolated into a regex!
   # TODO: it'd be nice to give these good names. Mostly thinking of this color regex
