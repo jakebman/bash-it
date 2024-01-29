@@ -92,10 +92,12 @@ function vars {
   # indicating a desire to search VALUES as well. (ex: equals sign in search query)
   local -a ignore_list
   # CAREFUL!!!! these values will be interpolated into a regex!
+  # Specifically, .*THEME.* eats the ignore_ variables, because it matches itself in the value
   # TODO: it'd be nice to give these good names. Mostly thinking of this color regex
   ignore_list=(BASH_ALIASES LS_COLORS SDKMAN_CANDIDATES SDKMAN_CANDIDATES_CSV)
   ignore_list+=("sdkman_.+" "SCM_.+" "SDKMAN_.+" "THEME_.+" "BASH_IT_L(OAD|OG)_.+" "_.+(any underscore variables)*")
-  ignore_list+=(".+_THEME_.+")
+  ignore_list+=("[^=]+_THEME_.+")
+  ignore_list+=("ignore_(list|regex)")
   ignore_list+=("(echo_|)(normal|reset_color|(background_|bold_|underline_|)(black|blue|cyan|green|orange|purple|red|white|yellow))")
   # Using IFS to join ignore_list with a single-character delimiter, from:
   # https://stackoverflow.com/questions/1527049/how-can-i-join-elements-of-a-bash-array-into-a-delimited-string
@@ -113,7 +115,7 @@ function vars {
 		# we're looking for one of these variables. Don't filter.
 		(set -o posix; set) | ack "$@"
 	else
-		(set -o posix; set) | grep -v -E "$ignore_regex" | ack "$@"
+		(set -o posix; set) | ack -v "$ignore_regex" | ack "$@"
 		# TODO: call out which (if any) of these matched. Potentially take args about it?
 		# (but definitely don't do that last - our success/failure should be the one above)
 		echo "ignored ${ignore_list[*]}"
