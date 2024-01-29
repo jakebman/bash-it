@@ -85,10 +85,10 @@ function status-or-show {
 
 function realpath-or-rainbow {
 	if [[ "$#" -ne 0 ]] ; then
-		rainbow "$@"
-	elif [[ "$(realpath)" = "$PWD" ]] ; then
+		git rainbow "$@"
+	elif [[ "$(realpath "$PWD")" = "$PWD" ]] ; then
 		# realpath would do nothing
-		rainbow "$@" # empty args
+		git rainbow "$@" # empty args
 	else
 		realpath "$@" # empty args
 	fi
