@@ -97,7 +97,6 @@ function vars {
   fi
 }
 alias var=vars # because I'm lazy
-alias cars=vars # typo
 
 function fidget {
 	type fidget
