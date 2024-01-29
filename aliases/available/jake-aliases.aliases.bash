@@ -35,7 +35,7 @@ alias maven=mvn
 # alias m=mr # typo
 # alias p=pull # typo
 # alias q="echo no need to quit - you are already out"
-  alias r=realpath # convenient shortcut to de-symlink where I currently am
+  alias r=realpath-or-rainbow # defined below, but fine to alias here
   alias s=status-or-show # defined below, but fine to alias here
 # alias u=pull # typo; actually for 'up', but shortcutting
 # alias v=vim # typo
@@ -80,6 +80,17 @@ function status-or-show {
 		git show "$@"
 	else
 		git status "$@"
+	fi
+}
+
+function realpath-or-rainbow {
+	if [[ "$#" -ne 0 ]] ; then
+		rainbow "$@"
+	elif [[ "$(realpath)" = "$PWD" ]] ; then
+		# realpath would do nothing
+		rainbow "$@" # empty args
+	else
+		realpath "$@" # empty args
 	fi
 }
 
