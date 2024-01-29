@@ -101,7 +101,14 @@ export -f vim # so that j receives it!
 function realpath {
   about "allow you to type the bare word 'realpath' and automatically be cd'd there"
   if [[ "$#" -eq 0 ]] ; then
-		cd "$(command realpath .)"
+		local nextdir="$(command realpath .)"
+		if [[ "$nextdir" = "$PWD" ]] ; then
+			# Don't cd if we're already there. See also cddd's silly goose callout
+			echo "silly goose. You're already there." >2
+			return 1
+		else
+			cd "$nextdir"
+		fi
   else
     command realpath "$@"
   fi
