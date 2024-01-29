@@ -7,6 +7,8 @@
 export XDG_CONFIG_HOME
 export ACKRC="${XDG_CONFIG_HOME}/ack/ackrc"
 export GNUPGHOME="${XDG_CONFIG_HOME}/gnupg"
+# https://docs.docker.com/engine/reference/commandline/cli/#environment-variables
+export DOCKER_CONFIG="${XDG_CONFIG_HOME}/docker"
 
 # Gradle is the only current user of XDG_DATA_HOME, so it's inlined here
 export GRADLE_USER_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/gradle"
@@ -18,7 +20,6 @@ export GRADLE_USER_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/gradle"
 # .bashrc, .profile - requires decent high-powered intervention to loop in so early. Potentially an /etc/profile.d entry?
 # .bash-it - inconvenient for me - it's easier to come in here and change stuff without it being a level deeper
 # .cache, .config, ... .local - the XDG solution folders
-# .docker (needs WSL compatibility. Probably not muckable)
 # .editorconfig - currently not supported by all involved parties
 # .gi_list - not supported. git-ignore-io in git-extras writes this
 # .gitignore.d - vcsh, created by default. Not changeable right now?
