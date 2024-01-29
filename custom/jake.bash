@@ -87,18 +87,21 @@ function files {
 function vars {
   # TODO: this is both better and worse than printenv (printenv recognizes functions, but doesn't do partial matching)
   # compare/contrast their results for vars vim, printenv vim, printenv BASH_FUNC_vim%%, and printenv | ack vim
+
+  local -a ignore_list
+  # CAREFUL!!!! these values will be interpolated into a regex!
+  ignore_list=(BASH_ALIASES LS_COLORS SDKMAN_CANDIDATES SDKMAN_CANDIDATES_CSV "_.*(private underscore variables)*")
+  # Using IFS to join ignore_list with a single-character delimiter, from:
+  # https://stackoverflow.com/questions/1527049/how-can-i-join-elements-of-a-bash-array-into-a-delimited-string
+  local ignore_regex=$(IFS='|'; echo "^(${ignore_list[*]})")
+
   if [ "$#" -eq 0 ] ; then
     # magic incantation from the internet
     # Basically, prints the variables and functions of
     # the current bash session, but doesn't print the functions
-    (set -o posix; set) | less
+    (set -o posix; set) | grep -v -E "$ignore_regex" | less
+    echo "ignored ${ignore_list[*]}"
   else
-	local -a ignore_list
-	# CAREFUL!!!! these values will be interpolated into a regex!
-	ignore_list=(BASH_ALIASES LS_COLORS SDKMAN_CANDIDATES SDKMAN_CANDIDATES_CSV "_.*(private underscore variables)*")
-	# Using IFS to join ignore_list with a single-character delimiter, from:
-	# https://stackoverflow.com/questions/1527049/how-can-i-join-elements-of-a-bash-array-into-a-delimited-string
-	local ignore_regex=$(IFS='|'; echo "^(${ignore_list[*]})")
 	# nb: ack matching uses smartcase. Can't use grep here if we're using ack below
 	if echo "$ignore_regex" | ack "$@" >/dev/null; then
 		# we're looking for one of these variables. Don't filter.
