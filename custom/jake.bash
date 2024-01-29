@@ -90,7 +90,11 @@ function vars {
 
   local -a ignore_list
   # CAREFUL!!!! these values will be interpolated into a regex!
-  ignore_list=(BASH_ALIASES LS_COLORS SDKMAN_CANDIDATES SDKMAN_CANDIDATES_CSV "_.*(private underscore variables)*")
+  # TODO: it'd be nice to give these good names. Mostly thinking of this color regex
+  ignore_list=(BASH_ALIASES LS_COLORS SDKMAN_CANDIDATES SDKMAN_CANDIDATES_CSV)
+  ignore_list+=("sdkman_.+" "SCM_.+" "SDKMAN_.+" "THEME_.+" "BASH_IT_L(OAD|OG)_.+" "_.+(any underscore variables)*")
+  ignore_list+=(".+_THEME_.+")
+  ignore_list+=("(echo_|)(normal|reset_color|(background_|bold_|underline_|)(black|blue|cyan|green|orange|purple|red|white|yellow))")
   # Using IFS to join ignore_list with a single-character delimiter, from:
   # https://stackoverflow.com/questions/1527049/how-can-i-join-elements-of-a-bash-array-into-a-delimited-string
   local ignore_regex=$(IFS='|'; echo "^(${ignore_list[*]})")
