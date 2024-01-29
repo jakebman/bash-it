@@ -93,7 +93,20 @@ function vars {
     # the current bash session, but doesn't print the functions
     (set -o posix; set) | less
   else
-     (set -o posix; set) | ack "$@"
+	local -a ignore_list
+	# CAREFUL!!!! these values will be interpolated into a regex!
+	ignore_list=(BASH_ALIASES LS_COLORS SDKMAN_CANDIDATES SDKMAN_CANDIDATES_CSV _acktypeargs _negacktypes _acktypes _xspecs)
+	local ignore_regex=$(IFS='|'; echo "^(${ignore_list[*]})")
+	# nb: ack matching uses smartcase. Can't use grep here if we're using ack below
+	if echo "$ignore_regex" | ack "$@" >/dev/null; then
+		# we're looking for one of these variables. Don't filter.
+		(set -o posix; set) | ack "$@"
+	else
+		(set -o posix; set) | grep -v -E "$ignore_regex" | ack "$@"
+		# TODO: call out which (if any) of these matched. Potentially take args about it?
+		# (but definitely don't do that last - our success/failure should be the one above)
+		echo "ignored ${ignore_list[*]}"
+	fi
   fi
 }
 alias var=vars # because I'm lazy
