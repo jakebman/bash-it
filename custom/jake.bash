@@ -96,6 +96,8 @@ function vars {
 	local -a ignore_list
 	# CAREFUL!!!! these values will be interpolated into a regex!
 	ignore_list=(BASH_ALIASES LS_COLORS SDKMAN_CANDIDATES SDKMAN_CANDIDATES_CSV _acktypeargs _negacktypes _acktypes _xspecs)
+	# Using IFS to join ignore_list with a single-character delimiter, from:
+	# https://stackoverflow.com/questions/1527049/how-can-i-join-elements-of-a-bash-array-into-a-delimited-string
 	local ignore_regex=$(IFS='|'; echo "^(${ignore_list[*]})")
 	# nb: ack matching uses smartcase. Can't use grep here if we're using ack below
 	if echo "$ignore_regex" | ack "$@" >/dev/null; then
