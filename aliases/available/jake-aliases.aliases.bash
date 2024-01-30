@@ -215,7 +215,6 @@ alias fetch='git fetch'
 alias rebase='git rebase'
 alias merge='git merge'
 alias stash='git stash'
-alias show='git show'
 alias branch='git branch'
 alias blame='git blame'
 alias log='git log'
@@ -256,6 +255,17 @@ alias ignored='git status --ignored'
 alias staged='git diff --staged'
 alias addp='git add --patch'
 alias autostash='git pull --rebase --autostash' # I ususally mean rebase as well as autostash
+
+# 'Modifying' aliases
+# Sometimes, I want my implicit git commands to have an additional parameter
+# I can't add these to a git alias, because aliases can't overwrite existing commands
+
+# If I'm `show`-ing a merge commit, please try to assume more that I'm looking for a `--diff-merge=on`-like behavior
+# TODO: this is a little hinky. I'd really prefer if git had a config to actually turn ON --diff-merge,
+#       rather than just set the default option for when it *does* get turned on
+# TODO: git docs for --diff-merge imply that --first-parent is the only one to override the default ...=on behavior
+#       That... doesn't seem right. Wouldn't --dd or --remerge-diff also override the default?
+alias show='git show -m'
 
 # 'Not exactly duplicating' aliases
 # Not all of these are duplicating a git alias, but they're not exactly typos either
