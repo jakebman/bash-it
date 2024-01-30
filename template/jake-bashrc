@@ -22,8 +22,9 @@ export GRADLE_USER_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/gradle"
 # .cache, .config, ... .local - the XDG solution folders
 # .editorconfig - currently not supported by all involved parties
 # .gi_list - not supported. git-ignore-io in git-extras writes this
-# .gitignore.d - vcsh, created by default. Not changeable right now?
-# .gitmodules - required because I'm keeping subrepos in my conf vcsh repo (needs to live in $GIT_WORK_TREE)
+# .gitignore.d - vcsh, created by default. hardcoded name below $VCSH_BASE, which defaults to $HOME
+# .gitmodules - required because I'm keeping subrepos in my conf vcsh repo
+#    It needs to live in $GIT_WORK_TREE - gets really interesting with nns-config also having these
 # .java - for jshell, and other users of the jdk's java.util.prefs.Preferences API
 # .landscape - ubuntu-ism
 # .m2 - requires cli argument to move settings.xml, which is the only thing I keep there anyway :(
