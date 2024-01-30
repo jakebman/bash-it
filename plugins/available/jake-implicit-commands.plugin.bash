@@ -20,6 +20,7 @@ function diff {
   elif [[ "$#" -eq 1 ]] && ! _jake-special-single-args-for-diff "$1" ; then
     git diff "$@"
   else
+    # TODO: colordiff?
     command diff "$@"
   fi
 }
