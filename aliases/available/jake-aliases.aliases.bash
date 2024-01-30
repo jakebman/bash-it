@@ -18,7 +18,7 @@ alias ll=lls
 # This overrides one from general
 unalias h
 function h {
-	history "$@" | less
+	history "$@" | less +G
 }
 
 # I really like permament differences
@@ -32,6 +32,7 @@ alias maven=mvn
 # alias d=diff # currently in jake-typos.aliases.bash because it was a typo first
 # alias f=fidget # defined in custom/jake.bash
   alias g=git
+# function h { history | less +G } # defined above
 # alias m=mr # typo
 # alias p=pull # typo
 # alias q="echo no need to quit - you are already out"
