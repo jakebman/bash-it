@@ -241,7 +241,7 @@ alias rainbow-here='git rainbow-here' # approx. git log --oneline --graph, speci
 alias rainbow-all='git rainbow-all' # explicitly --all form of rainbow output
 # TODO: why does quitting `less` with q cause these commands to fail?
 # Testing seems to indicate that git considers a failure to get to the end of output
-# to be a failure in this way
+# to be a failure in this way (broken pipe?)
 alias logp='git logp' # log with patch
 alias logs='git logs' # log with stats (+++-- indicators)
 alias logn='git logn' # log with numstats
