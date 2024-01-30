@@ -192,6 +192,7 @@ alias shw=show
 # To handle these both with and without git requires duplication. I'd rather have that duplication in here than
 # in jake-aliases. These are typo words, not git-command words.
 # TODO: I wish there were a way to auto-correct `commit --amened` to `commit --amend`
+alias githelp='git help'
 alias ammend=amend
 alias amned=amend
 alias comit=commit
