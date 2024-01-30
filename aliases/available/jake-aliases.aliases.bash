@@ -234,7 +234,6 @@ alias unlock='git unlock'
 # Exceptions to 'Duplicating' aliases, below. The git alias's behavior *could* change, and I want the
 # bare command's behavior to continue to track as-if it were just adding git to it. I do expect their
 # behavior to remain how it's described here, though.
-alias rainbow='git rainbow-all' # colored graphlines in the terminal
 alias rainbow-here='git rainbow-here' # same, but only the current history (no --all)
 alias rainbow-all='git rainbow-all' # explicitly --all
 # TODO: why does quitting `less` with q cause these commands to fail?
@@ -266,6 +265,9 @@ alias autostash='git pull --rebase --autostash' # I ususally mean rebase as well
 # TODO: git docs for --diff-merge imply that --first-parent is the only one to override the default ...=on behavior
 #       That... doesn't seem right. Wouldn't --dd or --remerge-diff also override the default?
 alias show='git show -m'
+
+# rainbow should be implicitly --all from the cli, *even though* I *know* it's currently `rainbow-here` in git aliases
+alias rainbow='git rainbow-all'
 
 # 'Not exactly duplicating' aliases
 # Not all of these are duplicating a git alias, but they're not exactly typos either
