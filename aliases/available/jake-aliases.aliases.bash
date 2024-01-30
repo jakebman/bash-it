@@ -208,7 +208,7 @@ alias ghelp='git help' # help is actually a bash builtin
 alias gpull='git pull'
 alias gstatus='git status'
 
-# 'Vanilla' aliases - these commands simply add 'git' at the beginning
+# 'Vanilla' aliases - these are aliases to existing git-<command>s, that simply allow for an implicit git
 alias clone='git clone'
 alias push='git push'
 alias fetch='git fetch'
@@ -231,11 +231,14 @@ alias authors='git authors'
 alias lock='git lock'
 alias locked='git locked'
 alias unlock='git unlock'
-# Exceptions to 'Duplicating' aliases, below. The git alias's behavior *could* change, and I want the
-# bare command's behavior to continue to track as-if it were just adding git to it. I do expect their
-# behavior to remain how it's described here, though.
-alias rainbow-here='git rainbow-here' # same, but only the current history (no --all)
-alias rainbow-all='git rainbow-all' # explicitly --all
+
+# 'Non-Duplicating' aliases - these are aliases to existing git-<alias>s, that simply allow for an implicit git
+# Specifically, these are intentional exceptions to the 'Duplicating' aliases, below.
+# These git alias's behavior *could* change in the future, and I *specifically* want the
+# bare git-<alias>'s behavior to continue to track as-if it were just adding git to it.
+# I do expect their behavior to remain how it's described here, though.
+alias rainbow-here='git rainbow-here' # approx. git log --oneline --graph, specifically only the current history (no --all)
+alias rainbow-all='git rainbow-all' # explicitly --all form of rainbow output
 # TODO: why does quitting `less` with q cause these commands to fail?
 # Testing seems to indicate that git considers a failure to get to the end of output
 # to be a failure in this way
@@ -247,13 +250,13 @@ alias tags='git tags' # list the tags
 # 'Duplicating' aliases
 # These could have been written as `alias X='git X'`, because they're
 # all bash aliases for git aliases I've written.
-# But! because I don't ever expect to change what the underlying git alias does,
+# But! Because I don't ever expect to change what the underlying git alias does,
 # I'd rather skip the indirection and just specify the correct behavior in the alias
 alias co='git checkout'
 alias ignored='git status --ignored'
 alias staged='git diff --staged'
 alias addp='git add --patch'
-alias autostash='git pull --rebase --autostash' # I ususally mean rebase as well as autostash
+alias autostash='git pull --rebase --autostash' # implicit rebase is intentional. See the alias definition
 
 # 'Modifying' aliases
 # Sometimes, I want my implicit git commands to have an additional parameter
