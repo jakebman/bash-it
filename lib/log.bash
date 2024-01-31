@@ -93,7 +93,7 @@ function _log_stacktrace() {
 		prefix="["
 		suffix="]"
 		delimiter=", "
-	elif [[ '--newlines' == "$1" ]];  then
+	elif [[ '--newlines' == "$1" ]]; then
 		prefix="\n\t"
 	fi
 
@@ -103,9 +103,9 @@ function _log_stacktrace() {
 	local index
 	# TODO: we could start index at 1 to ignore the current _log_stacktrace invocation. If so, then update the _about section above too
 	# I'm using zero here to have all the debug cards on the table
-	for (( index = 0; index < len; index++ )); do
+	for ((index = 0; index < len; index++)); do
 		printf "%s:%s(%d)" "${BASH_SOURCE[${index}]}" "${FUNCNAME[${index}]}" "${BASH_LINENO[${index}]}"
-		if (( index < len - 1 )); then
+		if ((index < len - 1)); then
 			printf "%s" "$delimiter"
 		fi
 	done
