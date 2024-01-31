@@ -103,6 +103,7 @@ alias ree=tree
 alias treee=tree
 
 alias d=diff
+alias di=diff
 alias idf=diff
 alias dif=diff
 alias iff=diff
