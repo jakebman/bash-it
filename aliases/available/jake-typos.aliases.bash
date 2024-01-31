@@ -157,6 +157,8 @@ alias ssg=ssh
 
 alias pws=pwd
 
+alias vack=jack
+
 # The vars command is defined in .bash-it/custom, so it is defined *after* this, but it's fine to
 # pre-declare aliases beforehand
 alias vasr=vars
