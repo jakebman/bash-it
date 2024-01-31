@@ -22,4 +22,3 @@ if [[ "${BASH_IT_BAT_FOR_HELP:-1}" == 1 ]]; then
 		"$@" --help 2>&1 | bathelp
 	}
 fi
-

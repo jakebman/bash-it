@@ -31,4 +31,3 @@ else
 	_log_error "You might try: ${ALIAS_CLONE_COMMAND}"
 	unset ALIAS_CLONE_COMMAND
 fi
-
