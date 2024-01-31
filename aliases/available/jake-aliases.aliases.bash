@@ -28,16 +28,16 @@ alias watch='watch --differences=permanent'
 alias maven=mvn
 
 # Single-letter/alphabetical shortcut alaises. Formatting to match comments
-  alias b=browse # or bash?
+alias b=browse # or bash?
 # alias d=diff # currently in jake-typos.aliases.bash because it was a typo first
 # alias f=fidget # defined in custom/jake.bash
-  alias g=git
+alias g=git
 # function h { history | less +G } # defined above
 # alias m=mr # typo
 # alias p=pull # typo
 # alias q="echo no need to quit - you are already out"
-  alias r=realpath-or-rainbow # defined below, but fine to alias here
-  alias s=status-or-show # defined below, but fine to alias here
+alias r=realpath-or-rainbow # defined below, but fine to alias here
+alias s=status-or-show      # defined below, but fine to alias here
 # alias u=pull # typo; actually for 'up', but shortcutting
 # alias v=vim # typo
 
@@ -51,10 +51,10 @@ alias llh='ll -h'
 
 # pull can have special meaning in $HOME, or other places with mr configs
 function pull {
-	if [ "$#" -ne 0 ] ; then
+	if [ "$#" -ne 0 ]; then
 		# If we have arguments, it's because I'm thinking this is a git pull
 		git pull "$@"
-	elif [ "$PWD" == ~ ] || [ -f .mrconfig ] ; then
+	elif [ "$PWD" == ~ ] || [ -f .mrconfig ]; then
 		# yes, there's a .mrconfig in ~, but there's no disk access to check $PWD first
 		mr up "$@"
 	else
@@ -68,7 +68,7 @@ function pull {
 
 function status {
 	# see pull, above
-	if [ "$PWD" == ~ ] || [ -f .mrconfig ] ; then
+	if [ "$PWD" == ~ ] || [ -f .mrconfig ]; then
 		mr status "$@"
 	else
 		git status "$@"
@@ -76,7 +76,7 @@ function status {
 }
 
 function status-or-show {
-	if JAKE_SUPPRESS_GIT_SQUAWK=1 git diff --quiet && JAKE_SUPPRESS_GIT_SQUAWK=1 git diff --staged --quiet ; then
+	if JAKE_SUPPRESS_GIT_SQUAWK=1 git diff --quiet && JAKE_SUPPRESS_GIT_SQUAWK=1 git diff --staged --quiet; then
 		# status is basically bunk
 		git show "$@"
 	else
@@ -85,25 +85,25 @@ function status-or-show {
 }
 
 function realpath-or-rainbow {
-	if [[ "$#" -ne 0 ]] ; then
+	if [[ "$#" -ne 0 ]]; then
 		git rainbow "$@"
 	else
 		# realpath function calls out that we're a silly goose and fails if it would be idempotent
 		# We rely on that here:
 		# (And rainbow is defined as an alias below. It's inlined here)
-		realpath 2>/dev/null || git rainbow-all
+		realpath 2> /dev/null || git rainbow-all
 	fi
 }
 
 function _jake-banner-display {
 	about "display a banner, but don't care if it fails"
-	figlet -t -f mini "$@" "$JAKE_BANNER_WHY" 2>/dev/null || true
+	figlet -t -f mini "$@" "$JAKE_BANNER_WHY" 2> /dev/null || true
 }
 
 # git errors if add has no args (prints advice.addEmptyPathspec)
 # And this is another for the "it's functionally an alias, so sue me" pile
 function add {
-	if [ "$#" -eq 0 ] ; then
+	if [ "$#" -eq 0 ]; then
 		_jake-banner-display "GIT ADD"
 		# TODO: if there is *exactly* one trivial change, automatically add it and print the diff
 		# (Not sure what 'trivial' means yet, but it could be counting lines, or diff sections, or changed files)
@@ -120,7 +120,7 @@ function commit {
 	# (these can only be BEFORE the message for now... potentially always)
 	local -a args
 	case "$1" in
-		-a|--all|--amend )
+		-a | --all | --amend)
 			args+=("$1")
 			shift
 			;;
@@ -130,21 +130,21 @@ function commit {
 	local JAKE_BANNER_WHY="... TO COMMIT"
 
 	# exactly one argument, and it's not a flag. (don't eat --message=typo, for instance)
-	if [ "$#" -eq 1 ] && ! [[ "$1" == -* ]] ; then
-		if [ -f "$1" ] ; then
+	if [ "$#" -eq 1 ] && ! [[ "$1" == -* ]]; then
+		if [ -f "$1" ]; then
 			# is a file. add, then interactive commit
 			JAKE_SUPPRESS_GIT_SQUAWK=1 add "$1"
 			git commit
 		else
 			# is a commit message. Commit with that message
 
-			if [ -v args ] ; then
+			if [ -v args ]; then
 				: # TODO: this only really checks if I added *something* to args; not specifically '-a'
-			elif JAKE_SUPPRESS_GIT_SQUAWK=1 git diff --staged --quiet ; then
+			elif JAKE_SUPPRESS_GIT_SQUAWK=1 git diff --staged --quiet; then
 				# No staged changes. Commit will fail. User probably wants to select some changes to add
 				JAKE_SUPPRESS_GIT_SQUAWK=1 add # dunno which file you wanted, but go ahead and do an interactive add
 				# STILL no changes. Commit will obviously fail. User probably a little confused
-				if JAKE_SUPPRESS_GIT_SQUAWK=1 git diff --staged --quiet ; then
+				if JAKE_SUPPRESS_GIT_SQUAWK=1 git diff --staged --quiet; then
 					echo
 					echo "no changes for commit message '$1'. No commit created. Thank you."
 					echo
@@ -175,7 +175,7 @@ function restore {
 }
 
 function unstage {
-	if [ "$#" -eq 0 ] ; then
+	if [ "$#" -eq 0 ]; then
 		_jake-banner-display "GIT RESTORE --STAGED"
 		git unstage -p "$@" # $@ is empty, but this is more consistent with the other branch
 	else
@@ -192,11 +192,11 @@ function remote {
 }
 
 function reset {
-	if echo "$@" | grep -q HEAD ; then
+	if echo "$@" | grep -q HEAD; then
 		echo "You probably meant git reset. Don't just do this willy-nilly!" >&2
 	fi
 	command reset "$@"
-	if echo "$@" | grep -q HEAD ; then
+	if echo "$@" | grep -q HEAD; then
 		echo "You probably meant git reset. Don't just do this willy-nilly!" >&2
 	fi
 }
@@ -238,14 +238,14 @@ alias unlock='git unlock'
 # bare git-<alias>'s behavior to continue to track as-if it were just adding git to it.
 # I do expect their behavior to remain how it's described here, though.
 alias rainbow-here='git rainbow-here' # approx. git log --oneline --graph, specifically only the current history (no --all)
-alias rainbow-all='git rainbow-all' # explicitly --all form of rainbow output
+alias rainbow-all='git rainbow-all'   # explicitly --all form of rainbow output
 # TODO: why does quitting `less` with q cause these commands to fail?
 # Testing seems to indicate that git considers a failure to get to the end of output
 # to be a failure in this way (broken pipe?)
-alias logp='git logp' # log with patch
-alias logs='git logs' # log with stats (+++-- indicators)
-alias logn='git logn' # log with numstats
-alias tags='git tags' # list the tags
+alias logp='git logp'     # log with patch
+alias logs='git logs'     # log with stats (+++-- indicators)
+alias logn='git logn'     # log with numstats
+alias tags='git tags'     # list the tags
 alias merges='git merges' # list merge commits (a la `log --merges`)
 
 # 'Duplicating' aliases
