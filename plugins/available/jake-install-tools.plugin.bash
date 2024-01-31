@@ -110,6 +110,8 @@ function jake-install-tools() {
   _jake-find-tool lynx
 
   # playing with these
+  _jake-find-tool shfmt
+  _jake-find-tool shellcheck
   _jake-find-tool mr myrepos
   _jake-find-tool vcsh
   _jake-find-tool perldoc perl-doc "for man mr"
