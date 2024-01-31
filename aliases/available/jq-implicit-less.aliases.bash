@@ -1,5 +1,5 @@
-#! /bin/bash
+# shellcheck shell=bash
+about-alias "an addition to jq.plugin that makes the jqless command the default jq implementation"
 
-# I want jq to work like the jqless I created for the jq.plugin.bash
 alias jq=jqless
 
