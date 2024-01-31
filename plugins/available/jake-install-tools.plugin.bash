@@ -263,23 +263,23 @@ function jake-install-tools() {
   fi
   local when
   if when="$(_jake-last-update)" ; then
-	  echo -e "And the apt update is from ${echo_red}${when}${echo_reset_color}"
+	  echo -e "And the apt update is from ${echo_red-}${when}${echo_reset_color-}"
 	  echo -e "      A reminder: today is $(date)"
   else
-	  echo -e "${echo_red}${when}${echo_reset_color}"
+	  echo -e "${echo_red-}${when}${echo_reset_color-}"
   fi
 
   # let's make sure blue is readable while we're here
   echo -en "btw, "
-  echo -en "${echo_blue}if ${echo_reset_color}"
+  echo -en "${echo_blue-}if ${echo_reset_color-}"
   echo -en "this blue "
-  echo -en "${echo_blue}is ${echo_reset_color}"
+  echo -en "${echo_blue-}is ${echo_reset_color-}"
   echo -en "hard "
-  echo -en "${echo_blue}to ${echo_reset_color}"
+  echo -en "${echo_blue-}to ${echo_reset_color-}"
   echo -e  "read,"
-  echo -en "${echo_blue}"
+  echo -en "${echo_blue-}"
   echo     "check out https://devblogs.microsoft.com/commandline/updating-the-windows-console-colors/"
-  echo -en "${echo_reset_color}"
+  echo -en "${echo_reset_color-}"
 
   # TODO: recommend git config --global --set core.fsmonitor true for windows
 }

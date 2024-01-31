@@ -164,11 +164,11 @@ alias amend='commit --amend'
 
 # Print a header warning that this is NOT ADD, and DESTUCTIVE
 function restore {
-	echo -ne "$echo_red"
+	echo -ne "${echo_red-}"
 	_jake-banner-display "!!! GIT RESTORE !!!"
 	sleep .2
 	_jake-banner-display "!!!!! TAKE CARE !!!!!"
-	echo -ne "$echo_reset_color"
+	echo -ne "${echo_reset_color-}"
 
 	sleep .3
 	git restore -p "$@"
