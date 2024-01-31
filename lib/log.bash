@@ -83,8 +83,8 @@ function _log_stacktrace() {
 	: _group 'log'
 
 	# --stdout style. First entry has a tab in front. Newline+tab between all, and a final newline at the end
-	# These strings have trusted value, so are safe to pass as the first argument to printf
-	local format="%s:%s(%d)"
+	# Even though these strings have trusted value, we'll still use printf "%s" to print them, for safety
+	# (and because shellcheck yells at us otherwise)
 	local prefix="\t"
 	local suffix="\n"
 	local delimiter="\n\t"
@@ -97,20 +97,20 @@ function _log_stacktrace() {
 		prefix="\n\t"
 	fi
 
-	printf "$prefix" # careful!!!
+	printf "%s" "$prefix"
 
 	local len=${#BASH_LINENO[@]}
 	local index
 	# TODO: we could start index at 1 to ignore the current _log_stacktrace invocation. If so, then update the _about section above too
 	# I'm using zero here to have all the debug cards on the table
 	for (( index = 0; index < len; index++ )); do
-		printf "$format" "${BASH_SOURCE[${index}]}" "${FUNCNAME[${index}]}" "${BASH_LINENO[${index}]}"
+		printf "%s:%s(%d)" "${BASH_SOURCE[${index}]}" "${FUNCNAME[${index}]}" "${BASH_LINENO[${index}]}"
 		if (( index < len - 1 )); then
-			printf "$delimiter" # careful!!!
+			printf "%s" "$delimiter"
 		fi
 	done
 
-	printf "$suffix" # careful!!!
+	printf "%s" "$suffix"
 }
 
 function _log_trace() {
