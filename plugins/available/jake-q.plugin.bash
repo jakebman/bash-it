@@ -8,6 +8,7 @@ function _q-describe-parent () {
 	local output;
 	if output="$(ps -o user= -o cmd= -p "$PPID")"; then
 		echo "$output"
+		# TODO: this needs to be safer, and check actual values
 		if echo "$output" | grep -q "$USER"; then
 			return 0 # safe - ownership is the same
 		else
