@@ -11,7 +11,7 @@ function q {
 		# or in terse phrasing like `logout` uses:
 		# echo "$0: is login shell. Use \`logout' or \`exit'"
 	else
-		echo "You're not at the top-level login. Exiting to your parent"
+		echo "You're not at the top-level login. Exiting $(basename "$SHELL") ${$} to ${PPID}"
 		exit
 	fi
 }
