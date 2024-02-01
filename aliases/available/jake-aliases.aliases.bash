@@ -35,7 +35,7 @@ alias g=git
 # function h { history | less +G } # defined above
 # alias m=mr # typo
 # alias p=pull # typo
-# alias q="echo no need to quit - you are already out"
+# function q # in bash-it plugin jake-q. Approx: { if ! _is-toplevel-bash; then exit; fi }
 alias r=realpath-or-rainbow # defined below, but fine to alias here
 alias s=status-or-show      # defined below, but fine to alias here
 # alias u=pull # typo; actually for 'up', but shortcutting

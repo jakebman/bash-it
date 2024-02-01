@@ -44,10 +44,6 @@ alias jgti=git # it's like... sometimes I just mash the keyboard while thinking 
 alias :q="echo You are not in vim"
 alias :wq=:q
 alias wq=:q
-# TODO: this could be a function to check if our parent is also bash, and exit to it. Only print this message at top level
-# Basically: exit, but don't exit if we'd lose the terminal
-# Best current tech is to see if /proc/$$/cmdline's first character is -
-alias q="echo no need to quit - you are already out"
 
 alias explorer.='explorer .'
 alias exploer.=explorer. # happened while I was writing the alias above

@@ -13,6 +13,7 @@ plugins jake-implicit-commands
 plugins jake-install-tools
 plugins jake-maintenance
 plugins jake-path
+plugins jake-q
 plugins jq
 plugins projects
 plugins sdkman
