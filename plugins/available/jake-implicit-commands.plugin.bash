@@ -76,7 +76,7 @@ for _i in {1..5}; do
 done
 
 function tree {
-	about "always paginate tree output (ltree), and also try for a small peek even in large trees (use 'tree .' to override)"
+	about "ltree; but limit files in the implicit case, and a first arg is implicitly to -L"
 	# I already set CLICOLOR_FORCE, so -C is not required, but it's more consistent to set it here
 	# minor rant: why doesn't tree have a long option for this?
 	if [[ "$#" -eq 0 ]] ; then
