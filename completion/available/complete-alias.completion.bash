@@ -6,7 +6,11 @@ about-plugin "Use cykerway's complete-alias project to complete aliases"
 # From https://github.com/cykerway/complete-alias
 # TODO: this can actually live in the /vendor folder
 : "${COMPLETE_ALIAS_DIR:=${HOME}/.complete-alias}"
-: "${COMPLETE_ALIAS_FILE:=${COMPLETE_ALIAS_DIR}/complete_alias}"
+: "${COMPLETE_ALIAS_FILENAME:=complete_alias}"
+: "${COMPLETE_ALIAS_FILE:=${COMPLETE_ALIAS_DIR}/${COMPLETE_ALIAS_FILENAME}}"
+# allow us to read the dir and filename if the user sets COMPLETE_ALIAS_FILE
+COMPLETE_ALIAS_DIR="$(dirname "${COMPLETE_ALIAS_FILE}")"
+COMPLETE_ALIAS_FILENAME="$(basename "${COMPLETE_ALIAS_FILE}")"
 
 if [[ -f "${COMPLETE_ALIAS_FILE}" ]]; then
 	source "${COMPLETE_ALIAS_FILE}"
@@ -27,8 +31,8 @@ if [[ -f "${COMPLETE_ALIAS_FILE}" ]]; then
 
 	complete -F _complete_alias "${!BASH_ALIASES[@]}"
 else
-	ALIAS_CLONE_COMMAND="git clone git@github.com:cykerway/complete-alias.git \"\$(dirname \"\${COMPLETE_ALIAS_FILE:-${COMPLETE_ALIAS_FILE}}\")\""
-	_log_error "please install complete-alias or point \$COMPLETE_ALIAS_FILE to the complete_alias file within the place you checked it out from"
+	ALIAS_CLONE_COMMAND="git clone git@github.com:cykerway/complete-alias.git \"\${COMPLETE_ALIAS_DIR:-${COMPLETE_ALIAS_DIR}}\""
+	_log_error "please install complete-alias or point \$COMPLETE_ALIAS_FILE to the ${COMPLETE_ALIAS_FILENAME} file within the place you checked it out from"
 	_log_error "You might try: ${ALIAS_CLONE_COMMAND}"
 	unset ALIAS_CLONE_COMMAND
 fi
