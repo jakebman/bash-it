@@ -163,7 +163,7 @@ function _mr-able-single {
 		fi
 	done
 
-	if [[ "${#mr_yes[@]}" -gt 0 ]]; then
+	if [[ "${#mr_yes[@]}" -gt 0 && "${#mr_no[@]}" -gt 0 ]]; then
 		printf "%s\n" "${mr_no[@]}"
 	fi
 }
