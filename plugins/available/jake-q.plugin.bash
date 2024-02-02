@@ -15,14 +15,15 @@ function _q-describe-parent () {
 	fi
 
 	read user cmd <<<"$output"
-	printf "%s, owned by %s" "$cmd" "$user"
 
 	# TODO: this still might not be right
 	if [[ "$user" = "$USER" ]]; then
-		return 0 # safe to exit to it - ownership is the same
+		printf "%s, owned by you" "$cmd"
+		return 0 # ownership is the same - no concerns about braining wrong
 	else
+		printf "%s, owned by %s" "$cmd" "$user"
 		printf ", because it has a different owner than this process (%s)" "$USER"
-		return 1 # unsafe - ownership is different
+		return 1 # ownership is different. User should be aware of this
 	fi
 }
 
@@ -36,9 +37,10 @@ function q () {
 		# or in terse phrasing like `logout` uses:
 		# echo "$0: is login shell. Use \`logout' or \`exit'"
 	elif parent_description=$(_q-describe-parent); then
-		echo "Exiting to safe parent, ${parent_description}"
+		echo "Exiting to parent ${parent_description}"
 		exit
 	else
-		echo "Parent process ${parent_description}. Use \`exit' to exit to it"
+		echo "Not automatically exiting to ${parent_description}. Use \`exit' to exit to it"
+		return 1
 	fi
 }
