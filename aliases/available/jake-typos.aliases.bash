@@ -85,6 +85,7 @@ alias qcat=cat
 
 # G is closer to B than C on the keyboard
 alias gat=bat
+alias bathhelp=bathelp
 
 # lls is define in jake-aliases. Basically ls | less
 alias qls=ls # I quit less *twice* then wanted to ls
