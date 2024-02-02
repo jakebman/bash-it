@@ -55,14 +55,41 @@ function delta {
   fi
 }
 
+function ltree {
+	about "paginate (colored) tree output through your pager"
+	# tree will be overwitten below, so 100% NEED to get past that with `command`
+	command tree -C "$@" | pager # pager from general aliases
+}
+
+function treeN {
+	about "customizable depth on ltree"
+	param "1: tree depth"
+	param "<rest>: Further args to tree."
+	# Abuse the first param being always an arg to -L
+	# We could totally shift $1 out... and then... put it first anyway?
+	ltree -L "$@"
+}
+
+# tree2, tree3, tree4, tree5
+for _i in {1..5}; do
+	alias "tree${_i}=treeN ${_i}"
+done
+
 function tree {
-	about "always paginate tree output, and also try for a small peek even in large trees (use 'tree .' to override)"
+	about "always paginate tree output (ltree), and also try for a small peek even in large trees (use 'tree .' to override)"
 	# I already set CLICOLOR_FORCE, so -C is not required, but it's more consistent to set it here
 	# minor rant: why doesn't tree have a long option for this?
 	if [[ "$#" -eq 0 ]] ; then
-		command tree -C -L 3 --filelimit 25 "$@" | less
+		tree2 --filelimit 25 "$@"
 	else
-		command tree -C "$@" | less
+		# numeric test from
+		# https://stackoverflow.com/questions/806906/how-do-i-test-if-a-variable-is-a-number-in-bash
+		if [[ "$1" -eq "$1" ]] 2>/dev/null ; then
+			# numeric first arg. Assume we're treeN
+			treeN "$@"
+		else
+			tree2 "$@"
+		fi
 	fi
 }
 
