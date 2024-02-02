@@ -9,7 +9,7 @@ function _q-describe-parent () {
 
 	output="$(ps --no-headers -o "ruser comm" --pid "$PPID" 2>&1)"
 	if [[ "$?" -ne 0 ]]; then
-		printf "Unable to find parent via PPID %s:%s%n" "$PPID" "$output" >&2
+		printf "Unable to find parent via PPID %s:%s\n" "$PPID" "$output" >&2
 		echo "[unknown parent]"
 		return 1
 	fi
