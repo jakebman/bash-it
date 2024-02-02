@@ -5,18 +5,24 @@ about-plugin "q - an exit that doesn't exit your login shell (this overrides the
 function _q-describe-parent () {
 	about "figure out what the parent process is, describing it. Fail if it's a differen owner than this process"
 	local user cmd
-	local output;
-	if output="$(ps -o user= -o cmd= -p "$PPID")"; then
-		echo "$output"
-		# TODO: this needs to be safer, and check actual values
-		if echo "$output" | grep -q "$USER"; then
-			return 0 # safe - ownership is the same
-		else
-			return 1 # unsafe - ownership is different
-		fi
-	else
-		echo "unable to find parent via PPID ${PPID}"
+	local output
+
+	output="$(ps --no-headers -o "ruser comm" --pid "$PPID" 2>&1)"
+	if [[ "$?" -ne 0 ]]; then
+		printf "Unable to find parent via PPID %s:%s%n" "$PPID" "$output" >&2
+		echo "[unknown parent]"
 		return 1
+	fi
+
+	read user cmd <<<"$output"
+	printf "%s, owned by %s" "$cmd" "$user"
+
+	# TODO: this still might not be right
+	if [[ "$user" = "$USER" ]]; then
+		return 0 # safe to exit to it - ownership is the same
+	else
+		printf ", because it has a different owner than this process (%s)" "$USER"
+		return 1 # unsafe - ownership is different
 	fi
 }
 
