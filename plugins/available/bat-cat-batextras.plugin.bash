@@ -18,6 +18,7 @@ if [[ "${BASH_IT_BAT_FOR_HELP:-1}" == 1 ]]; then
 		alias bathelp='bat --plain --language=help'
 	fi
 
+	# TODO: this is not compatible with bash's help builtin
 	help() {
 		"$@" --help 2>&1 | bathelp
 	}
