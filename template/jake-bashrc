@@ -27,7 +27,7 @@ export GRADLE_USER_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/gradle"
 #    It needs to live in $GIT_WORK_TREE - gets really interesting with nns-config also having these
 # .java - for jshell, and other users of the jdk's java.util.prefs.Preferences API
 # .landscape - ubuntu-ism
-# .m2 - requires cli argument to move settings.xml, which is the only thing I keep there anyway :(
+# .m2 - a symlink. Would otherwise require CLI argument to move settings.xml, which is the only thing I keep there anyway :(
 # .motd_shown - probably not doable
 # .mrconfig (& .mr which symlinks to beat .mrtrust at tab completion) - cannot be moved without a code change in mr tool
 # .netrc - conventional file name, from telnet. Location configurable in curl, but not telnet.
