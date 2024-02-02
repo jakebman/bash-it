@@ -1,4 +1,3 @@
-
 # the commonly-known env variables for common tools
 export EDITOR=vim
 export VISUAL=vim
@@ -50,7 +49,7 @@ export LESS="--quit-if-one-screen --quit-at-eof --no-init --ignore-case --RAW-CO
 export LESSHISTFILE="${XDG_DATA_HOME:-${HOME}/.local/share}/lesshst"
 export LESSSTYLE=sas # respected by lessfilter in XDG_CONFIG_HOME (not actually a LESS env variable)
 
-if [ -f "$HOME/.cargo/env" ] ; then
+if [ -f "$HOME/.cargo/env" ]; then
 	source "$HOME/.cargo/env"
 fi
 
@@ -59,22 +58,22 @@ fi
 # TODO: I'd like to be able to apply these to stdin as well (the "||- your-command %s" variation).
 # That'll take more infrastructure.
 # Read more in $XDG_CONFIG_HOME/lessfilter or ~/.lessfilter
-if _command_exists lesspipe ; then # most likely; gets zip files too
-  eval `lesspipe`
-elif _command_exists "${XDG_CONFIG_HOME:-${HOME}/.config}/lessfilter" ; then # my custom shim for coloring lesspipe. lesspipe calls it
-  _log_warn "lesspipe is not available, but XDG_CONFIG_HOME/lessfilter is present at ${XDG_CONFIG_HOME:-${HOME}/.config}/lessfilter. Using that"
-  export LESSOPEN="|| ${XDG_CONFIG_HOME:-${HOME}/.config}/lessfilter %s"
-elif _command_exists "$HOME/.lessfilter" ; then # a legacy location for lessfilter
-  _log_warn "lesspipe is not available, but ~/.lessfilter is present. Using that"
-  export LESSOPEN="|| $HOME/.lessfilter %s"
-elif _command_exists pygmentize ; then # fallback if somehow we don't have anything else useful
-  # see `man less`, section "INPUT PREPROCESSOR"
-  # We only use pygmentize on named files (not '||-') because
-  # I don't really like the default colors that are guessed
-  _log_warn "lesspipe is mising and lessfilter is missing from both ~ and XDG_CONFIG_HOME. Using pygmentize bare"
-  export LESSOPEN='|| pygmentize -f 256 -O style="${LESSSTYLE:-default}" -g %s 2>/tmp/pygmentize-errors'
+if _command_exists lesspipe; then # most likely; gets zip files too
+	eval $(lesspipe)
+elif _command_exists "${XDG_CONFIG_HOME:-${HOME}/.config}/lessfilter"; then # my custom shim for coloring lesspipe. lesspipe calls it
+	_log_warn "lesspipe is not available, but XDG_CONFIG_HOME/lessfilter is present at ${XDG_CONFIG_HOME:-${HOME}/.config}/lessfilter. Using that"
+	export LESSOPEN="|| ${XDG_CONFIG_HOME:-${HOME}/.config}/lessfilter %s"
+elif _command_exists "$HOME/.lessfilter"; then # a legacy location for lessfilter
+	_log_warn "lesspipe is not available, but ~/.lessfilter is present. Using that"
+	export LESSOPEN="|| $HOME/.lessfilter %s"
+elif _command_exists pygmentize; then # fallback if somehow we don't have anything else useful
+	# see `man less`, section "INPUT PREPROCESSOR"
+	# We only use pygmentize on named files (not '||-') because
+	# I don't really like the default colors that are guessed
+	_log_warn "lesspipe is mising and lessfilter is missing from both ~ and XDG_CONFIG_HOME. Using pygmentize bare"
+	export LESSOPEN='|| pygmentize -f 256 -O style="${LESSSTYLE:-default}" -g %s 2>/tmp/pygmentize-errors'
 else
-  _log_error "pygmentize is available via sudo apt install python-pygments"
+	_log_error "pygmentize is available via sudo apt install python-pygments"
 fi
 
 function files {
@@ -85,64 +84,76 @@ function files {
 }
 
 function vars {
-  # TODO: this is both better and worse than printenv (printenv recognizes functions, but doesn't do partial matching)
-  # compare/contrast their results for vars vim, printenv vim, printenv BASH_FUNC_vim%%, and printenv | ack vim
+	# TODO: this is both better and worse than printenv (printenv recognizes functions, but doesn't do partial matching)
+	# compare/contrast their results for vars vim, printenv vim, printenv BASH_FUNC_vim%%, and printenv | ack vim
 
-  # TODO: it'd be nice if the query were implicitly over the variable NAMES, unless there's "something"
-  # indicating a desire to search VALUES as well. (ex: equals sign in search query)
-  local -a ignore_list
-  # CAREFUL!!!! these values will be interpolated into a regex!
-  # Specifically, .*THEME.* eats the ignore_ variables, because it matches itself in the value
-  # TODO: it'd be nice to give these good names. Mostly thinking of this color regex
-  ignore_list=(BASH_ALIASES LS_COLORS SDKMAN_CANDIDATES SDKMAN_CANDIDATES_CSV)
-  ignore_list+=("sdkman_.+" "SCM_.+" "SDKMAN_.+" "THEME_.+" "BASH_IT_L(OAD|OG)_.+" "_.+(any underscore variables)*")
-  ignore_list+=("[^=]+_THEME_.+")
-  ignore_list+=("ignore_(list|regex)")
-  ignore_list+=("(echo_|)(normal|reset_color|(background_|bold_|underline_|)(black|blue|cyan|green|orange|purple|red|white|yellow))")
-  # Using IFS to join ignore_list with a single-character delimiter, from:
-  # https://stackoverflow.com/questions/1527049/how-can-i-join-elements-of-a-bash-array-into-a-delimited-string
-  local ignore_regex=$(IFS='|'; echo "^(${ignore_list[*]})=")
+	# TODO: it'd be nice if the query were implicitly over the variable NAMES, unless there's "something"
+	# indicating a desire to search VALUES as well. (ex: equals sign in search query)
+	local -a ignore_list
+	# CAREFUL!!!! these values will be interpolated into a regex!
+	# Specifically, .*THEME.* eats the ignore_ variables, because it matches itself in the value
+	# TODO: it'd be nice to give these good names. Mostly thinking of this color regex
+	ignore_list=(BASH_ALIASES LS_COLORS SDKMAN_CANDIDATES SDKMAN_CANDIDATES_CSV)
+	ignore_list+=("sdkman_.+" "SCM_.+" "SDKMAN_.+" "THEME_.+" "BASH_IT_L(OAD|OG)_.+" "_.+(any underscore variables)*")
+	ignore_list+=("[^=]+_THEME_.+")
+	ignore_list+=("ignore_(list|regex)")
+	ignore_list+=("(echo_|)(normal|reset_color|(background_|bold_|underline_|)(black|blue|cyan|green|orange|purple|red|white|yellow))")
+	# Using IFS to join ignore_list with a single-character delimiter, from:
+	# https://stackoverflow.com/questions/1527049/how-can-i-join-elements-of-a-bash-array-into-a-delimited-string
+	local ignore_regex=$(
+		IFS='|'
+		echo "^(${ignore_list[*]})="
+	)
 
-  if [ "$#" -eq 0 ] ; then
-    # magic incantation from the internet
-    # Basically, prints the variables and functions of
-    # the current bash session, but doesn't print the functions
-    (set -o posix; set) | grep -v -E "$ignore_regex" | less
-    echo "ignored ${ignore_list[*]}"
-  else
-	# nb: ack matching uses smartcase. Can't use grep here if we're using ack below
-	if echo "$ignore_regex" | ack "$@" >/dev/null; then
-		# we're looking for one of these variables. Don't filter.
-		(set -o posix; set) | ack "$@"
-	else
-		(set -o posix; set) | ack -v "$ignore_regex" | ack "$@"
-		# TODO: call out which (if any) of these matched. Potentially take args about it?
-		# (but definitely don't do that last - our success/failure should be the one above)
+	if [ "$#" -eq 0 ]; then
+		# magic incantation from the internet
+		# Basically, prints the variables and functions of
+		# the current bash session, but doesn't print the functions
+		(
+			set -o posix
+			set
+		) | grep -v -E "$ignore_regex" | less
 		echo "ignored ${ignore_list[*]}"
+	else
+		# nb: ack matching uses smartcase. Can't use grep here if we're using ack below
+		if echo "$ignore_regex" | ack "$@" > /dev/null; then
+			# we're looking for one of these variables. Don't filter.
+			(
+				set -o posix
+				set
+			) | ack "$@"
+		else
+			(
+				set -o posix
+				set
+			) | ack -v "$ignore_regex" | ack "$@"
+			# TODO: call out which (if any) of these matched. Potentially take args about it?
+			# (but definitely don't do that last - our success/failure should be the one above)
+			echo "ignored ${ignore_list[*]}"
+		fi
 	fi
-  fi
 }
 alias var=vars # because I'm lazy
 
 #function funs {
-	# TODO: Let's get a function-printing equivalent of vars
+# TODO: Let's get a function-printing equivalent of vars
 #}
 
 function fidget {
 	type fidget
 	echo "TODO: loop this into jake-maintain-system tech"
-	if [[ "$#" -eq 0 ]] ; then
+	if [[ "$#" -eq 0 ]]; then
 		echo "giving you a chance to cancel"
 		sleep 12
 	else
 		echo "literally any argument works as-if it were '--quickly'"
 	fi
-	( # subshell. Automatically undoes the cd ~
+	(# subshell. Automatically undoes the cd ~
 		cd ~
 		jake-sdkman-update
 		up
 		echo "TODO: check for 'mr-able' repos - ones that are in the same folder as an mr-tracked repo, but aren't mr-tracked"
-		if _command_exists win-git-update &>/dev/null ; then
+		if _command_exists win-git-update &> /dev/null; then
 			echo updating window git stuff too
 			win-git-update
 		fi
@@ -154,7 +165,6 @@ alias f=fidget
 alias ff="fidget --fast"
 alias asdf=fidget
 alias sdf=fidget
-
 
 function typo {
 	vim "${BASH_IT}/aliases/available/jake-typos.aliases.bash"
@@ -213,7 +223,7 @@ function catwhich {
 	where="$(which "$1")"
 	if _jake-success; then
 		cat "$where"
-		if [[ -t 1 ]] ; then # stdout is terminal. Cool to add info (see jake's bin/git)
+		if [[ -t 1 ]]; then # stdout is terminal. Cool to add info (see jake's bin/git)
 			echo "${FUNCNAME[0]}: this file lives at '$where'"
 		fi
 	else
@@ -272,13 +282,13 @@ function xml {
 function xpath {
 	local -a args
 	args=("$@")
-	if ! [[ -t 0 ]] ; then
+	if ! [[ -t 0 ]]; then
 		# stdin not from terminal. assume it's xml
 		args+=('-')
 	fi
 
 	# insufficient args. Reading from stdin *does* add to this count
-	if [[ "${#args[@]}" -lt 2 ]] ; then
+	if [[ "${#args[@]}" -lt 2 ]]; then
 		echo "insufficient arguments:"
 		echo "usage: ${FUNCNAME[0]} <xpath> <file>..."
 		return 1
