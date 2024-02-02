@@ -56,11 +56,11 @@ function delta {
 }
 
 function tree {
-	about "always paginate tree output, and also assume -L 3 if not specified (use 'tree .' to override)"
+	about "always paginate tree output, and also try for a small peek even in large trees (use 'tree .' to override)"
 	# I already set CLICOLOR_FORCE, so -C is not required, but it's more consistent to set it here
 	# minor rant: why doesn't tree have a long option for this?
 	if [[ "$#" -eq 0 ]] ; then
-		command tree -C -L 3 "$@" | less
+		command tree -C -L 3 --filelimit 25 "$@" | less
 	else
 		command tree -C "$@" | less
 	fi
