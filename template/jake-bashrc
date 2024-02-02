@@ -36,7 +36,7 @@ export GRADLE_USER_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/gradle"
 # .sdkman - inconvenient for me, same as .bash-it
 # .ssh - Not generally possible
 # .sudo_as_admin_successful - SUPER(user) unlikely
-# .vim - requires intervention at a level I'm not happy with. Either overwrite the "system" location, or do crazy stuff
+# .vim - a symlink into .config/vim, for a small win. Removing this symlink requires rewriting vim to read an env. var
 # .wget-hsts - inconvenient to change (only via cli argument, or by creating an unmovable .wgetrc file in the same place)
 # .zef - requires env variable, and the file the env var points to also needs to reference the new location
 

@@ -90,7 +90,7 @@ function open {
 
 # Inspired by https://github.com/tpope/vim-obsession/issues/11
 function vim {
-	local file="${HOME}/.vim/jake-autosaved-session"
+	local file="${XDG_STATE_HOME:-${HOME?}/.local/state}/vim/jake-autosaved-session"
 	if [[ "$#" -eq 0 ]] ; then
 		# $@ is unecessary, as it's empty. Keeps parallel structure, though.
 		command vim -S "$file" "$@"
