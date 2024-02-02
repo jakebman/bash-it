@@ -139,6 +139,27 @@ alias var=vars # because I'm lazy
 # TODO: Let's get a function-printing equivalent of vars
 #}
 
+function _mr-able {
+	about "for each path element in the argument (default \$BASH_IT_PROJECT_PATHS) as a path varable, call out child folders that aren't registered to mr, but are siblings with ones that are"
+	param "1: (optional - defaults to \$BASH_IT_PROJECT_PATHS) A path variable for folders to check"
+	local arg="${1:-${BASH_IT_PROJECT_PATHS}}"
+	arg="${arg:+${arg}:}" # append an extra ':' if `$arg` is set
+	echo "got arg >>>$arg<<<"
+	local path
+	local -a opportunities
+
+	# https://stackoverflow.com/questions/11655770/looping-through-the-elements-of-a-path-variable-in-bash
+	while IFS=: read -d: -r path; do # `$IFS` is only set for the `read` command
+		local child
+		local -a mr mr_able
+		(
+			cd "$path"
+			find . -type d -maxdepth 1 | xargs echo
+		)
+	done <<< "$arg"
+	echo "done"
+}
+
 function fidget {
 	type fidget
 	echo "TODO: loop this into jake-maintain-system tech"
