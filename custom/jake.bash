@@ -171,15 +171,20 @@ function _mr-able-single {
 function _mr-able {
 	# TODO: any number of PATH-like arguments; read args into an array directly, then just run array stuff?
 	about "for each path element in the argument (default \$BASH_IT_PROJECT_PATHS) as a path varable, call out child folders that aren't registered to mr, but are siblings with ones that are"
-	param "1: (optional - defaults to \$BASH_IT_PROJECT_PATHS) A path variable for folders to check"
-	local arg="${1-${BASH_IT_PROJECT_PATHS}}"
-	arg="${arg:+${arg}:}" # append an extra ':' if `$arg` is set
-	local path
+	param '*: Any number of $PATH-like folder lists to check. If none are given, $BASH_IT_PROJECT_PATHS and $PWD are assumed as arguments'
+	local -a args;
+	if [[ "$#" -eq 0 ]]; then
+		args=("$BASH_IT_PROJECT_PATHS" "$PWD")
+	else
+		args=("$@")
+	fi
 
-	# https://stackoverflow.com/questions/11655770/looping-through-the-elements-of-a-path-variable-in-bash
+	# https://stackoverflow.com/questions/11655770/looping-through-the-elements-of-a-path-variable-in-bash, but I use printf to get the trailing colon
+	local path
 	while IFS=: read -d: -r path; do # `$IFS` is only set for the `read` command
 		_mr-able-single "$path"
-	done <<< "$arg"
+	done < <(printf "%s:" "${args[@]}")
+	# NB: double indirection above is because `<()` is essentially a filename, not an indirection
 }
 
 function fidget {
