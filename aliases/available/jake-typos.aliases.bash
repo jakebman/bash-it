@@ -171,6 +171,7 @@ alias tyoe=type
 alias typ=typo
 alias fypo=typo
 alias tyop=typo
+alias ytypo=typo
 alias typeo=typo
 
 alias whick=which # (to be fair, I was drinking at the time :| )
@@ -206,6 +207,7 @@ alias cmmit=commit
 alias cimmit=commit
 alias vimmit=commit
 alias commmit=commit
+alias commi9t=commit
 alias committ=commit
 alias commit-a='commit -a'
 alias commita='commit -a'
