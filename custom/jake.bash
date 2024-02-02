@@ -139,25 +139,47 @@ alias var=vars # because I'm lazy
 # TODO: Let's get a function-printing equivalent of vars
 #}
 
+function _mr-isrepo {
+	about "succeed if the given folder is tracked by mr. fail otherwise"
+	param "1: a folder which may or may not be an mr-tracked repo; default \$PWD"
+	(cd "${1-$PWD}" && mr status) &>/dev/null
+}
+
+function _mr-able-single {
+	about "Within a single folder (default \$PWD), if any child folder is tracked by mr, print every other child folder that *could* be tracked by mr"
+	param "1: a single directory to check; default \$PWD"
+	local path="${1-$PWD}" candidate
+	local -a candidates mr_yes mr_no
+
+	# only the first-level child folders are candidates
+	# TODO: this is a bash 4.4-ism, and might not be supported in the rest of bash-it
+	# https://stackoverflow.com/questions/23356779/how-can-i-store-the-find-command-results-as-an-array-in-bash
+	readarray -d '' candidates < <(find "$path" -type d -maxdepth 1 -mindepth 1 -print0)
+	for candidate in "${candidates[@]}"; do
+		if _mr-isrepo "$candidate"; then
+			mr_yes+=("$candidate")
+		else
+			mr_no+=("$candidate")
+		fi
+	done
+
+	if [[ "${#mr_yes[@]}" -gt 0 ]]; then
+		printf "%s\n" "${mr_no[@]}"
+	fi
+}
+
 function _mr-able {
+	# TODO: any number of PATH-like arguments; read args into an array directly, then just run array stuff?
 	about "for each path element in the argument (default \$BASH_IT_PROJECT_PATHS) as a path varable, call out child folders that aren't registered to mr, but are siblings with ones that are"
 	param "1: (optional - defaults to \$BASH_IT_PROJECT_PATHS) A path variable for folders to check"
-	local arg="${1:-${BASH_IT_PROJECT_PATHS}}"
+	local arg="${1-${BASH_IT_PROJECT_PATHS}}"
 	arg="${arg:+${arg}:}" # append an extra ':' if `$arg` is set
-	echo "got arg >>>$arg<<<"
 	local path
-	local -a opportunities
 
 	# https://stackoverflow.com/questions/11655770/looping-through-the-elements-of-a-path-variable-in-bash
 	while IFS=: read -d: -r path; do # `$IFS` is only set for the `read` command
-		local child
-		local -a mr mr_able
-		(
-			cd "$path"
-			find . -type d -maxdepth 1 | xargs echo
-		)
+		_mr-able-single "$path"
 	done <<< "$arg"
-	echo "done"
 }
 
 function fidget {
