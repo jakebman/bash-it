@@ -173,6 +173,7 @@ alias tyop=typo
 alias typeo=typo
 
 alias whick=which # (to be fair, I was drinking at the time :| )
+alias whic=which
 
 alias ipconfig=ifconfig
 
