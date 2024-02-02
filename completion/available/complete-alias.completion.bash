@@ -5,7 +5,8 @@ about-plugin "Use cykerway's complete-alias project to complete aliases"
 
 # From https://github.com/cykerway/complete-alias
 # TODO: this can actually live in the /vendor folder
-: "${COMPLETE_ALIAS_FILE:=${HOME}/.complete-alias/complete_alias}"
+: "${COMPLETE_ALIAS_DIR:=${HOME}/.complete-alias}"
+: "${COMPLETE_ALIAS_FILE:=${COMPLETE_ALIAS_DIR}/complete_alias}"
 
 if [[ -f "${COMPLETE_ALIAS_FILE}" ]]; then
 	source "${COMPLETE_ALIAS_FILE}"
