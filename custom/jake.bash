@@ -171,10 +171,10 @@ function _mr-able-single {
 function _mr-able {
 	# TODO: any number of PATH-like arguments; read args into an array directly, then just run array stuff?
 	about "for each path element in the argument (default \$BASH_IT_PROJECT_PATHS) as a path varable, call out child folders that aren't registered to mr, but are siblings with ones that are"
-	param '*: Any number of $PATH-like folder lists to check. If none are given, $BASH_IT_PROJECT_PATHS and $PWD are assumed as arguments'
+	param '*: Any number of $PATH-like folder lists to check. If none are given, $BASH_IT_PROJECT_PATHS is used implicitly'
 	local -a args;
 	if [[ "$#" -eq 0 ]]; then
-		args=("$BASH_IT_PROJECT_PATHS" "$PWD")
+		args=("$BASH_IT_PROJECT_PATHS")
 	else
 		args=("$@")
 	fi
