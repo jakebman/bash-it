@@ -206,6 +206,7 @@ alias commt=commit
 alias cmmit=commit
 alias cimmit=commit
 alias vimmit=commit
+alias ocmmit=commit
 alias commmit=commit
 alias commi9t=commit
 alias committ=commit
