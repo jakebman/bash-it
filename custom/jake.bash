@@ -3,9 +3,6 @@ export EDITOR=vim
 export VISUAL=vim
 export PAGER=less
 
-# Gonna try this out for a bit
-alias cat='bat --plain'
-
 # Allow j!! to work for a previous ack query
 alias jack=j
 # I want j!! to work for a previous pj query, too

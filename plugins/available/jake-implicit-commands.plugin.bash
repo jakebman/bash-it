@@ -11,6 +11,16 @@ function _jake-special-single-args-for-diff {
   return 1;
 }
 
+# formerly a simple `alias cat='bat --plain'`, but that doesn't handle this no-args use case
+function cat {
+  about 'allow you to use a bare `cat` as the normal cat; but any params essentially go to bat --plain'
+  if [[ "$#" -eq 0 ]] ; then
+		command cat "$@"
+	else
+		bat "$@"
+  fi
+}
+
 function diff {
   about "allow you to type the bare word 'diff' and get an automatic git diff, while still not harming the diff command"
   if [[ "$#" -eq 0 ]] ; then
