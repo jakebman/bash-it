@@ -13,13 +13,15 @@ if [[ "${BASH_IT_BAT_FOR_MAN:-1}" == 1 ]]; then
 fi
 
 if [[ "${BASH_IT_BAT_FOR_HELP:-1}" == 1 ]]; then
-	if ! _command_exists bathelp; then
-		# future-proof in case bathelp gets included in bat-extras
+	if _command_exists bathelp; then
+		alias help=bathelp
+	else
+		# a fallback in case you don't have bat-extras, or bat-extras doesn't have bathelp
+		_log_warning "bathelp not found. Using abbreviated functionality to serve \$BASH_IT_BAT_FOR_HELP"
 		alias bathelp='bat --plain --language=help'
-	fi
 
-	# TODO: this is not compatible with bash's help builtin
-	help() {
-		"$@" --help 2>&1 | bathelp
-	}
+		function help() {
+			builtin help "$@" 2>&1 | bathelp
+		}
+	fi
 fi

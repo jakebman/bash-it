@@ -2,6 +2,7 @@
 
 # plugins
 plugins base
+plugins bat-cat-batextras
 plugins cht-sh
 plugins curl-logging
 plugins dircolors
