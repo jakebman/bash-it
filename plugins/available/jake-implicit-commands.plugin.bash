@@ -164,7 +164,7 @@ function file {
 function shfmt {
 	about "report *sh (.bash, .sh, etc.) files in the current folder that need to be formatted. Otherwise, forward to normal shfmt"
 	if [[ "$#" -eq 0 ]]; then
-		command shfmt -l * | pager # defined in general.alias
+		command shfmt -l * 2>&1 | pager # defined in general.alias
 	else
 		command shfmt "$@"
 	fi
