@@ -139,7 +139,7 @@ alias var=vars # because I'm lazy
 function _mr-isrepo {
 	about "succeed if the given folder is tracked by mr. fail otherwise"
 	param "1: a folder which may or may not be an mr-tracked repo; default \$PWD"
-	(cd "${1-$PWD}" && mr status) &>/dev/null
+	(cd "${1-$PWD}" && mr status) &> /dev/null
 }
 
 function _mr-able-single {
@@ -169,7 +169,7 @@ function _mr-able {
 	# TODO: any number of PATH-like arguments; read args into an array directly, then just run array stuff?
 	about "for each path element in the argument (default \$BASH_IT_PROJECT_PATHS) as a path varable, call out child folders that aren't registered to mr, but are siblings with ones that are"
 	param '*: Any number of $PATH-like folder lists to check. If none are given, $BASH_IT_PROJECT_PATHS is used implicitly'
-	local -a args;
+	local -a args
 	if [[ "$#" -eq 0 ]]; then
 		args=("$BASH_IT_PROJECT_PATHS")
 	else
