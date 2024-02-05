@@ -1,7 +1,5 @@
-
 cite about-plugin
 about-plugin 'keep some facts around about what happens with curl output'
-
 
 _command_exists curl || return # don't create the function if the binary is missing
 
@@ -15,7 +13,7 @@ function _curl-logging-helper {
 		printf ' %q' curl "$@" # rely on printf's "re-used as necessary" behavior
 		printf '\n'
 		cat
-	)>> ~/curlheaders.txt
+	) >> ~/curlheaders.txt
 }
 
 function curl {
