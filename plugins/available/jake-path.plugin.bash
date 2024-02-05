@@ -2,6 +2,10 @@
 cite about-plugin
 about-plugin 'Put ~/bin and ~/.local/bin on your path before ~/.profile does. Be sure to delete those phrases from .profile'
 
+# Load early, so that the commands in these locations are available to all alias _command_exists checks
+# BASH_IT_LOAD_PRIORITY: 140
+
+
 # these lines are from ubuntu's .profile file, modified to use bash-it's pathmunge
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
