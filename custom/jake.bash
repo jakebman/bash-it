@@ -77,7 +77,7 @@ function files {
 	about "list the files of an apt package"
 	# TODO: apt-file has a 'progress bar'-like thing. It'd be cool to be able to borrow that
 	echo "(This command takes a long time, and it's eating apt-file's progress bar. Sorry.)"
-	apt-file list "$@" | less
+	apt-file list "$@" | pager
 }
 
 function vars {
@@ -109,7 +109,7 @@ function vars {
 		(
 			set -o posix
 			set
-		) | grep -v -E "$ignore_regex" | less
+		) | grep -v -E "$ignore_regex" | pager
 		echo "ignored ${ignore_list[*]}"
 	else
 		# nb: ack matching uses smartcase. Can't use grep here if we're using ack below
