@@ -4,11 +4,14 @@ about-plugin "Use cykerway's complete-alias project to complete aliases"
 # BASH_IT_LOAD_PRIORITY: 800
 
 # From https://github.com/cykerway/complete-alias
-# TODO: this can actually live in the /vendor folder
+# TODO: It'd be nice if this were bundled into the /vendor folder
+
+# Configuration. User can choose a folder, filename, or the whole path. Whole path wins.
 : "${COMPLETE_ALIAS_DIR:=${HOME}/.complete-alias}"
 : "${COMPLETE_ALIAS_FILENAME:=complete_alias}"
 : "${COMPLETE_ALIAS_FILE:=${COMPLETE_ALIAS_DIR}/${COMPLETE_ALIAS_FILENAME}}"
-# allow us to read the dir and filename if the user sets COMPLETE_ALIAS_FILE
+
+# Re-read the dir and filename back from the ultimate configuration
 COMPLETE_ALIAS_DIR="$(dirname "${COMPLETE_ALIAS_FILE}")"
 COMPLETE_ALIAS_FILENAME="$(basename "${COMPLETE_ALIAS_FILE}")"
 
@@ -36,3 +39,6 @@ else
 	_log_error "You might try: ${ALIAS_CLONE_COMMAND}"
 	unset ALIAS_CLONE_COMMAND
 fi
+
+# Don't pollute the environment - clean these up (they're 100% derivable from COMPLETE_ALIAS_FILE)"
+unset COMPLETE_ALIAS_DIR COMPLETE_ALIAS_FILENAME
