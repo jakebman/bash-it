@@ -77,6 +77,9 @@ alias mabn=man
 
 alias sork=sort
 
+alias shfmy=shfmt
+alias shfmty=shfmt # speculative
+
 alias cata=cat
 alias vat=cat
 alias ca=cat
@@ -189,6 +192,7 @@ alias stsaged=staged
 alias setaged=staged
 alias stagerd=staged
 alias stg=staged
+alias whow=show
 alias sho=show
 alias shw=show
 # some of these are handled by a "duplicating alias" too (so alias comm0t='git comm0t' would work) but it's better for
