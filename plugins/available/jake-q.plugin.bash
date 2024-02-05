@@ -2,7 +2,7 @@
 about-plugin "q - an exit that doesn't exit your login shell (this overrides the general q alias)"
 #NB: this is almost exactly the opposite behavior of bash's `logout` builtin
 
-function _q-describe-parent () {
+function _q-describe-parent() {
 	about "figure out what the parent process is, describing it. Fail if it's a differen owner than this process"
 	local user cmd
 	local output
@@ -14,7 +14,7 @@ function _q-describe-parent () {
 		return 1
 	fi
 
-	read user cmd <<<"$output"
+	read user cmd <<< "$output"
 
 	# TODO: this still might not be right
 	if [[ "$user" = "$USER" ]]; then
@@ -28,8 +28,8 @@ function _q-describe-parent () {
 }
 
 unalias q
-function q () {
-	local parent_description;
+function q() {
+	local parent_description
 	if shopt -q login_shell; then
 		# NB: this isn't *necessarily* the top-most bash. You can manually invoke a login shell
 		# wherever you like by invoking `bash --login`
