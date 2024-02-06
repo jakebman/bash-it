@@ -237,7 +237,7 @@ alias unlock='git unlock'
 # Specifically, these are intentional exceptions to the 'Duplicating' aliases, below, which try to shortcut a level of indirection.
 # These git aliases *could* become full git-X-dispatched commands in the future, and I'd love to not accidentally overwrite that
 # behavior with what this file's no-longer-current knowledge gets wrong.
-# Specifically, that means I should be *very judicious* with the 'Duplicating' aliases, because if I ever improve those commands,
+# Specifically, that means I should be *very judicious* with the 'Duplicating' and 'Modifying' aliases, because if I ever improve those commands,
 # I won't actually reap any benefit!
 # tl;dr: these git-<alias>s SHOULD ALWAYS track what their corresponding git-<command> DOES, EVEN IF those commands change in the future
 alias rainbow-here='git rainbow-here' # approx. git log --oneline --graph, specifically only the current history (no --all)
