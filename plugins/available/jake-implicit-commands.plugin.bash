@@ -16,7 +16,7 @@ function cat {
 	if [[ "$#" -eq 0 ]]; then
 		command cat "$@"
 	else
-		bat "$@"
+		bat --plain "$@"
 	fi
 }
 
