@@ -32,6 +32,7 @@ function jake-maintain-system() {
 		echo "$! spawned for config pull with autostash (and submodules!) pull" | jake-log
 		echo "(bash-it pulling has been moved to pull function, which delegates to mr)"
 		for pid in $(jobs -p); do
+			# TODO: this is vulnerable to having an already-existing suspended job
 			wait $pid || echo PID $pid failed somehow | jake-log
 		done
 		echo "Done with git fetches"
