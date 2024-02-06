@@ -247,6 +247,8 @@ alias rainbow-all='git rainbow-all'   # explicitly --all form of rainbow output
 alias logp='git logp'     # log with patch
 alias logs='git logs'     # log with stats (+++-- indicators)
 alias logn='git logn'     # log with numstats
+alias since='git since'   # log with immediate --since argument (technically --since-as-filter, but THATS THE POINT!!!)
+alias yesterday='git yesterday' # 'since yesterday', potentially smarter
 alias tags='git tags'     # list the tags
 
 # 'Duplicating' aliases
