@@ -86,6 +86,18 @@ for _i in {1..5}; do
 	alias "tree${_i}=treeN ${_i}"
 done
 
+function _is_numeric {
+	about "Succeeds if all arguments match the /[0-9]+/ regex. Fails otherwise. (The empty string is not numeric)"
+	for arg in "$@"; do
+		# nb: the numeric test from
+		# https://stackoverflow.com/questions/806906/how-do-i-test-if-a-variable-is-a-number-in-bash
+		# is unable to work properly in this situation, so we use bash's [['s extended regex (ERE) support
+		# The 1 prefix prevents `arg=-a` from tricking test into doing something odd
+		[[ "1$arg" =~ 1[[:digit:]]+ ]] || return 1
+	done
+	return 0
+}
+
 function tree {
 	about "ltree; but limit files in the implicit case, and a first arg is implicitly to -L"
 	if [[ "$#" -eq 0 ]]; then
@@ -94,10 +106,7 @@ function tree {
 	else
 		printf "%s " "$#" args: "$@"
 		printf "First arg is '%s'\n" "$1"
-		# numeric test from
-		# https://stackoverflow.com/questions/806906/how-do-i-test-if-a-variable-is-a-number-in-bash
-		# ,plus the x$ONE -eq x$TWO "defeat this parameter from being interpreted as a flag" trick
-		if [[ "1$1" -eq "1$1" ]] ; then
+		if _is_numeric "$1"; then
 			echo "first arg is numeric"
 			# numeric first arg. Assume we're treeN
 			treeN "$@"
