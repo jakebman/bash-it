@@ -248,7 +248,6 @@ alias logp='git logp'     # log with patch
 alias logs='git logs'     # log with stats (+++-- indicators)
 alias logn='git logn'     # log with numstats
 alias tags='git tags'     # list the tags
-alias merges='git merges' # list merge commits (a la `log --merges`)
 
 # 'Duplicating' aliases
 # These could have been written as `alias X='git X'`, because they're
@@ -277,6 +276,10 @@ alias rainbow='git rainbow-all'
 
 # always edit the global git config file
 alias edit-config='git config-editg'
+
+# list merge commits (like `log --merges`), but always assume I wanted to look at patches
+# TODO: could potentially be super smart by looking at reflog and showing merges that have been *pulled* 'recently'
+alias merges='git merges -p'
 
 # 'Not exactly duplicating' aliases
 # Not all of these are duplicating a git alias, but they're not exactly typos either
