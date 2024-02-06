@@ -149,9 +149,11 @@ function _mr-able-single {
 	local -a candidates mr_yes mr_no
 
 	# only the first-level child folders are candidates
-	# TODO: this is a bash 4.4-ism, and might not be supported in the rest of bash-it
+	# TODO: `-d` is a bash 4.4-ism, and might not be supported in the rest of bash-it
 	# https://stackoverflow.com/questions/23356779/how-can-i-store-the-find-command-results-as-an-array-in-bash
-	readarray -d '' candidates < <(find "$path" -type d -maxdepth 1 -mindepth 1 -print0)
+	# NB: double < < is because <() produces a 'filename'-like argument
+	# I'd like to call this `readarray` over mapfile, to not use the alias, but bash-it prefers mapfile
+	mapfile -d '' candidates < <(find "$path" -type d -maxdepth 1 -mindepth 1 -print0)
 	for candidate in "${candidates[@]}"; do
 		if _mr-isrepo "$candidate"; then
 			mr_yes+=("$candidate")
