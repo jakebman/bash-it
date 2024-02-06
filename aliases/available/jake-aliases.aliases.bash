@@ -210,6 +210,7 @@ function reset {
 # the full automatic invocation of an existing command. Mostly, this lets me pick
 # `git pull` over `mr up` where `pull` would otherwise pick the second one
 alias ghelp='git help' # help is actually a bash builtin
+alias gman='git man' # git-man is amusingly also an alias to git-help
 alias gpull='git pull'
 alias gstatus='git status'
 
