@@ -246,6 +246,7 @@ alias rainbow-all='git rainbow-all'   # explicitly --all form of rainbow output
 # Testing seems to indicate that git considers a failure to get to the end of output
 # to be a failure in this way (broken pipe?)
 # AND WHY DOESN'T THIS APPLY TO A BARE git log?????!????!?
+#     edit: nevermind - you just need a longer git history than wherever I tested this
 # It also goes away if you append +G to LESS (`LESS="$LESS +G"`)
 alias logp='git logp'     # log with patch
 alias logs='git logs'     # log with stats (+++-- indicators)
