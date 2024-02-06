@@ -67,6 +67,8 @@ function delta {
 function ltree {
 	about "paginate (colored) tree output through your pager"
 	# tree will be overwitten below, so 100% NEED to get past that with `command`
+	# I already set CLICOLOR_FORCE, so -C is not required, but it's more consistent to set it here
+	# minor rant: why doesn't tree have a long option for this?
 	command tree -C "$@" | pager
 }
 
@@ -86,14 +88,17 @@ done
 
 function tree {
 	about "ltree; but limit files in the implicit case, and a first arg is implicitly to -L"
-	# I already set CLICOLOR_FORCE, so -C is not required, but it's more consistent to set it here
-	# minor rant: why doesn't tree have a long option for this?
 	if [[ "$#" -eq 0 ]]; then
+		echo no args - running tree2
 		tree2 --filelimit 25 "$@"
 	else
+		printf "%s " "$#" args: "$@"
+		printf "First arg is '%s'\n" "$1"
 		# numeric test from
 		# https://stackoverflow.com/questions/806906/how-do-i-test-if-a-variable-is-a-number-in-bash
-		if [[ "$1" -eq "$1" ]] 2> /dev/null; then
+		# ,plus the x$ONE -eq x$TWO "defeat this parameter from being interpreted as a flag" trick
+		if [[ "1$1" -eq "1$1" ]] ; then
+			echo "first arg is numeric"
 			# numeric first arg. Assume we're treeN
 			treeN "$@"
 		else
