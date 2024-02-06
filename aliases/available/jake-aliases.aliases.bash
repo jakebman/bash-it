@@ -233,10 +233,13 @@ alias locked='git locked'
 alias unlock='git unlock'
 
 # 'Non-Duplicating' aliases - these are aliases to existing git-<alias>s, that simply allow for an implicit git
-# Specifically, these are intentional exceptions to the 'Duplicating' aliases, below.
-# These git alias's behavior *could* change in the future, and I *specifically* want the
-# bare git-<alias>'s behavior to continue to track as-if it were just adding git to it.
-# I do expect their behavior to remain how it's described here, though.
+# They're only different from 'Vanilla' aliases above because we "know" that these git commands are actually git aliases
+# Specifically, these are intentional exceptions to the 'Duplicating' aliases, below, which try to shortcut a level of indirection.
+# These git aliases *could* become full git-X-dispatched commands in the future, and I'd love to not accidentally overwrite that
+# behavior with what this file's no-longer-current knowledge gets wrong.
+# Specifically, that means I should be *very judicious* with the 'Duplicating' aliases, because if I ever improve those commands,
+# I won't actually reap any benefit!
+# tl;dr: these git-<alias>s SHOULD ALWAYS track what their corresponding git-<command> DOES, EVEN IF those commands change in the future
 alias rainbow-here='git rainbow-here' # approx. git log --oneline --graph, specifically only the current history (no --all)
 alias rainbow-all='git rainbow-all'   # explicitly --all form of rainbow output
 # TODO: why does quitting `less` with q cause these commands to fail?
