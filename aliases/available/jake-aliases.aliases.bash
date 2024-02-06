@@ -192,6 +192,11 @@ function remote {
 }
 
 function reset {
+	# TODO: are there some resets I can do safely?
+	# ex: add tags and stashes around this behavior, and allow only certain subsets:
+	# if _no_git_changes && $1 == origin:  we reset the current branch to upstream, in a --hard way?
+	#		Potentially, this could be function reset-to-origin
+	# if _no_git_changes && $1 is ancestor of HEAD: soft reset
 	if echo "$@" | grep -q HEAD; then
 		echo "You probably meant git reset. Don't just do this willy-nilly!" >&2
 	fi
