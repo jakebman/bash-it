@@ -38,7 +38,8 @@ export MAVEN_ARGS="-T1C"
 #        you would otherwise be searching 2/10ths of the screen *up* from where you started
 #   It's also worth noting that this is *per line*, so following matches on the same line are also skipped
 # use-color gets a nice light cyan color on some of less's UI elements
-export LESS="--quit-if-one-screen --quit-at-eof --no-init --ignore-case --RAW-CONTROL-CHARS --tabs=2 --jump-target=.2 --SEARCH-SKIP-SCREEN --use-color"
+# <trailing space> permits `LESS+=--new-flag some command` invocations
+export LESS="--quit-if-one-screen --quit-at-eof --no-init --ignore-case --RAW-CONTROL-CHARS --tabs=2 --jump-target=.2 --SEARCH-SKIP-SCREEN --use-color "
 # I liked editing ~/.lessfilter (which is now in XDG_CONFIG_HOME), and this kept getting in the way.
 # Still, this is the proper XDG-like location for this file. Since it's the 'other' default for this setting,
 # I could export XDG_DATA_HOME here instead of LESSHISTFILE, and less would implicitly use it.
