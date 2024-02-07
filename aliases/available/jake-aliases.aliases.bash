@@ -234,13 +234,11 @@ alias branch='git branch'
 alias blame='git blame'
 alias log='git log'
 alias shortlog='git shortlog'
-alias ls-files='git ls-files'
 alias submodule='git submodule'
 alias cherry-pick='git cherry-pick'
 alias tag='git tag'
 alias reflog='git reflog'
 alias rev-parse='git rev-parse'
-alias untracked='git untracked' # a git alias, probably 'status --untracked'
 # git-extras
 alias authors='git authors'
 alias lock='git lock'
@@ -255,8 +253,6 @@ alias unlock='git unlock'
 # Specifically, that means I should be *very judicious* with the 'Duplicating' and 'Modifying' aliases, because if I ever improve those commands,
 # I won't actually reap any benefit!
 # tl;dr: these git-<alias>s SHOULD ALWAYS track what their corresponding git-<command> DOES, EVEN IF those commands change in the future
-alias rainbow-here='git rainbow-here' # approx. git log --oneline --graph, specifically only the current history (no --all)
-alias rainbow-all='git rainbow-all'   # explicitly --all form of rainbow output
 # TODO: why does quitting `less` with q cause these commands to fail?
 # Testing seems to indicate that git considers a failure to get to the end of output
 # to be a failure in this way (broken pipe?)
@@ -266,9 +262,13 @@ alias rainbow-all='git rainbow-all'   # explicitly --all form of rainbow output
 alias logp='git logp'     # log with patch
 alias logs='git logs'     # log with stats (+++-- indicators)
 alias logn='git logn'     # log with numstats
+alias ls-files='git ls-files'
+alias rainbow-here='git rainbow-here' # approx. git log --oneline --graph, specifically only the current history (no --all)
+alias rainbow-all='git rainbow-all'   # explicitly --all form of rainbow output
 alias since='git since'   # log with immediate --since argument (technically --since-as-filter, but THATS THE POINT!!!)
-alias yesterday='git yesterday' # 'since yesterday', potentially smarter
 alias tags='git tags'     # list the tags
+alias untracked='git untracked' # a git alias, probably 'status --untracked'
+alias yesterday='git yesterday' # 'since yesterday', potentially smarter
 
 # 'Duplicating' aliases
 # These could have been written as `alias X='git X'`, because they're
