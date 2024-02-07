@@ -56,7 +56,7 @@ function delta {
 	# TODO: with a command that can say if `delta X Y Z` should act like `git X Y Z`,
 	# I can then dispatch wisely to `git delta X Y Z`. It's possible that only X really
 	# matters for that evaluation
-	# (Might be able to borrow that from the git command completion tech)
+	# (Might be able to borrow that from the git command completion tech in /usr/share/bash-completion/completions/git)
 	# elif _jake-is-git-command "$1";
 	#    git delta "$@"
 	else
