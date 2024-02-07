@@ -85,6 +85,7 @@ function treeN {
 for _i in {1..5}; do
 	alias "tree${_i}=treeN ${_i}"
 done
+unset _i
 
 function _is_numeric {
 	about "Succeeds if all arguments match the /[0-9]+/ regex. Fails otherwise. (The empty string is not numeric)"

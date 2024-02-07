@@ -223,7 +223,8 @@ function jake-install-tools() {
 		echo 'sudo install --compare --mode 0440 "${BASH_IT_CUSTOM}/100-jake-sudoers" /etc/sudoers.d/'
 	fi
 
-	local bin_files
+	local -a bin_files
+	local bin_file
 	for bin_file in $(ls "${BASH_IT_CUSTOM}/bin"); do
 		if ! cmp -s "${BASH_IT_CUSTOM}/bin/${bin_file}" "/usr/local/bin/${bin_file}"; then
 			bin_files+=($bin_file)

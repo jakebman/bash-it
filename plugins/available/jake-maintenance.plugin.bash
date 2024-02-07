@@ -31,6 +31,7 @@ function jake-maintain-system() {
 		) |& tee config-pull &
 		echo "$! spawned for config pull with autostash (and submodules!) pull" | jake-log
 		echo "(bash-it pulling has been moved to pull function, which delegates to mr)"
+		# local pid - not in a bash function context right now
 		for pid in $(jobs -p); do
 			# TODO: this is vulnerable to having an already-existing suspended job
 			wait $pid || echo PID $pid failed somehow | jake-log
@@ -45,6 +46,7 @@ function jake-maintain-system() {
 		(sudo apt-update-only && echo "Listing..." && apt list --upgradable) |& tee apt-update &
 		echo "$! spawned for apt update" | jake-log
 		echo "TODO: clean up docker images if docker is present: https://rzymek.github.io/post/docker-prune/ (or docker system prune)"
+		# local pid - not in a bash function context right now
 		for pid in $(jobs -p); do
 			wait $pid || echo PID $pid failed somehow | jake-log
 		done

@@ -154,6 +154,7 @@ function _mr-able-single {
 	# NB: double < < is because <() produces a 'filename'-like argument
 	# I'd like to call this `readarray` over mapfile, to not use the alias, but bash-it prefers mapfile
 	mapfile -d '' candidates < <(find "$path" -type d -maxdepth 1 -mindepth 1 -print0)
+	local candidate
 	for candidate in "${candidates[@]}"; do
 		if _mr-isrepo "$candidate"; then
 			mr_yes+=("$candidate")
