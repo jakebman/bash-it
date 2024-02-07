@@ -104,13 +104,9 @@ function _is_numeric {
 function tree {
 	about "ltree; but limit files in the implicit case, and a first arg is implicitly to -L"
 	if [[ "$#" -eq 0 ]]; then
-		echo no args - running tree2
 		tree2 --filelimit 25 "$@"
 	else
-		printf "%s " "$#" args: "$@"
-		printf "First arg is '%s'\n" "$1"
 		if _is_numeric "$1"; then
-			echo "first arg is numeric"
 			# numeric first arg. Assume we're treeN
 			treeN "$@"
 		else
