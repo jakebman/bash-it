@@ -279,8 +279,6 @@ alias autostash='git pull --rebase --autostash' # implicit rebase is intentional
 # If I'm `show`-ing a merge commit, please try to assume more that I'm looking for a `--diff-merge=on`-like behavior
 # TODO: this is a little hinky. I'd really prefer if git had a config to actually turn ON --diff-merge,
 #       rather than just set the default option for when it *does* get turned on
-# TODO: git docs for --diff-merge imply that --first-parent is the only one to override the default ...=on behavior
-#       That... doesn't seem right. Wouldn't --dd or --remerge-diff also override the default?
 alias show='git show -m'
 
 # rainbow should be implicitly --all from the cli, *even though* I *know* it's currently `rainbow-here` in git aliases
