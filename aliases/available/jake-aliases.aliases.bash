@@ -253,6 +253,8 @@ alias unlock='git unlock'
 # Specifically, that means I should be *very judicious* with the 'Duplicating' and 'Modifying' aliases, because if I ever improve those commands,
 # I won't actually reap any benefit!
 # tl;dr: these git-<alias>s SHOULD ALWAYS track what their corresponding git-<command> DOES, EVEN IF those commands change in the future
+alias intent='git intent'
+alias intent-to-add=intent # longname to remind myself on tab-completion
 # TODO: why does quitting `less` with q cause these commands to fail?
 # Testing seems to indicate that git considers a failure to get to the end of output
 # to be a failure in this way (broken pipe?)
@@ -277,6 +279,7 @@ alias yesterday='git yesterday' # 'since yesterday', potentially smarter
 # I'd rather skip the indirection and just specify the correct behavior in the alias
 alias co='git checkout'
 alias ignored='git status --ignored'
+alias intend='git intent' # sorta typo, but more trying to cover my bases on these names
 alias staged='git diff --staged'
 alias addp='git add --patch'
 alias autostash='git pull --rebase --autostash' # implicit rebase is intentional. See the alias definition
