@@ -138,13 +138,13 @@ alias var=vars # because I'm lazy
 
 function _mr-isrepo {
 	about "succeed if the given folder is tracked by mr. fail otherwise"
-	param "1: a folder which may or may not be an mr-tracked repo; default \$PWD"
+	param '1: a folder which may or may not be an mr-tracked repo; default $PWD'
 	(cd "${1-$PWD}" && mr status) &> /dev/null
 }
 
 function _mr-able-single {
-	about "Within a single folder (default \$PWD), if any child folder is tracked by mr, print every other child folder that *could* be tracked by mr"
-	param "1: a single directory to check; default \$PWD"
+	about 'Within a single folder (default $PWD), if any child folder is tracked by mr, print every other child folder that *could* be tracked by mr'
+	param '1: a single directory to check; default $PWD'
 	local path="${1-$PWD}" candidate
 	local -a candidates mr_yes mr_no
 
@@ -168,7 +168,7 @@ function _mr-able-single {
 }
 
 function _mr-able {
-	about "for each path element in the argument (default \$BASH_IT_PROJECT_PATHS) as a path varable, call out child folders that aren't registered to mr, but are siblings with ones that are"
+	about 'for each path element in the argument (default $BASH_IT_PROJECT_PATHS) as a path varable, call out child folders that are not registered to mr, but are siblings with ones that are'
 	param '*: Any number of $PATH-like folder lists to check. If none are given, $BASH_IT_PROJECT_PATHS is used implicitly'
 	local -a args
 	if [[ "$#" -eq 0 ]]; then
