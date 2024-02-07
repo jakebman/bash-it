@@ -12,6 +12,11 @@ function _jq-ify {
 	"$cmd" "$@" <(jq -S "$filter" < "$left") <(jq -S "$filter" < "$right")
 }
 
+# TODO: there's an update-alternatives for jsondiff. It currently is won by this file:
+# python3-jsonpatch: /usr/bin/json-patch-jsondiff
+# ... Do I want to put jq's hat into the fray?
+# decent info at https://dev.to/webduvet/how-to-manage-versions-using-update-alternatives-258e
+
 alias jqdiff="_jq-ify diff"
 alias jqvimdiff="_jq-ify vimdiff"
 alias vimjqdiff="_jq-ify vimdiff"
