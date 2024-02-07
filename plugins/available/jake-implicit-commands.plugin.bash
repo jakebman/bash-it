@@ -29,8 +29,9 @@ function diff {
 	elif [[ "$#" -eq 1 ]] && ! _jake-special-single-args-for-diff "$1"; then
 		git diff "$@"
 	else
-		# TODO: colordiff?
-		command diff "$@"
+		# TODO: this could be smarter for other people who don't hard-code LESS=-R, use a non-colorful pager, etc.
+		# For now, I'm the only consumer, and this seems adequate
+		command colordiff "$@" | pager
 	fi
 }
 
