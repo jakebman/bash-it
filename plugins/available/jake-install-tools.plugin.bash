@@ -233,7 +233,7 @@ function jake-install-tools() {
 
 	# https://serverfault.com/questions/477503/check-if-array-is-empty-in-bash
 	if ((${#bin_files[@]})); then
-		echo "please copy the apt* files from ${BASH_IT_CUSTOM}/bin to /usr/local/bin"
+		echo "please copy the apt* files (${bin_files[*]}) from ${BASH_IT_CUSTOM}/bin to /usr/local/bin"
 		echo -en "\t"
 		echo 'sudo install ${BASH_IT_CUSTOM}/bin/* /usr/local/bin'
 	else
