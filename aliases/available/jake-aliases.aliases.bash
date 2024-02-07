@@ -289,6 +289,7 @@ alias edit-config='git config-editg'
 
 # list merge commits (like `log --merges`), but always assume I wanted to look at patches
 # TODO: could potentially be super smart by looking at reflog and showing merges that have been *pulled* 'recently'
+# nb: this might also learn something from `yesterday` if yesterday gets a hair smarter
 alias merges='git merges -p'
 
 # 'Not exactly duplicating' aliases
