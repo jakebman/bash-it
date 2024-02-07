@@ -17,7 +17,7 @@ function _q-describe-parent() {
 	read user cmd <<< "$output"
 
 	# TODO: this still might not be right
-	if [[ "$user" = "$USER" ]]; then
+	if [[ "x${user}" = "x${USER}" ]]; then
 		printf "%s, owned by you" "$cmd"
 		return 0 # ownership is the same - no concerns about braining wrong
 	else

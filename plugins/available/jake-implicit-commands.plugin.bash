@@ -88,12 +88,13 @@ done
 
 function _is_numeric {
 	about "Succeeds if all arguments match the /[0-9]+/ regex. Fails otherwise. (The empty string is not numeric)"
+	local arg
 	for arg in "$@"; do
 		# nb: the numeric test from
 		# https://stackoverflow.com/questions/806906/how-do-i-test-if-a-variable-is-a-number-in-bash
 		# is unable to work properly in this situation, so we use bash's [['s extended regex (ERE) support
 		# The 1 prefix prevents `arg=-a` from tricking test into doing something odd
-		[[ "1$arg" =~ 1[[:digit:]]+ ]] || return 1
+		[[ "x${arg}" =~ x[[:digit:]]+ ]] || return 1
 	done
 	return 0
 }
@@ -154,7 +155,7 @@ function realpath {
 	about "allow you to type the bare word 'realpath' and automatically be cd'd there"
 	if [[ "$#" -eq 0 ]]; then
 		local nextdir="$(command realpath .)"
-		if [[ "$nextdir" = "$PWD" ]]; then
+		if [[ "x${nextdir}" = "x${PWD}" ]]; then
 			# Don't cd if we're already there. See also cddd's silly goose callout
 			echo "silly goose. You're already there." > 2
 			return 1

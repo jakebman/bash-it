@@ -54,7 +54,7 @@ function pull {
 	if [ "$#" -ne 0 ]; then
 		# If we have arguments, it's because I'm thinking this is a git pull
 		git pull "$@"
-	elif [ "$PWD" == ~ ] || [ -f .mrconfig ]; then
+	elif [ ~ = "$PWD" ] || [ -f .mrconfig ]; then
 		# yes, there's a .mrconfig in ~, but there's no disk access to check $PWD first
 		mr up "$@"
 	else
@@ -68,7 +68,7 @@ function pull {
 
 function status {
 	# see pull, above
-	if [ "$PWD" == ~ ] || [ -f .mrconfig ]; then
+	if [ ~ = "$PWD" ] || [ -f .mrconfig ]; then
 		mr status "$@"
 	else
 		git status "$@"
@@ -114,6 +114,15 @@ function add {
 	fi
 }
 
+function _is_flag {
+	about "Succeeds if all arguments are flags (have a first character of '-'). Fails otherwise"
+	local arg
+	for arg in "$@"; do
+		[[ "x${arg}" == x-* ]] || return 1
+	done
+	return 0
+}
+
 # commit with one argument is either add/commit the file, or commit with the given message
 function commit {
 	# stash some flags that can be "transparent" to this feature
@@ -130,7 +139,7 @@ function commit {
 	local JAKE_BANNER_WHY="... TO COMMIT"
 
 	# exactly one argument, and it's not a flag. (don't eat --message=typo, for instance)
-	if [ "$#" -eq 1 ] && ! [[ "$1" == -* ]]; then
+	if [ "$#" -eq 1 ] && ! _is_flag "$1"; then
 		if [ -f "$1" ]; then
 			# is a file. add, then interactive commit
 			JAKE_SUPPRESS_GIT_SQUAWK=1 add "$1"
@@ -184,7 +193,7 @@ function unstage {
 }
 
 function remote {
-	if [ "$#" -eq 0 ] || [[ "$1" == 'show' ]]; then
+	if [ "$#" -eq 0 ] || [[ show = "$1" ]]; then
 		git remote -v "$@"
 	else
 		git remote "$@"
