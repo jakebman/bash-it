@@ -184,7 +184,7 @@ function _mr-able {
 	local path
 	while IFS=: read -d: -r path; do # `$IFS` is only set for the `read` command
 		_mr-able-single "$path"
-	done < <(printf "%s:" "${args[@]}")
+	done < <(printf "%s:" "${args[@]}") | jaketree
 	# NB: double indirection above is because `<()` is essentially a filename, not an indirection
 }
 
@@ -206,7 +206,7 @@ function fidget {
 			win-git-update
 		fi
 		apt-up
-		_mr-able | jaketree
+		_mr-able
 	)
 }
 alias fid=fidget
