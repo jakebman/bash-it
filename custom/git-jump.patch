@@ -1,0 +1,11 @@
+*** /usr/share/doc/git/contrib/git-jump/git-jump	2023-11-19 19:07:41.000000000 -0700
+--- /home/jakebman/bin/git-jump	2024-02-08 15:24:58.493985627 -0700
+***************
+*** 81,83 ****
+  mode_ws() {
+! 	git diff --check "$@"
+  }
+--- 81,83 ----
+  mode_ws() {
+! 	git diff --check --relative "$@"
+  }
