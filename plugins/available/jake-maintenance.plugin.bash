@@ -46,6 +46,7 @@ function jake-maintain-system() {
 		(sudo apt-update-only && echo "Listing..." && apt list --upgradable) |& tee apt-update &
 		echo "$! spawned for apt update" | jake-log
 		echo "TODO: clean up docker images if docker is present: https://rzymek.github.io/post/docker-prune/ (or docker system prune)"
+		echo "TODO: for each pom.xml file in each subfolder of each element of BASH_IT_PROJECT_PATHS: do a mvn dependency:go-offline after a git update"
 		# local pid - not in a bash function context right now
 		for pid in $(jobs -p); do
 			wait $pid || echo PID $pid failed somehow | jake-log
