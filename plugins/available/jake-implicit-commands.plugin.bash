@@ -31,7 +31,10 @@ function diff {
 	else
 		# TODO: this could be smarter for other people who don't hard-code LESS=-R, use a non-colorful pager, etc.
 		# For now, I'm the only consumer, and this seems adequate
-		command colordiff "$@" | pager
+		(
+			set -o pipefail # allow diff's failure to propagate outward past a pager's success
+			command colordiff "$@" | pager
+		)
 	fi
 }
 
