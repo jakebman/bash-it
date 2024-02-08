@@ -10,7 +10,7 @@
 # https://stackoverflow.com/questions/18215973/how-to-check-if-running-as-root-in-a-bash-script
 if (( $EUID == 0 )) ; then
   # root - can upgrade
-  apt upgrade
+  apt-get upgrade
 else
   # not root - use implicit sudo
   # Warning: $0 is tempting, but capable of failure. see https://stackoverflow.com/a/31872769/285944
