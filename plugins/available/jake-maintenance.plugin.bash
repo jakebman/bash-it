@@ -47,6 +47,7 @@ function jake-maintain-system() {
 		echo "$! spawned for apt update" | jake-log
 		echo "TODO: clean up docker images if docker is present: https://rzymek.github.io/post/docker-prune/ (or docker system prune)"
 		echo "TODO: for each pom.xml file in each subfolder of each element of BASH_IT_PROJECT_PATHS: do a mvn dependency:go-offline after a git update"
+		echo "TODO: check each gradlew wrapper jdk candidate for being an sdkman-able jdk. Symlink it into sdkman's candidates (gradle can install its own jdks, and find sdkman's, but not ask sdkman to install a jdk)"
 		# local pid - not in a bash function context right now
 		for pid in $(jobs -p); do
 			wait $pid || echo PID $pid failed somehow | jake-log
