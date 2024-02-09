@@ -1,0 +1,17 @@
+diff --git i/contrib/git-jump/git-jump w/contrib/git-jump/git-jump
+index 40c4b0d111..546021e946 100755
+--- i/contrib/git-jump/git-jump
++++ w/contrib/git-jump/git-jump
+@@ -77,11 +77,11 @@ mode_grep() {
+ 	s/^ *//;
+ 	'
+ }
+ 
+ mode_ws() {
+-	git diff --check "$@"
++	git diff --check --relative "$@"
+ }
+ 
+ use_stdout=
+ while test $# -gt 0; do
+ 	case "$1" in
