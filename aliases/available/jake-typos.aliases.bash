@@ -181,6 +181,8 @@ alias typeo=typo
 alias whick=which # (to be fair, I was drinking at the time :| )
 alias whic=which
 
+alias gind=find
+
 alias ipconfig=ifconfig
 
 alias rakubew=rakubrew
