@@ -73,6 +73,7 @@ alias mt=mr
 alias m=mr
 
 alias map=man # I'm kinda surprised there was no existing map command that this overrides
+alias amn=man
 alias mabn=man
 
 alias sork=sort
@@ -269,6 +270,8 @@ alias lgop=logp
 alias lopg=logp
 alias jfd=jdf
 alias jdkf=jdf
+alias ws=jws
+
 alias jske=jake
 
 alias dockar=docker
