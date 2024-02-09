@@ -149,8 +149,8 @@ function _mr-isrepo {
 function _mr-able-single {
 	about 'Within a single folder (default $PWD), if any child folder is tracked by mr, print every other child folder that *could* be tracked by mr'
 	param '1: a single directory to check; default $PWD'
-	local path="${1-$PWD}" candidate
-	local -a candidates mr_yes mr_no
+	local path="${1-$PWD}" candidate do_print
+	local -a candidates mr_no
 
 	# only the first-level child folders are candidates
 	# TODO: `-d` is a bash 4.4-ism, and might not be supported in the rest of bash-it
@@ -161,15 +161,18 @@ function _mr-able-single {
 	local candidate
 	for candidate in "${candidates[@]}"; do
 		if _mr-isrepo "$candidate"; then
-			mr_yes+=("$candidate")
+			do_print="any non-empty-string"
+			if [[ 0 -lt "${mr_no[@]}" ]]; then
+				# print the one's we've been caching
+				printf "%s\n" "${mr_no[@]}"
+				mr_no=()
+			fi
+		elif [ -n "$do_print" ]; then
+			printf "%s\n" "$candidate"
 		else
 			mr_no+=("$candidate")
 		fi
 	done
-
-	if [[ "${#mr_yes[@]}" -gt 0 && "${#mr_no[@]}" -gt 0 ]]; then
-		printf "%s\n" "${mr_no[@]}"
-	fi
 }
 
 function _mr-able-impl {
