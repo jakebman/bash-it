@@ -57,15 +57,19 @@ function jake-install-tools() {
 		echo "Nothing to do for ack - ack already exists"
 	fi
 
-	if cmp -s /usr/share/doc/git/contrib/git-jump/git-jump ~/bin/git-jump; then
-		echo "Nothing to do for git-jump - git-jump matches git's contrib/"
+	if ! [ /usr/share/doc/git/contrib/git-jump/git-jump -nt ~/bin/git-jump ]; then
+		echo "Nothing to do for git-jump - git-jump's timestamp is no older than git's contrib/"
 	else
 		if ! _binary_exists git-jump; then
 			echo "Installing git-jump"
 		else
 			echo "Updating git-jump"
 		fi
+		# preserve-timestamp isn't super helpful, given that we patch and then overwrite, but still..
+		# it's the principle of the matter
 		install --preserve-timestamps /usr/share/doc/git/contrib/git-jump/git-jump --target-directory ~/bin
+		patch ~/bin/git-jump "${BASH_IT_CUSTOM}/etc/git-jump.patch"
+		touch -r /usr/share/doc/git/contrib/git-jump/git-jump ~/bin/git-jump
 	fi
 
 	# tools that can use apt
