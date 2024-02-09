@@ -158,7 +158,7 @@ function realpath {
 		local nextdir="$(command realpath .)"
 		if [[ "x${nextdir}" = "x${PWD}" ]]; then
 			# Don't cd if we're already there. See also cddd's silly goose callout
-			echo "silly goose. You're already there." > 2
+			echo "silly goose. You're already there." >&2
 			return 1
 		else
 			cd "$nextdir"
