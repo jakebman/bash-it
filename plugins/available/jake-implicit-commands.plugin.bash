@@ -86,10 +86,20 @@ function treeN {
 }
 
 # tree2, tree3, tree4, tree5
-for _i in {1..5}; do
+for _i in {2..5}; do
 	alias "tree${_i}=treeN ${_i}"
 done
 unset _i
+
+function _in_array {
+	about 'Succeeds if the first argument is stringly equal to any other element. Usage like _in_array 1 "${doesThisArrayHaveAOne[@]}"'
+	local needle="$1" hay
+	shift || return 1 # no needle - can't find it
+	for hay; do # implicit `in "$@"`
+		[[ "x${needle}" = "x${hay}" ]] && return
+	done
+	return 1
+}
 
 function _is_numeric {
 	about "Succeeds if all arguments match the /[0-9]+/ regex. Fails otherwise. (The empty string is not numeric)"
@@ -105,13 +115,15 @@ function _is_numeric {
 }
 
 function tree {
-	about "ltree; but limit files in the implicit case, and a first arg is implicitly to -L"
+	about "tree, with assumed depth of 2, and filelimit 25. Numeric first argument becomes depth (see treeN). '-a' additionally implies infinite depth"
 	if [[ "$#" -eq 0 ]]; then
 		tree2 --filelimit 25 "$@"
 	else
 		if _is_numeric "$1"; then
 			# numeric first arg. Assume we're treeN
 			treeN "$@"
+		elif _in_array "-a" "$@"; then
+			ltree "$@"
 		else
 			tree2 "$@"
 		fi
