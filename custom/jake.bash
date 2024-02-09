@@ -172,6 +172,15 @@ function _mr-able-single {
 	fi
 }
 
+function _mr-able-impl {
+	# https://stackoverflow.com/questions/11655770/looping-through-the-elements-of-a-path-variable-in-bash, but I use printf to get the trailing colon
+	local path
+	while ifs=: read -d: -r path; do # `$ifs` is only set for the `read` command
+		_mr-able-single "$path"
+	done < <(printf "%s:" "$@")
+	# NB: double indirection above is because `<()` is essentially a filename, not an indirection
+}
+
 function _mr-able {
 	about 'for each path element in the argument (default $BASH_IT_PROJECT_PATHS) as a path varable, call out child folders that are not registered to mr, but are siblings with ones that are'
 	param '*: Any number of $PATH-like folder lists to check. If none are given, $BASH_IT_PROJECT_PATHS is used implicitly'
@@ -182,12 +191,13 @@ function _mr-able {
 		args=("$@")
 	fi
 
-	# https://stackoverflow.com/questions/11655770/looping-through-the-elements-of-a-path-variable-in-bash, but I use printf to get the trailing colon
-	local path
-	while IFS=: read -d: -r path; do # `$IFS` is only set for the `read` command
-		_mr-able-single "$path"
-	done < <(printf "%s:" "${args[@]}") | jaketree
-	# NB: double indirection above is because `<()` is essentially a filename, not an indirection
+	if [ -t 1 ]; then
+		# Implicit jaketree output cleanup for stdout
+		_mr-able-impl "${args[@]}" | jaketree
+	else
+		# Piping. Be cleaner
+		_mr-able-impl "${args[@]}"
+	fi
 }
 
 function fidget {
