@@ -149,7 +149,7 @@ function _mr-isrepo {
 function _mr-able-single {
 	about 'Within a single folder (default $PWD), if any child folder is tracked by mr, print every other child folder that *could* be tracked by mr'
 	param '1: a single directory to check; default $PWD'
-	local path="${1-$PWD}" candidate print_non_mr_repos
+	local path="${1-$PWD}" candidate print_non_mr_repos printed
 	local -a candidates non_mr_repos
 
 	# only the first-level child folders are candidates
@@ -166,16 +166,26 @@ function _mr-able-single {
 				# Those ones previously that we didn't know if we needed to print?
 				# Let's print them now!
 				printf "%s\n" "${non_mr_repos[@]}"
+				printed="any non-empty-string"
 				non_mr_repos=()
 			fi
 		elif [ -n "$print_non_mr_repos" ]; then
 			# We need to print it. Might as well print it now
 			printf "%s\n" "$candidate"
+			printed="any non-empty-string"
 		else
 			# Keep this one in case we need to print it later
 			non_mr_repos+=("$candidate")
 		fi
 	done
+
+	if [ -z "$printed" ]; then
+		if [ -z "$print_non_mr_repos" ]; then
+			printf "%s - no mr repositories with here (%d examined)\n" "$path" "${#candidates[@]}"
+		else
+			printf "%s - clean, with %d candidates examined\n" "$path" "${#candidates[@]}"
+		fi
+	fi
 }
 
 function _mr-able-impl {
