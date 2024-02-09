@@ -43,6 +43,14 @@ function jake-update-expected-git-version() {
 	grep "'${GIT_VERSION}'" "$BASH_SOURCE"
 }
 
+function _jake-same-timestamp() {
+	about "succeeds if the two given files have the same timestamp"
+	param "1 & 2: files to compare"
+	[[ "$1" -nt "$2" ]] && return 1
+	[[ "$1" -ot "$2" ]] && return 1
+	return 0
+}
+
 function jake-install-tools() {
 	about "installs the tools jake uses"
 
@@ -57,15 +65,21 @@ function jake-install-tools() {
 		echo "Nothing to do for ack - ack already exists"
 	fi
 
-	if cmp -s /usr/share/doc/git/contrib/git-jump/git-jump ~/bin/git-jump; then
-		echo "Nothing to do for git-jump - git-jump matches git's contrib/"
+	if _jake-same-timestamp /usr/share/doc/git/contrib/git-jump/git-jump ~/bin/git-jump; then
+		# A timestamp isn't the best indicator for this, but it's the best I have for the moment.
+		# Also, allows me to 're-install' just by touching my copy
+		echo "Nothing to do for git-jump - git-jump's timestamp is the same as in git's contrib/"
 	else
 		if ! _binary_exists git-jump; then
 			echo "Installing git-jump"
 		else
 			echo "Updating git-jump"
 		fi
+		# preserve-timestamp isn't super helpful, given that we patch and then overwrite, but still..
+		# it's the principle of the matter
 		install --preserve-timestamps /usr/share/doc/git/contrib/git-jump/git-jump --target-directory ~/bin
+		patch ~/bin/git-jump "${BASH_IT_CUSTOM}/etc/git-jump.patch"
+		touch -r /usr/share/doc/git/contrib/git-jump/git-jump ~/bin/git-jump
 	fi
 
 	# tools that can use apt
