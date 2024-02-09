@@ -271,6 +271,7 @@ alias jdkf=jdf
 alias ws=jws
 
 alias jske=jake
+alias jkae=jake
 alias vack=jack
 
 alias dockar=docker
