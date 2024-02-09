@@ -89,7 +89,8 @@ function realpath-or-rainbow {
 		git rainbow "$@"
 	else
 		# realpath function calls out that we're a silly goose and fails if it would be idempotent
-		# We rely on that here:
+		# We rely on that here. Also, if it's not present, realpath with no args also errors, and STDERRs
+		# so we really don't care which reason this command fails :)
 		# (And rainbow is defined as an alias below. It's inlined here)
 		realpath 2> /dev/null || git rainbow-all
 	fi
