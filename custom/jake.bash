@@ -18,8 +18,6 @@ alias jake='j --jake'
 alias pkill='pkill --echo'
 alias pgrep='pgrep --list-full'
 
-export CLICOLOR_FORCE="setting this value to ANYTHING forces 'tree' to use colors so we don't need to alias tree='tree -C'. See man(1) tree"
-
 # requires maven 3.9+ https://maven.apache.org/configure.html#maven_args-environment-variable
 export MAVEN_ARGS="-T1C"
 

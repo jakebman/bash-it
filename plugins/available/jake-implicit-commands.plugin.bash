@@ -71,9 +71,11 @@ function delta {
 function ltree {
 	about "paginate (colored) tree output through your pager"
 	# tree will be overwitten below, so 100% NEED to get past that with `command`
-	# I already set CLICOLOR_FORCE, so -C is not required, but it's more consistent to set it here
-	# minor rant: why doesn't tree have a long option for this?
-	command tree -C "$@" | pager
+	if [ -t 1 ]; then
+		command tree -C "$@" | pager
+	else
+		command tree "$@"
+	fi
 }
 
 function treeN {
