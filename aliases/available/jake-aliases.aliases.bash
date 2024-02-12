@@ -6,7 +6,7 @@ alias tulpn='netstat -tulpn'
 # They're functionally aliases; so sue me
 # (They also have typo aliases)
 function lls {
-	ll --color "$@" | less
+	ll --color "$@" | pager
 }
 # WARNING!!!! CONCERNING OVER-RELIANCE ON BASH MINUTAE:
 # The alias ll='ls -alF' already exists. We used it above.
