@@ -145,6 +145,18 @@ function browse {
 	fi
 }
 
+function fork {
+	about "allow you to type the bare word 'fork' to fork in github or gitlab, whichever's relevant"
+	if remotes | grep --quiet jake; then
+		echo "You probably already have a fork. Figure it out"
+		remotes
+	elif remotes | grep --quiet gitlab; then
+		glab repo fork --remote "$@" || echo "I didn't test this. Probably needs a rewrite"
+	else
+		gh repo fork --remote "$@" || echo "I didn't test this either. Probably needs a rewrite"
+	fi
+}
+
 function open {
 	about "essentially identical to 'browse' - implicit gh browse, but runs the open command instead. (open is an alternatives, which usually picks xdg-open)"
 	if [[ "$#" -eq 0 ]]; then
