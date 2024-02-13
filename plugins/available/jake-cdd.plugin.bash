@@ -53,3 +53,5 @@ function cddddd() {
 function cdddddd() {
 	_cdd_any "../../../.." "$@"
 }
+
+# TODO: hook into bash's "missing command tech" and allow an arbitrary number of d's!
