@@ -184,7 +184,7 @@ function _mr-able-single {
 			printf "%s - clean, with %d candidates examined\n" "$path" "${#candidates[@]}"
 		fi
 	else
-		printf "%s - this is (a) cause of the printings above\n" "$print_non_mr_repos"
+		printf "%s - is an example mr'd repository\n" "$print_non_mr_repos"
 	fi
 }
 
