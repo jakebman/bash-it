@@ -159,18 +159,18 @@ function _mr-able-single {
 	local candidate
 	for candidate in "${candidates[@]}"; do
 		if _mr-isrepo "$candidate"; then
-			print_non_mr_repos="any non-empty-string"
+			print_non_mr_repos="$candidate" # re-used below as the reason why we printed
 			if [[ 0 -lt "${#non_mr_repos[@]}" ]]; then
 				# Those ones previously that we didn't know if we needed to print?
 				# Let's print them now!
 				printf "%s\n" "${non_mr_repos[@]}"
-				printed="any non-empty-string"
+				printed="yes, we printed output"
 				non_mr_repos=()
 			fi
 		elif [ -n "$print_non_mr_repos" ]; then
 			# We need to print it. Might as well print it now
 			printf "%s\n" "$candidate"
-			printed="any non-empty-string"
+			printed="yes, we printed output"
 		else
 			# Keep this one in case we need to print it later
 			non_mr_repos+=("$candidate")
@@ -183,6 +183,8 @@ function _mr-able-single {
 		else
 			printf "%s - clean, with %d candidates examined\n" "$path" "${#candidates[@]}"
 		fi
+	else
+		printf "%s - this is (a) cause of the printings above\n" "$print_non_mr_repos"
 	fi
 }
 
