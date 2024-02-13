@@ -141,7 +141,7 @@ alias var=vars # because I'm lazy
 function _mr-isrepo {
 	about "succeed if the given folder is tracked by mr. fail otherwise"
 	param '1: a folder which may or may not be an mr-tracked repo; default $PWD'
-	(cd "${1-$PWD}" && mr status) &> /dev/null
+	(cd "${1-$PWD}" && [[ -e .git ]] && mr status) &> /dev/null
 }
 
 function _mr-able-single {
