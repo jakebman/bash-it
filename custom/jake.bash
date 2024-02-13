@@ -155,7 +155,7 @@ function _mr-able-single {
 	# https://stackoverflow.com/questions/23356779/how-can-i-store-the-find-command-results-as-an-array-in-bash
 	# NB: double < < is because <() produces a 'filename'-like argument
 	# I'd like to call this `readarray` over mapfile, to not use the alias, but bash-it prefers mapfile
-	mapfile -d '' candidates < <(find "$path" -type d -maxdepth 1 -mindepth 1 -not -name .git -print0 | sort -z)
+	mapfile -d '' candidates < <(find "$path" -maxdepth 1 -mindepth 1 -type d -not -name .git -print0 | sort -z)
 	local candidate
 	for candidate in "${candidates[@]}"; do
 		if _mr-isrepo "$candidate"; then
