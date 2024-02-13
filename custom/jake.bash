@@ -160,7 +160,7 @@ function _mr-able-single {
 	for candidate in "${candidates[@]}"; do
 		if _mr-isrepo "$candidate"; then
 			print_non_mr_repos="any non-empty-string"
-			if [[ 0 -lt "${non_mr_repos[@]}" ]]; then
+			if [[ 0 -lt "${#non_mr_repos[@]}" ]]; then
 				# Those ones previously that we didn't know if we needed to print?
 				# Let's print them now!
 				printf "%s\n" "${non_mr_repos[@]}"
