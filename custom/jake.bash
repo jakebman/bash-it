@@ -380,3 +380,9 @@ function doctor {
 	about "just run bash-it doctor"
 	time bash-it doctor
 }
+
+function timing {
+	about 'the `time` command, but also put timestamps in front of each printed line'
+	# nb: ts is from moreutils
+	time "$@" | ts -s
+}
