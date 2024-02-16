@@ -1,9 +1,9 @@
 
 cite about-plugin
-about-plugin 'Enhancements for curl - log the commands and their headers; using $PAGER, bat or less for pagination if available; [TODO] using JQ to format json output to STDOUT'
+about-plugin 'Additional enhancements for curl. Aware of curl-logging, and jq enhancements'
 # Load after other plugins, which load at 250
-# Specifically, we want to load *after* the jq plugin. We're already after the jq-implicit-less alias, which loads at 150
-# (I'm not certain this is strictly necessary, though)
+# Specifically, we want to load *after* the jq and the curl-logging plugins
+# We also want to load after the jq-implicit-less alias, which loads at 150
 # BASH_IT_LOAD_PRIORITY: 251
 
 _command_exists curl || return # don't create the function if the binary is missing
