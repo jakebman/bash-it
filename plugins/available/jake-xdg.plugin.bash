@@ -15,8 +15,7 @@ export DOCKER_CONFIG="${XDG_CONFIG_HOME}/docker"
 
 # Gradle is the only current user of XDG_DATA_HOME, so it's inlined here
 export GRADLE_USER_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/gradle"
-# TODO: needs to be _log_warning
-[ -d ~/.gradle ] && echo "heads up - you have a dangling ~/.gradle folder. It lives in $GRADLE_USER_HOME now"
+[ -d ~/.gradle ] && _log_warning "heads up - you have a dangling ~/.gradle folder. It lives in $GRADLE_USER_HOME now"
 
 ## XDG_CACHE_HOME
 : ${XDG_CACHE_HOME:=${HOME}/.cache}
