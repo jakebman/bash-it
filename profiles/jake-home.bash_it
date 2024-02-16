@@ -4,6 +4,7 @@
 plugins base
 plugins bat-cat-batextras
 plugins cht-sh
+plugins curl-enhancements
 plugins curl-logging
 plugins dircolors
 plugins dotfiles-via-bare-git-repo-with-config-alias
