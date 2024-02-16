@@ -16,6 +16,7 @@ plugins jake-install-tools
 plugins jake-maintenance
 plugins jake-path
 plugins jake-q
+plugins jake-xdg
 plugins jq
 plugins projects
 plugins rakubrew
