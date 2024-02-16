@@ -12,9 +12,9 @@ export GNUPGHOME="${XDG_CONFIG_HOME}/gnupg"
 export DOCKER_CONFIG="${XDG_CONFIG_HOME}/docker"
 
 ## XDG_DATA_HOME
+: "${XDG_DATA_HOME:-${HOME}/.local/share}"
 
-# Gradle is the only current user of XDG_DATA_HOME, so it's inlined here
-export GRADLE_USER_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/gradle"
+export GRADLE_USER_HOME="${XDG_DATA_HOME}/gradle"
 [ -d ~/.gradle ] && _log_warning "heads up - you have a dangling ~/.gradle folder. It lives in $GRADLE_USER_HOME now"
 
 ## XDG_CACHE_HOME
