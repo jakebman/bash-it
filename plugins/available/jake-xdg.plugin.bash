@@ -55,19 +55,3 @@ export PERL_CPANM_HOME="${XDG_STATE_HOME}/cpanm" # cpanm command in the cpanminu
 # .vim - a symlink into .config/vim, for a small win. Removing this symlink requires rewriting vim to read an env. var
 # .wget-hsts - inconvenient to change (only via cli argument, or by creating an unmovable .wgetrc file in the same place)
 # .zef - requires env variable, and the file the env var points to also needs to reference the new location
-
-
-# These next few lines are verbatim from history-eternal plugin. I want 'something' like this, in order to automatically
-# create the XDG directory for $HISTFILE. And *this code* is very much something like itself.
-# WARNING TVTROPES LINK: https://tvtropes.org/pmwiki/pmwiki.php/Main/ShapedLikeItself
-HISTDIR="${XDG_STATE_HOME:-${HOME?}/.local/state}/bash"
-[[ -d ${HISTDIR?} ]] || mkdir -p "${HISTDIR?}"
-readonly HISTFILE="${HISTDIR?}/history" 2>/dev/null || true
-
-# Grab old HISTFILE, if it exists, and seems newer than the new HISTFILE
-if [[ ~/.bash_history -nt "$HISTFILE" ]]; then
-  # -nt is false on missing first files, true on missing second files
-  mv ~/.bash_history "$HISTFILE"
-  touch ~/.bash_history-moved-to-XDG-because-jake-custom-bash-it
-fi
-
