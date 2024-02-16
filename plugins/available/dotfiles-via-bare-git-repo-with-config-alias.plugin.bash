@@ -2,8 +2,15 @@
 # at https://news.ycombinator.com/item?id=11070797
 about-plugin "Following the ideas at https://www.atlassian.com/git/tutorials/dotfiles. Becoming more and more 'vcsh, without vcsh'"
 
-# Convention is that a bare git repo has a .git suffix
-: "${BASH_IT_DOTFILES_GIT_REPO:=~/.dotfiles-repo.git}"
+# Try out some possible locations. NB: last candidate is the one that will be suggested as an option if none of these are found
+if ! [[ -v BASH_IT_DOTFILES_GIT_REPO ]]; then
+	# The naming congention for these folders is that they end in .git, because they're bare repos
+	for BASH_IT_DOTFILES_GIT_REPO in "${VCSH_REPO_D-${XDG_CONFIG_HOME-~/.config}/vcsh/repo.d}/config.git" "~/.dotfiles-repo.git}"; do
+		if [ -d  "${BASH_IT_DOTFILES_GIT_REPO}" ]; then
+			break
+		fi
+	done
+fi
 
 if ! [ -d "${BASH_IT_DOTFILES_GIT_REPO}" ]; then
 	_log_error "${BASH_IT_DOTFILES_GIT_REPO} (\${BASH_IT_DOTFILES_GIT_REPO}) is not a valid git dir."
@@ -15,6 +22,9 @@ if ! [ -d "${BASH_IT_DOTFILES_GIT_REPO}" ]; then
 	_log_error 'GIT_DIR=$BASH_IT_DOTFILES_GIT_REPO (git config --unset core.bare; git config --add core.worktree "$HOME")'
 	return
 fi
+
+# Needed by some the implicit wsl git commands, and by mr repo definitions
+export BASH_IT_DOTFILES_GIT_REPO
 
 _log_debug "found dotfiles repository at ${BASH_IT_DOTFILES_GIT_REPO}"
 alias config='GIT_DIR="${BASH_IT_DOTFILES_GIT_REPO}" git'

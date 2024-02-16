@@ -13,8 +13,6 @@ esac
 
 # Path to the bash it configuration
 export BASH_IT="${HOME}/.bash-it"
-export VCSH_REPO_D="${XDG_CONFIG_HOME}/vcsh/repo.d"          # exporting the variable as its own self
-export BASH_IT_DOTFILES_GIT_REPO="${VCSH_REPO_D}/config.git" # convention recommends bare repos end in .git
 export WSL_WINDOWS_USER_HOME="/mnt/c/Users/Jake"
 
 # This might be useful for a WSL 1 instance, where /usr/bin/git can be slower
