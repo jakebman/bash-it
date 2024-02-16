@@ -1,4 +1,6 @@
-
+# shellcheck shell=bash
+cite about-plugin
+about-plugin 'Set certain environment variables to make their corresponding apps play well with XDG-isms'
 
 ## XDG_CONFIG_HOME
 : ${XDG_CONFIG_HOME:=${HOME}/.config}
