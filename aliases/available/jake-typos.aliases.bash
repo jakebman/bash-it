@@ -166,6 +166,7 @@ alias pws=pwd
 alias vasr=vars
 alias cars=vars
 
+alias tpe=type
 alias ype=type
 alias tyep=type
 alias tyoe=type
