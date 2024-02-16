@@ -2,6 +2,7 @@
 export EDITOR=vim
 export VISUAL=vim
 export PAGER=less
+export BASHIT_CURL_PAGER='bat --style=numbers'
 
 # Allow j!! to work for a previous ack query
 alias jack=j
