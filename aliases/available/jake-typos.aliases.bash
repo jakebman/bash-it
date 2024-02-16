@@ -219,6 +219,7 @@ alias committ=commit
 alias commit-a='commit -a'
 alias commita='commit -a'
 alias ignroed=ignored
+alias rebas=rebase
 alias restoer=restore
 alias ra=rainbow
 alias rain=rainbow
