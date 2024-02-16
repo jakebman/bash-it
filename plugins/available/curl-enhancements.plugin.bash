@@ -12,7 +12,7 @@ function _curl-choose-pager {
 	if _command_exists bat; then
 		echo bat
 	else
-		echo less
+		echo pager
 	fi
 }
 
@@ -23,7 +23,7 @@ function _curl-jqing-and-paging-helper {
 	# It's going to be tricky to automatically decide whether or not to pipe to jq
 	# I think I need to curl to a temp file so that jq can 'sniff' the file and then decide
 	# For now, we can just do paging:
-	$BASHIT_CURL_PAGER
+	$BASHIT_CURL_PAGER "$@"
 }
 
 # allow for curl-logging plugin to apply or not
