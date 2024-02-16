@@ -244,6 +244,7 @@ alias st=status # first unique difference from s's status-or-show magic
 alias gst=gstatus
 alias staqsh=stashs
 alias stashs=stash
+alias unstasn=unstash # Amusingly, a typo of a command I didn't even have before I made the typo. Now I do
 alias gup=gpull # shortened form - not really a good name, so 'typo'
 alias u=pull    # more likely I was thinking of 'up', but that's just 'pull' anyway
 alias p=pull

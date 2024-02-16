@@ -271,6 +271,7 @@ alias rainbow-all='git rainbow-all'   # explicitly --all form of rainbow output
 alias since='git since'   # log with immediate --since argument (technically --since-as-filter, but THATS THE POINT!!!)
 alias tags='git tags'     # list the tags
 alias unshallow='git unshallow' # re-hydrate a shallow clone
+alias unstash='git unstash' # essentially `stash pop`
 alias untracked='git untracked' # something morally equivalent to 'status --untracked'
 alias yesterday='git yesterday' # 'since yesterday', potentially smarter
 
