@@ -8,23 +8,6 @@ about-plugin 'Enhancements for curl - log the commands and their headers; using 
 
 _command_exists curl || return # don't create the function if the binary is missing
 
-function _curl-logging-helper {
-	# TODO: log rotation/storage concerns
-	(
-		# NB: I prefer %q over shell-quote for shell quoting. This note lives here to remind myself
-		# TODO: I'm honestly a little curious the difference between `shell-quote` and printf "%q" ...
-		# See https://askubuntu.com/a/354929
-		printf '#'
-		printf ' %q' curl "$@" # rely on printf's "re-used as necessary" behavior
-		printf '\n'
-		cat
-	)>> ~/curlheaders.txt
-}
-
-function _curl-logged {
-	command curl "$@" --dump-header >(_curl-logging-helper "$@")
-}
-
 function _curl-choose-pager {
 	if _command_exists bat; then
 		echo bat
@@ -43,12 +26,20 @@ function _curl-jqing-and-paging-helper {
 	$BASHIT_CURL_PAGER
 }
 
+# allow for curl-logging plugin to apply or not
+function _curl-maybe-logging {
+	curl "$@"
+}
+if _command_exists _curl-logging; then
+	function _curl-maybe-logging {
+		_curl-logging "$@"
+	}
+fi
 
 function curl {
 	if [[ -t 1 ]]; then
-		_curl-logged "$@" | _curl-jqing-and-paging-helper
+		_curl-maybe-logging "$@" | _curl-jqing-and-paging-helper
 	else
-		_curl-logged "$@"
+		_curl-maybe-logging "$@"
 	fi
 }
-
