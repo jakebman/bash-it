@@ -109,10 +109,20 @@ function add {
 		# TODO: if there is *exactly* one trivial change, automatically add it and print the diff
 		# (Not sure what 'trivial' means yet, but it could be counting lines, or diff sections, or changed files)
 		# For instance, diff sections might not be super smart - I've wanted to split 'a single' diff section when adding before
-		git add -p "$@" # $@ is empty, but this is more consistent with the other branch
+		addp "$@" # $@ is empty, but this is more consistent with the other branch
 	else
 		git add "$@"
 	fi
+}
+
+function addp {
+	about "reset tabstops in git add to something similar to git's core.pager= less --tabs=3,5, but with 4 spaces instead"
+	# put the margin in by one character (+m1), and use 'COBOL compact format extended' (-c3)
+	tabs +m1 -c3
+	add --patch "$@"
+	local out="$?"
+	tabs +m0
+	return "$out"
 }
 
 function _is_flag {
@@ -284,7 +294,6 @@ alias yesterday='git yesterday' # 'since yesterday', potentially smarter
 alias co='git checkout'
 alias intend='git intent' # sorta typo, but more trying to cover my bases on these names
 alias staged='git diff --staged'
-alias addp='git add --patch'
 alias autostash='git pull --rebase --autostash' # implicit rebase is intentional. See the alias definition
 
 # 'Modifying' aliases
