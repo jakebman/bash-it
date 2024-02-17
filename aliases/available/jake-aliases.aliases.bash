@@ -105,7 +105,6 @@ function _jake-banner-display {
 # And this is another for the "it's functionally an alias, so sue me" pile
 function add {
 	if [ "$#" -eq 0 ]; then
-		_jake-banner-display "GIT ADD"
 		# TODO: if there is *exactly* one trivial change, automatically add it and print the diff
 		# (Not sure what 'trivial' means yet, but it could be counting lines, or diff sections, or changed files)
 		# For instance, diff sections might not be super smart - I've wanted to split 'a single' diff section when adding before
@@ -119,6 +118,7 @@ function addp {
 	about "reset tabstops in git add to something similar to git's core.pager= less --tabs=3,5, but with 4 spaces instead"
 	# put the margin in by one character (+m1), and use 'COBOL compact format extended' (-c3)
 	tabs +m1 -c3
+	_jake-banner-display "GIT ADD"
 	add --patch "$@"
 	local out="$?"
 	tabs +m0
