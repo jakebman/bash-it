@@ -275,6 +275,7 @@ alias jfd=jdf
 alias jdkf=jdf
 alias ws=jws
 
+alias jjake=jake # j!! on a jake
 alias jske=jake
 alias jkae=jake
 alias vack=jack
