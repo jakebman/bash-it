@@ -52,7 +52,7 @@ export TODO="t"
 
 # Set this to the location of your work or project folders
 BASH_IT_PROJECT_PATHS="${HOME}/wsl-projects"
-BASH_IT_PROJECT_PATHS+=":${HOME}/ms"
+# BASH_IT_PROJECT_PATHS+=":${HOME}/ms" # for work
 BASH_IT_PROJECT_PATHS+=":${HOME}/wsl-projects/remarkable/repos"
 # BASH_IT_PROJECT_PATHS+=":${HOME}/projects" # gets too many duplicats if we include :${HOME}/projects"
 
