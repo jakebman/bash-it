@@ -118,6 +118,7 @@ function addp {
 	about "reset tabstops in git add to something similar to git's core.pager= less --tabs=3,5, but with 4 spaces instead"
 	# put the margin in by one character (+m1), and use 'COBOL compact format extended' (-c3)
 	tabs +m1 -c3
+	clear -x
 	_jake-banner-display "GIT ADD"
 	add --patch "$@"
 	local out="$?"
