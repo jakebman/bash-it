@@ -151,6 +151,11 @@ function _mr-able-single {
 	local path="${1-$PWD}" candidate print_non_mr_repos printed
 	local -a candidates non_mr_repos
 
+	if [ ! -d "$path" ]; then
+		echo "${path} - doesn't exist. No candidates analyzed"
+		return
+	fi
+
 	# only the first-level child folders are candidates
 	# TODO: `-d` is a bash 4.4-ism, and might not be supported in the rest of bash-it
 	# https://stackoverflow.com/questions/23356779/how-can-i-store-the-find-command-results-as-an-array-in-bash
