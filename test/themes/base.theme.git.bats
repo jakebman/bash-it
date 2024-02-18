@@ -61,6 +61,7 @@ setup_repo_with_upstream() {
 
 @test 'themes base: Git: when tracking a remote branch: it shows the commits ahead and behind' {
   pre="\$(_git-friendly-ref)"
+  eval_pre="master"
 
   remote="$(setup_repo)"
   pushd "$remote"
@@ -76,17 +77,17 @@ setup_repo_with_upstream() {
   SCM_GIT_SHOW_COMMIT_COUNT=true
 
   git_prompt_vars
-  assert_equal "$SCM_BRANCH" "${pre}"
+  assert_equal "$SCM_BRANCH" "${eval_pre}"
 
   add_commit
 
   git_prompt_vars
-  assert_equal "$SCM_BRANCH" "${pre} ↑1"
+  assert_equal "$SCM_BRANCH" "${eval_pre} ↑1"
 
   add_commit
 
   git_prompt_vars
-  assert_equal "$SCM_BRANCH" "${pre} ↑2"
+  assert_equal "$SCM_BRANCH" "${eval_pre} ↑2"
   popd
 
   pushd "$remote"
@@ -99,17 +100,18 @@ setup_repo_with_upstream() {
   git fetch
 
   git_prompt_vars
-  assert_equal "$SCM_BRANCH" "${pre} ↑2 ↓3"
+  assert_equal "$SCM_BRANCH" "${eval_pre} ↑2 ↓3"
 
   git reset HEAD~2 --hard
 
   SCM_GIT_BEHIND_CHAR="↓"
   git_prompt_vars
-  assert_equal "$SCM_BRANCH" "${pre} ↓3"
+  assert_equal "$SCM_BRANCH" "${eval_pre} ↓3"
 }
 
 @test 'themes base: Git: when stashes exist: it shows the number of stashes' {
   pre="\$(_git-friendly-ref)"
+  eval_pre="master"
 
   enter_new_git_repo
   add_commit
@@ -121,25 +123,26 @@ setup_repo_with_upstream() {
   SCM_GIT_SHOW_STASH_INFO=true
 
   git_prompt_vars
-  assert_equal "$SCM_BRANCH" "${pre} {1}"
+  assert_equal "$SCM_BRANCH" "${eval_pre} {1}"
 
   touch file2
   git add file2
   git stash
 
   git_prompt_vars
-  assert_equal "$SCM_BRANCH" "${pre} {2}"
+  assert_equal "$SCM_BRANCH" "${eval_pre} {2}"
 }
 
 @test 'themes base: Git: remote info: when there is no upstream remote: is empty' {
   pre="\$(_git-friendly-ref)"
+  eval_pre="master"
   post=" ↑1 ↓1"
 
   enter_new_git_repo
   add_commit
 
   git_prompt_vars
-  assert_equal "$SCM_BRANCH" "${pre}"
+  assert_equal "$SCM_BRANCH" "${eval_pre}"
 }
 
 @test 'themes base: Git: remote info: when SCM_GIT_SHOW_REMOTE_INFO is true: includes the remote' {
@@ -154,12 +157,12 @@ setup_repo_with_upstream() {
   SCM_GIT_SHOW_COMMIT_COUNT=true
 
   git_prompt_vars
-  assert_equal "$SCM_BRANCH" "${pre}my-remote${post}"
+  assert_equal "$SCM_BRANCH" "${eval_pre}my-remote${post}"
 
   git branch -u my-remote/branch-two
 
   git_prompt_vars
-  assert_equal "$SCM_BRANCH" "${pre}\$(_git-upstream)${post}"
+  assert_equal "$SCM_BRANCH" "${eval_pre}\$(_git-upstream)${post}"
   assert_equal "$(eval "echo \"$SCM_BRANCH\"")" "${eval_pre}my-remote/branch-two${post}"
 }
 
@@ -175,26 +178,26 @@ setup_repo_with_upstream() {
   SCM_GIT_SHOW_COMMIT_COUNT=true
 
   git_prompt_vars
-  assert_equal "$SCM_BRANCH" "${pre}${post}"
+  assert_equal "$SCM_BRANCH" "${eval_pre}${post}"
 
   pre="${pre} → "
   eval_pre="${eval_pre} → "
   git branch -u my-remote/branch-two
 
   git_prompt_vars
-  assert_equal "$SCM_BRANCH" "${pre}\$(_git-upstream-branch)${post}"
+  assert_equal "$SCM_BRANCH" "${eval_pre}\$(_git-upstream-branch)${post}"
   assert_equal "$(eval "echo \"$SCM_BRANCH\"")" "${eval_pre}branch-two${post}"
 
   git remote add second-remote "$(mktemp -d)"
   git branch -u my-remote/master
 
   git_prompt_vars
-  assert_equal "$SCM_BRANCH" "${pre}my-remote${post}"
+  assert_equal "$SCM_BRANCH" "${eval_pre}my-remote${post}"
 
   git branch -u my-remote/branch-two
 
   git_prompt_vars
-  assert_equal "$SCM_BRANCH" "${pre}\$(_git-upstream)${post}"
+  assert_equal "$SCM_BRANCH" "${eval_pre}\$(_git-upstream)${post}"
   assert_equal "$(eval "echo \"$SCM_BRANCH\"")" "${eval_pre}my-remote/branch-two${post}"
 }
 
@@ -212,19 +215,20 @@ setup_repo_with_upstream() {
   SCM_GIT_SHOW_COMMIT_COUNT=true
 
   git_prompt_vars
-  assert_equal "$SCM_BRANCH" "${pre}${post}"
+  assert_equal "$SCM_BRANCH" "${eval_pre}${post}"
 
   pre="${pre} → "
   eval_pre="${eval_pre} → "
   git branch -u my-remote/branch-two
 
   git_prompt_vars
-  assert_equal "$SCM_BRANCH" "${pre}\$(_git-upstream-branch)${post}"
+  assert_equal "$SCM_BRANCH" "${eval_pre}\$(_git-upstream-branch)${post}"
   assert_equal "$(eval "echo \"$SCM_BRANCH\"")" "${eval_pre}branch-two${post}"
 }
 
 @test 'themes base: Git: remote info: when showing remote info: show if upstream branch is gone' {
   pre="\$(_git-friendly-ref)"
+  eval_pre="master"
   post=" ↑1 ↓1"
 
   repo="$(setup_repo_with_upstream)"
@@ -234,13 +238,14 @@ setup_repo_with_upstream() {
   SCM_GIT_SHOW_COMMIT_COUNT=true
 
   git_prompt_vars
-  assert_equal "$SCM_BRANCH" "${pre} → my-remote${post}"
+  assert_equal "$SCM_BRANCH" "${eval_pre} → my-remote${post}"
 
-  git checkout gone-branch
+  eval_pre="gone-branch"
+  git checkout "$eval_pre"
   git fetch --prune --all
 
   git_prompt_vars
-  assert_equal "$SCM_BRANCH" "${pre} ⇢ my-remote"
+  assert_equal "$SCM_BRANCH" "${eval_pre} ⇢ my-remote"
 }
 
 @test 'themes base: Git: git friendly ref: when a branch is checked out: shows that branch' {
@@ -314,6 +319,7 @@ setup_repo_with_upstream() {
 
 @test 'themes base: Git: git friendly ref: shows staged, unstaged, and untracked file counts' {
   pre="\$(_git-friendly-ref)"
+  eval_pre="master"
 
   enter_new_git_repo
   echo "line1" > file1
@@ -332,7 +338,7 @@ setup_repo_with_upstream() {
   SCM_GIT_SHOW_DETAILS=true
 
   git_prompt_vars
-  assert_equal "$SCM_BRANCH" "${pre} S:1"
+  assert_equal "$SCM_BRANCH" "${eval_pre} S:1"
   assert_equal "$SCM_STATE" " ✗"
   assert_equal "$SCM_DIRTY" "3"
 
@@ -341,48 +347,48 @@ setup_repo_with_upstream() {
   echo "line2" >> file4
 
   git_prompt_vars
-  assert_equal "$SCM_BRANCH" "${pre} S:1 U:3"
+  assert_equal "$SCM_BRANCH" "${eval_pre} S:1 U:3"
   assert_equal "$SCM_DIRTY" "2"
 
   echo "line1" > newfile5
   echo "line1" > newfile6
 
   git_prompt_vars
-  assert_equal "$SCM_BRANCH" "${pre} S:1 U:3 ?:2"
+  assert_equal "$SCM_BRANCH" "${eval_pre} S:1 U:3 ?:2"
   assert_equal "$SCM_DIRTY" "1"
 
-  # Jake: this section tests a feature I have intentionally disabled
-  # git config bash-it.hide-status 1
+  git config bash-it.hide-status 1
 
-  # SCM_DIRTY='nope'
-  # git_prompt_vars
-  # assert_equal "$SCM_BRANCH" "${pre}" # fails
-  # assert_equal "$SCM_DIRTY" "nope"
+  SCM_DIRTY='nope'
+  git_prompt_vars
+  assert_equal "$SCM_BRANCH" "${eval_pre}"
+  assert_equal "$SCM_DIRTY" "nope"
 }
 
 @test 'themes base: Git: git user info: shows user initials' {
   pre="\$(_git-friendly-ref)"
+  eval_pre="master"
 
   enter_new_git_repo
   git config user.name "Cool User"
 
   git_prompt_vars
-  assert_equal "$SCM_BRANCH" "${pre}"
+  assert_equal "$SCM_BRANCH" "${eval_pre}"
 
   SCM_GIT_SHOW_CURRENT_USER=true
 
   git_prompt_vars
-  assert_equal "$SCM_BRANCH" "${pre} ☺︎ cu"
+  assert_equal "$SCM_BRANCH" "${eval_pre} ☺︎ cu"
 
   git config user.name "Çool Üser"
 
   git_prompt_vars
-  assert_equal "$SCM_BRANCH" "${pre} ☺︎ çü"
+  assert_equal "$SCM_BRANCH" "${eval_pre} ☺︎ çü"
 
   # show initials set by `git pair`
 
   git config user.initials "ab cd"
 
   git_prompt_vars
-  assert_equal "$SCM_BRANCH" "${pre} ☺︎ ab+cd"
+  assert_equal "$SCM_BRANCH" "${eval_pre} ☺︎ ab+cd"
 }
