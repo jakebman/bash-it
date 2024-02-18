@@ -100,13 +100,13 @@ setup_repo_with_upstream() {
   git fetch
 
   git_prompt_vars
-  assert_equal "$SCM_BRANCH" "${pre} ↑2 ↓3"
+  assert_equal "$SCM_BRANCH" "${eval_pre} ↑2 ↓3"
 
   git reset HEAD~2 --hard
 
   SCM_GIT_BEHIND_CHAR="↓"
   git_prompt_vars
-  assert_equal "$SCM_BRANCH" "${pre} ↓3"
+  assert_equal "$SCM_BRANCH" "${eval_pre} ↓3"
 }
 
 @test 'themes base: Git: when stashes exist: it shows the number of stashes' {
@@ -157,12 +157,12 @@ setup_repo_with_upstream() {
   SCM_GIT_SHOW_COMMIT_COUNT=true
 
   git_prompt_vars
-  assert_equal "$SCM_BRANCH" "${pre}my-remote${post}"
+  assert_equal "$SCM_BRANCH" "${eval_pre}my-remote${post}"
 
   git branch -u my-remote/branch-two
 
   git_prompt_vars
-  assert_equal "$SCM_BRANCH" "${pre}\$(_git-upstream)${post}"
+  assert_equal "$SCM_BRANCH" "${eval_pre}\$(_git-upstream)${post}"
   assert_equal "$(eval "echo \"$SCM_BRANCH\"")" "${eval_pre}my-remote/branch-two${post}"
 }
 
@@ -178,26 +178,26 @@ setup_repo_with_upstream() {
   SCM_GIT_SHOW_COMMIT_COUNT=true
 
   git_prompt_vars
-  assert_equal "$SCM_BRANCH" "${pre}${post}"
+  assert_equal "$SCM_BRANCH" "${eval_pre}${post}"
 
   pre="${pre} → "
   eval_pre="${eval_pre} → "
   git branch -u my-remote/branch-two
 
   git_prompt_vars
-  assert_equal "$SCM_BRANCH" "${pre}\$(_git-upstream-branch)${post}"
+  assert_equal "$SCM_BRANCH" "${eval_pre}\$(_git-upstream-branch)${post}"
   assert_equal "$(eval "echo \"$SCM_BRANCH\"")" "${eval_pre}branch-two${post}"
 
   git remote add second-remote "$(mktemp -d)"
   git branch -u my-remote/master
 
   git_prompt_vars
-  assert_equal "$SCM_BRANCH" "${pre}my-remote${post}"
+  assert_equal "$SCM_BRANCH" "${eval_pre}my-remote${post}"
 
   git branch -u my-remote/branch-two
 
   git_prompt_vars
-  assert_equal "$SCM_BRANCH" "${pre}\$(_git-upstream)${post}"
+  assert_equal "$SCM_BRANCH" "${eval_pre}\$(_git-upstream)${post}"
   assert_equal "$(eval "echo \"$SCM_BRANCH\"")" "${eval_pre}my-remote/branch-two${post}"
 }
 
