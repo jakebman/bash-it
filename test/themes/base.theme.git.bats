@@ -363,27 +363,28 @@ setup_repo_with_upstream() {
 
 @test 'themes base: Git: git user info: shows user initials' {
   pre="\$(_git-friendly-ref)"
+  eval_pre="master"
 
   enter_new_git_repo
   git config user.name "Cool User"
 
   git_prompt_vars
-  assert_equal "$SCM_BRANCH" "${pre}"
+  assert_equal "$SCM_BRANCH" "${eval_pre}"
 
   SCM_GIT_SHOW_CURRENT_USER=true
 
   git_prompt_vars
-  assert_equal "$SCM_BRANCH" "${pre} ☺︎ cu"
+  assert_equal "$SCM_BRANCH" "${eval_pre} ☺︎ cu"
 
   git config user.name "Çool Üser"
 
   git_prompt_vars
-  assert_equal "$SCM_BRANCH" "${pre} ☺︎ çü"
+  assert_equal "$SCM_BRANCH" "${eval_pre} ☺︎ çü"
 
   # show initials set by `git pair`
 
   git config user.initials "ab cd"
 
   git_prompt_vars
-  assert_equal "$SCM_BRANCH" "${pre} ☺︎ ab+cd"
+  assert_equal "$SCM_BRANCH" "${eval_pre} ☺︎ ab+cd"
 }
