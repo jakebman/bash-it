@@ -212,7 +212,7 @@ setup_repo_with_upstream() {
   SCM_GIT_SHOW_COMMIT_COUNT=true
 
   git_prompt_vars
-  assert_equal "$SCM_BRANCH" "${pre}${post}"
+  assert_equal "$SCM_BRANCH" "${eval_pre}${post}"
 
   pre="${pre} → "
   eval_pre="${eval_pre} → "
