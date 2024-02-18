@@ -233,7 +233,7 @@ function reset {
 # the full automatic invocation of an existing command. Mostly, this lets me pick
 # `git pull` over `mr up` where `pull` would otherwise pick the second one
 alias ghelp='git help' # help is actually a bash builtin
-alias gman='git man' # git-man is amusingly also an alias to git-help
+alias gman='git man'   # git-man is amusingly also an alias to git-help
 alias gpull='git pull'
 alias gstatus='git status'
 
@@ -276,18 +276,18 @@ alias intent-to-add=intent # longname to remind myself on tab-completion
 # AND WHY DOESN'T THIS APPLY TO A BARE git log?????!????!?
 #     edit: nevermind - you just need a longer git history than wherever I tested this
 # It also goes away if you append +G to LESS (`LESS="$LESS +G"`)
-alias logp='git logp'     # log with patch
-alias logs='git logs'     # log with stats (+++-- indicators)
-alias logn='git logn'     # log with numstats
+alias logp='git logp' # log with patch
+alias logs='git logs' # log with stats (+++-- indicators)
+alias logn='git logn' # log with numstats
 alias ls-files='git ls-files'
 alias rainbow-here='git rainbow-here' # approx. git log --oneline --graph, specifically only the current history (no --all)
 alias rainbow-all='git rainbow-all'   # explicitly --all form of rainbow output
-alias since='git since'   # log with immediate --since argument (technically --since-as-filter, but THATS THE POINT!!!)
-alias tags='git tags'     # list the tags
-alias unshallow='git unshallow' # re-hydrate a shallow clone
-alias unstash='git unstash' # essentially `stash pop`
-alias untracked='git untracked' # something morally equivalent to 'status --untracked'
-alias yesterday='git yesterday' # 'since yesterday', potentially smarter
+alias since='git since'               # log with immediate --since argument (technically --since-as-filter, but THATS THE POINT!!!)
+alias tags='git tags'                 # list the tags
+alias unshallow='git unshallow'       # re-hydrate a shallow clone
+alias unstash='git unstash'           # essentially `stash pop`
+alias untracked='git untracked'       # something morally equivalent to 'status --untracked'
+alias yesterday='git yesterday'       # 'since yesterday', potentially smarter
 
 # 'Duplicating' aliases
 # These could have been written as `alias X='git X'`, because they're
