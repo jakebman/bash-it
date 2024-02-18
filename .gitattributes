@@ -5,5 +5,8 @@
 *.md whitespace=-blank-at-eol
 *.rst whitespace=-blank-at-eol
 
+# patches have trailing whitespace and 'paradoxical' leading spaces
+*.patch whitespace=-blank-at-eol,-space-before-tab
+
 # Windows files
 *.bat text eol=crlf
