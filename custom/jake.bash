@@ -61,16 +61,16 @@ fi
 if _command_exists lesspipe; then # most likely; gets zip files too
 	eval $(lesspipe)
 elif _command_exists "${XDG_CONFIG_HOME:-${HOME}/.config}/lessfilter"; then # my custom shim for coloring lesspipe. lesspipe calls it
-	_log_warn "lesspipe is not available, but XDG_CONFIG_HOME/lessfilter is present at ${XDG_CONFIG_HOME:-${HOME}/.config}/lessfilter. Using that"
+	_log_warning "lesspipe is not available, but XDG_CONFIG_HOME/lessfilter is present at ${XDG_CONFIG_HOME:-${HOME}/.config}/lessfilter. Using that"
 	export LESSOPEN="|| ${XDG_CONFIG_HOME:-${HOME}/.config}/lessfilter %s"
 elif _command_exists "$HOME/.lessfilter"; then # a legacy location for lessfilter
-	_log_warn "lesspipe is not available, but ~/.lessfilter is present. Using that"
+	_log_warning "lesspipe is not available, but ~/.lessfilter is present. Using that"
 	export LESSOPEN="|| $HOME/.lessfilter %s"
 elif _command_exists pygmentize; then # fallback if somehow we don't have anything else useful
 	# see `man less`, section "INPUT PREPROCESSOR"
 	# We only use pygmentize on named files (not '||-') because
 	# I don't really like the default colors that are guessed
-	_log_warn "lesspipe is mising and lessfilter is missing from both ~ and XDG_CONFIG_HOME. Using pygmentize bare"
+	_log_warning "lesspipe is mising and lessfilter is missing from both ~ and XDG_CONFIG_HOME. Using pygmentize bare"
 	export LESSOPEN='|| pygmentize -f 256 -O style="${LESSSTYLE:-default}" -g %s 2>/tmp/pygmentize-errors'
 else
 	_log_error "pygmentize is available via sudo apt install python-pygments"
