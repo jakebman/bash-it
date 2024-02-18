@@ -130,6 +130,8 @@ function _is_flag {
 	about "Succeeds if all arguments are flags (have a first character of '-'). Fails otherwise"
 	local arg
 	for arg in "$@"; do
+		# shellcheck is wrong here. If arg is "-a", then x is ABSOLUTELY necessary
+		# shellcheck disable=SC2268
 		[[ "x${arg}" == x-* ]] || return 1
 	done
 	return 0
