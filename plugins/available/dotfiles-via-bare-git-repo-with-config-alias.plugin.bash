@@ -5,7 +5,7 @@ about-plugin "Following the ideas at https://www.atlassian.com/git/tutorials/dot
 # Try out some possible locations. NB: last candidate is the one that will be suggested as an option if none of these are found
 if ! [[ -v BASH_IT_DOTFILES_GIT_REPO ]]; then
 	# The naming congention for these folders is that they end in .git, because they're bare repos
-	for BASH_IT_DOTFILES_GIT_REPO in "${VCSH_REPO_D-${XDG_CONFIG_HOME-~/.config}/vcsh/repo.d}/config.git" "~/.dotfiles-repo.git}"; do
+	for BASH_IT_DOTFILES_GIT_REPO in "${VCSH_REPO_D-${XDG_CONFIG_HOME-~/.config}/vcsh/repo.d}/config.git" "~/.dotfiles-repo.git"; do
 		if [ -d  "${BASH_IT_DOTFILES_GIT_REPO}" ]; then
 			break
 		fi
