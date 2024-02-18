@@ -351,13 +351,12 @@ setup_repo_with_upstream() {
   assert_equal "$SCM_BRANCH" "${pre} S:1 U:3 ?:2"
   assert_equal "$SCM_DIRTY" "1"
 
-  # Jake: this section tests a feature I have intentionally disabled
-  # git config bash-it.hide-status 1
+  git config bash-it.hide-status 1
 
-  # SCM_DIRTY='nope'
-  # git_prompt_vars
-  # assert_equal "$SCM_BRANCH" "${pre}" # fails
-  # assert_equal "$SCM_DIRTY" "nope"
+  SCM_DIRTY='nope'
+  git_prompt_vars
+  assert_equal "$SCM_BRANCH" "${pre}"
+  assert_equal "$SCM_DIRTY" "nope"
 }
 
 @test 'themes base: Git: git user info: shows user initials' {
