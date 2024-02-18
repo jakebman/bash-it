@@ -61,6 +61,7 @@ setup_repo_with_upstream() {
 
 @test 'themes base: Git: when tracking a remote branch: it shows the commits ahead and behind' {
   pre="\$(_git-friendly-ref)"
+  eval_pre="master"
 
   remote="$(setup_repo)"
   pushd "$remote"
@@ -76,17 +77,17 @@ setup_repo_with_upstream() {
   SCM_GIT_SHOW_COMMIT_COUNT=true
 
   git_prompt_vars
-  assert_equal "$SCM_BRANCH" "${pre}"
+  assert_equal "$SCM_BRANCH" "${eval_pre}"
 
   add_commit
 
   git_prompt_vars
-  assert_equal "$SCM_BRANCH" "${pre} ↑1"
+  assert_equal "$SCM_BRANCH" "${eval_pre} ↑1"
 
   add_commit
 
   git_prompt_vars
-  assert_equal "$SCM_BRANCH" "${pre} ↑2"
+  assert_equal "$SCM_BRANCH" "${eval_pre} ↑2"
   popd
 
   pushd "$remote"
@@ -110,6 +111,7 @@ setup_repo_with_upstream() {
 
 @test 'themes base: Git: when stashes exist: it shows the number of stashes' {
   pre="\$(_git-friendly-ref)"
+  eval_pre="master"
 
   enter_new_git_repo
   add_commit
@@ -121,25 +123,26 @@ setup_repo_with_upstream() {
   SCM_GIT_SHOW_STASH_INFO=true
 
   git_prompt_vars
-  assert_equal "$SCM_BRANCH" "${pre} {1}"
+  assert_equal "$SCM_BRANCH" "${eval_pre} {1}"
 
   touch file2
   git add file2
   git stash
 
   git_prompt_vars
-  assert_equal "$SCM_BRANCH" "${pre} {2}"
+  assert_equal "$SCM_BRANCH" "${eval_pre} {2}"
 }
 
 @test 'themes base: Git: remote info: when there is no upstream remote: is empty' {
   pre="\$(_git-friendly-ref)"
+  eval_pre="master"
   post=" ↑1 ↓1"
 
   enter_new_git_repo
   add_commit
 
   git_prompt_vars
-  assert_equal "$SCM_BRANCH" "${pre}"
+  assert_equal "$SCM_BRANCH" "${eval_pre}"
 }
 
 @test 'themes base: Git: remote info: when SCM_GIT_SHOW_REMOTE_INFO is true: includes the remote' {
