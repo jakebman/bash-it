@@ -237,7 +237,8 @@ setup_repo_with_upstream() {
   git_prompt_vars
   assert_equal "$SCM_BRANCH" "${eval_pre} → my-remote${post}"
 
-  git checkout gone-branch
+  eval_pre="gone-branch"
+  git checkout "$eval_pre"
   git fetch --prune --all
 
   git_prompt_vars
