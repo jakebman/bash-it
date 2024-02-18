@@ -127,7 +127,7 @@ function jake-install-tools() {
 	_jake-find-tool vcsh
 	_jake-find-tool perldoc perl-doc "for man mr"
 	_jake-find-tool ctags universal-ctags "for vim navigation"
-	_jake-find-tool figlet "for my git no-args tools"
+	_jake-find-tool figlet figlet "for my git no-args tools"
 	_jake-find-file /usr/lib/git-core/git-gui git-gui "git commit gui; not dispatched-to via the path"
 	# 228MB - only when you need it: _jake-find-tool ffmpeg
 
