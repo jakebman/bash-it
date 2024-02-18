@@ -219,12 +219,13 @@ setup_repo_with_upstream() {
   git branch -u my-remote/branch-two
 
   git_prompt_vars
-  assert_equal "$SCM_BRANCH" "${pre}\$(_git-upstream-branch)${post}"
+  assert_equal "$SCM_BRANCH" "${eval_pre}\$(_git-upstream-branch)${post}"
   assert_equal "$(eval "echo \"$SCM_BRANCH\"")" "${eval_pre}branch-two${post}"
 }
 
 @test 'themes base: Git: remote info: when showing remote info: show if upstream branch is gone' {
   pre="\$(_git-friendly-ref)"
+  eval_pre="master"
   post=" ↑1 ↓1"
 
   repo="$(setup_repo_with_upstream)"
@@ -234,13 +235,13 @@ setup_repo_with_upstream() {
   SCM_GIT_SHOW_COMMIT_COUNT=true
 
   git_prompt_vars
-  assert_equal "$SCM_BRANCH" "${pre} → my-remote${post}"
+  assert_equal "$SCM_BRANCH" "${eval_pre} → my-remote${post}"
 
   git checkout gone-branch
   git fetch --prune --all
 
   git_prompt_vars
-  assert_equal "$SCM_BRANCH" "${pre} ⇢ my-remote"
+  assert_equal "$SCM_BRANCH" "${eval_pre} ⇢ my-remote"
 }
 
 @test 'themes base: Git: git friendly ref: when a branch is checked out: shows that branch' {
@@ -314,6 +315,7 @@ setup_repo_with_upstream() {
 
 @test 'themes base: Git: git friendly ref: shows staged, unstaged, and untracked file counts' {
   pre="\$(_git-friendly-ref)"
+  eval_pre="master"
 
   enter_new_git_repo
   echo "line1" > file1
@@ -332,7 +334,7 @@ setup_repo_with_upstream() {
   SCM_GIT_SHOW_DETAILS=true
 
   git_prompt_vars
-  assert_equal "$SCM_BRANCH" "${pre} S:1"
+  assert_equal "$SCM_BRANCH" "${eval_pre} S:1"
   assert_equal "$SCM_STATE" " ✗"
   assert_equal "$SCM_DIRTY" "3"
 
@@ -341,21 +343,21 @@ setup_repo_with_upstream() {
   echo "line2" >> file4
 
   git_prompt_vars
-  assert_equal "$SCM_BRANCH" "${pre} S:1 U:3"
+  assert_equal "$SCM_BRANCH" "${eval_pre} S:1 U:3"
   assert_equal "$SCM_DIRTY" "2"
 
   echo "line1" > newfile5
   echo "line1" > newfile6
 
   git_prompt_vars
-  assert_equal "$SCM_BRANCH" "${pre} S:1 U:3 ?:2"
+  assert_equal "$SCM_BRANCH" "${eval_pre} S:1 U:3 ?:2"
   assert_equal "$SCM_DIRTY" "1"
 
   git config bash-it.hide-status 1
 
   SCM_DIRTY='nope'
   git_prompt_vars
-  assert_equal "$SCM_BRANCH" "${pre}"
+  assert_equal "$SCM_BRANCH" "${eval_pre}"
   assert_equal "$SCM_DIRTY" "nope"
 }
 
