@@ -27,14 +27,14 @@ alias watch='watch --differences=permanent'
 # Sometimes I use this name for the command rather than its normal name. Oops.
 alias maven=mvn
 
-# Single-letter/alphabetical shortcut alaises. Formatting to match comments
-alias b=browse # or bash?
+# Single-letter/alphabetical shortcut alaises
+alias b=browse # or branch, bash, or bat?
 # alias d=diff # currently in jake-typos.aliases.bash because it was a typo first
 # alias f=fidget # defined in custom/jake.bash
 alias g=git
 # function h { history | less +G } # defined above
 # alias m=mr # typo
-# alias p=pull # typo
+# alias p=pull # typo (TODO: could this become `push` if we're a commit ahead of upstream?)
 # function q # in bash-it plugin jake-q. Approx: { if ! _is-toplevel-bash; then exit; fi }
 alias r=realpath-or-rainbow # defined below, but fine to alias here
 alias s=status-or-show      # defined below, but fine to alias here
