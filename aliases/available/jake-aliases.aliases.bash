@@ -124,8 +124,10 @@ function addp {
 	# put the margin in by one character (+m1), and use 'COBOL compact format extended' (-c3)
 	tabs +m1 -c3
 	clear -x
+
 	_jake-banner-display "GIT ADD"
 	add --patch "$@"
+
 	local out="$?"
 	tabs +m0
 	return "$out"
@@ -192,6 +194,10 @@ alias amend='commit --amend'
 
 # Print a header warning that this is NOT ADD, and DESTUCTIVE
 function restore {
+	# tab-sizing tech from addp
+	tabs +m1 -c3
+	clear -x
+
 	echo -ne "${echo_red-}"
 	_jake-banner-display "!!! GIT RESTORE !!!"
 	sleep .2
@@ -200,6 +206,10 @@ function restore {
 
 	sleep .3
 	git restore -p "$@"
+
+	local out="$?"
+	tabs +m0
+	return "$out"
 }
 
 function unstage {
