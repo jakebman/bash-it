@@ -100,7 +100,7 @@ function _in_array {
 	about 'Succeeds if the first argument is stringly equal to any other element. Usage like _in_array 1 "${doesThisArrayHaveAOne[@]}"'
 	local needle="$1" hay
 	shift || return 1 # no needle - can't find it
-	for hay; do # implicit `in "$@"`
+	for hay; do       # implicit `in "$@"`
 		[[ "x${needle}" = "x${hay}" ]] && return
 	done
 	return 1
@@ -222,7 +222,7 @@ function _is_git_safe {
 		printf "%s is not in git." "$1" >&2
 		return 1
 	fi
-	if ! git diff --quiet -- "$1" &>/dev/null; then
+	if ! git diff --quiet -- "$1" &> /dev/null; then
 		printf "%s has git modifications." "$1" >&2
 		return 1
 	fi

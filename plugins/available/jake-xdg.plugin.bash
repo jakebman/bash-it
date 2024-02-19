@@ -30,7 +30,6 @@ export JARVIZ_DIR="${XDG_CACHE_HOME}" # a jar analyzer, from sdkman
 
 export PERL_CPANM_HOME="${XDG_STATE_HOME}/cpanm" # cpanm command in the cpanminus package from apt (for rakubrew)
 
-
 # XDG list:
 # .aws - not configurable
 # .azure - symlinked into $WSL_WINDOWS_USER_HOME. Can probably remove it without damage.
