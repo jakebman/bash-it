@@ -139,10 +139,22 @@ alias var=vars # because I'm lazy
 # TODO: Let's get a function-printing equivalent of vars
 #}
 
+function _mr-isrepo-local {
+	about "succeeds if the current folder is a git repo tracked by mr. fails otherwise"
+	[[ -e .git ]] || return 1
+	local status
+	status="$(mr status)" || return 1
+
+	[[ "x${status}" =~ status:.*\(in\ subdir\  ]] && return 1
+
+	return 0
+}
+
+
 function _mr-isrepo {
-	about "succeed if the given folder is tracked by mr. fail otherwise"
+	about "succeeds if the given folder is a git repo tracked by mr. fails otherwise"
 	param '1: a folder which may or may not be an mr-tracked repo; default $PWD'
-	(cd "${1-$PWD}" && [[ -e .git ]] && mr status) &> /dev/null
+	(cd "${1-$PWD}" && _mr-isrepo-local) &> /dev/null
 }
 
 function _mr-able-single {
