@@ -237,7 +237,8 @@ alias gman='git man'   # git-man is amusingly also an alias to git-help
 alias gpull='git pull'
 alias gstatus='git status'
 
-# 'Vanilla' aliases - these are aliases to existing git-<command>s, that simply allow for an implicit git
+# 'Vanilla' aliases - these are aliases to existing git-<command>s (not git-<alias>es)
+# These aliases simply allow for an implicit git on commands that predate any of my git-config alias additions
 alias clone='git clone'
 alias push='git push'
 alias fetch='git fetch'
