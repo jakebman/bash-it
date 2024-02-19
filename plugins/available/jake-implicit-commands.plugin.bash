@@ -19,7 +19,7 @@ function cat {
 		# --plain: no line numbers or header
 		# --show-all: allow printing binary files without complaint (but also signifies all binary characters)
 		# (so we only want to do the show-all only if the bare plain fails)
-		bat --plain "$@" 2>/dev/null || bat --plain --show-all "$@"
+		bat --plain "$@" 2> /dev/null || bat --plain --show-all "$@"
 	fi
 }
 
@@ -218,7 +218,7 @@ function file {
 function _is_git_safe {
 	about "determine if it's okay to modify a file 'automatically'. Essentially, if there aren't floating changes to it in the workdir"
 	param "1: a file to check"
-	git diff --quiet -- "$1" &>/dev/null
+	git diff --quiet -- "$1" &> /dev/null
 }
 
 function shfmt {
