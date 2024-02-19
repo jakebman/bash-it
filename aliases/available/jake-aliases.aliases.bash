@@ -68,11 +68,16 @@ function pull {
 
 function status {
 	# see pull, above
+	local status=0
 	if [ ~ = "$PWD" ] || [ -f .mrconfig ]; then
 		mr status "$@"
-	else
-		git status "$@"
+		status="$?"
+		echo # separator line for readability
 	fi
+
+	# I want an unconditional git status. We *can* also include mr, above, but this *must* happen anyway
+	# (but if mr status fails, it would be nice to propagate that failure here, too)
+	git status "$@" && return $status
 }
 
 function status-or-show {
