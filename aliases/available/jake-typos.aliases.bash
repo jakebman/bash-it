@@ -245,6 +245,7 @@ alias staut=status
 alias tatus=status
 alias staus=status
 alias st=status # first unique difference from s's status-or-show magic
+alias branche=branches # because sometimes I get lazy, apparently
 alias gst=gstatus
 alias staqsh=stashs
 alias stashs=stash
