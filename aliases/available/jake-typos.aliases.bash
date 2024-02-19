@@ -120,7 +120,7 @@ alias difff=diff
 alias diiff=diff
 
 alias renite=remote
-alias remotes=remote  # technically, a different word, but it's the plural of the first and should do the same thing
+alias remotes=remote # technically, a different word, but it's the plural of the first and should do the same thing
 
 alias bash0t=bash-it
 alias bash0-t=bash-it
@@ -283,7 +283,6 @@ alias gman=gitman
 alias gpull=gitpull
 alias gstatus=gitstatus
 alias gup=gitpull
-
 
 alias jjake=jake # j!! on a jake
 alias jske=jake
