@@ -235,7 +235,7 @@ function shfmt {
 				# run shfmt in-place, printing the file name if modified
 				local mod="$(shfmt -w -l "$file")"
 				if [[ -n "$mod" ]]; then
-					modified+=("$file ($mod)")
+					modified+=("$file")
 				fi
 			else
 				echo "$file: has git modifications. not modifying via implicit shfmt"
