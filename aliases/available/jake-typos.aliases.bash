@@ -224,6 +224,7 @@ alias restoer=restore
 alias ra=rainbow
 alias rain=rainbow
 alias rainow=rainbow
+alias rainbo=rainbow
 alias rianbow=rainbow
 alias ranibow=rainbow
 alias rainboqw=rainbow
