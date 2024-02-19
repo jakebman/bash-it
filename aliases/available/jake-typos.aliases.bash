@@ -131,6 +131,7 @@ alias vd=cd
 alias vf=cd # left hand misaligned
 alias dc=cd
 alias ce=cd
+alias ced=cd
 alias xs=cd
 alias qcd=cd # I quit less *twice*, then wanted to cd
 alias lcd=cd # I tried to ls, then decided to change directories instead
