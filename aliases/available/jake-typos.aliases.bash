@@ -248,9 +248,7 @@ alias gst=gstatus
 alias staqsh=stashs
 alias stashs=stash
 alias unstasn=unstash # Amusingly, a typo of a command I didn't even have before I made the typo. Now I do
-alias gup=gpull       # shortened form - not really a good name, so 'typo'
 alias u=pull          # more likely I was thinking of 'up', but that's just 'pull' anyway
-alias gitup='git up'
 alias p=pull
 alias pu=pull
 alias up=pull  # Technically not a typo, but it's a typo of a typo, so I'm keeping it here
@@ -278,6 +276,14 @@ alias workdir=worktree
 alias jfd=jdf
 alias jdkf=jdf
 alias ws=jws
+
+# shortened (typo-like) form of these "please definitely use git, and not bash, man, or mr" commands
+alias ghelp=githelp
+alias gman=gitman
+alias gpull=gitpull
+alias gstatus=gitstatus
+alias gup=gitpull
+
 
 alias jjake=jake # j!! on a jake
 alias jske=jake

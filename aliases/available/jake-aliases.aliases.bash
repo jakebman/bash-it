@@ -229,13 +229,15 @@ function reset {
 	fi
 }
 
-# non-standard plan - use the prefix g to disambiguate the desired `git help` from
+# non-standard plan - use the prefix git to disambiguate the desired `git help` from
 # the full automatic invocation of an existing command. Mostly, this lets me pick
 # `git pull` over `mr up` where `pull` would otherwise pick the second one
-alias ghelp='git help' # help is actually a bash builtin
-alias gman='git man'   # git-man is amusingly also an alias to git-help
-alias gpull='git pull'
-alias gstatus='git status'
+# nb: the more-useful 'ghelp/gpull/etc.' are typos of these
+alias githelp='git help' # help is actually a bash builtin
+alias gitman='git man'   # git-man is amusingly also an alias to git-help
+alias gitpull='git pull'
+alias gitup='git up' # git aliased to pull, but parallel structure wins
+alias gitstatus='git status'
 
 # 'Vanilla' aliases - these are aliases to existing git-<command>s (not git-<alias>es)
 # These aliases simply allow for an implicit git on commands that predate any of my git-config alias additions
