@@ -268,6 +268,8 @@ alias unlock='git unlock'
 # I won't actually reap any benefit!
 # tl;dr: these git-<alias>s SHOULD ALWAYS track what their corresponding git-<command> DOES, EVEN IF those commands change in the future
 alias branches='git branches'
+alias config-editg='git config-editg'
+alias config-editl='git config-editl'
 alias ignored='git ignored'
 alias intent='git intent'
 alias intent-to-add=intent # longname to remind myself on tab-completion
@@ -313,7 +315,7 @@ alias show='git show -m'
 alias rainbow='git rainbow-all'
 
 # always edit the global git config file
-alias edit-config='git config-editg'
+alias config-edit='git config-editg'
 
 # list merge commits (like `log --merges`), but always assume I wanted to look at patches
 # TODO: could potentially be super smart by looking at reflog and showing merges that have been *pulled* 'recently'

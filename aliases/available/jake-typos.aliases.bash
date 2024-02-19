@@ -298,5 +298,8 @@ alias onfig=config
 alias nfig=config
 alias conf=config
 
+# the git config-edit to edit "the appropriate" git config file
+alias edit-config=config-edit
+
 alias ci=co
 alias coi=co
