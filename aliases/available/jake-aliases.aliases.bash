@@ -254,6 +254,7 @@ alias cherry-pick='git cherry-pick'
 alias tag='git tag'
 alias reflog='git reflog'
 alias rev-parse='git rev-parse'
+alias worktree='git worktree'
 # git-extras
 alias authors='git authors'
 alias lock='git lock'

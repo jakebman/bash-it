@@ -274,6 +274,7 @@ alias lgop=logp
 alias lopg=logp
 alias yesteday=yesterday
 alias yest=yesterday
+alias workdir=worktree
 alias jfd=jdf
 alias jdkf=jdf
 alias ws=jws
