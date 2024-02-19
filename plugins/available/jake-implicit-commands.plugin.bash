@@ -218,7 +218,15 @@ function file {
 function _is_git_safe {
 	about "determine if it's okay to modify a file 'automatically'. Essentially, if there aren't floating changes to it in the workdir"
 	param "1: a file to check"
-	git diff --quiet -- "$1" &> /dev/null
+	if ! git ls-files --error-unmatch "$1" &> /dev/null; then
+		printf "%s is not in git." "$1" >&2
+		return 1
+	fi
+	if ! git diff --quiet -- "$1" &>/dev/null; then
+		printf "%s has git modifications." "$1" >&2
+		return 1
+	fi
+	return 0
 }
 
 function shfmt {
@@ -238,14 +246,15 @@ function shfmt {
 					modified+=("$file")
 				fi
 			else
-				echo "$file: has git modifications. not modifying via implicit shfmt"
+				# rely on _is_git_safe to say 'why'
+				echo " Not modifying via implicit shfmt" >&2
 			fi
 
 		done
 		if [[ 0 -eq "${#modified}" ]]; then
-			echo "no modifcations performed"
+			echo "No modifcations performed"
 		else
-			printf "modified:\n"
+			printf "Modified:\n"
 			printf " * %s\n" "${modified[@]}"
 		fi
 
