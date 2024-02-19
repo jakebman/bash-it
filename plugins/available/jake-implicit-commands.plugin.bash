@@ -119,6 +119,15 @@ function _is_numeric {
 	return 0
 }
 
+function _has_flags {
+	about "succeeds if any argument matches the /^-/ regex. Fails otherwise."
+	local arg
+	for arg; do # implicit in $@
+		[[ "x${arg}" =~ ^x- ]] && return 0
+	done
+	return 1
+}
+
 function tree {
 	about "tree, with assumed depth of 2, and filelimit 25. Numeric first argument becomes depth (see treeN). '-a' additionally implies infinite depth"
 	if [[ "$#" -eq 0 ]]; then
@@ -206,11 +215,39 @@ function file {
 	fi
 }
 
+function _is_git_safe {
+	about "determine if it's okay to modify a file 'automatically'. Essentially, if there aren't floating changes to it in the workdir"
+	param "1: a file to check"
+	git diff --quiet -- "$1" &>/dev/null
+}
+
 function shfmt {
-	about "report *sh (.bash, .sh, etc.) files in the current folder that need to be formatted. Otherwise, forward to normal shfmt"
+	about "report *sh (.bash, .sh, etc.) files in the current folder that need to be formatted, or take that output via xargs and format the files if they're safe to modify in git. Otherwise, forward to normal shfmt"
 	if [[ "$#" -eq 0 ]]; then
 		command shfmt -l * 2>&1 | pager
-	else
+	elif _has_flags "$@"; then
 		command shfmt "$@"
+	else
+		local file
+		local -a modified
+		for file; do # implicit in $@
+			if _is_git_safe "$file"; then
+				# run shfmt in-place, printing the file name if modified
+				local mod="$(shfmt -w -l "$file")"
+				if [[ -n "$mod" ]]; then
+					modified+=("$file ($mod)")
+				fi
+			else
+				echo "$file: has git modifications. not modifying via implicit shfmt"
+			fi
+
+		done
+		if [[ 0 -eq "${#modified}" ]]; then
+			echo "no modifcations performed"
+		else
+			printf "modified:\n"
+			printf " * %s\n" "${modified[@]}"
+		fi
+
 	fi
 }
