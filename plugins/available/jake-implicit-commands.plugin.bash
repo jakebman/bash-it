@@ -252,7 +252,7 @@ function shfmt {
 
 		done
 		if [[ 0 -eq "${#modified}" ]]; then
-			echo "No modifcations performed"
+			echo "No modifications performed"
 		else
 			printf "Modified:\n"
 			printf " * %s\n" "${modified[@]}"
