@@ -17,8 +17,8 @@ function cat {
 		command cat "$@"
 	else
 		# --plain: no line numbers or header
-		# --show-all: allow printing binary files without complaint
-		# (but do the show-all only if plain fails)
+		# --show-all: allow printing binary files without complaint (but also signifies all binary characters)
+		# (so we only want to do the show-all only if the bare plain fails)
 		bat --plain "$@" 2>/dev/null || bat --plain --show-all "$@"
 	fi
 }
