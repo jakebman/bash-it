@@ -150,7 +150,6 @@ function _mr-isrepo-local {
 	return 0
 }
 
-
 function _mr-isrepo {
 	about "succeeds if the given folder is a git repo tracked by mr. fails otherwise"
 	param '1: a folder which may or may not be an mr-tracked repo; default $PWD'
