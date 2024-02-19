@@ -79,6 +79,7 @@ alias mabn=man
 alias sork=sort
 
 alias shfmy=shfmt
+alias shft=shfmt
 alias shfmty=shfmt # speculative
 
 alias cata=cat
