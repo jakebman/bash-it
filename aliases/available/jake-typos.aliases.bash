@@ -121,7 +121,6 @@ alias diiff=diff
 
 alias renite=remote
 alias remotes=remote  # technically, a different word, but it's the plural of the first and should do the same thing
-alias branches=branch # ditto
 
 alias bash0t=bash-it
 alias bash0-t=bash-it

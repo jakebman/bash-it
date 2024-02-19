@@ -267,6 +267,7 @@ alias unlock='git unlock'
 # Specifically, that means I should be *very judicious* with the 'Duplicating' and 'Modifying' aliases, because if I ever improve those commands,
 # I won't actually reap any benefit!
 # tl;dr: these git-<alias>s SHOULD ALWAYS track what their corresponding git-<command> DOES, EVEN IF those commands change in the future
+alias branches='git branches'
 alias ignored='git ignored'
 alias intent='git intent'
 alias intent-to-add=intent # longname to remind myself on tab-completion
