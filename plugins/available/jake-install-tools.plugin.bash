@@ -347,7 +347,7 @@ function _jake-check-optional-tools() {
 
 	if _command_exists fzf; then
 		# TODO: better version checking sounds like a good idea
-		if [[ "$(fzf --version)" =~ ^0.[123] ]] then
+		if [[ "$(fzf --version)" =~ ^0.[123] ]]; then
 			echo "fzf version is too low. Please uninstall it and reinstall it"
 		else
 			echo "Nothing to do for fzf - fzf is happy"
