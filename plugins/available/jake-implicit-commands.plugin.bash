@@ -16,7 +16,10 @@ function cat {
 	if [[ "$#" -eq 0 ]]; then
 		command cat "$@"
 	else
-		bat --plain "$@"
+		# --plain: no line numbers or header
+		# --show-all: allow printing binary files without complaint
+		# (but do the show-all only if plain fails)
+		bat --plain "$@" 2>/dev/null || bat --plain --show-all "$@"
 	fi
 }
 
