@@ -287,6 +287,7 @@ alias unlock='git unlock'
 # Specifically, that means I should be *very judicious* with the 'Duplicating' and 'Modifying' aliases, because if I ever improve those commands,
 # I won't actually reap any benefit!
 # tl;dr: these git-<alias>s SHOULD ALWAYS track what their corresponding git-<command> DOES, EVEN IF those commands change in the future
+alias bare='git bare'
 alias branches='git branches'
 alias config-editg='git config-editg'
 alias config-editl='git config-editl'
@@ -307,6 +308,7 @@ alias rainbow-here='git rainbow-here' # approx. git log --oneline --graph, speci
 alias rainbow-all='git rainbow-all'   # explicitly --all form of rainbow output
 alias since='git since'               # log with immediate --since argument (technically --since-as-filter, but THATS THE POINT!!!)
 alias tags='git tags'                 # list the tags
+alias shallow='git shallow'           # a shallow clone (non-alphabetical to be beside its twin)
 alias unshallow='git unshallow'       # re-hydrate a shallow clone
 alias unstash='git unstash'           # essentially `stash pop`
 alias untracked='git untracked'       # something morally equivalent to 'status --untracked'
