@@ -73,6 +73,7 @@ function status {
 		mr status "$@"
 		status="$?"
 		echo # separator line for readability
+		echo "git repo status:"
 	fi
 
 	# I want an unconditional git status. We *can* also include mr, above, but this *must* happen anyway
