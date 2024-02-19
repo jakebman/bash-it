@@ -312,7 +312,10 @@ alias autostash='git pull --rebase --autostash' # implicit rebase is intentional
 #       rather than just set the default option for when it *does* get turned on
 alias show='git show -m'
 
-# rainbow should be implicitly --all from the cli, *even though* I *know* it's currently `rainbow-here` in git aliases
+# rainbow should be implicitly --all from the cli
+# This is an INTENTIONAL divergence from the behavior in git aliases, where it's rainbow-here.
+# This makes sense because rainbow-here is more specific, and rainbow-all is more general.
+# This way, an offhand invocation is more "the whole repo" and a git prefix means "what I'm working on now"
 alias rainbow='git rainbow-all'
 
 # always edit the global git config file
