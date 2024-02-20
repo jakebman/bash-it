@@ -2,6 +2,7 @@
 about-plugin 'quickly navigate configured project paths'
 
 # TODO: is there a way to more-naturally emulate CDPATH?
+# TODO: is there a way to get an argument that *would* tab-complete to a single candidate to just... be that candidate?
 : "${BASH_IT_PROJECT_PATHS:=$HOME/Projects:$HOME/src:$HOME/work}"
 
 function pj() {
