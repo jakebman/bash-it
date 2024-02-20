@@ -291,6 +291,7 @@ alias bare='git bare'
 alias branches='git branches'
 alias config-editg='git config-editg'
 alias config-editl='git config-editl'
+alias gitdir='git gitdir'
 alias ignored='git ignored'
 alias intent='git intent'
 alias intent-to-add=intent # longname to remind myself on tab-completion
