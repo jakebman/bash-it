@@ -13,7 +13,7 @@ esac
 
 # Path to the bash it configuration
 export BASH_IT="${HOME}/.bash-it"
-export WSL_WINDOWS_USER_HOME="/mnt/c/Users/Jake"
+export WSL_WINDOWS_USER_HOME="/mnt/c/Users/jakeb"
 
 # for bash-it autocomplete; and for .mrconfig (which is why it must be exported)
 export COMPLETE_ALIAS_DIR="${HOME}/.local/bin/complete-alias"
