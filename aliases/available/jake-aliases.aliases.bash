@@ -271,7 +271,6 @@ alias blame='git blame'
 alias log='git log'
 alias shortlog='git shortlog'
 alias submodule='git submodule'
-alias cherry-pick='git cherry-pick'
 alias tag='git tag'
 alias reflog='git reflog'
 alias rev-parse='git rev-parse'
@@ -331,6 +330,9 @@ alias autostash='git pull --rebase --autostash' # implicit rebase is intentional
 # 'Modifying' aliases
 # Sometimes, I want my implicit git commands to have an additional parameter
 # I can't add these to a git alias, because aliases can't overwrite existing commands
+
+# I like the "cherry-picked from <hash>" added to messages
+alias cherry-pick='git cherry-pick -x'
 
 # If I'm `show`-ing a merge commit, please try to assume more that I'm looking for a `--diff-merge=on`-like behavior
 # TODO: this is a little hinky. I'd really prefer if git had a config to actually turn ON --diff-merge,
