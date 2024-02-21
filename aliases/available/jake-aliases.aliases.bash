@@ -148,6 +148,15 @@ function _is_flag {
 	return 0
 }
 
+function cherry-pick {
+	about "git cherry-pick, but if it's not a --continue/--abort/etc., try to include the (cherry picked from ...)"
+	if [ "$#" -eq 1 ] && _is_flag "$1"; then # likely a --continue/etc.
+		git cherry-pick "$@"
+	else
+		git cherry-pick -x "$@"
+	fi
+}
+
 # commit with one argument is either add/commit the file, or commit with the given message
 function commit {
 	# stash some flags that can be "transparent" to this feature
@@ -330,9 +339,6 @@ alias autostash='git pull --rebase --autostash' # implicit rebase is intentional
 # 'Modifying' aliases
 # Sometimes, I want my implicit git commands to have an additional parameter
 # I can't add these to a git alias, because aliases can't overwrite existing commands
-
-# I like the "cherry-picked from <hash>" added to messages
-alias cherry-pick='git cherry-pick -x'
 
 # If I'm `show`-ing a merge commit, please try to assume more that I'm looking for a `--diff-merge=on`-like behavior
 # TODO: this is a little hinky. I'd really prefer if git had a config to actually turn ON --diff-merge,
