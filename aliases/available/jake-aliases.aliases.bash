@@ -122,6 +122,9 @@ function add {
 
 function addp {
 	about "reset tabstops in git add to something similar to git's core.pager= less --tabs=3,5, but with 4 spaces instead"
+	# TODO: would this make sense to try under termcap's ti/te state? Would that be helpful, or weird because the output is lost?
+	# https://askubuntu.com/questions/984209/how-does-less-switch-to-the-text-then-back-to-the-prompt
+	# (DO NOT do this for restore - I want the patches stored in the terminal scrollback buffer)
 	# put the margin in by one character (+m1), and use 'COBOL compact format extended' (-c3)
 	tabs +m1 -c3
 	clear -x
