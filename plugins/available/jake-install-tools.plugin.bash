@@ -439,6 +439,13 @@ function _jake-check-optional-tools() {
 		echo "consider installing git big picture, because it looks pretty"
 	fi
 
+	if _command_exists warp-terminal; then
+		echo "warp-terminal is installed (uncertain if it's running though, because it's weird)"
+	else
+		echo "I'm trying to install warp-terminal. Currently, it needs: libegl1 libxkbcommon-x11-0 libgl1-mesa-dri"
+		echo "and the deb is from https://www.warp.dev/linux-terminal"
+	fi
+
 	if _command_exists raku; then
 		echo "Nothing to do for raku - raku is happy"
 	else
