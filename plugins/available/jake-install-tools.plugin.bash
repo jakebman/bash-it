@@ -442,7 +442,7 @@ function _jake-check-optional-tools() {
 	if _command_exists warp-terminal; then
 		echo "warp-terminal is installed (uncertain if it's running though, because it's weird)"
 	else
-		echo "I'm trying to install warp-terminal. Currently, it needs: libegl1 libxkbcommon-x11-0 libgl1-mesa-dri"
+		echo "I'm trying to install warp-terminal. Currently, it needs: libegl1 libxkbcommon-x11-0 libgl1-mesa-dri xdg-desktop-portal"
 		echo "and the deb is from https://www.warp.dev/linux-terminal"
 	fi
 
