@@ -30,6 +30,7 @@ unset NOTEPAD_LEGACY
 alias explorer=explorer.exe
 alias wsl=wsl.exe
 alias winmerge="'/mnt/c/Program Files/WinMerge/WinMergeU.exe'"
+alias winget=winget.exe
 
 # don't worry about aliasing docker if it's already here
 # TODO: when docker is /mnt/c/Program Files/Docker/Docker/resources/bin/docker, all it does is complain
