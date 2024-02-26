@@ -175,6 +175,7 @@ alias typew=type # ... because type already operates on its which (this might bi
 # because that's what I was trying to type at the time, and I figure if I most-common'd
 # 'type asdf' into 'typ easdf', it wouldn't work anyway
 alias typ=typo
+alias ypo=typo
 alias fypo=typo
 alias tyop=typo
 alias ytypo=typo
@@ -223,6 +224,7 @@ alias commit-a='commit -a'
 alias commita='commit -a'
 alias ignroed=ignored
 alias rebas=rebase
+alias reabse=rebase
 alias restoer=restore
 alias ra=rainbow
 alias rain=rainbow
