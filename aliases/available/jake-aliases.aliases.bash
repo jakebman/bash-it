@@ -36,8 +36,8 @@ alias g=git
 # alias m=mr # typo
 # alias p=pull # typo (TODO: could this become `push` if we're a commit ahead of upstream?)
 # function q # in bash-it plugin jake-q. Approx: { if ! _is-toplevel-bash; then exit; fi }
-alias r=realpath-or-rainbow # defined below, but fine to alias here
-alias s=status-or-show      # defined below, but fine to alias here
+alias r=realpath-and-rainbow # defined below, but fine to alias here
+alias s=status-or-show       # defined below, but fine to alias here
 # alias u=pull # typo; actually for 'up', but shortcutting
 # alias v=vim # typo
 
@@ -90,15 +90,14 @@ function status-or-show {
 	fi
 }
 
-function realpath-or-rainbow {
-	if [[ "$#" -ne 0 ]]; then
-		git rainbow "$@"
+function realpath-and-rainbow {
+	about "preceed a rainbow with a realpath, if relevant"
+	realpath 2> /dev/null # specifically want the zero-arg "go to the real path" behavior
+
+	if [[ "$#" -eq 0 ]]; then
+		git rainbow-all "$@"
 	else
-		# realpath function calls out that we're a silly goose and fails if it would be idempotent
-		# We rely on that here. Also, if it's not present, realpath with no args also errors, and STDERRs
-		# so we really don't care which reason this command fails :)
-		# (And rainbow is defined as an alias below. It's inlined here)
-		realpath 2> /dev/null || git rainbow-all
+		git rainbow "$@"
 	fi
 }
 
