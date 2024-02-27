@@ -296,6 +296,8 @@ alias jske=jake
 alias jkae=jake
 alias vack=jack
 
+alias mrdir=rmdir
+
 alias dockar=docker
 
 # super eager with that second s
