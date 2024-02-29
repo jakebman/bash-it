@@ -51,11 +51,11 @@ export IRC_CLIENT='irssi'
 export TODO="t"
 
 # Set this to the location of your work or project folders
-candidates=("${HOME}/wsl-projects" ":${HOME}/ms" ":${HOME}/wsl-projects/remarkable/repos" ":${HOME}/wsl-projects/junk-drawer")
+candidates=("${HOME}/wsl-projects" "${HOME}/ms" "${HOME}/wsl-projects/remarkable/repos" "${HOME}/wsl-projects/junk-drawer")
 for candidate in "${candidates[@]}"; do
   if [[ -d "$candidate" ]]; then
     # magic: use the "use this value if this variable is set syntax (`:+`) to add a preceeding colon to each entry after the first
-    BASH_IT_PROJECT_PATHS="${BASH_IT_PROJECT_PATHS:+:}${candidate}"
+    BASH_IT_PROJECT_PATHS+="${BASH_IT_PROJECT_PATHS:+:}${candidate}"
   fi
 done
 unset -v candidate candidates
