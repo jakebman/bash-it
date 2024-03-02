@@ -315,9 +315,9 @@ function _jake-find-jekyll() {
 	_jake-find-file /usr/include/zlib.h zlib1g-dev "for jekyll, per https://jekyllrb.com/docs/installation/ubuntu/"
 	if ! _command_exists gem; then
 		echo "gem isn't installed - comes with ruby-full"
-		echo "gem for jekyll not found - install it with 'gem install jekyll bundler'"
+		echo "gem for jekyll not found - install it with 'sudo gem install jekyll bundler'"
 	elif ! gem list jekyll | grep -q jekyll; then
-		echo "gem for jekyll not found - install it with 'gem install jekyll bundler'"
+		echo "gem for jekyll not found - install it with 'sudo gem install jekyll bundler'"
 	fi
 }
 
