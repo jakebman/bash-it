@@ -336,6 +336,7 @@ function _jake-check-optional-tools() {
 	if _command_exists httpx; then
 		echo "Nothing to do for httpx - httpx is happy"
 	else
+		# TODO: this might be deprecated
 		echo "httpx not found! Install it from one of these: (it's a zip file with the executable in it)"
 		_jake-github-repo-release-urls httpx-sh/httpx | grep linux | grep -v alligator # final nonsense to remove highlighting
 	fi
