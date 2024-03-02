@@ -410,6 +410,8 @@ function _jake-check-optional-tools() {
 	fi
 
 	if _binary_exists git-delta; then
+		# TODO: I don't see evidence that this command exists, especially not where I say it came from
+		# 1) which git-delta am I thinking about removing here and 2) is it still around?
 		echo "git-extras's git-delta shadows my git-delta alias. Pleas remove it with"
 		echo -en "\t"
 		echo 'sudo rm "$(which git-delta)"'
