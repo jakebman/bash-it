@@ -226,6 +226,7 @@ alias ignroed=ignored
 alias rebas=rebase
 alias reabse=rebase
 alias restoer=restore
+alias r-here=rainbow-here
 alias ra=rainbow
 alias rain=rainbow
 alias rainow=rainbow
