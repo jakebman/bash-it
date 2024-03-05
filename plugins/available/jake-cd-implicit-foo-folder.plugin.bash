@@ -7,4 +7,3 @@ function cd {
 	fi
 	builtin cd "$@"
 }
-
