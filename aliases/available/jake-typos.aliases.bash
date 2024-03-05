@@ -234,6 +234,7 @@ alias rianbow=rainbow
 alias ranibow=rainbow
 alias rainboqw=rainbow
 alias rainboiw=rainbow
+alias raninbow=rainbow
 alias submoduel=submodule
 alias submod=submodule
 alias setatus=status
