@@ -1,4 +1,3 @@
-
 cite about-plugin
 about-plugin 'Additional enhancements for curl. Aware of curl-logging, and jq enhancements'
 # Load after other plugins, which load at 250
