@@ -157,6 +157,17 @@ function browse {
 	fi
 }
 
+function pulls {
+	about "try to mange pull requests from the CLI"
+	if remotes | grep --quiet gitlab; then
+		echo "running glab mr list"
+		glab mr list "$@"
+	else
+		echo "running gh pr list"
+		gh pr list "$@"
+	fi
+}
+
 function fork {
 	about "allow you to type the bare word 'fork' to fork in github or gitlab, whichever's relevant"
 	if remotes | grep --quiet jake; then
