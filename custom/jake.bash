@@ -198,7 +198,7 @@ function _mr-able-single {
 		if [ -z "$print_non_mr_repos" ]; then
 			printf "%s - no mr'd repositories within here (%d examined)\n" "$path" "${#candidates[@]}"
 		else
-			printf "%s - clean, with %d candidates examined\n" "$path" "${#candidates[@]}"
+			printf "%s - clean, with %d mr'd repositories and no non-mr'd repos\n" "$path" "${#candidates[@]}"
 		fi
 	else
 		printf "%s - is an example mr'd repository\n" "$print_non_mr_repos"
