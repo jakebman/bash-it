@@ -13,13 +13,18 @@ function _jake-special-single-args-for-diff {
 # formerly a simple `alias cat='bat --plain'`, but that doesn't handle this no-args use case
 function cat {
 	about 'allow you to use a bare `cat` as the normal cat; but any params essentially go to bat --plain'
-	if [[ "$#" -eq 0 ]]; then
-		command cat "$@"
-	else
+	if [[ "$#" -ne 0 ]] && [[ -t 0 ]] && [[ -t 1 ]]; then
+		# we have arguments and we're not in a pipeline (both stdin and stdout are terminals) Let bat taste the file and 'do the needful'
 		# --plain: no line numbers or header
 		# --show-all: allow printing binary files without complaint (but also signifies all binary characters)
 		# (so we only want to do the show-all only if the bare plain fails)
 		bat --plain "$@" 2> /dev/null || bat --plain --show-all "$@"
+	elif [[ -t 1 ]]; then
+		# if we're 'partially' cat-like, but at least we have stdout, then we should be also partially bat-like
+		bat --plain "$@"
+	else
+		# don't intervene. `cat` is probably the command to use here
+		command cat "$@"
 	fi
 }
 
