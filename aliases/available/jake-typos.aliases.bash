@@ -298,6 +298,9 @@ alias jske=jake
 alias jkae=jake
 alias vack=jack
 
+# Because I apparently use this tool less frequently, and calling it by its full name... should have worked
+alias sdkman=sdk
+
 alias mrdir=rmdir
 
 alias dockar=docker
