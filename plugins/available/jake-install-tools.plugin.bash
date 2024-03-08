@@ -126,6 +126,7 @@ function jake-install-tools() {
 	_jake-find-tool shellcheck
 	_jake-find-tool mr myrepos
 	_jake-find-tool vcsh
+	_jake-find-tool pip python3-pip "to install git-big-picture"
 	_jake-find-tool perldoc perl-doc "for man mr"
 	_jake-find-tool ctags universal-ctags "for vim navigation"
 	_jake-find-tool figlet figlet "for my git no-args tools"
@@ -448,7 +449,7 @@ function _jake-check-optional-tools() {
 	if _command_exists git-big-picture; then
 		echo "Nothing to do for git big picture - git-big-picture is happy"
 	else
-		echo "consider installing git big picture, because it looks pretty"
+		echo "consider installing git big picture via 'pip install git-big-picture', because it looks pretty"
 	fi
 
 	if _command_exists raku; then
