@@ -111,7 +111,7 @@ function _is_numeric {
 		# https://stackoverflow.com/questions/806906/how-do-i-test-if-a-variable-is-a-number-in-bash
 		# is unable to work properly in this situation, so we use bash's [['s extended regex (ERE) support
 		# The 1 prefix prevents `arg=-a` from tricking test into doing something odd
-		[[ "x${arg}" =~ x[[:digit:]]+ ]] || return 1
+		[[ "x${arg}" =~ x[[:digit:]]+$ ]] || return 1
 	done
 	return 0
 }
