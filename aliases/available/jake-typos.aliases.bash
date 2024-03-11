@@ -136,6 +136,7 @@ alias ced=cd
 alias xs=cd
 alias qcd=cd # I quit less *twice*, then wanted to cd
 alias lcd=cd # I tried to ls, then decided to change directories instead
+alias treecd=cd # Ditto, but tree. Wow.
 
 alias grpe=grep
 
