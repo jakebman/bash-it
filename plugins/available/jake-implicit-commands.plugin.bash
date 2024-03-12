@@ -104,14 +104,14 @@ function _in_array {
 }
 
 function _is_numeric {
-	about "Succeeds if all arguments match the /[0-9]+/ regex. Fails otherwise. (The empty string is not numeric)"
+	about "Succeeds if all arguments match the /^[0-9]+$/ regex. Fails otherwise. (The empty string is not numeric)"
 	local arg
 	for arg in "$@"; do
 		# nb: the numeric test from
 		# https://stackoverflow.com/questions/806906/how-do-i-test-if-a-variable-is-a-number-in-bash
 		# is unable to work properly in this situation, so we use bash's [['s extended regex (ERE) support
 		# The 1 prefix prevents `arg=-a` from tricking test into doing something odd
-		[[ "x${arg}" =~ x[[:digit:]]+$ ]] || return 1
+		[[ "x${arg}" =~ ^x[[:digit:]]+$ ]] || return 1
 	done
 	return 0
 }
