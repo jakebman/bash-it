@@ -22,6 +22,8 @@ NOTEPAD_LEGACY="/mnt/c/Program Files (x86)/Notepad++/notepad++.exe"
 if [[ -f "$NOTEPAD_LEGACY" ]] && [[ ! -f "$NOTEPAD" ]]; then
 	NOTEPAD="$NOTEPAD_LEGACY"
 fi
+# NB: the single-quotes on ++ aren't necessary. They merely make vim's highlighting happier (and not notepad+ +=)
+alias 'notepad++'="'$NOTEPAD'"
 alias notepad="'$NOTEPAD'"
 alias npp="'$NOTEPAD'"
 unset NOTEPAD
