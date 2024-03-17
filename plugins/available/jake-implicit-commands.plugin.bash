@@ -154,6 +154,16 @@ function browse {
 	fi
 }
 
+function gmail {
+	about "open gmail in your browser, including search terms, if present"
+	if [[ "$#" -eq 0 ]]; then
+		browse "http://gmail.com/"
+	else
+		# NB: $* over $@, because that keeps all the string as one string argument, w/o breaking it out
+		browse "https://mail.google.com/mail/u/0/#search/$*"
+	fi
+}
+
 function pulls {
 	about "try to mange pull requests from the CLI"
 	if remotes | grep --quiet gitlab; then
