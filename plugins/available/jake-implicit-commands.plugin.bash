@@ -164,6 +164,15 @@ function gmail {
 	fi
 }
 
+function words {
+	about "print the word list, or search it with ack"
+	if [[ "$#" -eq 0 ]]; then
+		less /usr/share/dict/words
+	else
+		ack "$@" /usr/share/dict/words
+	fi
+}
+
 function pulls {
 	about "try to mange pull requests from the CLI"
 	if remotes | grep --quiet gitlab; then
