@@ -169,6 +169,7 @@ function words {
 	if [[ "$#" -eq 0 ]]; then
 		less /usr/share/dict/words
 	else
+		# TODO: consider each of $@ as a separate arg to a separate ack
 		ack "$@" /usr/share/dict/words
 	fi
 }
