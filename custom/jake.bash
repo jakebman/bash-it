@@ -271,8 +271,8 @@ function spelling-bee {
 	# TODO: perf  might be better if we test $2 first
 	words -I -v "[A-Z']" \
 		.... \
-		-v "[^${1}]" \
-		"[$2]"
+		-v "[^${1?Need a valid set of permissible letters}]" \
+		"[${2?Need a valid set of required letters}]"
 }
 
 
