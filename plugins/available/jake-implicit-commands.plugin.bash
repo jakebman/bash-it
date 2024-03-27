@@ -165,13 +165,24 @@ function gmail {
 }
 
 function words {
-	about "print the word list, or search it with ack"
-	if [[ "$#" -eq 0 ]]; then
-		less /usr/share/dict/words
+	about 'print the word list, paged. Arguments are regex filters on a word list. If stdin is not a terminal, it is used in lieu of the ${WORDLIST:/usr/share/dict/words}'
+	# Implementation note: this is *incredibly recursive*
+
+	if [[ -t 0 ]]; then
+		cat "${WORDLIST:-/usr/share/dict/words}" | words "$@"
+		return # Not strictly necessary if EVERYTHING is if/elif/else. But that can't be guaranteed locally
+	elif [[ "$#" -eq 0 ]]; then
+		less
+		return # see above
 	else
-		# TODO: consider each of $@ as a separate arg to a separate ack
-		ack "$@" /usr/share/dict/words
+		# TODO: allow this to be an array, with as many flags up to the first non-flag
+		local regex="$1"
+		shift
+		ack "$regex" | words "$@"
+		return # see above
 	fi
+
+	# PUTTING CODE HERE MIGHT BE A VERY BAD IDEA. SEE ABOVE
 }
 
 function pulls {
