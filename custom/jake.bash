@@ -260,6 +260,22 @@ alias ff="fidget --fast"
 alias asdf=fidget
 alias sdf=fidget
 
+function spelling-bee {
+	about "solve the NYT's spelling bee puzzle"
+	param "1: permissible letters (will go into a regex []-grouping)"
+	param "2: required letters (will go into a regex []-grouping)"
+	# exclude uppercase letters and the apostrophe
+	# require 4-or-more letters
+	# exclude any letters not in $1
+	# require a match with at least one $2 letters
+	# TODO: perf  might be better if we test $2 first
+	words -I -v "[A-Z']" \
+		.... \
+		-v "[^${1}]" \
+		"[$2]"
+}
+
+
 function typo {
 	vim "${BASH_IT}/aliases/available/jake-typos.aliases.bash"
 }
