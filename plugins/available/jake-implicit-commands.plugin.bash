@@ -164,8 +164,20 @@ function gmail {
 	fi
 }
 
+# TODO: DUPLICATED CODE
+function _is_flag {
+	about "Succeeds if all arguments are flags (have a first character of '-'). Fails otherwise"
+	local arg
+	for arg in "$@"; do
+		# note that shellcheck is wrong here. If arg is "-a", then x is ABSOLUTELY necessary
+		# shellcheck disable=SC2268
+		[[ "x${arg}" == x-* ]] || return 1
+	done
+	return 0
+}
+
 function words {
-	about 'print the word list, paged. Arguments are regex filters on a word list. If stdin is not a terminal, it is used in lieu of the ${WORDLIST:/usr/share/dict/words}'
+	about 'print the word list, paged. Arguments are ack filters on a word list (flags apply to the next non-flag argument, which is assumed to be a regex). If stdin is not a terminal, it is used in lieu of the ${WORDLIST:/usr/share/dict/words}'
 	# Implementation note: this is *incredibly recursive*
 
 	if [[ -t 0 ]]; then
@@ -175,10 +187,22 @@ function words {
 		less
 		return # see above
 	else
-		# TODO: allow this to be an array, with as many flags up to the first non-flag
-		local regex="$1"
-		shift
-		ack "$regex" | words "$@"
+		# Grab a bunch of flags, and apply them to "the current" regex
+		local -a args
+		while _is_flag "$1"; do
+			args+=("$1")
+			shift
+		done
+
+		args+=("$1")
+
+		# error checking - there should be at least one argument left, so shift should succeed
+		if ! shift; then
+			echo "not enough arguments after flags '${args[@]}'" >&2
+			return 1
+		fi
+
+		ack "${args[@]}" | words "$@"
 		return # see above
 	fi
 
