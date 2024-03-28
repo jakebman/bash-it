@@ -253,6 +253,7 @@ function fidget {
 		apt-up
 		_mr-able
 	)
+	echo "update completed at `date`"
 }
 alias fid=fidget
 alias f=fidget
