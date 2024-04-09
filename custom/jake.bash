@@ -261,6 +261,15 @@ alias ff="fidget --fast"
 alias asdf=fidget
 alias sdf=fidget
 
+function wordle {
+	about "solve the NYT's wordle puzzle (words with implicit 5-letter filter)"
+	param "any: args to words command"
+
+	words -I -v "[A-Z']" \
+		^.....$ \
+		"$@"
+}
+
 function spelling-bee {
 	about "solve the NYT's spelling bee puzzle"
 	param "1: permissible letters (will go into a regex []-grouping)"
