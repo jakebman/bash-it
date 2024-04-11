@@ -174,6 +174,7 @@ alias tpe=type
 alias ype=type
 alias tyep=type
 alias tyoe=type
+alias yype=type
 alias typew=type # ... because type already operates on its which (this might bite future me. Sorry, future me)
 # because that's what I was trying to type at the time, and I figure if I most-common'd
 # 'type asdf' into 'typ easdf', it wouldn't work anyway
