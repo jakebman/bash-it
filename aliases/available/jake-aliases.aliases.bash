@@ -42,7 +42,7 @@ alias s=status-or-show       # defined below, but fine to alias here
 # alias v=vim # typo
 
 # ll, plus other flags
-alias lla='ll -a'
+alias lla='ll -a' # NB: -a is implied in ll. This is apparently a no-op. Oops?
 alias llh='ll -h'
 alias llt='ll -t'
 alias llht='ll -ht'
