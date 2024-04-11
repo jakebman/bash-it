@@ -300,6 +300,7 @@ alias gup=gitpull
 alias jjake=jake # j!! on a jake
 alias jske=jake
 alias jkae=jake
+alias jaek=jake
 alias vack=jack
 
 # Because I apparently use this tool less frequently, and calling it by its full name... should have worked
