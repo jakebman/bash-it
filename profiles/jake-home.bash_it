@@ -10,13 +10,14 @@ plugins dircolors
 plugins dotfiles-via-bare-git-repo-with-config-alias
 plugins gitstatus
 plugins history-eternal
-plugins jake-cd-implicit-foo-folder
 plugins jake-cdd
+plugins jake-cd-implicit-foo-folder
 plugins jake-implicit-commands
 plugins jake-install-tools
 plugins jake-maintenance
 plugins jake-path
 plugins jake-q
+plugins jake-words
 plugins jake-xdg
 plugins jq
 plugins projects
