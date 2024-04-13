@@ -8,7 +8,7 @@
 # Security issues - I don't know how safe "sudo $0"
 
 # https://stackoverflow.com/questions/18215973/how-to-check-if-running-as-root-in-a-bash-script
-if (( $EUID == 0 )) ; then
+if (($EUID == 0)); then
   # root - can update
   apt-get update
   # Pre-fetch downloadable upgrades while we're here
