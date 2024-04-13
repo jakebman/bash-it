@@ -1,4 +1,4 @@
-about-plugin "Easy access to the wordlist via a words command, plus NYT puzzle solvers based on it (TODO)"
+about-plugin "Easy access to the wordlist via a words command, plus NYT puzzle solvers based on it"
 
 function words {
 	about 'print the word list, paged. Arguments are ack filters on a word list (flags apply to the next non-flag argument, which is assumed to be a regex). If stdin is not a terminal, it is used in lieu of the ${WORDLIST:/usr/share/dict/words}'
@@ -31,4 +31,28 @@ function words {
 	fi
 
 	# PUTTING CODE HERE MIGHT BE A VERY BAD IDEA. SEE ABOVE
+}
+
+function wordle {
+	about "solve the NYT's wordle puzzle (words with implicit 5-letter filter)"
+	param "any: args to words command"
+
+	words -I -v "[A-Z']" \
+		^.....$ \
+		"$@"
+}
+
+function spelling-bee {
+	about "solve the NYT's spelling bee puzzle"
+	param "1: permissible letters (will go into a regex []-grouping)"
+	param "2: required letters (will go into a regex []-grouping)"
+	# exclude uppercase letters and the apostrophe
+	# require 4-or-more letters
+	# exclude any letters not in $1
+	# require a match with at least one $2 letters
+	# TODO: perf  might be better if we test $2 first
+	words -I -v "[A-Z']" \
+		.... \
+		-v "[^${1?Need a valid set of permissible letters}]" \
+		"[${2?Need a valid set of required letters}]"
 }
