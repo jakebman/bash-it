@@ -251,6 +251,10 @@ function fidget {
 			win-git-update
 		fi
 		apt-up
+		if _command_exists winget.exe &> /dev/null; then
+			echo "winget.exe exists - here's the update"
+			winget.exe update
+		fi
 		_mr-able
 	)
 	echo "update completed at $(date)"
