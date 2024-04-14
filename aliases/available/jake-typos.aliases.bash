@@ -77,6 +77,7 @@ alias amn=man
 alias mabn=man
 
 alias sork=sort
+alias sortr=sort
 
 alias shfmy=shfmt
 alias shft=shfmt
