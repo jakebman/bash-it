@@ -277,7 +277,7 @@ function shfmt {
 				if [[ -n "$mod" ]]; then
 					modified+=("$file")
 				fi
-			elif command shfmt -d "$file" &>/dev/null; then
+			elif command shfmt -d "$file" &> /dev/null; then
 				# shfmt didn't find any complaints with this file
 				# rely on _is_git_safe to give a prior sentence along the lines of "$file has git modifications"
 				echo " But shfmt doesn't want to modify it." >&2
