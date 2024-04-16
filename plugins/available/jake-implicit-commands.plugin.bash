@@ -268,6 +268,7 @@ function shfmt {
 	else
 		local file
 		local -a modified
+		local -a skipped
 		for file; do # implicit in $@
 			if _is_git_safe "$file"; then
 				# run shfmt in-place, printing the file name if modified
@@ -278,7 +279,14 @@ function shfmt {
 			else
 				# rely on _is_git_safe to say 'why'
 				echo " Not modifying via implicit shfmt" >&2
+				skipped+=("$file")
 			fi
+
+
+
+
+ # this is a weird spot for this comment
+
 
 		done
 		if [[ 0 -eq "${#modified}" ]]; then
@@ -286,6 +294,13 @@ function shfmt {
 		else
 			printf "Modified:\n"
 			printf " * %s\n" "${modified[@]}"
+		fi
+		if [[ 0 -ne "${#skipped}" ]]; then
+			echo "Use the following command to intentionally modify skipped files:"
+			printf "shfmt -w -l "
+			# TODO: shellquote?
+			printf "%q" "${skipped[@]}"
+			printf "\n"
 		fi
 
 	fi
