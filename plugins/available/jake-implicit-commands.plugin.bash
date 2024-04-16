@@ -288,18 +288,19 @@ function shfmt {
 			fi
 		done
 
+		echo # blank line
 		if [[ 0 -eq "${#modified}" ]]; then
-			echo "No modifications performed"
+			echo "No modifications performed."
 		else
 			printf "Modified:\n"
 			printf " * %s\n" "${modified[@]}"
 		fi
 
 		if [[ 0 -ne "${#skipped}" ]]; then
-			echo "Use the following command to intentionally modify skipped files (or use -d to preview the diffs):"
+			echo # blank line
+			echo "Use the following command to intentionally modify skipped files (or use shfmt -d to preview the diffs):"
 			printf "shfmt -w -l" # THIS DEPENDS ON THE SCRIPT ABOVE, AND SHOULD MATCH
-			printf " %q" "${skipped[@]}"
-			printf "\n"
+			printf " \\\\\n\t%q" "${skipped[@]}"
 		fi
 
 	fi
