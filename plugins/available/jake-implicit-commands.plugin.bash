@@ -281,24 +281,18 @@ function shfmt {
 				echo " Not modifying via implicit shfmt" >&2
 				skipped+=("$file")
 			fi
-
-
-
-
- # this is a weird spot for this comment
-
-
 		done
+
 		if [[ 0 -eq "${#modified}" ]]; then
 			echo "No modifications performed"
 		else
 			printf "Modified:\n"
 			printf " * %s\n" "${modified[@]}"
 		fi
+
 		if [[ 0 -ne "${#skipped}" ]]; then
 			echo "Use the following command to intentionally modify skipped files:"
 			printf "shfmt -w -l"
-			# TODO: shellquote?
 			printf " %q" "${skipped[@]}"
 			printf "\n"
 		fi
