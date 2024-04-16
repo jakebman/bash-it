@@ -322,6 +322,7 @@ alias rainbow-all='git rainbow-all'   # explicitly --all form of rainbow output
 alias rainbow-here='git rainbow-here' # approx. git log --oneline --graph, specifically only the current history (no --all)
 alias shallow='git shallow'           # a shallow clone (non-alphabetical to be beside its twin)
 alias since='git since'               # log with immediate --since argument (technically --since-as-filter, but THATS THE POINT!!!)
+alias stats='git stats'               # git show, with implicit --stat to change diff output to stats output
 alias tags='git tags'                 # list the tags
 alias unshallow='git unshallow'       # re-hydrate a shallow clone
 alias unstash='git unstash'           # essentially `stash pop`
