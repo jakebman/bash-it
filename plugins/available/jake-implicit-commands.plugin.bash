@@ -277,9 +277,14 @@ function shfmt {
 				if [[ -n "$mod" ]]; then
 					modified+=("$file")
 				fi
+			elif command shfmt -d "$file" &>/dev/null; then
+				# shfmt didn't find any complaints with this file
+				# rely on _is_git_safe to give a prior sentence along the lines of "$file has git modifications"
+				echo " But shfmt doesn't want to modify it." >&2
 			else
-				# rely on _is_git_safe to say 'why'
-				echo " Not modifying via implicit shfmt" >&2
+				# Not git safe; have a message printed about that.
+				# Shfmt had a diff it would like to apply
+				echo " And shfmt would like to modify it." >&2
 				skipped+=("$file")
 			fi
 		done
