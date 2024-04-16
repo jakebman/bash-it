@@ -297,9 +297,9 @@ function shfmt {
 		fi
 		if [[ 0 -ne "${#skipped}" ]]; then
 			echo "Use the following command to intentionally modify skipped files:"
-			printf "shfmt -w -l "
+			printf "shfmt -w -l"
 			# TODO: shellquote?
-			printf "%q" "${skipped[@]}"
+			printf " %q" "${skipped[@]}"
 			printf "\n"
 		fi
 
