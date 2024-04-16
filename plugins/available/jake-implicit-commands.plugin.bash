@@ -272,6 +272,7 @@ function shfmt {
 		for file; do # implicit in $@
 			if _is_git_safe "$file"; then
 				# run shfmt in-place, printing the file name if modified
+				# IF THIS IS MODIFIED, MODIFY THE MANUAL STEP BELOW
 				local mod="$(shfmt -w -l "$file")"
 				if [[ -n "$mod" ]]; then
 					modified+=("$file")
@@ -292,7 +293,7 @@ function shfmt {
 
 		if [[ 0 -ne "${#skipped}" ]]; then
 			echo "Use the following command to intentionally modify skipped files:"
-			printf "shfmt -w -l"
+			printf "shfmt -w -l" # THIS DEPENDS ON THE SCRIPT ABOVE, AND SHOULD MATCH
 			printf " %q" "${skipped[@]}"
 			printf "\n"
 		fi
