@@ -15,6 +15,7 @@ plugins jake-cd-implicit-foo-folder
 plugins jake-implicit-commands
 plugins jake-install-tools
 plugins jake-maintenance
+plugins jake-maven
 plugins jake-path
 plugins jake-q
 plugins jake-words
