@@ -287,7 +287,6 @@ alias reflog='git reflog'
 alias rev-parse='git rev-parse'
 alias worktree='git worktree'
 # git-extras
-alias authors='git authors'
 alias lock='git lock'
 alias locked='git locked'
 alias unlock='git unlock'
@@ -300,6 +299,8 @@ alias unlock='git unlock'
 # Specifically, that means I should be *very judicious* with the 'Duplicating' and 'Modifying' aliases, because if I ever improve those commands,
 # I won't actually reap any benefit!
 # tl;dr: these git-<alias>s SHOULD ALWAYS track what their corresponding git-<command> DOES, EVEN IF those commands change in the future
+alias authors='git authors' # formerly from git-extras, but I don't like their implementation
+alias authors-raw='git authors-raw'
 alias bare='git bare'
 alias branches='git branches'
 alias config-editg='git config-editg'
