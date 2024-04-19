@@ -48,7 +48,7 @@ alias markdown-diff=diff-ignore-wrapping
 alias mddiff=markdown-diff
 
 function delta {
-	about 'allow you to type the bare word "delta" or ("delta git-command" - TODO) and get an automatic git-delta, while still not harming the delta command. Additional magic (TODO): `delta show`, if show aliases into git: show="git show ...", (or is a function that mentions git?) and runs that command with git replaced with git-delta'
+	about 'allow you to type the bare word "delta" or "delta <git-command>" and get an automatic git-delta, while still not harming the delta command. Additional magic (TODO): `delta show`, if show aliases into git: show="git show ...", (or is a function that mentions git?) and runs that command with git replaced with git-delta'
 	if [[ "$#" -eq 0 ]]; then
 		# $@ is unecessary, as it's empty. Keeps parallel structure, though.
 		# we choose implicitdiff here, because it serves diff well too
@@ -57,12 +57,10 @@ function delta {
 		# git-delta is aliased in git to run git with delta as the pager
 		# and git-deltaDiff uses that to run diff
 		git deltaDiff "$@"
-	# TODO: with a command that can say if `delta X Y Z` should act like `git X Y Z`,
-	# I can then dispatch wisely to `git delta X Y Z`. It's possible that only X really
-	# matters for that evaluation
-	# (Might be able to borrow that from the git command completion tech in /usr/share/bash-completion/completions/git)
-	# elif _jake-is-git-command "$1";
-	#    git delta "$@"
+	elif git is-valid-git-command "$1"; then
+		# I 'trust' the is-valid-git-command I wrote, so...
+		# file any grievances with is-valid-git-command, not here.
+		git delta "$@"
 	else
 		command delta "$@"
 	fi
