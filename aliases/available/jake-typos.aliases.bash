@@ -171,6 +171,8 @@ alias pws=pwd
 alias vasr=vars
 alias cars=vars
 
+alias pyt=python # technically, just a lazy name
+
 alias tpe=type
 alias ype=type
 alias tyep=type
