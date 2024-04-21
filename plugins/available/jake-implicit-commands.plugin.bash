@@ -53,14 +53,14 @@ function delta {
 		# $@ is unecessary, as it's empty. Keeps parallel structure, though.
 		# we choose implicitdiff here, because it serves diff well too
 		git delta implicitdiff "$@"
-	elif [[ "$#" -eq 1 ]] && ! _jake-special-single-args-for-diff "$1"; then
-		# git-delta is aliased in git to run git with delta as the pager
-		# and git-deltaDiff uses that to run diff
-		git deltaDiff "$@"
 	elif git is-valid-git-command "$1"; then
 		# I 'trust' the is-valid-git-command I wrote, so...
 		# file any grievances with is-valid-git-command, not here.
 		git delta "$@"
+	elif [[ "$#" -eq 1 ]] && ! _jake-special-single-args-for-diff "$1"; then
+		# git-delta is aliased in git to run git with delta as the pager
+		# and git-deltaDiff uses that to run diff
+		git deltaDiff "$@"
 	else
 		command delta "$@"
 	fi
