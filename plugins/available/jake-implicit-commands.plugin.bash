@@ -139,6 +139,11 @@ function tree {
 	fi
 }
 
+function pstree {
+	about "pstree, with assumed pagination and -a"
+	command pstree -a "$@" | pager
+}
+
 function browse {
 	about "allow you to type the bare word 'browse' and get an automatic gh browse, while not stepping on the toes of xdg-utils's browse command (a symlink to xdg-open), which takes arguments"
 	if [[ "$#" -eq 0 ]]; then
