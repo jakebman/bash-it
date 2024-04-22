@@ -18,6 +18,7 @@ alias ll=lls
 # This overrides one from general
 unalias h
 function h {
+	# No guarantee that pager is less, let alone accepts +G
 	history "$@" | less +G
 }
 

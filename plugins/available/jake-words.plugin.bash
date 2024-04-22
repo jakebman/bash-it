@@ -8,7 +8,7 @@ function words {
 		cat "${WORDLIST:-/usr/share/dict/words}" | words "$@"
 		return # Not strictly necessary if EVERYTHING is if/elif/else. But that can't be guaranteed locally
 	elif [[ "$#" -eq 0 ]]; then
-		less
+		pager
 		return # see above
 	else
 		# Grab a bunch of flags, and apply them to "the current" regex
