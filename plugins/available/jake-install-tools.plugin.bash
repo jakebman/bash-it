@@ -99,6 +99,7 @@ function jake-install-tools() {
 	_jake-find-tool wslview wslu "installs wslview, which is an /etc's alternative x-www-browser (but not www-browser - lynx wins that bid)"
 	_jake-find-tool ts moreutils 'timestamps its stdin and sends it to stdout (technically, we double-count moreutils, but I want this too)'
 	_jake-find-tool http httpie
+	_jake-find-tool asciidoctor
 	_jake-find-tool git-extras
 	_jake-find-tool xmlindent # doesn't have --long-options, which is a little weird, but formats all XML (incl. xmllint --xpath results), so that's good
 	_jake-find-tool colordiff
