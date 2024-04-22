@@ -255,7 +255,7 @@ function jake-install-tools() {
 	if ((${#bin_files[@]})); then
 		echo "please copy the apt* files (${bin_files[*]}) from ${BASH_IT_CUSTOM}/bin to /usr/local/bin"
 		echo -en "\t"
-		echo 'sudo install ${BASH_IT_CUSTOM}/bin/* /usr/local/bin'
+		echo 'sudo install --verbose ${BASH_IT_CUSTOM}/bin/* /usr/local/bin'
 	else
 		echo "Nothing to do for apt-*-only - bin files are installed and are happy"
 	fi
