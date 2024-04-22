@@ -80,6 +80,7 @@ alias sork=sort
 alias sortr=sort
 
 alias shfmy=shfmt
+alias shf=shfmt # tentative, sitting at the tab completion fork with shfolder.dll
 alias shft=shfmt
 alias shfmty=shfmt # speculative
 
