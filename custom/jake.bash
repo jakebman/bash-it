@@ -269,6 +269,8 @@ function typo {
 	vim "${BASH_IT}/aliases/available/jake-typos.aliases.bash"
 }
 
+alias utc='date --utc'
+
 function hgrep {
 	about "grep your history (using ack)"
 	# Modify ack's pager to ask less to start at the end of output. From `man less`:
