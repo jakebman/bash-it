@@ -86,7 +86,7 @@ function treeN {
 }
 
 # tree2, tree3, tree4, tree5
-for _i in {2..5}; do
+for _i in {1..5}; do
 	alias "tree${_i}=treeN ${_i}"
 done
 unset _i
