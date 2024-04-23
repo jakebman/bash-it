@@ -474,6 +474,8 @@ function _jake-github-repo-release-urls {
 	about "list download urls for a release"
 	param "1: repo, in <user>/<repo> format. Like sharkdp/bat"
 
+	# NB: this could be `gh api "repos/${1}/releases/latest" --jq '.assets[].browser_download_url'
+	# ... if we weren't in the bootstrap space where gh might not be available
 	local URL="https://api.github.com/repos/${1}/releases/latest"
 	# --location follows 301 redirects, like for httpx-sh/httpx, which goes to a numeric value
 	curl -s --location "$URL" \
