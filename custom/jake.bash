@@ -271,6 +271,8 @@ function typo {
 
 alias utc='date --utc'
 
+alias jake-todo='ls-files | grep jake | j -x TODO'
+
 function hgrep {
 	about "grep your history (using ack)"
 	# Modify ack's pager to ask less to start at the end of output. From `man less`:
