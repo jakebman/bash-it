@@ -127,6 +127,7 @@ function jake-install-tools() {
 	_jake-find-tool shfmt
 	_jake-find-tool shellcheck
 	_jake-find-tool mr myrepos
+	_jake-find-tool qdirstat
 	_jake-find-tool vcsh
 	_jake-find-tool pip python3-pip "to install git-big-picture"
 	_jake-find-tool perldoc perl-doc "for man mr"
