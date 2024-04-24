@@ -144,6 +144,15 @@ function pstree {
 	command pstree -a "$@" | pager
 }
 
+function du {
+	about "implicit -h to du if stdout is terminal"
+	if [[ -t 1 ]]; then
+		command du -h "$@"
+	else
+		command du "$@"
+	fi
+}
+
 function browse {
 	about "allow you to type the bare word 'browse' and get an automatic gh browse, while not stepping on the toes of xdg-utils's browse command (a symlink to xdg-open), which takes arguments"
 	if [[ "$#" -eq 0 ]]; then
