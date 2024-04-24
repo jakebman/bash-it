@@ -42,6 +42,16 @@ if ! type docker &> /dev/null; then
 	alias kubectl=kubectl.exe
 fi
 
+function windirstat {
+	about "run windirstat.exe in a background process, willing to assume you mean the current folder"
+
+	if [[ 0 -eq "$#" ]]; then
+		'/mnt/c/Program Files (x86)/WinDirStat/windirstat.exe' . &
+	else
+		'/mnt/c/Program Files (x86)/WinDirStat/windirstat.exe' "$@" &
+	fi
+}
+
 function wsl-open-port {
 	about "learn more at https://learn.microsoft.com/en-us/windows/wsl/networking"
 	param "1: port to open on linux side"
