@@ -212,9 +212,10 @@ function fork {
 }
 
 function open {
-	about "essentially identical to 'browse' - implicit gh browse, but runs the open command instead. (open is an alternatives, which usually picks xdg-open)"
+	about "essentially identical to 'browse' - runs browse, but runs the open command on its arguments instead. (open is an alternatives, which usually picks xdg-open)"
 	if [[ "$#" -eq 0 ]]; then
-		gh browse "$@"
+		# implicit browse function knows how to figure out whether to use gh or glab
+		browse "$@"
 	else
 		command open "$@"
 	fi
