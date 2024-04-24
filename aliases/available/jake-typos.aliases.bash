@@ -22,6 +22,7 @@ alias it=git
 alias gi=git
 alias gir=git
 alias gti=git
+alias fir=git
 alias igt=git
 alias vit=git
 alias bit=git
