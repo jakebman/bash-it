@@ -7,6 +7,11 @@ else
 	_log_warning "Set WSL_WINDOWS_USER_HOME to /mnt/c/Users/<your home dir> to unify maven repos"
 fi
 
+# TODO: these functions and alises cause _command_exists even if their target doesn't exist.
+# I'd like to make these conditional on their targets working
+
+# TODO: it'd be nice to call out wslu's wslview which is an alternative in x-www-browser to forward to your chrome-or-other windows browser
+
 #wsl.exe prints in window-y output (utf-16LE, CRLF), so we need to undo that for our unix tools
 wsl2unix() {
 	about "a dos2unix for the output of wsl.exe, which seems to have weird output from our linux perspective"
