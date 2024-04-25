@@ -145,9 +145,19 @@ function pstree {
 }
 
 function du {
-	about "implicit -h to du if stdout is terminal"
+	about "implicit ncdu if du's stdout is terminal"
 	if [[ -t 1 ]]; then
-		command du -h "$@"
+		if [[ 0 -eq "$#" ]]; then
+			# no guarantee that I have this
+			if _command_exists ncdu; then
+				ncdu -r
+			else
+				command du -h
+			fi
+		else
+			# Still with terminal output; implicit -h
+			command du -h "$@"
+		fi
 	else
 		command du "$@"
 	fi

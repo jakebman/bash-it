@@ -114,6 +114,7 @@ function jake-install-tools() {
 	_jake-find-tool gh gh "github cli"
 	_jake-find-tool cmake cmake 'optional - used by the reMarkable suite'
 	# _jake-find-tool g++ # I prefer clang for now
+	_jake-find-tool ncdu
 	_jake-find-tool tree
 	_jake-find-tool zip
 	_jake-find-tool jq
