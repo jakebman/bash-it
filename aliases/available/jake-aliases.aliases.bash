@@ -260,6 +260,34 @@ function reset {
 	fi
 }
 
+function clone {
+	local git_command=clone
+	local retcode
+	if [[ "x${PWD}" =~ /junk-drawer$ ]]; then
+		# special case: shallow clone in junk-drawer
+		git_command=shallow
+		echo "We're in the junk drawer - using a shallow clone"
+	fi
+	git $git_command "$@"
+	retcode="$?"
+	if [[ -f .mrconfig ]]; then
+		# https://www.cyberciti.biz/faq/linux-unix-bsd-apple-osx-bash-get-last-argument/
+		local dir
+		for dir; do :; done
+
+		# basename, stripping a suffix
+		dir="$(basename -s .git "$dir")"
+
+		if [[ -d "$dir" ]]; then
+			mr register "$dir"
+		else
+			echo "pleas manaully register $* with mr"
+		fi
+	fi
+
+	return "$retcode"
+}
+
 # non-standard plan - use the prefix git to disambiguate the desired `git help` from
 # the full automatic invocation of an existing command. Mostly, this lets me pick
 # `git pull` over `mr up` where `pull` would otherwise pick the second one
@@ -272,7 +300,6 @@ alias gitstatus='git status'
 
 # 'Vanilla' aliases - these are aliases to existing git-<command>s (not git-<alias>es)
 # These aliases simply allow for an implicit git on commands that predate any of my git-config alias additions
-alias clone='git clone'
 alias push='git push'
 alias fetch='git fetch'
 alias rebase='git rebase'
