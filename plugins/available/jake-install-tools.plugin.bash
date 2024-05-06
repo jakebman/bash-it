@@ -193,12 +193,15 @@ function jake-install-tools() {
 			'too old')
 				echo "git is not very new - ${GIT_VERSION}, behind ${EXPECTED_VERSION}. Try grabbing their ppa:"
 				echo -e "\t" "sudo add-apt-repository ppa:git-core/ppa"
+				echo -e "\t" "sudo add-apt-repository ppa:git-core/candidate"
 				echo -e "\t" "sudo apt update"
 				echo # spacing
 				;;
 			patch)
 				echo "git is only off by a patch version - not super important, but know that ${GIT_VERSION} is behind ${EXPECTED_VERSION}. Try grabbing their ppa:"
-				echo -e "\t" "sudo add-apt-repository ppa:git-core/ppa; sudo apt update"
+				echo -e "\t" "sudo add-apt-repository ppa:git-core/ppa"
+				echo -e "\t" "sudo add-apt-repository ppa:git-core/candidate"
+				echo -e "\t" "sudo apt update"
 				echo # spacing
 				;;
 			newer)
