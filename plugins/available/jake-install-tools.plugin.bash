@@ -406,12 +406,12 @@ function _jake-check-optional-tools() {
 		else
 			echo "asciinema is installed, but please add the ppa via:"
 			echo -en "\t"
-			echo 'sudo apt-add-repository ppa:zanchey/asciinema'
+			echo 'sudo add-apt-repository ppa:zanchey/asciinema'
 		fi
 	else
 		echo "Please install asciinema via:"
 		echo -en "\t"
-		echo 'sudo apt-add-repository ppa:zanchey/asciinema'
+		echo 'sudo add-apt-repository ppa:zanchey/asciinema'
 		echo -en "\t"
 		echo 'sudo apt install asciinema'
 	fi
