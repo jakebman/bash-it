@@ -18,6 +18,7 @@ function words {
 			shift
 		done
 
+		# TODO: I'd like to keep words -c . a e i o u to count the final result, not return no results because 123,456 doesn't contain a e i o or u
 		args+=("$1")
 
 		# error checking - there should be at least one argument left, so shift should succeed
