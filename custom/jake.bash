@@ -233,6 +233,15 @@ function _mr-able {
 	fi
 }
 
+function cdgit {
+	about 'cd into the git-dir for the current directory, or fail'
+	local where
+	where="$(git rev-parse --absolute-git-dir)" || return 1
+	echo "found git dir at '${where}'. Going there"
+	cd "$where"
+}
+alias gitcd=cdgit # not a typo - I literally don't know which name should be primary
+
 function fidget {
 	type fidget
 	echo "TODO: loop this into jake-maintain-system tech"
