@@ -265,6 +265,7 @@ alias branche=branches # because sometimes I get lazy, apparently
 alias gst=gstatus
 alias staqsh=stashs
 alias stashs=stash
+alias tsga=tags       # Wow.
 alias unstasn=unstash # Amusingly, a typo of a command I didn't even have before I made the typo. Now I do
 alias u=pull          # more likely I was thinking of 'up', but that's just 'pull' anyway
 alias p=pull
