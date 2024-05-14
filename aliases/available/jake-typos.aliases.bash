@@ -130,6 +130,7 @@ alias bash0t=bash-it
 alias bash0-t=bash-it
 # my own tool that does apt updates
 alias apt0up=apt-up
+alias aptup=apt-up
 
 alias vd=cd
 alias vf=cd # left hand misaligned
