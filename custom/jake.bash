@@ -77,10 +77,19 @@ else
 fi
 
 function files {
-	about "list the files of an apt package"
-	# TODO: apt-file has a 'progress bar'-like thing. It'd be cool to be able to borrow that
-	echo "(This command takes a long time, and it's eating apt-file's progress bar. Sorry.)"
-	apt-file list "$@" | pager
+	about "list the files of an apt package; or run the file command on all files in a directory (defaulting to . if there are no arguments)"
+
+	if [[ "$#" -eq 0 ]]; then
+		file # the no-arg behavior I added to file is to list the files in .
+	elif [[ -d "$1" ]]; then
+		for arg; do # implicit in $@
+			file "$arg" "${arg}/"*
+		done
+	else
+		# TODO: apt-file has a 'progress bar'-like thing. It'd be cool to be able to borrow that
+		echo "(This command takes a long time, and it's eating apt-file's progress bar. Sorry.)"
+		apt-file list "$@" | pager
+	fi
 }
 
 function vars {
