@@ -35,12 +35,11 @@ function words {
 }
 
 function wordle {
-	about "solve the NYT's wordle puzzle (words with implicit 5-letter filter)"
+	about "solve the NYT's wordle puzzle (words with implicit 5-letter filter; and ..x and x.. both mean ..x.. (words with dots are padded by dots on the other side to make 5 letters. Not smart enough to fix ..[xy] ))"
 	param "any: args to words command"
 
-	words -I -v "[A-Z']" \
-		^.....$ \
-		"$@"
+	# take the given $@ array, apply it one-arg-per-line, then use the outputted lines as args to words
+	words -I -v "[A-Z']" ^.....$ $(for word; do printf "%s\n" "$word"; done | wordle-pad.py)
 }
 
 function spelling-bee {
