@@ -367,6 +367,7 @@ alias co='git checkout'
 alias intend='git intent' # sorta typo, but more trying to cover my bases on these names
 alias staged='git diff --staged'
 alias autostash='git pull --rebase --autostash' # implicit rebase is intentional. See the alias definition
+alias register='mr register'                    # not a git command, but imagine `git alias register '!mr register'`
 
 # 'Modifying' aliases
 # Sometimes, I want my implicit git commands to have an additional parameter
