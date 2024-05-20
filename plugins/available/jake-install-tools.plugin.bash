@@ -164,7 +164,7 @@ function jake-install-tools() {
 
 	# I would really prefer to use the latest git
 	local GIT_VERSION="$(git --version)"
-	local EXPECTED_VERSION='git version 2.45.0'
+	local EXPECTED_VERSION='git version 2.45.1'
 	# TODO: it would be nice to be able to compare versions better
 	if [ "$GIT_VERSION_MAJOR" != "$EXPECTED_VERSION" ]; then
 		local GIT_VERSION_MAJOR=$(echo $GIT_VERSION | sed -E -n 's/.* ([0-9]+)\..*/\1/p')
