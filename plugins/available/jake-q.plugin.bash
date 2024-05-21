@@ -34,6 +34,8 @@ function q() {
 		# NB: this isn't *necessarily* the top-most bash. You can manually invoke a login shell
 		# wherever you like by invoking `bash --login`
 		echo "You're at a top-level or login shell. Exiting here will end the terminal session"
+		echo "Heading back to \$HOME, like you might want"
+		cd ~
 		# or in terse phrasing like `logout` uses:
 		# echo "$0: is login shell. Use \`logout' or \`exit'"
 	elif parent_description=$(_q-describe-parent); then
