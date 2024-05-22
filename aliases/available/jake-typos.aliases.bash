@@ -206,6 +206,7 @@ alias rakub=rakubrew
 alias stage=staged # NB: `git stage` is an alias for `git add`. This here is a TYPO of staged, not an attempt to use `git stage` conveniently
 alias stsaged=staged
 alias setaged=staged
+alias staghed=staged
 alias stagerd=staged
 alias stg=staged
 alias whow=show
