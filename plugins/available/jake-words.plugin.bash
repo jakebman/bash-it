@@ -39,7 +39,8 @@ function wordle {
 	param "any: args to words command"
 
 	# take the given $@ array, apply it one-arg-per-line, then use the outputted lines as args to words
-	words -I -v "[A-Z']" ^.....$ $(for word; do printf "%s\n" "$word"; done | wordle-pad.py)
+	# Ignore words with capital letters, 's, and the several variants of xxvii
+	words -I -v "[A-Z']" ^.....$ -v '^x[xvi]+$' $(for word; do printf "%s\n" "$word"; done | wordle-pad.py)
 }
 
 function spelling-bee {
