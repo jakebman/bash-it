@@ -15,7 +15,12 @@ function hgrep {
 	# Modify ack's pager to ask less to start at the end of output. From `man less`:
 	# "If a command line option begins with +, the remainder of that option is taken to be an
 	#  initial command to less. For example, +G tells less to start at the end of the file..."
-	history | ack --pager='less +G' "$@"
+	if [[ "$#" -eq 0 ]]; then
+		# can't use `pager` here - no guarantee it respects +G, and we want to scroll to bottom
+		history | less +G
+	else
+		history | ack --pager='less +G' "$@"
+	fi
 }
 
 # formerly a simple `alias cat='bat --plain'`, but that doesn't handle this no-args use case
