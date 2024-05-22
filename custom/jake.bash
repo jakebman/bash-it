@@ -291,14 +291,6 @@ alias utc='date --utc'
 
 alias jake-todo='ls-files | grep jake | j -x TODO'
 
-function hgrep {
-	about "grep your history (using ack)"
-	# Modify ack's pager to ask less to start at the end of output. From `man less`:
-	# "If a command line option begins with +, the remainder of that option is taken to be an
-	#  initial command to less. For example, +G tells less to start at the end of the file..."
-	history | ack --pager='less +G' "$@"
-}
-
 function _jake-success {
 	# Stash our success before a success from `local` or `about` overwrites it
 	local success="$?"

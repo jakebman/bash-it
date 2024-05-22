@@ -15,13 +15,6 @@ function lls {
 # the creation of the function, so there's no circular reference
 alias ll=lls
 
-# This overrides one from general
-unalias h
-function h {
-	# No guarantee that pager is less, let alone accepts +G
-	history "$@" | less +G
-}
-
 # I really like permament differences
 alias watch='watch --differences=permanent'
 
@@ -33,7 +26,7 @@ alias b=browse # or branch, bash, or bat?
 # alias d=diff # currently in jake-typos.aliases.bash because it was a typo first
 # alias f=fidget # defined in custom/jake.bash
 alias g=git
-# function h { history | less +G } # defined above
+unalias h; alias h=hgrep # replace the one from general with hgrep from jake-implicit-commands
 # alias m=mr # typo
 # alias p=pull # typo (TODO: could this become `push` if we're a commit ahead of upstream?)
 # function q # in bash-it plugin jake-q. Approx: { if ! _is-toplevel-bash; then exit; fi }
