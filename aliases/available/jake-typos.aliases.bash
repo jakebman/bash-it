@@ -220,6 +220,7 @@ alias shw=show
 alias githelp='git help'
 alias ammend=amend
 alias amned=amend
+alias amdne=amend # jeez.
 alias comit=commit
 alias comm9t=commit
 alias comm0t=commit
