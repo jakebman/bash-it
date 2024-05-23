@@ -14,6 +14,9 @@ function lls {
 # This is FINE by the rules of bash! The prior alias was *expanded* during
 # the creation of the function, so there's no circular reference
 alias ll=lls
+# Override bash-it's --all with --Almost-All
+alias l='ls -AF'
+
 
 # I really like permament differences
 alias watch='watch --differences=permanent'
