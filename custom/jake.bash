@@ -148,6 +148,16 @@ alias var=vars # because I'm lazy
 # TODO: Let's get a function-printing equivalent of vars
 #}
 
+function cdp {
+	about "cd, but with an implicit mkdir -p"
+	if ! test -d "${1?NEED A DIR}"; then
+		# TODO: skip $1 if it's a flag, find the first non-flag
+		echo creating "$1"
+		mkdir -p "$1"
+	fi
+	cd "$@"
+}
+
 function _mr-isrepo-local {
 	about "succeeds if the current folder is a git repo tracked by mr. fails otherwise"
 	[[ -e .git ]] || return 1
