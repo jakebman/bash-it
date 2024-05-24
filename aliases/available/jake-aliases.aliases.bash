@@ -157,6 +157,7 @@ function cherry-pick {
 }
 
 # commit with one argument is either add/commit the file, or commit with the given message
+# TODO: in a situation where no flags are specified, -m is "$*", and we automatically addp any files mentioned
 function commit {
 	# stash some flags that can be "transparent" to this feature
 	# (these can only be BEFORE the message for now... potentially always)
