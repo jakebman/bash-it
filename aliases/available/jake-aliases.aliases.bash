@@ -17,7 +17,6 @@ alias ll=lls
 # Override bash-it's --all with --Almost-All
 alias l='ls -AF'
 
-
 # I really like permament differences
 alias watch='watch --differences=permanent'
 
@@ -29,7 +28,8 @@ alias b=browse # or branch, bash, or bat?
 # alias d=diff # currently in jake-typos.aliases.bash because it was a typo first
 # alias f=fidget # defined in custom/jake.bash
 alias g=git
-unalias h; alias h=hgrep # replace the one from general with hgrep from jake-implicit-commands
+unalias h
+alias h=hgrep # replace the one from general with hgrep from jake-implicit-commands
 # alias m=mr # typo
 # alias p=pull # typo (TODO: could this become `push` if we're a commit ahead of upstream?)
 # function q # in bash-it plugin jake-q. Approx: { if ! _is-toplevel-bash; then exit; fi }
