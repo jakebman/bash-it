@@ -6,6 +6,7 @@ about-plugin "Use cykerway's complete-alias project to complete aliases"
 # From https://github.com/cykerway/complete-alias
 # TODO: It'd be nice if this were bundled into the /vendor folder
 
+function _use_complete_alias {
 # Configuration. User can choose a folder, filename, or the whole path. Whole path wins. We clean-back-up whatever the user left unset
 COMPLETE_ALIAS_CLEANUP=(CLEANUP) # unset this variable itself
 if [ ! -v COMPLETE_ALIAS_DIR ]; then
@@ -51,9 +52,10 @@ else
 fi
 
 # Don't pollute the environment - remove variables the user didn't specifically set
-# TODO: This cleanup is dumb. Make the relevant variables local to a function, then call it.
-# (In retrospect, that's probably why other plugins that strategy)
 for _deleted_suffix in "${COMPLETE_ALIAS_CLEANUP[@]}"; do
 	unset "COMPLETE_ALIAS_${_deleted_suffix}"
 done
 unset _deleted_suffix
+}
+
+_use_complete_alias
