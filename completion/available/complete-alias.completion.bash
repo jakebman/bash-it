@@ -51,6 +51,8 @@ else
 fi
 
 # Don't pollute the environment - remove variables the user didn't specifically set
+# TODO: This cleanup is dumb. Make the relevant variables local to a function, then call it.
+# (In retrospect, that's probably why other plugins that strategy)
 for _deleted_suffix in "${COMPLETE_ALIAS_CLEANUP[@]}"; do
 	unset "COMPLETE_ALIAS_${_deleted_suffix}"
 done
