@@ -29,6 +29,7 @@ fi
 export BASH_IT_DOTFILES_GIT_REPO
 
 _log_debug "found dotfiles repository at ${BASH_IT_DOTFILES_GIT_REPO}"
+# TODO: once I find a way for delta to act a little git-like, it'd be nice to include it here, too
 alias config='GIT_DIR="${BASH_IT_DOTFILES_GIT_REPO}" git'
 
 if [ "no" != "$(config config status.showUntrackedFiles)" ]; then
