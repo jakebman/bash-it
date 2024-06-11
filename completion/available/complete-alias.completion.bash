@@ -7,19 +7,16 @@ about-plugin "Use cykerway's complete-alias project to complete aliases"
 # TODO: It'd be nice if this were bundled into the /vendor folder
 
 function _use_complete_alias {
-	# Configuration. User can choose a folder, filename, or the whole path. Whole path wins. We clean-back-up whatever the user left unset
-	COMPLETE_ALIAS_CLEANUP=(CLEANUP) # unset this variable itself
+	# Configuration. User can choose a folder, filename, or the whole path. Whole path wins, and its value is written back over any that it superceded
+	# We use local variables to 'shadow' the missing configuration variables and 'plaster-over' their missing-ness within this function
 	if [ ! -v COMPLETE_ALIAS_DIR ]; then
-		COMPLETE_ALIAS_CLEANUP+=(DIR)
-		COMPLETE_ALIAS_DIR="${HOME}/.complete-alias"
+		local COMPLETE_ALIAS_DIR="${HOME}/.complete-alias"
 	fi
 	if [ ! -v COMPLETE_ALIAS_FILENAME ]; then
-		COMPLETE_ALIAS_CLEANUP+=(FILENAME)
-		COMPLETE_ALIAS_FILENAME="complete_alias"
+		local COMPLETE_ALIAS_FILENAME="complete_alias"
 	fi
 	if [ ! -v COMPLETE_ALIAS_FILE ]; then
-		COMPLETE_ALIAS_CLEANUP+=(FILE)
-		COMPLETE_ALIAS_FILE="${COMPLETE_ALIAS_DIR}/${COMPLETE_ALIAS_FILENAME}"
+		local COMPLETE_ALIAS_FILE="${COMPLETE_ALIAS_DIR}/${COMPLETE_ALIAS_FILENAME}"
 	fi
 
 	# Re-read the dir and filename back from the ultimate configuration
@@ -45,17 +42,10 @@ function _use_complete_alias {
 
 		complete -F _complete_alias "${!BASH_ALIASES[@]}"
 	else
-		ALIAS_CLONE_COMMAND="git clone git@github.com:cykerway/complete-alias.git \"\${COMPLETE_ALIAS_DIR:-${COMPLETE_ALIAS_DIR}}\""
+		local ALIAS_CLONE_COMMAND="git clone git@github.com:cykerway/complete-alias.git \"\${COMPLETE_ALIAS_DIR:-${COMPLETE_ALIAS_DIR}}\""
 		_log_error "please install complete-alias or point \$COMPLETE_ALIAS_FILE to the ${COMPLETE_ALIAS_FILENAME} file within the place you checked it out from"
 		_log_error "You might try: ${ALIAS_CLONE_COMMAND}"
-		unset ALIAS_CLONE_COMMAND
 	fi
-
-	# Don't pollute the environment - remove variables the user didn't specifically set
-	for _deleted_suffix in "${COMPLETE_ALIAS_CLEANUP[@]}"; do
-		unset "COMPLETE_ALIAS_${_deleted_suffix}"
-	done
-	unset _deleted_suffix
 }
 
 _use_complete_alias
