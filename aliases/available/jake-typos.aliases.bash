@@ -250,6 +250,7 @@ alias ranibow=rainbow
 alias rainboqw=rainbow
 alias rainboiw=rainbow
 alias raninbow=rainbow
+alias submodules=submodule # in git-land, I consider this a "command I expected to work", but here in bash-land, I consider it closer to a typo
 alias dubmodule=submodule
 alias submoduel=submodule
 alias submod=submodule
