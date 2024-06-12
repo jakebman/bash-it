@@ -173,6 +173,7 @@ function commit {
 	local JAKE_BANNER_WHY="... TO COMMIT"
 
 	# exactly one argument, and it's not a flag. (don't eat --message=typo, for instance)
+	# TODO: if no args are flags, then the commit message is "$*", and any args-that-are-also-files are add-p'd
 	if [ "$#" -eq 1 ] && ! _is_flag "$1"; then
 		if [ -f "$1" ]; then
 			# is a file. add, then interactive commit
