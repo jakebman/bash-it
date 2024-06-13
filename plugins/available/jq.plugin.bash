@@ -21,6 +21,8 @@ alias jqdiff="_jq-ify diff"
 alias jqvimdiff="_jq-ify vimdiff"
 alias vimjqdiff="_jq-ify vimdiff"
 
+_command_exists delta && alias jqdelta="_jqify delta"
+
 function jqless {
 	local args
 
