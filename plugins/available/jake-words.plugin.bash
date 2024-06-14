@@ -1,4 +1,4 @@
-about-plugin "Easy access to the wordlist via a words command, plus NYT puzzle solvers based on it"
+about-plugin "Easy access to the wordlist via a words command, plus NYT puzzle solvers which use it"
 
 function words {
 	about 'print the word list, paged. Arguments are ack filters on a word list (flags apply to the next non-flag argument, which is assumed to be a regex). If stdin is not a terminal, it is used in lieu of the ${WORDLIST:/usr/share/dict/words}'
