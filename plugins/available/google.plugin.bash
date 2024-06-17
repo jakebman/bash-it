@@ -4,7 +4,7 @@ about-plugin 'perform google searches from the cli with the google command'
 
 function google() {
 	about 'perform a google search'
-	param '*: a series of words that are concatenated into the google query. TODO: you currently need to urlencode ampersands yourself'
+	param '*: a series of words that are concatenated into the google query. TODO: you currently need to urlencode ampersands yourself. Sorry :('
 	# TODO: urlencode ampersands in the query
 	# TODO: but maybe parameters that start with & and have an = (ex: `&lang=en`) are unmolested. Prepend a space (like `google " &lang=en"`) to prevent this.
 	# TODO: and perhaps this only applies to final params, so `google "&lang=en" ""` also disables this. Essentially "query parameters are accepted only at the end"
