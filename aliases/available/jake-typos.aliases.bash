@@ -189,6 +189,7 @@ alias typ=typo
 alias ypo=typo
 alias fypo=typo
 alias tyop=typo
+alias tyypo=typo
 alias ytypo=typo
 alias typeo=typo
 
@@ -295,6 +296,7 @@ alias pus=push
 alias ush=push
 alias addd=add
 alias ass=add
+alias ad=add
 alias loig=log
 alias lig=log
 alias lop=logp
