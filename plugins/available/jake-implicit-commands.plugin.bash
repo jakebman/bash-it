@@ -189,16 +189,6 @@ function browse {
 	fi
 }
 
-function gmail {
-	about "open gmail in your browser, including search terms, if present"
-	if [[ "$#" -eq 0 ]]; then
-		browse "http://gmail.com/"
-	else
-		# NB: $* over $@, because that keeps all the string as one string argument, w/o breaking it out
-		browse "https://mail.google.com/mail/u/0/#search/$*"
-	fi
-}
-
 # TODO: DUPLICATED CODE
 function _is_flag {
 	about "Succeeds if all arguments are flags (have a first character of '-'). Fails otherwise"

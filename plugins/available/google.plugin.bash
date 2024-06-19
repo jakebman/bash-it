@@ -1,6 +1,6 @@
 # shellcheck shell=bash
 cite about-plugin
-about-plugin 'perform google searches from the cli with the google command'
+about-plugin 'perform some google-y searches from the cli with the google and gmail command'
 
 function google() {
 	about 'perform a google search'
@@ -10,4 +10,14 @@ function google() {
 	# TODO: and perhaps this only applies to final params, so `google "&lang=en" ""` also disables this. Essentially "query parameters are accepted only at the end"
 	browse "https://google.com/search?q=$*"
 	# TODO: &ie=<input encoding> might be a useful query parameter to include
+}
+
+function gmail {
+	about "open gmail in your browser, including search terms, if present"
+	if [[ "$#" -eq 0 ]]; then
+		browse "http://gmail.com/"
+	else
+		# NB: $* over $@, because that keeps all the string as one string argument, w/o breaking it out
+		browse "https://mail.google.com/mail/u/0/#search/$*"
+	fi
 }
