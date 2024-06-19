@@ -6,6 +6,8 @@ about-plugin "Use cykerway's complete-alias project to complete aliases"
 # From https://github.com/cykerway/complete-alias
 # TODO: It'd be nice if this were bundled into the /vendor folder
 
+# TODO: it would be nice if this didn't also complete my typos (This will definitely requre coordination)
+
 function _use_complete_alias {
 	# Configuration. User can choose a folder, filename, or the whole path. Whole path wins, and its value is written back over any that it superceded
 	# We use local variables to 'shadow' the missing configuration variables and 'plaster-over' their missing-ness within this function
