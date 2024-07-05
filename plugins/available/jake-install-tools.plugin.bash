@@ -166,6 +166,7 @@ function jake-install-tools() {
 	local GIT_VERSION="$(git --version)"
 	local EXPECTED_VERSION='git version 2.45.2'
 	# TODO: it would be nice to be able to compare versions better
+	# 1/2: Does https://github.com/fsaintjacques/semver-tool work?
 	if [ "$GIT_VERSION_MAJOR" != "$EXPECTED_VERSION" ]; then
 		local GIT_VERSION_MAJOR=$(echo $GIT_VERSION | sed -E -n 's/.* ([0-9]+)\..*/\1/p')
 		local GIT_VERSION_MINOR=$(echo $GIT_VERSION | sed -E -n 's/.* ([0-9]+)\.([0-9]+)\..*/\2/p')
@@ -357,6 +358,7 @@ function _jake-check-optional-tools() {
 
 	if _command_exists fzf; then
 		# TODO: better version checking sounds like a good idea
+		# 2/2: Does https://github.com/fsaintjacques/semver-tool work?
 		if [[ "$(fzf --version)" =~ ^0.[123] ]]; then
 			echo "fzf version is too low. Please uninstall it and reinstall it"
 		else
