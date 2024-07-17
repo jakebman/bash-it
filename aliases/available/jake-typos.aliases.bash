@@ -298,6 +298,7 @@ alias ush=push
 alias addd=add
 alias ass=add
 alias ad=add
+alias .og=log
 alias loig=log
 alias lig=log
 alias lop=logp
