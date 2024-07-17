@@ -308,6 +308,28 @@ function _jake-success {
 	[[ "$success" -eq 0 ]]
 }
 
+
+function vimfind {
+	about "try to edit a bunch of files with fzf, using ack's -f file listing"
+	FZF_DEFAULT_COMMAND='ack -f' fzf \
+		--bind "enter:become(vim {})" \
+		--scheme=path \
+		--multi \
+		--reverse \
+		--no-sort \
+		--exit-0 \
+		--select-1 \
+		--header "Ctrl+Space to preview" \
+		--bind "ctrl-space:execute(vim -q <(echo {}) </dev/tty >/dev/tty)" \
+		--bind "ctrl-a:select-all" \
+		--bind "ctrl-n:deselect-all" \
+		--bind "q:abort" \
+		--bind "change:unbind(q)" \
+		--bind "backward-eof:rebind(q)" \
+		--query "$@"
+}
+alias vimf=vimfind
+
 # TODO: these *-whiches are becoming a pattern. Can this be a bash-it plugin, maybe using _jq-ify tech?
 # TODO: they need completions
 function vimwhich {
@@ -321,6 +343,7 @@ function vimwhich {
 		vim "$where"
 	else
 		echo "${FUNCNAME[0]} - ${1} is not found. Cannot open it for editing"
+		# TODO: try vimfind instead
 		return 1
 	fi
 }
