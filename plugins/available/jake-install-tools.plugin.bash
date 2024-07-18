@@ -82,6 +82,8 @@ function jake-install-tools() {
 		touch -r /usr/share/doc/git/contrib/git-jump/git-jump ~/bin/git-jump
 	fi
 
+	# TODO: it would be nice to have instructions that turn on APT::Get::Always-Include-Phased-Updates
+
 	# tools that can use apt
 	TOOLS_TO_INSTALL=""
 	_jake-find-tool pygmentize python3-pygments
