@@ -404,6 +404,16 @@ function _jake-check-optional-tools() {
 		echo 'sudo dpkg -i glab_*.deb'
 	fi
 
+	if _binary_exists jless; then
+		echo "Nothing to do for jless - jless is happy"
+	else
+		echo "Please install jless - a cli json gui"
+		echo "Get the zip file and put it in ~/bin, or via https://github.com/PaulJuliusMartinez/jless/releases"
+		_jake-github-repo-release-urls PaulJuliusMartinez/jless | grep -v apple-darwin
+		echo -en "\t"
+		echo 'unzip jless*.zip # -d ~/bin'
+	fi
+
 	if _command_exists asciinema; then
 		# -w -q -s is --word-regexp --quiet --no-messages (--silent is a synonym of --quiet).
 		# Means "surround with word barriers"; "no success output"; "no error output"
