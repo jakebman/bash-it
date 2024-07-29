@@ -42,6 +42,7 @@ function _use_complete_alias {
 		fi
 
 		complete -F _complete_alias "${!BASH_ALIASES[@]}"
+		_log_debug "completed ${BASH_ALIASES[*]}"
 	else
 		local ALIAS_CLONE_COMMAND="git clone git@github.com:cykerway/complete-alias.git \"\${COMPLETE_ALIAS_DIR:-${COMPLETE_ALIAS_DIR}}\""
 		_log_error "please install complete-alias or point \$COMPLETE_ALIAS_FILE to the ${COMPLETE_ALIAS_FILENAME} file within the place you checked it out from"
