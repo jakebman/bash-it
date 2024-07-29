@@ -1,4 +1,6 @@
 # shellcheck shell=bash
+# Run SPECIFICALLY AFTER the complete-alias completion, so our typos aren't picked up by autocomplete
+# BASH_IT_LOAD_PRIORITY: 801
 about-alias "Jake's custom aliases for common typos in common and jake-custom scripts"
 
 alias viim=vim
