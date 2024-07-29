@@ -1,5 +1,7 @@
 about-plugin "Some commands make no sense when invoked without an argument. Let's give them some!"
 
+# TODO: several commands here leverate the `remotes` typo alias, which isn't correct - they should use something more explicit
+
 function _jake-special-single-args-for-diff {
 	case $1 in
 		--help) return ;;
