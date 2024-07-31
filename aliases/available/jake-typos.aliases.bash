@@ -109,6 +109,8 @@ alias tre=tree
 alias ree=tree
 alias treee=tree
 
+alias deita=delta
+
 alias d=diff
 alias di=diff
 alias idf=diff
