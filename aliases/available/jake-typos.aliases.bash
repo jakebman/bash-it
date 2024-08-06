@@ -135,6 +135,7 @@ alias bash0-t=bash-it
 alias apt0up=apt-up
 alias aptup=apt-up
 
+alias '~cd'=cd
 alias vd=cd
 alias vf=cd # left hand misaligned
 alias dc=cd
