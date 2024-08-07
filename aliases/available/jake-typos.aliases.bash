@@ -195,6 +195,9 @@ alias tyop=typo
 alias tyypo=typo
 alias ytypo=typo
 alias typeo=typo
+alias typow=typo
+
+alias brwose=browse
 
 alias whick=which # (to be fair, I was drinking at the time :| )
 alias whic=which
