@@ -166,7 +166,7 @@ function jake-install-tools() {
 
 	# I would really prefer to use the latest git
 	local GIT_VERSION="$(git --version)"
-	local EXPECTED_VERSION='git version 2.45.2'
+	local EXPECTED_VERSION='git version 2.46.0'
 	# TODO: it would be nice to be able to compare versions better
 	# 1/2: Does https://github.com/fsaintjacques/semver-tool work?
 	if [ "$GIT_VERSION_MAJOR" != "$EXPECTED_VERSION" ]; then
