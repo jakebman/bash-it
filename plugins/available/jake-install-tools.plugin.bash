@@ -91,6 +91,7 @@ function jake-install-tools() {
 	_jake-find-tool python python-is-python3   # also grabs python3, as a bonus
 	# _jake-find-tool xmlformat xmlformat-perl # I think xmlindent is cleaner, partially because it has fewer options
 	_jake-find-tool xmllint libxml2-utils # multi-function, but only used for --xpath queries, because --format makes --xpath return one-line results
+	_jake-find-tool redis-cli redis-tools
 	_jake-find-tool make build-essential
 	_jake-find-tool ifconfig net-tools
 	_jake-find-tool nslookup dnsutils "for wsl-vpnkit, but I'm not certain nslookup is the required command. Could be dig or similar"
