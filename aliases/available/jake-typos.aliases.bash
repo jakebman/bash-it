@@ -332,6 +332,8 @@ alias jkae=jake
 alias jaek=jake
 alias vack=jack
 
+alias furl=curl
+
 # Because I apparently use this tool less frequently, and calling it by its full name... should have worked
 alias sdkman=sdk
 
