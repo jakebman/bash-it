@@ -415,6 +415,14 @@ function _jake-check-optional-tools() {
 		echo 'unzip jless*.zip # -d ~/bin'
 	fi
 
+	if _binary_exists rancher; then
+		echo "Nothing to do for rancher - rancher is happy"
+	else
+		echo "Please get rancher - the cli tool to access charter's rancher"
+		echo "Get the zip file and put it in ~/bin"
+		_jake-github-repo-release-urls PaulJuliusMartinez/jless | grep -v apple-darwin | grep -v windows
+	fi
+
 	if _command_exists asciinema; then
 		# -w -q -s is --word-regexp --quiet --no-messages (--silent is a synonym of --quiet).
 		# Means "surround with word barriers"; "no success output"; "no error output"
