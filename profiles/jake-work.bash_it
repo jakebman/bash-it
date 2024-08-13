@@ -29,6 +29,8 @@ completion ack
 completion awscli
 completion bash-it
 completion complete-alias
+completion docker
+completion kubectl
 completion maven
 completion projects
 completion sdkman
