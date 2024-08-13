@@ -121,6 +121,7 @@ function jake-install-tools() {
 	_jake-find-tool tree
 	_jake-find-tool zip
 	_jake-find-tool jq
+	# _jake-find-tool an an "an anagram tool" # meh - webapp seems just as fine
 	_jake-find-spelling
 
 	# not necessary, but nice:
