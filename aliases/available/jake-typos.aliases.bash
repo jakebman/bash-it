@@ -308,6 +308,7 @@ alias .og=log
 alias loig=log
 alias lig=log
 alias lop=logp
+alias logd=logp # apparently log[D]iff makes sense if I forget it's actually [P]atch
 alias lgop=logp
 alias lopg=logp
 alias yesteday=yesterday
