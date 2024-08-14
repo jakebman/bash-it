@@ -48,6 +48,7 @@ alias llth='ll -ht' # would be a typo, but I don't actually know which should be
 # The rest of the file is entirely git commands that... I don't care to add git to
 
 # 'Magic' aliases - smarter than their corresponding git command (they can see more Jake context)
+# TODO: these are potentially 'implicit' commands a la jake-implicit-commands
 
 # pull can have special meaning in $HOME, or other places with mr configs
 function pull {
