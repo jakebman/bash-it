@@ -35,6 +35,15 @@ function cat {
 	fi
 }
 
+function ts {
+	about 'allow a bare `ts` to default to incremental timestamps from program start second: `ts -s "%H:%M:%.S"`'
+	if [[ "$#" -eq 0 ]]; then
+		command ts -s "%H:%M:%.S" "$@"
+	else
+		command ts "$@"
+	fi
+}
+
 function diff {
 	about "allow you to type the bare word 'diff' and get an automatic git diff, while still not harming the diff command"
 	if [[ "$#" -eq 0 ]]; then
