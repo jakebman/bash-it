@@ -70,8 +70,39 @@ function status {
 	# see pull, above
 	local status=0
 	if [ ~ = "$PWD" ] || [ -f .mrconfig ]; then
-		mr status "$@"
-		status="$?"
+		mr status "$@" | awk '
+			# starts a repo report
+			/^mr status:/ {
+				if (info) {
+					print ""
+					print "#" repo
+					print info
+					info = ""
+				}
+				# TODO: track repos which do not print
+				repo = $0
+			}
+
+			# lines in a repo report. Beautifully, info remains empty/false if concatenates an empty line
+			# so any number of prefixed empty lines are all eaten into the empty string
+			!/^mr status:/ {
+				if (info) {
+					info = info "\n"
+				}
+				info = info $0
+			}
+
+			# When we are done, we print the last repo, even if it had empty info
+			# this also serendipituously covers the final summary "mr status: finished (86 ok)"
+			END {
+				if (info || repo) {
+					print ""
+					print "#" repo
+					print info
+				}
+			}
+		' | bat --plain --paging=never --language "Git Attributes" # good enough
+		status="$?" # TODO: did I harm this with the awk processing?
 		echo # separator line for readability
 		echo "git repo status:"
 	fi
