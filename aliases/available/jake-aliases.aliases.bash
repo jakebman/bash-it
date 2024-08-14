@@ -78,6 +78,13 @@ function status {
 					print "#" repo
 					print info
 					info = ""
+				} else {
+					if (skipped) {
+						skipped = skipped "\n"
+					}
+					if (repo) {
+						skipped = skipped "#" repo
+					}
 				}
 				# TODO: track repos which do not print
 				repo = $0
@@ -99,6 +106,9 @@ function status {
 					print ""
 					print "#" repo
 					print info
+				}
+				if (skipped) {
+					print skipped
 				}
 			}
 		' | bat --plain --paging=never --language "Git Attributes" # good enough
