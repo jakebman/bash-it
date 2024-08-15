@@ -75,7 +75,6 @@ function status {
 			# starts a repo report
 			/^mr status:/ {
 				if (info) {
-					print ""
 					print "#" repo
 					print info
 					info = ""
@@ -86,6 +85,7 @@ function status {
 
 			# lines in a repo report. Beautifully, info remains empty/false if concatenates an empty line
 			# so any number of prefixed empty lines are all eaten into the empty string
+			# SUBTLE: the trailing empty string DOES get glommed in here, and is a natural separator between sections
 			!/^mr status:/ {
 				if (info) {
 					info = info "\n"
@@ -97,14 +97,13 @@ function status {
 			# this also serendipituously covers the final summary "mr status: finished (86 ok)"
 			END {
 				if (info || repo) {
-					print ""
 					print "#" repo
 					print info
 				}
 			}
 		' | bat --plain --paging=never --language "Git Attributes" # good enough
 		status="$?" # TODO: did I harm this with the awk processing?
-		echo # separator line for readability
+
 		echo "git repo status:"
 	fi
 
