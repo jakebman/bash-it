@@ -7,6 +7,7 @@ about-plugin "Use cykerway's complete-alias project to complete aliases"
 # TODO: It'd be nice if this were bundled into the /vendor folder
 
 # TODO: it would be nice if this didn't also complete my typos (This will definitely requre coordination... unless I just declare the typo aliases... after this code runs (`BASH_IT_LOAD_PRIORITY: 801`))
+# OOPS!!!!: all that does is mean that igt doesn't get complions for commit/push/pull/etc. D'oh.
 
 function _use_complete_alias {
 	# Configuration. User can choose a folder, filename, or the whole path. Whole path wins, and its value is written back over any that it superceded
