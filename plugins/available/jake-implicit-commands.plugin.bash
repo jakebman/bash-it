@@ -26,14 +26,16 @@ function hgrep {
 }
 
 # formerly a simple `alias cat='bat --plain'`, but that doesn't handle this no-args use case
-function cat {
-	about 'allow you to use a bare `cat` as the normal cat; but any params essentially go to bat --plain'
-	if [[ "$#" -eq 0 ]]; then
-		command cat "$@"
-	else
-		bat --plain "$@"
-	fi
-}
+if _command_exists bat; then
+	function cat {
+		about 'allow you to use a bare `cat` as the normal cat; but any params essentially go to bat --plain'
+		if [[ "$#" -eq 0 ]]; then
+			command cat "$@"
+		else
+			bat --plain "$@"
+		fi
+	}
+fi
 
 function ts {
 	about 'allow a bare `ts` to default to incremental timestamps from program start second: `ts -s "%H:%M:%.S"`'
