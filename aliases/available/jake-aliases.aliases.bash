@@ -101,7 +101,7 @@ function status {
 					print info
 				}
 			}
-		' | bat --plain --paging=never --language "Git Attributes" # good enough
+		' | bat --style=plain --paging=never --language "Git Attributes" # good enough
 		status="$?" # TODO: did I harm this with the awk processing?
 
 		echo "git repo status:"
