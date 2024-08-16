@@ -79,15 +79,22 @@ function delta {
 		# $@ is unecessary, as it's empty. Keeps parallel structure, though.
 		# we choose implicitdiff here, because it serves diff well too
 		git delta implicitdiff "$@"
-	elif git is-valid-git-command "$1"; then
+	elif [[ "$#" -eq 1 ]] && _jake-special-single-args-for-diff "$1"; then
+		# --help, --version, etc.
+		command delta "$@"
+	elif JAKE_SUPPRESS_GIT_SQUAWK=1 git is-valid-git-command "$1"; then
 		# I 'trust' the is-valid-git-command I wrote, so...
 		# file any grievances with is-valid-git-command, not here.
+		# Update: lol - there's nothing is-valid-git-command can do about --help, so
+		# for now we'll check the special args first.
+		# TODO: if/when is-valid-git-command supports -- --help, use it here
 		git delta "$@"
-	elif [[ "$#" -eq 1 ]] && ! _jake-special-single-args-for-diff "$1"; then
+	elif [[ "$#" -eq 1 ]]; then
 		# git-delta is aliased in git to run git with delta as the pager
 		# and git-deltaDiff uses that to run diff
 		git deltaDiff "$@"
 	else
+		# anything else goes directly to delta
 		command delta "$@"
 	fi
 }
