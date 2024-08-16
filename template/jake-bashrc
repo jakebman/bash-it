@@ -13,6 +13,7 @@ esac
 
 # Path to the bash it configuration
 export BASH_IT="${HOME}/.bash-it"
+# TODO: WSL probably reserves global variables with this prefix. I should probably pick a new name :\
 export WSL_WINDOWS_USER_HOME="/mnt/c/Users/jakeb"
 
 # for bash-it autocomplete; and for .mrconfig (which is why it must be exported)
