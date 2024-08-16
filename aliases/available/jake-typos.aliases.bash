@@ -248,6 +248,7 @@ alias rebas=rebase
 alias reabse=rebase
 alias restoer=restore
 alias retore=restore
+alias rstore=restore
 alias r-here=rainbow-here
 alias ra=rainbow
 alias rain=rainbow
