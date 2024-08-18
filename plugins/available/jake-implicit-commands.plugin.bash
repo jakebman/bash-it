@@ -64,6 +64,15 @@ function diff {
 	fi
 }
 
+function stat {
+	about "allow you to type the bare word 'stat' and get an automatic (implicit-git) status, while not harming the stat command"
+	if [[ "$#" -eq 0 ]]; then
+		status "$@"
+	else
+		command stat "$@"
+	fi
+}
+
 # TODO: I've gotten to the point of being frustrated at line wrapping messing with my diffs.
 # TODO: I'd love it if this also looped into git diff, too
 function diff-ignore-wrapping {
