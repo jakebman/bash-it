@@ -312,7 +312,7 @@ function _jake-success {
 function vimfind {
 	about "try to edit a bunch of files with fzf, using ack's -f file listing"
 	FZF_DEFAULT_COMMAND='ack -f' fzf \
-		--bind "enter:become(vim {})" \
+		--bind "enter:become(echo editing:; echo {+}; vim {+})" \
 		--scheme=path \
 		--multi \
 		--reverse \
