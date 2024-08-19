@@ -450,9 +450,16 @@ function _jake-check-optional-tools() {
 		echo -en "\t"
 		echo 'sudo rm "$(which git-delta)"'
 	fi
+	if _binary_exists git-alias; then
+		# TODO: I don't see evidence that this command exists, especially not where I say it came from
+		# 1) which git-alias am I thinking about removing here and 2) is it still around?
+		echo "git-extras's git-alias shadows my git-alias alias. Pleas remove it with"
+		echo -en "\t"
+		echo 'sudo rm "$(which git-alias)"'
+	fi
 
 	if _binary_exists git-authors; then
-		echo "git-extras's git-delta shadows my git-authors alias (and is also strange). Pleas remove it with"
+		echo "git-extras's git-authors shadows my git-authors alias (and is also strange). Pleas remove it with"
 		# Strange: If you run git-authors in the folder where git-authors's source lives, its output is appended
 		# to its own source code
 		echo -en "\t"
