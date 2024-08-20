@@ -112,6 +112,7 @@ function status {
 	git status "$@" && return $status
 }
 
+# TODO: this would be nice to promote into a git !f() function alias
 function status-or-show {
 	if JAKE_SUPPRESS_GIT_SQUAWK=1 git diff --quiet && JAKE_SUPPRESS_GIT_SQUAWK=1 git diff --staged --quiet; then
 		# status is basically bunk
