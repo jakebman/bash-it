@@ -27,8 +27,10 @@ function words {
 			return 1
 		fi
 
-		ack "${args[@]}" | words "$@"
-		return # see above
+		(
+			set -o pipefail
+			ack "${args[@]}" | words "$@"
+		)
 	fi
 
 	# PUTTING CODE HERE MIGHT BE A VERY BAD IDEA. SEE ABOVE
