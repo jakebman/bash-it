@@ -210,6 +210,8 @@ alias ipconfig=ifconfig
 alias rakubew=rakubrew
 alias rakub=rakubrew
 
+alias eks=eksctl
+
 # from jake-aliases - these are git command which drop the "git " prefix
 alias stage=staged # NB: `git stage` is an alias for `git add`. This here is a TYPO of staged, not an attempt to use `git stage` conveniently
 alias stsaged=staged
