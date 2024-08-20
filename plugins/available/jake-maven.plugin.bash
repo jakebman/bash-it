@@ -11,7 +11,9 @@ function mvn {
 		# TODO: where is style.color documented?
 		# TODO: once I'm using maven 3.9 (and not a lower version) I could use MAVEN_ARGS
 		# see: https://maven.apache.org/configure.html
-		command mvn "$@" -Dstyle.color=always | less --RAW-CONTROL-CHARS
+		# NB: We need all raw characters to support maven's overstrike/^M/bolding tech
+		# And there's no reason not to start less following the output
+		command mvn "$@" -Dstyle.color=always | less --raw-control-chars +F
 	else
 		command mvn "$@"
 	fi
