@@ -2,7 +2,7 @@
 
 function type {
 	# TODO: `about` docs, recursive drilling down until no longer getting an alias
-	case `command type -t -- "$1"` in
+	case $(command type -t -- "$1") in
 		alias)
 			# https://askubuntu.com/a/871435/235107
 			local next #="${BASH_ALIASES[$1]}"
@@ -16,4 +16,3 @@ function type {
 			;;
 	esac
 }
-
