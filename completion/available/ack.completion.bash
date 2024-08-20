@@ -89,4 +89,4 @@ _ack()
     fi
 }
 
-complete -F _ack ack -o default
+complete -o default -F _ack ack
