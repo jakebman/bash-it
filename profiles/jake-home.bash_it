@@ -25,6 +25,7 @@ plugins jq
 plugins projects
 plugins rakubrew
 plugins sdkman
+plugins type-through-aliases
 plugins wsl-fast
 completion ack
 completion awscli
