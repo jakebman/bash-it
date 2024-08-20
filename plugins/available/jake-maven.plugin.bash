@@ -1,6 +1,7 @@
 about-plugin "jake lazy maven commands"
 
 alias go-offline='mvn dependency:go-offline'
+alias effective-pom='mvn help:effective-pom'
 
 # Implicit paging!
 function mvn {
