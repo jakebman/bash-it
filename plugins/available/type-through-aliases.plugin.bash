@@ -1,7 +1,10 @@
-
+# shellcheck shell=bash
+cite about-plugin
+about-plugin 'allow type to see through aliases and try to find the underlying command'
 
 function type {
-	# TODO: `about` docs, recursive drilling down until no longer getting an alias
+	about 'enhance the shell builtin `type` to try and see through aliases'
+
 	case $(command type -t -- "$1") in
 		alias)
 			# https://askubuntu.com/a/871435/235107
