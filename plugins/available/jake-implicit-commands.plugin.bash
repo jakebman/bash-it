@@ -267,7 +267,11 @@ function wc {
 	about "wc all files if there were no arguments. wc on a stdin tty feels... not optimal"
 	if [[ "$#" -eq 0 ]] && [[ -t 0 ]]; then
 		# no implicit $@ - not sure which side of * it goes on
-		command wc *
+		# sorted output, because it's pleasing to the eye
+		(
+			set -o pipefail
+			command wc * | sort -n
+		)
 	else
 		command wc "$@"
 	fi
