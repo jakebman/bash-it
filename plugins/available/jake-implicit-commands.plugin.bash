@@ -29,11 +29,15 @@ function hgrep {
 if _command_exists bat; then
 	function cat {
 		about 'allow you to use a bare `cat` as the normal cat; but any params essentially go to bat --plain'
-		if [[ "$#" -eq 0 ]]; then
-			command cat "$@"
-		else
-			bat --plain "$@"
-		fi
+		case "$#" in
+			0)
+			command cat "$@" ;;
+			1)
+			bat --plain "$@" ;;
+			*)
+			bat --plain --style=header "$@"
+			;;
+		esac
 	}
 fi
 
