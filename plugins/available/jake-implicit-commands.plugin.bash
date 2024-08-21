@@ -37,7 +37,7 @@ if _command_exists bat; then
 				bat --plain "$@"
 				;;
 			*)
-				bat --plain --style=header "$@"
+				bat --style=header,grid,changes "$@"
 				;;
 		esac
 	}
