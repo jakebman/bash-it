@@ -31,12 +31,14 @@ if _command_exists bat; then
 		about 'allow you to use a bare `cat` as the normal cat; but any params essentially go to bat --plain'
 		case "$#" in
 			0)
-			command cat "$@" ;;
+				command cat "$@"
+				;;
 			1)
-			bat --plain "$@" ;;
+				bat --plain "$@"
+				;;
 			*)
-			bat --plain --style=header "$@"
-			;;
+				bat --plain --style=header "$@"
+				;;
 		esac
 	}
 fi
