@@ -263,6 +263,16 @@ function open {
 	fi
 }
 
+function wc {
+	about "wc all files if there were no arguments. wc on a stdin tty feels... not optimal"
+	if [[ "$#" -eq 0 ]] && [[ -t 0 ]]; then
+		# no implicit $@ - not sure which side of * it goes on
+		command wc *
+	else
+		command wc "$@"
+	fi
+}
+
 # Inspired by https://github.com/tpope/vim-obsession/issues/11
 function vim {
 	local file="${XDG_STATE_HOME:-${HOME?}/.local/state}/vim/jake-autosaved-session"
