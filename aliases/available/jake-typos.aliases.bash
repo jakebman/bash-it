@@ -159,6 +159,7 @@ alias fil=file
 
 alias mkae=make
 alias maek=make
+alias mane=make
 
 alias tiem=time
 
