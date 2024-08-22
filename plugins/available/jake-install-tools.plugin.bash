@@ -376,6 +376,19 @@ function _jake-check-optional-tools() {
 		echo 'wget --directory-prefix ${HOME}/bin/man/man1/ https://raw.githubusercontent.com/junegunn/fzf/master/man/man1/fzf.1 && mandb --user-db'
 	fi
 
+	if _command_exists jira; then
+		echo "Nothing to do for jira - bat is happy"
+	else
+		echo "Please install jira - the cli tool for atlassian's jira"
+		echo "Get the package from"
+		_jake-github-repo-release-urls ankitpokhrel/jira-cli | grep linux | grep 64 | grep -v alligator # alligator is nonsense to remove highlighting
+		echo -en "\t"
+		echo 'tar xzf jira*tar*; install jira*/bin/jira ~/bin'
+		echo -en "\t"
+		echo 'jira man --generate --output ~/bin/man/man7 && mandb --user-db'
+	fi
+
+
 	if _command_exists bat; then
 		echo "Nothing to do for bat - bat is happy"
 	else
