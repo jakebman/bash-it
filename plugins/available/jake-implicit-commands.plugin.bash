@@ -313,11 +313,14 @@ function realpath {
 
 function file {
 	about "allow file to implicitly work against all files in the current folder"
-	if [[ "$#" -eq 0 ]]; then
-		command file * | pager
-	else
-		command file "$@" | pager
-	fi
+	(
+		set -o pipefail
+		if [[ "$#" -eq 0 ]]; then
+			command file * | pager
+		else
+			command file "$@" | pager
+		fi
+	)
 }
 
 function _is_git_safe {
