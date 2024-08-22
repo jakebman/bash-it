@@ -243,6 +243,7 @@ alias vimmit=commit
 alias ocmmit=commit
 alias commmit=commit
 alias commi9t=commit
+alias commitm=commit
 alias committ=commit
 alias commit-a='commit -a'
 alias commita='commit -a'
