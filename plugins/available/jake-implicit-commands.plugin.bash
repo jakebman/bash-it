@@ -312,13 +312,13 @@ function realpath {
 }
 
 function file {
-	about "allow file to implicitly work against all files in the current folder"
+	about "allow file to implicitly work against all files in the current folder. Also, filesystem errors propagate out (implicit -E)"
 	(
 		set -o pipefail
 		if [[ "$#" -eq 0 ]]; then
-			command file * | pager
+			command file -E * | pager
 		else
-			command file "$@" | pager
+			command file -E "$@" | pager
 		fi
 	)
 }
