@@ -18,7 +18,7 @@ function mvn {
 		# see: https://maven.apache.org/configure.html
 		# NB: We need all raw characters to support maven's overstrike/^M/bolding tech
 		# And there's no reason not to start less following the output
-		mvn-colored | less --raw-control-chars +F
+		mvn-colored "$@" | less --raw-control-chars +F
 	else
 		command mvn "$@"
 	fi
