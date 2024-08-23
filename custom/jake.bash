@@ -415,6 +415,9 @@ alias cddwhich=cdwhich
 alias cddw=cdwhich
 alias cdw=cdwhich
 
+#TODO: this won't be super useful to me until I get the *whiches into bash-it plugin land, and not processed at the very last moment (after complete-aliases)
+complete -c vimwhich filewhich catwhich llwhich cdwhich
+
 function xml {
 	if [[ "$#" -eq 0 ]] && [[ -t 0 ]]; then
 		# reading from terminal, but no arguments on the CLI
