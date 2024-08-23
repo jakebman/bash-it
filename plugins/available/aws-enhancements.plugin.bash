@@ -24,4 +24,6 @@ function aws-with-browser {
 
 # DETAILED CODE INTERACTION: this alias IS NOT used in aws-autologin, because it is not present when aws-autologin is declared
 # so we DO NOT get infinite recursion. But, that also means we SHOULD NOT move this line above aws-autologin
+
+# TODO: this gets goozled because there's no completion for aws-with-browser :(
 alias aws=aws-with-browser
