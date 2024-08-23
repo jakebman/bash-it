@@ -5,16 +5,17 @@ about-plugin "AWS automatically login if there's a failure, allow a custom brows
 function aws-autologin {
 	about "automatically log in to aws sso if you're not"
 	# NB: it's useful to create an alias in aws cli for this command. Imagine 'aws loggedin' here
-	if ! aws sts get-caller-identity &>/dev/null; then
+	if ! command aws sts get-caller-identity &>/dev/null; then
 		echo "You're not logged in to aws sso. Automatically logging you in!"
-		aws sso login || return
+		command aws sso login || return
 		echo
 		echo "============= Now proceeding with your original '$1' command =================="
 		echo "==>" aws "$@"
 		echo "============= Now proceeding with your original '$1' command =================="
 	fi
-	aws "$@"
+	command aws "$@"
 }
+
 function aws-with-browser {
 	about "Respect new flag AWS_BROWSER, which is allowed to differ from your normal BROWSER env variable"
 	local BROWSER="${AWS_BROWSER-$BROWSER}"
@@ -22,8 +23,6 @@ function aws-with-browser {
 	BROWSER="${BROWSER}" aws-autologin "$@"
 }
 
-# DETAILED CODE INTERACTION: this alias IS NOT used in aws-autologin, because it is not present when aws-autologin is declared
-# so we DO NOT get infinite recursion. But, that also means we SHOULD NOT move this line above aws-autologin
-
-# TODO: this gets goozled because there's no completion for aws-with-browser :(
-alias aws=aws-with-browser
+function aws {
+	aws-with-browser "$@"
+}
