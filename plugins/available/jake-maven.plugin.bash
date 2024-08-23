@@ -3,6 +3,10 @@ about-plugin "jake lazy maven commands"
 alias go-offline='mvn dependency:go-offline'
 alias effective-pom='mvn help:effective-pom'
 
+function mvn-colored {
+	command mvn "$@" -Dstyle.color=always
+}
+
 # Implicit paging!
 function mvn {
 	# output to terminal
@@ -14,7 +18,7 @@ function mvn {
 		# see: https://maven.apache.org/configure.html
 		# NB: We need all raw characters to support maven's overstrike/^M/bolding tech
 		# And there's no reason not to start less following the output
-		command mvn "$@" -Dstyle.color=always | less --raw-control-chars +F
+		mvn-colored | less --raw-control-chars +F
 	else
 		command mvn "$@"
 	fi
