@@ -3,6 +3,7 @@ export EDITOR=vim
 export VISUAL=vim
 export PAGER=less
 export BASHIT_CURL_PAGER='bat --style=numbers'
+export MANPAGER="less  --lesskey-src '${HOME}/.config/lesskey-no-gotoend-on-q'"
 # NB: an enhancement only provided by aws-auto-login
 export AWS_BROWSER=wslview
 
