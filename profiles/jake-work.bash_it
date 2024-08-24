@@ -33,6 +33,7 @@ completion bash-it
 completion complete-alias
 completion docker
 completion eksctl
+completion jira
 completion glab
 completion kubectl
 completion maven
