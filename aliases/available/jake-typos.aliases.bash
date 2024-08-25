@@ -18,6 +18,8 @@ alias vm=vim
 alias im=vim
 alias v=vim
 
+alias wimw=vimw
+
 alias it=git
 alias gi=git
 alias gir=git
@@ -233,6 +235,7 @@ alias ammend=amend
 alias amned=amend
 alias amdne=amend # jeez.
 alias comit=commit
+alias ommit=commit
 alias comm9t=commit
 alias comm0t=commit
 alias comm-t=commit
