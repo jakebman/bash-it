@@ -311,7 +311,6 @@ function _jake-success {
 	[[ "$success" -eq 0 ]]
 }
 
-
 function vimfind {
 	about "try to edit a bunch of files with fzf, using ack's -f file listing"
 	FZF_DEFAULT_COMMAND='ack -f' fzf \

@@ -388,7 +388,6 @@ function _jake-check-optional-tools() {
 		echo 'jira man --generate --output ~/bin/man/man7 && mandb --user-db'
 	fi
 
-
 	if _command_exists bat; then
 		echo "Nothing to do for bat - bat is happy"
 	else

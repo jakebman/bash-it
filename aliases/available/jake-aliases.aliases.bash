@@ -102,7 +102,8 @@ function status {
 				}
 			}
 		' | bat --style=plain --paging=never --language "Git Attributes" # good enough
-		status="$?" # TODO: did I harm this with the awk processing?
+		# TODO: did I harm this exit code with the awk processing?
+		status="$?"
 
 		echo "git repo status:"
 	fi
