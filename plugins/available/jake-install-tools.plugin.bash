@@ -101,6 +101,7 @@ function jake-install-tools() {
 	_jake-find-tool xeyes x11-apps "because I really like googly eyes"
 	_jake-find-tool wslview wslu "installs wslview, which is an /etc's alternative x-www-browser (but not www-browser - lynx wins that bid)"
 	_jake-find-tool ts moreutils 'timestamps its stdin and sends it to stdout (technically, we double-count moreutils, but I want this too)'
+	_jake-find-tool rpmbuild rpm 'work tool to build rpms'
 	_jake-find-tool http httpie
 	_jake-find-tool asciidoctor
 	_jake-find-tool git-extras
