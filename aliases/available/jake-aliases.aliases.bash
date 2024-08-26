@@ -357,14 +357,7 @@ alias config-editg='git config-editg'
 alias config-editl='git config-editl'
 alias gitdir='git gitdir'
 alias ignored='git ignored'
-alias intent='git intent'
-alias intent-to-add=intent # longname to remind myself on tab-completion
-# TODO: why does quitting `less` with q cause these commands to fail?
-# Testing seems to indicate that git considers a failure to get to the end of output
-# to be a failure in this way (broken pipe?)
-# AND WHY DOESN'T THIS APPLY TO A BARE git log?????!????!?
-#     edit: nevermind - you just need a longer git history than wherever I tested this
-# It also goes away if you append +G to LESS (`LESS="$LESS +G"`)
+alias intent-to-add='git intent-to-add'
 alias logn='git logn' # log with numstats
 alias logp='git logp' # log with patch
 alias logs='git logs' # log with stats (+++-- indicators)
@@ -387,7 +380,8 @@ alias yesterday='git yesterday'           # 'since yesterday', potentially smart
 # But! Because I don't ever expect to change what the underlying git alias does,
 # I'd rather skip the indirection and just specify the correct behavior in the alias
 alias co='git checkout'
-alias intend='git intent' # sorta typo, but more trying to cover my bases on these names
+alias intend='git intent-to-add' # sorta typo, but more trying to cover my bases on these names
+alias intent='git intent-to-add' # sorta typo, but more trying to cover my bases on these names
 alias staged='git diff --staged'
 alias autostash='git pull --rebase --autostash' # implicit rebase is intentional. See the alias definition
 alias register='mr register'                    # not a git command, but imagine `git alias register '!mr register'`
