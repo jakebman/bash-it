@@ -172,8 +172,10 @@ function _has_flags {
 }
 
 function tree {
-	about "tree, with assumed depth of 2, and filelimit 25. Numeric first argument becomes depth (see treeN). '-a' additionally implies infinite depth"
-	if [[ "$#" -eq 0 ]]; then
+	about "tree, with assumed depth of 2, and filelimit 25. Numeric first argument becomes depth (see treeN). '-a' additionally implies infinite depth. If stdin is present, use jaketree on it instead"
+	if ! [ -t 0 ]; then
+		jaketree "$@"
+	elif [[ "$#" -eq 0 ]]; then
 		tree2 --filelimit 25 "$@"
 	else
 		if _is_numeric "$1"; then
