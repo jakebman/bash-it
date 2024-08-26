@@ -4,8 +4,12 @@ export VISUAL=vim
 export PAGER=less
 export BASHIT_CURL_PAGER='bat --style=numbers'
 export MANPAGER="less  --lesskey-src '${HOME}/.config/lesskey-no-gotoend-on-q'"
-# NB: an enhancement only provided by aws-auto-login
+
+# NB: Enhancement only provided by the aws-enhancements plugin.
+# I'm exporting AWS_BROWSER even though it's only respected by aws-enhancements
+# just in case I write a non-bash-it script in ~/bin that might care
 export AWS_BROWSER=wslview
+_BASH_IT_AWS_AUTOLOGIN_EXCEPTIONS+=(login loggedin logout)
 
 # Allow j!! to work for a previous ack query
 alias jack=j
