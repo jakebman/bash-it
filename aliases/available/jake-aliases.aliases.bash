@@ -113,17 +113,6 @@ function status {
 	git status "$@" && return $status
 }
 
-# TODO: this would be nice to promote into a git !f() function alias
-function status-or-show {
-	if JAKE_SUPPRESS_GIT_SQUAWK=1 git diff --quiet && JAKE_SUPPRESS_GIT_SQUAWK=1 git diff --staged --quiet; then
-		# status is basically bunk
-		git show "$@"
-	else
-		# NB: git status, not bare status - I don't want the additional mr status behaviors
-		git status "$@"
-	fi
-}
-
 function realpath-and-rainbow {
 	about "preceed a rainbow with a realpath, if relevant"
 	realpath 2> /dev/null # specifically want the zero-arg "go to the real path" behavior
@@ -380,16 +369,17 @@ alias logn='git logn' # log with numstats
 alias logp='git logp' # log with patch
 alias logs='git logs' # log with stats (+++-- indicators)
 alias ls-files='git ls-files'
-alias rainbow-all='git rainbow-all'   # explicitly --all form of rainbow output
-alias rainbow-here='git rainbow-here' # approx. git log --oneline --graph, specifically only the current history (no --all)
-alias shallow='git shallow'           # a shallow clone (non-alphabetical to be beside its twin)
-alias since='git since'               # log with immediate --since argument (technically --since-as-filter, but THATS THE POINT!!!)
-alias stats='git stats'               # git show, with implicit --stat to change diff output to stats output
-alias tags='git tags'                 # list the tags
-alias unshallow='git unshallow'       # re-hydrate a shallow clone
-alias unstash='git unstash'           # essentially `stash pop`
-alias untracked='git untracked'       # something morally equivalent to 'status --untracked'
-alias yesterday='git yesterday'       # 'since yesterday', potentially smarter
+alias rainbow-all='git rainbow-all'       # explicitly --all form of rainbow output
+alias rainbow-here='git rainbow-here'     # approx. git log --oneline --graph, specifically only the current history (no --all)
+alias shallow='git shallow'               # a shallow clone (non-alphabetical to be beside its twin)
+alias since='git since'                   # log with immediate --since argument (technically --since-as-filter, but THATS THE POINT!!!)
+alias stats='git stats'                   # git show, with implicit --stat to change diff output to stats output
+alias status-or-show='git status-or-show' # git status, if it would have any output. Otherwise git show
+alias tags='git tags'                     # list the tags
+alias unshallow='git unshallow'           # re-hydrate a shallow clone
+alias unstash='git unstash'               # essentially `stash pop`
+alias untracked='git untracked'           # something morally equivalent to 'status --untracked'
+alias yesterday='git yesterday'           # 'since yesterday', potentially smarter
 
 # 'Duplicating' aliases
 # These could have been written as `alias X='git X'`, because they're
