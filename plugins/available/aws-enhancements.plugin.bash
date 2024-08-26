@@ -35,8 +35,8 @@ function aws-autologin {
 }
 
 function aws-with-browser {
-	about "Respect new flag AWS_BROWSER, which is allowed to differ from your normal BROWSER env variable"
-	local BROWSER="${AWS_BROWSER-$BROWSER}"
+	about "Respect new flag BASH_IT_AWS_BROWSER and/or AWS_BROWSER, which is allowed to differ from your normal BROWSER env variable"
+	local BROWSER="${BASH_IT_AWS_BROWSER-${AWS_BROWSER-$BROWSER}}"
 	_log_debug "using browser '$BROWSER'"
 	BROWSER="${BROWSER}" aws-autologin "$@"
 }
