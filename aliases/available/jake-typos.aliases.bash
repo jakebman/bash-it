@@ -282,6 +282,8 @@ alias statu=status
 alias staut=status
 alias tatus=status
 alias staus=status
+# NB: `stat` is an existing command. I needed a function to turn zero-arg `stat` into status, not just a simple alias
+alias sta=status
 alias st=status        # first unique difference from s's status-or-show magic
 alias branche=branches # because sometimes I get lazy, apparently
 alias gst=gstatus

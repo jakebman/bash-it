@@ -119,6 +119,7 @@ function status-or-show {
 		# status is basically bunk
 		git show "$@"
 	else
+		# NB: git status, not bare status - I don't want the additional mr status behaviors
 		git status "$@"
 	fi
 }
