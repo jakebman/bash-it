@@ -130,7 +130,11 @@ function treeN {
 	param "<rest>: Further args to tree."
 	# Abuse the first param being always an arg to -L
 	# We could totally shift $1 out... and then... put it first anyway?
-	ltree -L "$@"
+	if (( $# == 0 )); then
+		ltree "$@"
+	else
+		ltree -L "$@"
+	fi
 }
 
 # tree2, tree3, tree4, tree5
