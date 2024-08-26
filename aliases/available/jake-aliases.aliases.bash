@@ -317,7 +317,7 @@ function clone {
 alias githelp='git help' # help is actually a bash builtin
 alias gitman='git man'   # git-man is amusingly also an alias to git-help
 alias gitpull='git pull'
-alias gitup='git up' # git aliased to pull, but parallel structure wins
+alias gitup='git up' # git aliases up to pull, but parallel structure wins, so I'm not expanding it here.
 alias gitstatus='git status'
 
 # 'Vanilla' aliases - these are aliases to existing git-<command>s (not git-<alias>es)
