@@ -110,6 +110,7 @@ alias lless=lls
 alias tre=tree
 alias ree=tree
 alias treee=tree
+alias treen=treeN
 
 alias deita=delta
 
