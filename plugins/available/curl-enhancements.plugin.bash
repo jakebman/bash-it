@@ -15,14 +15,14 @@ function _curl-choose-pager {
 	fi
 }
 
-: ${BASHIT_CURL_PAGER:=${PAGER:-$(_curl-choose-pager)}}
+: ${BASH_IT_CURL_PAGER:=${PAGER:-$(_curl-choose-pager)}}
 
 function _curl-jqing-and-paging-helper {
 	# TODO. This is currently a stub.
 	# It's going to be tricky to automatically decide whether or not to pipe to jq
 	# I think I need to curl to a temp file so that jq can 'sniff' the file and then decide
 	# For now, we can just do paging:
-	$BASHIT_CURL_PAGER "$@"
+	$BASH_IT_CURL_PAGER "$@"
 }
 
 # allow for curl-logging plugin to apply or not

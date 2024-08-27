@@ -2,7 +2,7 @@
 export EDITOR=vim
 export VISUAL=vim
 export PAGER=less
-export BASHIT_CURL_PAGER='bat --style=numbers'
+export BASH_IT_CURL_PAGER='bat --style=numbers'
 export MANPAGER="less  --lesskey-src '${HOME}/.config/lesskey-no-gotoend-on-q'"
 
 # NB: Enhancement only provided by the aws-enhancements plugin.
