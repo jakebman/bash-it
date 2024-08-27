@@ -420,8 +420,10 @@ alias cddwhich=cdwhich
 alias cddw=cdwhich
 alias cdw=cdwhich
 
-#TODO: this won't be super useful to me until I get the *whiches into bash-it plugin land, and not processed at the very last moment (after complete-aliases)
 complete -c vimwhich filewhich catwhich llwhich cdwhich
+#TODO: I'm manually invoking the complete-alias completions on some aliases here. This is not super maintainable. These functions should become
+# their own plugin, so their aliases can just be handled by complete-alias and I can remove this line
+complete -F _complete_alias vimw filew catw llw cddwhich cddw cdw
 
 function xml {
 	if [[ "$#" -eq 0 ]] && [[ -t 0 ]]; then
