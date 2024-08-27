@@ -35,6 +35,7 @@ completion complete-alias
 completion docker
 completion eksctl
 completion glab
+completion helm
 completion jira
 completion kubectl
 completion maven

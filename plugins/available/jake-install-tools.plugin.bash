@@ -378,6 +378,17 @@ function _jake-check-optional-tools() {
 		echo 'wget --directory-prefix ${HOME}/bin/man/man1/ https://raw.githubusercontent.com/junegunn/fzf/master/man/man1/fzf.1 && mandb --user-db'
 	fi
 
+	if _command_exists helm; then
+		echo "Nothing to do for helm - helm is happy"
+	else
+		echo "Please install helm - the package manager for kubernetes that I use at work"
+		echo "Get the package from"
+		_jake-github-repo-release-urls helm/helm | grep linux | grep 64 | grep -v arm
+		echo -en "\t"
+		echo 'tar xzf helm*tar*; install helm*/helm ~/bin'
+		echo -en "\t"
+	fi
+
 	if _command_exists jira; then
 		echo "Nothing to do for jira - jira is happy"
 	else
