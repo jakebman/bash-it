@@ -379,7 +379,7 @@ function _jake-check-optional-tools() {
 	fi
 
 	if _command_exists jira; then
-		echo "Nothing to do for jira - bat is happy"
+		echo "Nothing to do for jira - jira is happy"
 	else
 		echo "Please install jira - the cli tool for atlassian's jira"
 		echo "Get the package from"
