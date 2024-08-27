@@ -178,6 +178,7 @@ function _mr-isrepo-local {
 
 function _mr-isrepo {
 	about "succeeds if the given folder is a git repo tracked by mr. fails otherwise"
+	# TODO: "a git repo with a toplevel .mrconfig" trivially fits this definition. Also check that the .mrconfig is *external* to the git repo
 	param '1: a folder which may or may not be an mr-tracked repo; default $PWD'
 	(cd "${1-$PWD}" && _mr-isrepo-local) &> /dev/null
 }
