@@ -8,6 +8,7 @@ plugins cht-sh
 plugins curl-enhancements
 plugins curl-logging
 plugins dircolors
+plugins docker-wsl
 plugins dotfiles-via-bare-git-repo-with-config-alias
 plugins gitstatus
 plugins google
