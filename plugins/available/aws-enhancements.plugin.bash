@@ -41,6 +41,11 @@ function aws-with-browser {
 	BROWSER="${BROWSER}" aws-autologin "$@"
 }
 
+function aws-with-paging {
+	about "attempt to apply paging to aws output. Especially, try to get jq *colored* output paged, if possible"
+	echo TODO
+}
+
 function aws {
 	aws-with-browser "$@"
 }
