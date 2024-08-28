@@ -214,6 +214,7 @@ alias ipconfig=ifconfig
 alias rakubew=rakubrew
 alias rakub=rakubrew
 
+alias kube=kubectl
 alias eks=eksctl
 
 # from jake-aliases - these are git command which drop the "git " prefix
