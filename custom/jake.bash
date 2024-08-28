@@ -5,6 +5,14 @@ export PAGER=less
 export BASH_IT_CURL_PAGER='bat --style=numbers'
 export MANPAGER="less  --lesskey-src '${HOME}/.config/lesskey-no-gotoend-on-q'"
 
+if [ -v WSL_WINDOWS_USER_HOME ]; then
+	if [ -v KUBECONFIG ]; then
+		KUBECONFIG+=":"
+	fi
+	# TODO: refactor out the "is windows a viable thing to add to KUBECONFIG" and "ensure ~/.kube/config is in KUBECONFIG"
+	KUBECONFIG+="${WSL_WINDOWS_USER_HOME}/.kube/config:${HOME}/.kube/config"
+	export KUBECONFIG
+fi
 # NB: Enhancement only provided by the aws-enhancements plugin.
 # I'm exporting AWS_BROWSER even though it's only respected by aws-enhancements
 # just in case I write a non-bash-it script in ~/bin that might care
