@@ -130,7 +130,7 @@ function treeN {
 	param "<rest>: Further args to tree."
 	# Abuse the first param being always an arg to -L
 	# We could totally shift $1 out... and then... put it first anyway?
-	if (( $# == 0 )); then
+	if (($# == 0)); then
 		ltree "$@"
 	else
 		ltree -L "$@"
@@ -365,42 +365,42 @@ function shfmt {
 		# we have args. They aren't flags. Stdin is the terminal. Format them :)
 		_shfmt-xargsy "$@"
 	fi
-	}
+}
 function _shfmt-xargsy {
-		local file
-		local -a modified
-		local -a skipped
-		for file; do # implicit in $@
-			if command shfmt -d "$file" &> /dev/null; then
-				# shfmt didn't find any complaints with this file
-				: # Nothing to do
-			elif ! _is_git_safe "$file"; then
-				# Not git safe; have a message printed about that.
-				echo " And shfmt would like to modify it." >&2
-				skipped+=("$file")
-			else
-				# shfmt wants to make a change, and it is allowed to
-				# So, let's run shfmt in-place, printing the file name if modified
-				# IF THIS IS MODIFIED, MODIFY THE MANUAL STEP BELOW
-				local mod="$(shfmt -w -l "$file")"
-				if [[ -n "$mod" ]]; then
-					modified+=("$file")
-				fi
-			fi
-		done
-
-		echo # blank line
-		if [[ 0 -eq "${#modified}" ]]; then
-			echo "No modifications performed."
+	local file
+	local -a modified
+	local -a skipped
+	for file; do # implicit in $@
+		if command shfmt -d "$file" &> /dev/null; then
+			# shfmt didn't find any complaints with this file
+			: # Nothing to do
+		elif ! _is_git_safe "$file"; then
+			# Not git safe; have a message printed about that.
+			echo " And shfmt would like to modify it." >&2
+			skipped+=("$file")
 		else
-			printf "Modified:\n"
-			printf " * %s\n" "${modified[@]}"
+			# shfmt wants to make a change, and it is allowed to
+			# So, let's run shfmt in-place, printing the file name if modified
+			# IF THIS IS MODIFIED, MODIFY THE MANUAL STEP BELOW
+			local mod="$(shfmt -w -l "$file")"
+			if [[ -n "$mod" ]]; then
+				modified+=("$file")
+			fi
 		fi
+	done
 
-		if [[ 0 -ne "${#skipped}" ]]; then
-			echo # blank line
-			echo "Use the following command to intentionally modify skipped files (or use shfmt -d to preview the diffs):"
-			printf "shfmt -w -l" # THIS DEPENDS ON THE SCRIPT ABOVE, AND SHOULD MATCH
-			printf " \\\\\n\t%q" "${skipped[@]}"
-		fi
+	echo # blank line
+	if [[ 0 -eq "${#modified}" ]]; then
+		echo "No modifications performed."
+	else
+		printf "Modified:\n"
+		printf " * %s\n" "${modified[@]}"
+	fi
+
+	if [[ 0 -ne "${#skipped}" ]]; then
+		echo # blank line
+		echo "Use the following command to intentionally modify skipped files (or use shfmt -d to preview the diffs):"
+		printf "shfmt -w -l" # THIS DEPENDS ON THE SCRIPT ABOVE, AND SHOULD MATCH
+		printf " \\\\\n\t%q" "${skipped[@]}"
+	fi
 }
