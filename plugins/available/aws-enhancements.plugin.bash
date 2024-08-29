@@ -2,7 +2,7 @@
 cite about-plugin
 about-plugin "AWS automatically login if there's a failure, allow a custom browser setting via AWS_BROWSER"
 
-_BASH_IT_AWS_AUTOLOGIN_EXCEPTIONS=(sso sts)
+_BASH_IT_AWS_AUTOLOGIN_EXCEPTIONS+=(sso sts)
 # It's worth adding your own exceptions for login/logout aws-cli aliases that you create
 # _BASH_IT_AWS_AUTOLOGIN_EXCEPTIONS+=(login loggedin logout)
 
