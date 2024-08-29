@@ -9,7 +9,7 @@ _BASH_IT_AWS_AUTOLOGIN_EXCEPTIONS=(sso sts)
 function _aws-autologin-exception {
 	about "given an aws cli command, should the aws-autologin behavior ignore it?"
 	# https://stackoverflow.com/questions/3685970/check-if-a-bash-array-contains-a-value
-	local exception;
+	local exception
 	for exception in "${_BASH_IT_AWS_AUTOLOGIN_EXCEPTIONS[@]}"; do
 		if [ "$exception" = "$1" ]; then
 			return
@@ -22,7 +22,7 @@ function aws-autologin {
 	about "automatically log in to aws sso if you're not"
 	if _aws-autologin-exception "$@"; then
 		_log_debug "not automatically logging into aws to run '$@' - it is an exception"
-	elif ! command aws sts get-caller-identity &>/dev/null; then
+	elif ! command aws sts get-caller-identity &> /dev/null; then
 		# NB: it's useful to create an alias in aws cli for this sts command. Imagine 'aws loggedin' here
 		echo "You're not logged in to aws sso. Automatically logging you in!"
 		command aws sso login || return
