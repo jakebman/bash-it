@@ -10,7 +10,7 @@ _BASH_IT_DOCKER_AUTOSTART_EXCEPTIONS+=(version)
 function _docker-autostart-exception {
 	about "given a docker cli command, should the docker-autostart behavior ignore it?"
 	# https://stackoverflow.com/questions/3685970/check-if-a-bash-array-contains-a-value
-	local exception;
+	local exception
 	for exception in "${_BASH_IT_DOCKER_AUTOSTART_EXCEPTIONS[@]}"; do
 		if [ "$exception" = "$1" ]; then
 			return
@@ -24,16 +24,15 @@ function docker-autostart {
 	if _docker-autostart-exception "$@"; then
 		_log_debug "Not automatically starting docker to run '$@' - it is an exception"
 	elif ! docker-is-running; then
-		        echo "Docker is not currently running. Starting it now."
-			docker-start || return
-        echo
-        echo "============= Now proceeding with your original '$1' command =================="
-        echo "==>" docker "$@"
-        echo "============= Now proceeding with your original '$1' command =================="
+		echo "Docker is not currently running. Starting it now."
+		docker-start || return
+		echo
+		echo "============= Now proceeding with your original '$1' command =================="
+		echo "==>" docker "$@"
+		echo "============= Now proceeding with your original '$1' command =================="
 	fi
 	docker "$@"
 }
-
 
 function docker-start {
 	about "start Window's Docker Desktop, so that docker commands don't complain about not having integration installed, or about a missing //./pipe/dockerDesktopLinuxEngine"
@@ -46,4 +45,3 @@ function docker-is-running {
 	# checks to see if the WSL2 integration is present in the current machine.
 	[ -f /usr/bin/docker ]
 }
-
