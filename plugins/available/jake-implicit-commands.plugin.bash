@@ -346,11 +346,7 @@ function _is_git_safe {
 function shfmt {
 	about 'report *sh (.bash, .sh, etc.) files in the current folder that need to be formatted, or take that output on the CLI or from stdin as-if via xargs (`shfmt|shfmt` or `shfmt $(shfmt)`)and format the listed files if they are safe to modify in git. Otherwise, forward to normal shfmt'
 	if _has_flags "$@"; then
-		command shfmt "$@"
-	elif [[ "$#" -eq 0 ]] && ! [ -t 0 ]; then
-		# shfmt doc's this case - if there are no args, stdin is used
-		# I reserve my carveouts for bare terminal invocation, but shfmt can have `cat foo.bash | shfmt`
-		# But it can't have `> shfmt` - there's no way in hell I'm going to sit here and a bash file manually
+		echo 'dispatching to shfmt.exe'
 		command shfmt "$@"
 	elif ! [ -t 0 ]; then
 		# Stdin isn't the terminal and command shfmt doesn't have priority.
