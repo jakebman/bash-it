@@ -7,4 +7,3 @@ function docker-start {
 	about "start Window's Docker Desktop, so that docker commands don't complain about //./pipe/dockerDesktopLinuxEngine"
 	"${BASH_IT_DOCKER_DESKTOP_LOCATION}" && echo "Docker desktop kicked off. Expect the UI in a few seconds"
 }
-
