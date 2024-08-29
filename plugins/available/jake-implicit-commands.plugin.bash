@@ -344,12 +344,33 @@ function _is_git_safe {
 }
 
 function shfmt {
-	about "report *sh (.bash, .sh, etc.) files in the current folder that need to be formatted, or take that output via xargs and format the files if they're safe to modify in git. Otherwise, forward to normal shfmt"
-	if [[ "$#" -eq 0 ]]; then
-		command shfmt -l * 2>&1 | pager
-	elif _has_flags "$@"; then
+	about 'report *sh (.bash, .sh, etc.) files in the current folder that need to be formatted, or take that output on the CLI or from stdin as-if via xargs (`shfmt|shfmt` or `shfmt $(shfmt)`)and format the listed files if they are safe to modify in git. Otherwise, forward to normal shfmt'
+	if _has_flags "$@"; then
 		command shfmt "$@"
+	elif [[ "$#" -eq 0 ]] && ! [ -t 0 ]; then
+		# shfmt doc's this case - if there are no args, stdin is used
+		# I reserve my carveouts for bare terminal invocation, but shfmt can have `cat foo.bash | shfmt`
+		# But it can't have `> shfmt` - there's no way in hell I'm going to sit here and a bash file manually
+		command shfmt "$@"
+	elif ! [ -t 0 ]; then
+		# Stdin isn't the terminal and command shfmt doesn't have priority.
+		# That means xargs-y input
+		# Huh. "Splat the stdin into a series of cli arguments" can *almost* be done via `$(cat)`,
+		# But it breaks on filenames with spaces.
+		local -a files
+		mapfile files
+		_shfmt-xargsy "$@" "${files[@]}"
+	elif [[ "$#" -eq 0 ]]; then
+		# No args - we're in list-y land
+		# TODO: if shfmt gets a --null flag, switch on the terminaly-ness of stdout and use xargsy --null behavior
+		# in order to best support  the `shfmt | shfmt` use case
+		command shfmt -l * 2>&1 | pager
 	else
+		# we have args. They aren't flags. Stdin is the terminal. Format them :)
+		_shfmt-xargsy "$@"
+	fi
+	}
+function _shfmt-xargsy {
 		local file
 		local -a modified
 		local -a skipped
@@ -386,6 +407,4 @@ function shfmt {
 			printf "shfmt -w -l" # THIS DEPENDS ON THE SCRIPT ABOVE, AND SHOULD MATCH
 			printf " \\\\\n\t%q" "${skipped[@]}"
 		fi
-
-	fi
 }
