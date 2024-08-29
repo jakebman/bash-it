@@ -354,7 +354,7 @@ function shfmt {
 		# Huh. "Splat the stdin into a series of cli arguments" can *almost* be done via `$(cat)`,
 		# But it breaks on filenames with spaces.
 		local -a files
-		mapfile files
+		mapfile -t files
 		_shfmt-xargsy "$@" "${files[@]}"
 	elif [[ "$#" -eq 0 ]]; then
 		# No args - we're in list-y land
