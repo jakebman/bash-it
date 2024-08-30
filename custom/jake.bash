@@ -55,6 +55,7 @@ export MAVEN_ARGS="-T1C"
 #   It's also worth noting that this is *per line*, so following matches on the same line are also skipped
 # use-color gets a nice light cyan color on some of less's UI elements
 # <trailing space> permits `LESS+=--new-flag some command` invocations
+# There's some cool discussion on the value of these flags used in SYSTEMD_LESS in the `man systemctl` docs
 export LESS="--quit-if-one-screen --quit-at-eof --no-init --ignore-case --RAW-CONTROL-CHARS --tabs=2 --jump-target=.2 --SEARCH-SKIP-SCREEN --use-color "
 # I liked editing ~/.lessfilter (which is now in XDG_CONFIG_HOME), and this kept getting in the way.
 # Still, this is the proper XDG-like location for this file. Since it's the 'other' default for this setting,
