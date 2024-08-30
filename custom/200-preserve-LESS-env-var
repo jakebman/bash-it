@@ -1,0 +1,17 @@
+
+#
+# This file MUST be edited with the 'visudo' command as root.
+#
+# You should add this file as local content in /etc/sudoers.d/
+# The file should be readable only by root and the root group
+# It should not be writable (that's what visudo is for!)
+#
+# See the man page for details on how to write a sudoers file.
+#
+
+# This snippet copied and modified from 100-jake-sudoers, which got it from
+# the primary /etc/sudoers file:
+
+# This probably allows running arbitrary commands (via '+!your-command-here'),
+# but so does ALL, and this means different sudoers have their LESS settings of choice
+Defaults:%sudo env_keep += "LESS"
