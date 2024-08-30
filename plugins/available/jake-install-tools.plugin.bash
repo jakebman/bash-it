@@ -244,15 +244,15 @@ function jake-install-tools() {
 
 	# Allowing the $EDITOR environment variables to pass through sudo
 	# ref for script: https://superuser.com/questions/869144/why-does-the-system-have-etc-sudoers-d-how-should-i-edit-it
-	if ! [ -f /etc/sudoers.d/100-jake-sudoers ]; then
-		echo "I'd like to preserve my \$EDITOR environment variable when editing. Please make sure we have that in /etc/sudoers.d"
-		echo "You can find that file in ${BASH_IT_CUSTOM}/100-jake-sudoers"
+	if ! [[ -f /etc/sudoers.d/100-jake-sudoers && -f /etc/sudoers.d/200-preserve-LESS-env-var ]]; then
+		echo "I'd like to preserve my \$EDITOR and \$LESS environment variable when editing. Please make sure we have that in /etc/sudoers.d"
+		echo "You can find those files in ${BASH_IT_CUSTOM}/sudoers.d/"
 		echo "(Heads up: files in sudoers.d can't have dots in them or they're ignored!)"
 		echo "Copy it into the /etc/sudoers.d directory, but it needs to be root-owned, and only root-group-readable:"
 		echo -en "\t"
-		echo 'visudo --check --quiet --file="${BASH_IT_CUSTOM}/100-jake-sudoers" &&'
+		echo "find '${BASH_IT_CUSTOM}/sudoers.d/' -type f -print0 | xargs --null -L1 visudo --check --file"
 		echo -en "\t"
-		echo 'sudo install --compare --mode 0440 "${BASH_IT_CUSTOM}/100-jake-sudoers" /etc/sudoers.d/'
+		echo "find '${BASH_IT_CUSTOM}/sudoers.d/' -type f -print0 | xargs --null sudo install --compare --mode 0440 --target-directory /etc/sudoers.d/"
 	fi
 
 	local -a bin_files
