@@ -43,6 +43,15 @@ if _command_exists bat; then
 	}
 fi
 
+function dirname {
+	about 'allow a bare `dirname` to default to operating on the current $PWD. Not super helpful, but simple'
+	if [[ "$#" -eq 0 ]]; then
+		command dirname "$PWD"
+	else
+		command dirname "$@"
+	fi
+}
+
 function alias {
 	about 'try git aliases if no bash aliases are found'
 	if command alias "$@"; then
