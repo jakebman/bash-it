@@ -78,6 +78,7 @@ function status {
 					print "#" repo
 					print info
 					info = ""
+					fflush()
 				}
 				# TODO: track repos which do not print
 				repo = $0
