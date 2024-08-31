@@ -43,6 +43,16 @@ if _command_exists bat; then
 	}
 fi
 
+function alias {
+	about 'try git aliases if no bash aliases are found'
+	if command alias "$@"; then
+		return
+	fi
+	echo "No bash aliases found for $@ - trying git aliases too"
+	# WARN: Jake-specific bash alias. Also found in git-extras
+	git alias "$@"
+}
+
 function ts {
 	about 'allow a bare `ts` to default to incremental timestamps from program start second: `ts -s "%H:%M:%.S"`'
 	if [[ "$#" -eq 0 ]]; then
