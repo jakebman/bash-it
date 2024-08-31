@@ -308,6 +308,7 @@ alias pulll=pull
 alias puhs=push
 alias upsh=push
 alias pusl=push
+alias ppush=push
 alias pushb=push
 alias pusjh=push
 alias push4=push
