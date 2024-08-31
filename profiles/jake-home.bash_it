@@ -13,6 +13,7 @@ plugins google
 plugins history-eternal
 plugins jake-cdd
 plugins jake-cd-implicit-foo-folder
+plugins jake-counting-lines
 plugins jake-implicit-commands
 plugins jake-install-tools
 plugins jake-maintenance
