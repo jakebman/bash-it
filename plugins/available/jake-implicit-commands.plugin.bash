@@ -82,7 +82,7 @@ function diff {
 	else
 		# TODO: this could be smarter for other people who don't hard-code LESS=-R, use a non-colorful pager, etc.
 		# For now, I'm the only consumer, and this seems adequate
-		(
+		( # TODO: `local -` instead of a subshell?
 			set -o pipefail # allow diff's failure to propagate outward past a pager's success
 			command colordiff "$@" | pager
 		)
@@ -299,7 +299,7 @@ function wc {
 	if [[ "$#" -eq 0 ]] && [[ -t 0 ]]; then
 		# no implicit $@ - not sure which side of * it goes on
 		# sorted output, because it's pleasing to the eye
-		(
+		( # TODO: `local -` instead of a subshell?
 			set -o pipefail
 			command wc * | sort -n
 		)
@@ -338,7 +338,7 @@ function realpath {
 
 function file {
 	about "allow file to implicitly work against all files in the current folder. Also, filesystem errors propagate out (implicit -E)"
-	(
+	( # TODO: `local -` instead of a subshell?
 		set -o pipefail
 		if [[ "$#" -eq 0 ]]; then
 			command file -E * | pager
