@@ -260,14 +260,6 @@ function unstage {
 	fi
 }
 
-# this was formerly a function which (conditionally) adds -v to git-remote. I promoted it to a git alias
-# Git aliases aren't allowed to shadow git builtins, so this is the closest name I could pick, which is fine
-# But! I also created the permit-aliases-to-shadow-builtins tech, AND I aliased `remote = remotes`
-# So we *could* alias remote='git permit-aliases-to-shadow-builtins remote'.
-# Let's... not do that - it seems more straightforward to go directly there
-# (and we won't be *as* vulnerable if I turn that behavior off)
-alias remote='git remotes'
-
 function reset {
 	# TODO: are there some resets I can do safely?
 	# ex: add tags and stashes around this behavior, and allow only certain subsets:
@@ -374,6 +366,22 @@ alias unshallow='git unshallow'           # re-hydrate a shallow clone
 alias unstash='git unstash'               # essentially `stash pop`
 alias untracked='git untracked'           # something morally equivalent to 'status --untracked'
 alias yesterday='git yesterday'           # 'since yesterday', potentially smarter
+
+# 'Builtin-Shadowing, Duplicating' aliases
+# These aliases are builtins that I *definitely* want shadowed all the time.
+# For now, I'm NOT relying on permit-aliases-to-shadow-builtins or run-alias.
+# Instead, for each of the builtin commands that I'd like to enhance, I'm just directly aliasing
+# from the bash-land alias for the git-builtin name to the git-land enhanced command I'd like to use
+
+# The `remote` bash command was formerly a function which (conditionally) adds -v to git-remote.
+# I promoted it to a git alias. Git aliases aren't allowed to shadow git builtins,
+# and `remotes` is the closest name I could pick in git-land, which is fine
+# But! I also created the permit-aliases-to-shadow-builtins tech, AND I git-aliased `remote = remotes`
+# So we *could* alias remote='git permit-aliases-to-shadow-builtins remote', or even rely on
+# an existing `alias git='git permit-aliases-to-shadow-builtins'`, and just be a Non-Duplicating alias.
+# Let's... not do that - it seems more straightforward to go directly there
+# (and we won't be *as* vulnerable if I turn permit-aliases-to-shadow-builtins off)
+alias remote='git remotes'
 
 # 'Duplicating' aliases
 # These could have been written as `alias X='git X'`, because they're
