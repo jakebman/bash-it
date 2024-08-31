@@ -260,13 +260,13 @@ function unstage {
 	fi
 }
 
-function remote {
-	if [ "$#" -eq 0 ] || [[ show = "$1" ]]; then
-		git remote -v "$@"
-	else
-		git remote "$@"
-	fi
-}
+# this was formerly a function which (conditionally) adds -v to git-remote. I promoted it to a git alias
+# Git aliases aren't allowed to shadow git builtins, so this is the closest name I could pick, which is fine
+# But! I also created the permit-aliases-to-shadow-builtins tech, AND I aliased `remote = remotes`
+# So we *could* alias remote='git permit-aliases-to-shadow-builtins remote'.
+# Let's... not do that - it seems more straightforward to go directly there
+# (and we won't be *as* vulnerable if I turn that behavior off)
+alias remote='git remotes'
 
 function reset {
 	# TODO: are there some resets I can do safely?
