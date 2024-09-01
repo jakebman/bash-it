@@ -71,16 +71,19 @@ function status {
 	# see pull, above
 	local status=0
 	if [ ~ = "$PWD" ] || [ -f .mrconfig ]; then
-		mr status "$@" | awk '
+		mr status "$@" | awk --assign boredRatio="${JAKE_STATUS_BORED_RATIO:-42}"  '
+			function print_and_empty_info() {
+				if (! repo) return
+				print "#" repo
+				print info
+				info = ""
+				fflush()
+			}
+
 			# starts a repo report
 			/^mr status:/ {
-				if (info) {
-					print "#" repo
-					print info
-					info = ""
-					fflush()
-				}
 				# TODO: track repos which do not print
+				if (info) print_and_empty_info()
 				repo = $0
 			}
 
@@ -94,13 +97,19 @@ function status {
 				info = info $0
 			}
 
+			/^$/ {
+				# with a hundred tracked repos, I want some intermediate output
+				emptyLine+=1
+				if(!(emptyLine % boredRatio)) {
+					repo=repo " (progress marker for entry " emptyLine ")"
+					print_and_empty_info()
+				}
+			}
+
 			# When we are done, we print the last repo, even if it had empty info
 			# this also serendipituously covers the final summary "mr status: finished (86 ok)"
 			END {
-				if (info || repo) {
-					print "#" repo
-					print info
-				}
+				print_and_empty_info()
 			}
 		' | bat --style=plain --paging=never --language "Git Attributes" # good enough
 		# TODO: did I harm this exit code with the awk processing?
