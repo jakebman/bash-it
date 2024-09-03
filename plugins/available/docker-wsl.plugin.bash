@@ -25,7 +25,7 @@ function docker-autostart {
 		_log_debug "Not automatically starting docker to run '$@' - it is an exception"
 	elif ! docker-is-running; then
 		echo "Docker is not currently running. Starting it now."
-		docker-start || return
+		docker-start-and-wait || return
 		echo
 		echo "============= Now proceeding with your original '$1' command =================="
 		echo "==>" docker "$@"
