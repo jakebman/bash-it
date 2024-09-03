@@ -61,3 +61,5 @@ function docker-is-running {
 	# checks to see if the WSL2 integration is present in the current machine.
 	[ -f /usr/bin/docker ]
 }
+
+alias docker=docker-autostart
