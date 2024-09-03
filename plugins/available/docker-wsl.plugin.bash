@@ -38,6 +38,14 @@ function docker-start {
 	about "start Window's Docker Desktop, so that docker commands don't complain about not having integration installed, or about a missing //./pipe/dockerDesktopLinuxEngine"
 	"${BASH_IT_DOCKER_DESKTOP_LOCATION}" && echo "Docker desktop kicked off. Expect the UI in a few seconds"
 }
+function docker-start-and-wait {
+	about "start Window's Docker Desktop, so that docker commands don't complain about not having integration installed, or about a missing //./pipe/dockerDesktopLinuxEngine"
+	docker-start
+	until docker-is-running; do
+		sleep 1
+	done
+}
+
 
 function docker-is-running {
 	about "succeeds if docker is running, fails otherwise"
