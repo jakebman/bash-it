@@ -16,6 +16,7 @@ plugins history-eternal
 plugins jake-cd-implicit-foo-folder
 plugins jake-cdd
 plugins jake-counting-lines
+plugins jake-docker
 plugins jake-implicit-commands
 plugins jake-install-tools
 plugins jake-maintenance

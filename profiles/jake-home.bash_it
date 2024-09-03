@@ -7,6 +7,7 @@ plugins cht-sh
 plugins curl-enhancements
 plugins curl-logging
 plugins dircolors
+plugins docker-wsl
 plugins dotfiles-via-bare-git-repo-with-config-alias
 plugins gitstatus
 plugins google
@@ -14,6 +15,7 @@ plugins history-eternal
 plugins jake-cdd
 plugins jake-cd-implicit-foo-folder
 plugins jake-counting-lines
+plugins jake-docker
 plugins jake-implicit-commands
 plugins jake-install-tools
 plugins jake-maintenance
