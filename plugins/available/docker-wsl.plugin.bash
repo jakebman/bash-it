@@ -38,12 +38,20 @@ function docker-start {
 	about "start Window's Docker Desktop, so that docker commands don't complain about not having integration installed, or about a missing //./pipe/dockerDesktopLinuxEngine"
 	"${BASH_IT_DOCKER_DESKTOP_LOCATION}" && echo "Docker desktop kicked off. Expect the UI in a few seconds"
 }
+_BASH_IT_DOCKER_PROGRESS+=('/' '-' '\' '|')
 function docker-start-and-wait {
 	about "start Window's Docker Desktop, so that docker commands don't complain about not having integration installed, or about a missing //./pipe/dockerDesktopLinuxEngine"
 	docker-start
+	local count index delta=${_BASH_IT_DOCKER_PROGRESS_TICKS:-0.15}
 	until docker-is-running; do
-		sleep 1
+		(( count++ ))
+		(( index=count%4 ))
+		printf '\r%s' "${_BASH_IT_DOCKER_PROGRESS[$index]}"
+		sleep "$delta"
 	done
+	printf '\r%s\n' '   '
+	(( delta *= count ))
+	printf '%s seconds elapsed\n' "$delta"
 }
 
 
