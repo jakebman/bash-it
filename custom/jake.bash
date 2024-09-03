@@ -308,8 +308,11 @@ function fidget {
 alias fid=fidget
 alias f=fidget
 alias ff="fidget --fast"
-alias asdf=fidget
 alias sdf=fidget
+if ! _command_exists; then
+	# There's an asdf package manager
+	alias asdf=fidget
+fi
 
 function typo {
 	vim "${BASH_IT}/aliases/available/jake-typos.aliases.bash"
