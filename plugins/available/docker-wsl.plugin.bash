@@ -50,8 +50,8 @@ function docker-start-and-wait {
 		sleep "$(printf '%d.%03d' $((delta/1000)) $((delta%1000)))"
 	done
 	printf '\r%s\n' '   '
-	(( delta = count * delta / 1000 ))
-	printf '%s seconds elapsed\n' "$delta"
+	(( delta *= count ))
+	printf '%d.%03d seconds elapased\n' $((delta/1000)) $((delta%1000))
 }
 
 
