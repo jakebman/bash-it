@@ -42,15 +42,15 @@ _BASH_IT_DOCKER_PROGRESS+=('/' '-' '\' '|')
 function docker-start-and-wait {
 	about "start Window's Docker Desktop, so that docker commands don't complain about not having integration installed, or about a missing //./pipe/dockerDesktopLinuxEngine"
 	docker-start
-	local count index delta=${_BASH_IT_DOCKER_PROGRESS_TICKS:-0.15}
+	local count index delta=${_BASH_IT_DOCKER_PROGRESS_MS_TICKS:-150}
 	until docker-is-running; do
 		(( count++ ))
 		(( index=count%4 ))
 		printf '\r%*s'  $((count/20)) "${_BASH_IT_DOCKER_PROGRESS[$index]}"
-		sleep "$delta"
+		sleep "$(printf '%d.%03d' $((delta/1000)) $((delta%1000)))"
 	done
 	printf '\r%s\n' '   '
-	(( delta *= count ))
+	(( delta = count * delta / 1000 ))
 	printf '%s seconds elapsed\n' "$delta"
 }
 
