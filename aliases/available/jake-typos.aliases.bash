@@ -315,6 +315,7 @@ alias push4=push
 alias pushd=push
 alias psh=push
 alias pus=push
+alias puh=push
 alias ush=push
 alias addd=add
 alias ass=add
