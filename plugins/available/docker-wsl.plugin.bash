@@ -36,12 +36,18 @@ function docker-autostart {
 
 function docker-start {
 	about "start Window's Docker Desktop, so that docker commands don't complain about not having integration installed, or about a missing //./pipe/dockerDesktopLinuxEngine"
-	"${BASH_IT_DOCKER_DESKTOP_LOCATION}" && echo "Docker desktop kicked off. Expect the UI in a few seconds"
+	"${BASH_IT_DOCKER_DESKTOP_LOCATION}"
+	if docker-is-running; then
+		echo "Docker desktop is likely already running"
+		return 1
+	else
+		echo "Docker desktop kicked off. Expect the UI in a few seconds"
+	fi
 }
 _BASH_IT_DOCKER_PROGRESS+=('/' '-' '\' '|')
 function docker-start-and-wait {
 	about "start Window's Docker Desktop, so that docker commands don't complain about not having integration installed, or about a missing //./pipe/dockerDesktopLinuxEngine"
-	docker-start
+	docker-start || return
 	local count index delta=${_BASH_IT_DOCKER_PROGRESS_MS_TICKS:-150}
 	until docker-is-running; do
 		(( count++ ))
