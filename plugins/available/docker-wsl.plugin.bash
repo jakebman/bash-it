@@ -46,7 +46,7 @@ function docker-start-and-wait {
 	until docker-is-running; do
 		(( count++ ))
 		(( index=count%4 ))
-		printf '\r%s' "${_BASH_IT_DOCKER_PROGRESS[$index]}"
+		printf '\r%*s'  $((count/20)) "${_BASH_IT_DOCKER_PROGRESS[$index]}"
 		sleep "$delta"
 	done
 	printf '\r%s\n' '   '
