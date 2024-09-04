@@ -52,7 +52,7 @@ function dirname {
 	fi
 }
 
-function alias {
+function alias-deep {
 	about 'try git aliases if no bash aliases are found'
 	if command alias "$@"; then
 		return
