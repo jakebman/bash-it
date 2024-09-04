@@ -5,6 +5,11 @@ about-plugin 'allow type to see through aliases and try to find the underlying c
 function type {
 	about 'enhance the shell builtin `type` to try and see through aliases'
 
+	if ! [ -t 0 ] || ! [ -t 1 ]; then
+		command type "$@"
+		return
+	fi
+
 	case $(command type -t -- "$1") in
 		alias)
 			# https://askubuntu.com/a/871435/235107
