@@ -9,7 +9,7 @@ function docker-run {
 }
 
 
-: ${BASH_IT_DOCKER_ADHOC_TAG:=adhocRunTarget}
+: ${BASH_IT_DOCKER_ADHOC_TAG:=adhoc-run-target}
 function docker-build-and-run {
 	about "build the current docker, and immediately run it with -it and --rm"
 	group 'docker'
