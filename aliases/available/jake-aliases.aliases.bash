@@ -57,7 +57,47 @@ function pull {
 		git pull "$@"
 	elif [ ~ = "$PWD" ] || [ -f .mrconfig ]; then
 		# yes, there's a .mrconfig in ~, but there's no disk access to check $PWD first
-		mr up "$@"
+		mr up "$@" | awk --assign boredRatio="${JAKE_STATUS_BORED_RATIO:-42}"  '
+			function print_and_empty_info() {
+				if (! repo) return
+				print "#" repo
+				print info
+				info = ""
+				fflush()
+			}
+
+			# starts a repo report
+			/^mr status:/ {
+				# TODO: track repos which do not print
+				if (info) print_and_empty_info()
+				repo = $0
+			}
+
+			# lines in a repo report. Beautifully, info remains empty/false if concatenates an empty line
+			# so any number of prefixed empty lines are all eaten into the empty string
+			# SUBTLE: the trailing empty string DOES get glommed in here, and is a natural separator between sections
+			!/^mr status:/ {
+				if (info) {
+					info = info "\n"
+				}
+				info = info $0
+			}
+
+			/^$/ {
+				# with a hundred tracked repos, I want some intermediate output
+				emptyLine+=1
+				if(!(emptyLine % boredRatio)) {
+					repo=repo " (progress marker for entry " emptyLine ")"
+					print_and_empty_info()
+				}
+			}
+
+			# When we are done, we print the last repo, even if it had empty info
+			# this also serendipituously covers the final summary "mr status: finished (86 ok)"
+			END {
+				print_and_empty_info()
+			}
+		' | bat --style=plain --paging=never --language "Git Attributes" # good enough
 	else
 		# Technically, we know there are no args to pass to pull here, but it keeps parallel structure
 		# And we should fallback to git fetch in case we're in a situation where the remote branch is deleted (merged)
