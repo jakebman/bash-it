@@ -57,7 +57,7 @@ function pull {
 		git pull "$@"
 	elif [ ~ = "$PWD" ] || [ -f .mrconfig ]; then
 		# yes, there's a .mrconfig in ~, but there's no disk access to check $PWD first
-		mr up "$@" | awk --assign boredRatio="${JAKE_STATUS_BORED_RATIO:-42}"  '
+		mr up "$@" |& awk --assign boredRatio="${JAKE_STATUS_BORED_RATIO:-42}"  '
 			function print_and_empty_info() {
 				if (! repo) return
 				print "#" repo
@@ -67,7 +67,7 @@ function pull {
 			}
 
 			# starts a repo report
-			/^mr status:/ {
+			/^mr update:/ {
 				# TODO: track repos which do not print
 				if (info) print_and_empty_info()
 				repo = $0
@@ -76,11 +76,16 @@ function pull {
 			# lines in a repo report. Beautifully, info remains empty/false if concatenates an empty line
 			# so any number of prefixed empty lines are all eaten into the empty string
 			# SUBTLE: the trailing empty string DOES get glommed in here, and is a natural separator between sections
-			!/^mr status:/ {
+			!/^mr update:/ && !/^Already up to date.$/ &&
+				!/^Junk Drawer: Skipping junk drawer project.$/ && !/^Fetching / {
 				if (info) {
 					info = info "\n"
 				}
 				info = info $0
+			}
+			/Fetching / {
+				$1 = ""
+				repo = repo "," $0;
 			}
 
 			/^$/ {
