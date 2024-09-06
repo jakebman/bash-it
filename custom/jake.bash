@@ -314,10 +314,6 @@ if ! _command_exists; then
 	alias asdf=fidget
 fi
 
-function typo {
-	vim "${BASH_IT}/plugins/available/jake-typos.plugins.bash"
-}
-
 alias utc='date --utc'
 
 alias jake-todo='ls-files | grep jake | j -x TODO'

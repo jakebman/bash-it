@@ -2,11 +2,24 @@
 cite about-plugin
 about-plugin "Jake's custom tool for common typos in common and jake-custom scripts"
 
-_BASH_IT_TYPOS=()
+# An analog to BASH_ALIASES
+declare -A _BASH_IT_TYPOS
 
 function typo {
-	_BASH_IT_TYPOS+=("$@")
-	alias "$@"
+	case $# in
+		0)
+			echo "${BASH_SOURCE[*]}"
+			;;
+		1)
+			local key val
+			val=${1#*=}
+			key=${1%=$val}
+			_log_debug "$key is $val"
+			_BASH_IT_TYPOS["$key"]=$val
+			alias "$@"
+			;;
+		*) echo oops ;;
+	esac
 }
 
 typo viim=vim
