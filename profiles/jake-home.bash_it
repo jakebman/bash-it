@@ -22,6 +22,7 @@ plugins jake-maintenance
 plugins jake-maven
 plugins jake-path
 plugins jake-q
+plugins jake-typos
 plugins jake-words
 plugins jake-xdg
 plugins jq
@@ -42,6 +43,5 @@ completion sdkman
 completion system
 aliases general
 aliases jake-aliases
-aliases jake-typos
 aliases jq-implicit-less
 aliases sudo-expands-aliases
