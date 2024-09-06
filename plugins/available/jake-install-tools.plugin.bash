@@ -389,6 +389,15 @@ function _jake-check-optional-tools() {
 		echo -en "\t"
 	fi
 
+	if _command_exists pyenv; then
+		echo "Nothing to do for pyenv - jira is happy"
+	else
+		echo "Please install pyenv - a sdkman equivalent for python"
+		echo "Follow the instructions at https://github.com/pyenv/pyenv-installer, that basically boil down to:"
+		echo -en "\t"
+		echo 'PYENV_ROOT=~/.local/lib/pyenv curl https://pyenv.run | bash'
+	fi
+
 	if _command_exists jira; then
 		echo "Nothing to do for jira - jira is happy"
 	else
