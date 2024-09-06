@@ -4,8 +4,6 @@ export VISUAL=vim
 export PAGER=less
 export BASH_IT_CURL_PAGER='bat --style=numbers'
 export MANPAGER="less  --lesskey-src '${HOME}/.config/lesskey-no-gotoend-on-q'"
-# install via https://github.com/pyenv/pyenv-installer
-export PYENV_ROOT=~/.local/lib/pyenv
 
 if [ -v WSL_WINDOWS_USER_HOME ]; then
 	if [ -v KUBECONFIG ]; then
