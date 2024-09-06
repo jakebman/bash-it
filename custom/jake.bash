@@ -126,10 +126,13 @@ function vars {
 	# Using IFS to join ignore_list with a single-character delimiter, from:
 	# https://stackoverflow.com/questions/1527049/how-can-i-join-elements-of-a-bash-array-into-a-delimited-string
 	# TODO: printf?
-	local ignore_regex=$(
+	local ignore_regex ignore_filter
+	ignore_regex=$(
 		IFS='|'
-		echo "^(${ignore_list[*]})="
+		echo "${ignore_list[*]}"
 	)
+	printf -v ignore_filter '^(%s)=' "$ignore_regex"
+
 
 	if [ "$#" -eq 0 ]; then
 		# magic incantation from the internet
@@ -138,11 +141,11 @@ function vars {
 		( # TODO: `local -` instead of a subshell?
 			set -o posix
 			set
-		) | grep -v -E "$ignore_regex" | pager
+		) | grep -v -E "$ignore_filter" | pager
 		echo "ignored ${ignore_list[*]}"
 	else
 		# nb: ack matching uses smartcase. Can't use grep here if we're using ack below
-		if echo "$ignore_regex" | ack "$@" > /dev/null; then
+		if echo "$@" | ack "$ignore_regex" > /dev/null; then
 			# we're looking for one of these variables. Don't filter.
 			(
 				set -o posix
@@ -152,7 +155,7 @@ function vars {
 			(
 				set -o posix
 				set
-			) | ack -v "$ignore_regex" | ack "$@"
+			) | ack -v "$ignore_filter" | ack "$@"
 			# TODO: call out which (if any) of these matched. Potentially take args about it?
 			# (but definitely don't do that last - our success/failure should be the one above)
 			echo "ignored ${ignore_list[*]}"
