@@ -16,9 +16,6 @@ export BASH_IT="${HOME}/.bash-it"
 # TODO: WSL probably reserves global variables with this prefix. I should probably pick a new name :\
 export WSL_WINDOWS_USER_HOME="/mnt/c/Users/jakeb"
 
-# for bash-it autocomplete; and for .mrconfig (which is why it must be exported)
-export COMPLETE_ALIAS_DIR="${HOME}/.local/bin/complete-alias"
-
 # This might be useful for a WSL 1 instance, where /usr/bin/git can be slower
 #export SCM_GIT_SHOW_MINIMAL_INFO=true
 
