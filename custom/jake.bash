@@ -315,7 +315,7 @@ if ! _command_exists; then
 fi
 
 function typo {
-	vim "${BASH_IT}/aliases/available/jake-typos.aliases.bash"
+	vim "${BASH_IT}/plugins/available/jake-typos.plugins.bash"
 }
 
 alias utc='date --utc'
