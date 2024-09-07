@@ -6,6 +6,7 @@ about-plugin "Jake's custom tool for common typos in common and jake-custom scri
 declare -A _BASH_IT_TYPOS
 
 function typo {
+	# TODO: error if there's an existing alias we'd overwrite. It's not perfect, but better than nothing
 	local key val alias
 	case $# in
 		0)
@@ -26,7 +27,6 @@ function typo {
 	esac
 	_log_debug "$key is $val; aliasing $alias"
 	_BASH_IT_TYPOS["$key"]=$val
-	alias "$alias"
 }
 
 # https://mharrison.org/post/bashfunctionoverride/
@@ -39,7 +39,22 @@ function save_function {
 save_function command_not_found_handle _ububtu_command_not_found_handle
 function command_not_found_handle {
 	echo handling missing "$@";
-	_ububtu_command_not_found_handle "$@";
+	if [ -z "${_BASH_IT_TYPOS["$1"]}" ]; then
+		# it's not a typo - follow the old
+		_ububtu_command_not_found_handle "$@";
+		return
+	fi
+
+	# TODO: it might be useful to replace this loop with an array appending to BASH_ALIASES
+	local name
+	for name in "${!_BASH_IT_TYPOS[@]}"; do
+		echo alias -- "${name}=${_BASH_IT_TYPOS["$name"]}"
+	done
+
+	local - # local set -o stuff
+	# TODO: CHeck if the outer bash is interactive
+	shopt expand_aliases
+	"$@"
 }
 
 
