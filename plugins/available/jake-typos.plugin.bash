@@ -39,7 +39,7 @@ function save_function {
 save_function command_not_found_handle _ububtu_command_not_found_handle
 function command_not_found_handle {
 	echo handling missing "$@";
-	if [ -z "${_BASH_IT_TYPOS["$1"]}" ]; then
+	if [ -z "${_BASH_IT_TYPOS["$1"]}" ] || alias -- "$1"; then
 		# it's not a typo - follow the old
 		_ububtu_command_not_found_handle "$@";
 		return
