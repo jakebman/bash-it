@@ -48,15 +48,26 @@ function command_not_found_handle {
 	# TODO: it might be useful to replace this loop with an array appending to BASH_ALIASES
 	local name
 	for name in "${!_BASH_IT_TYPOS[@]}"; do
-		echo alias -- "${name}=${_BASH_IT_TYPOS["$name"]}"
+		alias -- "${name}=${_BASH_IT_TYPOS["$name"]}"
 	done
+
+	echo "the aloas is $(type "$1")"
 
 	local - # local set -o stuff
 	# TODO: CHeck if the outer bash is interactive
 	shopt expand_aliases
-	"$@"
+	eval "$@"
 }
 
+function typos {
+	(
+		unalias -a
+		for name in "${!_BASH_IT_TYPOS[@]}"; do
+			alias -- "${name}=${_BASH_IT_TYPOS["$name"]}"
+		done
+		alias -p
+	) | pager
+}
 
 typo viim vim
 typo vimi vim
