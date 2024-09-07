@@ -29,6 +29,20 @@ function typo {
 	alias "$alias"
 }
 
+# https://mharrison.org/post/bashfunctionoverride/
+function save_function {
+    local ORIG_FUNC=$(declare -f $1)
+    local NEWNAME_FUNC="$2${ORIG_FUNC#$1}"
+    eval "$NEWNAME_FUNC"
+}
+
+save_function command_not_found_handle _ububtu_command_not_found_handle
+function command_not_found_handle {
+	echo handling missing "$@";
+	_ububtu_command_not_found_handle "$@";
+}
+
+
 typo viim vim
 typo vimi vim
 typo vimn vim # actual
