@@ -374,6 +374,7 @@ typo pul pull
 typo ull pull
 typo upll pull
 typo pulll pull
+typo puas push
 typo puhs push
 typo upsh push
 typo pusl push
