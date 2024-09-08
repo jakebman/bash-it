@@ -25,7 +25,7 @@ function typo {
 			;;
 		*) echo oops ;;
 	esac
-	_log_debug "$key is $val; aliasing $alias"
+	_log_debug "$key is $val; aliasing like $alias"
 	_BASH_IT_TYPOS["$key"]=$val
 }
 
@@ -38,24 +38,22 @@ function save_function {
 
 save_function command_not_found_handle _ububtu_command_not_found_handle
 function command_not_found_handle {
-	echo handling missing "$@";
-	if [ -z "${_BASH_IT_TYPOS["$1"]}" ] || alias -- "$1"; then
-		# it's not a typo - follow the old
+	echo Typo identified: "$@";
+	if [ -z "${_BASH_IT_TYPOS["$1"]}" ]; then
+		# we don't have a typo entry for this word. Follow the old path
 		_ububtu_command_not_found_handle "$@";
 		return
 	fi
 
-	# TODO: it might be useful to replace this loop with an array appending to BASH_ALIASES
-	local name
-	for name in "${!_BASH_IT_TYPOS[@]}"; do
-		alias -- "${name}=${_BASH_IT_TYPOS["$name"]}"
-	done
+	local name=$1
+	alias -- "${name}=${_BASH_IT_TYPOS["$name"]}"
 
-	echo "the aloas is $(type "$1")"
+	# TODO: can I get a printed bash stack trace?
+	_log_debug "generated alias $(type "$name")"
 
 	local - # local set -o stuff
-	# TODO: CHeck if the outer bash is interactive
-	shopt expand_aliases
+	# TODO: Check if the outer bash is interactive
+	shopt -qs expand_aliases
 	eval "$@"
 }
 
