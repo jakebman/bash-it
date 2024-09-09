@@ -28,6 +28,7 @@ plugins jake-words
 plugins jake-xdg
 plugins jq
 plugins projects
+plugins pyenv
 plugins sdkman
 plugins type-through-aliases
 plugins wsl-fast
