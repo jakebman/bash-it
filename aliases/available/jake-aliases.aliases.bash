@@ -56,6 +56,13 @@ function pull {
 		# If we have arguments, it's because I'm thinking this is a git pull
 		git pull "$@"
 	elif [ ~ = "$PWD" ] || [ -f .mrconfig ]; then
+		# Get local coloring from git pull, even through mr up
+		local GIT_CONFIG_COUNT GIT_CONFIG_KEY_0 GIT_CONFIG_VALUE_0
+		GIT_CONFIG_COUNT=1
+		GIT_CONFIG_KEY_0=color.ui
+		GIT_CONFIG_VALUE_0=always
+		export GIT_CONFIG_COUNT GIT_CONFIG_KEY_0 GIT_CONFIG_VALUE_0
+
 		# yes, there's a .mrconfig in ~, but there's no disk access to check $PWD first
 		mr up "$@" |& awk --assign boredRatio="${JAKE_STATUS_BORED_RATIO:-42}"  '
 			function print_and_empty_info() {
@@ -102,7 +109,7 @@ function pull {
 			END {
 				print_and_empty_info()
 			}
-		' | bat --style=plain --paging=never --language "Git Attributes" # good enough
+		'
 	else
 		# Technically, we know there are no args to pass to pull here, but it keeps parallel structure
 		# And we should fallback to git fetch in case we're in a situation where the remote branch is deleted (merged)
