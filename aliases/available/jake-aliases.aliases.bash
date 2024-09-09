@@ -71,6 +71,9 @@ function pull {
 				print info
 				info = ""
 				fflush()
+
+				# reset the boredom counter
+				emptyLine = 0
 			}
 
 			# starts a repo report
@@ -99,7 +102,7 @@ function pull {
 				# with a hundred tracked repos, I want some intermediate output
 				emptyLine+=1
 				if(!(emptyLine % boredRatio)) {
-					repo=repo " (progress marker for entry " emptyLine ")"
+					repo=repo " (progress marker for " emptyLine "th quiet entry)"
 					print_and_empty_info()
 				}
 			}
@@ -130,6 +133,9 @@ function status {
 				print info
 				info = ""
 				fflush()
+
+				# reset the boredom counter
+				emptyLine = 0
 			}
 
 			# starts a repo report
@@ -153,7 +159,7 @@ function status {
 				# with a hundred tracked repos, I want some intermediate output
 				emptyLine+=1
 				if(!(emptyLine % boredRatio)) {
-					repo=repo " (progress marker for entry " emptyLine ")"
+					repo=repo " (progress marker for " emptyLine "th quiet entry)"
 					print_and_empty_info()
 				}
 			}
