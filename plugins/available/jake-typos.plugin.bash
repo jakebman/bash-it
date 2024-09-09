@@ -38,14 +38,15 @@ function save_function {
 
 save_function command_not_found_handle _ububtu_command_not_found_handle
 function command_not_found_handle {
-	echo Typo identified: "$@";
-	if [ -z "${_BASH_IT_TYPOS["$1"]}" ]; then
+	local -a args=("${@:2}")
+	local name=$1
+	echo "Typo identified: $name ${args[@]@Q}";
+	if [ -z "${_BASH_IT_TYPOS["$name"]}" ]; then
 		# we don't have a typo entry for this word. Follow the old path
 		_ububtu_command_not_found_handle "$@";
 		return
 	fi
 
-	local name=$1
 	alias -- "${name}=${_BASH_IT_TYPOS["$name"]}"
 
 	# TODO: can I get a printed bash stack trace?
@@ -54,7 +55,6 @@ function command_not_found_handle {
 	local - # local set -o stuff
 	# TODO: Check if the outer bash is interactive
 	shopt -qs expand_aliases
-	local -a args=("${@:2}")
 	# the arguments are 'quoted in a format that can be reused as input.' per Bash's @ "Parameter transformation"
 	# @Q and :2 cannot be combined in the same substitution, though I didn't try very hard - this is far more readable
 	eval "$name" "${args[@]@Q}"
