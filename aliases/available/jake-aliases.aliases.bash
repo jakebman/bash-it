@@ -67,7 +67,7 @@ function pull {
 		mr up "$@" |& awk --assign boredRatio="${JAKE_STATUS_BORED_RATIO:-42}"  '
 			function print_and_empty_info() {
 				if (! repo) return
-				print "#" repo
+				print repo
 				print info
 				info = ""
 				fflush()
