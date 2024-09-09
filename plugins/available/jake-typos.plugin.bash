@@ -282,6 +282,7 @@ typo ipconfig ifconfig
 typo rakubew rakubrew
 typo rakub rakubrew
 
+typo heml helm
 typo kube kubectl
 typo kubectyl kubectl
 typo eks eksctl
