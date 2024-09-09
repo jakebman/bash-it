@@ -54,7 +54,10 @@ function command_not_found_handle {
 	local - # local set -o stuff
 	# TODO: Check if the outer bash is interactive
 	shopt -qs expand_aliases
-	eval "$@"
+	local -a args=("${@:2}")
+	# the arguments are 'quoted in a format that can be reused as input.' per Bash's @ "Parameter transformation"
+	# @Q and :2 cannot be combined in the same substitution, though I didn't try very hard - this is far more readable
+	eval "$name" "${args[@]@Q}"
 }
 
 function typos {
