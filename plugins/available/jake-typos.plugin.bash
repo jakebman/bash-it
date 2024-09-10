@@ -87,7 +87,6 @@ typo cim vim
 typo fim vim
 typo vm vim
 typo im vim
-typo v vim
 
 typo wimw vimw
 
@@ -144,7 +143,6 @@ typo akc ack
 
 # mt is actually a real command, but I don't plan on doing stuff with magnetic tape
 typo mt mr
-typo m mr
 
 typo map man # I'm kinda surprised there was no existing map command that this overrides
 typo amn man
@@ -185,7 +183,6 @@ typo treen treeN
 
 typo deita delta
 
-typo d diff
 typo di diff
 typo idf diff
 typo dif diff
@@ -368,8 +365,6 @@ typo staqsh stashs
 typo stashs stash
 typo tsga tags       # Wow.
 typo unstasn unstash # Amusingly, a typo of a command I didn't even have before I made the typo. Now I do
-typo u pull          # more likely I was thinking of 'up', but that's just 'pull' anyway
-typo p pull
 typo pu pull
 typo up pull  # Technically not a typo, but it's a typo of a typo, so I'm keeping it here
 typo uop pull # Actually a typo of up, which I'm using more as an alias of up, apparently
