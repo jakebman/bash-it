@@ -83,6 +83,7 @@ function jake-install-tools() {
 	fi
 
 	# TODO: it would be nice to have instructions that turn on APT::Get::Always-Include-Phased-Updates
+	# read more at https://discourse.ubuntu.com/t/phased-updates-in-apt-in-21-04/20345/24
 
 	# tools that can use apt
 	TOOLS_TO_INSTALL=""
