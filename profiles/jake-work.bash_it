@@ -48,5 +48,6 @@ completion sdkman
 completion system
 aliases general
 aliases jake-aliases
+aliases jake-single-letter
 aliases jq-implicit-less
 aliases sudo-expands-aliases
