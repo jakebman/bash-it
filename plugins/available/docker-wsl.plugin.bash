@@ -68,4 +68,6 @@ function docker-is-running {
 	[ -f /usr/bin/docker ]
 }
 
-alias docker=docker-autostart
+function docker {
+	docker-autostart "$@"
+}
