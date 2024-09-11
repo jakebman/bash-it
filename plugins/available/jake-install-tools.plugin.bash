@@ -420,6 +420,7 @@ function _jake-check-optional-tools() {
 		echo -en "\t"
 		echo 'sudo dpkg -i bat*.deb && sudo apt-mark hold bat # keep apt from installing over this version'
 		echo 'use apt-mark showhold to list the held packages'
+		# read more at https://askubuntu.com/questions/18654/how-to-prevent-updating-of-a-specific-package
 	fi
 
 	if _binary_exists delta; then
