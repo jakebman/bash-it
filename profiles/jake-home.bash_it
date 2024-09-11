@@ -41,6 +41,7 @@ completion maven
 completion projects
 completion sdkman
 completion system
+aliases batcat
 aliases general
 aliases jake-aliases
 aliases jake-single-letter
