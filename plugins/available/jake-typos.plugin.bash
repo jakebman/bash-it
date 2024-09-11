@@ -25,7 +25,6 @@ function typo {
 			;;
 		*) echo oops ;;
 	esac
-	_log_debug "$key is $val; aliasing like $alias"
 	_BASH_IT_TYPOS["$key"]=$val
 }
 
