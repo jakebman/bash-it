@@ -41,6 +41,10 @@ function command_not_found_handle {
 	local -a args=("${@:2}")
 	local name=$1
 	echo "Typo identified: $name ${args[@]@Q}";
+	echo "FUNCNAME:" "${FUNCNAME[@]}"
+	echo "BASH_COMMAND: $BASH_COMMAND"
+	echo "BASHPID: $$ or $BASHPID  PPID $PPID SUBSHELL: $BASH_SUBSHELL  SHLVL: $SHLVL"
+	echo "Dash: $_ BASH: $BASH"
 	if [ -z "${_BASH_IT_TYPOS["$name"]}" ]; then
 		# we don't have a typo entry for this word. Follow the old path
 		_ububtu_command_not_found_handle "$@";
