@@ -418,7 +418,8 @@ function _jake-check-optional-tools() {
 		echo "Get the new .deb from one of these:"
 		_jake-github-repo-release-urls sharkdp/bat | grep deb$ | grep amd | grep -v musl
 		echo -en "\t"
-		echo 'sudo dpkg -i bat*.deb'
+		echo 'sudo dpkg -i bat*.deb && sudo apt-mark hold bat # keep apt from installing over this version'
+		echo 'use apt-mark showhold to list the held packages'
 	fi
 
 	if _binary_exists delta; then
