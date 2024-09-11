@@ -130,6 +130,7 @@ typo ch cht.sh
 
 typo ks ls
 typo lks ls
+typo dls ls
 typo lss ls
 typo lsa 'ls -a'
 typo lsl 'ls -l'
