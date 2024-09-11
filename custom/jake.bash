@@ -312,7 +312,7 @@ alias fid=fidget
 alias f=fidget
 alias ff="fidget --fast"
 alias sdf=fidget
-if ! _command_exists; then
+if ! _command_exists asdf; then
 	# There's an asdf package manager
 	alias asdf=fidget
 fi
