@@ -294,7 +294,7 @@ function fidget {
 	(# subshell. Automatically undoes the cd ~
 		cd ~
 		jake-sdkman-update
-		up
+		pull # also does mr up, since ~/.mrconfig exists
 		if _command_exists win-git-update &> /dev/null; then
 			echo updating window git stuff too
 			win-git-update
