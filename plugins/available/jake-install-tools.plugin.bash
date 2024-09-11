@@ -411,10 +411,10 @@ function _jake-check-optional-tools() {
 		echo 'jira man --generate --output ~/bin/man/man7 && mandb --user-db'
 	fi
 
-	if _command_exists bat; then
+	if _binary_exists bat; then
 		echo "Nothing to do for bat - bat is happy"
 	else
-		echo "Please install bat - a dependency for my j script. Apt has an old version. I like 0.22.1"
+		echo "Please install bat - a dependency for my j script. The version installed from apt names the binary batcat. I don't like that"
 		echo "Get the new .deb from one of these:"
 		_jake-github-repo-release-urls sharkdp/bat | grep deb$ | grep amd | grep -v musl
 		echo -en "\t"
