@@ -458,7 +458,7 @@ function _jake-check-optional-tools() {
 	else
 		echo "Please get rancher - the cli tool to access charter's rancher"
 		echo "Get the zip file and put it in ~/bin"
-		_jake-github-repo-release-urls PaulJuliusMartinez/jless | grep -v apple-darwin | grep -v windows
+		_jake-github-repo-release-urls rancher/rancher | grep -v apple-darwin | grep -v windows
 	fi
 
 	if _command_exists asciinema; then
