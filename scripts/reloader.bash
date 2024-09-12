@@ -22,7 +22,7 @@ if [[ "${1:-}" != "skip" ]] && [[ -d "${BASH_IT?}/enabled" ]]; then
 			_bash-it-log-prefix-by-path "${_bash_it_reloader_file}"
 			_log_debug "Loading component..."
 			# shellcheck source=/dev/null
-			source "$_bash_it_reloader_file"
+			load "" "component" "$_bash_it_reloader_file"
 			_log_debug "Loaded."
 		else
 			_log_error "Unable to read ${_bash_it_reloader_file}"
@@ -37,9 +37,8 @@ if [[ -n "${2:-}" ]] && [[ -d "$BASH_IT/${2}/enabled" ]]; then
 			for _bash_it_reloader_file in "$BASH_IT/${2}/enabled"/*.bash; do
 				if [[ -e "$_bash_it_reloader_file" ]]; then
 					_bash-it-log-prefix-by-path "${_bash_it_reloader_file}"
-					_log_debug "Loading component..."
 					# shellcheck source=/dev/null
-					source "$_bash_it_reloader_file"
+					load "" "component" "$_bash_it_reloader_file"
 					_log_debug "Loaded."
 				else
 					_log_error "Unable to locate ${_bash_it_reloader_file}"
