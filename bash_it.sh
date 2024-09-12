@@ -15,9 +15,9 @@ if [[ "${BASH_IT_LOG_LEVEL:-0}" -ge 6 ]] &&  [[ false != "${BASH_IT_LOG_INCLUDE_
 		echo "$@"
 	}
 	function source {
-		BASH_IT_START_TIME=${EPOCHREALTIME/./}
+		local BASH_IT_START_TIME=${EPOCHREALTIME/./}
 		builtin source "$@"
-		BASH_IT_END_TIME=${EPOCHREALTIME/./}
+		local BASH_IT_END_TIME=${EPOCHREALTIME/./}
 		_log_debug "Elapsed $((BASH_IT_END_TIME - BASH_IT_START_TIME)) ns for $@"
 	}
 fi
@@ -123,4 +123,4 @@ for _bash_it_library_finalize_f in "${_bash_it_library_finalize_hook[@]:-}"; do
 	eval "${_bash_it_library_finalize_f?}" # Use `eval` to achieve the same behavior as `$PROMPT_COMMAND`.
 done
 _log_debug "Done."
-unset source BASH_IT_START_TIME BASH_IT_END_TIME "${!_bash_it_library_finalize_@}" "${!_bash_it_main_file_@}"
+unset source "${!_bash_it_library_finalize_@}" "${!_bash_it_main_file_@}"
