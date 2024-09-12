@@ -9,6 +9,19 @@ BASH_IT_LOG_PREFIX="core: main: "
 : "${CUSTOM_THEME_DIR:="${BASH_IT_CUSTOM}/themes"}"
 : "${BASH_IT_BASHRC:=${BASH_SOURCE[${#BASH_SOURCE[@]} - 1]}}"
 
+if [[ "${BASH_IT_LOG_LEVEL:-0}" -ge 6 ]] &&  [[ false != "${BASH_IT_LOG_INCLUDE_TIMESTAMP:-true}" ]]; then
+	# Shim - _log_debug is defined *later*, and will override this simple definition
+	function _log_debug {
+		echo "$@"
+	}
+	function source {
+		BASH_IT_START_TIME=${EPOCHREALTIME/./}
+		builtin source "$@"
+		BASH_IT_END_TIME=${EPOCHREALTIME/./}
+		_log_debug "Elapsed $((BASH_IT_END_TIME - BASH_IT_START_TIME)) ns for $@"
+	}
+fi
+
 # Load composure first, so we support function metadata
 # shellcheck source-path=SCRIPTDIR/vendor/github.com/erichs/composure
 source "${BASH_IT}/vendor/github.com/erichs/composure/composure.sh"
@@ -67,6 +80,7 @@ for _bash_it_main_file_type in "aliases" "completion" "plugins"; do
 	if [[ -s "${_bash_it_main_file_custom}" ]]; then
 		_bash-it-log-prefix-by-path "${_bash_it_main_file_custom}"
 		_log_debug "Loading component..."
+
 		# shellcheck disable=SC1090
 		source "${_bash_it_main_file_custom}"
 	fi
@@ -109,4 +123,4 @@ for _bash_it_library_finalize_f in "${_bash_it_library_finalize_hook[@]:-}"; do
 	eval "${_bash_it_library_finalize_f?}" # Use `eval` to achieve the same behavior as `$PROMPT_COMMAND`.
 done
 _log_debug "Done."
-unset "${!_bash_it_library_finalize_@}" "${!_bash_it_main_file_@}"
+unset source BASH_IT_START_TIME BASH_IT_END_TIME "${!_bash_it_library_finalize_@}" "${!_bash_it_main_file_@}"
