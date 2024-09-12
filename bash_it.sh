@@ -18,7 +18,8 @@ function load {
 	local BASH_IT_LOG_PREFIX=${1-$BASH_IT_LOG_PREFIX}
 	_log_debug "Loading $2..."
 	# shellcheck disable=SC1090
-	source "${@:2}"
+	source "${@:3}"
+	_log_debug "Loaded."
 }
 
 if [[ "${BASH_IT_LOG_LEVEL:-0}" -ge 6 ]] && [[ false != "${BASH_IT_LOG_INCLUDE_TIMESTAMP:-true}" ]]; then
@@ -27,7 +28,7 @@ if [[ "${BASH_IT_LOG_LEVEL:-0}" -ge 6 ]] && [[ false != "${BASH_IT_LOG_INCLUDE_T
 		# shellcheck disable=SC1090
 		source "${@:3}"
 		local BASH_IT_END_TIME=${EPOCHREALTIME/./}
-		_log_debug "Elapsed $((BASH_IT_END_TIME - BASH_IT_START_TIME)) ns for $*"
+		_log_debug "Elapsed $((BASH_IT_END_TIME - BASH_IT_START_TIME)) ns for ${*:3}"
 	}
 fi
 
