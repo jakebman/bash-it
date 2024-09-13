@@ -180,6 +180,7 @@ typo lless lls
 
 typo tre tree
 typo ree tree
+typo tgree tree
 typo treee tree
 typo treen treeN
 
