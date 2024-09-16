@@ -32,7 +32,6 @@ plugins sdkman
 plugins type-through-aliases
 plugins wsl-fast
 completion ack
-completion awscli
 completion bash-it
 completion complete-alias
 completion glab
