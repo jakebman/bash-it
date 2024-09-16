@@ -200,6 +200,7 @@ typo difff diff
 typo diiff diff
 
 typo renite remote
+typo remtoe remote
 typo rewmote remote
 typo remotes remote # technically, a different word, but it's the plural of the first and should do the same thing
 
