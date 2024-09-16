@@ -33,6 +33,7 @@ export PERL_CPANM_HOME="${XDG_STATE_HOME}/cpanm" # cpanm command in the cpanminu
 : ${JAKE_XDG_BIN_DIR:=${HOME}/.local/bin}
 # install via https://github.com/pyenv/pyenv-installer. Installed via fork, so it's prudent to export it here
 export PYENV_ROOT="${JAKE_XDG_BIN_DIR}/pyenv"
+export GOPATH="${JAKE_XDG_BIN_DIR}/go"
 # install via git clone 'git@github.com:cykerway/complete-alias.git' "$COMPLETE_ALIAS_DIR"
 # for bash-it autocomplete; and for .mrconfig (which is why it must be exported)
 export COMPLETE_ALIAS_DIR="${JAKE_XDG_BIN_DIR}/complete-alias"
