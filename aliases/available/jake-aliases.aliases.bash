@@ -48,6 +48,11 @@ function pull {
 		GIT_CONFIG_VALUE_0=always
 		export GIT_CONFIG_COUNT GIT_CONFIG_KEY_0 GIT_CONFIG_VALUE_0
 
+		if [ junk-drawer = "$(basename "$PWD")" ]; then
+			# Directly within the Junk Drawer. Allow updating it
+			local -x UPDATE_JUNK_DRAWER=any-string-value
+		fi
+
 		# yes, there's a .mrconfig in ~, but there's no disk access to check $PWD first
 		mr up "$@" |& awk --assign boredRatio="${JAKE_STATUS_BORED_RATIO:-42}"  '
 			function print_and_empty_info() {
