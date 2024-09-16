@@ -112,6 +112,7 @@ function jake-install-tools() {
 	_jake-find-tool dos2unix
 	_jake-find-tool neofetch "neofetch --no-install-recommends" "Has a recommended dependency on imagemagick, which is ~100MB of extras I don't need or want"
 	_jake-find-tool debtree # to backtrace apt packages
+	_jake-find-tool minica 'work tool to create HTTPS certificates'
 	# TODO: Deprecating - haven't found it useful, nor missed it in its absence
 	# _jake-find-tool thefuck # potentially not super compatible with bash-it :(
 	_jake-find-tool unzip
