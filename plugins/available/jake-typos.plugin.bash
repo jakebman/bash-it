@@ -25,8 +25,24 @@ function typo {
 			;;
 		*) echo oops ;;
 	esac
+	# type: -a: all types, -f: ignore functions. This lets us find builtins shadowed by aliases (which I assume are just extras)
+	if ((BASH_IT_LOG_LEVEL >= BASH_IT_LOG_LEVEL_TRACE)) &&
+			type -af "$val" |& grep -s -q 'is a shell builtin$' &> /dev/null; then
+		# This is an expensive check, but worth it in tracing time
+		_log_warning "this is an alias to a builtin: $alias"
+		alias "$alias"
+	fi
 	_BASH_IT_TYPOS["$key"]=$val
 }
+
+function _typo-builtin {
+	local key val alias
+	key=$1
+	val=$2
+	alias="$key=$val"
+	alias "$alias"
+}
+
 
 # https://mharrison.org/post/bashfunctionoverride/
 function save_function {
@@ -50,6 +66,9 @@ function command_not_found_handle {
 
 	# TODO: can I get a printed bash stack trace?
 	_log_debug "generated alias $(type "$name")"
+	if type -af "${_BASH_IT_TYPOS["$name"]}" |& grep -s -q 'is a shell builtin$' &> /dev/null; then
+		_log_warn "$name is aliased to a builtin, ${_BASH_IT_TYPOS["$name"]}. It might be worth using the typo_builtin function instead"
+	fi
 
 	local - # local set -o stuff
 	# TODO: Check if the outer bash is interactive
@@ -125,7 +144,6 @@ typo wq :q
 typo explorer. 'explorer .'
 typo exploer. explorer. # happened while I was writing the alias above
 
-typo hsitory history
 
 typo htpo htop
 
@@ -217,17 +235,6 @@ typo bash0-t bash-it
 typo apt0up apt-up
 typo aptup apt-up
 
-typo '~cd' cd
-typo vd cd
-typo vf cd # left hand misaligned
-typo dc cd
-typo ce cd
-typo ced cd
-typo xs cd
-typo qcd cd    # I quit less *twice*, then wanted to cd
-typo lcd cd    # I tried to ls, then decided to change directories instead
-typo treecd cd # Ditto, but tree. Wow.
-
 typo note notepad
 
 typo grpe grep
@@ -254,7 +261,6 @@ typo audo sudo
 
 typo ssg ssh
 
-typo pws pwd
 
 # The vars command is defined in .bash-it/custom, so it is defined *after* this, but it's fine to
 # pre-declare aliases beforehand
@@ -263,12 +269,6 @@ typo cars vars
 
 typo pyt python # technically, just a lazy name
 
-typo tpe type
-typo ype type
-typo tyep type
-typo tyoe type
-typo yype type
-typo typew type # ... because type already operates on its which (this might bite future me. Sorry, future me)
 # because that's what I was trying to type at the time, and I figure if I most-common'd
 # 'type asdf' into 'typ easdf', it wouldn't work anyway
 typo typ typo
@@ -459,3 +459,32 @@ typo edit-config config-edit
 
 typo ci co
 typo coi co
+
+#######################
+## typos to builtins
+## A bad shim until I figure something better
+#######################
+
+alias typo=_typo-builtin
+typo '~cd' cd
+typo vd cd
+typo vf cd # left hand misaligned
+typo dc cd
+typo ce cd
+typo ced cd
+typo xs cd
+typo qcd cd    # I quit less *twice*, then wanted to cd
+typo lcd cd    # I tried to ls, then decided to change directories instead
+typo treecd cd # Ditto, but tree. Wow.
+
+typo hsitory history
+typo pws pwd
+
+typo tpe type
+typo ype type
+typo tyep type
+typo tyoe type
+typo yype type
+typo typew type # ... because type already operates on its which (this might bite future me. Sorry, future me)
+
+unalias typo
