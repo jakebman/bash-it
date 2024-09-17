@@ -66,7 +66,7 @@ function command_not_found_handle {
 	_typos-load
 
 	# TODO: can I get a printed bash stack trace?
-	_log_debug "generated alias $(type "$name")"
+	_log_debug "generated alias '$(type "$name")' for '$name'"
 	if type -af "${_BASH_IT_TYPOS["$name"]}" |& grep -s -q 'is a shell builtin$' &> /dev/null; then
 		_log_warn "$name is aliased to a builtin, ${_BASH_IT_TYPOS["$name"]}. It might be worth using the typo_builtin function instead"
 	fi
