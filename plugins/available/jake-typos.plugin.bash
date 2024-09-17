@@ -10,7 +10,7 @@ function typo {
 	local key val alias
 	case $# in
 		0)
-			vim "$(realpath "${BASH_SOURCE[*]}")"
+			vim "$(realpath "${BASH_SOURCE}")"
 			return
 			;;
 		1)
