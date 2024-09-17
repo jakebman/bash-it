@@ -443,6 +443,7 @@ typo run docker-run
 
 # super eager with that second s
 typo bashs bash
+typo bass bash
 typo bas bash
 # custom config command to manage dotfiles
 typo confgi config
