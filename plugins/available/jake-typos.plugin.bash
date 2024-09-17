@@ -439,6 +439,7 @@ typo mrdir rmdir
 
 typo dockar docker
 typo docksr docker
+typo run docker-run
 
 # super eager with that second s
 typo bashs bash
