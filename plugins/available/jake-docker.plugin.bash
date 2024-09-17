@@ -5,7 +5,11 @@ about-plugin 'Helpers to more easily work with Docker'
 function docker-run {
 	about 'transiently run a docker image (essentially -it, --rm)'
 	group 'docker'
-	docker run -it --rm "$@"
+	if (( 0 == $# )); then
+		docker run -it --rm "${BASH_IT_DOCKER_ADHOC_TAG}"
+	else
+		docker run -it --rm "$@"
+	fi
 }
 
 
@@ -15,15 +19,26 @@ function docker-build-and-run {
 	group 'docker'
 	local -a args
 	local arg haveBuildDir
-	for arg; do
-		# Over-broad. It'll grab --output-dir some-dir/
-		if [ -d "$arg" ]; then
-			haveBuildDir=true
-		fi
-	done
+	case $# in
+		1)
+			if [ -d "$1" ]; then
+				haveBuildDir=true
+			elif [ -f "$1" ]; then
+				args+=(-f "$1")
+				shift
+			fi
+			;;
+		*)
+		for arg; do
+			# Over-broad. It'll grab --output-dir some-dir/
+			if [ -d "$arg" ]; then
+				haveBuildDir=true
+			fi
+		done
+	esac
+
 	if [ true != "$haveBuildDir" ]; then
 		args+=(.)
 	fi
-
 	docker build --tag "${BASH_IT_DOCKER_ADHOC_TAG}" "$@" "${args[@]}" && docker-run "${BASH_IT_DOCKER_ADHOC_TAG}"
 }
