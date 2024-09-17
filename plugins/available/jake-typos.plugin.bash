@@ -80,6 +80,7 @@ function command_not_found_handle {
 }
 
 function _typos-load {
+	local name
 	for name in "${!_BASH_IT_TYPOS[@]}"; do
 		alias -- "${name}=${_BASH_IT_TYPOS["$name"]}"
 	done
