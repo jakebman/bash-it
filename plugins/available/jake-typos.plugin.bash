@@ -59,12 +59,16 @@ function command_not_found_handle {
 	eval "$name" "${args[@]@Q}"
 }
 
+function _typos-load {
+	for name in "${!_BASH_IT_TYPOS[@]}"; do
+		alias -- "${name}=${_BASH_IT_TYPOS["$name"]}"
+	done
+}
+
 function typos {
 	(
 		unalias -a
-		for name in "${!_BASH_IT_TYPOS[@]}"; do
-			alias -- "${name}=${_BASH_IT_TYPOS["$name"]}"
-		done
+		_typos-load
 		alias -p
 	) |
 		sort |
