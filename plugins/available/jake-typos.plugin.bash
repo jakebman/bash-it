@@ -182,7 +182,10 @@ typo tre tree
 typo ree tree
 typo tgree tree
 typo treee tree
-typo treen treeN
+
+# These are times when I expected tree to have neither the depth nor count limits
+typo treea ltree
+typo treen ltree
 
 typo deita delta
 
