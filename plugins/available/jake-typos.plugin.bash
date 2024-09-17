@@ -62,7 +62,7 @@ function command_not_found_handle {
 		return
 	fi
 
-	alias -- "${name}=${_BASH_IT_TYPOS["$name"]}"
+	_typos-load
 
 	# TODO: can I get a printed bash stack trace?
 	_log_debug "generated alias $(type "$name")"
