@@ -133,7 +133,6 @@ function vars {
 	)
 	printf -v ignore_filter '^(%s)=' "$ignore_regex"
 
-
 	if [ "$#" -eq 0 ]; then
 		# magic incantation from the internet
 		# Basically, prints the variables and functions of
@@ -291,7 +290,7 @@ function fidget {
 	else
 		echo "literally any argument works as-if it were '--quickly'"
 	fi
-	(# subshell. Automatically undoes the cd ~
+	( # subshell. Automatically undoes the cd ~
 		cd ~
 		jake-sdkman-update
 		pull # also does mr up, since ~/.mrconfig exists
