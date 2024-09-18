@@ -26,8 +26,8 @@ function typo {
 		*) echo oops ;;
 	esac
 	# type: -a: all types, -f: ignore functions. This lets us find builtins shadowed by aliases (which I assume are just extras)
-	if ((BASH_IT_LOG_LEVEL >= BASH_IT_LOG_LEVEL_TRACE)) &&
-			type -af "$val" |& grep -s -q 'is a shell builtin$' &> /dev/null; then
+	if ((BASH_IT_LOG_LEVEL >= BASH_IT_LOG_LEVEL_TRACE)) \
+		&& type -af "$val" |& grep -s -q 'is a shell builtin$' &> /dev/null; then
 		# This is an expensive check, but worth it in tracing time
 		_log_warning "this is an alias to a builtin: $alias"
 		alias "$alias"
@@ -43,23 +43,22 @@ function _typo-builtin {
 	alias "$alias"
 }
 
-
 # https://mharrison.org/post/bashfunctionoverride/
 # NB: this won't cover recursive functions properly
 function save_function {
-    local ORIG_FUNC=$(declare -f $1)
-    local NEWNAME_FUNC="$2${ORIG_FUNC#$1}"
-    eval "$NEWNAME_FUNC"
+	local ORIG_FUNC=$(declare -f $1)
+	local NEWNAME_FUNC="$2${ORIG_FUNC#$1}"
+	eval "$NEWNAME_FUNC"
 }
 
 save_function command_not_found_handle _ububtu_command_not_found_handle
 function command_not_found_handle {
 	local -a args=("${@:2}")
 	local name=$1
-	echo "Typo identified: $name ${args[@]@Q}";
+	echo "Typo identified: $name ${args[@]@Q}"
 	if [ -z "${_BASH_IT_TYPOS["$name"]}" ]; then
 		# we don't have a typo entry for this word. Follow the old path
-		_ububtu_command_not_found_handle "$@";
+		_ububtu_command_not_found_handle "$@"
 		return
 	fi
 
@@ -91,9 +90,9 @@ function typos {
 		unalias -a
 		_typos-load
 		alias -p
-	) |
-		sort |
-		pager
+	) \
+		| sort \
+		| pager
 }
 
 typo viim vim
@@ -145,7 +144,6 @@ typo wq :q
 
 typo explorer. 'explorer .'
 typo exploer. explorer. # happened while I was writing the alias above
-
 
 typo htpo htop
 
@@ -262,7 +260,6 @@ typo suto sudo
 typo audo sudo
 
 typo ssg ssh
-
 
 # The vars command is defined in .bash-it/custom, so it is defined *after* this, but it's fine to
 # pre-declare aliases beforehand
