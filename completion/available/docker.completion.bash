@@ -22,3 +22,10 @@ for fn in "${_docker_bash_completion_paths[@]}"; do
 		break
 	fi
 done
+
+# the docker-autostart functionality would like to also be completed like docker
+if [[ $(type -t compopt) = "builtin" ]]; then
+    complete -o default -F __start_docker docker-autostart
+else
+    complete -o default -o nospace -F __start_docker docker-autostart
+fi
