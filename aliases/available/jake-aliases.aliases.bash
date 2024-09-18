@@ -54,7 +54,7 @@ function pull {
 		fi
 
 		# yes, there's a .mrconfig in ~, but there's no disk access to check $PWD first
-		mr up "$@" |& awk --assign boredRatio="${JAKE_STATUS_BORED_RATIO:-42}"  '
+		mr up "$@" |& awk --assign boredRatio="${JAKE_STATUS_BORED_RATIO:-42}" '
 			function print_and_empty_info() {
 				if (! repo) return
 				print repo
@@ -116,7 +116,7 @@ function status {
 	# see pull, above
 	local status=0
 	if [ ~ = "$PWD" ] || [ -f .mrconfig ]; then
-		mr status "$@" | awk --assign boredRatio="${JAKE_STATUS_BORED_RATIO:-42}"  '
+		mr status "$@" | awk --assign boredRatio="${JAKE_STATUS_BORED_RATIO:-42}" '
 			function print_and_empty_info() {
 				if (! repo) return
 				print "#" repo
