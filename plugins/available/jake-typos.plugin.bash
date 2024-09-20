@@ -397,6 +397,7 @@ typo psh push
 typo pus push
 typo puh push
 typo ush push
+typo cone clone
 typo addd add
 typo ass add
 typo ad add
