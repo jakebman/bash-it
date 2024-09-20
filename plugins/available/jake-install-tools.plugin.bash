@@ -109,6 +109,7 @@ function jake-install-tools() {
 	_jake-find-tool git-extras
 	_jake-find-tool xmlindent # doesn't have --long-options, which is a little weird, but formats all XML (incl. xmllint --xpath results), so that's good
 	_jake-find-tool colordiff
+	_jake-find-tool markdown
 	_jake-find-tool dos2unix
 	_jake-find-tool neofetch "neofetch --no-install-recommends" "Has a recommended dependency on imagemagick, which is ~100MB of extras I don't need or want"
 	_jake-find-tool debtree # to backtrace apt packages
