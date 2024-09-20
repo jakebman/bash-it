@@ -4,6 +4,7 @@
 plugins aws-enhancements
 plugins base
 plugins bat-cat-batextras
+plugins browser
 plugins cht-sh
 plugins curl-enhancements
 plugins curl-logging

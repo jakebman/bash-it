@@ -1,4 +1,6 @@
 # based on https://gist.github.com/318247
+# Load before the base plugin, so this is available to enable pmdown in there
+# BASH_IT_LOAD_PRIORITY: 210
 
 cite about-plugin
 about-plugin 'render commandline output in your browser'
