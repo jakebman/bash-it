@@ -231,6 +231,7 @@ typo remotes remote # technically, a different word, but it's the plural of the 
 
 typo bash0t bash-it
 typo bash0-t bash-it
+typo bashs-it bash-it
 # my own tool that does apt updates
 typo apt0up apt-up
 typo aptup apt-up
