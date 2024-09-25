@@ -478,6 +478,7 @@ typo vf cd # left hand misaligned
 typo dc cd
 typo ce cd
 typo ced cd
+typo ccd cd
 typo xs cd
 typo qcd cd    # I quit less *twice*, then wanted to cd
 typo lcd cd    # I tried to ls, then decided to change directories instead
