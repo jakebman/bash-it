@@ -18,14 +18,17 @@ function _use_complete_typo {
 		_log_error "Please enable the typos plugin to use this completion"
 		return 1
 	fi
-	complete -F _complete_typo "${!_BASH_IT_TYPOS[@]}"
+	complete -F _complete_alias_for_typos "${!_BASH_IT_TYPOS[@]}"
 }
 
-function _complete_typo {
-	(
-		_typos-load
-		_complete_alias
-	)
+
+# Named to be compatible with _complete_alias checking https://github.com/cykerway/complete-alias/blob/7f2555c2fe7a1f248ed2d4301e46c8eebcbbc4e2/complete_alias#L806
+function _complete_alias_for_typos {
+	_typos-load
+	_complete_alias
+	local ret=$?
+	_typos-unload
+	return $ret
 }
 
 

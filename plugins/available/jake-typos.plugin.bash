@@ -85,6 +85,10 @@ function _typos-load {
 	done
 }
 
+function _typos-unload {
+	unalias "${!_BASH_IT_TYPOS[@]}"
+}
+
 function typos {
 	(
 		unalias -a
