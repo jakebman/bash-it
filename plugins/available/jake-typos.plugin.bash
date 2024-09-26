@@ -75,6 +75,9 @@ function command_not_found_handle {
 	shopt -qs expand_aliases
 	# the arguments are 'quoted in a format that can be reused as input.' per Bash's @ "Parameter transformation"
 	# @Q and :2 cannot be combined in the same substitution, though I didn't try very hard - this is far more readable
+	# NB: this might be able to accomplished cleaner following the suggestion here:
+	# https://unix.stackexchange.com/questions/444946/how-can-we-run-a-command-stored-in-a-variable#:~:text=in%20the%20end.-,Using%20an%20array%3A,-Arrays%20allow%20creating
+	# (but it might be true that the quoted first argument defeats alias expansion)
 	eval "$name" "${args[@]@Q}"
 }
 
