@@ -394,6 +394,7 @@ typo pusl push
 typo ppush push
 typo pushb push
 typo pusjh push
+typo pushj push
 typo push4 push
 typo pushd push
 typo psh push
