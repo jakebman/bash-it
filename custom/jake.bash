@@ -93,6 +93,11 @@ else
 	_log_error "pygmentize is available via sudo apt install python-pygments"
 fi
 
+function find-ack {
+	ack -f "$@"
+}
+alias ack-find=find-ack
+
 function files {
 	about "list the files of an apt package; or run the file command on all files in a directory (defaulting to . if there are no arguments)"
 
