@@ -88,7 +88,12 @@ function jake-install-tools() {
 	# tools that can use apt
 	TOOLS_TO_INSTALL=""
 	_jake-find-tool pygmentize python3-pygments
-	_jake-find-tool procyon procyon-decompiler # java class files. TODO - does this require OS-level java 11? can I sdkman around it? (via just installing the dependencies)
+	# A little hacky - I could just install procyon-decompiler, but that brings in default-jre-headless, which has a large dependency tree
+	# See https://serverfault.com/questions/250224/how-do-i-get-apt-get-to-ignore-some-dependencies#comment1207918_250227
+	_jake-find-tool procyon "ca-certificates-java java-common libjcommander-java libpcsclite1 libprocyon-java &&
+		apt download procyon-decompiler &&
+		sudo dpkg --ignore-depends=default-jre-headless -i procyon-decompiler*.deb &&
+		sudo apt install " '(or just procyon-decompiler, but this keeps the 300MB os-level java install away)'
 	_jake-find-tool python python-is-python3   # also grabs python3, as a bonus
 	# _jake-find-tool xmlformat xmlformat-perl # I think xmlindent is cleaner, partially because it has fewer options
 	_jake-find-tool xmllint libxml2-utils # multi-function, but only used for --xpath queries, because --format makes --xpath return one-line results
