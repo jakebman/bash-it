@@ -464,6 +464,8 @@ typo conf config
 
 typo nns-conifg nns-config
 
+typo sha256 sha256sum
+
 # the git config-edit to edit "the appropriate" git config file
 typo edit-config config-edit
 
