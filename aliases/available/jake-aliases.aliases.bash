@@ -287,6 +287,9 @@ function commit {
 		git commit "${args[@]}" "$@"
 	fi
 }
+# TODO: this could be smarter - it ends up giving me commit message editing when I don't usually want that.
+# Potentially, that just means `-C HEAD` (in a way that removes itself if `-m foo` or `-F bar.txt` is present)
+# Or just --no-edit, potentiall in a "I asked you if you wanted to add anything. You didn't. So you're editing the message instead" way.
 alias amend='commit --amend'
 
 # Print a header warning that this is NOT ADD, and DESTUCTIVE
