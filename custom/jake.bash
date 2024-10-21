@@ -38,6 +38,10 @@ alias pgrep='pgrep --list-full'
 # requires maven 3.9+ https://maven.apache.org/configure.html#maven_args-environment-variable
 export MAVEN_ARGS="-T1C"
 
+# Get timing output in maven. Doesn't require maven >= 3.9 (sets java system properties, not maven switches)
+MAVEN_OPTS+=" -Dorg.slf4j.simpleLogger.showDateTime=true -Dorg.slf4j.simpleLogger.dateTimeFormat=HH:mm:ss.SSS"
+export MAVEN_OPTS
+
 # quit-if-one-screen allows less to simply dump the output to STDOUT when it would all fit on a single page
 #   see https://stackoverflow.com/questions/2183900/how-do-i-prevent-git-diff-from-using-a-pager
 # quit-at-eof gives you the change to scroll to the end, but if you keep
