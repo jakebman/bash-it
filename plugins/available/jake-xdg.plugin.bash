@@ -13,6 +13,7 @@ export ACKRC="${XDG_CONFIG_HOME}/ack/ackrc"
 export GNUPGHOME="${XDG_CONFIG_HOME}/gnupg"
 # https://docs.docker.com/engine/reference/commandline/cli/#environment-variables
 export DOCKER_CONFIG="${XDG_CONFIG_HOME}/docker"
+export RANCHER_CONFIG_DIR="${XDG_CONFIG_HOME}/rancher"
 
 ## XDG_DATA_HOME
 : "${XDG_DATA_HOME:-${HOME}/.local/share}"
