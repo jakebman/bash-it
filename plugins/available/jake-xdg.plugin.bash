@@ -15,6 +15,9 @@ export GNUPGHOME="${XDG_CONFIG_HOME}/gnupg"
 export DOCKER_CONFIG="${XDG_CONFIG_HOME}/docker"
 export RANCHER_CONFIG_DIR="${XDG_CONFIG_HOME}/rancher"
 
+# *On Linux*, the *default backing store* respects this system property,
+# per https://docs.oracle.com/en/java/javase/11/core/preferences-api1.html#GUID-2DAC3DD0-993A-41A8-8CDC-F8E3A72E1AE3__SECTION_KWW_Z1P_S3B
+# (but, for ex., Windows uses the registry)
 alias jshell='jshell -J-Djava.util.prefs.userRoot="${XDG_CONFIG_HOME}/java"'
 
 ## XDG_DATA_HOME
