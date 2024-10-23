@@ -22,6 +22,9 @@ export GRADLE_USER_HOME="${XDG_DATA_HOME}/gradle"
 
 ## XDG_CACHE_HOME
 : ${XDG_CACHE_HOME:=${HOME}/.cache}
+# We export XDG_CACHE_HOME to its own value so that git-ignore-io from git-extras will respect it
+# (it doesn't respect this folder unless this environment variable is defined)
+export XDG_CACHE_HOME
 
 export JARVIZ_DIR="${XDG_CACHE_HOME}" # a jar analyzer, from sdkman
 
