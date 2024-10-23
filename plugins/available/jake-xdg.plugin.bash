@@ -16,7 +16,7 @@ export DOCKER_CONFIG="${XDG_CONFIG_HOME}/docker"
 export RANCHER_CONFIG_DIR="${XDG_CONFIG_HOME}/rancher"
 
 ## XDG_DATA_HOME
-: "${XDG_DATA_HOME:-${HOME}/.local/share}"
+: "${XDG_DATA_HOME:=${HOME}/.local/share}"
 
 export GRADLE_USER_HOME="${XDG_DATA_HOME}/gradle"
 [ -d ~/.gradle ] && _log_warning "heads up - you have a dangling ~/.gradle folder. It lives in $GRADLE_USER_HOME now"
