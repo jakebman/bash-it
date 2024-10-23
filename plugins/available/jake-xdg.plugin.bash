@@ -20,8 +20,8 @@ export RANCHER_CONFIG_DIR="${XDG_CONFIG_HOME}/rancher"
 
 export GRADLE_USER_HOME="${XDG_DATA_HOME}/gradle"
 [ -d ~/.gradle ] && _log_warning "heads up - you have a dangling ~/.gradle folder. It lives in $GRADLE_USER_HOME now"
-# TODO: --ivy flag here to also not create ~/.ivy2 folder
-export SBT_OPTS="--sbt-dir '${XDG_DATA_HOME}/scala-build-tool'"
+# TODO: --ivy flag here to also not create ~/.ivy2 folder; figure out how whitespace is supposed to work in this env var.
+export SBT_OPTS="--sbt-dir ${XDG_DATA_HOME}/scala-build-tool"
 
 ## XDG_CACHE_HOME
 : ${XDG_CACHE_HOME:=${HOME}/.cache}
