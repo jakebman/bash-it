@@ -39,6 +39,7 @@ export JARVIZ_DIR="${XDG_CACHE_HOME}" # a jar analyzer, from sdkman
 ## XDG_STATE_HOME
 : ${XDG_STATE_HOME:=${HOME}/.local/state}
 
+export REDISCLI_HISTFILE="${XDG_STATE_HOME}/redis/cli-history"
 export PERL_CPANM_HOME="${XDG_STATE_HOME}/cpanm" # cpanm command in the cpanminus package from apt (for rakubrew)
 
 : ${JAKE_XDG_BIN_DIR:=${HOME}/.local/bin}
