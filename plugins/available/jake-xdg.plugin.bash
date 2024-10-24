@@ -43,7 +43,7 @@ export JARVIZ_DIR="${XDG_CACHE_HOME}" # a jar analyzer, from sdkman
 # or https://unix.stackexchange.com/questions/630642/change-location-of-python-history
 export REDISCLI_HISTFILE="${XDG_STATE_HOME}/redis/cli-history"
 export PERL_CPANM_HOME="${XDG_STATE_HOME}/cpanm" # cpanm command in the cpanminus package from apt (for rakubrew)
-alias wget='wget --hsts-file="{XDG_STATE_HOME}/wget-hsts"'
+alias wget='wget --hsts-file="${XDG_STATE_HOME}/wget-hsts"'
 
 : ${JAKE_XDG_BIN_DIR:=${HOME}/.local/bin}
 # install via https://github.com/pyenv/pyenv-installer. Installed via fork, so it's prudent to export it here
