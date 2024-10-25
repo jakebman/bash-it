@@ -41,6 +41,8 @@ export JARVIZ_DIR="${XDG_CACHE_HOME}" # a jar analyzer, from sdkman
 
 # TODO: python history: https://stackoverflow.com/questions/62063414/how-to-disable-python-history-saving
 # or https://unix.stackexchange.com/questions/630642/change-location-of-python-history
+# However, this canonical solution will be available in python 3.13:
+export PYTHON_HISTORY="${XDG_STATE_HOME}/python/python_history"
 export REDISCLI_HISTFILE="${XDG_STATE_HOME}/redis/cli-history"
 export PERL_CPANM_HOME="${XDG_STATE_HOME}/cpanm" # cpanm command in the cpanminus package from apt (for rakubrew)
 alias wget='wget --hsts-file="${XDG_STATE_HOME}/wget-hsts"'
