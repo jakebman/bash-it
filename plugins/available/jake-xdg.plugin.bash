@@ -29,6 +29,9 @@ export RANCHER_CONFIG_DIR="${XDG_CONFIG_HOME}/rancher"
 # But there's also JDK_JAVA_OPTIONS: https://stackoverflow.com/questions/52986487/what-is-the-difference-between-jdk-java-options-and-java-tool-options-when-using
 # In the end, I followed https://dev.to/sunnybhambhani/different-environment-variables-available-in-java-101o - I'm choosing
 # JAVA_TOOL_OPTIONS, which seems to be global, overridable, and I don't mind javac reading this too:
+# Further justification: The JDK's debugging docs only know about JAVA_TOOL_OPTIONS, and don't mention JDK_JAVA_OPTIONS:
+# https://docs.oracle.com/en/java/javase/23/troubleshoot/environment-variables-and-system-properties.html#GUID-A91E7E21-2E91-48C4-89A4-836A7C0EE93B
+# https://docs.oracle.com/en/java/javase/23/troubleshoot/submit-bug-report.html#GUID-3933BFE1-0193-403E-8D72-2E0DC6639EE8
 JAVA_TOOL_OPTIONS+=" -Djava.util.prefs.userRoot='${XDG_CONFIG_HOME}'/java"
 export JAVA_TOOL_OPTIONS
 
