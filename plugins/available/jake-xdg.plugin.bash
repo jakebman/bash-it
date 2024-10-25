@@ -18,7 +18,19 @@ export RANCHER_CONFIG_DIR="${XDG_CONFIG_HOME}/rancher"
 # *On Linux*, the *default backing store* respects this system property,
 # per https://docs.oracle.com/en/java/javase/11/core/preferences-api1.html#GUID-2DAC3DD0-993A-41A8-8CDC-F8E3A72E1AE3__SECTION_KWW_Z1P_S3B
 # (but, for ex., Windows uses the registry)
-alias jshell='jshell -J-Djava.util.prefs.userRoot="${XDG_CONFIG_HOME}/java"'
+# Documented journey to find the appropriate ENV variable to convince all javas to use this system property:
+# A Stack Overflow answer suggests _JAVA_OPTIONS: https://stackoverflow.com/a/8158708/285944
+# ... it cites to a blog post and the Java2D spec for java 1.5, which aren't good canonical citations
+#         ([The docs for java 8](https://docs.oracle.com/javase/8/docs/technotes/guides/2d/flags.html) do agree)
+# I search for canonical docs for _JAVA_OPTIONS and find https://stackoverflow.com/questions/28327620/difference-between-java-options-java-tool-options-and-java-opts
+#  The answer is that _JAVA_OPTIONS is for HotSport only.
+#  https://bugs.openjdk.org/browse/JDK-4971166 suggests JAVA_TOOL_OPTIONS, which does seem to be documented:
+#         https://docs.oracle.com/en/java/javase/11/troubleshoot/environment-variables-and-system-properties.html#GUID-BE6E7B7F-A4BE-45C0-9078-AA8A66754B97
+# But there's also JDK_JAVA_OPTIONS: https://stackoverflow.com/questions/52986487/what-is-the-difference-between-jdk-java-options-and-java-tool-options-when-using
+# In the end, I followed https://dev.to/sunnybhambhani/different-environment-variables-available-in-java-101o - I'm choosing
+# JAVA_TOOL_OPTIONS, which seems to be global, and I don't mind javac reading this too:
+JAVA_TOOL_OPTIONS+=" -Djava.util.prefs.userRoot='${XDG_CONFIG_HOME}'/java"
+export JAVA_TOOL_OPTIONS
 
 ## XDG_DATA_HOME
 : "${XDG_DATA_HOME:=${HOME}/.local/share}"
