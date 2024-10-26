@@ -308,6 +308,7 @@ typo setaged staged
 typo staghed staged
 typo stagerd staged
 typo stg staged
+typo sjow show
 typo whow show
 typo sho show
 typo shw show
@@ -375,6 +376,7 @@ typo sta status
 typo st status        # first unique difference from s's status-or-show magic
 typo branche branches # because sometimes I get lazy, apparently
 typo gst gstatus
+typo gstat gstatus
 typo staqsh stashs
 typo stashs stash
 typo tsga tags       # Wow.
