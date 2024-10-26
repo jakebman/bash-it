@@ -3,12 +3,11 @@
 # Functions for measuring and reporting how long a command takes to run.
 
 # Get shell duration in decimal format regardless of runtime locale.
-# Notice: This function runs as a sub-shell - notice '(' vs '{'.
-function _shell_duration_en() (
+function _shell_duration_en() {
 	# DFARREL You would think LC_NUMERIC would do it, but not working in my local
-	LC_ALL='en_US.UTF-8'
+	local LC_ALL='en_US.UTF-8'
 	printf "%s" "${EPOCHREALTIME:-$SECONDS}"
-)
+}
 
 : "${COMMAND_DURATION_START_SECONDS:=$(_shell_duration_en)}"
 : "${COMMAND_DURATION_ICON:=🕘}"
