@@ -239,7 +239,6 @@ function cherry-pick {
 
 # commit with one argument is either add/commit the file, or commit with the given message
 # TODO: in a situation where no flags are specified, -m is "$*", and we automatically addp any files mentioned
-# TODO: this improperly rejects the situation where we only have staged renames
 function commit {
 	# stash some flags that can be "transparent" to this feature
 	# (these can only be BEFORE the message for now... potentially always)
@@ -269,6 +268,7 @@ function commit {
 				: # TODO: this only really checks if I added *something* to args; not specifically '-a'
 			elif JAKE_SUPPRESS_GIT_SQUAWK=1 git diff --staged --quiet; then
 				# No staged changes. Commit will fail. User probably wants to select some changes to add
+				# TODO: this doesn't catch renames. How do I catch renames?
 				JAKE_SUPPRESS_GIT_SQUAWK=1 add # dunno which file you wanted, but go ahead and do an interactive add
 				# STILL no changes. Commit will obviously fail. User probably a little confused
 				if JAKE_SUPPRESS_GIT_SQUAWK=1 git diff --staged --quiet; then
