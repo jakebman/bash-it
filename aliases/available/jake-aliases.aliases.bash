@@ -289,10 +289,28 @@ function commit {
 		git commit "${args[@]}" "$@"
 	fi
 }
-# TODO: this could be smarter - it ends up giving me commit message editing when I don't usually want that.
-# Potentially, that just means `-C HEAD` (in a way that removes itself if `-m foo` or `-F bar.txt` is present)
-# Or just --no-edit, potentiall in a "I asked you if you wanted to add anything. You didn't. So you're editing the message instead" way.
-alias amend='commit --amend'
+
+# Amend a prior commit. Try to guess the user's intent.
+# Nice feature: if you committed some changes (and therefore didn't change the message),
+# re-running this gives you the ability to immediately(-ish) change the message
+function amend {
+	if JAKE_SUPPRESS_GIT_SQUAWK=1 git is-clean-quiet; then
+		# No changes can possibly be `add`-ed. We're obviously editing the message
+		git commit --amend
+		return
+	fi
+
+	# offer the ability to add changes:
+	JAKE_SUPPRESS_GIT_SQUAWK=1 add
+
+	if JAKE_SUPPRESS_GIT_SQUAWK=1 git diff --staged --no-renames --quiet; then
+		# No staged changes
+		git commit --amend
+	else
+		# There are staged changes. We'll keep the prior message
+		git commit --amend --no-edit
+	fi
+}
 
 # Print a header warning that this is NOT ADD, and DESTUCTIVE
 function restore {
