@@ -266,12 +266,13 @@ function commit {
 
 			if [ -v args ]; then
 				: # TODO: this only really checks if I added *something* to args; not specifically '-a'
-			elif JAKE_SUPPRESS_GIT_SQUAWK=1 git diff --staged --quiet; then
+			elif JAKE_SUPPRESS_GIT_SQUAWK=1 git diff --staged --no-renames --quiet; then
 				# No staged changes. Commit will fail. User probably wants to select some changes to add
-				# TODO: this doesn't catch renames. How do I catch renames?
+				# --no-renames tells git to identify a difference when one file is deleted and another added,
+				# even if those files "happen" to have the same contents. We positively want that behavior.
 				JAKE_SUPPRESS_GIT_SQUAWK=1 add # dunno which file you wanted, but go ahead and do an interactive add
 				# STILL no changes. Commit will obviously fail. User probably a little confused
-				if JAKE_SUPPRESS_GIT_SQUAWK=1 git diff --staged --quiet; then
+				if JAKE_SUPPRESS_GIT_SQUAWK=1 git diff --staged --no-renames --quiet; then
 					echo
 					echo "no changes for commit message '$1'. No commit created. Thank you."
 					echo
