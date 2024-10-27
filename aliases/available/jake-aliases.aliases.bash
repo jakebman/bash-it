@@ -300,11 +300,13 @@ function amend {
 		return
 	fi
 
-	# offer the ability to add changes:
-	JAKE_SUPPRESS_GIT_SQUAWK=1 add
+	# if nothing is staged, offer the ability to add changes:
+	if JAKE_SUPPRESS_GIT_SQUAWK=1 git diff --staged --no-renames --quiet; then
+		JAKE_SUPPRESS_GIT_SQUAWK=1 add
+	fi
 
 	if JAKE_SUPPRESS_GIT_SQUAWK=1 git diff --staged --no-renames --quiet; then
-		# No staged changes
+		# No staged changes, even after offering `add`
 		git commit --amend
 	else
 		# There are staged changes. We'll keep the prior message
