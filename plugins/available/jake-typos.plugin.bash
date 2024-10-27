@@ -271,6 +271,7 @@ typo vasr vars
 typo cars vars
 
 typo pyt python # technically, just a lazy name
+typo pyhtron python
 
 # because that's what I was trying to type at the time, and I figure if I most-common'd
 # 'type asdf' into 'typ easdf', it wouldn't work anyway
