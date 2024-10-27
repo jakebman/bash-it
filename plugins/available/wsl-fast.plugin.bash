@@ -35,6 +35,7 @@ alias wsl=wsl.exe
 alias winmerge="'/mnt/c/Program Files/WinMerge/WinMergeU.exe'"
 alias winget=winget.exe
 alias clip=clip.exe
+alias cmd=cmd.exe
 
 function windirstat {
 	about "run windirstat.exe in a background process, willing to assume you mean the current folder"
