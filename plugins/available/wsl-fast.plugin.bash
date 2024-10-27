@@ -36,14 +36,6 @@ alias winmerge="'/mnt/c/Program Files/WinMerge/WinMergeU.exe'"
 alias winget=winget.exe
 alias clip=clip.exe
 
-# don't worry about aliasing docker if it's already here
-# TODO: when docker is /mnt/c/Program Files/Docker/Docker/resources/bin/docker, all it does is complain
-# that it's not actually the right docker
-if ! type docker &> /dev/null; then
-	alias docker=docker.exe
-	alias kubectl=kubectl.exe
-fi
-
 function windirstat {
 	about "run windirstat.exe in a background process, willing to assume you mean the current folder"
 
