@@ -2,6 +2,7 @@
 cite about-plugin
 about-plugin 'allow type to see through aliases and try to find the underlying command'
 
+# TODO: this doesn't work with `alias foo='/a path/with spaces'`
 function type {
 	about 'enhance the shell builtin `type` to try and see through aliases'
 
