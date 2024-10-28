@@ -30,10 +30,6 @@ alias jake='j --jake'
 
 # TODO: can I get autocomplete on a single tab?
 
-# because I want to know what the command *is*.
-# These commands share many common flags, but these two flags are "(<command> only)", despite being very similar
-alias pkill='pkill --echo'
-alias pgrep='pgrep --list-full'
 
 # requires maven 3.9+ https://maven.apache.org/configure.html#maven_args-environment-variable
 export MAVEN_ARGS="-T1C"

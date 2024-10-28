@@ -212,6 +212,26 @@ function tree {
 	fi
 }
 
+# I want to know what the command *is* when I pgrep or pkill.
+# pgrep and pkill share many common flags, but these two flags I'm adding are "(<command> only)", despite being very similar
+function pkill {
+	about "pkill, but with --echo and paging if the output is terminal"
+	if [ -t 1 ]; then
+		command pkill --echo "$@" | pager
+	else
+		command pkill "$@"
+	fi
+}
+
+function pgrep {
+	about "pgrep, but with --list-full and paging if the output is terminal"
+	if [ -t 1 ]; then
+		command pgrep --list-full "$@" | pager
+	else
+		command pgrep "$@"
+	fi
+}
+
 function pstree {
 	about "pstree, with assumed pagination and -a"
 	command pstree -a "$@" | pager
