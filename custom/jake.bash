@@ -386,6 +386,7 @@ function filewhich {
 }
 alias filew=filewhich
 
+# TODO: headwhich and tailwhich
 function catwhich {
 	# TODO: what if this was also able to print functions and aliases, too?
 	# TODO: what if we follow aliases down to their roots?
