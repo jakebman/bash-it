@@ -245,6 +245,8 @@ typo grpe grep
 
 typo pgre pgrep
 
+typo ptree pstree
+
 typo vile file
 typo fiel file
 typo fild file
@@ -477,6 +479,7 @@ typo edit-config config-edit
 
 typo ci co
 typo coi co
+typo c- 'co -'
 
 #######################
 ## typos to builtins
