@@ -58,6 +58,7 @@ export JARVIZ_DIR="${XDG_CACHE_HOME}" # a jar analyzer, from sdkman
 # or https://unix.stackexchange.com/questions/630642/change-location-of-python-history
 # However, this canonical solution will be available in python 3.13:
 export PYTHON_HISTORY="${XDG_STATE_HOME}/python/python_history"
+mkdir -p "$(dirname "$PYTHON_HISTORY")" # python expects the parent folder to exist
 export REDISCLI_HISTFILE="${XDG_STATE_HOME}/redis/cli-history"
 export PERL_CPANM_HOME="${XDG_STATE_HOME}/cpanm" # cpanm command in the cpanminus package from apt (for rakubrew)
 alias wget='wget --hsts-file="${XDG_STATE_HOME}/wget-hsts"'
@@ -88,7 +89,7 @@ export COMPLETE_ALIAS_DIR="${JAKE_XDG_BIN_DIR}/complete-alias"
 # .motd_shown - probably not doable
 # .mrconfig (& .mr which symlinks to beat .mrtrust at tab completion) - cannot be moved without a code change in mr tool
 # .netrc - conventional file name, from telnet. Location configurable in curl, but not telnet.
-# .python_history - not currently configurable
+# .python_history - not currently configurable - will in 3.13
 # .rakubrew, .raku - not worth changing right now. Still TODO
 # .sdkman - inconvenient for me, same as .bash-it
 # .ssh - Not generally possible
