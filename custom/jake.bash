@@ -38,26 +38,42 @@ export MAVEN_ARGS="-T1C"
 MAVEN_OPTS+=" -Dorg.slf4j.simpleLogger.showDateTime=true -Dorg.slf4j.simpleLogger.dateTimeFormat=HH:mm:ss.SSS"
 export MAVEN_OPTS
 
+if [ -v LESS ]; then
+	_log_warning "LESS has a value before I start adding my custom flags"
+	# <trailing space> permits `LESS+=--a-single-new-flag some command` invocations, and allows better inline comments below
+	LESS+=' '
+fi
+
 # quit-if-one-screen allows less to simply dump the output to STDOUT when it would all fit on a single page
 #   see https://stackoverflow.com/questions/2183900/how-do-i-prevent-git-diff-from-using-a-pager
+LESS+="--quit-if-one-screen "
 # quit-at-eof gives you the change to scroll to the end, but if you keep
 #   scrolling it also exits (I like not feeling trapped)
+LESS+="--quit-at-eof "
 # no-init disables that weird 'second screen' behavior, which I don't like
+LESS+="--no-init "
 # ignore-case is actually smartcase - all-lowercase is case-insensitive; add an uppercase to require case matching
+LESS+="--ignore-case "
 # RAW-CONTROL-CHARS enables color interpretation without allowing every raw control code through
 #   (b/c that would make lines hard to track)
+LESS+="--RAW-CONTROL-CHARS "
 # tabs=2 condenses tabs to only two characters wide
+LESS+="--tabs=2 "
 # jump-target=.2 puts the searched-for line 2/10ths of the way down the screen, rather than at the top line
 #   (Heads up! 0.2 does not work. I tried, and learned that)
 #   This also applies to 'go to line' and 'go to tag' commands
+LESS+="--jump-target=.2 "
 # SEARCH-SKIP-SCREEN ensures that new searches start below the jump-target line, and not the top of the screen
 #   Repeated searches (with n/N) already did this, but if you search for something new
 #        you would otherwise be searching 2/10ths of the screen *up* from where you started
 #   It's also worth noting that this is *per line*, so following matches on the same line are also skipped
+LESS+="--SEARCH-SKIP-SCREEN "
 # use-color gets a nice light cyan color on some of less's UI elements
-# <trailing space> permits `LESS+=--new-flag some command` invocations
+LESS+="--use-color "
 # There's some cool discussion on the value of these flags used in SYSTEMD_LESS in the `man systemctl` docs
-export LESS="--quit-if-one-screen --quit-at-eof --no-init --ignore-case --RAW-CONTROL-CHARS --tabs=2 --jump-target=.2 --SEARCH-SKIP-SCREEN --use-color "
+export LESS
+
+
 # I liked editing ~/.lessfilter (which is now in XDG_CONFIG_HOME), and this kept getting in the way.
 # Still, this is the proper XDG-like location for this file. Since it's the 'other' default for this setting,
 # I could export XDG_DATA_HOME here instead of LESSHISTFILE, and less would implicitly use it.
