@@ -70,6 +70,8 @@ LESS+="--jump-target=.2 "
 LESS+="--SEARCH-SKIP-SCREEN "
 # use-color gets a nice light cyan color on some of less's UI elements
 LESS+="--use-color "
+# follow-name ensures that `less +F /var/log/foo` emulates `tail -F`, not `tail -f`. i.e. an implicit --follow=name
+LESS+="--follow-name "
 # There's some cool discussion on the value of these flags used in SYSTEMD_LESS in the `man systemctl` docs
 export LESS
 
