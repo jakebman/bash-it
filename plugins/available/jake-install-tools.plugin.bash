@@ -280,6 +280,14 @@ function jake-install-tools() {
 		echo "Nothing to do for apt-*-only - bin files are installed and are happy"
 	fi
 
+	if ! cmp -s "${BASH_IT_CUSTOM}/apt-preferences.d/jake-no-thanks-batcat" "/etc/apt/preferences.d/jake-no-thanks-batcat"; then
+		echo "please copy the down-playing of apt preferences of batcat to /etc/apt/preferences.d/"
+		echo -en "\t"
+		echo 'sudo install --verbose --mode=644 ${BASH_IT_CUSTOM}/apt-preferences.d/* /etc/apt/preferences.d/'
+	else
+		echo "Nothing to do for apt preferences - those files are installed and happy"
+	fi
+
 	if grep -q 'systemd=true' /etc/wsl.conf; then
 		echo "Nothing to do for systemd - systemd is enabled in WSL"
 	else
@@ -425,9 +433,7 @@ function _jake-check-optional-tools() {
 		echo "Get the new .deb from one of these:"
 		_jake-github-repo-release-urls sharkdp/bat | grep deb$ | grep amd | grep -v musl
 		echo -en "\t"
-		echo 'sudo dpkg -i bat*.deb && sudo apt-mark hold bat # keep apt from installing over this version'
-		echo 'use apt-mark showhold to list the held packages'
-		# read more at https://askubuntu.com/questions/18654/how-to-prevent-updating-of-a-specific-package
+		echo 'And apt will keep trying to upgrade over this sometimes. Ensure that /etc/apt/preferences.d contains a file about this'
 	fi
 
 	if _binary_exists delta; then

@@ -1,0 +1,9 @@
+
+# This file belongs in /etc/apt/preferences.d
+# It should be owned by root:root
+# see `man apt_preferences`
+# Learn more from https://unix.stackexchange.com/questions/692634/restrict-which-packages-are-installable-from-a-repository
+
+Package: bat
+Pin: release n=noble
+Pin-Priority: 50
