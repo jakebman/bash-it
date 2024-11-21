@@ -449,6 +449,7 @@ alias unshallow='git unshallow'           # re-hydrate a shallow clone
 alias unstash='git unstash'               # essentially `stash pop`
 alias untracked='git untracked'           # something morally equivalent to 'status --untracked'
 alias yesterday='git yesterday'           # 'since yesterday', potentially smarter
+alias today='git today'                   # like yesterday, but more recent. Allowed to be identical to yesterday, though.
 
 # 'Builtin-Shadowing, Duplicating' aliases
 # These aliases are builtins that I *definitely* want shadowed all the time.
