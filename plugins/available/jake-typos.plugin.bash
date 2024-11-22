@@ -140,6 +140,8 @@ typo gitr git
 typo qgit git
 typo jgti git # it's like... sometimes I just mash the keyboard while thinking really hard about the command
 
+typo ggsheild ggshield # Git Guardian - a work tool
+
 # Not technically typos, but a common misstep:
 typo :q "echo You are not in vim"
 typo :wq :q
