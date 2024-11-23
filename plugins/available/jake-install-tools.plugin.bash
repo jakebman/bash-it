@@ -536,6 +536,14 @@ function _jake-check-optional-tools() {
 		echo "consider looking into makedeb for my own packages - https://www.makedeb.org/"
 	fi
 
+	if _command_exists cloudsmith; then
+		echo "Nothing to do for cloudsmith - cloudsmith is happy"
+	else
+		echo "consider installing and using cloudsmith for my own packages:"
+		echo -en "\t"
+		echo "curl -1sLf 'https://dl.cloudsmith.io/public/cloudsmith/cli/setup.deb.sh' | sudo -E bash"
+	fi
+
 	if _command_exists dgit; then
 		echo "Nothing to do for dgit - dgit is happy"
 	else
