@@ -92,7 +92,7 @@ function pull {
 				# with a hundred tracked repos, I want some intermediate output
 				emptyLine+=1
 				if(!(emptyLine % boredRatio)) {
-					repo=repo " (progress marker for " emptyLine "th quiet entry)"
+					repo=repo " (progress marker after " emptyLine " quiet entries)"
 					print_and_empty_info()
 				}
 			}
@@ -149,7 +149,7 @@ function status {
 				# with a hundred tracked repos, I want some intermediate output
 				emptyLine+=1
 				if(!(emptyLine % boredRatio)) {
-					repo=repo " (progress marker for " emptyLine "th quiet entry)"
+					repo=repo " (progress marker after " emptyLine " quiet entries)"
 					print_and_empty_info()
 				}
 			}
