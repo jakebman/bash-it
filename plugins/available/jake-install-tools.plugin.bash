@@ -250,6 +250,14 @@ function jake-install-tools() {
 		echo 'sudo update-alternatives --set editor ....'
 	fi
 
+	if [ -f '/mnt/c/Windows/System32/drivers/etc/hosts' ]; then
+		echo "You have the windows hosts file accessible at '/mnt/c/Windows/System32/drivers/etc/hosts'"
+	else
+		echo "Creating symlink to windows hosts file at '/etc/hosts-windows'"
+
+		sudo ln -s '/mnt/c/Windows/System32/drivers/etc/hosts' '/etc/hosts-windows'
+	fi
+
 	# Allowing the $EDITOR environment variables to pass through sudo
 	# ref for script: https://superuser.com/questions/869144/why-does-the-system-have-etc-sudoers-d-how-should-i-edit-it
 	if ! [[ -f /etc/sudoers.d/100-jake-sudoers && -f /etc/sudoers.d/200-preserve-LESS-env-var ]]; then
