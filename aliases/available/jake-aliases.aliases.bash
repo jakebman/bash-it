@@ -200,6 +200,7 @@ function add {
 	fi
 }
 
+# TODO: this doesn't offer to add untracked files. If there are no patches, can it try that instead, please?
 function addp {
 	about "reset tabstops in git add to something similar to git's core.pager= less --tabs=3,5, but with 4 spaces instead"
 	# TODO: would this make sense to try under termcap's ti/te state? Would that be helpful, or weird because the output is lost?
