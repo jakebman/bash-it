@@ -185,6 +185,8 @@ typo shf shfmt # tentative, sitting at the tab completion fork with shfolder.dll
 typo shft shfmt
 typo shfmty shfmt # speculative
 
+typo crontabl crontab
+
 typo cata cat
 typo vat cat
 typo ca cat
@@ -283,6 +285,7 @@ typo typ typo
 typo ypo typo
 typo fypo typo
 typo tyop typo
+typo yypo typo
 typo tyypo typo
 typo ytypo typo
 typo typeo typo
