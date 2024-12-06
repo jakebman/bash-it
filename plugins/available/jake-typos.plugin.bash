@@ -353,6 +353,7 @@ typo reabse rebase
 typo restoer restore
 typo retore restore
 typo rstore restore
+typo restorep restore
 typo r-here rainbow-here
 typo ra rainbow
 typo rain rainbow
