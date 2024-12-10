@@ -251,6 +251,7 @@ typo pgre pgrep
 
 typo ptree pstree
 
+typo gilr file # Left hand moved one key to the right
 typo vile file
 typo fiel file
 typo fild file
