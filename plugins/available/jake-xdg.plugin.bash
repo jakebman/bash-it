@@ -92,6 +92,7 @@ export COMPLETE_ALIAS_DIR="${JAKE_XDG_BIN_DIR}/complete-alias"
 #         https://www.scala-sbt.org/1.x/docs/Library-Management.html#Ivy+Home+Directory
 #         https://stackoverflow.com/questions/3142856/how-to-configure-ivy-cache-directory-per-user-or-system-wide
 #         https://www.scala-sbt.org/1.x/docs/Launcher-Configuration.html
+#     Or simpler in the discussion of SBT_OPTS, above
 # .landscape - ubuntu-ism
 # .m2 - a symlink. Would otherwise require CLI argument to move settings.xml, which is the only thing I keep there anyway :(
 #     TODO: maven 3.9.0+ accept CLI arguments via $MAVEN_ARGS. See https://maven.apache.org/configure.html
