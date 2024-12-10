@@ -147,6 +147,8 @@ typo :q "echo You are not in vim"
 typo :wq :q
 typo wq :q
 
+typo ecoh echo
+
 typo explorer. 'explorer .'
 typo exploer. explorer. # happened while I was writing the alias above
 
@@ -279,6 +281,7 @@ typo cars vars
 
 typo pyt python # technically, just a lazy name
 typo pyhtron python
+typo pytrhon python
 
 # because that's what I was trying to type at the time, and I figure if I most-common'd
 # 'type asdf' into 'typ easdf', it wouldn't work anyway
@@ -501,6 +504,7 @@ typo dc cd
 typo ce cd
 typo ced cd
 typo ccd cd
+typo cdc cd
 typo xs cd
 typo qcd cd    # I quit less *twice*, then wanted to cd
 typo lcd cd    # I tried to ls, then decided to change directories instead
