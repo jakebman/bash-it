@@ -83,7 +83,6 @@ export COMPLETE_ALIAS_DIR="${JAKE_XDG_BIN_DIR}/complete-alias"
 # .gitignore.d - vcsh, created by default. hardcoded name below $VCSH_BASE, which defaults to $HOME
 # .gitmodules - required because I'm keeping subrepos in my conf vcsh repo
 #    It needs to live in $GIT_WORK_TREE - gets really interesting with nns-config also having these
-# .java - for jshell, and other users of the jdk's java.util.prefs.Preferences API
 # .landscape - ubuntu-ism
 # .m2 - a symlink. Would otherwise require CLI argument to move settings.xml, which is the only thing I keep there anyway :(
 # .motd_shown - probably not doable
