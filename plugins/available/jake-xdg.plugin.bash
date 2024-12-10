@@ -85,6 +85,11 @@ export COMPLETE_ALIAS_DIR="${JAKE_XDG_BIN_DIR}/complete-alias"
 # .gitignore.d - vcsh, created by default. hardcoded name below $VCSH_BASE, which defaults to $HOME
 # .gitmodules - required because I'm keeping subrepos in my conf vcsh repo
 #    It needs to live in $GIT_WORK_TREE - gets really interesting with nns-config also having these
+# .ivy2 - sbt (scala build tool)'s equivalent to .m2
+#     Potentialy configurable like java above, via:
+#         https://www.scala-sbt.org/1.x/docs/Library-Management.html#Ivy+Home+Directory
+#         https://stackoverflow.com/questions/3142856/how-to-configure-ivy-cache-directory-per-user-or-system-wide
+#         https://www.scala-sbt.org/1.x/docs/Launcher-Configuration.html
 # .landscape - ubuntu-ism
 # .m2 - a symlink. Would otherwise require CLI argument to move settings.xml, which is the only thing I keep there anyway :(
 #       TODO: maven 3.9.0+ accept CLI arguments via $MAVEN_ARGS. See https://maven.apache.org/configure.html
