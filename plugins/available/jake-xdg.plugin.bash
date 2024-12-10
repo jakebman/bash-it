@@ -49,6 +49,8 @@ export SBT_OPTS="--sbt-dir ${XDG_DATA_HOME}/scala-build-tool"
 # (it doesn't respect this folder unless this environment variable is defined)
 export XDG_CACHE_HOME
 
+# see `man npm` and https://docs.npmjs.com/cli/v10/commands/npm-cache
+export npm_config_cache="${XDG_CACHE_HOME}/npm"
 export JARVIZ_DIR="${XDG_CACHE_HOME}" # a jar analyzer, from sdkman
 
 ## XDG_STATE_HOME
@@ -96,6 +98,7 @@ export COMPLETE_ALIAS_DIR="${JAKE_XDG_BIN_DIR}/complete-alias"
 # .motd_shown - probably not doable
 # .mrconfig (& .mr which symlinks to beat .mrtrust at tab completion) - cannot be moved without a code change in mr tool
 # .netrc - conventional file name, from telnet. Location configurable in curl, but not telnet.
+# .npm - potentially configurable via `npm config set cache ~/...` or better. In Progress.
 # .python_history - not currently configurable - will in 3.13
 # .rakubrew, .raku - not worth changing right now. Still TODO
 # .sdkman - inconvenient for me, same as .bash-it
