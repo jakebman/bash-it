@@ -464,6 +464,10 @@ function _jake-check-optional-tools() {
 		echo 'sudo dpkg -i glab_*.deb'
 	fi
 
+	if [ -f ~/.bash_logout ]; then
+		echo "Please check out your ~/.bash_logout. It's probably useless and deletable"
+	fi
+
 	if _binary_exists jless; then
 		echo "Nothing to do for jless - jless is happy"
 	else
