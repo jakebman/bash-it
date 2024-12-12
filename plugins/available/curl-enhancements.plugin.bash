@@ -45,4 +45,4 @@ function enhanced-curl {
 
 # By using an alias to overwrite curl, and loading after sdkman, we allow sdkman to use curl without
 # competition with the maybe-logging output
-alias curl enhanced-curl
+alias curl=enhanced-curl

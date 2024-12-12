@@ -24,4 +24,4 @@ function _curl-logging {
 	command curl --dump-header >(_curl-logging-helper "$@") "$@"
 }
 
-alias curl _curl-logging
+alias curl=_curl-logging
