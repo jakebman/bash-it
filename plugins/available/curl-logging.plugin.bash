@@ -1,6 +1,10 @@
 cite about-plugin
 about-plugin 'keep some facts around about what happens with curl output'
 
+# Load after other plugins, which load at 250
+# Specifically, we want to load *after* the sdkman plugin
+# BASH_IT_LOAD_PRIORITY: 251
+
 _command_exists curl || return # don't create the function if the binary is missing
 
 function _curl-logging-helper {
@@ -20,6 +24,4 @@ function _curl-logging {
 	command curl --dump-header >(_curl-logging-helper "$@") "$@"
 }
 
-function curl {
-	_curl-logging "$@"
-}
+alias curl _curl-logging

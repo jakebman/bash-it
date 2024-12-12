@@ -1,9 +1,9 @@
 cite about-plugin
 about-plugin 'Additional enhancements for curl. Aware of curl-logging, and jq enhancements'
 # Load after other plugins, which load at 250
-# Specifically, we want to load *after* the jq, curl-logging, and sdkman plugins
+# Specifically, we want to load *after* the jq, curl-logging (at 251), and sdkman plugins
 # We also want to load after the jq-implicit-less alias, which loads at 150
-# BASH_IT_LOAD_PRIORITY: 251
+# BASH_IT_LOAD_PRIORITY: 252
 
 _command_exists curl || return # don't create the function if the binary is missing
 
