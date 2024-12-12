@@ -358,18 +358,17 @@ function realpath {
 
 function file {
 	about "allow file to implicitly work against all files in the current folder. Also, filesystem errors propagate out (implicit -E)"
-	( # TODO: `local -` instead of a subshell?
-		set -o pipefail
-		if [[ "$#" -eq 0 ]]; then
-			# A safer form of file -E * using find
-			# -maxdepth 1 - find only the files under the starting-point
-			# -printf '%P\0' - customizing a form of -print0 which strips the ./ prefix that -print0 gives
-			# %P: File's name with the name of the starting-point under which it was found removed.
-			find . -maxdepth 1 -printf '%P\0' | xargs --null file -E | pager
-		else
-			command file -E "$@" | pager
-		fi
-	)
+	local -
+	set -o pipefail
+	if [[ "$#" -eq 0 ]]; then
+		# A safer form of file -E * using find
+		# -maxdepth 1 - find only the files under the starting-point
+		# -printf '%P\0' - customizing a form of -print0 which strips the ./ prefix that -print0 gives
+		# %P: File's name with the name of the starting-point under which it was found removed.
+		find . -maxdepth 1 -printf '%P\0' | xargs --null file -E | pager
+	else
+		command file -E "$@" | pager
+	fi
 }
 
 function _is_git_safe {
