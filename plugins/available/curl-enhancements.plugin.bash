@@ -1,7 +1,7 @@
 cite about-plugin
 about-plugin 'Additional enhancements for curl. Aware of curl-logging, and jq enhancements'
 # Load after other plugins, which load at 250
-# Specifically, we want to load *after* the jq and the curl-logging plugins
+# Specifically, we want to load *after* the jq, curl-logging, and sdkman plugins
 # We also want to load after the jq-implicit-less alias, which loads at 150
 # BASH_IT_LOAD_PRIORITY: 251
 
@@ -27,7 +27,7 @@ function _curl-jqing-and-paging-helper {
 
 # allow for curl-logging plugin to apply or not
 function _curl-maybe-logging {
-	curl "$@"
+	command curl "$@"
 }
 if _command_exists _curl-logging; then
 	function _curl-maybe-logging {
@@ -35,10 +35,14 @@ if _command_exists _curl-logging; then
 	}
 fi
 
-function curl {
+function enhanced-curl {
 	if [[ -t 1 ]]; then
 		_curl-maybe-logging "$@" | _curl-jqing-and-paging-helper
 	else
 		_curl-maybe-logging "$@"
 	fi
 }
+
+# By using an alias to overwrite curl, and loading after sdkman, we allow sdkman to use curl without
+# competition with the maybe-logging output
+alias curl enhanced-curl
