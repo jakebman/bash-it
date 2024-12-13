@@ -30,6 +30,8 @@ alias llt='ll -t'
 alias llht='ll -ht'
 alias llth='ll -ht' # would be a typo, but I don't actually know which should be canonical
 
+alias untar='tar xf' # simply untar a file
+
 # The rest of the file is entirely git commands that... I don't care to add git to
 
 # 'Magic' aliases - smarter than their corresponding git command (they can see more Jake context)
