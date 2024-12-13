@@ -422,6 +422,14 @@ function _jake-check-optional-tools() {
 		echo 'PYENV_ROOT=~/.local/lib/pyenv curl https://pyenv.run | bash'
 	fi
 
+	if _command_exists ijq; then
+		echo "Nothing to do for ijq - ijq is happy"
+	else
+		echo "Please install ijq - the interactive jq tool"
+		echo "Get the binary (and manpage) from https://git.sr.ht/~gpanders/ijq/refs/v1.1.2, or the latest tag"
+		echo "The manpage (ijq.1) goes into ~/bin/man"
+	fi
+
 	if _command_exists jira; then
 		echo "Nothing to do for jira - jira is happy"
 	else
