@@ -6,9 +6,19 @@ about-plugin 'Set certain environment variables to make their corresponding apps
 ## XDG_CONFIG_HOME
 : ${XDG_CONFIG_HOME:=${HOME}/.config}
 
-# We export XDG_CONFIG_HOME to its own value so that curl will respect it
-# (curl doesn't respect this folder unless this environment variable is defined)
-export XDG_CONFIG_HOME
+# Curl is documented to check for curlrc at $XDG_CONFIG_HOME/curlrc ONLY if XDG_CONFIG_HOME is set.
+# I dislike this for four reasons:
+# 1. It's wrong, because there's a bug. Use strace on curl 8.5.0 and you'll see it check $XDG_CONFIG_HOME/.curlrc instead:
+#         $ XDG_CONFIG_HOME=/foo/bar strace curl |& grep foo/bar
+#         openat(AT_FDCWD, "/foo/bar/.curlrc", O_RDONLY) = -1 ENOENT (No such file or directory)
+# 2. It only works if XDG_CONFIG_HOME is set
+# 3. Item 2 is also a lie. Not sure if there's a bug in the docs, but Dec 6 2023 curl-8_5_0(7161cb17c) also tries to check $HOME/.config/.curlrc independently
+# 4. (re: 2, despite 3) I won't be blackmailed into exporting XDG_CONFIG_HOME with its default value
+#         (Please ignore the git history which shows me doing exactly that here)
+# That means I need intervention.
+# I *want* curlrc to live at "${XDG_CONFIG_HOME}/curl/curlrc", but there's no way to do that in env variables
+# So, I'm storing a symlink from "${XDG_CONFIG_HOME}/curl/.curlrc" to {the same, but without a dot} in my dotfiles repo
+export CURL_HOME="${XDG_CONFIG_HOME}/curl"
 export ACKRC="${XDG_CONFIG_HOME}/ack/ackrc"
 export GNUPGHOME="${XDG_CONFIG_HOME}/gnupg"
 # https://docs.docker.com/engine/reference/commandline/cli/#environment-variables
