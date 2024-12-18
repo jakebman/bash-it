@@ -64,6 +64,11 @@ function _bash-it-log-message() {
 	: _param '3: message to log'
 	: _group 'log'
 
+	# TODO: a system to redirect logging to a file. This shortcut prevents that
+	if ! [ -t 1 ]; then
+		return
+	fi
+
 	local prefix="${BASH_IT_LOG_PREFIX:-default}"
 	local color="${1-${echo_cyan:-}}"
 	local level="${2:-TRACE}"
