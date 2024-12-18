@@ -501,6 +501,7 @@ typo waths watch
 
 alias typo=_typo-builtin
 typo '~cd' cd
+typo foo 'cd foo'
 typo vd cd
 typo vf cd # left hand misaligned
 typo dc cd
