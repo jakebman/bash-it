@@ -386,6 +386,14 @@ function _jake-check-optional-tools() {
 		echo "maven is available via sdkman: sdk install maven # latest version chosen by default"
 	fi
 
+	if _command_exists postman; then
+		echo "Nothing to do for postman - postman is happy"
+	else
+		echo "Please consider installing postman via:"
+		echo -en "\t"
+		echo 'curl -o- "https://dl-cli.pstmn.io/install/linux64.sh" | sh-but-do-not-be-an-idiot'
+	fi
+
 	if _command_exists fzf; then
 		# TODO: better version checking sounds like a good idea
 		# 2/2: Does https://github.com/fsaintjacques/semver-tool work?
