@@ -484,6 +484,11 @@ function _jake-check-optional-tools() {
 		echo "Please check out your ~/.bash_logout. It's probably useless and deletable"
 	fi
 
+	if ! [ -f /etc/ssl/cert.pem ]; then
+		echo "potentially, postman-cli might care that /etc/ssl/cert.pem is missing."
+		echo "I created it as a symlink: sudo ln -s /etc/ssl/certs/ca-certificates.crt /etc/ssl/cert.pem"
+	fi
+
 	if _binary_exists jless; then
 		echo "Nothing to do for jless - jless is happy"
 	else
