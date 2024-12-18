@@ -492,6 +492,8 @@ typo ci co
 typo coi co
 typo c- 'co -'
 
+typo waths watch
+
 #######################
 ## typos to builtins
 ## A bad shim until I figure something better
