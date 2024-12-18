@@ -438,6 +438,15 @@ function _jake-check-optional-tools() {
 		echo "The manpage (ijq.1) goes into ~/bin/man"
 	fi
 
+	if _command_exists jp; then
+		echo "Nothing to do for jp - jp is happy"
+	else
+		echo "Consider jp - JMESPath, a standalone tool that models the language the aws cli uses to proc its --query arguments"
+		echo "Get the binary via:"
+		echo -en "\t"
+		echo 'wget "https://github.com/jmespath/jp/releases/latest/download/jp-linux-amd64" -O ~/bin/jp && chmod +x ~/bin/jp'
+	fi
+
 	if _command_exists jira; then
 		echo "Nothing to do for jira - jira is happy"
 	else
