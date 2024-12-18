@@ -363,9 +363,10 @@ function file {
 	if [[ "$#" -eq 0 ]]; then
 		# A safer form of file -E * using find
 		# -maxdepth 1 - find only the files under the starting-point
+		# -mindepth 1 - exclude the starting point (at depth 0)
 		# -printf '%P\0' - customizing a form of -print0 which strips the ./ prefix that -print0 gives
 		# %P: File's name with the name of the starting-point under which it was found removed.
-		find . -maxdepth 1 -printf '%P\0' | xargs --null file -E | pager
+		find . -maxdepth 1 -mindepth 1 -printf '%P\0' | xargs --null file -E | pager
 	else
 		command file -E "$@" | pager
 	fi
