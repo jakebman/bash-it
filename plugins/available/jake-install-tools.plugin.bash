@@ -283,7 +283,7 @@ function jake-install-tools() {
 		echo -en "\t"
 		echo "find '${BASH_IT_CUSTOM}/sudoers.d/' -type f -print0 | xargs --null -L1 visudo --check --file"
 		echo -en "\t"
-		echo "find '${BASH_IT_CUSTOM}/sudoers.d/' -type f -print0 | xargs --null sudo install --compare --mode 0440 --target-directory /etc/sudoers.d/"
+		echo "find '${BASH_IT_CUSTOM}/sudoers.d/' -type f -print0 | xargs --null sudo install --preserve-timestamp --mode 0440 --target-directory /etc/sudoers.d/"
 	fi
 
 	local -a bin_files
