@@ -257,13 +257,30 @@ function jake-install-tools() {
 		sudo ln -s '/mnt/c/Windows/System32/drivers/etc/hosts' '/etc/hosts-windows'
 	fi
 
+	# TODO: `-d` is a bash 4.4-ism, and might not be supported in the rest of bash-it
+	# https://stackoverflow.com/questions/23356779/how-can-i-store-the-find-command-results-as-an-array-in-bash
+	# NB: double < < is because <() produces a 'filename'-like argument
+	# I'd like to call this `readarray` over mapfile, to not use the alias, but bash-it prefers mapfile
+	#
+	# -printf '%P\0' - customizing a form of -print0 which strips the ./ prefix that -print0 gives
+	# %P: File's name with the name of the starting-point under which it was found removed.
+	local -a sudo_files to_install
+	mapfile -d '' sudo_files < <(find -L "${BASH_IT_CUSTOM}/sudoers.d/" -mindepth 1 -type f -printf '%P\0' | sort -z)
+	local sudo_file
+	for sudo_file in "${sudo_files[@]}"; do
+		echo "cheking $sudo_file"
+		if [ "${BASH_IT_CUSTOM}/sudoers.d/$sudo_file" -nt "/et/sudoers.d/$sudo_file" ]; then
+			to_install+=("$sudo_file")
+		fi
+	done
+
 	# Allowing the $EDITOR environment variables to pass through sudo
 	# ref for script: https://superuser.com/questions/869144/why-does-the-system-have-etc-sudoers-d-how-should-i-edit-it
-	if ! [[ -f /etc/sudoers.d/100-jake-sudoers && -f /etc/sudoers.d/200-preserve-LESS-env-var ]]; then
-		echo "I'd like to preserve my \$EDITOR and \$LESS environment variable when editing. Please make sure we have that in /etc/sudoers.d"
-		echo "You can find those files in ${BASH_IT_CUSTOM}/sudoers.d/"
+	if ! [ 0 -eq "${#to_install[@]}" ]; then
+		echo "There are ${#to_install[@]} file(s) in ${BASH_IT_CUSTOM}/sudoers.d/ that would like to be updated:"
+		printf ' * %s\n' "${to_install[@]}"
 		echo "(Heads up: files in sudoers.d can't have dots in them or they're ignored!)"
-		echo "Copy it into the /etc/sudoers.d directory, but it needs to be root-owned, and only root-group-readable:"
+		echo "Copy them into the /etc/sudoers.d directory, but it needs to be root-owned, and only root-group-readable:"
 		echo -en "\t"
 		echo "find '${BASH_IT_CUSTOM}/sudoers.d/' -type f -print0 | xargs --null -L1 visudo --check --file"
 		echo -en "\t"
