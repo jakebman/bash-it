@@ -167,9 +167,8 @@ function jake-install-tools() {
 	if ! _command_exists sdk; then
 		echo "sdkman not found! Install via instructions at https://sdkman.io/install."
 		echo -e "\t" "BE CAREFUL WHEN YOU PIPE TO BASH!!! THAT IS A BAD IDEA!!!"
-		echo -e "\t" "curl --silent --show-error 'https://get.sdkman.io?rcupdate=false' --output ~/install-sdkman.sh"
-		echo -e "\t" "vim ~/install-sdkman.sh"
-		echo -e "\t" "~/install-sdkman.sh"
+		echo -e "\t" "curl --silent --show-error 'https://get.sdkman.io?rcupdate=false' | tee ~/install-sdkman.sh | bash-but-be-smart-about-it"
+		echo -e "\t" "# that means you should vim ~/install-sdkman.sh before running it"
 		echo -e "\t" "bash-it enable plugin sdkman"
 		echo # spacing
 	else
@@ -427,7 +426,7 @@ function _jake-check-optional-tools() {
 		echo "Please install pyenv - a sdkman equivalent for python"
 		echo "Follow the instructions at https://github.com/pyenv/pyenv-installer, that basically boil down to:"
 		echo -en "\t"
-		echo 'PYENV_ROOT=~/.local/lib/pyenv curl https://pyenv.run | bash'
+		echo 'PYENV_ROOT=~/.local/lib/pyenv curl https://pyenv.run | bash-but-be-smart-about-it'
 	fi
 
 	if _command_exists ijq; then
@@ -578,7 +577,7 @@ function _jake-check-optional-tools() {
 	else
 		echo "consider installing and using cloudsmith for my own packages:"
 		echo -en "\t"
-		echo "curl -1sLf 'https://dl.cloudsmith.io/public/cloudsmith/cli/setup.deb.sh' | sudo -E bash"
+		echo "curl -1sLf 'https://dl.cloudsmith.io/public/cloudsmith/cli/setup.deb.sh' | sudo -E bash-but-be-smart-about-it"
 	fi
 
 	if _command_exists dgit; then
