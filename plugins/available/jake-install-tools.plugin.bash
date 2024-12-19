@@ -281,7 +281,7 @@ function jake-install-tools() {
 		echo "(Heads up: files in sudoers.d can't have dots in them or they're ignored!)"
 		echo "Copy them into the /etc/sudoers.d directory, but it needs to be root-owned, and only root-group-readable:"
 		echo -en "\t"
-		echo "find '${BASH_IT_CUSTOM}/sudoers.d/' -type f -print0 | xargs --null -L1 visudo --check --file"
+		echo "find '${BASH_IT_CUSTOM}/sudoers.d/' -type f -print0 | xargs --null -L1 visudo --check --file &&"
 		echo -en "\t"
 		echo "find '${BASH_IT_CUSTOM}/sudoers.d/' -type f -print0 | xargs --null sudo install --preserve-timestamp --mode 0440 --target-directory /etc/sudoers.d/"
 	fi
