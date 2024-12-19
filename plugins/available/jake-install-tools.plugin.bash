@@ -268,8 +268,7 @@ function jake-install-tools() {
 	mapfile -d '' sudo_files < <(find -L "${BASH_IT_CUSTOM}/sudoers.d/" -mindepth 1 -type f -printf '%P\0' | sort -z)
 	local sudo_file
 	for sudo_file in "${sudo_files[@]}"; do
-		echo "cheking $sudo_file"
-		if [ "${BASH_IT_CUSTOM}/sudoers.d/$sudo_file" -nt "/et/sudoers.d/$sudo_file" ]; then
+		if [ "${BASH_IT_CUSTOM}/sudoers.d/$sudo_file" -nt "/etc/sudoers.d/$sudo_file" ]; then
 			to_install+=("$sudo_file")
 		fi
 	done
