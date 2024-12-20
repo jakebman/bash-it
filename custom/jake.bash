@@ -19,7 +19,7 @@ fi
 # Enable java to read the cacertificates from linux. Technically, there's an intermediate process (ca-certificates-java)
 # that copies to here, but it's close enough to update-ca-certificates that you only need to know this if you're getting
 # errors
-JAVA_TOOL_OPTIONS+=" -Djavax.net.ssl.trustStore=/etc/ssl/certs/java -Djavax.net.ssl.trustStorePassword=changeit"
+JAVA_TOOL_OPTIONS+=" -Djavax.net.ssl.trustStore=/etc/ssl/certs/java/cacerts -Djavax.net.ssl.trustStorePassword=changeit"
 export JAVA_TOOL_OPTIONS
 
 # The python library `webbrowser` has some weird hiccups. Setting this environment variable
