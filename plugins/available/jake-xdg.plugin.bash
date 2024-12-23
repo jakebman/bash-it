@@ -20,6 +20,7 @@ about-plugin 'Set certain environment variables to make their corresponding apps
 # So, I'm storing a symlink from "${XDG_CONFIG_HOME}/curl/.curlrc" to {the same, but without a dot} in my dotfiles repo
 export CURL_HOME="${XDG_CONFIG_HOME}/curl"
 export ACKRC="${XDG_CONFIG_HOME}/ack/ackrc"
+export WGETRC="${XDG_CONFIG_HOME}/wget/wgetrc"
 export GNUPGHOME="${XDG_CONFIG_HOME}/gnupg"
 # https://docs.docker.com/engine/reference/commandline/cli/#environment-variables
 export DOCKER_CONFIG="${XDG_CONFIG_HOME}/docker"
