@@ -41,10 +41,9 @@ function jqless {
 	fi
 
 	args+=("$@")
-	(
-		set -o pipefail
-		command jq "${args[@]}" | less --RAW-CONTROL-CHARS # Raw isn't necessary if we're not coloring output, but it doesn't *hurt* either
-	)
+	local -
+	set -o pipefail
+	command jq "${args[@]}" | less --RAW-CONTROL-CHARS # Raw isn't necessary if we're not coloring output, but it doesn't *hurt* either
 }
 
 function jqgrep {

@@ -32,10 +32,9 @@ function words {
 		return 1
 	fi
 
-	( # TODO: `local -` instead of a subshell?
-		set -o pipefail
-		ack "${args[@]}" | words "$@"
-	)
+	local -
+	set -o pipefail
+	ack "${args[@]}" | words "$@"
 }
 
 function wordle {

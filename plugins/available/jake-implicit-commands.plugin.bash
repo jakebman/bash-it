@@ -82,10 +82,9 @@ function diff {
 	else
 		# TODO: this could be smarter for other people who don't hard-code LESS=-R, use a non-colorful pager, etc.
 		# For now, I'm the only consumer, and this seems adequate
-		( # TODO: `local -` instead of a subshell?
-			set -o pipefail # allow diff's failure to propagate outward past a pager's success
-			command colordiff "$@" | pager
-		)
+		local -
+		set -o pipefail # allow diff's failure to propagate outward past a pager's success
+		command colordiff "$@" | pager
 	fi
 }
 
@@ -319,10 +318,9 @@ function wc {
 	if [[ "$#" -eq 0 ]] && [[ -t 0 ]]; then
 		# no implicit $@ - not sure which side of * it goes on
 		# sorted output, because it's pleasing to the eye
-		( # TODO: `local -` instead of a subshell?
-			set -o pipefail
-			command wc * | sort -n
-		)
+		local -
+		set -o pipefail
+		command wc * | sort -n
 	else
 		command wc "$@"
 	fi
