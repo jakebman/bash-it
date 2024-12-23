@@ -13,6 +13,8 @@ function mvn {
 	if [ -t 1 ]; then
 		echo "Jake: paging maven output :D"
 
+		local -
+		set -o pipefail
 		# TODO: where is style.color documented?
 		# TODO: once I'm using maven 3.9 (and not a lower version) I could use MAVEN_ARGS
 		# see: https://maven.apache.org/configure.html
