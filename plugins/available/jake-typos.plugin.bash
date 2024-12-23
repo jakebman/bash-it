@@ -252,6 +252,8 @@ typo grpe grep
 
 typo pgre pgrep
 
+typo hgrpe hgrep
+
 typo ptree pstree
 
 typo gilr file # Left hand moved one key to the right
