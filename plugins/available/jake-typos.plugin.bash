@@ -459,6 +459,7 @@ typo furl curl
 
 # Because I apparently use this tool less frequently, and calling it by its full name... should have worked
 typo sdkman sdk
+typo adk sdk
 
 typo mrdir rmdir
 
@@ -508,6 +509,7 @@ typo vf cd # left hand misaligned
 typo dc cd
 typo ce cd
 typo ced cd
+typo dcd cd
 typo ccd cd
 typo cdc cd
 typo xs cd
