@@ -55,13 +55,14 @@ save_function command_not_found_handle _ububtu_command_not_found_handle
 function command_not_found_handle {
 	local -a args=("${@:2}")
 	local name=$1
-	echo "Typo identified: $name ${args[@]@Q}"
+
 	if [ -z "${_BASH_IT_TYPOS["$name"]}" ]; then
 		# we don't have a typo entry for this word. Follow the old path
 		_ububtu_command_not_found_handle "$@"
 		return
 	fi
 
+	echo "Typo identified: $name ${args[@]@Q}"
 	_typos-load
 
 	# TODO: can I get a printed bash stack trace?
