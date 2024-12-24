@@ -316,6 +316,8 @@ typo kube kubectl
 typo kubectyl kubectl
 typo eks eksctl
 
+typo mktmp mktemp
+
 # from jake-aliases - these are git command which drop the "git " prefix
 typo stage staged # NB: `git stage` is an alias for `git add`. This here is a TYPO of staged, not an attempt to use `git stage` conveniently
 typo stsaged staged
