@@ -21,6 +21,7 @@ plugins jake-maintenance
 plugins jake-maven
 plugins jake-path
 plugins jake-q
+plugins jake-ssh
 plugins jake-typos
 plugins jake-words
 plugins jake-xdg
