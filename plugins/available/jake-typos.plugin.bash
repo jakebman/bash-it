@@ -485,6 +485,7 @@ typo nfig config
 typo conf config
 
 typo nns-conifg nns-config
+typo nns-confg nns-config
 
 typo sha256 sha256sum
 typo sha sha256sum
