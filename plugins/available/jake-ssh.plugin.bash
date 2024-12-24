@@ -9,10 +9,16 @@ function _ssh_additional_config() {
 	# So, we'll pass it through a comment removal and translation of newlines to semicolons and call it good.
 	# TODO: this is a poor idea - we're applying regexes to a bash string. I'd like to refactor this so it's
 	# using proper bash-code-string handling
-	cat <<-TAB-IGNORING_HEREDOC | sed 's/#.*//g' | tr "\n" ';' | sed -E 's/;+/;/g'
+	cat <<-TAB-IGNORING_HEREDOC | sed 's/#.*//g' | tr "\n" ';' | sed -E -e 's/;+/;/g' -e 's/\{;/\{ /g'
 	RemoteCommand=\
 		export LESS=${LESS@Q} # less env variable from the current host is used, processed for being input
 		function hgrep { history | grep --color=always "\$@" | less --RAW-CONTROL-CHARS +G; }
+		if !type vim &>/dev/null; then \
+			function vim {
+				vi "\$@"
+			}
+			export -f vim
+		fi
 		export -f hgrep
 		bash -il
 	TAB-IGNORING_HEREDOC
