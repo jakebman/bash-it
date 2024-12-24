@@ -586,6 +586,7 @@ function _jake-check-optional-tools() {
 		echo "Nothing to do for makedeb - makedeb is happy"
 	else
 		echo "consider looking into makedeb for my own packages - https://www.makedeb.org/"
+		echo "(It's one way the glab cli is published - https://gitlab.com/gitlab-org/cli/-/blob/main/docs/installation_options.md#prebuilt-mpr)"
 	fi
 
 	if _command_exists cloudsmith; then
