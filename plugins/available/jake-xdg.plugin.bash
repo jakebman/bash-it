@@ -74,7 +74,6 @@ export PYTHON_HISTORY="${XDG_STATE_HOME}/python/python_history"
 mkdir -p "$(dirname "$PYTHON_HISTORY")" # python expects the parent folder to exist
 export REDISCLI_HISTFILE="${XDG_STATE_HOME}/redis/cli-history"
 export PERL_CPANM_HOME="${XDG_STATE_HOME}/cpanm" # cpanm command in the cpanminus package from apt (for rakubrew)
-alias wget='wget --hsts-file="${XDG_STATE_HOME}/wget-hsts"'
 
 : ${JAKE_XDG_BIN_DIR:=${HOME}/.local/bin}
 # install via https://github.com/pyenv/pyenv-installer. Installed via fork, so it's prudent to export it here
@@ -121,5 +120,4 @@ export COMPLETE_ALIAS_DIR="${JAKE_XDG_BIN_DIR}/complete-alias"
 # .ssh - Not generally possible
 # .sudo_as_admin_successful - SUPER(user) unlikely
 # .vim - a symlink into .config/vim, for a small win. Removing this symlink requires rewriting vim to read an env. var
-# .wget-hsts - inconvenient to change (only via cli argument, or by creating an unmovable .wgetrc file in the same place)
 # .zef - requires env variable, and the file the env var points to also needs to reference the new location
