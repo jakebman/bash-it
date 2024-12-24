@@ -2,6 +2,26 @@
 about-plugin 'A not-necessarily-good idea to forward bash functions and environment variables on (poor heuristic of) interactive ssh sessions'
 
 
+# I couldn't find a better way to solve this problem.
+# You can choose only to proc some ssh_config lines on ssh (and not on scp) via `Match exec "test $_ = /usr/bin/ssh"`
+# See https://unix.stackexchange.com/questions/451253/how-to-configure-ssh-with-a-remotecommand-only-for-interactive-sessions-i-e-wi
+# But I can't find a way to only set RemoteCommand if a
+
+# TODO: this might be easier if it's implemented as
+# * a funciton like:
+#	function ssh {
+#		if exactly one non-flag arugment:
+#			export SSH_IS_INTERACTIVE= # even an empty value is fine
+#			# Optionally, re-generate config-but-only-for-interactive-shells?
+#		fi
+#		command ssh "$@"
+#		}
+# * a ~/.ssh/config-but-only-for-interactive-shells containing the output from _ssh_additional_config
+# * an entry in ~/.ssh/config of:
+#	Match exec 'test -v SSH_IS_INTERACTIVE'
+#		# DOCUMENT THE HECK OUT OF THIS!
+#		Include config-but-only-for-interactive-shells
+
 function _ssh_additional_config() {
 	echo "Host *"
 	echo "RequestTTY=yes"
