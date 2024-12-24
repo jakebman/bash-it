@@ -26,7 +26,7 @@ function ssh() {
 	# Let's do wild stuff!
 	local CONF_FILE
 	CONF_FILE=$(mktemp jake-ssh-config-for-interactive-shell-XXXXX --tmpdir)
-	trap 'rm "$CONF_FILE"' EXIT # Remove temp file on exit
+	trap 'rm "$CONF_FILE"' RETURN # Remove temp file and don't pollute /tmp
 	cat ~/.ssh/config >>"$CONF_FILE"
 	_ssh_additional_config >>"$CONF_FILE"
 	command ssh -F "$CONF_FILE" "$@"
