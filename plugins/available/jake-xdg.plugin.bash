@@ -64,7 +64,9 @@ export XDG_CACHE_HOME
 # Unfortunately, wget 1) doesn't create the parent folder for this file, and
 # 2) doesn't know how to interpolate environment variables from within that file so
 # this value and that value may differ
-mkdir -p "${XDG_CACHE_HOME}/wget"
+if [ -f "$WGETRC" ]; then
+	mkdir -p "${XDG_CACHE_HOME}/wget"
+fi
 
 # see `man npm` and https://docs.npmjs.com/cli/v10/commands/npm-cache
 export npm_config_cache="${XDG_CACHE_HOME}/npm"
