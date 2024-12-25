@@ -60,6 +60,12 @@ export SBT_OPTS="--sbt-dir ${XDG_DATA_HOME}/scala-build-tool"
 # (it doesn't respect this folder unless this environment variable is defined)
 export XDG_CACHE_HOME
 
+# It's nice to have your $WGETRC include a `hsts-file = ~/.cache/wget/hsts` line.
+# Unfortunately, wget 1) doesn't create the parent folder for this file, and
+# 2) doesn't know how to interpolate environment variables from within that file so
+# this value and that value may differ
+mkdir -p "${XDG_CACHE_HOME}/wget"
+
 # see `man npm` and https://docs.npmjs.com/cli/v10/commands/npm-cache
 export npm_config_cache="${XDG_CACHE_HOME}/npm"
 export JARVIZ_DIR="${XDG_CACHE_HOME}" # a jar analyzer, from sdkman
