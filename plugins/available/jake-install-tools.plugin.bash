@@ -450,7 +450,7 @@ function _jake-check-optional-tools() {
 	else
 		echo "Please install ijq - the interactive jq tool"
 		echo "Get the binary (and manpage) from https://git.sr.ht/~gpanders/ijq/refs/v1.1.2, or the latest tag"
-		echo "The manpage (ijq.1) goes into ~/bin/man"
+		echo "The manpage (ijq.1) goes into ~/bin/man/man1"
 	fi
 
 	if _command_exists jp; then
