@@ -429,8 +429,8 @@ function _jake-check-optional-tools() {
 		echo "Nothing to do for helm - helm is happy"
 	else
 		echo "Please install helm - the package manager for kubernetes that I use at work"
-		echo "Get the package from"
-		_jake-github-repo-release-urls helm/helm | grep linux | grep 64 | grep -v arm
+		echo "Get the package from https://github.com/helm/helm/releases/latest. You probably want 'Linux amd64'"
+		echo "(They... oddly ...don't include the install files as assets on the release - they're external links"
 		echo -en "\t"
 		echo 'tar xzf helm*tar*; install helm*/helm ~/bin'
 		echo -en "\t"
