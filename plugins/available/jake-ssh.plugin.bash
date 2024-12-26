@@ -22,6 +22,11 @@ about-plugin 'A not-necessarily-good idea to forward bash functions and environm
 #		# DOCUMENT THE HECK OUT OF THIS!
 #		Include config-but-only-for-interactive-shells
 # Thanks to https://news.ycombinator.com/item?id=23027097 for it
+#
+# Also, there's another option: https://github.com/atteo/uberbin/blob/master/ssh-executed-with-command
+# proposes a script `ssh-executed-with-command` that enables `Match exec "ssh-executed-with-command"`
+# by walking up the $PPIDs of itself until it finds an `ssh` command. Then it checks the commandline
+# of that command for any "unrecognized" command options, which are "probably" commands to run on the remote
 
 function _ssh_additional_config() {
 	echo "Host *"
