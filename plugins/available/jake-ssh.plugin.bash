@@ -28,8 +28,14 @@ about-plugin 'A not-necessarily-good idea to forward bash functions and environm
 # by walking up the $PPIDs of itself until it finds an `ssh` command. Then it checks the commandline
 # of that command for any "unrecognized" command options, which are "probably" commands to run on the remote
 # (This seems a productionized version of https://unix.stackexchange.com/questions/451253/how-to-configure-ssh-with-a-remotecommand-only-for-interactive-sessions-i-e-wi)
+#
+# Or another from 451253 - a symlink to major ssh, named ssht or similar, plus:
+# `Match Host example.com exec "test $_ = $HOME/bin/ssht"`
 
 function _ssh_additional_config() {
+	# TODO: additional cleanup might be possible by using a custom --init-file to bash instead:
+	# `bash --init-file <(echo "ls; pwd")`
+	# See: https://serverfault.com/questions/368054/run-an-interactive-bash-subshell-with-initial-commands-without-returning-to-the
 	echo "Host *"
 	echo "RequestTTY=yes"
 	# Nominally, ssh wants RemoteCommand all on one line. I want more lines than that, for readability.
