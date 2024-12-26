@@ -27,6 +27,7 @@ about-plugin 'A not-necessarily-good idea to forward bash functions and environm
 # proposes a script `ssh-executed-with-command` that enables `Match exec "ssh-executed-with-command"`
 # by walking up the $PPIDs of itself until it finds an `ssh` command. Then it checks the commandline
 # of that command for any "unrecognized" command options, which are "probably" commands to run on the remote
+# (This seems a productionized version of https://unix.stackexchange.com/questions/451253/how-to-configure-ssh-with-a-remotecommand-only-for-interactive-sessions-i-e-wi)
 
 function _ssh_additional_config() {
 	echo "Host *"
