@@ -21,6 +21,7 @@ about-plugin 'A not-necessarily-good idea to forward bash functions and environm
 #	Match exec 'test -v SSH_IS_INTERACTIVE'
 #		# DOCUMENT THE HECK OUT OF THIS!
 #		Include config-but-only-for-interactive-shells
+# Thanks to https://news.ycombinator.com/item?id=23027097 for it
 
 function _ssh_additional_config() {
 	echo "Host *"
