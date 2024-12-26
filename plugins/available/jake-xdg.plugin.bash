@@ -92,7 +92,7 @@ export GOPATH="${JAKE_XDG_BIN_DIR}/go"
 export COMPLETE_ALIAS_DIR="${JAKE_XDG_BIN_DIR}/complete-alias"
 
 # XDG list:
-# .aws - not configurable
+# .aws - not configurable. The AWS_CONFIG_FILE and AWS_SHARED_CREDENTIALS_FILE can be configured, but not for instance .aws/cli/alias
 # .azure - symlinked into $WSL_WINDOWS_USER_HOME. Can probably remove it without damage.
 # .bash - symlinked to .bashrc as tab-completion fodder to win over .bash{_history,_logout}
 # .bashrc, .profile - requires decent high-powered intervention to loop in so early. Potentially an /etc/profile.d entry?
