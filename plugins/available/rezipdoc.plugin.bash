@@ -7,8 +7,8 @@ about-plugin 'Load ReZipDoc - a git tool to diff docx files'
 export RE_ZIP_DOC_DIR=${RE_ZIP_DOC_DIR:-$HOME/.ReZipDoc}
 
 # arbitrary choice
-if [[ -s "${RE_ZIP_DOC_DIR}/script/rezipdoc-repo-tool.sh" ]]; then
-	pathmunge "${RE_ZIP_DOC_DIR}/script"
+if [[ -s "${RE_ZIP_DOC_DIR}/scripts/rezipdoc-repo-tool.sh" ]]; then
+	pathmunge "${RE_ZIP_DOC_DIR}/scripts"
 else
 	_log_error "please install ReZipDoc"
 fi
