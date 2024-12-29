@@ -23,6 +23,7 @@ export ACKRC="${XDG_CONFIG_HOME}/ack/ackrc"
 export WGETRC="${XDG_CONFIG_HOME}/wget/wgetrc"
 export GNUPGHOME="${XDG_CONFIG_HOME}/gnupg"
 # https://docs.docker.com/engine/reference/commandline/cli/#environment-variables
+# But, ~/.docker keeps getting created anyway on startup. Sigh.
 export DOCKER_CONFIG="${XDG_CONFIG_HOME}/docker"
 export RANCHER_CONFIG_DIR="${XDG_CONFIG_HOME}/rancher"
 
