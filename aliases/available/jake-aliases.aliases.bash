@@ -6,12 +6,15 @@ alias tulpn='netstat -tulpn'
 # They're functionally aliases; so sue me
 # (They also have typo aliases)
 function lls {
-	ll --color "$@" | pager
+	# an expanded form of -alF, from bash-it's `alias ll='ls -alF'`
+	# -l is --long-listing, but has no long analog
+
+	ls -l --almost-all --classify --color "$@" | pager
 }
-# WARNING!!!! CONCERNING OVER-RELIANCE ON BASH MINUTAE:
-# The alias ll='ls -alF' already exists. We used it above.
-# We're overwriting it here, using a function that... uses *it*.
-# This is FINE by the rules of bash! The prior alias was *expanded* during
+# Bash Minutae:
+# We *could* use the previously-declared `alias ll=..` within `function lls` above.
+# We *could* then override `alias ll=` with `=lls`, *and everything would work*
+# This is FINE by the rules of bash! The prior alias would have been *expanded* during
 # the creation of the function, so there's no circular reference
 alias ll=lls
 # Override bash-it's --all with --Almost-All
@@ -24,7 +27,7 @@ alias watch='watch --differences=permanent'
 alias maven=mvn
 
 # ll, plus other flags
-alias lla='ll -a' # NB: -a is implied in ll. This is apparently a no-op. Oops?
+alias lla='ll -a' # Beautiful - this used to be a no-op alias, but I changed ll to have -A instead
 alias llh='ll -h'
 alias llt='ll -t'
 alias llht='ll -ht'
