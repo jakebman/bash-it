@@ -102,7 +102,6 @@ export COMPLETE_ALIAS_DIR="${JAKE_XDG_BIN_DIR}/complete-alias"
 # .bashrc, .profile - requires decent high-powered intervention to loop in so early. Potentially an /etc/profile.d entry?
 # .bash-it - inconvenient for me - it's easier to come in here and change stuff without it being a level deeper
 # .cache, .config, ... .local - the XDG solution folders
-# .colordiffrc - not configurable. Could overwrite /etc/colordiffrc to do the same, but... that's not nice
 # .editorconfig - currently not supported by all involved parties
 # .gi_list - not supported. git-ignore-io in git-extras writes this
 # .gitguardian.yaml - not supported. ggshield only wants files in ~.
