@@ -26,6 +26,11 @@ export GNUPGHOME="${XDG_CONFIG_HOME}/gnupg"
 export DOCKER_CONFIG="${XDG_CONFIG_HOME}/docker"
 export RANCHER_CONFIG_DIR="${XDG_CONFIG_HOME}/rancher"
 
+# TODO: it'd be nice to have this set BEFORE bash starts, but hey, that's what `bind -f` is for!
+export INPUTRC="${XDG_CONFIG_HOME}/inputrc"
+bind -f "$INPUTRC"
+
+
 # *On Linux*, the *default backing store* respects the java.util.prefs.userRoot and java.util.prefs.systemRoot system properties
 # per https://docs.oracle.com/en/java/javase/11/core/preferences-api1.html#GUID-2DAC3DD0-993A-41A8-8CDC-F8E3A72E1AE3__SECTION_KWW_Z1P_S3B
 # (but, for ex., Windows uses the registry)
@@ -109,7 +114,6 @@ export COMPLETE_ALIAS_DIR="${JAKE_XDG_BIN_DIR}/complete-alias"
 # .gitignore.d - vcsh, created by default. hardcoded name below $VCSH_BASE, which defaults to $HOME
 # .gitmodules - required because I'm keeping subrepos in my conf vcsh repo
 #     It needs to live in $GIT_WORK_TREE - gets really interesting with nns-config also having these
-# .inputrc - conventional file name, from readline. Used by bash, and anything else using that library. Library respects $INPUTRC. Are we too late to change it during .bashrc loading?
 # .ivy2 - sbt (scala build tool)'s equivalent to .m2
 #     Potentialy configurable like java above, via:
 #         https://www.scala-sbt.org/1.x/docs/Library-Management.html#Ivy+Home+Directory
