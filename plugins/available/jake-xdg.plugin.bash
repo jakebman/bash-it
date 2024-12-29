@@ -79,9 +79,13 @@ export JARVIZ_DIR="${XDG_CACHE_HOME}" # a jar analyzer, from sdkman
 # or https://unix.stackexchange.com/questions/630642/change-location-of-python-history
 # However, this canonical solution will be available in python 3.13:
 export PYTHON_HISTORY="${XDG_STATE_HOME}/python/python_history"
-mkdir -p "$(dirname "$PYTHON_HISTORY")" # python expects the parent folder to exist
 export REDISCLI_HISTFILE="${XDG_STATE_HOME}/redis/cli-history"
+export SQLITE_HISTORY="${XDG_STATE_HOME}/sqlite/cli-history"
 export PERL_CPANM_HOME="${XDG_STATE_HOME}/cpanm" # cpanm command in the cpanminus package from apt (for rakubrew)
+
+# These programs need their parent folder to exist:
+mkdir -p "$(dirname "$PYTHON_HISTORY")"
+mkdir -p "$(dirname "$SQLITE_HISTORY")"
 
 : ${JAKE_XDG_BIN_DIR:=${HOME}/.local/bin}
 # install via https://github.com/pyenv/pyenv-installer. Installed via fork, so it's prudent to export it here
