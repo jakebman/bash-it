@@ -49,11 +49,6 @@ function _ssh_remote_bashrc() {
 					vi "$@"
 				}
 			fi
-
-			# Permit plugin export
-			function about-plugin {
-				:
-			}
 		NONINTERPOLATING_HEREDOC
 
 		cat "${BASH_IT}/plugins/available/jake-cdd.plugin.bash"
@@ -61,6 +56,13 @@ function _ssh_remote_bashrc() {
 		echo 'source ~/.bashrc || echo "no bashrc file on $HOSTNAME"'
 
 	) | bat -p --language Bash
+}
+
+function _ssh_minified_bashrc() {
+	about "remove the unnecessary spaces, comments, and composure keywords"
+	_ssh_remote_bashrc |
+		shfmt --minfiy |
+		sed -E '/(about(-\w+)*|author|example|group|param|version)\b/ d'
 }
 
 function _ssh_additional_config() {
@@ -71,7 +73,7 @@ function _ssh_additional_config() {
 	echo "RequestTTY=yes"
 	# Nominally, ssh wants RemoteCommand all on one line. I want more lines than that, for readability.
 	# So, we're pushing the contents of _ssh_remote_bashrc through base64 to the remote system
-	echo "RemoteCommand=echo '$(_ssh_remote_bashrc | shfmt --minify | gzip | base64 -w0)' | base64 --decode | gunzip >/tmp/jake-ssh-bashrc; bash --rcfile /tmp/jake-ssh-bashrc -i"
+	echo "RemoteCommand=echo '$(_ssh_minified_bashrc | gzip | base64 -w0)' | base64 --decode | gunzip >/tmp/jake-ssh-bashrc; bash --rcfile /tmp/jake-ssh-bashrc -i"
 }
 
 function ssh() {
