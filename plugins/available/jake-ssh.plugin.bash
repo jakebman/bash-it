@@ -1,7 +1,6 @@
 # shellcheck shell=bash
 about-plugin 'A not-necessarily-good idea to forward bash functions and environment variables on (poor heuristic of) interactive ssh sessions'
 
-
 # I couldn't find a better way to solve this problem.
 # You can choose only to proc some ssh_config lines on ssh (and not on scp) via `Match exec "test $_ = /usr/bin/ssh"`
 # See https://unix.stackexchange.com/questions/451253/how-to-configure-ssh-with-a-remotecommand-only-for-interactive-sessions-i-e-wi
@@ -34,11 +33,11 @@ about-plugin 'A not-necessarily-good idea to forward bash functions and environm
 
 function _ssh_remote_bashrc() {
 	(
-		cat <<-INTERPOLATING_HEREDOC
+		cat <<- INTERPOLATING_HEREDOC
 			export LESS=${LESS@Q} # Interpolated value of LESS env variable from the ssh-invoking machine
 		INTERPOLATING_HEREDOC
 
-		cat <<-'NONINTERPOLATING_HEREDOC'
+		cat <<- 'NONINTERPOLATING_HEREDOC'
 			function hgrep {
 				history |
 					grep --color=always "$@" |
@@ -73,15 +72,16 @@ function _ssh_additional_config() {
 	echo "RequestTTY=yes"
 	# ssh only accepts one-line RemoteCommands. I want more lines than that, for readability.
 	# So, we're pushing the contents of _ssh_remote_bashrc through base64 to the remote system
-	local encoded="$(_ssh_minified_bashrc |
-						gzip |
-						base64 --wrap 0 |
-						cat
-					)"
+	local encoded="$(
+		_ssh_minified_bashrc |
+			gzip |
+			base64 --wrap 0 |
+			cat
+	)"
 	echo -n "RemoteCommand=echo '$encoded' |"
-	echo -n       ' base64 --decode |'
-	echo -n       ' gunzip |'
-	echo -n       ' cat >/tmp/jake-ssh-bashrc;'
+	echo -n ' base64 --decode |'
+	echo -n ' gunzip |'
+	echo -n ' cat    >   /tmp/jake-ssh-bashrc;'
 	echo ' bash --rcfile /tmp/jake-ssh-bashrc -i'
 }
 
@@ -96,7 +96,7 @@ function ssh() {
 	local CONF_FILE
 	CONF_FILE=$(mktemp jake-ssh-config-for-interactive-shell-XXXXX --tmpdir)
 	trap 'rm "$CONF_FILE"' RETURN # Remove temp file and don't pollute /tmp
-	cat ~/.ssh/config >>"$CONF_FILE"
-	_ssh_additional_config >>"$CONF_FILE"
+	cat ~/.ssh/config >> "$CONF_FILE"
+	_ssh_additional_config >> "$CONF_FILE"
 	command ssh -F "$CONF_FILE" "$@"
 }
