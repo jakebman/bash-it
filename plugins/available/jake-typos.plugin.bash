@@ -433,6 +433,7 @@ typo lop logp
 typo logd logp # apparently log[D]iff makes sense if I forget it's actually [P]atch
 typo lgop logp
 typo lopg logp
+typo merege merge
 typo yesteday yesterday
 typo yest yesterday
 typo wortree worktree
