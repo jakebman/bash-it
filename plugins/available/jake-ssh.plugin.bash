@@ -53,7 +53,7 @@ function _ssh_remote_bashrc() {
 
 		cat "${BASH_IT}/plugins/available/jake-cdd.plugin.bash"
 
-		echo 'source ~/.bashrc || echo "no bashrc file on $HOSTNAME"'
+		echo 'source ~/.bashrc # to be certain we get anything we would otherwise want'
 
 	) | bat -p --language Bash
 }
