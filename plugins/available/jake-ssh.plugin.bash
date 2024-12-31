@@ -70,14 +70,7 @@ function _ssh_additional_config() {
 	echo "Host *"
 	echo "RequestTTY=yes"
 	# Nominally, ssh wants RemoteCommand all on one line. I want more lines than that, for readability.
-	# So, we're putting the contents of that one command on multiple as-readable-as-possible lines in _ssh_raw_RemoteCommand
-	# and then pass that through a comment removal and translation of newlines to semicolons and call it good.
-	# TODO: this is a poor idea - we're applying regexes to a bash string. I'd like to refactor this so it's
-	# using proper bash-code-string handling
-	# s/#.*//g - remove comments
-	# tr "\n" ';' - newlines become semicolons
-	# 's/;+/;/g' - collapse multiple semicolons
-	# 's/\{;/\{ /g' - undo the semicolon on newlines when a line ended in a function opener. Ditto Pipe character
+	# So, we're pushing the contents of _ssh_remote_bashrc through base64 to the remote system
 	echo "RemoteCommand=echo '$(_ssh_remote_bashrc | shfmt --minify | base64 -w0)' | base64 --decode >/tmp/jake-ssh-bashrc; bash --rcfile /tmp/jake-ssh-bashrc --login -i"
 }
 
