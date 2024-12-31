@@ -61,7 +61,7 @@ function _ssh_remote_bashrc() {
 function _ssh_minified_bashrc() {
 	about "remove the unnecessary spaces, comments, and composure keywords"
 	_ssh_remote_bashrc |
-		shfmt --minfiy |
+		shfmt --minify |
 		sed -E '/(about(-\w+)*|author|example|group|param|version)\b/ d'
 }
 
