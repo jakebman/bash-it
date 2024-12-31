@@ -71,7 +71,7 @@ function _ssh_additional_config() {
 	# See: https://serverfault.com/questions/368054/run-an-interactive-bash-subshell-with-initial-commands-without-returning-to-the
 	echo "Host *"
 	echo "RequestTTY=yes"
-	# Nominally, ssh wants RemoteCommand all on one line. I want more lines than that, for readability.
+	# ssh only accepts one-line RemoteCommands. I want more lines than that, for readability.
 	# So, we're pushing the contents of _ssh_remote_bashrc through base64 to the remote system
 	local encoded="$(_ssh_minified_bashrc |
 						gzip |
