@@ -32,10 +32,10 @@ about-plugin 'A not-necessarily-good idea to forward bash functions and environm
 # Or another from 451253 - a symlink to major ssh, named ssht or similar, plus:
 # `Match Host example.com exec "test $_ = $HOME/bin/ssht"`
 
-function _ssh_raw_RemoteCommand() {
+function _ssh_remote_bashrc() {
 	(
 		cat <<-INTERPOLATING_HEREDOC
-			export LESS=${LESS@Q} # less env variable from the current host is used, processed for being input
+			export LESS=${LESS@Q} # Interpolated value of LESS env variable from the ssh-invoking machine
 		INTERPOLATING_HEREDOC
 
 		cat <<-'NONINTERPOLATING_HEREDOC'
@@ -48,9 +48,7 @@ function _ssh_raw_RemoteCommand() {
 				function vim {
 					vi "$@"
 				}
-				export -f vim
 			fi
-			export -f hgrep
 
 			# Permit plugin export
 			function about-plugin {
@@ -60,7 +58,7 @@ function _ssh_raw_RemoteCommand() {
 
 		cat "${BASH_IT}/plugins/available/jake-cdd.plugin.bash"
 
-		echo 'bash -il'
+		echo 'source ~/.bashrc || echo "no bashrc file on $HOSTNAME"'
 
 	) | bat -p --language Bash
 }
@@ -80,7 +78,7 @@ function _ssh_additional_config() {
 	# tr "\n" ';' - newlines become semicolons
 	# 's/;+/;/g' - collapse multiple semicolons
 	# 's/\{;/\{ /g' - undo the semicolon on newlines when a line ended in a function opener. Ditto Pipe character
-	echo "RemoteCommand=$(_ssh_raw_RemoteCommand)" | sed 's/#.*//g' | tr "\n" ';' | sed -E -e 's/;+/;/g' -e 's/([{|]|then);/\1 /g'
+	echo "RemoteCommand=echo '$(_ssh_remote_bashrc | shfmt --minify | base64 -w0)' | base64 --decode >/tmp/jake-ssh-bashrc; bash --rcfile /tmp/jake-ssh-bashrc --login -i"
 }
 
 function ssh() {
