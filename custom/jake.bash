@@ -39,7 +39,6 @@ alias jake='j --jake'
 
 # TODO: can I get autocomplete on a single tab?
 
-
 # requires maven 3.9+ https://maven.apache.org/configure.html#maven_args-environment-variable
 export MAVEN_ARGS="-T1C"
 
@@ -83,7 +82,6 @@ LESS+="--use-color "
 LESS+="--follow-name "
 # There's some cool discussion on the value of these flags used in SYSTEMD_LESS in the `man systemctl` docs
 export LESS
-
 
 # I liked editing ~/.lessfilter (which is now in XDG_CONFIG_HOME), and this kept getting in the way.
 # Still, this is the proper XDG-like location for this file. Since it's the 'other' default for this setting,
