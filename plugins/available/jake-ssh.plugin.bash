@@ -32,6 +32,39 @@ about-plugin 'A not-necessarily-good idea to forward bash functions and environm
 # Or another from 451253 - a symlink to major ssh, named ssht or similar, plus:
 # `Match Host example.com exec "test $_ = $HOME/bin/ssht"`
 
+function _ssh_raw_RemoteCommand() {
+	(
+		cat <<-INTERPOLATING_HEREDOC
+			export LESS=${LESS@Q} # less env variable from the current host is used, processed for being input
+		INTERPOLATING_HEREDOC
+
+		cat <<-'NONINTERPOLATING_HEREDOC'
+			function hgrep {
+				history |
+					grep --color=always "$@" |
+					less --RAW-CONTROL-CHARS +G
+			}
+			if !type vim &>/dev/null; then
+				function vim {
+					vi "$@"
+				}
+				export -f vim
+			fi
+			export -f hgrep
+
+			# Permit plugin export
+			function about-plugin {
+				:
+			}
+		NONINTERPOLATING_HEREDOC
+
+		cat "${BASH_IT}/plugins/available/jake-cdd.plugin.bash"
+
+		echo 'bash -il'
+
+	) | bat -p --language Bash
+}
+
 function _ssh_additional_config() {
 	# TODO: additional cleanup might be possible by using a custom --init-file to bash instead:
 	# `bash --init-file <(echo "ls; pwd")`
@@ -39,22 +72,15 @@ function _ssh_additional_config() {
 	echo "Host *"
 	echo "RequestTTY=yes"
 	# Nominally, ssh wants RemoteCommand all on one line. I want more lines than that, for readability.
-	# So, we'll pass it through a comment removal and translation of newlines to semicolons and call it good.
+	# So, we're putting the contents of that one command on multiple as-readable-as-possible lines in _ssh_raw_RemoteCommand
+	# and then pass that through a comment removal and translation of newlines to semicolons and call it good.
 	# TODO: this is a poor idea - we're applying regexes to a bash string. I'd like to refactor this so it's
 	# using proper bash-code-string handling
-	cat <<-TAB-IGNORING_HEREDOC | sed 's/#.*//g' | tr "\n" ';' | sed -E -e 's/;+/;/g' -e 's/\{;/\{ /g'
-	RemoteCommand=\
-		export LESS=${LESS@Q} # less env variable from the current host is used, processed for being input
-		function hgrep { history | grep --color=always "\$@" | less --RAW-CONTROL-CHARS +G; }
-		if !type vim &>/dev/null; then \
-			function vim {
-				vi "\$@"
-			}
-			export -f vim
-		fi
-		export -f hgrep
-		bash -il
-	TAB-IGNORING_HEREDOC
+	# s/#.*//g - remove comments
+	# tr "\n" ';' - newlines become semicolons
+	# 's/;+/;/g' - collapse multiple semicolons
+	# 's/\{;/\{ /g' - undo the semicolon on newlines when a line ended in a function opener. Ditto Pipe character
+	echo "RemoteCommand=$(_ssh_raw_RemoteCommand)" | sed 's/#.*//g' | tr "\n" ';' | sed -E -e 's/;+/;/g' -e 's/([{|]|then);/\1 /g'
 }
 
 function ssh() {
