@@ -71,7 +71,7 @@ function _ssh_additional_config() {
 	echo "RequestTTY=yes"
 	# Nominally, ssh wants RemoteCommand all on one line. I want more lines than that, for readability.
 	# So, we're pushing the contents of _ssh_remote_bashrc through base64 to the remote system
-	echo "RemoteCommand=echo '$(_ssh_remote_bashrc | shfmt --minify | base64 -w0)' | base64 --decode >/tmp/jake-ssh-bashrc; bash --rcfile /tmp/jake-ssh-bashrc -i"
+	echo "RemoteCommand=echo '$(_ssh_remote_bashrc | shfmt --minify | gzip | base64 -w0)' | base64 --decode | gunzip >/tmp/jake-ssh-bashrc; bash --rcfile /tmp/jake-ssh-bashrc -i"
 }
 
 function ssh() {
