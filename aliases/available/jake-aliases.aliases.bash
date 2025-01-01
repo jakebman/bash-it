@@ -1,12 +1,14 @@
 # shellcheck shell=bash
 about-alias "Jake's custom commands that are aliases"
 
-alias tulpn='netstat -tulpn'
+# Based on a command I grabbed from the internet. Expanded `-tulpn` into long flags, because that's polite.
+alias tulpn='netstat --tcp --udp --listening --program --numeric'
 
 # They're functionally aliases; so sue me
 # (They also have typo aliases)
 function lls {
 	# an expanded form of -alF, from bash-it's `alias ll='ls -alF'`
+	# But, I prefer -[-A]lmost-All over -[-a]ll
 	# -l is --long-listing, but has no long analog
 
 	ls -l --almost-all --classify --color "$@" | pager
@@ -18,7 +20,7 @@ function lls {
 # the creation of the function, so there's no circular reference
 alias ll=lls
 # Override bash-it's --all with --Almost-All
-alias l='ls -AF'
+alias l='ls --almost-all --classify'
 
 # I really like permament differences
 alias watch='watch --differences=permanent'
