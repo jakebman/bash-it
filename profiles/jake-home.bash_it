@@ -29,6 +29,7 @@ plugins jake-xdg
 plugins jq
 plugins projects
 plugins rakubrew
+plugins rezipdoc
 plugins sdkman
 plugins type-through-aliases
 plugins wsl-fast
