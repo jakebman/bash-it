@@ -11,6 +11,7 @@ plugins dotfiles-via-bare-git-repo-with-config-alias
 plugins gitstatus
 plugins google
 plugins history-eternal
+plugins iotop
 plugins jake-cdd
 plugins jake-cd-implicit-foo-folder
 plugins jake-counting-lines
