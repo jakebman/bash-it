@@ -41,6 +41,7 @@ alias untar='tar xf' # simply untar a file
 
 # 'Magic' aliases - smarter than their corresponding git command (they can see more Jake context)
 # TODO: these are potentially 'implicit' commands a la jake-implicit-commands
+# ... or even as their own implicit-mr plugin
 
 # pull can have special meaning in $HOME, or other places with mr configs
 function pull {
