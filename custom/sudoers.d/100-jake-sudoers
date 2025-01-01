@@ -11,11 +11,6 @@
 
 # This snippet copied and enabled from primary /etc/sudoers file:
 
-# This allows running arbitrary commands, but so does ALL, and it means
-# different sudoers have their choice of editor respected.
-Defaults:%sudo env_keep += "EDITOR"
-# TODO: add the editor config so that EDITOR is constrained to only certain values
-
 
 # I'd like to run *only certain* apt commands without requiring a password
 # https://askubuntu.com/a/724157

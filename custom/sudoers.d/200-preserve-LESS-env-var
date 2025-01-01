@@ -9,8 +9,12 @@
 # See the man page for details on how to write a sudoers file.
 #
 
-# This snippet copied and modified from 100-jake-sudoers, which got it from
-# the primary /etc/sudoers file:
+# The EDITOR snippet is copied and modified from the primary /etc/sudoers file:
+
+# This allows running arbitrary commands, but so does ALL, and it means
+# different sudoers have their choice of editor respected.
+Defaults:%sudo env_keep += "EDITOR"
+# Jake TODO: add the editor config so that EDITOR is constrained to only certain values
 
 # This probably allows running arbitrary commands (via '+!your-command-here'),
 # but so does ALL, and this means different sudoers have their LESS settings of choice
