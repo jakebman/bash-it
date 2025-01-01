@@ -249,12 +249,12 @@ function jake-install-tools() {
 		echo 'sudo update-alternatives --set editor ....'
 	fi
 
-	if [ -f '/mnt/c/Windows/System32/drivers/etc/hosts' ]; then
-		echo "You have the windows hosts file accessible at '/mnt/c/Windows/System32/drivers/etc/hosts'"
+	if readlink -e '/etc/hosts-windows'; then
+		echo "Nothing to do for /etc/hosts-windows. Pointing at '$(readlink -f /etc/hosts-windows)'"
 	else
-		echo "Creating symlink to windows hosts file at '/etc/hosts-windows'"
-
-		sudo ln -s '/mnt/c/Windows/System32/drivers/etc/hosts' '/etc/hosts-windows'
+		echo "Please create a symlink to the windows hosts file at '/etc/hosts-windows'"
+		echo -en "\t"
+		echo "sudo ln -s '/mnt/c/Windows/System32/drivers/etc/hosts' '/etc/hosts-windows'"
 	fi
 
 	# TODO: `-d` is a bash 4.4-ism, and might not be supported in the rest of bash-it
