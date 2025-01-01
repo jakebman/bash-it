@@ -11,3 +11,4 @@
 # Allow the sudoers group to run iotop without sudo
 
 %sudo ALL = (root) NOPASSWD: /usr/sbin/iotop
+%sudo ALL = (root) NOPASSWD: /usr/local/bin/tulpn
