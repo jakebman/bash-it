@@ -35,6 +35,7 @@ about-plugin 'A not-necessarily-good idea to forward bash functions and environm
 function _ssh_remote_bashrc() {
 	(
 		cat <<-INTERPOLATING_HEREDOC
+			$(alias l)
 			export LESS=${LESS@Q} # Interpolated value of LESS env variable from the ssh-invoking machine
 		INTERPOLATING_HEREDOC
 
