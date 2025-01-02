@@ -1,9 +1,6 @@
 # shellcheck shell=bash
 about-alias "Jake's custom commands that are aliases"
 
-# Based on a command I grabbed from the internet. Expanded `-tulpn` into long flags, because that's polite.
-alias tulpn='netstat --tcp --udp --listening --program --numeric'
-
 # They're functionally aliases; so sue me
 # (They also have typo aliases)
 function lls {
