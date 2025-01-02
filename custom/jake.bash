@@ -56,33 +56,43 @@ fi
 # quit-if-one-screen allows less to simply dump the output to STDOUT when it would all fit on a single page
 #   see https://stackoverflow.com/questions/2183900/how-do-i-prevent-git-diff-from-using-a-pager
 LESS+="--quit-if-one-screen "
+LESS_ABBREV+=F
 # quit-at-eof gives you the change to scroll to the end, but if you keep
 #   scrolling it also exits (I like not feeling trapped)
 LESS+="--quit-at-eof "
+LESS_ABBREV+=e
 # no-init disables that weird 'second screen' behavior, which I don't like
 LESS+="--no-init "
+LESS_ABBREV+=X
 # ignore-case is actually smartcase - all-lowercase is case-insensitive; add an uppercase to require case matching
 LESS+="--ignore-case "
+LESS_ABBREV+=i
 # RAW-CONTROL-CHARS enables color interpretation without allowing every raw control code through
 #   (b/c that would make lines hard to track)
 LESS+="--RAW-CONTROL-CHARS "
+LESS_ABBREV+=R
 # tabs=2 condenses tabs to only two characters wide
 LESS+="--tabs=2 "
+LESS_ABBREV+=x2
 # jump-target=.2 puts the searched-for line 2/10ths of the way down the screen, rather than at the top line
 #   (Heads up! 0.2 does not work. I tried, and learned that)
 #   This also applies to 'go to line' and 'go to tag' commands
 LESS+="--jump-target=.2 "
+LESS_ABBREV+=j.2
 # SEARCH-SKIP-SCREEN ensures that new searches start below the jump-target line, and not the top of the screen
 #   Repeated searches (with n/N) already did this, but if you search for something new
 #        you would otherwise be searching 2/10ths of the screen *up* from where you started
 #   It's also worth noting that this is *per line*, so following matches on the same line are also skipped
 LESS+="--SEARCH-SKIP-SCREEN "
+LESS_ABBREV+=A
 # use-color gets a nice light cyan color on some of less's UI elements
 LESS+="--use-color "
+LESS_ABBREV+=" --use-color"
 # follow-name ensures that `less +F /var/log/foo` emulates `tail -F`, not `tail -f`. i.e. an implicit --follow=name
 LESS+="--follow-name "
+LESS_ABBREV+=" --follow-name"
 # There's some cool discussion on the value of these flags used in SYSTEMD_LESS in the `man systemctl` docs
-export LESS
+export LESS LESS_ABBREV
 
 
 # I liked editing ~/.lessfilter (which is now in XDG_CONFIG_HOME), and this kept getting in the way.
