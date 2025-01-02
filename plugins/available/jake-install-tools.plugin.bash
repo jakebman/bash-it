@@ -298,9 +298,9 @@ function jake-install-tools() {
 	if ((${#bin_files[@]})); then
 		echo "please copy the apt* files (${bin_files[*]}) from ${BASH_IT_CUSTOM}/bin to /usr/local/bin"
 		echo -en "\t"
-		echo 'sudo install --verbose -C ${BASH_IT_CUSTOM}/bin/* /usr/local/bin'
+		echo 'sudo install --verbose -C "${BASH_IT_CUSTOM}"/bin/* /usr/local/bin'
 	else
-		echo "Nothing to do for apt-*-only - bin files are installed and are happy"
+		echo "Nothing to do for my local bin files (apt-*-only and friends) - bin files are installed and are happy"
 	fi
 
 	if ! cmp -s "${BASH_IT_CUSTOM}/apt-preferences.d/jake-no-thanks-batcat" "/etc/apt/preferences.d/jake-no-thanks-batcat"; then
