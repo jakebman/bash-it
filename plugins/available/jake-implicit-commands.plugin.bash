@@ -17,11 +17,12 @@ function hgrep {
 	# Modify ack's pager to ask less to start at the end of output. From `man less`:
 	# "If a command line option begins with +, the remainder of that option is taken to be an
 	#  initial command to less. For example, +G tells less to start at the end of the file..."
+	# Also, suppress tilde padding - it's unnecessary here
 	if [[ "$#" -eq 0 ]]; then
 		# can't use `pager` here - no guarantee it respects +G, and we want to scroll to bottom
-		history | less +G
+		history | less --tilde +G
 	else
-		history | ack --pager='less +G' "$@"
+		history | ack --pager='less --tilde +G' "$@"
 	fi
 }
 
