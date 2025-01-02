@@ -249,7 +249,7 @@ function jake-install-tools() {
 		echo 'sudo update-alternatives --set editor ....'
 	fi
 
-	if readlink -e '/etc/hosts-windows'; then
+	if readlink -e '/etc/hosts-windows' &>/dev/null; then
 		echo "Nothing to do for /etc/hosts-windows. Pointing at '$(readlink -f /etc/hosts-windows)'"
 	else
 		echo "Please create a symlink to the windows hosts file at '/etc/hosts-windows'"
