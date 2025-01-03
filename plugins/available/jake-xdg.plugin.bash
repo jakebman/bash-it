@@ -78,6 +78,10 @@ fi
 export npm_config_cache="${XDG_CACHE_HOME}/npm"
 export JARVIZ_DIR="${XDG_CACHE_HOME}" # a jar analyzer, from sdkman
 
+# .pyc files go here. Read more in `man python`'s entry on `-X pycache_prefix=PATH`
+# Happily, it's automatically created, unlike the history file
+export PYTHONPYCACHEPREFIX="${XDG_CACHE_HOME}/__pycache__"
+
 ## XDG_STATE_HOME
 : ${XDG_STATE_HOME:=${HOME}/.local/state}
 
