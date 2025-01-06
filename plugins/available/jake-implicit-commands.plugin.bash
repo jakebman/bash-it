@@ -385,25 +385,24 @@ function _is_git_safe {
 	return 0
 }
 
+function _shfmt_pager {
+	eval "${SHFMT_PAGER:-bat --language=bash}"
+}
+
 function shfmt {
-	about 'report *sh (.bash, .sh, etc.) files in the current folder that need to be formatted, or take that output on the CLI or from stdin as-if via xargs (`shfmt|shfmt` or `shfmt $(shfmt)`)and format the listed files if they are safe to modify in git. Otherwise, forward to normal shfmt'
+	about 'report *sh (.bash, .sh, etc.) files in the current folder that need to be formatted, allow `shfmt $(shfmt)` to be git-aware'
 	if _has_flags "$@"; then
-		command shfmt "$@"
+		command shfmt "$@" | _shfmt_pager
 	elif ! [ -t 0 ]; then
+		# TODO: it would be nice to peek the first line. If it's a file, we'll xargs ourselves. Otherwise, be a formatting pager
 		# Stdin isn't the terminal and command shfmt doesn't have priority.
-		# That means xargs-y input
-		# Huh. "Splat the stdin into a series of cli arguments" can *almost* be done via `$(cat)`,
-		# But it breaks on filenames with spaces.
-		local -a files
-		mapfile -t files
-		_shfmt-xargsy "$@" "${files[@]}"
+		# We'll just format the input, but with a good coloring pager
+		command shfmt "$@" | _shfmt_pager
 	elif [[ "$#" -eq 0 ]]; then
-		# No args - we're in list-y land
-		# TODO: if shfmt gets a --null flag, switch on the terminaly-ness of stdout and use xargsy --null behavior
-		# in order to best support  the `shfmt | shfmt` use case
+		# No args, stdin is the terminal - we're in list-y land
 		command shfmt -l * 2>&1 | pager
 	else
-		# we have args. They aren't flags. Stdin is the terminal. Format them :)
+		# we have args. They aren't flags. Stdin is the terminal. Format them, respecting git safety :D
 		_shfmt-xargsy "$@"
 	fi
 }
