@@ -87,10 +87,10 @@ LESS+="--SEARCH-SKIP-SCREEN "
 LESS_ABBREV+=A
 # use-color gets a nice light cyan color on some of less's UI elements
 LESS+="--use-color "
-LESS_ABBREV+=" --use-color"
+LESS_ABBREV+=" --use-c"
 # follow-name ensures that `less +F /var/log/foo` emulates `tail -F`, not `tail -f`. i.e. an implicit --follow=name
 LESS+="--follow-name "
-LESS_ABBREV+=" --follow-name"
+LESS_ABBREV+=" --fol"
 # There's some cool discussion on the value of these flags used in SYSTEMD_LESS in the `man systemctl` docs
 export LESS LESS_ABBREV
 
