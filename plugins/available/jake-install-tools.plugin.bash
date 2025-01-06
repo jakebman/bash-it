@@ -175,6 +175,12 @@ function jake-install-tools() {
 		echo "Nothing to do for sdkman - sdkman is happy"
 	fi
 
+	if [ true = "$sdkman_auto_env" ]; then
+		echo "sdkman is automatically proc'ing on cd"
+	else
+		echo 'Consider setting sdkman_auto_env=true in `sdk config`'
+	fi
+
 	# I would really prefer to use the latest git
 	local GIT_VERSION="$(git --version)"
 	local EXPECTED_VERSION='git version 2.46.0'
