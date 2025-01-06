@@ -514,7 +514,7 @@ function _jake-check-optional-tools() {
 		echo "Nothing to do for glab - glab is happy"
 	else
 		echo "Please install glab - gitlab's cli tool (parallels github's gh)"
-		echo "Get the new .deb from one of these, or via https://gitlab.com/gitlab-org/cli/-/releases"
+		echo "Get the new .deb from one of these, or via https://gitlab.com/gitlab-org/cli/-/releases, or the prebuilt-mpr repository, and via apt"
 		_jake-gitlab-repo-release-urls 34675721 | grep deb$ | grep x86_64 | grep -v musl
 		echo -en "\t"
 		echo 'sudo dpkg -i glab_*.deb'
