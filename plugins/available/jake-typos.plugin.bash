@@ -154,6 +154,8 @@ typo explorer. 'explorer .'
 typo exploer. explorer. # happened while I was writing the alias above
 
 typo htpo htop
+typo hotp htop
+typo htp htop
 
 # It's faster to just alias these to cht.sh and let the invocation fail later instead of checking for the existence of cht.sh
 typo cht cht.sh
