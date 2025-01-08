@@ -57,6 +57,13 @@ function _ssh_remote_bashrc() {
 					vi "$@"
 				}
 			fi
+			# there's no ipconfig on Rocky Linux - it's `ip address`, but can be abbreviated, per the man page:
+			# "The names of all objects may be written in full or abbreviated form, for example address can be abbreviated as addr or just a."
+			if !type ipconfig &>/dev/null && type ip &>/dev/null; then
+				function ipconfig {
+					ip addr
+				}
+			fi
 		NONINTERPOLATING_HEREDOC
 
 		cat "${BASH_IT}/plugins/available/jake-cdd.plugin.bash"
