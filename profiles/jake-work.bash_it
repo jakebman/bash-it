@@ -13,6 +13,7 @@ plugins dotfiles-via-bare-git-repo-with-config-alias
 plugins gitstatus
 plugins google
 plugins history-eternal
+plugins jake-cd-git-root
 plugins jake-cd-implicit-foo-folder
 plugins jake-cdd
 plugins jake-counting-lines
@@ -30,6 +31,7 @@ plugins jake-xdg
 plugins jq
 plugins projects
 plugins pyenv
+plugins rezipdoc
 plugins sdkman
 plugins type-through-aliases
 plugins wsl-fast
