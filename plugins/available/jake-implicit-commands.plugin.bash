@@ -35,7 +35,8 @@ if _command_exists bat; then
 				command cat "$@"
 				;;
 			1)
-				bat --plain "$@"
+				# implicit --plain from `bat --config-file`
+				bat "$@"
 				;;
 			*)
 				bat --style=header,grid,changes "$@"
