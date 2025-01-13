@@ -181,6 +181,7 @@ typo mt mr
 typo map man # I'm kinda surprised there was no existing map command that this overrides
 typo amn man
 typo mabn man
+typo nan man
 
 typo sork sort
 typo sortr sort
@@ -247,6 +248,8 @@ typo bashs-it bash-it
 # my own tool that does apt updates
 typo apt0up apt-up
 typo aptup apt-up
+typo apu-up apt-up
+typo apt-files apt-file
 
 typo note notepad
 
