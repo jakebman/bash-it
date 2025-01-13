@@ -683,6 +683,7 @@ function _jake-gitlab-repo-release-urls {
 function _jake-remove-motd-junk {
 	_jake-remove-motd-news
 	_jake-remove-pro-news
+	_jake-remove-esm-messages
 }
 
 function _jake-remove-motd-news {
@@ -700,6 +701,16 @@ function _jake-remove-pro-news {
 		echo "sudo pro config set apt_news=False"
 	fi
 }
+
+function _jake-remove-esm-messages {
+	# see /usr/lib/update-notifier/update-motd-updates-available for details
+	if [ ! -f "/var/lib/update-notifier/hide-esm-in-motd" ]; then
+		echo "ESM update information is showing in the MOTD. I don't like that."
+		echo -en "\t"
+		echo touch /var/lib/update-notifier/hide-esm-in-motd
+	fi
+}
+
 
 function _jake-update-ack-and-its-manpages {
 	local bin_dir="${HOME}/bin"
