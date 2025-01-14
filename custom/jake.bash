@@ -441,6 +441,23 @@ function catwhich {
 }
 alias catw=catwhich
 
+function stringswhich {
+	local where
+	where="$(which "$1")"
+	if _jake-success; then
+		( strings "$where"
+			if [[ -t 1 ]]; then # stdout is terminal. Cool to add info (see jake's bin/git)
+				echo "${FUNCNAME[0]}: this file lives at '$where'"
+			fi
+		) | pager
+	else
+		echo "${FUNCNAME[0]} - ${1} is not found. Cannot display its contents"
+		return 1
+	fi
+}
+alias stringsw=stringswhich
+
+
 function llwhich {
 	local where
 	where="$(which "$1")"
