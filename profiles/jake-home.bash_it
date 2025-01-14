@@ -13,6 +13,7 @@ plugins google
 plugins history-eternal
 plugins iotop
 plugins jake-cdd
+plugins jake-cd-git-root
 plugins jake-cd-implicit-foo-folder
 plugins jake-counting-lines
 plugins jake-docker
@@ -42,7 +43,6 @@ completion maven
 completion projects
 completion sdkman
 completion system
-aliases batcat
 aliases general
 aliases jake-aliases
 aliases jake-single-letter
