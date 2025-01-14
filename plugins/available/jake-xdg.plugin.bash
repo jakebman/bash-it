@@ -90,6 +90,7 @@ export PYTHONPYCACHEPREFIX="${XDG_CACHE_HOME}/__pycache__"
 # However, this canonical solution will be available in python 3.13:
 export PYTHON_HISTORY="${XDG_STATE_HOME}/python/python_history"
 export REDISCLI_HISTFILE="${XDG_STATE_HOME}/redis/cli-history"
+# Thanks https://antonz.org/sqlite-history/
 export SQLITE_HISTORY="${XDG_STATE_HOME}/sqlite/cli-history"
 export PERL_CPANM_HOME="${XDG_STATE_HOME}/cpanm" # cpanm command in the cpanminus package from apt (for rakubrew)
 
