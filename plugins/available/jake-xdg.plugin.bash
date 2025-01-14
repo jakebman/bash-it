@@ -26,6 +26,8 @@ export GNUPGHOME="${XDG_CONFIG_HOME}/gnupg"
 # But, ~/.docker keeps getting created anyway on startup. Sigh.
 export DOCKER_CONFIG="${XDG_CONFIG_HOME}/docker"
 export RANCHER_CONFIG_DIR="${XDG_CONFIG_HOME}/rancher"
+# I had to rip this from their source code: https://github.com/GitGuardian/ggshield/blob/8b6464d31be1cef6fa3f4ceec1fe9894a8454c27/ggshield/core/dirs.py#L16
+export GG_USER_HOME_DIR="${XDG_CONFIG_HOME}/ggshield"
 
 # TODO: it'd be nice to have this set BEFORE bash starts, but hey, that's what `bind -f` is for!
 export INPUTRC="${XDG_CONFIG_HOME}/inputrc"
@@ -115,8 +117,6 @@ export COMPLETE_ALIAS_DIR="${JAKE_XDG_BIN_DIR}/complete-alias"
 # .cache, .config, ... .local - the XDG solution folders
 # .editorconfig - currently not supported by all involved parties
 # .gi_list - not supported. git-ignore-io in git-extras writes this
-# .gitguardian.yaml - not supported. ggshield only wants files in ~.
-#     See find_global_config_path/get_global_path/USER_CONFIG_FILENAMES in https://github.com/GitGuardian/ggshield/blob/6d0d8b86c504e0066de5758c69d8cd95a4f09426/ggshield/core/constants.py#L19
 # .gitignore.d - vcsh, created by default. hardcoded name below $VCSH_BASE, which defaults to $HOME
 # .gitmodules - required because I'm keeping subrepos in my conf vcsh repo
 #     It needs to live in $GIT_WORK_TREE - gets really interesting with nns-config also having these
