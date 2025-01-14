@@ -29,6 +29,9 @@ export RANCHER_CONFIG_DIR="${XDG_CONFIG_HOME}/rancher"
 # I had to rip this from their source code: https://github.com/GitGuardian/ggshield/blob/8b6464d31be1cef6fa3f4ceec1fe9894a8454c27/ggshield/core/dirs.py#L16
 export GG_USER_HOME_DIR="${XDG_CONFIG_HOME}/ggshield"
 
+# This file, if it's ever created, could also configure `cache=${npm_config_cache}` and remove the $npm_config_cache variable, below
+NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME}/npm/npmrc"
+
 # TODO: it'd be nice to have this set BEFORE bash starts, but hey, that's what `bind -f` is for!
 export INPUTRC="${XDG_CONFIG_HOME}/inputrc"
 bind -f "$INPUTRC"
