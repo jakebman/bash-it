@@ -488,8 +488,9 @@ function xml {
 		return 1
 	fi
 
-	# two-space indent, forcing newlines between elements w/o children
-	xmlindent -i 2 -f "$@" | bat -pl xml
+	# two-space indent, forcing newlines between elements w/o children,
+	# suppressing newline before end-tag
+	xmlindent -i 2 -f -nbe "$@" | bat -pl xml
 }
 
 function xpath {
