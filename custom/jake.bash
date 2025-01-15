@@ -327,12 +327,33 @@ alias gitcd=cdgit # not a typo - I literally don't know which name should be pri
 function fidget {
 	type fidget
 	echo "TODO: loop this into jake-maintain-system tech"
-	if [[ "$#" -eq 0 ]]; then
-		echo "giving you a chance to cancel"
-		sleep 12
+
+	local fast arg
+	local OPTIND=1  # Reset OPTIND for this function, so getopts starts at $1, not $ummm....?
+	while getopts 'afqh' arg; do
+		case "$arg" in
+			a)
+				# -x to export the variable
+				local -x UPDATE_JUNK_DRAWER=true
+				;;
+			f|q)
+				fast="Not waiting to cancel"
+				;;
+			*)
+				fast='Any unrecognized argument is interpreted as if it were -f/-q for fast or quick running'
+				;;
+		esac
+	done
+
+	[ -n "$UPDATE_JUNK_DRAWER" ] && echo "Including Junk Drawer in update"
+
+	if [[ -n "$fast" ]]; then
+		echo "$fast"
 	else
-		echo "literally any argument works as-if it were '--quickly'"
+		echo "Giving you a chance to cancel"
+		sleep 12
 	fi
+
 	( # subshell. Automatically undoes the cd ~
 		cd ~
 		jake-sdkman-update
@@ -352,7 +373,7 @@ function fidget {
 }
 alias fid=fidget
 alias f=fidget
-alias ff="fidget --fast"
+alias ff="fidget -f" # --fast
 alias sdf=fidget
 if ! _command_exists asdf; then
 	# There's an asdf package manager
