@@ -10,8 +10,8 @@ if [ -v WSL_WINDOWS_USER_HOME ]; then
 	if [ -v KUBECONFIG ]; then
 		KUBECONFIG+=":"
 	fi
-	# TODO: refactor out the "is windows a viable thing to add to KUBECONFIG" and "ensure ~/.kube/config is in KUBECONFIG"
-	KUBECONFIG+="${WSL_WINDOWS_USER_HOME}/.kube/config:${HOME}/.kube/config"
+	# TODO: refactor out the "is windows a viable thing to add to KUBECONFIG" and "ensure the linux config is in KUBECONFIG"
+	KUBECONFIG+="${WSL_WINDOWS_USER_HOME}/.kube/config:${XDG_CONFIG_HOME:-${HOME}/.cache}/kubectl/config"
 	export KUBECONFIG
 fi
 
