@@ -138,7 +138,10 @@ function jake-install-tools() {
 	_jake-find-tool lynx
 
 	# playing with these
-	_jake-find-tool wajig # Doesn't have docs, but https://unix.stackexchange.com/questions/40442/which-installed-software-packages-use-the-most-disk-space-on-debian
+	# Disabled wajig 1/16/25 because of syntax errors:
+	# /usr/lib/python3/dist-packages/wajig/commands.py:621: SyntaxWarning: invalid escape sequence '\.'
+	#        ", $6, $7, $8}' | sed 's|\.000000000||'")
+	# _jake-find-tool wajig # Doesn't have docs, but https://unix.stackexchange.com/questions/40442/which-installed-software-packages-use-the-most-disk-space-on-debian
 	_jake-find-tool shfmt
 	_jake-find-tool shellcheck
 	_jake-find-tool mr myrepos
