@@ -52,14 +52,14 @@ function _ssh_remote_bashrc() {
 					grep --color=always "$@" |
 					less --RAW-CONTROL-CHARS +G
 			}
-			if !type vim &>/dev/null; then
+			if ! type vim &>/dev/null; then
 				function vim {
 					vi "$@"
 				}
 			fi
 			# there's no ipconfig on Rocky Linux - it's `ip address`, but can be abbreviated, per the man page:
 			# "The names of all objects may be written in full or abbreviated form, for example address can be abbreviated as addr or just a."
-			if !type ipconfig &>/dev/null && type ip &>/dev/null; then
+			if ! type ipconfig &>/dev/null && type ip &>/dev/null; then
 				function ipconfig {
 					ip addr
 				}
