@@ -110,6 +110,9 @@ export GOPATH="${JAKE_XDG_BIN_DIR}/go"
 # for bash-it autocomplete; and for .mrconfig (which is why it must be exported)
 export COMPLETE_ALIAS_DIR="${JAKE_XDG_BIN_DIR}/complete-alias"
 
+# ref https://askubuntu.com/questions/882562/how-can-i-change-or-hide-the-snap-directory
+[ -d ~/snap ] && _log_warn 'consider hiding your ~/snap directory by running `sudo snap set system experimental.hidden-snap-folder=true`'
+
 # XDG list:
 # .aws - not configurable. The AWS_CONFIG_FILE and AWS_SHARED_CREDENTIALS_FILE can be configured, but not for instance .aws/cli/alias
 # .azure - symlinked into $WSL_WINDOWS_USER_HOME. Can probably remove it without damage.
@@ -144,3 +147,5 @@ export COMPLETE_ALIAS_DIR="${JAKE_XDG_BIN_DIR}/complete-alias"
 # .sudo_as_admin_successful - SUPER(user) unlikely
 # .vim - a symlink into .config/vim, for a small win. Removing this symlink requires rewriting vim to read an env. var
 # .zef - requires env variable, and the file the env var points to also needs to reference the new location
+#
+# snap - this directory without a dot is also polluting. Created by snapd. Supposedly configurable - read ablove
