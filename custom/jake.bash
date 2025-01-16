@@ -15,6 +15,10 @@ if [ -v WSL_WINDOWS_USER_HOME ]; then
 	export KUBECONFIG
 fi
 
+# A custom flag, respected by my custom kubectl. Essentially `kubectl ${JAKE_KUBE_CACHE_DIR+--cache-dir "$JAKE_KUBE_CACHE_DIR"}`
+# unsure if any parents need to be created
+JAKE_KUBE_CACHE_DIR="${XDG_CACHE_HOME:-${HOME}/.cache}/kubectl"
+
 # (TODO: this probably doesn't always work. Didn't for gradle at least)
 # Enable java to read the cacertificates from linux. Technically, there's an intermediate process (ca-certificates-java)
 # that copies to here, but it's close enough to update-ca-certificates that you only need to know this if you're getting
