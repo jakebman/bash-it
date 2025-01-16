@@ -94,6 +94,7 @@ export PYTHONPYCACHEPREFIX="${XDG_CACHE_HOME}/__pycache__"
 # However, this canonical solution will be available in python 3.13:
 export PYTHON_HISTORY="${XDG_STATE_HOME}/python/python_history"
 export REDISCLI_HISTFILE="${XDG_STATE_HOME}/redis/cli-history"
+export NODE_REPL_HISTORY="${XDG_STATE_HOME}/nodejs/cli-history"
 # Thanks https://antonz.org/sqlite-history/
 export SQLITE_HISTORY="${XDG_STATE_HOME}/sqlite/cli-history"
 export PERL_CPANM_HOME="${XDG_STATE_HOME}/cpanm" # cpanm command in the cpanminus package from apt (for rakubrew)
@@ -101,6 +102,7 @@ export PERL_CPANM_HOME="${XDG_STATE_HOME}/cpanm" # cpanm command in the cpanminu
 # These programs need their parent folder to exist:
 mkdir -p "$(dirname "$PYTHON_HISTORY")"
 mkdir -p "$(dirname "$SQLITE_HISTORY")"
+mkdir -p "$(dirname "$NODE_REPL_HISTORY")"
 
 : ${JAKE_XDG_BIN_DIR:=${HOME}/.local/bin}
 # install via https://github.com/pyenv/pyenv-installer. Installed via fork, so it's prudent to export it here
