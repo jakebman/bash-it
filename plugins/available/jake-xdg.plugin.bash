@@ -79,7 +79,7 @@ if [ -f "$WGETRC" ]; then
 	mkdir -p "${XDG_CACHE_HOME}/wget"
 fi
 # Ditto curl, with its cookie jar:
-if grep -q "${XDG_CACHE_HOME}/curl" "$CURL_HOME/.curlrc" "$XDG_CONFIG_HOME/curlrc" "$HOME/.curlrc"; then
+if grep -q "cookie-jar.*${XDG_CACHE_HOME}/curl" "$CURL_HOME/.curlrc" "$XDG_CONFIG_HOME/curlrc" "$HOME/.curlrc"; then
 	# SPECULATIVE!!!
 	# curlrc might contain a line like `--cookie-jar /home/jakebman/.cache/curl/cookie-jar`
 	# (mine does)
