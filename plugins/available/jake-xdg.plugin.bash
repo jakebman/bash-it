@@ -18,6 +18,7 @@ about-plugin 'Set certain environment variables to make their corresponding apps
 # That means I need intervention.
 # I *want* curlrc to live at "${XDG_CONFIG_HOME}/curl/curlrc", but there's no way to do that in env variables
 # So, I'm storing a symlink from "${XDG_CONFIG_HOME}/curl/.curlrc" to {the same, but without a dot} in my dotfiles repo
+# And instead relying on curl to use its primary choice for curlrc: `1) "$CURL_HOME/.curlrc"`, per the manpage
 export CURL_HOME="${XDG_CONFIG_HOME}/curl"
 export ACKRC="${XDG_CONFIG_HOME}/ack/ackrc"
 export WGETRC="${XDG_CONFIG_HOME}/wget/wgetrc"
@@ -76,6 +77,14 @@ export XDG_CACHE_HOME
 # this value and that value may differ
 if [ -f "$WGETRC" ]; then
 	mkdir -p "${XDG_CACHE_HOME}/wget"
+fi
+# Ditto curl, with its cookie jar:
+if grep -q "${XDG_CACHE_HOME}/curl" "$CURL_HOME/.curlrc" "$XDG_CONFIG_HOME/curlrc" "$HOME/.curlrc"; then
+	# SPECULATIVE!!!
+	# curlrc might contain a line like `--cookie-jar /home/jakebman/.cache/curl/cookie-jar`
+	# (mine does)
+	# I'd like to automatically creat that file
+	mkdir -p "${XDG_CACHE_HOME}/curl"
 fi
 
 # see `man npm` and https://docs.npmjs.com/cli/v10/commands/npm-cache
