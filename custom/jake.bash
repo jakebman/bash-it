@@ -378,6 +378,7 @@ function fidget {
 alias fid=fidget
 alias f=fidget
 alias ff="fidget -f" # --fast
+alias ffa="fidget -fa"
 alias sdf=fidget
 if ! _command_exists asdf; then
 	# There's an asdf package manager
