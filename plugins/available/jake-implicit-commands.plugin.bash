@@ -90,6 +90,16 @@ function diff {
 	fi
 }
 
+function winget.exe {
+	about "allow a bare winget.exe to list updates"
+	if [[ "$#" -eq 0 ]]; then
+		command winget.exe update "$@"
+	else
+		command winget.exe "$@"
+	fi
+}
+
+
 function stat {
 	about "allow you to type the bare word 'stat' and get an automatic (implicit-git) status, while not harming the stat command"
 	if [[ "$#" -eq 0 ]]; then
