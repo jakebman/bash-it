@@ -14,7 +14,7 @@ plugins history-eternal
 plugins iotop
 plugins jake-cdd
 plugins jake-cd-git-root
-plugins jake-cd-implicit-foo-folder
+plugins jake-cd-quick-access
 plugins jake-counting-lines
 plugins jake-docker
 plugins jake-implicit-commands
