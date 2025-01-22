@@ -11,7 +11,7 @@ about-plugin 'Set certain environment variables to make their corresponding apps
 # 1. It's wrong, because there's a bug. Use strace on curl 8.5.0 and you'll see it check $XDG_CONFIG_HOME/.curlrc instead:
 #         $ XDG_CONFIG_HOME=/foo/bar strace curl |& grep foo/bar
 #         openat(AT_FDCWD, "/foo/bar/.curlrc", O_RDONLY) = -1 ENOENT (No such file or directory)
-# 2. It only works if XDG_CONFIG_HOME is set
+# 2. It only works if XDG_CONFIG_HOME is set. You're supposed to use ~/.config if XDG_CONFIG_HOME is missing.
 # 3. Item 2 is also a lie. Not sure if there's a bug in the docs, but Dec 6 2023 curl-8_5_0(7161cb17c) also tries to check $HOME/.config/.curlrc independently
 # 4. (re: 2, despite 3) I won't be blackmailed into exporting XDG_CONFIG_HOME with its default value
 #         (Please ignore the git history which shows me doing exactly that here)
