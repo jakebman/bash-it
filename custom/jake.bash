@@ -214,6 +214,27 @@ alias var=vars # because I'm lazy
 # TODO: Let's get a function-printing equivalent of vars
 #}
 
+function path_to_lines {
+	if [ 0 -ne "$#" ]; then
+		# have args - apply to them
+		local arg
+		for arg; do
+			if [ -v "$arg" ]; then # user specified a variable name
+				echo "### $arg is..."
+				arg="${!arg}"
+			fi
+			echo "$arg"
+		done
+	elif [ -t 0 ]; then
+		# stdin is a terminal. Apply to $PATH
+		echo "$PATH"
+	else
+		# stdin is a pipe - apply to everything
+		cat
+	fi |
+		tr ':' "\n"
+}
+
 function cdp {
 	about "cd, but with an implicit mkdir -p"
 	if ! test -d "${1?NEED A DIR}"; then
