@@ -142,6 +142,8 @@ function jake-install-tools() {
 	# /usr/lib/python3/dist-packages/wajig/commands.py:621: SyntaxWarning: invalid escape sequence '\.'
 	#        ", $6, $7, $8}' | sed 's|\.000000000||'")
 	# _jake-find-tool wajig # Doesn't have docs, but https://unix.stackexchange.com/questions/40442/which-installed-software-packages-use-the-most-disk-space-on-debian
+	_jake-find-tool fortune 'fortune-mod fortunes fortunes-ubuntu-server fortunes-mario' 'Also consider tfortune/tfortunes'
+	_jake-find-tool cowsay
 	_jake-find-tool shfmt
 	_jake-find-tool shellcheck
 	_jake-find-tool mr myrepos
