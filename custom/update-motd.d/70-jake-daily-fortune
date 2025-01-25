@@ -1,0 +1,4 @@
+#!/bin/sh
+
+echo # spacing line
+exec /usr/games/fortune
