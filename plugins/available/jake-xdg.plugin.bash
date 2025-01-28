@@ -159,6 +159,8 @@ export COMPLETE_ALIAS_DIR="${JAKE_XDG_BIN_DIR}/complete-alias"
 # .ssh - Not generally possible
 # .sudo_as_admin_successful - SUPER(user) unlikely
 # .vim - a symlink into .config/vim, for a small win. Removing this symlink requires rewriting vim to read an env. var
+#        Update: "From [version 9.1.0327,] Vim looks for $XDG_CONFIG_HOME/vim/vimrc on its own, no further hacks required." https://jorenar.com/blog/vim-xdg
+#        Link also has a workaround with VIMINIT (which interferes with my vim autoresume trick, for some reason)
 # .zef - requires env variable, and the file the env var points to also needs to reference the new location
 #
 # snap - this directory without a dot is also polluting. Created by snapd. Supposedly configurable - read ablove
