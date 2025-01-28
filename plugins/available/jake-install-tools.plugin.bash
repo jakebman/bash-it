@@ -370,6 +370,7 @@ function jake-install-tools() {
 	echo -en "${echo_blue-}"
 	echo "check out https://devblogs.microsoft.com/commandline/updating-the-windows-console-colors/"
 	echo -en "${echo_reset_color-}"
+	echo "I also lightened the blue of Campbell from #0037DA to #2158FF (added #212100) at work. BrightBlue remains unchanged."
 
 	# TODO: recommend git config --global --set core.fsmonitor true for windows
 }
