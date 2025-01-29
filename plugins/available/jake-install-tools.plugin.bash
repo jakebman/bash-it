@@ -141,6 +141,7 @@ function jake-install-tools() {
 	# Disabled wajig 1/16/25 because of syntax errors:
 	# /usr/lib/python3/dist-packages/wajig/commands.py:621: SyntaxWarning: invalid escape sequence '\.'
 	#        ", $6, $7, $8}' | sed 's|\.000000000||'")
+	# wajig 4.1.2 is fine with my home system python `Python 3.12.3`. I suspect work's pyenv is too picky
 	# _jake-find-tool wajig # Doesn't have docs, but https://unix.stackexchange.com/questions/40442/which-installed-software-packages-use-the-most-disk-space-on-debian
 	_jake-find-tool fortune 'fortune-mod fortunes fortunes-ubuntu-server' 'Also consider tfortune/tfortunes'
 	_jake-find-tool cowsay
