@@ -341,9 +341,9 @@ function _mr-able {
 }
 
 function cdgit {
-	about 'cd into the git-dir for the current directory, or fail'
+	about 'cd into the root of a git repo for the current directory, or fail'
 	local where
-	where="$(git rev-parse --absolute-git-dir)" || return 1
+	where="$(git rev-parse --show-toplevel)" || return 1
 	echo "found git dir at '${where}'. Going there"
 	cd "$where"
 }

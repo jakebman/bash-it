@@ -528,6 +528,8 @@ typo qcd cd    # I quit less *twice*, then wanted to cd
 typo lcd cd    # I tried to ls, then decided to change directories instead
 typo treecd cd # Ditto, but tree. Wow.
 
+typo cdg cdgit
+
 typo hsitory history
 typo pws pwd
 
