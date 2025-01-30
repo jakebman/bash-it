@@ -470,23 +470,30 @@ function filewhich {
 }
 alias filew=filewhich
 
-# TODO: headwhich and tailwhich
-function catwhich {
+# TODO: permit flags by essentially "for each flag, if it's `which`-able, replace the word with its location"
+function _outwhich {
 	# TODO: what if this was also able to print functions and aliases, too?
 	# TODO: what if we follow aliases down to their roots?
+	local command=$1
+	shift
 	local where
 	where="$(which "$1")"
 	if _jake-success; then
-		cat "$where"
+		"$command" "$where"
 		if [[ -t 1 ]]; then # stdout is terminal. Cool to add info (see jake's bin/git)
-			echo "${FUNCNAME[0]}: this file lives at '$where'"
+			echo "${command}which: this file lives at '$where'"
 		fi
 	else
-		echo "${FUNCNAME[0]} - ${1} is not found. Cannot display its contents"
+		echo "${command}which - ${1} is not found. Cannot display its contents"
 		return 1
 	fi
 }
+alias catwhich='_outwhich cat'
 alias catw=catwhich
+alias headwhich='_outwhich head'
+alias headw=headwhich
+alias tailwhich='_outwhich tail'
+alias tailw=tailwhich
 
 function stringswhich {
 	local where
