@@ -170,6 +170,7 @@ typo lsl 'ls -l'
 typo los ls
 typo lh llh
 typo les less
+typo hess less
 typo lesss less
 
 typo ach ack
