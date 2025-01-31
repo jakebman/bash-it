@@ -90,9 +90,10 @@ function jake-install-tools() {
 	_jake-find-tool pygmentize python3-pygments
 	# A little hacky - I could just install procyon-decompiler, but that brings in default-jre-headless, which has a large dependency tree
 	# See https://serverfault.com/questions/250224/how-do-i-get-apt-get-to-ignore-some-dependencies#comment1207918_250227
-	_jake-find-tool procyon "ca-certificates-java java-common libjcommander-java libpcsclite1 libprocyon-java &&
+	_jake-find-tool procyon "&&
+		sudo apt install --mark-auto ca-certificates-java java-common libjcommander-java libpcsclite1 libprocyon-java &&
 		apt download procyon-decompiler &&
-		sudo dpkg --ignore-depends=default-jre-headless -i procyon-decompiler*.deb && # TODO: this might be sudo apt install ./procyon-decompiler*.deb default-jre-headless-
+		sudo dpkg --ignore-depends=default-jre-headless -i procyon-decompiler*.deb && # TODO: this isn't sudo apt install ./procyon-decompiler*.deb default-jre-headless-, but is there an apt way?
 		sudo apt install " '(or just procyon-decompiler, but this keeps the 300MB os-level java install away)'
 	_jake-find-tool python python-is-python3   # also grabs python3, as a bonus
 	# _jake-find-tool xmlformat xmlformat-perl # I think xmlindent is cleaner, partially because it has fewer options
