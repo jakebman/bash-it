@@ -277,6 +277,8 @@ typo tiem time
 typo mcn mvn
 typo vmn mvn
 
+typo mf mv
+
 typo suod sudo
 typo suto sudo
 typo audo sudo
