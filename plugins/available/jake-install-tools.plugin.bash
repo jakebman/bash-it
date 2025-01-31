@@ -517,6 +517,20 @@ function _jake-check-optional-tools() {
 		echo 'sudo apt install ./git-delta*.deb'
 	fi
 
+	if _binary_exists ghostty; then
+		echo "Nothing to do for ghostty - ghostty is happy"
+	else
+		echo "Consider installing ghostty to see what the hype is about this terminal emulator"
+		echo "Get the new .deb from one of these, or https://github.com/mkasberg/ghostty-ubuntu/releases/latest"
+		_jake-github-repo-release-urls mkasberg/ghostty-ubuntu |
+			grep deb$ |
+			grep amd |
+			grep "$(lsb_relase --release --short)" |
+			grep -v alligator
+		echo -en "\t"
+		echo 'sudo apt install ./ghostty*.deb'
+	fi
+
 	if _binary_exists glab; then
 		echo "Nothing to do for glab - glab is happy"
 	else
