@@ -259,6 +259,7 @@ typo grpe grep
 typo pgre pgrep
 
 typo hgrpe hgrep
+typo hrpe hgrep
 
 typo ptree pstree
 
