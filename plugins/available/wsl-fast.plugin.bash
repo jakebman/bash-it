@@ -51,9 +51,8 @@ function wsl-open-port {
 	about "learn more at https://learn.microsoft.com/en-us/windows/wsl/networking"
 	param "1: port to open on linux side"
 	param "2: port to open on windows side (optional - defaults to \$1)"
-	: ${2:=$1}
-	local linuxPort="$1"
-	local windowsPort="$2"
+	local linuxPort="${1?need a port to open}"
+	local windowsPort="${2:-$1}"
 	echo "This command requires windows-level Administrator permission."
 	echo "I currently don't have a way to invoke that from wsl. (TODO!)"
 	echo "however, you should be able to simply run this command:"
