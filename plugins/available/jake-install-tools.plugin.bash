@@ -279,6 +279,13 @@ function jake-install-tools() {
 		echo "Nothing to do for /etc/bash.bashrc's sudo_as_admin_successful nonsense"
 	fi
 
+	if grep -s -q "$(whoami)" /etc/wsl.conf &>/dev/null; then
+		echo "Nothing to do for setting WSL's default user"
+	else
+		echo "you're probably not the default wsl user."
+		echo "consider putting a [user]\\n default=$(whoami) into your /etc/wsl.conf file"
+	fi
+
 
 	# TODO: `-d` is a bash 4.4-ism, and might not be supported in the rest of bash-it
 	# https://stackoverflow.com/questions/23356779/how-can-i-store-the-find-command-results-as-an-array-in-bash
