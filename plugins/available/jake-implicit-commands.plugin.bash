@@ -81,12 +81,16 @@ function diff {
 		git implicitdiff "$@"
 	elif [[ "$#" -eq 1 ]] && ! _jake-special-single-args-for-diff "$1"; then
 		git diff "$@"
-	else
-		# TODO: this could be smarter for other people who don't hard-code LESS=-R, use a non-colorful pager, etc.
-		# For now, I'm the only consumer, and this seems adequate
+	elif [ -t 1 ]; then
+		# stdout is a terminal - we can color
 		local -
 		set -o pipefail # allow diff's failure to propagate outward past a pager's success
+
+		# TODO: this could be smarter for other people who don't hard-code LESS=-R, use a non-colorful pager, etc.
+		# For now, I'm the only consumer, and this seems adequate
 		command colordiff "$@" | pager
+	else
+		command diff "$@"
 	fi
 }
 
