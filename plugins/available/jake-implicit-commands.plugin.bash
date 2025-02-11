@@ -96,8 +96,8 @@ function diff {
 
 function dd {
 	about "sometimes I type dd when I meant d, which means diff"
-	if [[ -t 1 && -t 0 && -t 2 ]]; then
-		>&2 echo "${FUNCNAME[0]} - input, output, and stderr are all terminals. ${FUNCNAME[0]} is not a cat. Running diff instead."
+	if [[ "$#" -eq 0 && -t 1 && -t 0 && -t 2 ]]; then
+		>&2 echo "${FUNCNAME[0]} - no args, plus std pipes are all terminals. ${FUNCNAME[0]} is not a cat. Running diff instead."
 		>&2 echo
 		diff "$@"
 	else
