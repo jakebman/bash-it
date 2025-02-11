@@ -94,6 +94,17 @@ function diff {
 	fi
 }
 
+function dd {
+	about "sometimes I type dd when I meant d, which means diff"
+	if [[ -t 1 && -t 0 && -t 2 ]]; then
+		>&2 echo "${FUNCNAME[0]} - input, output, and stderr are all terminals. ${FUNCNAME[0]} is not a cat. Running diff instead."
+		>&2 echo
+		diff "$@"
+	else
+		command dd "$@"
+	fi
+}
+
 function winget.exe {
 	about "allow a bare winget.exe to list updates"
 	if [[ "$#" -eq 0 ]]; then
