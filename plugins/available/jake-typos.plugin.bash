@@ -434,6 +434,7 @@ typo pus push
 typo puh push
 typo ush push
 typo push-- 'push --force-with-lease'
+typo push== push--
 typo cone clone
 typo addd add
 typo ass add
