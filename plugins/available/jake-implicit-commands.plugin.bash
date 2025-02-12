@@ -124,6 +124,16 @@ function stat {
 	fi
 }
 
+function pop {
+	about "do a git stash pop, or a popd(ir) if nothing's stashed"
+	if [[ -z "$(git stash list)" ]]; then
+		popd "$@"
+	else
+		git stash pop "$@"
+	fi
+}
+
+
 # TODO: I've gotten to the point of being frustrated at line wrapping messing with my diffs.
 # TODO: I'd love it if this also looped into git diff, too
 function diff-ignore-wrapping {
