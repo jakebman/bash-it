@@ -10,11 +10,13 @@ about-plugin 'Allow certain folders to always remain valid `cd` targets, from an
 # "A null directory name is the same as the current directory", per `help cd`
 CDPATH+=":${XDG_CONFIG_HOME:-${HOME}/.config}/cd/quick-access"
 
+
 function cd {
-	about 'normal `cd`, but non-$CWD entries get an implicit -P to follow symlinks'
-	if [[ "$#" -eq 1 ]] && ! [[ -d "$1" ]]; then
+	about 'normal `cd`, but non-$CWD entries (and cdable_vars) get an implicit -P to follow symlinks'
+	if [[ "$#" -eq 1 ]] && [[ - != "$1" ]] && ! [[ -d "$1" ]]; then
 		# Shim: I'm basically assuming all symlinks contained in non-$CWD entries in CDPATH are "less canonical"
 		# than their targets.
+		# (but the folder `-` doesn't ususally exist, so we special-case that)
 		builtin cd -P "$@"
 	else
 		builtin cd "$@"
