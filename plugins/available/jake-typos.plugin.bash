@@ -336,6 +336,7 @@ typo stagerd staged
 typo stg staged
 typo sjow show
 typo whow show
+typo shwo show
 typo sho show
 typo shw show
 # some of these are handled by a "duplicating alias" too (so alias comm0t='git comm0t' would work) but it's better for
