@@ -310,6 +310,7 @@ typo typow typo
 typo brwose browse
 
 typo whick which # (to be fair, I was drinking at the time :| )
+typo whoch which
 typo whic which
 typo wich which
 
