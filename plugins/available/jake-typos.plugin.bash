@@ -72,3 +72,7 @@ function typos {
 		)
 	) | pager
 }
+
+function typo {
+	vim  "${BASH_IT_TYPOS_FILE}"
+}
