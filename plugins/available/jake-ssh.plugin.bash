@@ -81,8 +81,6 @@ function _ssh_minified_bashrc() {
 }
 
 function _ssh_additional_config() {
-	# TODO: additional cleanup might be possible by using a custom --init-file to bash instead:
-	# `bash --init-file <(echo "ls; pwd")`
 	# See: https://serverfault.com/questions/368054/run-an-interactive-bash-subshell-with-initial-commands-without-returning-to-the
 	echo "Host *"
 	echo "RequestTTY=yes"
