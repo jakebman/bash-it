@@ -6,7 +6,7 @@ about-plugin "Jake's custom tool for common typos in common and jake-custom scri
 # TODO: maybe we expose the command to there, but it *should* be static, please. Aliases. Functions. Boring stuff.
 : ${BASH_IT_TYPOS_FILE:=${XDG_CONFIG_HOME:-${HOME}/.config}/bash-it/typos.bash}
 # cd can't be handled by command_not_found_handle. We'll just source these inline
-: ${BASH_IT_BUILTIN_TYPOS_FILE:=${XDG_CONFIG_HOME:-${HOME}/.config}/bash-it/typos-builtin.bash}
+: ${BASH_IT_BUILTIN_TYPOS_FILE:=${XDG_CONFIG_HOME:-${HOME}/.config}/bash-it/builtin-typos.bash}
 
 if [ -f "${BASH_IT_BUILTIN_TYPOS_FILE}" ]; then
 	source "${BASH_IT_BUILTIN_TYPOS_FILE}"
