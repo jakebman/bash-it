@@ -346,6 +346,7 @@ typo shw show
 typo githelp 'git help'
 typo ammend amend
 typo amned amend
+typo ament amend
 typo amdne amend # jeez.
 typo comit commit
 typo ommit commit
@@ -431,6 +432,7 @@ typo psh push
 typo pus push
 typo puh push
 typo ush push
+typo push-- 'push --force-with-lease'
 typo cone clone
 typo addd add
 typo ass add
