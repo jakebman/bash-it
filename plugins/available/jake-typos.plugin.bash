@@ -457,6 +457,8 @@ typo ws jws
 # most likely something like "said [y] to a tool that already had --yes'd". Just succeed
 typo y true
 
+typo wignet winget
+
 # shortened (typo-like) form of these "please definitely use git, and not bash, man, or mr" commands
 typo ghelp githelp
 typo gman gitman
