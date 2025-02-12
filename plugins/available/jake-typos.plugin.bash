@@ -60,16 +60,23 @@ function command_not_found_handle {
 }
 
 
+function _typos-helper {
+	local command=$1
+	(
+		cd "$(dirname "${BASH_IT_TYPOS_FILE}")"
+		bash --norc --noprofile -r -c "source '$(basename "${BASH_IT_TYPOS_FILE}")' && $command"
+
+		cd "$(dirname "${BASH_IT_BUILTIN_TYPOS_FILE}")"
+		bash --norc --noprofile -r -c "source '$(basename "${BASH_IT_BUILTIN_TYPOS_FILE}")' && $command"
+	)
+}
+
 function typos {
 	(
-		(
-			cd "$(dirname  "${BASH_IT_TYPOS_FILE}")"
-			bash --norc --noprofile -r -c "source '$(basename "${BASH_IT_TYPOS_FILE}")' && alias -p | sort; set"
-		)
-		(
-			cd "$(dirname  "${BASH_IT_BUILTIN_TYPOS_FILE}")"
-			bash --norc --noprofile -r -c "source '$(basename "${BASH_IT_BUILTIN_TYPOS_FILE}")' && alias -p | sort; set"
-		)
+		# aliases first
+		_typos-helper 'alias -p' | sort
+		# functions last
+		_typos-helper 'declare -f'
 	) | pager
 }
 
