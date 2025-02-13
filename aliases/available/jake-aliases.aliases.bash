@@ -419,6 +419,7 @@ alias reflog='git reflog'
 alias rev-parse='git rev-parse'
 alias worktree='git worktree'
 # git-extras
+alias abort='git abort'
 alias lock='git lock'
 alias locked='git locked'
 alias unlock='git unlock'
