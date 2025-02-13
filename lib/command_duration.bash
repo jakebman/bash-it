@@ -3,11 +3,16 @@
 # Functions for measuring and reporting how long a command takes to run.
 
 # Get shell duration in decimal format regardless of runtime locale.
-function _shell_duration_en() {
-	# DFARREL You would think LC_NUMERIC would do it, but not working in my local
-	local LC_ALL='en_US.UTF-8'
+# Notice: This function runs as a sub-shell - notice '(' vs '{'.
+function _shell_duration_en() (
+	# DFARREL You would think LC_NUMERIC would do it, but not working in my local.
+	# Note: LC_ALL='en_US.UTF-8' has been used to enforce the decimal point to be
+	# a period, but the specific locale 'en_US.UTF-8' is not ensured to exist in
+	# the system.  One should instead use the locale 'C', which is ensured by the
+	# C and POSIX standards.
+	local LC_ALL=C
 	printf "%s" "${EPOCHREALTIME:-$SECONDS}"
-}
+)
 
 : "${COMMAND_DURATION_START_SECONDS:=$(_shell_duration_en)}"
 : "${COMMAND_DURATION_ICON:=🕘}"
@@ -25,7 +30,7 @@ function _dynamic_clock_icon {
 	local clock_hand
 	# clock hand value is between 90 and 9b in hexadecimal.
 	# so between 144 and 155 in base 10.
-	printf -v clock_hand '%x' $(((${1:-${SECONDS}} % 12) + 144))
+	printf -v clock_hand '%x' $((((${1:-${SECONDS}} - 1) % 12) + 144))
 	printf -v 'COMMAND_DURATION_ICON' '%b' "\xf0\x9f\x95\x$clock_hand"
 }
 
