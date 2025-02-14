@@ -122,6 +122,7 @@ function jake-install-tools() {
 	_jake-find-tool minica minica 'work tool to create HTTPS certificates'
 	# TODO: Deprecating - haven't found it useful, nor missed it in its absence
 	# _jake-find-tool thefuck # potentially not super compatible with bash-it :(
+	_jake-find-tool rclone rclone 'rsync, but for cloud services'
 	_jake-find-tool unzip
 	_jake-find-tool clang
 	_jake-find-tool iotop
