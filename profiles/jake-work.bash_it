@@ -17,6 +17,7 @@ plugins jake-cd-git-root
 plugins jake-cd-quick-access
 plugins jake-cdd
 plugins jake-counting-lines
+plugins jake-docker-aws-symlink-fix
 plugins jake-docker
 plugins jake-implicit-commands
 plugins jake-install-tools
