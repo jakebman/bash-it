@@ -22,6 +22,9 @@ alias l='ls --almost-all --classify'
 # I really like permament differences
 alias watch='watch --differences=permanent'
 
+# A trailing space in VALUE causes the next word to be checked for alias substitution when the alias is expanded.
+alias make='time make '
+
 # Sometimes I use this name for the command rather than its normal name. Oops.
 alias maven=mvn
 
