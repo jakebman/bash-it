@@ -418,6 +418,7 @@ alias tag='git tag'
 alias reflog='git reflog'
 alias rev-parse='git rev-parse'
 alias worktree='git worktree'
+alias bisect='git bisect'
 # git-extras
 alias abort='git abort'
 alias lock='git lock'
