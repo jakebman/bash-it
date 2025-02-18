@@ -6,14 +6,15 @@ export BASH_IT_CURL_PAGER='bat --style=numbers'
 export MANPAGER="less --lesskey-src '${HOME}/.config/lesskey-no-gotoend-on-q'"
 export WATCH_INTERVAL=1.2 # I'm a little impatient. It's nice to have this be a little faster than the full 2s
 
-if [ -v WSL_WINDOWS_USER_HOME ]; then
-	if [ -v KUBECONFIG ]; then
-		KUBECONFIG+=":"
-	fi
-	# TODO: refactor out the "is windows a viable thing to add to KUBECONFIG" and "ensure the linux config is in KUBECONFIG"
-	KUBECONFIG+="${WSL_WINDOWS_USER_HOME}/.kube/config:${XDG_CONFIG_HOME:-${HOME}/.cache}/kubectl/config"
-	export KUBECONFIG
+if [ -v KUBECONFIG ]; then
+	KUBECONFIG+=":"
 fi
+KUBECONFIG+="${XDG_CONFIG_HOME:-${HOME}/.config}/kubectl/config"
+if [ -v WSL_WINDOWS_USER_HOME ]; then
+	KUBECONFIG+=":"
+	KUBECONFIG+="${WSL_WINDOWS_USER_HOME}/.kube/config"
+fi
+export KUBECONFIG
 
 # A custom flag, respected by my custom kubectl, which respects some flags. Check the source for full listing
 # Thanks to https://github.com/kubernetes/kubectl/issues/1154 for the naming convention
