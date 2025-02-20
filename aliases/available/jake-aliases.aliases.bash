@@ -22,7 +22,14 @@ alias l='ls --almost-all --classify'
 # I really like permament differences
 alias watch='watch --differences=permanent'
 
-alias make='time make'
+function make {
+	if [ -t 1 ]; then
+		time colormake "$@"
+	else
+		command make "$@"
+	fi
+}
+source /usr/share/bash-completion/completions/make && complete -F _make make
 
 # Sometimes I use this name for the command rather than its normal name. Oops.
 alias maven=mvn
