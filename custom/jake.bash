@@ -156,7 +156,9 @@ function files {
 		done
 	else
 		# TODO: apt-file has a 'progress bar'-like thing. It'd be cool to be able to borrow that
-		echo "(This command takes a long time, and it's eating apt-file's progress bar. Sorry.)"
+		if [ -t 1 ]; then
+			>&2 echo "(This command takes a long time, and it's eating apt-file's progress bar. Sorry.)"
+		fi
 		(dpkg -L "$@" || apt-file list "$@") | pager
 	fi
 }
