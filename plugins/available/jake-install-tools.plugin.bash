@@ -463,7 +463,7 @@ function _jake-check-optional-tools() {
 	else
 		echo "Please install helm - the package manager for kubernetes that I use at work"
 		echo "Get the package from https://github.com/helm/helm/releases/latest. You probably want 'Linux amd64'"
-		echo "(They... oddly ...don't include the install files as assets on the release - they're external links"
+		echo "(They... oddly ...don't include the install files as assets on the release - they're external links)"
 		echo -en "\t"
 		echo 'tar xzf helm*tar*; install helm*/helm ~/bin'
 		echo -en "\t"
