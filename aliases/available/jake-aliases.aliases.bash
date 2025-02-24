@@ -29,6 +29,9 @@ function make {
 		command make "$@"
 	fi
 }
+
+# The completion mechanisms have no actual reason to believe that my make function has any actual relationship to the make command.
+# TODO: is there a way to bring the bash-completions mechanisms into the loop on this?
 source /usr/share/bash-completion/completions/make && complete -F _make make
 
 # Sometimes I use this name for the command rather than its normal name. Oops.
