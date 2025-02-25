@@ -47,6 +47,8 @@ alias jpj=j
 # Alias to look for my files
 alias jake='j --jake'
 
+alias cnn='browse http://cnn.com'
+
 # TODO: can I get autocomplete on a single tab?
 
 
