@@ -35,6 +35,9 @@ if _command_exists _curl-logging; then
 	}
 fi
 
+# TODO: this seems to handle interrupts in ways that don't always make sense to me.
+# I wonder what amount of signal handling I need to bake in here to get it to work
+# so that a ^C kills both, without somehow suspending one
 function enhanced-curl {
 	if [[ -t 1 ]]; then
 		_curl-maybe-logging "$@" | _curl-jqing-and-paging-helper
