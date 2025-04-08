@@ -26,6 +26,17 @@ function hgrep {
 	fi
 }
 
+
+function dmesg {
+	about "paging dmesg if stdout, no-args etc."
+	if [[ "$#" -eq 0 ]]; then
+		command dmesg --stdout-on "$@" | pager
+	else
+		command dmesg "$@"
+	fi
+}
+
+
 # formerly a simple `alias cat='bat --plain'`, but that doesn't handle this no-args use case
 if _command_exists bat; then
 	function cat {
