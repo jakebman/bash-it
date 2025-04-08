@@ -28,9 +28,9 @@ function hgrep {
 
 
 function dmesg {
-	about "paging dmesg if stdout, no-args etc."
-	if [[ "$#" -eq 0 ]]; then
-		command dmesg --console-on "$@" | pager
+	about 'enable `dmesg --human` if output is to the terminal. Also scroll to end if pager is less'
+	if [[ -t 1 ]]; then
+		LESS+=" +G" command dmesg --human "$@"
 	else
 		command dmesg "$@"
 	fi
