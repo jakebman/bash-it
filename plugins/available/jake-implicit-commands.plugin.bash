@@ -26,6 +26,17 @@ function hgrep {
 	fi
 }
 
+
+function dmesg {
+	about 'enable `dmesg --human` if output is to the terminal. Also scroll to end if pager is less'
+	if [[ -t 1 ]]; then
+		LESS+=" +G" command dmesg --human "$@"
+	else
+		command dmesg "$@"
+	fi
+}
+
+
 # formerly a simple `alias cat='bat --plain'`, but that doesn't handle this no-args use case
 if _command_exists bat; then
 	function cat {
