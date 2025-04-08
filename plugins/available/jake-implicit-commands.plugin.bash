@@ -30,7 +30,7 @@ function hgrep {
 function dmesg {
 	about "paging dmesg if stdout, no-args etc."
 	if [[ "$#" -eq 0 ]]; then
-		command dmesg --stdout-on "$@" | pager
+		command dmesg --console-on "$@" | pager
 	else
 		command dmesg "$@"
 	fi
