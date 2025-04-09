@@ -59,6 +59,13 @@ function pull {
 		git pull "$@"
 	elif [ ~ = "$PWD" ] || [ -f .mrconfig ]; then
 		# Get local coloring from git pull, even through mr up
+		# TODO: this eats mr error output like this:
+		# # In ~/wsl-projects/remarkable
+		# # NB: `pull` isn't an mr command. `mr up` was intended
+		# → mr pull
+		# mr: illegal checkout command "mv kindle2pdf pdf2remarkable || git clone 'git@github.com:teticio/pdf2remarkable.git' 'pdf2remarkable'" in untrusted /home/jakebman/wsl-projects/remarkable/.mrconfig line 115
+		# (To trust this file, list it in ~/.mrtrust.)
+
 		local GIT_CONFIG_COUNT GIT_CONFIG_KEY_0 GIT_CONFIG_VALUE_0
 		GIT_CONFIG_COUNT=1
 		GIT_CONFIG_KEY_0=color.ui
