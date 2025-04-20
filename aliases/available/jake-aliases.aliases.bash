@@ -265,6 +265,7 @@ function cherry-pick {
 # commit with one argument is either add/commit the file, or commit with the given message
 # TODO: in a situation where no flags are specified, -m is "$*", and we automatically addp any files mentioned
 # TODO: move this function to a git-alias. Calling it will get the proper git squawking behavior
+# TODO: if no args - should do an add -p, then a 'provide this commit message' step. Current behavior is 'status'
 function commit {
 	# stash some flags that can be "transparent" to this feature
 	# (these can only be BEFORE the message for now... potentially always)
