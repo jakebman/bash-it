@@ -263,7 +263,9 @@ function cherry-pick {
 }
 
 # commit with one argument is either add/commit the file, or commit with the given message
-# TODO: in a situation where no flags are specified, -m is "$*", and we automatically addp any files mentioned
+# TODO: in a situation where no flags are specified, -m is "$*", and we automatically add (addp?) any files mentioned.
+#        ... do we then addp, or call it good? I'd rather the second addp offer snippets rejected in the first
+#        Maybe only do the second addp if the stage is empty.
 # TODO: move this function to a git-alias. Calling it will get the proper git squawking behavior
 # TODO: if no args, and the stage is empty, we should do an add -p, then continue on to the 'provide this commit message' step. Current behavior is 'status'
 function commit {
