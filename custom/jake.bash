@@ -174,7 +174,7 @@ function vars {
 	local -a ignore_list
 	# CAREFUL!!!! these values will be interpolated into a regex!
 	# Specifically, .*THEME.* eats the ignore_ variables, because it matches itself in the value
-	# TODO: it'd be nice to give these good names. Mostly thinking of this color regex
+	# TODO: it'd be nice to give these good names beyond the dumb regex comment. Mostly thinking of this color regex
 	ignore_list=(BASH_ALIASES LS_COLORS SDKMAN_CANDIDATES SDKMAN_CANDIDATES_CSV)
 	ignore_list+=("sdkman_" "SCM_.*" "SDKMAN_.*" "THEME_.*" "BASH_IT_L(OAD|OG)_.*" "_.+(any underscore variables)*")
 	ignore_list+=("[^=]+_THEME_.*")
