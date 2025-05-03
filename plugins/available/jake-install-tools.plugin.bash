@@ -289,6 +289,15 @@ function jake-install-tools() {
 		echo "consider putting a [user]\\n default=$(whoami) into your /etc/wsl.conf file"
 	fi
 
+	if ! bash -n /usr/share/bash-completion/completions/make &>/dev/null; then
+		echo "the makefile completion is fine, yay!"
+	else
+		echo "The makefile completion at /usr/share/bash-completion/completions/make is failing bash validation"
+		echo "please copy over it from git@github.com:scop/bash-completion.git, via:"
+
+		echo -en "\t"
+		echo 'sudo curl https://raw.githubusercontent.com/scop/bash-completion/refs/heads/main/completions/make >/usr/share/bash-completion/completions/make'
+	fi
 
 	# TODO: `-d` is a bash 4.4-ism, and might not be supported in the rest of bash-it
 	# https://stackoverflow.com/questions/23356779/how-can-i-store-the-find-command-results-as-an-array-in-bash
