@@ -179,6 +179,7 @@ function vars {
 	ignore_list+=("sdkman_" "SCM_.*" "SDKMAN_.*" "THEME_.*" "BASH_IT_L(OAD|OG)_.*" "_.+(any underscore variables)*")
 	ignore_list+=("[^=]+_THEME_.*")
 	ignore_list+=("ignore_(list|regex)")
+	ignore_list+=("BASH_COMMAND='vars $1'")
 	ignore_list+=("(echo_|)(normal|reset_color|(background_|bold_|underline_|)(black|blue|cyan|green|orange|purple|red|white|yellow))")
 	# Using IFS to join ignore_list with a single-character delimiter, from:
 	# https://stackoverflow.com/questions/1527049/how-can-i-join-elements-of-a-bash-array-into-a-delimited-string
