@@ -289,7 +289,7 @@ function jake-install-tools() {
 		echo "consider putting a [user]\\n default=$(whoami) into your /etc/wsl.conf file"
 	fi
 
-	if ! bash -n /usr/share/bash-completion/completions/make &>/dev/null; then
+	if bash -n /usr/share/bash-completion/completions/make &>/dev/null; then
 		echo "the makefile completion is fine, yay!"
 	else
 		echo "The makefile completion at /usr/share/bash-completion/completions/make is failing bash validation"
