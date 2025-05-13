@@ -110,10 +110,40 @@ export NODE_REPL_HISTORY="${XDG_STATE_HOME}/nodejs/cli-history"
 export SQLITE_HISTORY="${XDG_STATE_HOME}/sqlite/cli-history"
 export PERL_CPANM_HOME="${XDG_STATE_HOME}/cpanm" # cpanm command in the cpanminus package from apt (for rakubrew)
 
+
+# We create local history folders, leaving a note that *I, Jake* created the folder, not the expected program
+# Implemented via a bash-ish form of JS's IIFEs, so I can have local variables
+function create_parent_folders_for {
+	local name needed
+
+	for name; do # implicit `in "$@"`
+		local -n ref=$name # a nameref variable
+		needed=$(dirname "$ref")
+
+		# Only create the needed dir if it doesn't already exist.
+		# That way, we don't claim credit if the folder already existed.
+		if [[ ! -d "$needed" ]]; then
+			_log_warning "Creating parent directory for custom, XDG-compatible \$${name} location at ${needed}"
+			mkdir -p "$needed"
+			cat <<-TABSTRIPPING_HEREDOC >"${needed}/.jake-autocreated-for-XDG-compatibility"
+				This folder was auto-created by Jake's scripts (not the original program, which expects the parent folder to exist), to serve as a home for the ${name} file.
+				I chose ${name} to be ./$(basename "$ref") to more closely match XDG behavior.
+			TABSTRIPPING_HEREDOC
+		fi
+		unset ref
+	done
+}
+
+# [I]nvoke the [I]mmediate [F]unction [E]xpression
 # These programs need their parent folder to exist:
-mkdir -p "$(dirname "$PYTHON_HISTORY")"
-mkdir -p "$(dirname "$SQLITE_HISTORY")"
-mkdir -p "$(dirname "$NODE_REPL_HISTORY")"
+create_parent_folders_for \
+	PYTHON_HISTORY \
+	SQLITE_HISTORY \
+	NODE_REPL_HISTORY \
+		&&
+	unset -f create_parent_folders_for
+
+
 
 : ${JAKE_XDG_BIN_DIR:=${HOME}/.local/bin}
 # install via https://github.com/pyenv/pyenv-installer. Installed via fork, so it's prudent to export it here
