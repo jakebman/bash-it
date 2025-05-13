@@ -22,3 +22,16 @@ function cd {
 		builtin cd "$@"
 	fi
 }
+
+function _cd-generate-quick-access {
+about "You'd like something like shopt -s cdable_vars, but only selectively (also, tab-completable)"
+	# NB: the _cd completion doesn't respect cdable_vars
+
+	# https://stackoverflow.com/questions/69257739/bash-get-a-list-of-environment-variables-with-proper-handling-of-new-lines
+	local i
+	for i in `compgen -A variable`; do
+		if [[ -d "${!i}" ]]; then
+			echo "${i}=${!i}"
+		fi
+	done
+}

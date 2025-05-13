@@ -6,10 +6,6 @@ export BASH_IT_CURL_PAGER='bat --style=numbers'
 export MANPAGER="less --lesskey-src '${HOME}/.config/lesskey-no-gotoend-on-q'"
 export WATCH_INTERVAL=1.2 # I'm a little impatient. It's nice to have this be a little faster than the full 2s
 
-# Allow `cd XDG_HOME` to work. Neat!
-# TODO: this isn't super great. It doesn't auto-complete. Prefer to look up variables which are also dirs, then symlink them into CDPATH
-# https://stackoverflow.com/questions/69257739/bash-get-a-list-of-environment-variables-with-proper-handling-of-new-lines
-shopt -s cdable_vars
 
 # This could be accomplished by KUBECONFIG+="${KUBECONFIG+:}${XDG_CONFIG_HOME:-${HOME}/.config}/kubectl/config",
 # but that's much less readable.
