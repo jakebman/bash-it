@@ -182,7 +182,7 @@ function vars {
 	ignore_list=(BASH_ALIASES LS_COLORS SDKMAN_CANDIDATES SDKMAN_CANDIDATES_CSV)
 	ignore_list+=("sdkman_" "SCM_.*" "SDKMAN_.*" "THEME_.*" "BASH_IT_L(OAD|OG)_.*" "_.+(any underscore variables)*")
 	ignore_list+=("[^=]+_THEME_.*")
-	ignore_list+=("ignore_(list|regex)")
+	ignore_list+=("ignore_(list|regex|filter)")
 	ignore_list+=("BASH_COMMAND='vars $1'")
 	ignore_list+=("(echo_|)(normal|reset_color|(background_|bold_|underline_|)(black|blue|cyan|green|orange|purple|red|white|yellow))")
 	# Using IFS to join ignore_list with a single-character delimiter, from:
