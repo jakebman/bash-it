@@ -10,7 +10,6 @@ about-plugin 'Allow certain folders to always remain valid `cd` targets, from an
 # "A null directory name is the same as the current directory", per `help cd`
 CDPATH+=":${XDG_CONFIG_HOME:-${HOME}/.config}/cd/quick-access"
 
-
 function cd {
 	about 'normal `cd`, but non-$CWD entries (and cdable_vars) get an implicit -P to follow symlinks'
 	if [[ "$#" -eq 1 ]] && [[ - != "$1" ]] && ! [[ -d "$1" ]]; then
@@ -24,12 +23,12 @@ function cd {
 }
 
 function _cd-generate-quick-access {
-about "You'd like something like shopt -s cdable_vars, but only selectively (also, tab-completable)"
+	about "You'd like something like shopt -s cdable_vars, but only selectively (also, tab-completable)"
 	# NB: the _cd completion doesn't respect cdable_vars
 
 	# https://stackoverflow.com/questions/69257739/bash-get-a-list-of-environment-variables-with-proper-handling-of-new-lines
 	local i
-	for i in `compgen -A variable`; do
+	for i in $(compgen -A variable); do
 		if [[ -d "${!i}" ]]; then
 			echo "${i}=${!i}"
 		fi
