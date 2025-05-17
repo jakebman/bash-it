@@ -296,7 +296,7 @@ function jake-install-tools() {
 		echo "please copy over it from git@github.com:scop/bash-completion.git, via:"
 
 		echo -en "\t"
-		echo 'sudo curl https://raw.githubusercontent.com/scop/bash-completion/refs/heads/main/completions/make >/usr/share/bash-completion/completions/make'
+		echo 'curl https://raw.githubusercontent.com/scop/bash-completion/refs/heads/main/completions/make | sudo tee /usr/share/bash-completion/completions/make'
 	fi
 
 	# TODO: `-d` is a bash 4.4-ism, and might not be supported in the rest of bash-it
