@@ -154,6 +154,15 @@ function diff-ignore-wrapping {
 alias markdown-diff=diff-ignore-wrapping
 alias mddiff=markdown-diff
 
+function gitk {
+	about "gitk should show all refs by default"
+	if [[ "$#" -eq 0 ]]; then
+		command gitk --all
+	else
+		command gitk "$@"
+	fi
+}
+
 function delta {
 	about 'allow you to type the bare word "delta" or "delta <git-command>" and get an automatic git-delta, while still not harming the delta command. Additional magic (TODO): `delta show`, if show aliases into git: show="git show ...", (or is a function that mentions git?) and runs that command with git replaced with git-delta'
 	if [[ "$#" -eq 0 ]]; then
