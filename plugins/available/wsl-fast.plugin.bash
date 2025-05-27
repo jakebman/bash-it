@@ -19,7 +19,7 @@ wsl2unix() {
 }
 
 # TODO: these programs might live in Program Files (x86) instead
-alias chrome="'/mnt/c/Program Files/Google/Chrome/Application/chrome.exe'"
+alias chrome="/mnt/c/Program\\ Files/Google/Chrome/Application/chrome.exe"
 
 # Find notepad in several places:
 if NOTEPAD=$(PATH="/mnt/c/Program Files/Notepad++:/mnt/c/Program Files (x86)/Notepad++" /bin/which notepad++.exe); then
@@ -32,7 +32,7 @@ unset NOTEPAD
 
 alias explorer=explorer.exe
 alias wsl=wsl.exe
-alias winmerge="'/mnt/c/Program Files/WinMerge/WinMergeU.exe'"
+alias winmerge="/mnt/c/Program\\ Files/WinMerge/WinMergeU.exe"
 alias winget=winget.exe
 alias clip=clip.exe
 alias cmd=cmd.exe
