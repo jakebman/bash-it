@@ -351,6 +351,8 @@ function _mr-able {
 	fi
 }
 
+# TODO: this doesn't work from within .git ("fatal: this operation must be run in a work tree")
+# it would be nice to get that
 function cdgit {
 	about 'cd into the root of a git repo for the current directory, or fail'
 	local where
