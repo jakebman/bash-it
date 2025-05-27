@@ -351,21 +351,19 @@ function _mr-able {
 	fi
 }
 
-# TODO: this doesn't work from within .git ("fatal: this operation must be run in a work tree")
-# it would be nice to get that
 function cdgit {
-	about 'cd into the root of a git repo for the current directory, or fail'
+	about 'cd into the root of a git repo/worktree for the current directory, or fail'
 	local where how
 
-	# https://stackoverflow.com/questions/12293944/how-to-find-the-path-of-the-local-git-repository-when-i-am-possibly-in-a-subdire/12293994#12293994
-	#
 	if where="$(git rev-parse --show-toplevel 2>/dev/null)"; then
+		# NB: This also respects GIT_WORK_TREE
 		how="- the toplevel from rev-parse"
 	elif [ 'true' = "$(git rev-parse --is-inside-git-dir)" ]; then
+		# https://stackoverflow.com/questions/12293944/how-to-find-the-path-of-the-local-git-repository-when-i-am-possibly-in-a-subdire/12293994#12293994
 		where="$(git rev-parse --git-dir)/.." || return 1
 		how="- the parent of the .git dir we're in"
 	else
-		>&2 echo "unable to find toplevel folder of this git repo. (Do we have one?)"
+		>&2 echo "${FUNCNAME}: Unable to find toplevel folder of this git repo. (Do we have one?)"
 		return 1
 	fi
 	echo "found git dir at '${where}' ${how}. Going there"
