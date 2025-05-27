@@ -358,13 +358,15 @@ function cdgit {
 	local where how
 
 	# https://stackoverflow.com/questions/12293944/how-to-find-the-path-of-the-local-git-repository-when-i-am-possibly-in-a-subdire/12293994#12293994
-	if [ 'true' = "$(git rev-parse --is-inside-git-dir)" ]; then
-		# TODO: there might be a better plan to try first (checking GIT_DIR or GIT_WORK_TREE)
+	#
+	if where="$(git rev-parse --show-toplevel 2>/dev/null)"; then
+		how="- the toplevel from rev-parse"
+	elif [ 'true' = "$(git rev-parse --is-inside-git-dir)" ]; then
 		where="$(git rev-parse --git-dir)/.." || return 1
 		how="- the parent of the .git dir we're in"
 	else
-		where="$(git rev-parse --show-toplevel)" || return 1
-		how="- the toplevel from rev-parse"
+		>&2 echo "unable to find toplevel folder of this git repo. (Do we have one?)"
+		return 1
 	fi
 	echo "found git dir at '${where}' ${how}. Going there"
 	cd "$where"
