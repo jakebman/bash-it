@@ -355,9 +355,18 @@ function _mr-able {
 # it would be nice to get that
 function cdgit {
 	about 'cd into the root of a git repo for the current directory, or fail'
-	local where
-	where="$(git rev-parse --show-toplevel)" || return 1
-	echo "found git dir at '${where}'. Going there"
+	local where how
+
+	# https://stackoverflow.com/questions/12293944/how-to-find-the-path-of-the-local-git-repository-when-i-am-possibly-in-a-subdire/12293994#12293994
+	if [ 'true' = "$(git rev-parse --is-inside-git-dir)" ]; then
+		# TODO: there might be a better plan to try first (checking GIT_DIR or GIT_WORK_TREE)
+		where="$(git rev-parse --git-dir)/.." || return 1
+		how="- the parent of the .git dir we're in"
+	else
+		where="$(git rev-parse --show-toplevel)" || return 1
+		how="- the toplevel from rev-parse"
+	fi
+	echo "found git dir at '${where}' ${how}. Going there"
 	cd "$where"
 }
 alias gitcd=cdgit # not a typo - I literally don't know which name should be primary
