@@ -30,6 +30,17 @@ function save_function {
 	eval "$NEWNAME_FUNC"
 }
 
+function alias_value {
+	about "the expanded value of an alias. Probably buggy"
+	# TODO: this doesn't do well if the alias value has single quotes in it
+	local name=$1
+	if ! alias "$name" &>/dev/null; then
+		return 1 # failed
+	fi
+
+	alias "$name" | sed -E -e "s/^alias( --)? $name='//g" -e "s/'\$//g"
+}
+
 save_function command_not_found_handle _ububtu_command_not_found_handle
 function command_not_found_handle {
 	local -a args=("${@:2}")
@@ -43,7 +54,13 @@ function command_not_found_handle {
 		return
 	fi
 
-	echo "Typo identified: $name ${args[@]@Q}"
+	local a_value
+	if a_value=$(alias_value "$name" 2>/dev/null); then
+		# Typo was implemented as an alias
+		echo "Simple typo: $a_value ${args[@]@Q}"
+	else
+		echo "Complex typo: $name ${args[@]@Q}"
+	fi
 
 	# TODO: can I get a printed bash stack trace?
 	_log_debug "found typo solution '$(type "$name")' for '$name'"
