@@ -31,14 +31,17 @@ function save_function {
 }
 
 function alias_value {
-	about "the expanded value of an alias. Probably buggy"
+	about "the expanded value of an alias. Probably unsafe and buggy"
 	# TODO: this doesn't do well if the alias value has single quotes in it
 	local name=$1
 	if ! alias "$name" &>/dev/null; then
 		return 1 # failed
 	fi
 
-	alias "$name" | sed -E -e "s/^alias( --)? $name='//g" -e "s/'\$//g"
+	local value=$(alias "$name" | sed -E -e "s/^alias( --)? $name=//g")
+	# TODO: If we don't do this, the function doesn't do well if the alias value has single quotes in it
+	# However, as-is, this is potentially very unsafe. I can't even guess why. But eval is scary.
+	eval echo "${value}"
 }
 
 save_function command_not_found_handle _ububtu_command_not_found_handle
