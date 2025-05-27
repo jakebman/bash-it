@@ -312,6 +312,20 @@ function du {
 	fi
 }
 
+function update-motd {
+	about "allow non-sudo users to run update-motd and get an implicit --show-only"
+
+	if command update-motd "$@" 2>/dev/null; then
+		# success!
+		echo "# successfully ran update-motd ${@@Q}"
+	else
+		command update-motd --show-only "$@"
+		echo "# This was an uncommitted preview, generated via fallback to update-motd --show-only ${@@Q}"
+		echo "# You're getting the previewed output and this message instead of an opaque failure thanks to the bash function $FUNCNAME"
+		return 1 # "Failure" might be too strong a word, but it definitely wasn't a successful update of the motd
+	fi
+}
+
 function browse {
 	about "allow you to type the bare word 'browse' and get an automatic gh browse, while not stepping on the toes of xdg-utils's browse command (a symlink to xdg-open), which takes arguments"
 	if [[ "$#" -eq 0 ]]; then
