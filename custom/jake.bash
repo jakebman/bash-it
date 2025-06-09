@@ -577,7 +577,14 @@ complete -c \
 	cdwhich
 #TODO: I'm manually invoking the complete-alias completions on some aliases here. This is not super maintainable. These functions should become
 # their own plugin, so their aliases can just be handled by complete-alias and I can remove this line
-complete -F _complete_alias vimw filew catw llw cddwhich cddw cdw
+complete -F _complete_alias \
+	catw \
+	vimw \
+	filew \
+	llw \
+	cddwhich \
+	cddw \
+	cdw
 
 function xml {
 	if [[ "$#" -eq 0 ]] && [[ -t 0 ]]; then
