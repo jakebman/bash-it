@@ -493,6 +493,7 @@ function filewhich {
 alias filew=filewhich
 
 # TODO: permit flags by essentially "for each flag, if it's `which`-able, replace the word with its location"
+# TODO: permit multiple arguments
 function _outwhich {
 	# TODO: what if this was also able to print functions and aliases, too?
 	# TODO: what if we follow aliases down to their roots?
