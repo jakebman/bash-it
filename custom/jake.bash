@@ -573,6 +573,7 @@ complete -c \
 	_outwhich \
 	vimwhich \
 	filewhich \
+	stringswhich \
 	llwhich \
 	cdwhich
 #TODO: I'm manually invoking the complete-alias completions on some aliases here. This is not super maintainable. These functions should become
@@ -581,6 +582,7 @@ complete -F _complete_alias \
 	catw \
 	vimw \
 	filew \
+	stringsw \
 	llw \
 	cddwhich \
 	cddw \
