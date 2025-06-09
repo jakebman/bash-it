@@ -39,8 +39,9 @@ export BROWSER=wslview
 
 _BASH_IT_AWS_AUTOLOGIN_EXCEPTIONS+=(login loggedin logout)
 
-# a program that can only be run by sudo. Feels dumb to just try and invoke it itself
+# Programs that can only be run by sudo. Putting an implicit ahead of it seems fine
 alias iotop='sudo iotop'
+alias iftop='sudo iftop'
 
 # Allow j!! to work for a previous ack query
 alias jack=j
