@@ -568,7 +568,13 @@ alias cddwhich=cdwhich
 alias cddw=cdwhich
 alias cdw=cdwhich
 
-complete -c vimwhich filewhich catwhich llwhich cdwhich
+complete -c \
+	{head,cat,tail}which \
+	_outwhich \
+	vimwhich \
+	filewhich \
+	llwhich \
+	cdwhich
 #TODO: I'm manually invoking the complete-alias completions on some aliases here. This is not super maintainable. These functions should become
 # their own plugin, so their aliases can just be handled by complete-alias and I can remove this line
 complete -F _complete_alias vimw filew catw llw cddwhich cddw cdw
