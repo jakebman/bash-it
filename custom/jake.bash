@@ -39,6 +39,9 @@ export BROWSER=wslview
 
 _BASH_IT_AWS_AUTOLOGIN_EXCEPTIONS+=(login loggedin logout)
 
+# a program that can only be run by sudo. Feels dumb to just try and invoke it itself
+alias iotop='sudo iotop'
+
 # Allow j!! to work for a previous ack query
 alias jack=j
 # I want j!! to work for a previous pj query, too
