@@ -11,7 +11,6 @@ plugins curl-logging
 plugins dircolors
 plugins dotfiles-via-bare-git-repo-with-config-alias
 plugins gitstatus
-plugins google
 plugins history-eternal
 plugins jake-cd-git-root
 plugins jake-cd-quick-access
@@ -25,6 +24,7 @@ plugins jake-maintenance
 plugins jake-maven
 plugins jake-path
 plugins jake-q
+plugins jake-search
 plugins jake-ssh
 plugins jake-typos
 plugins jake-words
