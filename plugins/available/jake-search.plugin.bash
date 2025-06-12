@@ -21,3 +21,11 @@ function gmail {
 		browse "https://mail.google.com/mail/u/0/#search/$*"
 	fi
 }
+
+function scryfall {
+	about 'perform a search of scryfall'
+	param '*: a series of words that are concatenated into the google query. TODO: you currently need to urlencode ampersands yourself. Sorry :('
+	browse "https://scryfall.com/search?q=$*"
+}
+# Convenience alias - not necessarily appropriate in a plugin
+alias card=scryfall
