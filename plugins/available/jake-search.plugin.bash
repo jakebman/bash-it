@@ -12,6 +12,12 @@ function google() {
 	# TODO: &ie=<input encoding> might be a useful query parameter to include
 }
 
+function define {
+	about 'perform a google search for the definition of a word'
+	param '1: the word to define'
+	browse "https://google.com/search?q=define:${1}"
+}
+
 function gmail {
 	about "open gmail in your browser, including search terms, if present"
 	if [[ "$#" -eq 0 ]]; then
