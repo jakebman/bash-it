@@ -100,10 +100,10 @@ LESS_ABBREV+=j.2
 #        you would otherwise be searching 2/10ths of the screen *up* from where you started
 #   It's also worth noting that this is *per line*, so following matches on the same line are also skipped
 LESS+="--SEARCH-SKIP-SCREEN "
-LESS_ABBREV+=A
+# LESS_ABBREV+=A # Not available in less version 436 on rhel
 # use-color gets a nice light cyan color on some of less's UI elements
 LESS+="--use-color "
-LESS_ABBREV+=" --use-c"
+# LESS_ABBREV+=" --use-c" # Not available in less version 436 on rhel
 # follow-name ensures that `less +F /var/log/foo` emulates `tail -F`, not `tail -f`. i.e. an implicit --follow=name
 LESS+="--follow-name "
 LESS_ABBREV+=" --fol"
