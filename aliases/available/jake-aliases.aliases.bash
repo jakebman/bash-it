@@ -208,6 +208,7 @@ function realpath-and-rainbow {
 
 function _jake-banner-display {
 	about "display a banner, but don't care if it fails"
+	# figlet doesn't have --long --options :(
 	figlet -t -f mini "$@" "$JAKE_BANNER_WHY" 2> /dev/null || true
 }
 
@@ -231,6 +232,7 @@ function addp {
 	# https://askubuntu.com/questions/984209/how-does-less-switch-to-the-text-then-back-to-the-prompt
 	# (DO NOT do this for restore - I want the patches stored in the terminal scrollback buffer)
 	# put the margin in by one character (+m1), and use 'COBOL compact format extended' (-c3)
+	# neither tabs nor clear has --long --options
 	tabs +m1 -c3
 	clear -x
 
@@ -311,7 +313,7 @@ function commit {
 				fi
 			fi
 
-			git commit "${args[@]}" -m "$1"
+			git commit "${args[@]}" --message "$1"
 		fi
 	else
 		git commit "${args[@]}" "$@"
@@ -355,7 +357,7 @@ function restore {
 	echo -ne "${echo_reset_color-}"
 
 	sleep .3
-	git restore -p "$@"
+	git restore --patch "$@"
 
 	local out="$?"
 	tabs +m0
@@ -365,7 +367,7 @@ function restore {
 function unstage {
 	if [ "$#" -eq 0 ]; then
 		_jake-banner-display "GIT RESTORE --STAGED"
-		git unstage -p "$@" # $@ is empty, but this is more consistent with the other branch
+		git unstage --patch "$@" # $@ is empty, but this is more consistent with the other branch
 	else
 		git unstage "$@"
 	fi
@@ -530,7 +532,7 @@ alias config-edit='git config-editg'
 # list merge commits (like `log --merges`), but always assume I wanted to look at patches
 # TODO: could potentially be super smart by looking at reflog and showing merges that have been *pulled* 'recently'
 # nb: this might also learn something from `yesterday` if yesterday gets a hair smarter
-alias merges='git merges -p'
+alias merges='git merges --patch'
 
 # 'Not exactly duplicating' aliases
 # Not all of these are duplicating a git alias, but they're not exactly typos either
