@@ -101,9 +101,9 @@ function typos {
 }
 
 function typo {
-	vim  "${BASH_IT_TYPOS_FILE}"
+	vim "${BASH_IT_TYPOS_FILE}"
 }
 
 function typo-builtin {
-	vim  "${BASH_IT_BUILTIN_TYPOS_FILE}"
+	vim "${BASH_IT_BUILTIN_TYPOS_FILE}"
 }
