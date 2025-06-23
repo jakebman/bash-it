@@ -13,7 +13,7 @@ about-plugin 'Set certain environment variables to make their corresponding apps
 #         openat(AT_FDCWD, "/foo/bar/.curlrc", O_RDONLY) = -1 ENOENT (No such file or directory)
 # 2. It only works if XDG_CONFIG_HOME is set. You're supposed to use ~/.config if XDG_CONFIG_HOME is missing.
 # 3. Item 2 is also a lie. Not sure if there's a bug in the docs, but Dec 6 2023 curl-8_5_0(7161cb17c) also tries to check $HOME/.config/.curlrc independently
-# 4. (re: 2, despite 3) I won't be blackmailed into exporting XDG_CONFIG_HOME with its default value
+# 4. (re: 2, despite 3) I won't be blackmailed into exporting XDG_CONFIG_HOME with its default value if I can help it
 #         (Please ignore the git history which shows me doing exactly that here)
 # That means I need intervention.
 # I *want* curlrc to live at "${XDG_CONFIG_HOME}/curl/curlrc", but there's no way to do that in env variables
@@ -67,10 +67,15 @@ export GRADLE_USER_HOME="${XDG_DATA_HOME}/gradle"
 # TODO: --ivy flag here to also not create ~/.ivy2 folder; figure out how whitespace is supposed to work in this env var.
 export SBT_OPTS="--sbt-dir ${XDG_DATA_HOME}/scala-build-tool"
 
+# This is one of two default locations for the less history file, and I didn't like it at ~/.lesshst
+# I could export XDG_DATA_HOME here instead of LESSHISTFILE, and less would implicitly use it.
+# BUT I don't want to do that. See above about being blackmailed into exporting XDG vars to their default values.
+export LESSHISTFILE="${XDG_DATA_HOME:-${HOME}/.local/share}/lesshst"
+
 ## XDG_CACHE_HOME
 : ${XDG_CACHE_HOME:=${HOME}/.cache}
 # We export XDG_CACHE_HOME to its own value so that git-ignore-io from git-extras will respect it
-# (it doesn't respect this folder unless this environment variable is defined)
+# (it doesn't respect this folder unless this environment variable is defined, and there's no recourse)
 export XDG_CACHE_HOME
 
 # It's nice to have your $WGETRC include a `hsts-file = ~/.cache/wget/hsts` line.

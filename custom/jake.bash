@@ -112,12 +112,6 @@ LESS_ABBREV+=" --fol"
 export LESS LESS_ABBREV
 
 
-# I liked editing ~/.lessfilter (which is now in XDG_CONFIG_HOME), and this kept getting in the way.
-# Still, this is the proper XDG-like location for this file. Since it's the 'other' default for this setting,
-# I could export XDG_DATA_HOME here instead of LESSHISTFILE, and less would implicitly use it.
-# BUT I don't want to do that :\ - I really want to preserve the 'should use the default' quality of the XDG variables,
-# and this shim lets me ~sorta~ do that
-export LESSHISTFILE="${XDG_DATA_HOME:-${HOME}/.local/share}/lesshst"
 export LESSSTYLE=sas # respected by lessfilter in XDG_CONFIG_HOME (not actually a LESS env variable)
 
 if [ -f "$HOME/.cargo/env" ]; then
