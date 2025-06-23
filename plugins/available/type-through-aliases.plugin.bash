@@ -3,9 +3,15 @@ cite about-plugin
 about-plugin 'allow type to see through aliases and try to find the underlying command'
 
 
-function _type_with_formatting {
-	command type "$@" | bat --language=bash
-}
+if _command_exists bat; then
+	function _type_with_formatting {
+		command type "$@" | bat --language=bash
+	}
+else
+	function _type_with_formatting {
+		command type "$@"
+	}
+fi
 
 # TODO: this doesn't work with `alias foo='/a path/with spaces'`
 function type {
