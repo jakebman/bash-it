@@ -2,6 +2,11 @@
 cite about-plugin
 about-plugin 'allow type to see through aliases and try to find the underlying command'
 
+
+function _type_with_formatting {
+	command type "$@" | bat --language=bash
+}
+
 # TODO: this doesn't work with `alias foo='/a path/with spaces'`
 function type {
 	about 'enhance the shell builtin `type` to try and see through aliases'
@@ -15,13 +20,13 @@ function type {
 		alias)
 			# https://askubuntu.com/a/871435/235107
 			local next #="${BASH_ALIASES[$1]}"
-			command type "$@"
+			_type_with_formatting "$@"
 			# https://stackoverflow.com/questions/918886/how-do-i-split-a-string-on-a-delimiter-in-bash
 			read next args <<< "${BASH_ALIASES[$1]}"
-			command type "$next"
+			_type_with_formatting "$next"
 			;;
 		*)
-			command type "$@"
+			_type_with_formatting "$@"
 			;;
 	esac
 }
