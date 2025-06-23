@@ -64,9 +64,10 @@ MAVEN_OPTS+=" -Dorg.slf4j.simpleLogger.showDateTime=true -Dorg.slf4j.simpleLogge
 export MAVEN_OPTS
 
 if [ -v LESS ]; then
-	_log_warning "LESS has a value before I start adding my custom flags"
-	# <trailing space> permits `LESS+=--a-single-new-flag some command` invocations, and allows better inline comments below
-	LESS+=' '
+	_log_warning "LESS has a value before I start adding my custom flags. Resetting it to '' from [$LESS]"
+	# We will follow a trailing space pattern.
+	# That permits `LESS+=--a-single-new-flag some command` invocations, and allows better inline comments below
+	LESS=''
 fi
 
 # quit-if-one-screen allows less to simply dump the output to STDOUT when it would all fit on a single page
