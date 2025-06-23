@@ -91,9 +91,23 @@ function _ssh_additional_config() {
 }
 
 function ssh() {
-	if [ "$#" -ne 1 ] || [ x"$1" == x-* ]; then
+	if [ "$#" -gt 1 ] || [ x"$1" == x-* ]; then
 		command ssh "$@"
 		return
+	fi
+
+	# Grab the destination from the tail of the history file, or put it there
+	# TODO: offer completion options from this file!
+	local history=${JAKE_SSH_CACHE:-${XDG_STATE_HOME:-${HOME}/.local/state}/jake-ssh/history}
+	[ -f "$history" ] || mkdir -p "$(dirname $history)"
+	touch $history
+	local destination=$1
+	if [ "$#" -eq 0 ]; then
+		# grab destination from history
+		destination=$(tail --lines 1 "$history")
+	else
+		# New history entry :D
+		echo "$destination" >> "$history"
 	fi
 
 	# We have exactly one argument, not beginning with a dash. Probably a hostname.
@@ -103,5 +117,5 @@ function ssh() {
 	trap 'rm "$CONF_FILE"' RETURN # Remove temp file and don't pollute /tmp
 	cat ~/.ssh/config >>"$CONF_FILE"
 	_ssh_additional_config >>"$CONF_FILE"
-	command ssh -F "$CONF_FILE" "$@"
+	command ssh -F "$CONF_FILE" "$destination"
 }
