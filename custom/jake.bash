@@ -6,7 +6,6 @@ export BASH_IT_CURL_PAGER='bat --style=numbers'
 export MANPAGER="less --lesskey-src '${HOME}/.config/lesskey-no-gotoend-on-q'"
 export WATCH_INTERVAL=1.2 # I'm a little impatient. It's nice to have this be a little faster than the full 2s
 
-
 # This could be accomplished by KUBECONFIG+="${KUBECONFIG+:}${XDG_CONFIG_HOME:-${HOME}/.config}/kubectl/config",
 # but that's much less readable.
 # TODO: a generic pathmunge that could be used here
@@ -54,7 +53,6 @@ alias jake='j --jake'
 alias cnn='browse http://cnn.com'
 
 # TODO: can I get autocomplete on a single tab?
-
 
 # requires maven 3.9+ https://maven.apache.org/configure.html#maven_args-environment-variable
 export MAVEN_ARGS="-T1C"
@@ -110,7 +108,6 @@ LESS+="--follow-name "
 LESS_ABBREV+=" --fol"
 # There's some cool discussion on the value of these flags used in SYSTEMD_LESS in the `man systemctl` docs
 export LESS LESS_ABBREV
-
 
 export LESSSTYLE=sas # respected by lessfilter in XDG_CONFIG_HOME (not actually a LESS env variable)
 
@@ -370,7 +367,6 @@ function cdgit {
 }
 alias gitcd=cdgit # not a typo - I literally don't know which name should be primary
 
-
 function cdmaven {
 	about 'cd into your maven repository, using a gav as-if it were a folder name'
 	param '1: an artifact-like gav. "com.twc.mystro.mas.integration:mas-integration:pom:5.4.6-SNAPSHOT"'
@@ -384,15 +380,14 @@ function cdmaven {
 	cd ~/.m2/repository/"${dest}"
 }
 alias mavencd=cdmaven # ditto cdgit above
-alias cdr=cdmaven # r for 'repository'
-
+alias cdr=cdmaven     # r for 'repository'
 
 function fidget {
 	type fidget | bat --language bash --style=plain --paging=never
 	echo "TODO: loop this into jake-maintain-system tech"
 
 	local fast arg
-	local OPTIND=1  # Reset OPTIND for this function, so getopts starts at $1, not $ummm....?
+	local OPTIND=1 # Reset OPTIND for this function, so getopts starts at $1, not $ummm....?
 	while getopts 'afqh' arg; do
 		case "$arg" in
 			a)
@@ -538,7 +533,8 @@ function stringswhich {
 	local where
 	where="$(which "$1")"
 	if _jake-success; then
-		( strings "$where"
+		(
+			strings "$where"
 			if [[ -t 1 ]]; then # stdout is terminal. Cool to add info (see jake's bin/git)
 				echo "${FUNCNAME[0]}: this file lives at '$where'"
 			fi
@@ -549,7 +545,6 @@ function stringswhich {
 	fi
 }
 alias stringsw=stringswhich
-
 
 function llwhich {
 	local where
