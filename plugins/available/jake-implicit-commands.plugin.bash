@@ -182,9 +182,9 @@ function base64 {
 		eval set -- -
 	fi
 
-
 	for fileish; do # implicit `in "$@"`
-		if [ -f "$fileish" ]; then
+		# need the x-tech because I'm concerned fileish could still be flag-like
+		if [[ -f "$fileish" ]] || [[ x-x = "x${fileish}x" ]]; then
 			command base64 "${flags[@]}" -- "$fileish"
 		else
 			command base64 "${flags[@]}" -- <<< "$fileish"
