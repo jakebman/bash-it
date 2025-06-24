@@ -370,6 +370,23 @@ function cdgit {
 }
 alias gitcd=cdgit # not a typo - I literally don't know which name should be primary
 
+
+function cdmaven {
+	about 'cd into your maven repository, using a gav as-if it were a folder name'
+	param '1: an artifact-like gav. "com.twc.mystro.mas.integration:mas-integration:pom:5.4.6-SNAPSHOT"'
+	local gav="${1?need an arg}"
+
+	# TODO: classifier can appear before version, like in example above.
+	local dest="${gav//[.:]//}"
+
+	echo "going to ${dest}"
+
+	cd ~/.m2/repository/"${dest}"
+}
+alias mavencd=cdmaven # ditto cdgit above
+alias cdr=cdmaven # r for 'repository'
+
+
 function fidget {
 	type fidget | bat --language bash --style=plain --paging=never
 	echo "TODO: loop this into jake-maintain-system tech"
