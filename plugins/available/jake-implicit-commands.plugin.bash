@@ -156,7 +156,11 @@ function base64 {
 			--long-options help,version
 			--
 			"$@")
-	if [ $? != 0 ] ; then echo "Terminating..." >&2 ; exit 1 ; fi
+
+	if [ $? != 0 ] ; then
+		echo "Terminating..." >&2
+		exit 1
+	fi
 
 	eval set -- "$OPTS"
 	while true; do
