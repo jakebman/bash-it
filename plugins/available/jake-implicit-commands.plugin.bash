@@ -150,11 +150,11 @@ function base64 {
 	# https://stackoverflow.com/questions/402377/using-getopts-to-process-long-and-short-command-line-options
 	local -a flags
 	local OPTS fileish
-	OPTS=$(getopt --name base64_wrapper
-			--options diw:
-			--long-options decode,ignore-garbage,wrap:
-			--long-options help,version
-			--
+	OPTS=$(getopt --name base64_wrapper \
+			--options diw: \
+			--longoptions decode,ignore-garbage,wrap: \
+			--longoptions help,version \
+			-- \
 			"$@")
 
 	if [ $? != 0 ] ; then
