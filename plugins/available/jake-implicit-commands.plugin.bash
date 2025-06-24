@@ -150,6 +150,12 @@ function base64 {
 	# https://stackoverflow.com/questions/402377/using-getopts-to-process-long-and-short-command-line-options
 	local -a flags
 	local OPTS fileish
+
+	if getopt -T || (( $? != 4 )); then
+		# non-GNU getopts will succeed -T. GNU getops returns 4
+		echo "Need GNU getopt" >&2
+		return 1
+	fi
 	OPTS=$(getopt --name base64_wrapper \
 			--options diw: \
 			--longoptions decode,ignore-garbage,wrap: \
