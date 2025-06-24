@@ -165,7 +165,7 @@ function base64 {
 
 	if [ $? != 0 ] ; then
 		echo "Terminating..." >&2
-		exit 1
+		return 2
 	fi
 
 	eval set -- "$OPTS"
