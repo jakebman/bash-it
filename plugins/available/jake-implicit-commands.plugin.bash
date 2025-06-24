@@ -177,6 +177,12 @@ function base64 {
 		esac
 	done
 
+	if [[ "$#" -eq 0 ]]; then
+		# If no args, make the implicit '-' explicit
+		eval set -- -
+	fi
+
+
 	for fileish; do # implicit `in "$@"`
 		command base64 "${flags[@]}" -- "fileish"
 	done
