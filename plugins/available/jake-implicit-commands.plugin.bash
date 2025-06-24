@@ -145,6 +145,42 @@ function pop {
 }
 
 
+function base64 {
+	about "allow base64 to operate on 1) multiple arguments (cat'd) and 2) string-arguments as-if they were files"
+	# https://stackoverflow.com/questions/402377/using-getopts-to-process-long-and-short-command-line-options
+	local -a flags
+	local OPTS fileish
+	OPTS=$(getopt --name base64_wrapper
+			--options diw:
+			--long-options decode,ignore-garbage,wrap:
+			--long-options help,version
+			--
+			"$@")
+	if [ $? != 0 ] ; then echo "Terminating..." >&2 ; exit 1 ; fi
+
+	eval set -- "$OPTS"
+	while true; do
+		case "$1" in
+			-- )
+				# -- is guaranteed to separate flags from arguments
+				shift
+				break
+				;;
+			* )
+				flags+=("$1")
+				shift
+				;;
+		esac
+	done
+
+	for fileish; do # implicit `in "$@"`
+		command base64 "${flags[@]}" -- "fileish"
+	done
+}
+
+
+
+
 # TODO: I've gotten to the point of being frustrated at line wrapping messing with my diffs.
 # TODO: I'd love it if this also looped into git diff, too
 function diff-ignore-wrapping {
