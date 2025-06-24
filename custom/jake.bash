@@ -371,7 +371,7 @@ function cdgit {
 alias gitcd=cdgit # not a typo - I literally don't know which name should be primary
 
 function fidget {
-	type fidget
+	type fidget | bat --language bash --style=plain --paging=never
 	echo "TODO: loop this into jake-maintain-system tech"
 
 	local fast arg
