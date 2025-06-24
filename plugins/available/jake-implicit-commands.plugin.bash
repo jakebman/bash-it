@@ -184,7 +184,11 @@ function base64 {
 
 
 	for fileish; do # implicit `in "$@"`
-		command base64 "${flags[@]}" -- "fileish"
+		if [ -f "$fileish" ]; then
+			command base64 "${flags[@]}" -- "fileish"
+		else
+			command base64 "${flags[@]}" -- <<< "fileish"
+		fi
 	done
 }
 
