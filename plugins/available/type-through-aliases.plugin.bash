@@ -13,9 +13,11 @@ else
 	}
 fi
 
-# TODO: this doesn't work with `alias foo="'/a path/with spaces'"`
-# Especially because it ends up `alias -p`'ing out as:
-# alias notepad=''\''/mnt/c/Program Files/Notepad++/notepad++.exe'\'''
+_command_exists shfmt || return
+
+# TODO: when a resolved alias is to a fully-qualified path, there's no need to follow it
+# TODO: when a resolved alias is to itself (alias sudo='sudo '), the alias shouldn't be checked (type -P?)
+# TODO: what about printing additional info if a function shadows an executable file while we're at it
 function type {
 	about 'enhance the shell builtin `type` to try and see through aliases'
 
@@ -29,8 +31,9 @@ function type {
 			# https://askubuntu.com/a/871435/235107
 			local next #="${BASH_ALIASES[$1]}"
 			_type_with_formatting "$@"
-			# https://stackoverflow.com/questions/918886/how-do-i-split-a-string-on-a-delimiter-in-bash
-			read next args <<< "${BASH_ALIASES[$1]}"
+			# shfmt seems to be my best parser to find the first word of the first command in the alias
+			# TODO: consider recursing into *all* statements in `alias a='foo; bar; baz'`. Use read -d "\0" and jq's --raw-output0
+			next=$(shfmt <<< "${BASH_ALIASES[${1}]}" --to-json | jq --raw-output '.Stmts[0].Cmd.Args[0].Parts[0].Value')
 			_type_with_formatting "$next"
 			;;
 		*)
