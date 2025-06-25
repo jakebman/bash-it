@@ -127,6 +127,7 @@ function jake-install-tools() {
 	_jake-find-tool unzip
 	_jake-find-tool clang
 	_jake-find-tool  htop
+	_jake-find-tool  btop btop "htop, but overwhelming and pretty"
 	_jake-find-tool iotop
 	_jake-find-tool iftop
 	_jake-find-tool gh gh "github cli"
