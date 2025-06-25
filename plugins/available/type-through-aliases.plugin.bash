@@ -13,7 +13,9 @@ else
 	}
 fi
 
-# TODO: this doesn't work with `alias foo='/a path/with spaces'`
+# TODO: this doesn't work with `alias foo="'/a path/with spaces'"`
+# Especially because it ends up `alias -p`'ing out as:
+# alias notepad=''\''/mnt/c/Program Files/Notepad++/notepad++.exe'\'''
 function type {
 	about 'enhance the shell builtin `type` to try and see through aliases'
 
