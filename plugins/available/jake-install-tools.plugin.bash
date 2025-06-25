@@ -194,7 +194,7 @@ function jake-install-tools() {
 
 	# I would really prefer to use the latest git
 	local GIT_VERSION="$(git --version)"
-	local EXPECTED_VERSION='git version 2.49.0'
+	local EXPECTED_VERSION='git version 2.50.0'
 	# TODO: it would be nice to be able to compare versions better
 	# 1/2: Does https://github.com/fsaintjacques/semver-tool work?
 	# TODO: These ppas get disabled on a distupgrade. Is there a hook I can get to re-enable them?
