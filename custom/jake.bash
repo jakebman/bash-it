@@ -242,6 +242,20 @@ function path_to_lines {
 		tr ':' "\n"
 }
 
+function edit-base64-as-file {
+	local temp
+	temp=$(mktemp editing-base64-as-file-XXXXXXXXXX --tmpdir)
+
+	echo -e "\n\n\n"
+
+	base64 -d <<< "$1" >"$temp"
+	"${EDITOR-edit}" "$temp"
+	base64 --wrap 0 "$temp"
+
+	echo -e "\n\n\n"
+	echo "# The output file is ${temp}. Use base64 --wrap 0 ${temp} to get the encoded output again"
+}
+
 function cdp {
 	about "cd, but with an implicit mkdir -p"
 	if ! test -d "${1?NEED A DIR}"; then
