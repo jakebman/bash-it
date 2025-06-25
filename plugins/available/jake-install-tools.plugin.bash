@@ -161,6 +161,7 @@ function jake-install-tools() {
 	_jake-find-tool ctags universal-ctags "for vim navigation"
 	_jake-find-tool figlet figlet "for my git no-args tools"
 	_jake-find-file /usr/lib/git-core/git-gui git-gui "git commit gui; not dispatched-to via the path"
+	_jake-find-file /etc/ca-certificates/update.d/jks-keystore ca-certificates-java "java CA certificates from the SSL stuff"
 	# 228MB - only when you need it: _jake-find-tool ffmpeg
 
 	_jake-find-jekyll
