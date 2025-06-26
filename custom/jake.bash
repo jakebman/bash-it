@@ -195,7 +195,9 @@ function vars {
 			set -o posix
 			set
 		) | grep -v -E "$ignore_filter" | pager
-		echo "ignored ${ignore_list[*]}"
+
+		echo
+		echo "# Ignored ${ignore_list[*]} and BASH_COMMAND (if literal match)"
 	else
 		# nb: ack matching uses smartcase. Can't use grep here if we're using ack below
 		# TODO: it's hacky to try and match our regex to the user input. The correct math is:
@@ -214,7 +216,9 @@ function vars {
 			) | ack -v "$ignore_filter" | ack "$@"
 			# TODO: call out which (if any) of these matched. Potentially take args about it?
 			# (but definitely don't do that last - our success/failure should be the one above)
-			echo "ignored ${ignore_list[*]}"
+
+			echo
+			echo "# Ignored ${ignore_list[*]} and BASH_COMMAND (if literal match)"
 		fi
 	fi
 }
