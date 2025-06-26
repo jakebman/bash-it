@@ -179,7 +179,6 @@ function vars {
 	ignore_list+=("(echo_|)(normal|reset_color|(background_|bold_|underline_|)(black|blue|cyan|green|orange|purple|red|white|yellow))")
 	# Using IFS to join ignore_list with a single-character delimiter, from:
 	# https://stackoverflow.com/questions/1527049/how-can-i-join-elements-of-a-bash-array-into-a-delimited-string
-	# TODO: printf?
 	local ignore_regex ignore_filter
 	ignore_regex=$(
 		IFS='|'
