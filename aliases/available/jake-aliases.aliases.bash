@@ -528,6 +528,8 @@ alias rainbow='git rainbow-all'
 
 # always edit the global git config file
 alias config-edit='git config-editg'
+# My preferred way to type this command. Formerly a typo.
+alias edit-config=config-edit
 
 # list merge commits (like `log --merges`), but always assume I wanted to look at patches
 # TODO: could potentially be super smart by looking at reflog and showing merges that have been *pulled* 'recently'
