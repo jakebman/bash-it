@@ -173,7 +173,7 @@ function vars {
 	# (That's why {prefix}_THEME_{suffix} specifically excludes equal signs, otherwise it also grabs ignore_list=..._THEME_...
 	# TODO: it'd be nice to give these good names beyond the dumb regex comment. Mostly thinking of this color regex
 	ignore_list=(BASH_ALIASES LS_COLORS SDKMAN_CANDIDATES SDKMAN_CANDIDATES_CSV)
-	ignore_list+=("sdkman_" "SCM_.*" "SDKMAN_.*" "THEME_.*" "BASH_IT_L(OAD|OG)_.*" "_.+(any underscore variables)*")
+	ignore_list+=("sdkman_" "SCM_.*" "SDKMAN_.*" "THEME_.*" "BASH_IT_(LOAD|LOG)_.*" "_.+(any underscore variables)*")
 	ignore_list+=("[^=]+_THEME_.*")
 	ignore_list+=("ignore_(list|regex|filter)")
 	ignore_list+=("BASH_COMMAND='vars $1'")
