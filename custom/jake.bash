@@ -168,8 +168,9 @@ function vars {
 	# TODO: it'd be nice if the query were implicitly over the variable NAMES, unless there's "something"
 	# indicating a desire to search VALUES as well. (ex: equals sign in search query)
 	local -a ignore_list
-	# CAREFUL!!!! these values will be interpolated into a regex!
-	# Specifically, .*THEME.* eats the ignore_ variables, because it matches itself in the value
+	# CAREFUL!!!! these values will be interpolated into a larger regex to try and match only the key part
+	# If your regex can eat an equals sign, you might end up matching a value
+	# (That's why {prefix}_THEME_{suffix} specifically excludes equal signs, otherwise it also grabs ignore_list=..._THEME_...
 	# TODO: it'd be nice to give these good names beyond the dumb regex comment. Mostly thinking of this color regex
 	ignore_list=(BASH_ALIASES LS_COLORS SDKMAN_CANDIDATES SDKMAN_CANDIDATES_CSV)
 	ignore_list+=("sdkman_" "SCM_.*" "SDKMAN_.*" "THEME_.*" "BASH_IT_L(OAD|OG)_.*" "_.+(any underscore variables)*")
