@@ -198,8 +198,11 @@ function vars {
 		echo "ignored ${ignore_list[*]}"
 	else
 		# nb: ack matching uses smartcase. Can't use grep here if we're using ack below
+		# TODO: it's hacky to try and match our regex to the user input. The correct math is:
+		# Filter all vars to the ignored keys onto lines then check if `ack "$@"` matches any of those lines
 		if echo "$@" | ack "$ignore_regex" > /dev/null; then
 			# we're looking for one of these variables. Don't filter.
+			# TODO: this also searches the values of other ignored variables we didn't request. Can be explosive
 			(
 				set -o posix
 				set
