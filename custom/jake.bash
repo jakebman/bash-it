@@ -172,7 +172,7 @@ function vars {
 	# If your regex can eat an equals sign, you might end up matching a value
 	# (That's why {prefix}_THEME_{suffix} specifically excludes equal signs, otherwise it also grabs ignore_keys=..._THEME_...
 	# TODO: it'd be nice to give these good names beyond the dumb regex comment. Mostly thinking of this color regex
-	ignore_keys=(BASH_ALIASES LS_COLORS SDKMAN_CANDIDATES SDKMAN_CANDIDATES_CSV)
+	ignore_keys+=(BASH_ALIASES LS_COLORS SDKMAN_CANDIDATES SDKMAN_CANDIDATES_CSV)
 	ignore_keys+=("sdkman_" "SCM_.*" "SDKMAN_.*" "THEME_.*" "BASH_IT_(LOAD|LOG)_.*" "_.+(any underscore variables)*")
 	ignore_keys+=("[^=]+_THEME_.*")
 	ignore_keys+=("ignore_(keys|key_regex|regex)")
