@@ -167,25 +167,25 @@ function vars {
 
 	# TODO: it'd be nice if the query were implicitly over the variable NAMES, unless there's "something"
 	# indicating a desire to search VALUES as well. (ex: equals sign in search query)
-	local -a ignore_list
+	local -a ignore_keys
 	# CAREFUL!!!! these values will be interpolated into a larger regex to try and match only the key part
 	# If your regex can eat an equals sign, you might end up matching a value
-	# (That's why {prefix}_THEME_{suffix} specifically excludes equal signs, otherwise it also grabs ignore_list=..._THEME_...
+	# (That's why {prefix}_THEME_{suffix} specifically excludes equal signs, otherwise it also grabs ignore_keys=..._THEME_...
 	# TODO: it'd be nice to give these good names beyond the dumb regex comment. Mostly thinking of this color regex
-	ignore_list=(BASH_ALIASES LS_COLORS SDKMAN_CANDIDATES SDKMAN_CANDIDATES_CSV)
-	ignore_list+=("sdkman_" "SCM_.*" "SDKMAN_.*" "THEME_.*" "BASH_IT_(LOAD|LOG)_.*" "_.+(any underscore variables)*")
-	ignore_list+=("[^=]+_THEME_.*")
-	ignore_list+=("ignore_(list|regex|filter)")
-	ignore_list+=("BASH_COMMAND='vars $1'")
-	ignore_list+=("(echo_|)(normal|reset_color|(background_|bold_|underline_|)(black|blue|cyan|green|orange|purple|red|white|yellow))")
-	# Using IFS to join ignore_list with a single-character delimiter, from:
+	ignore_keys=(BASH_ALIASES LS_COLORS SDKMAN_CANDIDATES SDKMAN_CANDIDATES_CSV)
+	ignore_keys+=("sdkman_" "SCM_.*" "SDKMAN_.*" "THEME_.*" "BASH_IT_(LOAD|LOG)_.*" "_.+(any underscore variables)*")
+	ignore_keys+=("[^=]+_THEME_.*")
+	ignore_keys+=("ignore_(keys|key_regex|regex)")
+	ignore_keys+=("BASH_COMMAND='vars $1'")
+	ignore_keys+=("(echo_|)(normal|reset_color|(background_|bold_|underline_|)(black|blue|cyan|green|orange|purple|red|white|yellow))")
+	# Using IFS to join ignore_keys with a single-character delimiter, from:
 	# https://stackoverflow.com/questions/1527049/how-can-i-join-elements-of-a-bash-array-into-a-delimited-string
-	local ignore_regex ignore_filter
-	ignore_regex=$(
+	local ignore_key_regex ignore_regex
+	ignore_key_regex=$(
 		IFS='|'
-		echo "${ignore_list[*]}"
+		echo "${ignore_keys[*]}"
 	)
-	printf -v ignore_filter '^(%s)=' "$ignore_regex"
+	printf -v ignore_regex '^(%s)=' "$ignore_key_regex"
 
 	if [ "$#" -eq 0 ]; then
 		# magic incantation from the internet
@@ -194,15 +194,15 @@ function vars {
 		( # TODO: `local -` instead of a subshell?
 			set -o posix
 			set
-		) | grep -v -E "$ignore_filter" | pager
+		) | grep -v -E "$ignore_regex" | pager
 
 		echo
-		echo "# Ignored ${ignore_list[*]} and BASH_COMMAND (if literal match)"
+		echo "# Ignored ${ignore_keys[*]} and BASH_COMMAND (if literal match)"
 	else
 		# nb: ack matching uses smartcase. Can't use grep here if we're using ack below
 		# TODO: it's hacky to try and match our regex to the user input. The correct math is:
 		# Filter all vars to the ignored keys onto lines then check if `ack "$@"` matches any of those lines
-		if echo "$@" | ack "$ignore_regex" > /dev/null; then
+		if echo "$@" | ack "$ignore_key_regex" > /dev/null; then
 			# we're looking for one of these variables. Don't filter.
 			# TODO: this also searches the values of other ignored variables we didn't request. Can be explosive
 			(
@@ -213,12 +213,12 @@ function vars {
 			(
 				set -o posix
 				set
-			) | ack -v "$ignore_filter" | ack "$@"
+			) | ack -v "$ignore_regex" | ack "$@"
 			# TODO: call out which (if any) of these matched. Potentially take args about it?
 			# (but definitely don't do that last - our success/failure should be the one above)
 
 			echo
-			echo "# Ignored ${ignore_list[*]} and BASH_COMMAND (if literal match)"
+			echo "# Ignored ${ignore_keys[*]} and BASH_COMMAND (if literal match)"
 		fi
 	fi
 }
