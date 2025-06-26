@@ -176,7 +176,6 @@ function vars {
 	ignore_keys+=("sdkman_.*" "SCM_.*" "SDKMAN_.*" "THEME_.*" "BASH_IT_(LOAD|LOG)_.*" "_.+(any underscore variables)*")
 	ignore_keys+=("[^=]+_THEME_.*")
 	ignore_keys+=("ignore_(keys|key_regex|regex)")
-	ignore_keys+=("BASH_COMMAND='vars $1'")
 	ignore_keys+=("(echo_|)(normal|reset_color|(background_|bold_|underline_|)(black|blue|cyan|green|orange|purple|red|white|yellow))")
 	# Using IFS to join ignore_keys with a single-character delimiter, from:
 	# https://stackoverflow.com/questions/1527049/how-can-i-join-elements-of-a-bash-array-into-a-delimited-string
@@ -186,6 +185,9 @@ function vars {
 		echo "${ignore_keys[*]}"
 	)
 	printf -v ignore_regex '^(%s)=' "$ignore_key_regex"
+
+	# Specifically ignore the bash command, if possible. (The quoting is hard, man. TODO.)
+	ignore_regex+="|^BASH_COMMAND='vars ${1}'$"
 
 	if [ "$#" -eq 0 ]; then
 		# magic incantation from the internet
@@ -202,7 +204,7 @@ function vars {
 		# nb: ack matching uses smartcase. Can't use grep here if we're using ack below
 		# TODO: it's hacky to try and match our regex to the user input. The correct math is:
 		# Filter all vars to the ignored keys onto lines then check if `ack "$@"` matches any of those lines
-		if echo "$@" | ack "$ignore_key_regex" > /dev/null; then
+		if echo "$@" | ack "${ignore_key_regex}|BASH_COMMAND" > /dev/null; then
 			# we're looking for one of these variables. Don't filter.
 			# TODO: this also searches the values of other ignored variables we didn't request. Can be explosive
 			(
