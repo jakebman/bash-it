@@ -643,6 +643,11 @@ function xml {
 	xmlindent -i 2 -f -nbe "$@" | bat -pl xml
 }
 
+
+# TODO: <project xmlns="..."> ("declaring a default namespace") breaks xpath for some reason:
+# https://stackoverflow.com/questions/5239685/xml-namespace-breaking-my-xpath
+# as seen in sth/pom.xml
+# Passing the pom.xml through `xmllint -` in a pipeline... fixes it... somehow.
 function xpath {
 	local -a args
 	args=("$@")
