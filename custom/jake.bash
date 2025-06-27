@@ -396,7 +396,14 @@ function cdmaven {
 	local gav="${1?need an arg}"
 
 	# TODO: classifier can appear before version, like in example above.
-	local dest="${gav//[.:]//}"
+	local group artifact classifier version
+	IFS=: read group artifact classifier version <<< "$gav"
+	: ${version:=$classifier} # grab version from classifier if it's missing or empty
+
+	vars | grep -E 'group|artifact|version|classifier'
+
+	local dest="${group//[.]//}/${artifact}/${version}"
+
 
 	echo "going to ${dest}"
 
