@@ -42,6 +42,7 @@ function type {
 		return
 	fi
 
+	# TODO: parse the flags and args. Guessing $1 is wrong.
 	case $(command type -t -- "$1") in
 		alias)
 			# https://askubuntu.com/a/871435/235107
