@@ -3,13 +3,29 @@ cite about-plugin
 about-plugin 'allow type to see through aliases and try to find the underlying command'
 
 
+function _type_with_typos {
+	about '`command type`, but aware of typos'
+	if command type "$@" 2>/dev/null; then
+		# Happy path! Successfully found something
+		return
+	fi
+
+	# TODO: respond to `-t` queries
+	(
+		set -o pipefail -o errexit
+		source "$BASH_IT_TYPOS_FILE"
+		command type "$@" |
+			sed 's/is aliased to/is a typo of/g'
+	)
+}
+
 if _command_exists bat; then
 	function _type_with_formatting {
-		command type "$@" | bat --language=bash
+		_type_with_typos "$@" | bat --language=bash
 	}
 else
 	function _type_with_formatting {
-		command type "$@"
+		_type_with_typos "$@"
 	}
 fi
 
@@ -22,7 +38,7 @@ function type {
 	about 'enhance the shell builtin `type` to try and see through aliases'
 
 	if ! [ -t 0 ] || ! [ -t 1 ]; then
-		command type "$@"
+		_type_with_typos "$@"
 		return
 	fi
 
