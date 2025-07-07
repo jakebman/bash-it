@@ -671,7 +671,7 @@ function xpath {
 	# But that's fine, because that's what `xml`'s job *is*
 	xml "$@" | # proper formatting, so sed is more likely to catch
 		sed --regexp-extended 's/\bxmlns="[^"]*"//g' | # strip default namespace
-		xmllint --xpath "$xpath" - |
+		xmllint --xpath "$xpath" - | # The actual work we came here for
 		xml # final coloring, paging, etc
 }
 alias xmlpath=xpath
