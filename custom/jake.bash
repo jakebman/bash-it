@@ -640,14 +640,10 @@ function xml {
 
 	# two-space indent, forcing newlines between elements w/o children,
 	# suppressing newline before end-tag
-	xmlindent -i 2 -f -nbe "$@" | bat -pl xml
+	xmlindent -i 2 -f -nbe "$@" | bat --language xml
 }
 
 
-# TODO: <project xmlns="..."> ("declaring a default namespace") breaks xpath for some reason:
-# https://stackoverflow.com/questions/5239685/xml-namespace-breaking-my-xpath
-# as seen in sth/pom.xml
-# Passing the pom.xml through `xmllint -` in a pipeline... fixes it... somehow.
 function xpath {
 	local -a args
 	args=("$@")
@@ -663,8 +659,22 @@ function xpath {
 		return 1
 	fi
 
-	# Pass the output through the `xml` formatter, because xmllint --format --xpath is a one-result-per-line type of work.
-	xmllint --xpath "${args[@]}" | xml
+	# Grab xpath arg, leaving filenames
+	local xpath=$1
+	shift
+
+	# Default namespaces confuse the hell out of xpath.
+	# See: https://stackoverflow.com/questions/28473291/force-xmllint-to-ignore-bad-default-xmlns
+	# TODO: this could potentially be smarter for multiple files, instead of cat-ing them all together
+	# TODO: this fix should call out that it applied, to stderr. This is a very "I had an error" situation
+	#
+	# On the tail end, we pass the output through the `xml` formatter, defined above
+	# because xmllint --format --xpath feels like it puts each result on a new line or something else weird.
+	# But that's fine, because that's what `xml`'s job *is*
+	xml "$@" | # proper formatting, so sed is more likely to catch
+		sed --regexp-extended 's/\bxmlns="[^"]*"//g' | # strip default namespace
+		xmllint --xpath "$xpath" - | # The actual work we came here for
+		xml # final coloring, paging, etc
 }
 alias xmlpath=xpath
 
