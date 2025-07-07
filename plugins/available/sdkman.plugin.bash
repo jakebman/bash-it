@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 cite about-plugin
 about-plugin 'Load Software Development Kit Manager'
 
@@ -6,6 +7,7 @@ about-plugin 'Load Software Development Kit Manager'
 export SDKMAN_DIR=${SDKMAN_DIR:-$HOME/.sdkman}
 
 if [[ -s "${SDKMAN_DIR}/bin/sdkman-init.sh" ]]; then
+	# shellcheck disable=SC1091
 	source "${SDKMAN_DIR}/bin/sdkman-init.sh"
 else
 	_log_error "please install SDKMAN - 'curl https://get.sdkman.io | bash' or read more at https://sdkman.io"

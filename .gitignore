@@ -28,3 +28,5 @@ profiles/*
 !profiles/default.bash_it
 # and mine:
 !profiles/jake*.bash_it
+
+/vendor/github.com/nojhan/liquidprompt
