@@ -665,6 +665,8 @@ function xpath {
 
 	# Default namespaces confuse the hell out of xpath.
 	# See: https://stackoverflow.com/questions/28473291/force-xmllint-to-ignore-bad-default-xmlns
+	# TODO: this could potentially be smarter for multiple files, instead of cat-ing them all together
+	# TODO: this fix should call out that it applied, to stderr. This is a very "I had an error" situation
 	#
 	# On the tail end, we pass the output through the `xml` formatter, defined above
 	# because xmllint --format --xpath feels like it puts each result on a new line or something else weird.
