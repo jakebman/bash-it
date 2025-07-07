@@ -10,6 +10,7 @@ about-plugin 'Allow certain folders to always remain valid `cd` targets, from an
 # "A null directory name is the same as the current directory", per `help cd`
 CDPATH+=":${XDG_CONFIG_HOME:-${HOME}/.config}/cd/quick-access"
 
+# TODO: (another plugin?) to respect a -p flag to cd, which `mkdir -p`'s its argument, then my cdp function can just alias that instead
 function cd {
 	about 'normal `cd`, but non-$CWD entries (and cdable_vars) get an implicit -P to follow symlinks'
 	if [[ "$#" -eq 1 ]] && [[ - != "$1" ]] && ! [[ -d "$1" ]]; then

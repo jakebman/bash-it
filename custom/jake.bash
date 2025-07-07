@@ -371,6 +371,7 @@ function _mr-able {
 }
 
 function cdgit {
+	# TODO: there is also cd-git in jake-cd-git-root
 	about 'cd into the root of a git repo/worktree for the current directory, or fail'
 	local where how
 
