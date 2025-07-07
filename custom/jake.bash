@@ -640,7 +640,7 @@ function xml {
 
 	# two-space indent, forcing newlines between elements w/o children,
 	# suppressing newline before end-tag
-	xmlindent -i 2 -f -nbe "$@" | bat -pl xml
+	xmlindent -i 2 -f -nbe "$@" | bat --language xml
 }
 
 
