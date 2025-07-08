@@ -639,9 +639,13 @@ function xml {
 		return 1
 	fi
 
-	# two-space indent, forcing newlines between elements w/o children,
-	# suppressing newline before end-tag
-	xmlindent -i 2 -f -nbe "$@" | bat --language xml
+	# XMLLINT_INDENT is for xmllint. It can take arbitrary strings ("I am an indent string   "), which we can't emulate here
+	# so we just grab its length if it is defined, defaulting to 2 spaces
+	local indent=${XMLLINT_INDENT+${#XMLLINT_INDENT}}
+	: ${indent:=2}
+	# -f forces newlines between elements w/o children
+	# -nbe suppresses newline before end-tag
+	xmlindent -i "$indent" -f -nbe "$@" | bat --language xml
 }
 
 
