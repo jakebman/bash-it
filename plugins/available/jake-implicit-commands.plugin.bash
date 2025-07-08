@@ -197,8 +197,7 @@ function base64 {
 		fi
 	done
 }
-
-
+alias unbase64='base64 -d'
 
 
 # TODO: I've gotten to the point of being frustrated at line wrapping messing with my diffs.
