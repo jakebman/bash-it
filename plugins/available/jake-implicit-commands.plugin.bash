@@ -144,6 +144,17 @@ function pop {
 	fi
 }
 
+function _base64_looks_like_base64 {
+	about "if a string looks like a base64-encoded string. Heuristic. 'hello' is potentially a base64-encoded string"
+
+	# Base64 is 26 lower + 26 upper + 10 digits (subtotal 62), plus two more characters ('+' and '/'), and up to 2 '=' for padding
+	# There are other options for the last two characters, which I am ignoring:
+	# https://en.wikipedia.org/wiki/Base64#Variants_summary_table
+	# RFC 3501 uses +,
+	# base64url uses -_
+	# Paranoia requires the x-trick. X is also valid base64, so that's fine.
+	(( ${#1} % 4 == 0 )) && [[ "X$1" =~ ^[a-zA-Z0-9+/]+=?=?$ ]]
+}
 
 function base64 {
 	about "allow base64 to operate on 1) multiple arguments (cat'd) and 2) string-arguments as-if they were files"
@@ -196,6 +207,25 @@ function base64 {
 			command base64 "${flags[@]}" -- <<< "$fileish"
 		fi
 	done
+
+	# Adding any flags (which would also include `-d`, but might not) disables this behavior
+	if [ -t 1 ] && [[ "${#flags[@]}" -eq 0 ]] ; then
+		# stdout is to the terminal and we aren't using any flags.
+		# Let's try and also decode things
+		for fileish; do # implicit `in "$@"`
+			# need the x-tech because i'm concerned fileish could still be flag-like
+			if ! [[ -f "$fileish" ]] && _base64_looks_like_base64 "$fileish"; then
+				# This pattern looks for 9 or more characters. The '*'s in the middle helps separate
+				# and the one at the end ensures we replace the entire string with its truncation.
+				# Lengths of ...6,7,8 are all preserved. 9 and up becomes {first six}...
+				local truncated="${fileish/#???*???*???*/${fileish:0:6}...}"
+
+				echo
+				echo "# And ${truncated} decodes to:"
+				command base64 "${flags[@]}" -d -- <<< "$fileish"
+			fi
+		done
+	fi
 }
 alias unbase64='base64 -d'
 
