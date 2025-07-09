@@ -148,13 +148,12 @@ function _base64_looks_like_base64 {
 	about "if a string looks like a base64-encoded string. Heuristic. 'hello' is potentially a base64-encoded string"
 
 	# Base64 is 26 lower + 26 upper + 10 digits (subtotal 62), plus two more characters ('+' and '/'), and up to 2 '=' for padding
-	# TODO: the reason for padding is that the length of encoded strings is always divisible by 4. Validate that too?
 	# There are other options for the last two characters, which I am ignoring:
 	# https://en.wikipedia.org/wiki/Base64#Variants_summary_table
 	# RFC 3501 uses +,
 	# base64url uses -_
 	# Paranoia requires the x-trick. X is also valid base64, so that's fine.
-	[[ "X$1" =~ ^[a-zA-Z0-9+/]+=?=?$ ]]
+	(( ${#1} % 4 == 0 )) && [[ "X$1" =~ ^[a-zA-Z0-9+/]+=?=?$ ]]
 }
 
 function base64 {
