@@ -60,9 +60,9 @@ function command_not_found_handle {
 	local a_value
 	if a_value=$(alias_value "$name" 2>/dev/null); then
 		# Typo was implemented as an alias
-		echo "Simple typo: $a_value ${args[@]@Q}"
+		>&2 echo "Simple typo: $a_value ${args[@]@Q}"
 	else
-		echo "Complex typo: $name ${args[@]@Q}"
+		>&2 echo "Complex typo: $name ${args[@]@Q}"
 	fi
 
 	# TODO: can I get a printed bash stack trace?
