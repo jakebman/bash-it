@@ -215,7 +215,12 @@ function base64 {
 		for fileish; do # implicit `in "$@"`
 			# need the x-tech because i'm concerned fileish could still be flag-like
 			if ! [[ -f "$fileish" ]] && _base64_looks_like_base64 "$fileish"; then
-				local truncated=${fileish/#??????*/${fileish:0:5}...}
+				# This pattern looks for 9 or more characters. The '*'s in the middle helps separate
+				# and the one at the end ensures we replace the entire string with its truncation.
+				# Lengths of ...6,7,8 are all preserved. 9 and up becomes {first six}...
+				local truncated="${fileish/#???*???*???*/${fileish:0:6}...}"
+
+				echo
 				echo "# And ${truncated} decodes to:"
 				command base64 "${flags[@]}" -d -- <<< "$fileish"
 			fi
