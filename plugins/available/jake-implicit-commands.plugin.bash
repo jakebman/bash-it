@@ -216,7 +216,7 @@ function base64 {
 			# need the x-tech because i'm concerned fileish could still be flag-like
 			if ! [[ -f "$fileish" ]] && _base64_looks_like_base64 "$fileish"; then
 				local truncated=${fileish/#??????*/${fileish:0:5}...}
-				echo "# And ${fileish}... decodes to:"
+				echo "# And ${truncated} decodes to:"
 				command base64 "${flags[@]}" -d -- <<< "$fileish"
 			fi
 		done
