@@ -36,6 +36,15 @@ function dmesg {
 	fi
 }
 
+function xxd {
+	about 'automatically page xxd output'
+	if [[ -t 1 ]]; then
+		command xxd "$@" | pager
+	else
+		command xxd "$@"
+	fi
+}
+
 
 # formerly a simple `alias cat='bat --plain'`, but that doesn't handle this no-args use case
 if _command_exists bat; then
