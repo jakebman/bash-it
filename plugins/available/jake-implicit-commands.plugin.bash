@@ -39,7 +39,8 @@ function dmesg {
 function xxd {
 	about 'automatically page xxd output'
 	if [[ -t 1 ]]; then
-		command xxd "$@" | pager
+		# -R is like --color <when>
+		command xxd -R always "$@" | pager
 	else
 		command xxd "$@"
 	fi
