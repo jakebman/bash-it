@@ -138,9 +138,7 @@ else
 	_log_error "pygmentize is available via sudo apt install python-pygments"
 fi
 
-function find-ack {
-	ack -f "$@"
-}
+alias find-ack='ack -f'
 alias ack-find=find-ack
 
 function files {
