@@ -126,7 +126,7 @@ function pull {
 			END {
 				print_and_empty_info()
 			}
-		'
+		' | less --tilde +G
 	else
 		# Technically, we know there are no args to pass to pull here, but it keeps parallel structure
 		# And we should fallback to git fetch in case we're in a situation where the remote branch is deleted (merged)
