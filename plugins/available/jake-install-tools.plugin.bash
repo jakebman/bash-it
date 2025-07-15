@@ -200,6 +200,7 @@ function jake-install-tools() {
 	# TODO: it would be nice to be able to compare versions better
 	# 1/2: Does https://github.com/fsaintjacques/semver-tool work?
 	# TODO: These ppas get disabled on a distupgrade. Is there a hook I can get to re-enable them?
+	# TODO: I should also check that these ppa declarations *are even there*, and I'm not just lagging
 	if [ "$GIT_VERSION_MAJOR" != "$EXPECTED_VERSION" ]; then
 		local GIT_VERSION_MAJOR=$(echo $GIT_VERSION | sed -E -n 's/.* ([0-9]+)\..*/\1/p')
 		local GIT_VERSION_MINOR=$(echo $GIT_VERSION | sed -E -n 's/.* ([0-9]+)\.([0-9]+)\..*/\2/p')
