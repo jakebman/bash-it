@@ -327,6 +327,7 @@ function commit {
 # Amend a prior commit. Try to guess the user's intent.
 # Nice feature: if you committed some changes (and therefore didn't change the message),
 # re-running this gives you the ability to immediately(-ish) change the message
+# TODO: this could follow commit's argument-juggling tech, from above
 function amend {
 	if JAKE_SUPPRESS_GIT_SQUAWK=1 git is-clean-quiet; then
 		# No changes can possibly be `add`-ed. We're obviously editing the message
