@@ -77,8 +77,8 @@ function pull {
 			# Directly within the Junk Drawer. Allow updating it
 			local -x UPDATE_JUNK_DRAWER=any-string-value
 
-			# ... but the junk drawer needs a pager
-			PAGER=(less --tilde +G)
+			# ... but the junk drawer needs a pager. It can follow the output, though
+			PAGER=(less --tilde +F)
 		fi
 
 		# yes, there's a .mrconfig in ~, but there's no disk access to check $PWD first
