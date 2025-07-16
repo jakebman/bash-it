@@ -72,9 +72,13 @@ function pull {
 		GIT_CONFIG_VALUE_0=always
 		export GIT_CONFIG_COUNT GIT_CONFIG_KEY_0 GIT_CONFIG_VALUE_0
 
+		local -a PAGER=cat # Normally, we don't have to do paging
 		if [ junk-drawer = "$(basename "$PWD")" ]; then
 			# Directly within the Junk Drawer. Allow updating it
 			local -x UPDATE_JUNK_DRAWER=any-string-value
+
+			# ... but the junk drawer needs a pager
+			PAGER=(less --tilde +G)
 		fi
 
 		# yes, there's a .mrconfig in ~, but there's no disk access to check $PWD first
@@ -126,7 +130,7 @@ function pull {
 			END {
 				print_and_empty_info()
 			}
-		' | less --tilde +G
+		' | "${PAGER[@]}"
 	else
 		# Technically, we know there are no args to pass to pull here, but it keeps parallel structure
 		# And we should fallback to git fetch in case we're in a situation where the remote branch is deleted (merged)
