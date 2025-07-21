@@ -145,6 +145,17 @@ function stat {
 	fi
 }
 
+# Some variants on stat, for conversing with `status`
+# The `status` command can sometimes farm out to mr status...
+#      which runs git mr-status (per ~/.mrconfig)...
+#      which dispatches to git is-mainline(-print-on-failure)...
+#      which respects this setting
+# The eventual result is that using this setting makes `status` go quicker or be more verbose
+# verbose
+alias statv="GIT_CONFIG_COUNT=1 GIT_CONFIG_KEY_0=jake.mainlineChecking GIT_CONFIG_VALUE_0=true stat"
+# quick/quiet (my default at work)
+alias statq="GIT_CONFIG_COUNT=1 GIT_CONFIG_KEY_0=jake.mainlineChecking GIT_CONFIG_VALUE_0=false stat"
+
 function pop {
 	about "do a git stash pop, or a popd(ir) if nothing's stashed"
 	if [[ -z "$(git stash list)" ]]; then
