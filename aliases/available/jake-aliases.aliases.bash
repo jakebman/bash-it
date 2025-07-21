@@ -78,7 +78,8 @@ function pull {
 			local -x UPDATE_JUNK_DRAWER=any-string-value
 
 			# ... but the junk drawer needs a pager. It can follow the output, though
-			PAGER=(less --tilde +F)
+			# (also, ask less to tee its input to an update log)
+			PAGER=(less --tilde +F --LOG-FILE="update-log.$(date --iso-8601=seconds)")
 		fi
 
 		# yes, there's a .mrconfig in ~, but there's no disk access to check $PWD first
