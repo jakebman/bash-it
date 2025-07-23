@@ -482,6 +482,7 @@ alias rainbow-all='git rainbow-all'       # explicitly --all form of rainbow out
 alias rainbow-here='git rainbow-here'     # approx. git log --oneline --graph, specifically only the current history (no --all)
 alias shallow='git shallow'               # a shallow clone (non-alphabetical to be beside its twin)
 alias since='git since'                   # log with immediate --since argument (technically --since-as-filter, but THATS THE POINT!!!)
+alias changed-since='git changed-since'   # like since, but only lists the files changed, piping through `jaketree` when showing on the terminal
 alias stats='git stats'                   # git show, with implicit --stat to change diff output to stats output
 alias status-or-show='git status-or-show' # git status, if it would have any output. Otherwise git show
 alias tags='git tags'                     # list the tags
