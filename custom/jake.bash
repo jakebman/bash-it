@@ -108,6 +108,7 @@ LESS+="--follow-name "
 LESS_ABBREV+=" --fol"
 # There's some cool discussion on the value of these flags used in SYSTEMD_LESS in the `man systemctl` docs
 export LESS LESS_ABBREV
+export SYSTEMD_LESS=$LESS # `systemctl` overwrites my $LESS by default. This is how to prevent that
 
 export LESSSTYLE=sas # respected by lessfilter in XDG_CONFIG_HOME (not actually a LESS env variable)
 
