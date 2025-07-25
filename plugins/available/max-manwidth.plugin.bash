@@ -1,6 +1,7 @@
 
 about-plugin 'Keep $MANWIDTH no larger than $MAX_MANWIDTH - watching $COLUMNS and enabling MANWIDTH=MAX_MANWIDTH only when the screen is wider'
 
+# TODO: should this have the BASH_IT_ prefix?
 : ${MAX_MANWIDTH:=100}
 
 function _maxManwidth_MaintainMaxManWidth {
