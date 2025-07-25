@@ -17,4 +17,5 @@ function pj() {
 function pjo() {
 	about 'open a file from one of your projects in your editor'
 	group 'projects'
-
+	# TODO
+}
