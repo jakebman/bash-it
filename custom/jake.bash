@@ -274,6 +274,15 @@ function cdp {
 	cd "$@"
 }
 
+unalias c # defined in general aliases
+function c {
+	about 'a typo of cd that can be spelled `c d $yourArg`, or just `c $yourArg`'
+	if [[ "$#" -gt 0 ]] && [[ d = "$1" ]]; then
+		shift
+	fi
+	cd "$@"
+}
+
 function _mr-isrepo-local {
 	about "succeeds if the current folder is a git repo tracked by mr. fails otherwise"
 	[[ -e .git ]] || return 1
