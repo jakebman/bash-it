@@ -411,17 +411,13 @@ function cdmaven {
 alias mavencd=cdmaven # ditto cdgit above
 alias cdr=cdmaven     # r for 'repository'
 
-function fidget {
-	type fidget | bat --language bash --style=plain --paging=never
-	echo "TODO: loop this into jake-maintain-system tech"
-
-	local fast arg
+function _fidget_options {
+	local arg
 	local OPTIND=1 # Reset OPTIND for this function, so getopts starts at $1, not $ummm....?
 	while getopts 'afqh' arg; do
 		case "$arg" in
 			a)
-				# -x to export the variable
-				local -x UPDATE_JUNK_DRAWER=true
+				UPDATE_JUNK_DRAWER=true
 				;;
 			f|q)
 				fast="Not waiting to cancel"
@@ -431,6 +427,16 @@ function fidget {
 				;;
 		esac
 	done
+}
+
+function fidget {
+	type fidget | bat --language bash --style=plain --paging=never
+	echo "TODO: loop this into jake-maintain-system tech"
+
+	# set by _fidget_options. UPDATE_JUNK_DRAWER needs to be exported to mr up, invoked from `pull`
+	local fast
+	local -x UPDATE_JUNK_DRAWER
+	_fidget_options "$@"
 
 	[ -n "$UPDATE_JUNK_DRAWER" ] && echo "Including Junk Drawer in update"
 
