@@ -31,7 +31,7 @@ plugins jake-words
 plugins jake-xdg
 plugins jq
 plugins node-trust-os-certs
-plugins projects
+plugins projects-CDPATH
 plugins pyenv
 plugins rezipdoc
 plugins sdkman
@@ -48,7 +48,7 @@ completion helm
 completion jira
 completion kubectl
 completion maven
-completion projects
+completion projects-CDPATH
 completion sdkman
 completion system
 aliases general

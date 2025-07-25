@@ -31,7 +31,7 @@ plugins jake-typos
 plugins jake-words
 plugins jake-xdg
 plugins jq
-plugins projects
+plugins projects-CDPATH
 plugins rakubrew
 plugins rezipdoc
 plugins sdkman
@@ -46,7 +46,7 @@ completion glab
 completion jira
 completion kubectl
 completion maven
-completion projects
+completion projects-CDPATH
 completion sdkman
 completion system
 aliases general
