@@ -200,6 +200,36 @@ function status {
 	git status "$@" && return $status
 }
 
+function mr-unskip {
+	mr --force -d "${1?Need an mr dir to run}" checkout
+}
+alias unskip=mr-unskip
+
+function _mr-unskip {
+	local -a candidates
+	local item completeMe=$2
+	# I have good docs on mapfile in jake-install-tools
+	# TODO: I'd love a better way to read ini file headers properly
+	# -t to remove trailing newline delimiter - not used in other places where I used the zero string
+	mapfile -t candidates < <(
+			grep '^\[' .mrconfig |
+				tr -d [] |
+				grep -Ev "^(DEFAULT|ALIAS)$" |
+				sort
+			)
+	touch "$candidates".txt
+	COMPREPLY=()
+	for item in "${candidates[@]}"; do
+		if [ ! -d "$item" ] && [[ x"$item" = x"$completeMe"* ]]; then
+			COMPREPLY+=("$item")
+		fi
+	done
+
+
+	#printf "{%s}\n" "${COMPREPLY[@]}"
+}
+complete -F _mr-unskip mr-unskip
+
 function realpath-and-rainbow {
 	about "preceed a rainbow with a realpath, if relevant"
 	realpath 2> /dev/null # specifically want the zero-arg "go to the real path" behavior
