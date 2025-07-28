@@ -313,7 +313,7 @@ function jake-install-tools() {
 	# -printf '%P\0' - customizing a form of -print0 which strips the ./ prefix that -print0 gives
 	# %P: File's name with the name of the starting-point under which it was found removed.
 	local -a sudo_files to_install
-	mapfile -d '' sudo_files < <(find -L "${BASH_IT_CUSTOM}/sudoers.d/" -mindepth 1 -type f -printf '%P\0' | sort -z)
+	mapfile -t -d '' sudo_files < <(find -L "${BASH_IT_CUSTOM}/sudoers.d/" -mindepth 1 -type f -printf '%P\0' | sort -z)
 	local sudo_file
 	for sudo_file in "${sudo_files[@]}"; do
 		if [ "${BASH_IT_CUSTOM}/sudoers.d/$sudo_file" -nt "/etc/sudoers.d/$sudo_file" ]; then
