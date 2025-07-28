@@ -13,8 +13,8 @@ esac
 
 # Path to the bash it configuration
 export BASH_IT="${HOME}/.bash-it"
-# TODO: WSL probably reserves global variables with this prefix. I should probably pick a new name :\
-export WSL_WINDOWS_USER_HOME="/mnt/c/Users/jakeb"
+# TODO: I'm deprecating this variable, replacing its usage with this value
+export WSL_WINDOWS_USER_HOME="${XDG_CONFIG_HOME:-${HOME}/.config}/jake/windows-user-home"
 
 # for bash-it autocomplete; and for .mrconfig (which is why it must be exported)
 export COMPLETE_ALIAS_DIR="${HOME}/.local/bin/complete-alias"

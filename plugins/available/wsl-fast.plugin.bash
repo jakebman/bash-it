@@ -1,6 +1,7 @@
 cite about-plugin
 about-plugin "Fire-and-forget-fast form of Windows Subsystem for Linux interop. While you're here, know about .wslconfig (WSL2 only): https://docs.microsoft.com/en-us/windows/wsl/wsl-config#configure-global-options-with-wslconfig"
 
+# Keeping this use of the deprecated variable. You can solve this entirely with symlinks, but this isn't a bad idea either
 if [ -d "$WSL_WINDOWS_USER_HOME" ]; then
 	export MAVEN_OPTS="-Dmaven.repo.local=${WSL_WINDOWS_USER_HOME}/.m2/repository"
 else

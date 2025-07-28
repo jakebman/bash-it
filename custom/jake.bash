@@ -13,9 +13,9 @@ if [ -v KUBECONFIG ]; then
 	KUBECONFIG+=":"
 fi
 KUBECONFIG+="${XDG_CONFIG_HOME:-${HOME}/.config}/kubectl/config"
-if [ -v WSL_WINDOWS_USER_HOME ]; then
+if [ -d "${XDG_CONFIG_HOME:-${HOME}/.config}/jake/windows-user-home" ]; then
 	KUBECONFIG+=":"
-	KUBECONFIG+="${WSL_WINDOWS_USER_HOME}/.kube/config"
+	KUBECONFIG+="${XDG_CONFIG_HOME:-${HOME}/.config}/jake/windows-user-home/.kube/config"
 fi
 export KUBECONFIG
 

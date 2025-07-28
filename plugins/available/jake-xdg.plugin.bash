@@ -164,7 +164,8 @@ export COMPLETE_ALIAS_DIR="${JAKE_XDG_BIN_DIR}/complete-alias"
 
 # XDG list:
 # .aws - not configurable. The AWS_CONFIG_FILE and AWS_SHARED_CREDENTIALS_FILE can be configured, but not for instance .aws/cli/alias
-# .azure - symlinked into $WSL_WINDOWS_USER_HOME. Can probably remove it without damage.
+#        NB: docker 'helpfully' overwrites my symlink with one into %USERPROFILE%
+# .azure - symlinked into %USERPROFILE%. Can probably remove it without damage.
 # .bash - symlinked to .bashrc as tab-completion fodder to win over .bash{_history,_logout}
 # .bashrc, .profile - requires decent high-powered intervention to loop in so early. Potentially an /etc/profile.d entry?
 # .bash-it - inconvenient for me - it's easier to come in here and change stuff without it being a level deeper
