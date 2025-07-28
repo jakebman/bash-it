@@ -15,6 +15,7 @@ esac
 export BASH_IT="${HOME}/.bash-it"
 # TODO: I'm deprecating this variable, replacing its usage with this value
 export WSL_WINDOWS_USER_HOME="${XDG_CONFIG_HOME:-${HOME}/.config}/jake/windows-user-home"
+export BASH_IT_DOTFILES_GIT_REPO="${VCSH_REPO_D-${XDG_CONFIG_HOME-~/.config}/vcsh/repo.d}/config.git"
 
 # for bash-it autocomplete; and for .mrconfig (which is why it must be exported)
 export COMPLETE_ALIAS_DIR="${HOME}/.local/bin/complete-alias"
