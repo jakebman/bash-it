@@ -11,22 +11,28 @@ about-plugin 'Allow certain folders to always remain valid `cd` targets, from an
 CDPATH+=":${XDG_CONFIG_HOME:-${HOME}/.config}/cd/quick-access"
 
 function _cd-to-single-completion {
-	if ! builtin cd "$@" && [[ "$#" -eq 1 ]]; then
-		local single_arg="$1"
-		# was deprecated in bash-completion 2.12 for _comp_cmd_cd
-		(
-			local -a COMPREPLY
-			function _init_completion { cur="$single_arg"; prev=cd; }
-			#function compopt { : ; }
-			# TODO: do we need to handle _filedir -d if CDPATH is empty?
-			# We do need to do something reasonable if an absolute dir, or a ..?/ is specified
-			set -x
-			_cd cd "$1" cd
-			printf "{%s}\n" "${COMPREPLY[@]}"
-
-			# TODO: completion condenses multiple duplicate elements into one. 'foo' is via quick access and ./, but works.
-		)
+	if builtin cd "$@"; then
+		return # propagates success. Nothing else to do.
 	fi
+	local failure=$?
+	if [[ "$#" -ne 1 ]]; then
+		# Not sure how to handle flags right now
+		return $failure
+	fi
+	local single_arg="$1"
+	# was deprecated in bash-completion 2.12 for _comp_cmd_cd
+	(
+		local -a COMPREPLY
+		function _init_completion { cur="$single_arg"; prev=cd; }
+		#function compopt { : ; }
+		# TODO: do we need to handle _filedir -d if CDPATH is empty?
+		# We do need to do something reasonable if an absolute dir, or a ..?/ is specified
+		set -x
+		_cd cd "$1" cd
+		printf "{%s}\n" "${COMPREPLY[@]}"
+
+		# TODO: completion condenses multiple duplicate elements into one. 'foo' is via quick access and ./, but works.
+	)
 }
 
 # TODO: (another plugin?) to respect a -p flag to cd, which `mkdir -p`'s its argument, then my cdp function can just alias that instead
