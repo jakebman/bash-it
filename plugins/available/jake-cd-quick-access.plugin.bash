@@ -24,7 +24,6 @@ function _cd-to-single-completion {
 		local -a COMPREPLY COMP_WORDS
 		local COMP_CWORD COMP_KEY COMP_LINE COMP_POINT COMP_TYPE
 		# COMP_WORDBREAKS participates, but we have no reason to change its value
-		set -x
 		COMP_WORDS=(cd "$single_arg")
 		COMP_LINE="${COMP_WORDS[@]}"
 		(( COMP_CWORD = ${#COMP_WORDS[@]} - 1 ))
