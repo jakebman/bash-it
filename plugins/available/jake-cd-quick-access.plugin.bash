@@ -75,7 +75,7 @@ function cd {
 		# Shim: I'm basically assuming all symlinks contained in non-$CWD entries in CDPATH are "less canonical"
 		# than their targets.
 		# (but the folder `-` doesn't ususally exist, so we special-case that)
-		builtin cd -P "$@"
+		_cd-to-single-completion -P "$@"
 	else
 		_cd-to-single-completion "$@"
 	fi
