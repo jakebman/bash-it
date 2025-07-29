@@ -11,24 +11,23 @@ about-plugin 'Allow certain folders to always remain valid `cd` targets, from an
 CDPATH+=":${XDG_CONFIG_HOME:-${HOME}/.config}/cd/quick-access"
 
 function _cd-to-single-completion {
+	about 'cd, but if it fails, try auto-completing the last argument word'
 	if builtin cd "$@" 2>/dev/null; then
 		return # propagates success. Nothing else to do.
 	fi
 
-	if [[ "$#" -ne 1 ]]; then
-		# More than one argument. Maybe a flag? Too complicated. Bail.
+	if [[ "$#" -eq 0 ]]; then
+		# No arguments. Not a hint we could help. Bail.
 		# cd had an error that we sent to /dev/null. Let's let it try again, to show the error to the user
 		builtin cd "$@"
 		return # returns the exit code of the previous command
 	fi
 
-	local single_arg="$1"
-
 	# Manually set up the completion environment like documented in bash's manpage
 	local -a COMPREPLY COMP_WORDS
 	local COMP_CWORD COMP_KEY COMP_LINE COMP_POINT COMP_TYPE
 	# COMP_WORDBREAKS participates, but we have no reason to change its value
-	COMP_WORDS=(cd "$single_arg")
+	COMP_WORDS=(cd "$@")
 	COMP_LINE="${COMP_WORDS[@]}"
 	(( COMP_CWORD = ${#COMP_WORDS[@]} - 1 ))
 	COMP_POINT=${#COMP_LINE}
@@ -61,7 +60,8 @@ function _cd-to-single-completion {
 	)
 
 	if [[ 1 -eq "${#COMPREPLY[@]}" ]]; then
-		builtin cd "${COMPREPLY[0]}"
+		# Try again, with all but the last argument, followed by the only completion for the last argument
+		builtin cd "${@:1:$# - 1}" "${COMPREPLY[0]}"
 	else
 		# cd had an error that we sent to /dev/null. Let's let it try again, to show the error to the user
 		builtin cd "$@"
