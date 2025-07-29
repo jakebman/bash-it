@@ -10,6 +10,25 @@ about-plugin 'Allow certain folders to always remain valid `cd` targets, from an
 # "A null directory name is the same as the current directory", per `help cd`
 CDPATH+=":${XDG_CONFIG_HOME:-${HOME}/.config}/cd/quick-access"
 
+function _cd-to-single-completion {
+	if ! builtin cd "$@" && [[ "$#" -eq 1 ]]; then
+		local single_arg="$1"
+		# was deprecated in bash-completion 2.12 for _comp_cmd_cd
+		(
+			local -a COMPREPLY
+			function _init_completion { cur="$single_arg"; prev=cd; }
+			#function compopt { : ; }
+			# TODO: do we need to handle _filedir -d if CDPATH is empty?
+			# We do need to do something reasonable if an absolute dir, or a ..?/ is specified
+			set -x
+			_cd cd "$1" cd
+			printf "{%s}\n" "${COMPREPLY[@]}"
+
+			# TODO: completion condenses multiple duplicate elements into one. 'foo' is via quick access and ./, but works.
+		)
+	fi
+}
+
 # TODO: (another plugin?) to respect a -p flag to cd, which `mkdir -p`'s its argument, then my cdp function can just alias that instead
 function cd {
 	about 'normal `cd`, but non-$CWD entries (and cdable_vars) get an implicit -P to follow symlinks'
