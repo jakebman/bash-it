@@ -16,6 +16,7 @@ function _cd-to-single-completion {
 	fi
 
 	if [[ "$#" -ne 1 ]]; then
+		# More than one argument. Maybe a flag? Too complicated. Bail.
 		# cd had an error that we sent to /dev/null. Let's let it try again, to show the error to the user
 		builtin cd "$@"
 		return # returns the exit code of the previous command
@@ -23,6 +24,7 @@ function _cd-to-single-completion {
 
 	local single_arg="$1"
 
+	# Manually set up the completion environment like documented in bash's manpage
 	local -a COMPREPLY COMP_WORDS
 	local COMP_CWORD COMP_KEY COMP_LINE COMP_POINT COMP_TYPE
 	# COMP_WORDBREAKS participates, but we have no reason to change its value
@@ -46,7 +48,7 @@ function _cd-to-single-completion {
 		# We're not in a completion context, so when _cd asks the completion mechanisms
 		# to handle these results like filenames...
 		# 1) The completion mechanism isn't there to listen, but...
-		# 2) It doesn't matter, because we're taking the values directly from COMPREPLY,
+		# 2) It doesn't matter, because we're taking the values directly from COMPREPLY, and
 		#       not trying to splort a chosen value from there back onto a string command line
 		function compopt { : ; }
 
