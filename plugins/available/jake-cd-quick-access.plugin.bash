@@ -20,15 +20,20 @@ function _cd-to-single-completion {
 		return $failure
 	fi
 	local single_arg="$1"
-	(
-		local -a COMPREPLY COMP_WORDS
-		local COMP_CWORD COMP_KEY COMP_LINE COMP_POINT COMP_TYPE
-		# COMP_WORDBREAKS participates, but we have no reason to change its value
-		COMP_WORDS=(cd "$single_arg")
-		COMP_LINE="${COMP_WORDS[@]}"
-		(( COMP_CWORD = ${#COMP_WORDS[@]} - 1 ))
-		COMP_POINT=${#COMP_LINE}
 
+	local -a COMPREPLY COMP_WORDS
+	local COMP_CWORD COMP_KEY COMP_LINE COMP_POINT COMP_TYPE
+	# COMP_WORDBREAKS participates, but we have no reason to change its value
+	COMP_WORDS=(cd "$single_arg")
+	COMP_LINE="${COMP_WORDS[@]}"
+	(( COMP_CWORD = ${#COMP_WORDS[@]} - 1 ))
+	COMP_POINT=${#COMP_LINE}
+
+
+	# Exfiltrate COMPREPLY from within the subshell
+	# I use the subshell to be safe in case a different function overrides this builtin,
+	# but it's also nice for the `... | sort | uniq` phrasing
+	mapfile -t -d '' COMPREPLY < <(
 		# We're not in a completion context, so when _cd asks the completion mechanisms
 		# to handle these results like filenames...
 		# 1) The completion mechanism isn't there to listen, but...
@@ -42,13 +47,18 @@ function _cd-to-single-completion {
 		# 3) the word preceding the word being completed on the current command line
 		# NB: _cd was deprecated in bash-completion 2.12 for _comp_cmd_cd
 		_cd "${COMP_WORDS[0]}" "${COMP_WORDS[-1]}" "${COMP_WORDS[-2]}"
-		printf "{%s}\n" "${COMPREPLY[@]}"
 
-		# TODO: completion condenses multiple duplicate elements into one. 'foo' is via quick access and ./, but works.
+		# NB: completion condenses multiple duplicate elements into one.
+		# Even if 'foo' is via quick access and ./ (and _cd generates it twice), it completes anyway.
+		printf "%s\0" "${COMPREPLY[@]}" | sort --zero-terminated | uniq --zero-terminated
 	)
 
-	# cd had an error that we sent to /dev/null. Let's let it try again, to show the error to the user
-	builtin cd "$@"
+	if [[ 1 -eq "${#COMPREPLY[@]}" ]]; then
+		builtin cd "${COMPREPLY[0]}"
+	else
+		# cd had an error that we sent to /dev/null. Let's let it try again, to show the error to the user
+		builtin cd "$@"
+	fi
 }
 
 # TODO: (another plugin?) to respect a -p flag to cd, which `mkdir -p`'s its argument, then my cdp function can just alias that instead
