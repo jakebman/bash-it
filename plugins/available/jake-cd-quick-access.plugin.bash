@@ -11,7 +11,7 @@ about-plugin 'Allow certain folders to always remain valid `cd` targets, from an
 CDPATH+=":${XDG_CONFIG_HOME:-${HOME}/.config}/cd/quick-access"
 
 function _cd-to-single-completion {
-	if builtin cd "$@"; then
+	if builtin cd "$@" 2>/dev/null; then
 		return # propagates success. Nothing else to do.
 	fi
 	local failure=$?
@@ -29,6 +29,14 @@ function _cd-to-single-completion {
 		COMP_LINE="${COMP_WORDS[@]}"
 		(( COMP_CWORD = ${#COMP_WORDS[@]} - 1 ))
 		COMP_POINT=${#COMP_LINE}
+
+		# We're not in a completion context, so when _cd asks the completion mechanisms
+		# to handle these results like filenames...
+		# 1) The completion mechanism isn't there to listen, but...
+		# 2) It doesn't matter, because we're taking the values directly from COMPREPLY,
+		#       not trying to splort a chosen value from there back onto a string command line
+		function compopt { : ; }
+
 		# args are:
 		# 1) name of the command whose arguments are being completed
 		# 2) the  word  being completed
@@ -39,6 +47,9 @@ function _cd-to-single-completion {
 
 		# TODO: completion condenses multiple duplicate elements into one. 'foo' is via quick access and ./, but works.
 	)
+
+	# cd had an error that we sent to /dev/null. Let's let it try again, to show the error to the user
+	builtin cd "$@"
 }
 
 # TODO: (another plugin?) to respect a -p flag to cd, which `mkdir -p`'s its argument, then my cdp function can just alias that instead
