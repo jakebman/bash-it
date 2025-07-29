@@ -59,13 +59,22 @@ function _cd-to-single-completion {
 		printf "%s\0" "${COMPREPLY[@]}" | sort --zero-terminated | uniq --zero-terminated
 	)
 
-	if [[ 1 -eq "${#COMPREPLY[@]}" ]]; then
-		# Try again, with all but the last argument, followed by the only completion for the last argument
-		builtin cd "${@:1:$# - 1}" "${COMPREPLY[0]}"
-	else
-		# cd had an error that we sent to /dev/null. Let's let it try again, to show the error to the user
-		builtin cd "$@"
-	fi
+	case "${#COMPREPLY[@]}" in
+		0)
+			# cd had an error that we sent to /dev/null.
+			# We don't have a guess at what to change.
+			# Let's let `cd` try again, to show the error to the user
+			builtin cd "$@"
+			;;
+		1)
+			# Try again, with all but the last argument, followed by the only completion for the last argument
+			builtin cd "${@:1:$# - 1}" "${COMPREPLY[0]}"
+			;;
+		*)
+			# Too many things that might fix this.
+			builtin cd "$@" 2> >(sed -E "s/(No such file or directory)/\1.\n${FUNCNAME}: Enhanced guessing behavior is also unwilling to guess between ${#COMPREPLY[@]} completions/" >&2)
+			;;
+	esac
 }
 
 # TODO: (another plugin?) to respect a -p flag to cd, which `mkdir -p`'s its argument, then my cdp function can just alias that instead
