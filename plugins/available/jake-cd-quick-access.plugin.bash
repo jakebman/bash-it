@@ -20,15 +20,21 @@ function _cd-to-single-completion {
 		return $failure
 	fi
 	local single_arg="$1"
-	# was deprecated in bash-completion 2.12 for _comp_cmd_cd
 	(
-		local -a COMPREPLY
-		function _init_completion { cur="$single_arg"; prev=cd; }
-		#function compopt { : ; }
-		# TODO: do we need to handle _filedir -d if CDPATH is empty?
-		# We do need to do something reasonable if an absolute dir, or a ..?/ is specified
+		local -a COMPREPLY COMP_WORDS
+		local COMP_CWORD COMP_KEY COMP_LINE COMP_POINT COMP_TYPE
+		# COMP_WORDBREAKS participates, but we have no reason to change its value
 		set -x
-		_cd cd "$1" cd
+		COMP_WORDS=(cd "$single_arg")
+		COMP_LINE="${COMP_WORDS[@]}"
+		(( COMP_CWORD = ${#COMP_WORDS[@]} - 1 ))
+		COMP_POINT=${#COMP_LINE}
+		# args are:
+		# 1) name of the command whose arguments are being completed
+		# 2) the  word  being completed
+		# 3) the word preceding the word being completed on the current command line
+		# NB: _cd was deprecated in bash-completion 2.12 for _comp_cmd_cd
+		_cd "${COMP_WORDS[0]}" "${COMP_WORDS[-1]}" "${COMP_WORDS[-2]}"
 		printf "{%s}\n" "${COMPREPLY[@]}"
 
 		# TODO: completion condenses multiple duplicate elements into one. 'foo' is via quick access and ./, but works.
