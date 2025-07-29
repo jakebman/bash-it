@@ -77,7 +77,7 @@ function cd {
 		# (but the folder `-` doesn't ususally exist, so we special-case that)
 		builtin cd -P "$@"
 	else
-		builtin cd "$@"
+		_cd-to-single-completion "$@"
 	fi
 }
 
