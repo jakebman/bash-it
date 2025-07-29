@@ -59,6 +59,11 @@ function _cd-to-single-completion {
 		printf "%s\0" "${COMPREPLY[@]}" | sort --zero-terminated | uniq --zero-terminated
 	)
 
+	# Corner case: mapfile will always be able to read a single empty string from an empty result.
+	if [[ 1 -eq "${#COMPREPLY[@]}" && -z "${COMPREPLY[0]}" ]]; then
+		COMPREPLY=()
+	fi
+
 	case "${#COMPREPLY[@]}" in
 		0)
 			# cd had an error that we sent to /dev/null.
