@@ -14,11 +14,13 @@ function _cd-to-single-completion {
 	if builtin cd "$@" 2>/dev/null; then
 		return # propagates success. Nothing else to do.
 	fi
-	local failure=$?
+
 	if [[ "$#" -ne 1 ]]; then
-		# Not sure how to handle flags right now
-		return $failure
+		# cd had an error that we sent to /dev/null. Let's let it try again, to show the error to the user
+		builtin cd "$@"
+		return # returns the exit code of the previous command
 	fi
+
 	local single_arg="$1"
 
 	local -a COMPREPLY COMP_WORDS
