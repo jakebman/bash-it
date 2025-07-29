@@ -31,6 +31,13 @@ function _cd-to-single-completion {
 	(( COMP_CWORD = ${#COMP_WORDS[@]} - 1 ))
 	COMP_POINT=${#COMP_LINE}
 
+	local -a completion_arg_list
+	# The args to a completion function are:
+	# 1) name of the command whose arguments are being completed
+	# 2) the  word  being completed
+	# 3) the word preceding the word being completed on the current command line
+	completion_arg_list=("${COMP_WORDS[0]}" "${COMP_WORDS[-1]}" "${COMP_WORDS[-2]}")
+
 
 	# Exfiltrate COMPREPLY from within the subshell
 	# I use the subshell to be safe in case a different function overrides this builtin,
@@ -43,12 +50,8 @@ function _cd-to-single-completion {
 		#       not trying to splort a chosen value from there back onto a string command line
 		function compopt { : ; }
 
-		# args are:
-		# 1) name of the command whose arguments are being completed
-		# 2) the  word  being completed
-		# 3) the word preceding the word being completed on the current command line
 		# NB: _cd was deprecated in bash-completion 2.12 for _comp_cmd_cd
-		_cd "${COMP_WORDS[0]}" "${COMP_WORDS[-1]}" "${COMP_WORDS[-2]}"
+		_cd "${completion_arg_list[@]}"
 
 		# NB: completion condenses multiple duplicate elements into one.
 		# Even if 'foo' is via quick access and ./ (and _cd generates it twice), it completes anyway.
