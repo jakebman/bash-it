@@ -6,7 +6,7 @@ about-plugin 'Allow certain folders to always remain valid `cd` targets, from an
 # 2. Change cd so any single-word target that doesn't exist from `.` gets an implicit -P
 
 # "Append the quick-access folder to the cd path"
-# Automagically, however this also creates CDPATH with the initial "." entry, because
+# Notably, this also automagically creates CDPATH with the initial "." entry, because
 # "A null directory name is the same as the current directory", per `help cd`
 CDPATH+=":${XDG_CONFIG_HOME:-${HOME}/.config}/cd/quick-access"
 
