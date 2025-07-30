@@ -275,13 +275,32 @@ function cdp {
 }
 
 unalias c # defined in general aliases
-function c {
-	about 'a typo of cd that can be spelled `c d $yourArg`, or just `c $yourArg`'
+function cd-or-checkout {
+	about 'a typo of cd that can be spelled `c d $yourArg`, or just `c $yourArg`. If cd fails, also try git checkout'
+	local -a origArgs=("$@")
 	if [[ "$#" -gt 0 ]] && [[ d = "$1" ]]; then
+		# allow an accidental `c[ d] $yourArg` to work
 		shift
 	fi
-	cd "$@"
+	if cd "$@" 2>/dev/null; then
+		# it was a cd! Yay!
+		return
+	fi
+	local gitSuccess
+	if gitSuccess=$(git checkout "${origArgs[@]}" 2>/dev/null); then
+		# it was a checkout! Yay!
+		echo "$gitSuccess"
+		return
+	fi
+
+	cd "$@" 2> >(
+			sed -E -e 's/(No such file)( or directory)/\1, branch,\2/g' \
+				-e 's/(Not a directory)/\1 or branch/g' \
+				-e "s/^-bash: cd/${FUNCNAME}/g" \
+			)
 }
+alias c=cd-or-checkout
+# TODO: command completion for cd-or-checkout
 
 function _mr-isrepo-local {
 	about "succeeds if the current folder is a git repo tracked by mr. fails otherwise"
