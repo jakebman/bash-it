@@ -703,6 +703,7 @@ function xpath {
 
 	# Default namespaces confuse the hell out of xpath.
 	# See: https://stackoverflow.com/questions/28473291/force-xmllint-to-ignore-bad-default-xmlns
+	# and explained in https://stackoverflow.com/a/16294/285944
 	# TODO: this could potentially be smarter for multiple files, instead of cat-ing them all together
 	# TODO: this fix should call out that it applied, to stderr. This is a very "I had an error" situation
 	#
