@@ -87,7 +87,7 @@ function _ssh_additional_config() {
 	# Nominally, ssh wants RemoteCommand all on one line. I want more lines than that, for readability.
 	# So, we're pushing the contents of _ssh_remote_bashrc through base64 to the remote system
 	# TODO: if the foreign machine already has a bash-it, use that instead
-	echo "RemoteCommand=echo '$(_ssh_minified_bashrc | gzip | base64 --wrap 0)' | base64 --decode | gunzip >/tmp/jake-ssh-bashrc; bash --rcfile /tmp/jake-ssh-bashrc -i"
+	echo "RemoteCommand=echo '$(_ssh_minified_bashrc | gzip | base64 --wrap 0)' | base64 --decode | gunzip >/tmp/jake-ssh-bashrc; chmod og+r /tmp/jake-ssh-bashrc; bash --rcfile /tmp/jake-ssh-bashrc -i"
 }
 
 function ssh() {
