@@ -151,6 +151,7 @@ create_parent_folders_for \
 
 
 
+# NB: there's no specific XDG_ env variable for this. Hence the obviously off-spec name
 : ${JAKE_XDG_BIN_DIR:=${HOME}/.local/bin}
 # install via https://github.com/pyenv/pyenv-installer. Installed via fork, so it's prudent to export it here
 export PYENV_ROOT="${JAKE_XDG_BIN_DIR}/pyenv"
@@ -158,6 +159,7 @@ export GOPATH="${JAKE_XDG_BIN_DIR}/go"
 # install via git clone 'git@github.com:cykerway/complete-alias.git' "$COMPLETE_ALIAS_DIR"
 # for bash-it autocomplete; and for .mrconfig (which is why it must be exported)
 export COMPLETE_ALIAS_DIR="${JAKE_XDG_BIN_DIR}/complete-alias"
+export SDKMAN_DIR="${JAKE_XDG_BIN_DIR}/sdkman"
 
 # ref https://askubuntu.com/questions/882562/how-can-i-change-or-hide-the-snap-directory
 [ -d ~/snap ] && _log_warn 'consider hiding your ~/snap directory by running `sudo snap set system experimental.hidden-snap-folder=true`'
@@ -192,7 +194,6 @@ export COMPLETE_ALIAS_DIR="${JAKE_XDG_BIN_DIR}/complete-alias"
 # .postman - paltry documentation. Not sure.
 # .python_history - not currently configurable - will in 3.13
 # .rakubrew, .raku - not worth changing right now. Still TODO
-# .sdkman - inconvenient for me, same as .bash-it
 # .ssh - Not generally possible
 # .sudo_as_admin_successful - SUPER(user) unlikely
 # .vim - a symlink into .config/vim, for a small win. Removing this symlink requires rewriting vim to read an env. var
