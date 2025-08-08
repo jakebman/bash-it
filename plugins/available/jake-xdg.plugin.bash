@@ -167,7 +167,7 @@ export SDKMAN_DIR="${JAKE_XDG_BIN_DIR}/sdkman"
 # XDG list:
 # .aws - not configurable. The AWS_CONFIG_FILE and AWS_SHARED_CREDENTIALS_FILE can be configured, but not for instance .aws/cli/alias
 #        NB: docker 'helpfully' overwrites my symlink with one into %USERPROFILE%
-# .azure - symlinked into %USERPROFILE%. Can probably remove it without damage.
+# .azure - symlinked into %USERPROFILE% by outside-WSL docker. Can probably remove it without damage.
 # .bash - symlinked to .bashrc as tab-completion fodder to win over .bash{_history,_logout}
 # .bashrc, .profile - requires decent high-powered intervention to loop in so early. Potentially an /etc/profile.d entry?
 # .bash-it - inconvenient for me - it's easier to come in here and change stuff without it being a level deeper
@@ -177,6 +177,7 @@ export SDKMAN_DIR="${JAKE_XDG_BIN_DIR}/sdkman"
 # .gitignore.d - vcsh, created by default. hardcoded name below $VCSH_BASE, which defaults to $HOME
 # .gitmodules - required because I'm keeping subrepos in my conf vcsh repo
 #     It needs to live in $GIT_WORK_TREE - gets really interesting with nns-config also having these
+# .ispell_default - used by something in the spell/aspell/ispell/etc. family
 # .ivy2 - sbt (scala build tool)'s equivalent to .m2
 #     Potentialy configurable like java above, via:
 #         https://www.scala-sbt.org/1.x/docs/Library-Management.html#Ivy+Home+Directory
@@ -199,6 +200,7 @@ export SDKMAN_DIR="${JAKE_XDG_BIN_DIR}/sdkman"
 # .vim - a symlink into .config/vim, for a small win. Removing this symlink requires rewriting vim to read an env. var
 #        Update: "From [version 9.1.0327,] Vim looks for $XDG_CONFIG_HOME/vim/vimrc on its own, no further hacks required." https://jorenar.com/blog/vim-xdg
 #        Link also has a workaround with VIMINIT (which interferes with my vim autoresume trick, for some reason)
+# .wajig - Wajig is particularly unhelpful with its docs. Doesn't appear to respect XDG, so needs a symlink
 # .zef - requires env variable, and the file the env var points to also needs to reference the new location
 #
 # snap - this directory without a dot is also polluting. Created by snapd. Supposedly configurable - read ablove
