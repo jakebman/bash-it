@@ -105,6 +105,7 @@ function ssh() {
 	if [ "$#" -eq 0 ]; then
 		# grab destination from history
 		destination=$(tail --lines 1 "$history")
+		>&2 echo "Going to previous ssh target, '$destination'"
 	else
 		# New history entry :D
 		echo "$destination" >> "$history"
