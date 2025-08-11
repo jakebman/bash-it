@@ -378,6 +378,7 @@ function _mr-able-impl {
 	# NB: double indirection above is because `<()` is essentially a filename, not an indirection
 }
 
+# TODO: this appears to be bugged - if you `cp -r tracked-repo untracked-repo`, then untracked-repo is still considered tracked
 function _mr-able {
 	about 'for each path element in the argument (default $BASH_IT_PROJECT_PATHS) as a path varable, call out child folders that are not registered to mr, but are siblings with ones that are'
 	param '*: Any number of $PATH-like folder lists to check. If none are given, $BASH_IT_PROJECT_PATHS is used implicitly'
