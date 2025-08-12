@@ -321,52 +321,27 @@ function _mr-isrepo {
 }
 
 function _mr-able-single {
-	about 'Within a single folder (default $PWD), if any child folder is tracked by mr, print every other child folder that *could* be tracked by mr'
+	about 'Within a single folder (default $PWD), print every child folder that *could* be tracked by mr. Ignore symlinks, as they are more like aliases'
 	param '1: a single directory to check; default $PWD'
-	local path="${1-$PWD}" candidate print_non_mr_repos printed
-	local -a candidates non_mr_repos
+	local path="${1-$PWD}"
 
 	if [ ! -d "$path" ]; then
 		echo "${path} - doesn't exist. No candidates analyzed"
 		return
 	fi
 
-	# only the first-level child folders are candidates
-	# TODO: `-d` is a bash 4.4-ism, and might not be supported in the rest of bash-it
-	# https://stackoverflow.com/questions/23356779/how-can-i-store-the-find-command-results-as-an-array-in-bash
-	# NB: double < < is because <() produces a 'filename'-like argument
-	# I'd like to call this `readarray` over mapfile, to not use the alias, but bash-it prefers mapfile
-	mapfile -t -d '' candidates < <(find -L "$path" -maxdepth 1 -mindepth 1 -type d -not -name .git -print0 | sort -z)
-	local candidate
-	for candidate in "${candidates[@]}"; do
-		if _mr-isrepo "$candidate"; then
-			print_non_mr_repos="$candidate" # re-used below as the reason why we printed
-			if [[ 0 -lt "${#non_mr_repos[@]}" ]]; then
-				# Those ones previously that we didn't know if we needed to print?
-				# Let's print them now!
-				printf "%s\n" "${non_mr_repos[@]}"
-				printed="yes, we printed output"
-				non_mr_repos=()
-			fi
-		elif [ -n "$print_non_mr_repos" ]; then
-			# We need to print it. Might as well print it now
-			printf "%s\n" "$candidate"
-			printed="yes, we printed output"
-		else
-			# Keep this one in case we need to print it later
-			non_mr_repos+=("$candidate")
-		fi
-	done
-
-	if [ -z "$printed" ]; then
-		if [ -z "$print_non_mr_repos" ]; then
-			printf "%s - no mr'd repositories within here (%d examined)\n" "$path" "${#candidates[@]}"
-		else
-			printf "%s - clean, with %d mr'd repositories and no non-mr'd repos\n" "$path" "${#candidates[@]}"
-		fi
-	else
-		printf "%s - is an example mr'd repository\n" "$print_non_mr_repos"
-	fi
+	# Print the elements that are unique the left argument
+	# Left: all (non-symlink) dirs in $PWD that have a .git dir child.
+	#       Impl. Note: we eliminate both type and xtype of l.
+	#       That way we exclude symlinks no matter which way find is looking at them.
+	#       Need explicit -print, because -exec suppresses the default implicit -print
+	# Right: all dirs that respond to an `mr run` invocation
+	# TODO: This doesn't handle newlines in paths. That's fine. I don't think you can register an mr path with a newline in it anyway
+	# TODO: This tests for only git repos. The find manpage has an example for other VCSs:
+	#       `find . \( -exec test -d '{}/.svn' \; -or -exec test -d '{}/.git' \; -or -exec test -d '{}/CVS' \; \) -print -prune`
+	comm -23 \
+		<(cd "$path"; find "$PWD" -maxdepth 1 -mindepth 1 -exec test -d '{}/.git' \; '!' -type l '!' -xtype l -print | sort) \
+		<(cd "$path"; mr run pwd | grep -v "^mr run" | grep -v "^$" | sort)
 }
 
 function _mr-able-impl {
