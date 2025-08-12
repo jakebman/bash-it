@@ -27,6 +27,11 @@ function _q-describe-parent() {
 	fi
 }
 
+# Easier access to Amazon Q, via the capital letter
+if _binary_exists q; then
+	alias Q='command q'
+fi
+
 unalias q
 function q() {
 	local parent_description
