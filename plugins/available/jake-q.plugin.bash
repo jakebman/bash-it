@@ -34,8 +34,15 @@ function q() {
 		# NB: this isn't *necessarily* the top-most bash. You can manually invoke a login shell
 		# wherever you like by invoking `bash --login`
 		echo "You're at a top-level or login shell. Exiting here will end the terminal session"
-		echo "Heading back to \$HOME, like you might want"
-		cd ~
+		if _binary_exists q; then
+			echo 'Running `command q`, like you might want'
+			command q "$@"
+		elif [ "x$PWD" != "x$HOME" ]; then
+			echo "Heading back to \$HOME, like you might want"
+			cd ~
+		else
+			echo "There's no Amazon Q, and you're \$HOME. If you know what you wanted to do, add it to this command!"
+		fi
 		# or in terse phrasing like `logout` uses:
 		# echo "$0: is login shell. Use \`logout' or \`exit'"
 	elif parent_description=$(_q-describe-parent); then
