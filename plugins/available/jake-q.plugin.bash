@@ -35,7 +35,9 @@ fi
 unalias q
 function q() {
 	local parent_description
-	if shopt -q login_shell; then
+	if [[ "$#" -ne 0 ]] && _binary_exists q; then
+		command q "$@"
+	elif shopt -q login_shell; then
 		# NB: this isn't *necessarily* the top-most bash. You can manually invoke a login shell
 		# wherever you like by invoking `bash --login`
 		echo "You're at a top-level or login shell. Exiting here will end the terminal session"
