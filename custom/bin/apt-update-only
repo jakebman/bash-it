@@ -15,7 +15,7 @@ if (($EUID == 0)); then
   apt-get upgrade --download-only --yes |
     sed -E \
       -e 's/^(The following packages will be) upgraded:$/\1 downloaded: (edited by jake)/g' \
-      -e 's/(\d) upgraded\b/\1 downloaded-and-not-upgraded-because--download-only/g'
+      -e 's/upgraded/downloaded-only/g'
 else
   # not root - use implicit sudo
   # Warning: $0 is tempting, but capable of failure. see https://stackoverflow.com/a/31872769/285944
