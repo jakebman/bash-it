@@ -48,16 +48,24 @@ function xxd {
 
 
 # formerly a simple `alias cat='bat --plain'`, but that doesn't handle this no-args use case
+# There's also an "or cd into it if it's a directory" feature
 if _command_exists bat; then
 	function cat {
-		about 'allow you to use a bare `cat` as the normal cat; but any params essentially go to bat --plain'
+		about 'allow you to use a bare `cat` as the normal cat; but any params essentially go to bat --plain. Or cd into a single-arg directory'
 		case "$#" in
 			0)
 				command cat "$@"
 				;;
 			1)
-				# implicit --plain from `bat --config-file`
-				bat "$@"
+				if [ -d "$1" ]; then
+					# "Typo" - catt'ed into a dir. Probably meant to cd
+					>&2 echo "Complex typo: meant to cd into a dir, but ran cat instead."
+					>&2 echo "Complex typo: cd"
+					cd "$@"
+				else
+					# implicit --plain from `bat --config-file`
+					bat "$@"
+				fi
 				;;
 			*)
 				bat --style=header,grid,changes "$@"
