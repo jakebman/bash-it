@@ -296,7 +296,7 @@ function jake-install-tools() {
 	fi
 
 	if bash -n /usr/share/bash-completion/completions/make &>/dev/null; then
-		echo "the makefile completion is fine, yay!"
+		echo 'Nothing to do to fix makefile completion - the file passes `bash -n`'
 	else
 		echo "The makefile completion at /usr/share/bash-completion/completions/make is failing bash validation"
 		echo "please copy over it from git@github.com:scop/bash-completion.git, via:"
