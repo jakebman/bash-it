@@ -81,7 +81,6 @@ function command_not_found_handle {
 	eval "$name" "${args[@]@Q}"
 }
 
-
 function _typos-helper {
 	local command=$1
 	# NB: this will not squawk if either file is missing.
