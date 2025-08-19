@@ -22,7 +22,7 @@ function _complete_typo {
 		return
 	fi
 
-	# Exfiltrate COMPREPLY from within the subshell
+	# Exfiltrate COMPREPLY from within a subshell
 	# See projects-CDPATH for this pattern working elsewhere
 	# We should only source BASH_IT_TYPOS_FILE in a subshell or subprocess
 	mapfile -t -d '' COMPREPLY < <(
