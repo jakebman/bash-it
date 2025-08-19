@@ -37,3 +37,5 @@ function _complete_typo {
 	   COMPREPLY=()
 	 fi
 }
+
+complete -F _complete_typo $(_list_typo_names)
