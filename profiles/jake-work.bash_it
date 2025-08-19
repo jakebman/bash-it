@@ -45,6 +45,7 @@ completion docker
 completion eksctl
 completion glab
 completion helm
+completion jake-typos
 completion jira
 completion kubectl
 completion maven

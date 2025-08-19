@@ -43,6 +43,7 @@ completion bash-it
 completion complete-alias
 completion docker
 completion glab
+completion jake-typos
 completion jira
 completion kubectl
 completion maven
