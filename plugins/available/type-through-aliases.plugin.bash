@@ -9,7 +9,12 @@ function _type_with_typos {
 		# Happy path! Successfully found something
 		return
 	fi
+	local err=$?
 
+	# Don't check for typos if nobody declared any typos
+	if ! [ -f "$BASH_IT_TYPOS_FILE" ]; then
+		return $err
+	fi
 	# TODO: respond to `-t` queries
 	(
 		set -o pipefail -o errexit
