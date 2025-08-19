@@ -49,9 +49,12 @@ function command_not_found_handle {
 	local -a args=("${@:2}")
 	local name=$1
 
-	source "${BASH_IT_TYPOS_FILE}"
-
-	if ! type -t "$name" &>/dev/null; then
+	if [ -f "${BASH_IT_TYPOS_FILE}" ] &&
+		source "${BASH_IT_TYPOS_FILE}" &&
+		type -t "$name" &>/dev/null; then
+		# This is so much easier to phrase as a success chain instead of negations
+		: # success - we'll continue.
+	else
 		# we don't have a typo entry for this word. Follow the old path
 		_ububtu_command_not_found_handle "$@"
 		return
