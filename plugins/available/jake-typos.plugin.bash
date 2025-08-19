@@ -85,12 +85,10 @@ function command_not_found_handle {
 
 function _typos-helper {
 	local command=$1
+	# NB: this will not squawk if either file is missing.
 	(
-		cd "$(dirname "${BASH_IT_TYPOS_FILE}")"
-		bash --norc --noprofile -r -c "source '$(basename "${BASH_IT_TYPOS_FILE}")' && $command"
-
-		cd "$(dirname "${BASH_IT_BUILTIN_TYPOS_FILE}")"
-		bash --norc --noprofile -r -c "source '$(basename "${BASH_IT_BUILTIN_TYPOS_FILE}")' && $command"
+		BASH_ENV=$BASH_IT_TYPOS_FILE         bash -r -c "$command"
+		BASH_ENV=$BASH_IT_BUILTIN_TYPOS_FILE bash -r -c "$command"
 	)
 }
 
