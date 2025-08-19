@@ -10,7 +10,6 @@ if ! _command_exists _typos-helper; then
 	return
 fi
 
-
 function _list_typo_names {
 	# https://stackoverflow.com/questions/948008/linux-command-to-list-all-available-commands-and-aliases
 	# List all functions and aliases.
@@ -35,13 +34,13 @@ function _complete_typo {
 		complete -F _complete_alias "$1"
 		_complete_alias "$@"
 
-	   printf "%s\0" "${COMPREPLY[@]}" | sort --zero-terminated | uniq --zero-terminated
-	 )
+		printf "%s\0" "${COMPREPLY[@]}" | sort --zero-terminated | uniq --zero-terminated
+	)
 
-	 # Corner case: mapfile will always be able to read a single empty string from an empty result.
-	 if [[ 1 -eq "${#COMPREPLY[@]}" && -z "${COMPREPLY[0]}" ]]; then
-	   COMPREPLY=()
-	 fi
+	# Corner case: mapfile will always be able to read a single empty string from an empty result.
+	if [[ 1 -eq "${#COMPREPLY[@]}" && -z "${COMPREPLY[0]}" ]]; then
+		COMPREPLY=()
+	fi
 }
 
 complete -F _complete_typo $(_list_typo_names)
