@@ -44,4 +44,15 @@ function _complete_typo {
 	fi
 }
 
+function _fallback_to_typos {
+	if COMPREPLY=( $(compgen -c -- "$2") ); then
+		# a normal command exists. Just pass it up
+		return
+	fi
+	# "Naturally" return with compgen's result
+	# TODO: since all the results here are typos, it would be real dumb to make me choose between two bad spellings of the same command.
+	COMPREPLY=( $(compgen -W "$(_list_typo_names)" "$2") )
+}
+
 complete -F _complete_typo $(_list_typo_names)
+complete -F _fallback_to_typos -I
