@@ -11,13 +11,11 @@ if ! _command_exists _typos-helper; then
 fi
 
 
-function _typos_commands {
-	(
-		# aliases first
-		_typos-helper 'alias -p' | sort
-		# functions last
-		_typos-helper 'declare -f'
-	) | pager
+function _list_typo_names {
+	# https://stackoverflow.com/questions/948008/linux-command-to-list-all-available-commands-and-aliases
+	# List all functions and aliases.
+	# (Ignore builtins, binaries, builtins, and keywords)
+	_typos-helper 'compgen -A function -a'
 }
 function _complete_typo {
 	if ! [ -f "$BASH_IT_TYPOS_FILE" ]; then
