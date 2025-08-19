@@ -16,6 +16,7 @@ function _list_typo_names {
 	# (Ignore builtins, binaries, builtins, and keywords)
 	_typos-helper 'compgen -A function -a'
 }
+
 function _complete_typo {
 	if ! [ -f "$BASH_IT_TYPOS_FILE" ]; then
 		return
