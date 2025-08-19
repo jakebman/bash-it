@@ -1,4 +1,6 @@
 about-plugin "Some commands make no sense when invoked without an argument. Let's give them some!"
+# Load after wsl(-fast).plugin
+# BASH_IT_LOAD_PRIORITY: 260
 
 # TODO: several commands here leverate the `remotes` typo alias, which isn't correct - they should use something more explicit
 
@@ -134,14 +136,15 @@ function dd {
 	fi
 }
 
-function winget.exe {
-	about "allow a bare winget.exe to list updates"
+function _winget-implicit {
+	about "allow a bare winget to list updates"
 	if [[ "$#" -eq 0 ]]; then
-		command winget.exe update "$@"
+		winget update "$@"
 	else
-		command winget.exe "$@"
+		winget "$@"
 	fi
 }
+alias winget=_winget-implicit
 
 
 function stat {
