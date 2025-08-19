@@ -85,10 +85,7 @@ function command_not_found_handle {
 function _typos-helper {
 	local command=$1
 	# NB: this will not squawk if either file is missing.
-	(
-		BASH_ENV=$BASH_IT_TYPOS_FILE         bash -r -c "$command"
-		BASH_ENV=$BASH_IT_BUILTIN_TYPOS_FILE bash -r -c "$command"
-	)
+	BASH_ENV=<(cat "$BASH_IT_TYPOS_FILE" "$BASH_IT_BUILTIN_TYPOS_FILE") bash -r -c "$command"
 }
 
 function typos {
