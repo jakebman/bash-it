@@ -21,7 +21,6 @@ if ! [ -f "${BASH_IT_TYPOS_FILE}" ]; then
 	return
 fi
 
-
 # https://mharrison.org/post/bashfunctionoverride/
 # NB: this won't cover recursive functions properly
 function save_function {
@@ -34,7 +33,7 @@ function alias_value {
 	about "the expanded value of an alias. Probably unsafe and buggy"
 	# TODO: this doesn't do well if the alias value has single quotes in it
 	local name=$1
-	if ! alias "$name" &>/dev/null; then
+	if ! alias "$name" &> /dev/null; then
 		return 1 # failed
 	fi
 
@@ -61,7 +60,7 @@ function command_not_found_handle {
 	fi
 
 	local a_value
-	if a_value=$(alias_value "$name" 2>/dev/null); then
+	if a_value=$(alias_value "$name" 2> /dev/null); then
 		# Typo was implemented as an alias
 		>&2 echo "Simple typo: $a_value ${args[@]@Q}"
 	else
