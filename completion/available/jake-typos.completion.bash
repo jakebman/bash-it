@@ -27,6 +27,12 @@ function _complete_typo {
 	# We should only source BASH_IT_TYPOS_FILE in a subshell or subprocess
 	mapfile -t -d '' COMPREPLY < <(
 		source "$BASH_IT_TYPOS_FILE"
+
+		# _complete_alias needs to be the completion function for $1, otherwise
+		# it would be afraid of improperly restoring the context when it unmasks
+		# the alias.
+		# We're in a subshell - we don't care.
+		complete -F _complete_alias "$1"
 		_complete_alias "$@"
 
 	   printf "%s\0" "${COMPREPLY[@]}" | sort --zero-terminated | uniq --zero-terminated
