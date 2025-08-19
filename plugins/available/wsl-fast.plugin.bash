@@ -31,12 +31,13 @@ if NOTEPAD=$(PATH="/mnt/c/Program Files/Notepad++:/mnt/c/Program Files (x86)/Not
 fi
 unset NOTEPAD
 
-alias explorer=explorer.exe
-alias wsl=wsl.exe
+alias explorer=/mnt/c/Windows/explorer.exe
+alias wsl=/mnt/c/Windows/System32/wsl.exe
 alias winmerge="/mnt/c/Program\\ Files/WinMerge/WinMergeU.exe"
-alias winget=winget.exe
-alias clip=clip.exe
-alias cmd=cmd.exe
+alias winget="${WSL_WINDOWS_USER_HOME}/AppData/Local/Microsoft/WindowsApps/winget.exe"
+alias clip=/mnt/c/Windows/System32/clip.exe
+alias cmd=/mnt/c/Windows/System32/cmd.exe
+alias netsh.exe=/mnt/c/Windows/System32/netsh.exe
 
 function windirstat {
 	about "run windirstat.exe in a background process, willing to assume you mean the current folder"
