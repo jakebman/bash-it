@@ -1,0 +1,41 @@
+# shellcheck shell=bash
+about-completion "Jake's custom tool for common typos in common and jake-custom scripts"
+# Load before other completions - typos are a fallback, so if there is a "real" command,
+# we want to allow its completion to overwrite our completion setting here.
+# BASH_IT_LOAD_PRIORITY: 349
+
+# A 'canary' commmand from the jake-typos plugin. This implies that all other commands and environment variables also exist.
+if ! _command_exists _typos-helper; then
+	_log_error "Please enable the typos plugin in order to enable completion for typos"
+	return
+fi
+
+
+function _typos_commands {
+	(
+		# aliases first
+		_typos-helper 'alias -p' | sort
+		# functions last
+		_typos-helper 'declare -f'
+	) | pager
+}
+function _complete_typo {
+	if ! [ -f "$BASH_IT_TYPOS_FILE" ]; then
+		return
+	fi
+
+	# Exfiltrate COMPREPLY from within the subshell
+	# See projects-CDPATH for this pattern working elsewhere
+	# We should only source BASH_IT_TYPOS_FILE in a subshell or subprocess
+	mapfile -t -d '' COMPREPLY < <(
+		source "$BASH_IT_TYPOS_FILE"
+		_complete_alias "$@"
+
+	   printf "%s\0" "${COMPREPLY[@]}" | sort --zero-terminated | uniq --zero-terminated
+	 )
+
+	 # Corner case: mapfile will always be able to read a single empty string from an empty result.
+	 if [[ 1 -eq "${#COMPREPLY[@]}" && -z "${COMPREPLY[0]}" ]]; then
+	   COMPREPLY=()
+	 fi
+}
