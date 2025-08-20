@@ -46,6 +46,17 @@ function jqless {
 	command jq "${args[@]}" | less --RAW-CONTROL-CHARS # Raw isn't necessary if we're not coloring output, but it doesn't *hurt* either
 }
 
+if _command_exists ijq; then
+	function ijq {
+		local temp=$(mktemp ijq-JQ_FILTER_RESULT-XXXXXXXXXX --tmpdir)
+		trap 'rm "$temp"' RETURN
+		command ijq "$@" 2>"$temp"
+		# specifically and intentionally NOT LOCAL
+		JQ_FILTER=$(<"$temp")
+		>&2 echo "Set JQ_FILTER to: $JQ_FILTER"
+	}
+fi
+
 function jqgrep {
 	about "grep for content in files, but implicity apply JQ_FILTER to the files we're grepping"
 	echo "TODO, sorry"
