@@ -89,8 +89,8 @@ function _typos-helper {
 
 function typos {
 	(
-		# aliases first
-		_typos-helper 'alias -p' | sort
+		# aliases first. Print as 'typo'
+		_typos-helper 'alias -p' | sort | sed 's/^alias/typo/g'
 		# functions last
 		_typos-helper 'declare -f'
 	) | pager
