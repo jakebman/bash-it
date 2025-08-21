@@ -190,7 +190,7 @@ function jake-install-tools() {
 	fi
 
 	if [ true = "$sdkman_auto_env" ]; then
-		echo "sdkman is automatically proc'ing on cd"
+		echo "Nothing to do for sdkman_auto_env - sdkman is automatically proc'ing on cd"
 	else
 		echo 'Consider setting sdkman_auto_env=true in `sdk config`'
 	fi
