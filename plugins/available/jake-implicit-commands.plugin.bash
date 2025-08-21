@@ -409,15 +409,16 @@ function pstree {
 function du {
 	about "implicit ncdu if du's stdout is terminal"
 	if ! [[ -t 1 ]]; then
+		# No terminal output. We don't modify the args to du
 		command du "$@"
 	elif [[ 0 -ne "$#" ]]; then
-		# Still with terminal output; implicit -h
+		# We have arguments, but terminal output. Add an implicit -h for readability
 		command du -h "$@"
 	elif _command_exists ncdu; then
-		# no guarantee that I have this
+		# No args, to the terminal. If ncdu exists, let's run it!
 		ncdu -r
 	else
-		command du -h
+		command du -h "$@"
 	fi
 }
 
