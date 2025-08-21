@@ -50,10 +50,23 @@ if _command_exists ijq; then
 	function ijq {
 		local temp=$(mktemp ijq-JQ_FILTER_RESULT-XXXXXXXXXX --tmpdir)
 		trap 'rm "$temp"' RETURN
-		command ijq "$@" 2>"$temp"
-		# specifically and intentionally NOT LOCAL
-		JQ_FILTER=$(<"$temp")
-		>&2 echo "Set JQ_FILTER to: $JQ_FILTER"
+		# Alas, a here-string would be more verbose as an argument to -f. Something like: `/dev/fd/23 23<<<"$JQ_FILTER"`
+		# See https://unix.stackexchange.com/questions/505828/how-to-pass-a-string-to-a-command-that-expects-a-file
+		command ijq -f <(printf "%s" "${JQ_FILTER:-.}") "$@" 2>"$temp"
+		local return=$?
+		local filter=$(<"$temp")
+		if [ 0 = "$return" ]; then
+			if [ -n "$filter" ]; then
+				# specifically and intentionally NOT LOCAL
+				JQ_FILTER=$filter
+				# NB: this still won't work in cat foo.json | ijq, which is another good reason to print the filter below
+				>&2 echo "Set JQ_FILTER=${JQ_FILTER@Q}"
+			else
+				>&2 echo "Empty result query. Not setting JQ_FILTER=${JQ_FILTER@Q}"
+			fi
+		else
+			echo "ijq failure. Not setting JQ_FILTER to ${filter@Q}"
+		fi
 	}
 fi
 
