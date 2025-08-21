@@ -371,15 +371,13 @@ function tree {
 		jaketree "$@"
 	elif [[ "$#" -eq 0 ]]; then
 		tree2 --filelimit 25 "$@"
+	elif _is_numeric "$1"; then
+		# numeric first arg. Assume we're treeN
+		treeN "$@"
+	elif _in_array "-a" "$@"; then
+		ltree "$@"
 	else
-		if _is_numeric "$1"; then
-			# numeric first arg. Assume we're treeN
-			treeN "$@"
-		elif _in_array "-a" "$@"; then
-			ltree "$@"
-		else
-			tree2 "$@"
-		fi
+		tree2 "$@"
 	fi
 }
 
@@ -410,20 +408,18 @@ function pstree {
 
 function du {
 	about "implicit ncdu if du's stdout is terminal"
-	if [[ -t 1 ]]; then
-		if [[ 0 -eq "$#" ]]; then
-			# no guarantee that I have this
-			if _command_exists ncdu; then
-				ncdu -r
-			else
-				command du -h
-			fi
+	if ! [[ -t 1 ]]; then
+		command du "$@"
+	elif [[ 0 -eq "$#" ]]; then
+		# no guarantee that I have this
+		if _command_exists ncdu; then
+			ncdu -r
 		else
-			# Still with terminal output; implicit -h
-			command du -h "$@"
+			command du -h
 		fi
 	else
-		command du "$@"
+		# Still with terminal output; implicit -h
+		command du -h "$@"
 	fi
 }
 
