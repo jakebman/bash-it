@@ -410,16 +410,14 @@ function du {
 	about "implicit ncdu if du's stdout is terminal"
 	if ! [[ -t 1 ]]; then
 		command du "$@"
-	elif [[ 0 -eq "$#" ]]; then
-		# no guarantee that I have this
-		if _command_exists ncdu; then
-			ncdu -r
-		else
-			command du -h
-		fi
-	else
+	elif [[ 0 -ne "$#" ]]; then
 		# Still with terminal output; implicit -h
 		command du -h "$@"
+	elif _command_exists ncdu; then
+		# no guarantee that I have this
+		ncdu -r
+	else
+		command du -h
 	fi
 }
 
