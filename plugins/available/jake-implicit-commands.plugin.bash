@@ -438,15 +438,13 @@ function update-motd {
 
 function browse {
 	about "allow you to type the bare word 'browse' and get an automatic gh browse, while not stepping on the toes of xdg-utils's browse command (a symlink to xdg-open), which takes arguments"
-	if [[ "$#" -eq 0 ]]; then
-		# List remotes with their urls
-		if git remote -v | grep --quiet gitlab; then
-			glab repo view -w "$@"
-		else
-			gh browse "$@"
-		fi
-	else
+	if [[ "$#" -ne 0 ]]; then
 		command browse "$@"
+	elif git remote -v | grep --quiet gitlab; then
+		# List remotes with their urls
+		glab repo view -w "$@"
+	else
+		gh browse "$@"
 	fi
 }
 
