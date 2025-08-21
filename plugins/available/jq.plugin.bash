@@ -55,18 +55,19 @@ if _command_exists ijq; then
 		command ijq -f <(printf "%s" "${JQ_FILTER:-.}") "$@" 2>"$temp"
 		local return=$?
 		local filter=$(<"$temp")
-		if [ 0 = "$return" ]; then
-			if [ -n "$filter" ]; then
-				# specifically and intentionally NOT LOCAL
-				JQ_FILTER=$filter
-				# NB: this still won't work in cat foo.json | ijq, which is another good reason to print the filter below
-				>&2 echo "Set JQ_FILTER=${JQ_FILTER@Q}"
-			else
-				>&2 echo "Empty result query. Not setting JQ_FILTER=${JQ_FILTER@Q}"
-			fi
+
+		if [ 0 != "$return" ]; then
+			>&2 echo "ijq failure. Not setting JQ_FILTER to ${filter@Q}"
+		elif [ -z "$filter" ]; then
+			>&2 echo "Empty result query. Not setting JQ_FILTER=${filter@Q}"
 		else
-			echo "ijq failure. Not setting JQ_FILTER to ${filter@Q}"
+			# NB: this still won't work in cat foo.json | ijq, which is another good reason to print the filter below
+			>&2 echo "Set JQ_FILTER=${filter@Q}"
+
+			# specifically and intentionally NOT LOCAL
+			JQ_FILTER=$filter
 		fi
+		return $return
 	}
 fi
 
