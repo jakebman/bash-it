@@ -371,15 +371,13 @@ function tree {
 		jaketree "$@"
 	elif [[ "$#" -eq 0 ]]; then
 		tree2 --filelimit 25 "$@"
+	elif _is_numeric "$1"; then
+		# numeric first arg. Assume we're treeN
+		treeN "$@"
+	elif _in_array "-a" "$@"; then
+		ltree "$@"
 	else
-		if _is_numeric "$1"; then
-			# numeric first arg. Assume we're treeN
-			treeN "$@"
-		elif _in_array "-a" "$@"; then
-			ltree "$@"
-		else
-			tree2 "$@"
-		fi
+		tree2 "$@"
 	fi
 }
 
@@ -410,20 +408,17 @@ function pstree {
 
 function du {
 	about "implicit ncdu if du's stdout is terminal"
-	if [[ -t 1 ]]; then
-		if [[ 0 -eq "$#" ]]; then
-			# no guarantee that I have this
-			if _command_exists ncdu; then
-				ncdu -r
-			else
-				command du -h
-			fi
-		else
-			# Still with terminal output; implicit -h
-			command du -h "$@"
-		fi
-	else
+	if ! [[ -t 1 ]]; then
+		# No terminal output. We don't modify the args to du
 		command du "$@"
+	elif [[ 0 -ne "$#" ]]; then
+		# We have arguments, but terminal output. Add an implicit -h for readability
+		command du -h "$@"
+	elif _command_exists ncdu; then
+		# No args, to the terminal. If ncdu exists, let's run it!
+		ncdu -r
+	else
+		command du -h "$@"
 	fi
 }
 
@@ -443,15 +438,13 @@ function update-motd {
 
 function browse {
 	about "allow you to type the bare word 'browse' and get an automatic gh browse, while not stepping on the toes of xdg-utils's browse command (a symlink to xdg-open), which takes arguments"
-	if [[ "$#" -eq 0 ]]; then
-		# List remotes with their urls
-		if git remote -v | grep --quiet gitlab; then
-			glab repo view -w "$@"
-		else
-			gh browse "$@"
-		fi
-	else
+	if [[ "$#" -ne 0 ]]; then
+		# Have arguments - send them to the original browse command
 		command browse "$@"
+	elif git remote -v | grep --quiet gitlab; then
+		glab repo view -w "$@"
+	else
+		gh browse "$@"
 	fi
 }
 
@@ -529,17 +522,18 @@ export -f vim # so that j receives it!
 
 function realpath {
 	about "allow you to type the bare word 'realpath' and automatically be cd'd there"
-	if [[ "$#" -eq 0 ]]; then
-		local nextdir="$(command realpath .)"
-		if [[ "x${nextdir}" = "x${PWD}" ]]; then
-			# Don't cd if we're already there. See also cddd's silly goose callout
-			echo "silly goose. You're already there." >&2
-			return 1
-		else
-			cd "$nextdir"
-		fi
-	else
+	if [[ "$#" -ne 0 ]]; then
 		command realpath "$@"
+		return # propagate return code from realpath command
+	fi
+
+	local nextdir="$(command realpath .)"
+	if [[ "x${nextdir}" = "x${PWD}" ]]; then
+		# Don't cd if we're already there. See also cddd's silly goose callout
+		echo "silly goose. You're already there." >&2
+		return 1
+	else
+		cd "$nextdir"
 	fi
 }
 
