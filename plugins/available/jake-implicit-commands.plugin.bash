@@ -2,8 +2,6 @@ about-plugin "Some commands make no sense when invoked without an argument. Let'
 # Load after wsl(-fast).plugin
 # BASH_IT_LOAD_PRIORITY: 260
 
-# TODO: several commands here leverate the `remotes` typo alias, which isn't correct - they should use something more explicit
-
 function _jake-special-single-args-for-diff {
 	case $1 in
 		--help) return ;;
@@ -446,7 +444,8 @@ function update-motd {
 function browse {
 	about "allow you to type the bare word 'browse' and get an automatic gh browse, while not stepping on the toes of xdg-utils's browse command (a symlink to xdg-open), which takes arguments"
 	if [[ "$#" -eq 0 ]]; then
-		if git remotes | grep --quiet gitlab; then
+		# List remotes with their urls
+		if git remote -v | grep --quiet gitlab; then
 			glab repo view -w "$@"
 		else
 			gh browse "$@"
@@ -470,7 +469,8 @@ function _is_flag {
 
 function pulls {
 	about "try to mange pull requests from the CLI"
-	if remotes | grep --quiet gitlab; then
+	# List remotes with their urls
+	if git remote -v | grep --quiet gitlab; then
 		echo "running glab mr list"
 		glab mr list "$@"
 	else
@@ -481,10 +481,11 @@ function pulls {
 
 function fork {
 	about "allow you to type the bare word 'fork' to fork in github or gitlab, whichever's relevant"
-	if remotes | grep --quiet jake; then
+	# List remotes with their urls
+	if git remote -v | grep --quiet jake; then
 		echo "You probably already have a fork. Figure it out"
-		remotes
-	elif remotes | grep --quiet gitlab; then
+		git remote -v
+	elif git remote -v | grep --quiet gitlab; then
 		glab repo fork --remote "$@" || echo "I didn't test this. Probably needs a rewrite"
 	else
 		gh repo fork --remote "$@" || echo "I didn't test this either. Probably needs a rewrite"
