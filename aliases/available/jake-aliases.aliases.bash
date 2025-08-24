@@ -66,11 +66,10 @@ function pull {
 		# mr: illegal checkout command "mv kindle2pdf pdf2remarkable || git clone 'git@github.com:teticio/pdf2remarkable.git' 'pdf2remarkable'" in untrusted /home/jakebman/wsl-projects/remarkable/.mrconfig line 115
 		# (To trust this file, list it in ~/.mrtrust.)
 
-		local GIT_CONFIG_COUNT GIT_CONFIG_KEY_0 GIT_CONFIG_VALUE_0
+		local -x GIT_CONFIG_COUNT GIT_CONFIG_KEY_0 GIT_CONFIG_VALUE_0
 		GIT_CONFIG_COUNT=1
 		GIT_CONFIG_KEY_0=color.ui
 		GIT_CONFIG_VALUE_0=always
-		export GIT_CONFIG_COUNT GIT_CONFIG_KEY_0 GIT_CONFIG_VALUE_0
 
 		local -a PAGER=cat # Normally, we don't have to do paging
 		if [ junk-drawer = "$(basename "$PWD")" ]; then
