@@ -137,7 +137,9 @@ function dd {
 function _winget-implicit {
 	about "allow a bare winget to list updates"
 	if [[ "$#" -eq 0 ]]; then
-		winget update "$@"
+		# Tell winget to list updatable tools, but also include pinned output
+		# (That way we don't have to call `winget pin list` after this)
+		winget update --include-pinned
 	else
 		winget "$@"
 	fi
