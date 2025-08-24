@@ -295,6 +295,13 @@ function jake-install-tools() {
 		echo "consider putting a [user]\\n default=$(whoami) into your /etc/wsl.conf file"
 	fi
 
+	if grep -s -q "appendWindowsPath" /etc/wsl.conf &>/dev/null; then
+		echo "You're probaly spending too much time searching the Windows PATH"
+		echo "consider putting a [interop]\\n appendWindowsPath=false into your /etc/wsl.conf file"
+	else
+		echo "Nothing to do for disabling Windows PATH mucking"
+	fi
+
 	if bash -n /usr/share/bash-completion/completions/make &>/dev/null; then
 		echo 'Nothing to do to fix makefile completion - the file passes `bash -n`'
 	else
