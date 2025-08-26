@@ -72,8 +72,8 @@ function pull {
 		GIT_CONFIG_VALUE_0=always
 
 		local -a PAGER=cat # Normally, we don't have to do paging
-		if [ junk-drawer = "$(basename "$PWD")" ]; then
-			# Directly within the Junk Drawer. Allow updating it
+		if [[ "x$(basename "$PWD")" == *junk-drawer* ]]; then
+			# Directly within a Junk Drawer. Allow updating it
 			local -x UPDATE_JUNK_DRAWER=any-string-value
 
 			# ... but the junk drawer needs a pager. It can follow the output, though
@@ -426,8 +426,8 @@ function reset {
 function clone {
 	local git_command=clone
 	local retcode
-	if [[ "x${PWD}" =~ /junk-drawer$ ]]; then
-		# special case: shallow clone in junk-drawer
+	if [[ "x$(basename "$PWD")" == *junk-drawer* ]]; then
+		# special case: shallow clone from within junk-drawers
 		git_command=shallow
 		echo "We're in the junk drawer - using a shallow clone"
 	fi
