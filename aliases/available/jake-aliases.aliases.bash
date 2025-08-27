@@ -71,7 +71,7 @@ function pull {
 		GIT_CONFIG_KEY_0=color.ui
 		GIT_CONFIG_VALUE_0=always
 
-		local -a PAGER=cat # Normally, we don't have to do paging
+		local -a PAGER=(cat) # Normally, we don't have to do paging
 		if [[ "x$(basename "$PWD")" == *junk-drawer* ]]; then
 			# Directly within a Junk Drawer. Allow updating it
 			local -x UPDATE_JUNK_DRAWER=any-string-value
