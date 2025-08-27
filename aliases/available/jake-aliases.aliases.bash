@@ -76,6 +76,7 @@ function pull {
 			# Directly within a Junk Drawer. Allow updating it
 			local -x UPDATE_JUNK_DRAWER=any-string-value
 
+			>&2 echo "Running pull in a junk drawer. Enabling UPDATE_JUNK_DRAWER"
 			# ... but the junk drawer needs a pager. It can follow the output, though
 			# (also, ask less to tee its input to an update log)
 			PAGER=(less --tilde +F --LOG-FILE="update-log.$(date --iso-8601=seconds)")
