@@ -64,6 +64,7 @@ export TODO="t"
 candidates=(
 	"${HOME}/wsl-projects"
 	"${HOME}/ms"
+	"${XDG_CONFIG_HOME:-${HOME}/.config}/jake/pj_disambiguation"
 	"${HOME}/wsl-projects/remarkable/repos"
 	"${HOME}/wsl-projects/junk-drawer"
 	"${HOME}/wsl-projects/home-junk-drawer"
