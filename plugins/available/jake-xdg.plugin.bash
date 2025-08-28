@@ -56,6 +56,8 @@ bind -f "$INPUTRC"
 # Further justification: The JDK's debugging docs only know about JAVA_TOOL_OPTIONS, and don't mention JDK_JAVA_OPTIONS:
 # https://docs.oracle.com/en/java/javase/23/troubleshoot/environment-variables-and-system-properties.html#GUID-A91E7E21-2E91-48C4-89A4-836A7C0EE93B
 # https://docs.oracle.com/en/java/javase/23/troubleshoot/submit-bug-report.html#GUID-3933BFE1-0193-403E-8D72-2E0DC6639EE8
+# Even more! AWS recommends this variable as well:
+# https://docs.aws.amazon.com/sdkref/latest/guide/jvm-system-properties.html#:~:text=With%20an%20environment%20variable
 JAVA_TOOL_OPTIONS+=" -Djava.util.prefs.userRoot='${XDG_CONFIG_HOME}'/java"
 export JAVA_TOOL_OPTIONS
 
@@ -166,6 +168,7 @@ export SDKMAN_DIR="${JAKE_XDG_BIN_DIR}/sdkman"
 
 # XDG list:
 # .aws - not configurable. The AWS_CONFIG_FILE and AWS_SHARED_CREDENTIALS_FILE can be configured, but not for instance .aws/cli/alias
+#        doc: https://docs.aws.amazon.com/sdkref/latest/guide/file-location.html
 #        NB: docker 'helpfully' overwrites my symlink with one into %USERPROFILE%
 # .azure - symlinked into %USERPROFILE% by outside-WSL docker. Can probably remove it without damage.
 # .bash - symlinked to .bashrc as tab-completion fodder to win over .bash{_history,_logout}
