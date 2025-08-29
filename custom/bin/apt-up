@@ -5,11 +5,18 @@
 # NB: the current script *should NOT* be auto-sudoable. The whole point of this script
 # is to *invoke OTHER* scripts that are auto-sudoable. If those scripts aren't auto-sudoable,
 # it's important that the user receive a prompt
+echo
 echo '===== apt update only ======'
+echo
 apt-update-only
+
+echo
 echo '===== apt upgrade only ======'
+echo
 apt-upgrade-only
 
 # might as well do the next maintenance task too
+echo
 echo '===== apt autoremove only ======'
+echo
 apt-autoremove-only
