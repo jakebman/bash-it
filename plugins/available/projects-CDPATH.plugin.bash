@@ -13,7 +13,8 @@ function pj() {
 	# TODO: the POSIX spec on cd specifically says "Use $PWD if cd can't find any other matches"
 	# This is not ideal, as I want to specifically exclude it from consideration
 	# I might have to re-implement cd, skipping step 7? https://pubs.opengroup.org/onlinepubs/9699919799/utilities/cd.html
-	cd "$@"
+	# Pass -P to follow symlinks to their destination
+	cd -P "$@"
 }
 
 # TODO: completion for this should include files, not just dirs
