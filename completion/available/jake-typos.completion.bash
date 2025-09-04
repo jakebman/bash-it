@@ -55,4 +55,4 @@ function _fallback_to_typos {
 }
 
 complete -F _complete_typo $(_list_typo_names)
-complete -F _fallback_to_typos -I
+complete -F _fallback_to_typos -I -c # -c means we're completing commands, so ./foo/bar completes properly
