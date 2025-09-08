@@ -20,7 +20,9 @@ function _type_with_typos {
 		set -o pipefail -o errexit
 		source "$BASH_IT_TYPOS_FILE"
 		command type "$@" |
-			sed 's/is aliased to/is a typo of/g'
+			sed -E \
+			-e 's/is aliased to/is a typo of/g' \
+			-e 's/\balias\b/typo/g'
 	)
 }
 
