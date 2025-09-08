@@ -49,10 +49,15 @@ function command_not_found_handle {
 	local name=$1
 
 	if [ -f "${BASH_IT_TYPOS_FILE}" ] &&
+		! type -t "$name" &>/dev/null &&
 		source "${BASH_IT_TYPOS_FILE}" &&
 		type -t "$name" &>/dev/null; then
 		# This is so much easier to phrase as a success chain instead of negations
-		: # success - we'll continue.
+		: # success - a command for this was *added* - we'll continue.
+	elif git is-valid-git-command "$name"; then
+		# Autogenerate git-prefixed aliases
+		alias "${name}=git ${name}"
+		>&2 echo "Git-based typo: $a_value ${args[@]@Q}"
 	else
 		# we don't have a typo entry for this word. Follow the old path
 		_ububtu_command_not_found_handle "$@"
