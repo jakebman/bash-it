@@ -26,6 +26,8 @@ function _type_with_typos {
 
 if _command_exists bat; then
 	function _type_with_formatting {
+		local -
+		set -o pipefail
 		_type_with_typos "$@" | bat --language=bash
 	}
 else
