@@ -48,12 +48,22 @@ function command_not_found_handle {
 	local -a args=("${@:2}")
 	local name=$1
 
+	# TODO: it would be nice to have a common "typo exists" vocabulary test
+	# that doesn't interfere with other functionality. Because type-through-typos
+	# causes `type -t` to *succeed* on typos, and that plugin isn't guaranteed to
+	# be enabled, it would be nice if there were a shared, consistent check that
+	# both plugins can rely on.
 	if [ -f "${BASH_IT_TYPOS_FILE}" ] &&
-		! type -t "$name" &>/dev/null &&
-		source "${BASH_IT_TYPOS_FILE}" &&
-		type -t "$name" &>/dev/null; then
-		# This is so much easier to phrase as a success chain instead of negations
-		: # success - a command for this was *added* - we'll continue.
+			! command -v "$name" &>/dev/null &&
+			source "${BASH_IT_TYPOS_FILE}" &&
+			type -t "$name" &>/dev/null; then
+		local a_value
+		if a_value=$(alias_value "$name" 2> /dev/null); then
+			# Typo was implemented as an alias
+			>&2 echo "Simple typo: $a_value ${args[@]@Q}"
+		else
+			>&2 echo "Complex typo: $name ${args[@]@Q}"
+		fi
 	elif git is-valid-git-command "$name"; then
 		# Autogenerate git-prefixed aliases
 		alias "${name}=git ${name}"
@@ -62,14 +72,6 @@ function command_not_found_handle {
 		# we don't have a typo entry for this word. Follow the old path
 		_ububtu_command_not_found_handle "$@"
 		return
-	fi
-
-	local a_value
-	if a_value=$(alias_value "$name" 2> /dev/null); then
-		# Typo was implemented as an alias
-		>&2 echo "Simple typo: $a_value ${args[@]@Q}"
-	else
-		>&2 echo "Complex typo: $name ${args[@]@Q}"
 	fi
 
 	# TODO: can I get a printed bash stack trace?
