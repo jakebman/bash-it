@@ -290,6 +290,7 @@ function _is_flag {
 	return 0
 }
 
+# TODO: this doesn't get automatic completion. Can we add some?
 function cherry-pick {
 	about "git cherry-pick, but if it's not a --continue/--abort/etc., try to include the (cherry picked from ...)"
 	if [ "$#" -eq 1 ] && _is_flag "$1"; then # likely a --continue/etc.
