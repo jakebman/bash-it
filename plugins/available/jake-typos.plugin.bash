@@ -57,7 +57,7 @@ function command_not_found_handle {
 	elif git is-valid-git-command "$name"; then
 		# Autogenerate git-prefixed aliases
 		alias "${name}=git ${name}"
-		>&2 echo "Git-based typo: $a_value ${args[@]@Q}"
+		>&2 echo "Git-based typo: git ${name} ${args[@]@Q}"
 	else
 		# we don't have a typo entry for this word. Follow the old path
 		_ububtu_command_not_found_handle "$@"
