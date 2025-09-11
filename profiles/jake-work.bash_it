@@ -38,6 +38,7 @@ plugins sdkman
 plugins type-through-aliases
 plugins wsl-fast
 completion ack
+completion aws-ehancements
 completion awscli
 completion bash-it
 completion complete-alias
