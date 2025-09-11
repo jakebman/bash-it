@@ -23,7 +23,9 @@ function _type_with_typos {
 			sed -E \
 			-e 's/is aliased to/is a typo of/g' \
 			-e 's/\balias\b/typo/g'
-	)
+	) >&2 # redirect output to stderr
+	# Fail, because aliases aren't successfully types
+	return 5253
 }
 
 if _command_exists bat; then
