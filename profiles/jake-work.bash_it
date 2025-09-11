@@ -50,6 +50,7 @@ completion jake-typos
 completion jira
 completion kubectl
 completion maven
+completion npm
 completion projects-CDPATH
 completion sdkman
 completion system
