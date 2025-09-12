@@ -62,7 +62,8 @@ function command_not_found_handle {
 			# Typo was implemented as an alias
 			>&2 echo "Simple typo: $a_value ${args[@]@Q}"
 		else
-			>&2 echo "Complex typo: $name ${args[@]@Q}"
+			>&2 echo "Complex typo:"
+			>&2 type "$name"
 		fi
 	elif JAKE_SUPPRESS_GIT_SQUAWK=1 git is-valid-git-command "$name"; then
 		# Autogenerate git-prefixed aliases
