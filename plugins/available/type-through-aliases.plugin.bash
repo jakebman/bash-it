@@ -21,6 +21,7 @@ function _type_with_typos {
 		source "$BASH_IT_TYPOS_FILE"
 		command type "$@" |
 			sed -E \
+			-e 's/is a function/is a typo, implemented as a function/g' \
 			-e 's/is aliased to/is a typo of/g' \
 			-e 's/\balias\b/typo/g'
 	) >&2 # redirect output to stderr
