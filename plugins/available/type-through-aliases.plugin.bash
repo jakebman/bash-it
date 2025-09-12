@@ -19,11 +19,13 @@ function _type_with_typos {
 	(
 		set -o pipefail -o errexit
 		source "$BASH_IT_TYPOS_FILE"
+		# TODO: these ^...$ are really trying to only operate if we're mucking on a `type -t`, not otherwise
 		command type "$@" |
 			sed -E \
 			-e 's/is a function/is a typo, implemented as a function/g' \
+			-e 's/^function$/typo-function/g' \
 			-e 's/is aliased to/is a typo of/g' \
-			-e 's/\balias\b/typo/g'
+			-e 's/^alias$/typo/g'
 	) >&2 # redirect output to stderr
 	# Fail, because aliases aren't successfully types
 	return 5253
