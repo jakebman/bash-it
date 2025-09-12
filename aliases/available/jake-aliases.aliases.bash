@@ -272,7 +272,7 @@ function addp {
 	clear -x
 
 	_jake-banner-display "GIT ADD"
-	add --patch "$@"
+	git add --patch "$@"
 
 	local out="$?"
 	tabs +m0
