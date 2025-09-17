@@ -375,7 +375,12 @@ function _mr-able {
 
 function mr-run {
 	about 'A wrapper around mr run to run a git command, colored, unpaged, and then paged totally'
-	mr run git unpaged colored "$@" | pager
+	if git is-valid-git-command "${1?Need a command to run on all mr repos}" &>/dev/null; then
+		# allow the command to be a git command. Choose this *greedily*, because mr is git-like
+		# What I mean is: prefer mr-run ls to mean mr-run git ls
+		set -- git unpaged colored "$@"
+	fi
+	mr run "$@" | pager
 }
 
 function cdgit {
