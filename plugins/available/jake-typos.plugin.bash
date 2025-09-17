@@ -43,6 +43,15 @@ function alias_value {
 	eval echo "${value}"
 }
 
+# TODO: could this use parens instead, at the outer function declaration?
+function typo_value {
+	about "the expanded value of a typo that is implemented as an alias. Potentially garbage if it isn't a typo. Probably unsafe and buggy. See alias_value"
+	(
+		source "${BASH_IT_TYPOS_FILE}"
+		alias_value "$@"
+	)
+}
+
 save_function command_not_found_handle _ububtu_command_not_found_handle
 function command_not_found_handle {
 	local -a args=("${@:2}")

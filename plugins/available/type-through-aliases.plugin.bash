@@ -1,6 +1,6 @@
 # shellcheck shell=bash
 cite about-plugin
-about-plugin 'allow type to see through aliases and try to find the underlying command'
+about-plugin 'allow type (and man) to see through aliases and try to find the underlying command'
 
 
 function _type_with_typos {
@@ -71,4 +71,25 @@ function type {
 			_type_with_formatting "$@"
 			;;
 	esac
+}
+
+function man {
+	about 'enhance the manual pages to try and see through typos'
+	local typoValue
+	if [ "$#" -ne 1 ] ||
+		command man --where "$1" &>/dev/null ||
+		[ 'typo' != "$(type -t "$1" 2>&1)" ] ||
+		! typoValue=$(typo_value "$1"); then
+		# Either the args are too hard to parse (to wit: I'd have to pick one)
+		# Or the manual page exists.
+		# Or this one command isn't a typo
+		# Or something went wrong getting its typo value.
+		# Disable magic and go to the normal work.
+		command man "$@"
+		return
+	fi
+
+	# a little indication of this indirection
+	>&2 type "$1"
+	command man "$typoValue"
 }
