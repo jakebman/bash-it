@@ -373,6 +373,11 @@ function _mr-able {
 	fi
 }
 
+function mr-run {
+	about 'A wrapper around mr run to run a git command, colored, unpaged, and then paged totally'
+	mr run git unpaged colored "$@" | pager
+}
+
 function cdgit {
 	# TODO: there is also cd-git in jake-cd-git-root
 	about 'cd into the root of a git repo/worktree for the current directory, or fail'
