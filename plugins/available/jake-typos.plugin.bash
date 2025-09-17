@@ -78,6 +78,10 @@ function command_not_found_handle {
 		# Autogenerate git-prefixed aliases
 		alias "${name}=git ${name}"
 		>&2 echo "Git-based typo: git ${name} ${args[@]@Q}"
+	elif JAKE_SUPPRESS_GIT_SQUAWK=1  git rev-parse --verify --quiet --end-of-options "$name"; then
+		# It's a commit in the current git. Let's show it.
+		alias "${name}=git show ${name@Q}"
+		>&2 echo "Pasted a git commit id: git show ${name@Q} ${args[@]@Q}"
 	else
 		# we don't have a typo entry for this word. Follow the old path
 		_ububtu_command_not_found_handle "$@"
