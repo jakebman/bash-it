@@ -217,7 +217,6 @@ function _mr-unskip {
 				grep -Ev "^(DEFAULT|ALIAS)$" |
 				sort
 			)
-	touch "$candidates".txt
 	COMPREPLY=()
 	for item in "${candidates[@]}"; do
 		if [ ! -d "$item" ] && [[ x"$item" = x"$completeMe"* ]]; then
