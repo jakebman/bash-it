@@ -8,7 +8,7 @@
 # See the man page for details on how to write a sudoers file.
 #
 
-# Allow the sudoers group to run iotop without sudo
+# Allow the sudoers group to run iotop with sudo, but without a password
 
 %sudo ALL = (root) NOPASSWD: /usr/sbin/iftop
 %sudo ALL = (root) NOPASSWD: /usr/sbin/iotop

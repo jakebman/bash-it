@@ -39,6 +39,8 @@ export BROWSER=wslview
 _BASH_IT_AWS_AUTOLOGIN_EXCEPTIONS+=(login loggedin logout)
 
 # Programs that can only be run by sudo. Putting an implicit ahead of it seems fine
+# These are also listed in my sudoers config to not require a password, so this is
+# super usable for me
 alias iotop='sudo iotop'
 alias iftop='sudo iftop'
 
