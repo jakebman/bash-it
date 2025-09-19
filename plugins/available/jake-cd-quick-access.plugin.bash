@@ -77,7 +77,12 @@ function _cd-to-single-completion {
 			;;
 		*)
 			# Too many things that might fix this.
-			builtin cd "$@" 2> >(sed -E "s/(No such file or directory)/\1.\n${FUNCNAME}: Enhanced guessing behavior is also unwilling to guess between ${#COMPREPLY[@]} completions/" >&2)
+			# Same schtick as the zero case
+			builtin cd "$@"
+			printf "%s: Enhanced guessing behavior is also unwilling to guess between %d completions:\n" \
+				"${FUNCNAME}" \
+				"${#COMPREPLY[@]}"
+			printf "%s\n" "${COMPREPLY[@]@Q}"
 			;;
 	esac
 }
