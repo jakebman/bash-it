@@ -240,6 +240,28 @@ function realpath-and-rainbow {
 	fi
 }
 
+# NB: subshell function
+function relocate (
+	about "move a file to a new location, leaving a symlink at the old location. If the file is tracked in git, git-relocate is used instead"
+	local source=${1?Need a source}
+	local destination=${2?Need a destination}
+	if git ls-files --error-unmatch "$source" &>/dev/null; then
+		# is tracked by git, per google AI result for "is git tracking a file"
+		git relocate "$source" "$destination"
+		return
+	fi
+
+	set -o errexit
+	local a_s=$(realpath "$source")
+	mv --interactive "$source" "$destination"
+	local a_d=$(realpath "$destination")
+	if [ -d "$destination" ]; then
+		# symbolic target should be the new filename
+		a_d+="/$(basename "$source")"
+	fi
+	ln --symbolic --relative --interactive --verbose "$a_d" "$a_s"
+)
+
 function _jake-banner-display {
 	about "display a banner, but don't care if it fails"
 	# figlet doesn't have --long --options :(
