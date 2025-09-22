@@ -342,8 +342,22 @@ function _mr-able-single {
 	# TODO: This tests for only git repos. The find manpage has an example for other VCSs:
 	#       `find . \( -exec test -d '{}/.svn' \; -or -exec test -d '{}/.git' \; -or -exec test -d '{}/CVS' \; \) -print -prune`
 	comm -23 \
-		<(cd "$path"; find "$PWD" -maxdepth 1 -mindepth 1 -exec test -d '{}/.git' \; '!' -type l '!' -xtype l -print | sort) \
-		<(cd "$path"; mr run pwd | grep -v "^mr run" | grep -v "^$" | sort)
+		<(cd "$path"
+			find "$PWD" \
+					-maxdepth 1 \
+					-mindepth 1 \
+					-exec test -d '{}/.git' \; \
+					'!' -type l \
+					'!' -xtype l \
+					-print |
+				sort
+		) \
+		<(cd "$path"
+			mr run pwd |
+				grep -v "^mr run" |
+				grep -v "^$" |
+				sort
+			)
 }
 
 function _mr-able-impl {
