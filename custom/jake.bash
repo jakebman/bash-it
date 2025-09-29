@@ -460,6 +460,14 @@ function _fidget_options {
 	done
 }
 
+function apt {
+	if [ 0 -eq "$#" ]; then
+		apt-up
+	else
+		command apt "$@"
+	fi
+}
+
 function fidget {
 	type fidget | bat --language bash --style=plain --paging=never
 	echo "TODO: loop this into jake-maintain-system tech"
