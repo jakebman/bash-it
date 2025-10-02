@@ -353,7 +353,7 @@ function _mr-able-single {
 				sort
 		) \
 		<(cd "$path"
-			mr run pwd 2>(grep -v "mr run: no repositories found to work on" >&2) |
+			mr run pwd 2> >(grep -v "mr run: no repositories found to work on" >&2) |
 				grep -v "^mr run" |
 				grep -v "^$" |
 				sort
