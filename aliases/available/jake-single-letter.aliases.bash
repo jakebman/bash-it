@@ -8,6 +8,7 @@ alias d=diff   # promoted typo
 alias g=git
 unalias h
 alias h=hgrep # replace the one from general with hgrep from jake-implicit-commands
+alias k='rancher kubectl' # TODO: this should be smarter about knowing if rancher exists
 alias m=mr    # promoted typo
 alias p=pull  # promoted typo (TODO: could this become `push` if we're a commit ahead of upstream?)
 # function q # in bash-it plugin jake-q. Approx: { if ! _is-toplevel-bash; then exit; fi }
