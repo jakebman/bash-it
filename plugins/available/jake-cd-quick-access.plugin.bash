@@ -10,6 +10,17 @@ about-plugin 'Allow certain folders to always remain valid `cd` targets, from an
 # "A null directory name is the same as the current directory", per `help cd`
 CDPATH+=":${XDG_CONFIG_HOME:-${HOME}/.config}/cd/quick-access"
 
+# TODO: this would be cool to accept the shortest suggestion if it's a prefix of all others
+# NB: this example output also includes the trailing slash, which defeats a bare algorithm. Hopefully
+# the slash was added after we got invoked and isn't in our exact data, otherwise this will be harder :(
+# → pj ui
+# -bash: cd: ui: No such file or directory
+# _cd-to-single-completion: Enhanced guessing behavior is also unwilling to guess between 5 completions:
+# 'uinode-/'      # <---- TODO: use this one!
+# 'uinode-clientservice-poc/'
+# 'uinode-documentation/'
+# 'uinode-projects'
+# 'uinode-validation/'
 function _cd-to-single-completion {
 	about 'cd, but if it fails, try auto-completing the last argument word'
 	if builtin cd "$@" 2>/dev/null; then
