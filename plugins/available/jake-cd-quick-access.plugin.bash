@@ -87,15 +87,33 @@ function _cd-to-single-completion {
 			builtin cd "${@:1:$# - 1}" "${COMPREPLY[0]}"
 			;;
 		*)
-			# Too many things that might fix this.
-			# Same schtick as the zero case
-			builtin cd "$@"
-			printf "%s: Enhanced guessing behavior is also unwilling to guess between %d completions:\n" \
-				"${FUNCNAME}" \
-				"${#COMPREPLY[@]}"
-			printf "%s\n" "${COMPREPLY[@]@Q}"
+			# TODO: this could subsume the 1) case
+			local candidate
+			if candidate=$(_common-prefix-of-args "${COMPREPLY[@]}"); then
+				builtin cd "${@:1:$# - 1}" "$candidate"
+			else
+				builtin cd "$@"
+				printf "%s: Enhanced guessing behavior is also unwilling to guess between %d completions:\n" \
+					"${FUNCNAME}" \
+					"${#COMPREPLY[@]}"
+				printf "%s\n" "${COMPREPLY[@]@Q}"
+			fi
 			;;
 	esac
+}
+
+function _common-prefix-of-args {
+	about 'If there is a common prefix among all arguments, print it. It has to be the first element, currently'
+	# TODO: there might be a "if candidate isn't a prefix of elem, then if elem is a prefix of candidate, it becomes the new candidate & continue"
+	# But I'm not confident in that for the first draft
+	local candidate="${1%/}" # with potential trailing slash removed
+	local elem
+	for elem in "$@"; do
+		if [[ "$elem" != ${candidate}* ]]; then
+			return 1 # fail - not a prefix
+		fi
+	done
+	printf "%s" "$candidate"
 }
 
 # TODO: (another plugin?) to respect a -p flag to cd, which `mkdir -p`'s its argument, then my cdp function can just alias that instead
