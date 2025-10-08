@@ -495,9 +495,11 @@ function fidget {
 			win-git-update
 		fi
 		apt-up
-		if _command_exists winget.exe &> /dev/null; then
-			echo "winget.exe exists - here's the update"
-			winget.exe update
+
+		# relies on my aliases. Not necessarily the best plan
+		if _command_exists winget &> /dev/null; then
+			echo "winget exists - here's the update"
+			winget update
 		fi
 		_mr-able
 	)
