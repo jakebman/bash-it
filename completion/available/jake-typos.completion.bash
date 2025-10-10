@@ -17,6 +17,7 @@ function _list_typo_names {
 	_typos-helper 'compgen -A function -a'
 }
 
+# TODO: This doesn't work for typo-functions
 function _complete_typo {
 	if ! [ -f "$BASH_IT_TYPOS_FILE" ]; then
 		return
