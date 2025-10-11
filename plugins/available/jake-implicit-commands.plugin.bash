@@ -426,6 +426,7 @@ function update-motd {
 		echo "# successfully ran update-motd ${@@Q}"
 	else
 		command update-motd --show-only "$@"
+		echo # spacing
 		echo "# This was an uncommitted preview, generated via fallback to update-motd --show-only ${@@Q}"
 		echo "# You're getting the previewed output and this message instead of an opaque failure thanks to the bash function $FUNCNAME"
 		return 1 # "Failure" might be too strong a word, but it definitely wasn't a successful update of the motd
