@@ -497,9 +497,10 @@ function fidget {
 		apt-up
 
 		# relies on my aliases. Not necessarily the best plan
+		# OTOH, free --include-pinned
 		if _command_exists winget &> /dev/null; then
 			echo "winget exists - here's the update"
-			winget update
+			winget
 		fi
 		_mr-able
 	)
