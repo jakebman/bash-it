@@ -30,8 +30,9 @@ function save_function {
 }
 
 function alias_value {
-	about "the expanded value of an alias. Probably unsafe and buggy"
+	about "the expanded value of an alias. Definitely unsafe and buggy"
 	# TODO: this doesn't do well if the alias value has single quotes in it
+	# TODO: ${BASH_ALIASES[$1]}, my dude.
 	local name=$1
 	if ! alias "$name" &> /dev/null; then
 		return 1 # failed
