@@ -54,6 +54,8 @@ alias jake='j --jake'
 
 alias cnn='browse http://cnn.com'
 
+unalias rb # defined in general plugin. I'd like to reserve it as a typo for rainbow-branches
+
 # TODO: can I get autocomplete on a single tab?
 
 # requires maven 3.9+ https://maven.apache.org/configure.html#maven_args-environment-variable
