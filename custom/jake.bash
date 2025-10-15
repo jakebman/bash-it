@@ -422,6 +422,8 @@ function cdgit {
 }
 alias gitcd=cdgit # not a typo - I literally don't know which name should be primary
 
+
+# TODO: if no argument, go to the first parent directory that contains a pom.xml
 function cdmaven {
 	about 'cd into your maven repository, using a gav as-if it were a folder name'
 	param '1: an artifact-like gav. "com.twc.mystro.mas.integration:mas-integration:pom:5.4.6-SNAPSHOT"'
