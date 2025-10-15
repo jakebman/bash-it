@@ -433,6 +433,8 @@ function update-motd {
 	fi
 }
 
+# TODO: when you're in a node_modules subfolder, you can find a URL to browse via `jq .repository package.json`.
+# This will make it easier to launch their readme, etc.
 function browse {
 	about "allow you to type the bare word 'browse' and get an automatic gh browse, while not stepping on the toes of xdg-utils's browse command (a symlink to xdg-open), which takes arguments"
 	if [[ "$#" -ne 0 ]]; then
