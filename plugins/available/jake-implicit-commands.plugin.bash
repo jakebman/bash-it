@@ -418,6 +418,16 @@ function du {
 	fi
 }
 
+function df {
+	about ""
+	if ! [[ -t 1 ]]; then
+		# No terminal output. We don't modify the args to df
+		command df "$@"
+	fi
+
+	command df -h "$@"
+}
+
 function update-motd {
 	about "allow non-sudo users to run update-motd and get an implicit --show-only"
 
