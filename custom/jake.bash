@@ -494,10 +494,6 @@ function fidget {
 		cd ~
 		jake-sdkman-update
 		pull # also does mr up, since ~/.mrconfig exists
-		if _command_exists win-git-update &> /dev/null; then
-			echo updating window git stuff too
-			win-git-update
-		fi
 		apt-up
 
 		# relies on my aliases. Not necessarily the best plan
