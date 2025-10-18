@@ -327,6 +327,8 @@ function cherry-pick {
 #        Maybe only do the second addp if the stage is empty.
 # TODO: move this function to a git-alias. Calling it will get the proper git squawking behavior
 # TODO: if no args, and the stage is empty, we should do an add -p, then continue on to the 'provide this commit message' step. Current behavior is 'status'
+# TODO: If this moves to a git alias (`git commit-like-jake-wants`), then I no longer need to suppress git squawk.
+#       ... I should formalize what that means somewhere.
 function commit {
 	# stash some flags that can be "transparent" to this feature
 	# (these can only be BEFORE the message for now... potentially always)
