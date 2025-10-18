@@ -502,6 +502,8 @@ function fidget {
 			echo "winget exists - here's the update"
 			winget
 		fi
+
+		echo # spacing
 		_mr-able
 	)
 	echo "update completed at $(date)"
