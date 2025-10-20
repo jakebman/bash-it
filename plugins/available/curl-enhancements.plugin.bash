@@ -40,6 +40,8 @@ fi
 # so that a ^C kills both, without somehow suspending one
 function enhanced-curl {
 	if [[ -t 1 ]]; then
+		local -
+		set -o pipefail
 		_curl-maybe-logging "$@" | _curl-jqing-and-paging-helper
 	else
 		_curl-maybe-logging "$@"
