@@ -45,6 +45,20 @@ function _complete_typo {
 	fi
 }
 
+function _complete_implicit-git_typo {
+	mapfile -t -d '' COMPREPLY < <(
+		alias "${1}=git ${1}"
+		complete -F _complete_alias "$1"
+		_complete_alias "$@"
+		printf "%s\0" "${COMPREPLY[@]}" | sort --zero-terminated | uniq --zero-terminated
+	)
+
+	# Corner case: mapfile will always be able to read a single empty string from an empty result.
+	if [[ 1 -eq "${#COMPREPLY[@]}" && -z "${COMPREPLY[0]}" ]]; then
+		COMPREPLY=()
+	fi
+}
+
 function _fallback_to_typos {
 	if COMPREPLY=( $(compgen -c -- "$2") ); then
 		# a normal command exists. Just pass it up
@@ -56,4 +70,5 @@ function _fallback_to_typos {
 }
 
 complete -F _complete_typo $(_list_typo_names)
+complete -F _complete_implicit-git_typo $(git list-all-commands) # NB: Jake-specific command.
 complete -F _fallback_to_typos -I -c # -c means we're completing commands, so ./foo/bar completes properly
