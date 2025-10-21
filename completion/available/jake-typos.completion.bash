@@ -69,6 +69,18 @@ function _fallback_to_typos {
 	COMPREPLY=( $(compgen -W "$(_list_typo_names)" "$2") )
 }
 
+function _add_completion_for_implicit-git_typos {
+	local command
+	for command in $(git list-all-commands); do # NB: Jake-specific command
+		# Don't overwrite any existing completion. Some git commands pun with existing real commands
+		# Ex: `rm` vs `git rm`
+		if ! complete -p "$command" &>/dev/null; then
+			complete -F _complete_implicit-git_typo "$command"
+		fi
+	done
+}
+
+_add_completion_for_implicit-git_typos
+# TODO: typo completion could clobber existing builtin completions, but that's less likely
 complete -F _complete_typo $(_list_typo_names)
-complete -F _complete_implicit-git_typo $(git list-all-commands) # NB: Jake-specific command.
 complete -F _fallback_to_typos -I -c # -c means we're completing commands, so ./foo/bar completes properly
