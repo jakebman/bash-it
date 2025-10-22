@@ -31,7 +31,7 @@ export DOCKER_CONFIG="${XDG_CONFIG_HOME}/docker"
 export RANCHER_CONFIG_DIR="${XDG_CONFIG_HOME}/rancher"
 # I had to rip this from their source code: https://github.com/GitGuardian/ggshield/blob/8b6464d31be1cef6fa3f4ceec1fe9894a8454c27/ggshield/core/dirs.py#L16
 export GG_USER_HOME_DIR="${XDG_CONFIG_HOME}/ggshield"
-# This file, if it's ever created, could also configure `cache=${npm_config_cache}` and remove the $npm_config_cache variable, below
+# This file might configure `cache=...`, which removes the need for $npm_config_cache variable, below
 export NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME}/npm/npmrc"
 
 # TODO: it'd be nice to have this set BEFORE bash starts, but hey, that's what `bind -f` is for!
@@ -97,7 +97,10 @@ if grep -q "cookie-jar.*${XDG_CACHE_HOME}/curl" "$CURL_HOME/.curlrc" "$XDG_CONFI
 fi
 
 # see `man npm` and https://docs.npmjs.com/cli/v10/commands/npm-cache
-export npm_config_cache="${XDG_CACHE_HOME}/npm"
+# We only need to set this cache directory if it's not in npmrc
+if ! grep -q ^cache= "$NPM_CONFIG_USERCONFIG"; then
+	export npm_config_cache="${XDG_CACHE_HOME}/npm"
+fi
 export JARVIZ_DIR="${XDG_CACHE_HOME}" # a jar analyzer, from sdkman
 
 # .pyc files go here. Read more in `man python`'s entry on `-X pycache_prefix=PATH`
