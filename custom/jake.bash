@@ -196,10 +196,11 @@ function vars {
 		# magic incantation from the internet
 		# Basically, prints the variables and functions of
 		# the current bash session, but doesn't print the functions
+		# NB: some values make grep think its stdin is a binary file, and it squawks to stderr about it
 		( # TODO: `local -` instead of a subshell?
 			set -o posix
 			set
-		) | grep -v -E "$ignore_regex" | pager
+		) | grep -v -E "$ignore_regex" 2>/dev/null | pager
 
 		echo
 		echo "# Ignored ${ignore_keys[*]} and BASH_COMMAND (if literal match)"
