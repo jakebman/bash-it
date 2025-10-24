@@ -98,7 +98,8 @@ fi
 
 # see `man npm` and https://docs.npmjs.com/cli/v10/commands/npm-cache
 # We only need to set this cache directory if it's not in npmrc
-if ! grep -q ^cache= "$NPM_CONFIG_USERCONFIG"; then
+# NB: because I don't always have/need an npmrc, this is the exact use case for grep -s
+if ! grep -s -q ^cache= "$NPM_CONFIG_USERCONFIG"; then
 	export npm_config_cache="${XDG_CACHE_HOME}/npm"
 fi
 export JARVIZ_DIR="${XDG_CACHE_HOME}" # a jar analyzer, from sdkman
