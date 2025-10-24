@@ -69,18 +69,50 @@ function _fallback_to_typos {
 	COMPREPLY=( $(compgen -W "$(_list_typo_names)" "$2") )
 }
 
-function _add_completion_for_implicit-git_typos {
+function _add_typo_completions_without_overriding_existing {
 	local command
+	for command in $(_list_typo_names); do
+		# Don't overwrite any existing completion with my typos
+		# I'm pretty certain the bash_completion stuff procs before bash-it
+		if complete -p "$command" &>/dev/null; then
+			_log_debug "Not creating typo completion for ${command}"
+		else
+			complete -F _complete_implicit-git_typo "$command"
+		fi
+	done
 	for command in $(git list-all-commands); do # NB: Jake-specific command
 		# Don't overwrite any existing completion. Some git commands pun with existing real commands
 		# Ex: `rm` vs `git rm`
-		if ! complete -p "$command" &>/dev/null; then
+		if complete -p "$command" &>/dev/null; then
+			_log_debug "Not creating git-fallback completion for ${command}"
+		else
 			complete -F _complete_implicit-git_typo "$command"
 		fi
 	done
 }
 
-_add_completion_for_implicit-git_typos
+# TODO: there's an enhancement opportunity to allow for dynamic completion loading. From `man bash`:
+#       There  is  some  support  for dynamically modifying completions.  This is most useful when
+#       used in combination with a default completion specified with complete -D.   It's  possible
+#       for  shell functions executed as completion handlers to indicate that completion should be
+#       retried by returning an exit status of 124.  If a shell function returns 124, and  changes
+#       the  compspec associated with the command on which completion is being attempted (supplied
+#       as the first argument when the function is  executed),  programmable  completion  restarts
+#       from  the beginning, with an attempt to find a new compspec for that command.  This allows
+#       a set of completions to be built dynamically as completion is attempted, rather than being
+#       loaded all at once.
+#
+#       For instance, assuming that there is a library of compspecs, each kept in  a  file  corre‐
+#       sponding  to the name of the command, the following default completion function would load
+#       completions dynamically:
+#
+#       _completion_loader()
+#       {
+#            . "/etc/bash_completion.d/$1.sh" >/dev/null 2>&1 && return 124
+#       }
+#       complete -D -F _completion_loader -o bashdefault -o default
+
+_add_typo_completions_without_overriding_existing
 # TODO: typo completion could clobber existing builtin completions, but that's less likely
 complete -F _complete_typo $(_list_typo_names)
 complete -F _fallback_to_typos -I -c # -c means we're completing commands, so ./foo/bar completes properly

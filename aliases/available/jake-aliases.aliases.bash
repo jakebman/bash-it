@@ -486,74 +486,16 @@ alias gitpull='git pull'
 alias gitup='git up' # git aliases up to pull, but parallel structure wins, so I'm not expanding it here.
 alias gitstatus='git status'
 
-# 'Vanilla' aliases - these are aliases to existing git-<command>s (not git-<alias>es)
-# These aliases simply allow for an implicit git on commands that predate any of my git-config alias additions
-alias push='git push'
-alias fetch='git fetch'
-alias rebase='git rebase'
-alias merge='git merge'
-alias stash='git stash'
-alias branch='git branch'
-alias blame='git blame'
-alias ls-files='git ls-files'
-alias log='git log'
-alias mergetool='git mergetool'
-alias shortlog='git shortlog'
-alias submodule='git submodule'
-alias tag='git tag'
-alias reflog='git reflog'
-alias rev-parse='git rev-parse'
-alias worktree='git worktree'
-alias bisect='git bisect'
-# git-extras
-alias abort='git abort'
-alias lock='git lock'
-alias locked='git locked'
-alias unlock='git unlock'
-
-# 'Non-Duplicating' aliases - these are aliases to existing git-<alias>s, that simply allow for an implicit git
-# They're only different from 'Vanilla' aliases above because we "know" that these git commands are actually git aliases
-# Specifically, these are intentional exceptions to the 'Duplicating' aliases, below, which try to shortcut a level of indirection.
-# These git aliases *could* become full git-X-dispatched commands in the future, and I'd love to not accidentally overwrite that
-# behavior with what this file's no-longer-current knowledge gets wrong.
-# Specifically, that means I should be *very judicious* with the 'Duplicating' and 'Modifying' aliases, because if I ever improve those commands,
-# I won't actually reap any benefit!
-# tl;dr: these git-<alias>s SHOULD ALWAYS track what their corresponding git-<command> DOES, EVEN IF those commands change in the future
-alias authors='git authors' # formerly from git-extras, but I don't like their implementation
-alias authors-raw='git authors-raw'
-alias bare='git bare'
-alias branches='git branches'
-alias config-editg='git config-editg'
-alias config-editl='git config-editl'
-alias gitdir='git gitdir'
-alias push--='git push--' # Intended to be push --force-with-lease
-alias pull--='git pull--' # A pull that is force-y: essentially reset the current branch to its upstream; changing the working tree. Try to be safe about it.
-alias ignored='git ignored'
-alias intent-to-add='git intent-to-add'
-alias logn='git logn' # log with numstats
-alias logp='git logp' # log with patch
-alias logs='git logs' # log with stats (+++-- indicators)
-alias ls-untracked='git ls-untracked'
-alias rainbow-branches='git rainbow-branches'
-alias rainbow-all='git rainbow-all'       # explicitly --all form of rainbow output
-alias rainbow-here='git rainbow-here'     # approx. git log --oneline --graph, specifically only the current history (no --all)
-alias shallow='git shallow'               # a shallow clone (non-alphabetical to be beside its twin)
-alias since='git since'                   # log with immediate --since argument (technically --since-as-filter, but THATS THE POINT!!!)
-alias changed-since='git changed-since'   # like since, but only lists the files changed, piping through `jaketree` when showing on the terminal
-alias stats='git stats'                   # git show, with implicit --stat to change diff output to stats output
-alias status-or-show='git status-or-show' # git status, if it would have any output. Otherwise git show
-alias tags='git tags'                     # list the tags
-alias unshallow='git unshallow'           # re-hydrate a shallow clone
-alias unstash='git unstash'               # essentially `stash pop`
-alias untracked='git untracked'           # something morally equivalent to 'status --untracked'
-alias yesterday='git yesterday'           # 'since yesterday', potentially smarter
-alias today='git today'                   # like yesterday, but more recent. Allowed to be identical to yesterday, though.
 
 # 'Builtin-Shadowing, Duplicating' aliases
 # These aliases are builtins that I *definitely* want shadowed all the time.
 # For now, I'm NOT relying on permit-aliases-to-shadow-builtins or run-alias.
 # Instead, for each of the builtin commands that I'd like to enhance, I'm just directly aliasing
 # from the bash-land alias for the git-builtin name to the git-land enhanced command I'd like to use
+
+# As a warning to myself:
+# I should be *very judicious* with these aliases, because if I ever improve those commands,
+# I won't actually reap any benefit!
 
 # The `remote` bash command was formerly a function which (conditionally) adds -v to git-remote.
 # I promoted it to a git alias. Git aliases aren't allowed to shadow git builtins,
@@ -565,16 +507,6 @@ alias today='git today'                   # like yesterday, but more recent. All
 # (and we won't be *as* vulnerable if I turn permit-aliases-to-shadow-builtins off)
 alias remote='git remotes'
 
-# 'Duplicating' aliases
-# These could have been written as `alias X='git X'`, because they're
-# all bash aliases for git aliases I've written.
-# But! Because I don't ever expect to change what the underlying git alias does,
-# I'd rather skip the indirection and just specify the correct behavior in the alias
-alias co='git checkout'
-alias intend='git intent-to-add' # sorta typo, but more trying to cover my bases on these names
-alias intent='git intent-to-add' # sorta typo, but more trying to cover my bases on these names
-alias staged='git diff --staged'
-alias autostash='git pull --rebase --autostash' # implicit rebase is intentional. See the alias definition
 alias register='mr register'                    # not a git command, but imagine `git alias register '!mr register'`
 
 # 'Modifying' aliases
