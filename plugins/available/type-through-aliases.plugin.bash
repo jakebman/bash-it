@@ -1,8 +1,9 @@
 # shellcheck shell=bash
 cite about-plugin
-about-plugin 'allow type (and man) to see through aliases and try to find the underlying command'
+about-plugin 'allow type (and man) to see through aliases and typos and try to find the underlying command'
 
 
+# TODO: this does weird things with multiple arguments, especially if they have mixed success
 function _type_with_typos {
 	about '`command type`, but aware of typos'
 	if command type "$@" 2>/dev/null; then
@@ -26,6 +27,7 @@ function _type_with_typos {
 			-e 's/^function$/typo-function/g' \
 			-e 's/is aliased to/is a typo of/g' \
 			-e 's/^alias$/typo/g'
+		# TODO: check git is-valid-command for the arguments
 	) >&2 # redirect output to stderr
 	# Fail, because aliases aren't successfully types
 	return 5253
