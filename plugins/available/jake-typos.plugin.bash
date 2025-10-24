@@ -90,7 +90,7 @@ function command_not_found_handle {
 	fi
 
 	# TODO: can I get a printed bash stack trace?
-	_log_debug "found typo solution '$(type "$name")' for '$name'"
+	_log_debug "found typo solution '$(type "$name")'"
 
 	local - # local set -o stuff
 	# TODO: Check if the outer bash is interactive
