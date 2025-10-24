@@ -647,6 +647,14 @@ function _jake-check-optional-tools() {
 		echo 'sudo rm "$(which git-cp)"'
 	fi
 
+	if _binary_exists git-sed; then
+		echo "git-extras's git-sed makes me uncomfortable. Pleas remove it with"
+		# Strange: If you run git-authors in the folder where git-authors's source lives, its output is appended
+		# to its own source code
+		echo -en "\t"
+		echo 'sudo rm "$(which git-sed)"'
+	fi
+
 	if _command_exists git-vendor; then
 		echo "Nothing to do for git-vendor - git-vendor is happy"
 	else
