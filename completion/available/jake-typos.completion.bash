@@ -75,7 +75,7 @@ function _add_typo_completions_without_overriding_existing {
 		# Don't overwrite any existing completion with my typos
 		# I'm pretty certain the bash_completion stuff procs before bash-it
 		if complete -p "$command" &>/dev/null; then
-			_log_debug "Not creating typo completion for ${command}"
+			_log_trace "Not creating typo completion for ${command}"
 		else
 			complete -F _complete_implicit-git_typo "$command"
 		fi
@@ -84,7 +84,7 @@ function _add_typo_completions_without_overriding_existing {
 		# Don't overwrite any existing completion. Some git commands pun with existing real commands
 		# Ex: `rm` vs `git rm`
 		if complete -p "$command" &>/dev/null; then
-			_log_debug "Not creating git-fallback completion for ${command}"
+			_log_trace "Not creating git-fallback completion for ${command}"
 		else
 			complete -F _complete_implicit-git_typo "$command"
 		fi
