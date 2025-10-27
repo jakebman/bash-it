@@ -58,6 +58,7 @@ bind -f "$INPUTRC"
 # https://docs.oracle.com/en/java/javase/23/troubleshoot/submit-bug-report.html#GUID-3933BFE1-0193-403E-8D72-2E0DC6639EE8
 # Even more! AWS recommends this variable as well:
 # https://docs.aws.amazon.com/sdkref/latest/guide/jvm-system-properties.html#:~:text=With%20an%20environment%20variable
+# TODO: Some tools ref JAVA_OPTS, which is a conventional name for "args I'll add to my call to java (`java --my-args $JAVA_OPTS your.jar`)"
 JAVA_TOOL_OPTIONS+=" -Djava.util.prefs.userRoot='${XDG_CONFIG_HOME}'/java"
 export JAVA_TOOL_OPTIONS
 
