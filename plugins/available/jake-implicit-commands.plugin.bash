@@ -272,11 +272,11 @@ alias markdown-diff=diff-ignore-wrapping
 alias mddiff=markdown-diff
 
 function gitk {
-	about "gitk should show all refs by default"
+	about "gitk should actually redirect through \`git gitk\` to allow me to keep argo-manifests out of there"
 	if [[ "$#" -eq 0 ]]; then
-		command gitk --all
+		command git gitk --all "$@"
 	else
-		command gitk "$@"
+		command git gitk "$@"
 	fi
 }
 
