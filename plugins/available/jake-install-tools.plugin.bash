@@ -82,6 +82,14 @@ function jake-install-tools() {
 		touch -r /usr/share/doc/git/contrib/git-jump/git-jump ~/bin/git-jump
 	fi
 
+	if [[ /usr/share/bash-completion/completions/docker -nt /mnt/wsl/docker-desktop/cli-tools/usr/share/bash-completion/completions/docker ]]; then
+		echo "Nothing to do for docker's (rude) symlink to docker completion"
+	else
+		echo "Hey, it looks like docker updated its completion script. Go ahead and copy it over the bash-it completion"
+		echo -en "\t"
+		echo "sudo cp /mnt/wsl/docker-desktop/cli-tools/usr/share/bash-completion/completions/docker /usr/share/bash-completion/completions/docker"
+	fi
+
 	# TODO: it would be nice to have instructions that turn on APT::Get::Always-Include-Phased-Updates
 	# read more at https://discourse.ubuntu.com/t/phased-updates-in-apt-in-21-04/20345/24
 
