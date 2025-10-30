@@ -8,6 +8,11 @@
 # added to Jake's bash-it from https://github.com/jonasbn/bash_completion_ack/raw/9f387108a813b7e214b47e4e269392ae89217e82/ack
 # and modified since then, to reduce perl calls for _acktypeargs and _negacktypes
 # for a .5s speedup on WSL startup
+# And to bail early if there's no ack command avalable
+
+if ! _command_exists ack; then
+	return
+fi
 
 _acktypes=( $(ack --help-types | tail +10 | awk '{gsub(/^[ \t]+/,"",$1); print$1;}') )
 _acktypeargs=()
