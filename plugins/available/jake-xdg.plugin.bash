@@ -36,7 +36,7 @@ export NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME}/npm/npmrc"
 
 # TODO: it'd be nice to have this set BEFORE bash starts, but hey, that's what `bind -f` is for!
 export INPUTRC="${XDG_CONFIG_HOME}/inputrc"
-bind -f "$INPUTRC"
+[ -f "$INPUTRC" ] && bind -f "$INPUTRC"
 
 
 # *On Linux*, the *default backing store* respects the java.util.prefs.userRoot and java.util.prefs.systemRoot system properties
@@ -89,7 +89,7 @@ if [ -f "$WGETRC" ]; then
 	mkdir -p "${XDG_CACHE_HOME}/wget"
 fi
 # Ditto curl, with its cookie jar:
-if grep -q "cookie-jar.*${XDG_CACHE_HOME}/curl" "$CURL_HOME/.curlrc" "$XDG_CONFIG_HOME/curlrc" "$HOME/.curlrc"; then
+if grep -s -q "cookie-jar.*${XDG_CACHE_HOME}/curl" "$CURL_HOME/.curlrc" "$XDG_CONFIG_HOME/curlrc" "$HOME/.curlrc"; then
 	# SPECULATIVE!!!
 	# curlrc might contain a line like `--cookie-jar /home/jakebman/.cache/curl/cookie-jar`
 	# (mine does)
