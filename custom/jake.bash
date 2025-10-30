@@ -3,7 +3,7 @@ export EDITOR=vim
 export VISUAL=vim
 export PAGER=less
 export BASH_IT_CURL_PAGER='bat --style=numbers'
-export MANPAGER="less --lesskey-src '${HOME}/.config/lesskey-no-gotoend-on-q'"
+[ -f "${HOME}/.config/lesskey-no-gotoend-on-q" ] && export MANPAGER="less --lesskey-src '${HOME}/.config/lesskey-no-gotoend-on-q'"
 export WATCH_INTERVAL=1.2 # I'm a little impatient. It's nice to have this be a little faster than the full 2s
 
 # This could be accomplished by KUBECONFIG+="${KUBECONFIG+:}${XDG_CONFIG_HOME:-${HOME}/.config}/kubectl/config",
