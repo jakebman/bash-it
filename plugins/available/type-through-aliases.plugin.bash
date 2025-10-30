@@ -1,6 +1,9 @@
 # shellcheck shell=bash
+# Load after the typos plugin, so we can check on it being there
+# BASH_IT_LOAD_PRIORITY: 270
+#
 cite about-plugin
-about-plugin 'allow type (and man) to see through aliases and typos and try to find the underlying command'
+about-plugin 'allow type (and man) to see through aliases and typos (if enabled) and try to find the underlying command'
 
 
 # TODO: this does weird things with multiple arguments, especially if they have mixed success
@@ -32,6 +35,14 @@ function _type_with_typos {
 	# Fail, because aliases aren't successfully types
 	return 5253
 }
+
+# Fallback logic
+if ! _command_exists  _typos-helper; then
+	# typos aren't loaded. Fall back to not doing typos
+	function _type_with_typos {
+		command type "$@"
+	}
+fi
 
 if _command_exists bat; then
 	function _type_with_formatting {
@@ -87,6 +98,7 @@ function man {
 		# Or this one command isn't a typo
 		# Or something went wrong getting its typo value.
 		# Disable magic and go to the normal work.
+		# This logic naturally avoids calling typo_value if type doesn't report typos
 		command man "$@"
 		return
 	fi
