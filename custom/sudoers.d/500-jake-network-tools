@@ -8,7 +8,9 @@
 # See the man page for details on how to write a sudoers file.
 #
 
-# Allow the sudoers group to run iotop with sudo, but without a password
+# Allow the sudoers group to run i{f,o}top with sudo, but without a password
+# (You can make the sudo implicit if you alias iftop='sudo iftop')
+# tulpn is different - I wrote it with a builtin sudo trampoline
 
 %sudo ALL = (root) NOPASSWD: /usr/sbin/iftop
 %sudo ALL = (root) NOPASSWD: /usr/sbin/iotop
