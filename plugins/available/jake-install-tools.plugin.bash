@@ -526,6 +526,15 @@ function _jake-check-optional-tools() {
 		echo 'wget "https://github.com/jmespath/jp/releases/latest/download/jp-linux-amd64" -O ~/bin/jp && chmod +x ~/bin/jp'
 	fi
 
+	if _command_exists pino-pretty; then
+		echo "Nothing to do for pino-pretty - pino-pretty is happy"
+	else
+		echo "Consider installing pino-pretty to get json-y logs to look less json-y"
+		echo "Get the node package 'globally' installed to ~/.local/bin by getting your npmrc.example into proper position in \$NPM_CONFIG_USERCONFIG, and then:"
+		echo -en "\t"
+		echo 'npm install -g pino-pretty'
+	fi
+
 	if _command_exists jira; then
 		echo "Nothing to do for jira - jira is happy"
 	else
