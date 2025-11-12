@@ -31,6 +31,14 @@ export KUBECTL_CACHE_DIR="${XDG_CACHE_HOME:-${HOME}/.cache}/kubectl"
 JAVA_TOOL_OPTIONS+=" -Djavax.net.ssl.trustStore=/etc/ssl/certs/java/cacerts -Djavax.net.ssl.trustStorePassword=changeit"
 export JAVA_TOOL_OPTIONS
 
+if _command_exists pino-pretty; then
+	export JAKE_MAVEN_PAGER='pino-pretty-paged'
+	function pino-pretty-paged {
+		pino-pretty --colorize |
+			less --raw-control-chars +F;
+	}
+fi
+
 # The python library `webbrowser` has some weird hiccups. Setting this environment variable
 # allows the aws cli and my ~/bin/splunk tool to avoid experiencing an `tcgetpgrp failed: Not a tty` error
 # (I no longer need to set AWS_BROWSER, as it defaults to BROWSER)
