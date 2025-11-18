@@ -200,6 +200,8 @@ export SDKMAN_DIR="${JAKE_XDG_BIN_DIR}/sdkman"
 # .landscape - ubuntu-ism
 # .m2 - a symlink. Would otherwise require CLI argument to move settings.xml, which is the only thing I keep there anyway :(
 #     TODO: maven 3.9.0+ accept CLI arguments via $MAVEN_ARGS. See https://maven.apache.org/configure.html
+#     TODO: even lower mavens might also be viable to accept -D args via JAVA_TOOL_OPTIONS
+#     TODO: alas, I have forgotten which CLI arguments would do this
 # .motd_shown - probably not doable
 # .mrconfig (& .mr which symlinks to beat .mrtrust at tab completion) - cannot be moved without a code change in mr tool
 # .netrc - conventional file name, from telnet. Location configurable in curl, but not telnet.
