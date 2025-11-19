@@ -315,6 +315,23 @@ function cd-or-checkout {
 alias c=cd-or-checkout
 # TODO: command completion for cd-or-checkout
 
+function _cat_or_cli_args {
+	if [[ "$#" -eq 0 ]]; then
+		# no args. Act like a filter
+		cat
+	else
+		echo "$@"
+	fi
+}
+
+# python-style naming for this string manipulation
+function upper {
+	_cat_or_cli_args "$@" | tr a-z A-Z
+}
+function lower {
+	_cat_or_cli_args "$@" | tr A-Z a-z
+}
+
 function _mr-isrepo-local {
 	about "succeeds if the current folder is a git repo tracked by mr. fails otherwise"
 	[[ -e .git ]] || return 1
