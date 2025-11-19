@@ -1,6 +1,5 @@
 #! /bin/bash
-# Run the command q as the user q, in a login shell (to clear out some env variables)
-# Alas, this resets the CWD to ~q.
+# Run the command q as the user q, with ~q/bin in the path (It's where q, *and `qchat`* live. `q` errors if `qchat` isn't on the path)
 
 echo "Hello '${SUDO_USER}', welcome to Q"
-sudo --login --user q ~q/bin/q
+sudo su q -c 'PATH=~q/bin:"$PATH"; q'
