@@ -4,11 +4,16 @@ about-alias "Jake's custom commands that are aliases"
 # They're functionally aliases; so sue me
 # (They also have typo aliases)
 function lls {
+	local humanReadable
+	if [ -t 1 ]; then
+		# stdout is terminal
+		humanReadable=--human-readable
+	fi
 	# an expanded form of -alF, from bash-it's `alias ll='ls -alF'`
 	# But, I prefer -[-A]lmost-All over -[-a]ll
 	# -l is --long-listing, but has no long analog
-
-	ls -l --almost-all --classify --color "$@" | pager
+	# And we only --human-readable if stdout is a terminal
+	ls -l --almost-all --classify $humanReadable --color "$@" | pager
 }
 # Bash Minutae:
 # We *could* use the previously-declared `alias ll=..` within `function lls` above.
