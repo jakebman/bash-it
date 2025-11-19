@@ -12,6 +12,7 @@
 # (You can make the sudo implicit if you alias iftop='sudo iftop')
 # tulpn is different - I wrote it with a builtin sudo trampoline
 
-%sudo ALL = (root) NOPASSWD: /usr/sbin/iftop
-%sudo ALL = (root) NOPASSWD: /usr/sbin/iotop
+Cmnd_Alias IO_MONITORING_TOOLS = /usr/sbin/iftop, /usr/sbin/iotop
+%sudo ALL = (root) NOPASSWD: IO_MONITORING_TOOLS
+
 %sudo ALL = (root) NOPASSWD: /usr/local/bin/tulpn
