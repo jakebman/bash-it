@@ -53,7 +53,7 @@ export INPUTRC="${XDG_CONFIG_HOME}/inputrc"
 # But there's also JDK_JAVA_OPTIONS: https://stackoverflow.com/questions/52986487/what-is-the-difference-between-jdk-java-options-and-java-tool-options-when-using
 # Which is doc'd in java 21's man page:
 #     Note: You can use the JDK_JAVA_OPTIONS launcher environment variable to prepend its content to the
-#     actual command line of the java launcher [when launching a source-file java sh-bang file].
+#     actual command line of the java launcher [especially when launching a source-file java sh-bang file, but also in regular use(?)].
 #     See Using the JDK_JAVA_OPTIONS Launcher Environment Variable.
 # In the end, I followed https://dev.to/sunnybhambhani/different-environment-variables-available-in-java-101o - I'm choosing
 # JAVA_TOOL_OPTIONS, which seems to be global, overridable, and I don't mind javac reading this too:
