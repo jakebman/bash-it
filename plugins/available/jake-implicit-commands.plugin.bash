@@ -419,7 +419,7 @@ function du {
 }
 
 function df {
-	about ""
+	about "implicit -h on df if stdout is a terminal"
 	if ! [[ -t 1 ]]; then
 		# No terminal output. We don't modify the args to df
 		command df "$@"
