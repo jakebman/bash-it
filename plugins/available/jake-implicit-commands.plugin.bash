@@ -428,6 +428,14 @@ function df {
 	command df -h "$@"
 }
 
+function free {
+	about "implicit -h on free if stdout is a terminal"
+	if ! [[ -t 1 ]]; then
+		command free "$@"
+	fi
+	command free -h "$@"
+}
+
 function update-motd {
 	about "allow non-sudo users to run update-motd and get an implicit --show-only"
 
