@@ -188,17 +188,12 @@ function _base64_looks_like_base64 {
 	(( ${#1} % 4 == 0 )) && [[ "X$1" =~ ^[a-zA-Z0-9+/]+=?=?$ ]]
 }
 
-function base64 {
+function _implicit_base64 {
 	about "allow base64 to operate on 1) multiple arguments (cat'd) and 2) string-arguments as-if they were files"
 	# https://stackoverflow.com/questions/402377/using-getopts-to-process-long-and-short-command-line-options
 	local -a flags
 	local OPTS fileish
 
-	if getopt -T || (( $? != 4 )); then
-		# non-GNU getopts will succeed -T. GNU getops returns 4
-		echo "Need GNU getopt" >&2
-		return 1
-	fi
 	OPTS=$(getopt --name base64_wrapper \
 			--options diw: \
 			--longoptions decode,ignore-garbage,wrap: \
@@ -259,6 +254,12 @@ function base64 {
 		done
 	fi
 }
+if getopt -T || (( $? != 4 )); then
+	# non-GNU getopts will succeed -T. GNU getops returns 4
+	_log_error "Need GNU getopt for base64 implicit command"
+else
+	alias base64=_implicit_base64
+fi
 alias unbase64='base64 -d'
 
 
