@@ -143,6 +143,7 @@ function jake-install-tools() {
 	# _jake-find-tool g++ # I prefer clang for now
 	_jake-find-tool ncdu
 	_jake-find-tool tree
+	_jake-find-tool ack # also custom-installed, but Ubuntu is now on 3.7, and no longer calling the binary ack-grep
 	_jake-find-tool zip
 	_jake-find-tool jq
 	# _jake-find-tool an an "an anagram tool" # meh - webapp seems just as fine
