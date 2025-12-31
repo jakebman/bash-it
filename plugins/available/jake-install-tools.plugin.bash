@@ -678,23 +678,12 @@ function _jake-check-optional-tools() {
 		echo "Consider installing git-vendor - it's a tool for bash-it vendor management from https://github.com/Tyrben/git-vendor"
 	fi
 
-	if _command_exists makedeb; then
-		echo "Nothing to do for makedeb - makedeb is happy"
+	if _command_exists pacstall; then
+		echo "Nothing to do for pacstall - pacstall is happy"
 	else
-		echo "consider looking into makedeb for my own packages - https://www.makedeb.org/"
-		echo "(It's one way the glab cli is published - https://gitlab.com/gitlab-org/cli/-/blob/main/docs/installation_options.md#prebuilt-mpr)"
-	fi
-
-	if [ -f '/etc/apt/sources.list.d/prebuilt-mpr.list' ]; then
-		echo "Nothing to do for MPR repository - prebuilt-mpr.list exists in /etc/apt/sources.list.d/"
-	else
-		echo "consider enabling the MPR repository for glab-cli and other(?) tools. Learn more at https://docs.makedeb.org/prebuilt-mpr/getting-started/#setting-up-the-repository"
+		echo "Consider looking into pacstall - recommended by the makedeb guy after he stopped maintaining makedeb"
 		echo -en "\t"
-		echo "wget -qO - 'https://proget.makedeb.org/debian-feeds/prebuilt-mpr.pub' | gpg --dearmor | sudo tee /usr/share/keyrings/prebuilt-mpr-archive-keyring.gpg 1> /dev/null"
-		echo -en "\t"
-		echo 'echo "deb [arch=all,$(dpkg --print-architecture) signed-by=/usr/share/keyrings/prebuilt-mpr-archive-keyring.gpg] https://proget.makedeb.org prebuilt-mpr $(lsb_release -cs)" | sudo tee /etc/apt/sources.list.d/prebuilt-mpr.list'
-		echo -en "\t"
-		echo "sudo apt update"
+		echo "See https://hunterwittenborn.com/blog/stepping-back-from-open-source/ and https://pacstall.dev/"
 	fi
 
 	if _command_exists cloudsmith; then
