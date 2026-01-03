@@ -498,7 +498,6 @@ function _jake-check-optional-tools() {
 		echo "(They... oddly ...don't include the install files as assets on the release - they're external links)"
 		echo -en "\t"
 		echo 'tar xzf helm*tar*; install helm*/helm ~/bin'
-		echo -en "\t"
 	fi
 
 	if _command_exists pyenv; then
