@@ -103,14 +103,19 @@ function _cd-to-single-completion {
 }
 
 function _common-prefix-of-args {
-	about 'If there is a common prefix among all arguments, print it. It has to be the first element, currently'
-	# TODO: there might be a "if candidate isn't a prefix of elem, then if elem is a prefix of candidate, it becomes the new candidate & continue"
-	# But I'm not confident in that for the first draft
+	about 'If an element of $@ is a common prefix of all others (modulo trailing slashes), print it'
 	local candidate="${1%/}" # with potential trailing slash removed
 	local elem
 	for elem in "$@"; do
 		if [[ "$elem" != ${candidate}* ]]; then
-			return 1 # fail - not a prefix
+			elem="${elem%/}" # strip the potential trailing slash
+			if [[ "$candidate" != ${elem}* ]]; then
+				return 1 # fail - neither is a prefix of the other
+			else
+				# current elem is a prefix of the candidate, and therefore a prefix of every prior
+				# elem that candidate was a prefix of
+				candidate=$elem
+			fi
 		fi
 	done
 	printf "%s" "$candidate"
