@@ -477,7 +477,7 @@ function clone {
 		if [[ -d "$dir" ]]; then
 			mr register "$dir"
 		else
-			echo "pleas manaully register $* with mr"
+			echo "please manaully register $* with mr"
 		fi
 	fi
 
