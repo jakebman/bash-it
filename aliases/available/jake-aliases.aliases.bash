@@ -461,6 +461,7 @@ function clone {
 	local retcode
 	if [[ "x$(basename "$PWD")" == *junk-drawer* ]]; then
 		# special case: shallow clone from within junk-drawers
+		# TODO: But only if the mr config for this is skip=lazy
 		git_command=shallow
 		echo "We're in the junk drawer - using a shallow clone"
 	fi
