@@ -19,6 +19,11 @@ if [ -d "${XDG_CONFIG_HOME:-${HOME}/.config}/jake/windows-user-home" ]; then
 fi
 export KUBECONFIG
 
+if [ -d ~/wsl-projects/figlet ]; then
+	# this is a git repo (git@github.com:Sepatu-Bot/figlet.git) which has a lot of extra fonts
+	export FIGLET_FONTDIR=~/wsl-projects/figlet
+fi
+
 # A custom flag, respected by my custom kubectl, which respects some flags. Check the source for full listing
 # Thanks to https://github.com/kubernetes/kubectl/issues/1154 for the naming convention
 # unsure if any parents need to be created
