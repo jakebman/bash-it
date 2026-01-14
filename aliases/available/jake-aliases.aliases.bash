@@ -459,11 +459,11 @@ function reset {
 function clone {
 	local git_command=clone
 	local retcode
-	if [[ "x$(basename "$PWD")" == *junk-drawer* ]]; then
-		# special case: shallow clone from within junk-drawers
-		# TODO: But only if the mr config for this is skip=lazy
+	if [[ "x$(basename "$PWD")" == *junk-drawer* ]] &&
+		mr -d this-mr-repo-name-does-not-exist-and-is-used-to-check-if-we-skip-repos status &>/dev/null; then
+		# special case: shallow clone from within skipping junk-drawers
 		git_command=shallow
-		echo "We're in the junk drawer - using a shallow clone"
+		echo "We're in a junk drawer with skip=lazy or similar - using a shallow clone"
 	fi
 	git $git_command "$@"
 	retcode="$?"
