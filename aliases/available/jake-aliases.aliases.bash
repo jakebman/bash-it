@@ -543,6 +543,7 @@ alias logn='git logn' # log with numstats
 alias logp='git logp' # log with patch
 alias logs='git logs' # log with stats (+++-- indicators)
 alias ls-untracked='git ls-untracked'
+alias ls-ignored='git ls-ignored'
 alias rainbow-branches='git rainbow-branches'
 alias rainbow-all='git rainbow-all'       # explicitly --all form of rainbow output
 alias rainbow-here='git rainbow-here'     # approx. git log --oneline --graph, specifically only the current history (no --all)
