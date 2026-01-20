@@ -9,6 +9,12 @@ function pj() {
 	about 'navigate quickly to your various project directories'
 	group 'projects'
 
+	if [ "$#" -eq 0 ]; then
+		>2 echo "No project specified. pj is not a mind reader"
+		return 1
+	fi
+
+
 	local CDPATH=${BASH_IT_PROJECT_PATHS}
 	# TODO: the POSIX spec on cd specifically says "Use $PWD if cd can't find any other matches"
 	# This is not ideal, as I want to specifically exclude it from consideration
