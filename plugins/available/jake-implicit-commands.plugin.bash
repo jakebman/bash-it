@@ -330,6 +330,8 @@ for _i in {1..5}; do
 done
 unset _i
 
+complete -d ltree treeN tree{1..5}
+
 function _in_array {
 	about 'Succeeds if the first argument is stringly equal to any other element. Usage like _in_array 1 "${doesThisArrayHaveAOne[@]}"'
 	local needle="$1" hay
