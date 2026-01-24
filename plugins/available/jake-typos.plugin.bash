@@ -54,7 +54,6 @@ function typo_value {
 }
 
 
-# TODO: a valid typo is when you accidentally capslock. LS -> ls
 _command_exists _ububtu_command_not_found_handle || save_function command_not_found_handle _ububtu_command_not_found_handle
 function command_not_found_handle {
 	local -a args=("${@:2}")
@@ -85,6 +84,11 @@ function command_not_found_handle {
 		# It's a commit in the current git. Let's show it.
 		alias "${name}=git show ${name@Q}"
 		>&2 echo "Pasted a git commit id: git show ${name@Q} ${args[@]@Q}"
+	elif ! [[ "$name" =~ [a-z] ]] && type -t "${name@L}" &>/dev/null; then
+		# This command is probably allcaps
+		# Or at least it doesn't have any lowercase letters (permit LS-UNTRACKED)
+		alias "${name}=${name@L}"
+		>&2 echo "Capslock was on. Using ${name@L}"
 	else
 		# we don't have a typo entry for this word. Follow the old path
 		_ububtu_command_not_found_handle "$@"
