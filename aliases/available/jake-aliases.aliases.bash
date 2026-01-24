@@ -465,8 +465,9 @@ function clone {
 		git_command=shallow
 		echo "We're in a junk drawer with skip=lazy or similar - using a shallow clone"
 	fi
-	git $git_command "$@"
-	retcode="$?"
+
+	git $git_command "$@" || return
+
 	if [[ -f .mrconfig ]]; then
 		# https://www.cyberciti.biz/faq/linux-unix-bsd-apple-osx-bash-get-last-argument/
 		local dir
@@ -482,7 +483,7 @@ function clone {
 		fi
 	fi
 
-	return "$retcode"
+	return 0 # the git clone above succeeded. We don't care if mr register did.
 }
 
 # non-standard plan - use the prefix git to disambiguate the desired `git help` from
