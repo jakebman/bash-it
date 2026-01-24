@@ -53,6 +53,8 @@ function typo_value {
 	)
 }
 
+
+# TODO: a valid typo is when you accidentally capslock. LS -> ls
 _command_exists _ububtu_command_not_found_handle || save_function command_not_found_handle _ububtu_command_not_found_handle
 function command_not_found_handle {
 	local -a args=("${@:2}")
