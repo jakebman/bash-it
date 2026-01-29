@@ -41,9 +41,13 @@ function jqless {
 	fi
 
 	args+=("$@")
-	local -
-	set -o pipefail
-	command jq "${args[@]}" | less --RAW-CONTROL-CHARS # Raw isn't necessary if we're not coloring output, but it doesn't *hurt* either
+	if [ -t 1 ]; then
+		local -
+		set -o pipefail
+		command jq "${args[@]}" | less --RAW-CONTROL-CHARS # Raw isn't necessary if we're not coloring output, but it doesn't *hurt* either
+	else
+		command jq "${args[@]}"
+	fi
 }
 
 if _command_exists ijq; then
