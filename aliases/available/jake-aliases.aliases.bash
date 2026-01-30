@@ -533,6 +533,7 @@ alias authors='git authors' # formerly from git-extras, but I don't like their i
 alias authors-raw='git authors-raw'
 alias bare='git bare'
 alias branches='git branches'
+alias co='git co'
 alias config-editg='git config-editg'
 alias config-editl='git config-editl'
 alias gitdir='git gitdir'
@@ -581,7 +582,8 @@ alias remote='git remotes'
 # all bash aliases for git aliases I've written.
 # But! Because I don't ever expect to change what the underlying git alias does,
 # I'd rather skip the indirection and just specify the correct behavior in the alias
-alias co='git checkout'
+# TOMBSTONE: this Duplicating alias failed. Preserving evidence of 1/6 failure rate
+# alias co='git checkout'
 alias intend='git intent-to-add' # sorta typo, but more trying to cover my bases on these names
 alias intent='git intent-to-add' # sorta typo, but more trying to cover my bases on these names
 alias staged='git diff --staged'
