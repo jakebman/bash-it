@@ -175,7 +175,7 @@ function files {
 		if [ -t 1 ]; then
 			>&2 echo "(This command takes a long time, and it's eating apt-file's progress bar. Sorry.)"
 		fi
-		(dpkg -L "$@" || apt-file list "$@") | pager
+		(dpkg --listfiles "$@" || apt-file list "$@") | pager
 	fi
 }
 
