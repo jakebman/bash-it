@@ -123,7 +123,7 @@ export PYTHON_HISTORY="${XDG_STATE_HOME}/python/python_history"
 export REDISCLI_HISTFILE="${XDG_STATE_HOME}/redis/cli-history"
 export NODE_REPL_HISTORY="${XDG_STATE_HOME}/nodejs/cli-history"
 # Thanks https://antonz.org/sqlite-history/
-export SQLITE_HISTORY="${XDG_STATE_HOME}/sqlite/cli-history"
+export SQLITE_HISTORY="${XDG_STATE_HOME}/sqlite/sqlite_history"
 export PERL_CPANM_HOME="${XDG_STATE_HOME}/cpanm" # cpanm command in the cpanminus package from apt (for rakubrew)
 
 
