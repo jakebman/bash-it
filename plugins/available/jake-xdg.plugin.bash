@@ -147,7 +147,7 @@ function create_parent_folders_for {
 				I chose ${name} to be ./$(basename "$ref") to more closely match XDG behavior.
 			TABSTRIPPING_HEREDOC
 		fi
-		unset ref
+		unset -n ref # Needs `-n` to match `local` declaration above
 	done
 }
 
