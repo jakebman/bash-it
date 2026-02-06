@@ -127,7 +127,7 @@ export SQLITE_HISTORY="${XDG_STATE_HOME}/sqlite/sqlite_history"
 export PERL_CPANM_HOME="${XDG_STATE_HOME}/cpanm" # cpanm command in the cpanminus package from apt (for rakubrew)
 
 
-# We create local history folders, leaving a note that *I, Jake* created the folder, not the expected program
+# We create local folders to hold the history files, leaving a note that *I, Jake* created the folder, not the expected program
 # Implemented via a bash-ish form of JS's IIFEs, so I can have local variables
 # TODO: I'd like to be able to use this blurb for wget's hsts file too, but that doesn't follow this pattern. Refactor into two pieces: blurb, and blurb setup
 function create_parent_folders_for {
