@@ -10,7 +10,7 @@ function pj() {
 	group 'projects'
 
 	if [ "$#" -eq 0 ]; then
-		>2 echo "No project specified. pj is not a mind reader"
+		>&2 echo "No project specified. pj is not a mind reader"
 		return 1
 	fi
 
