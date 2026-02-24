@@ -66,7 +66,8 @@ candidates=(
 	"${HOME}/wsl-projects"
 	"${HOME}/ms"
 	"${HOME}/foo" # because throwaways
-	"${HOME}/uinode-projects" # work
+	"${HOME}/uinode-projects"   # work
+	"${HOME}/specflow-projects" # ditto
 	"${XDG_CONFIG_HOME:-${HOME}/.config}/jake/pj-quick-access"
 	"${HOME}/wsl-projects/remarkable/repos"
 	"${HOME}/wsl-projects/junk-drawer"
