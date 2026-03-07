@@ -64,10 +64,13 @@ export TODO="t"
 # Set this to the location of your work or project folders
 candidates=(
 	"${HOME}/wsl-projects"
+	# any other FOO-projects, in alphabetical order (work has uinode- and specflow-).
+	# Duplicates wsl-projects, which is above to have a higher priority
+	# The glob must be outside the quotes, and if $HOME isn't quoted, it
+	# will break the glob if it contains spaces
+	"${HOME}"/*-projects
 	"${HOME}/ms"
 	"${HOME}/foo" # because throwaways
-	"${HOME}/uinode-projects"   # work
-	"${HOME}/specflow-projects" # ditto
 	"${XDG_CONFIG_HOME:-${HOME}/.config}/jake/pj-quick-access"
 	"${HOME}/wsl-projects/remarkable/repos"
 	"${HOME}/wsl-projects/junk-drawer"
