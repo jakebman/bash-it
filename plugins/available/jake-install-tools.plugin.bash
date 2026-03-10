@@ -672,6 +672,14 @@ function _jake-check-optional-tools() {
 		echo 'sudo rm "$(which git-sed)"'
 	fi
 
+	if _binary_exists HEAD; then
+		echo "HEAD is really cool - the HEAD/GET/POST symlinks to lwp-request are all really fun"
+		echo "but - it shadows my 'paste any git commit and get an automatic 'git show' about it"
+		echo "So, please delete it with:"
+		echo -en "\t"
+		echo "sudo rm '$(which HEAD)' # this should be /usr/bin/HEAD, a symlink to /usr/bin/lwp-request"
+	fi
+
 	if _command_exists git-vendor; then
 		echo "Nothing to do for git-vendor - git-vendor is happy"
 	else
