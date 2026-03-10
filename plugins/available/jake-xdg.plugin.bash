@@ -109,6 +109,10 @@ if ! grep -s -q ^cache= "$NPM_CONFIG_USERCONFIG"; then
 fi
 export JARVIZ_DIR="${XDG_CACHE_HOME}" # a jar analyzer, from sdkman
 
+# Apparently, Sonar Scanning decides to create ~/.sonar. The docs say I can redirect that
+# https://docs.sonarsource.com/sonarqube-server/10.8/analyzing-source-code/analysis-parameters
+export SONAR_USER_HOME="${XDG_CACHE_HOME}/sonarqube"
+
 # .pyc files go here. Read more in `man python`'s entry on `-X pycache_prefix=PATH`
 # Happily, it's automatically created, unlike the history file
 export PYTHONPYCACHEPREFIX="${XDG_CACHE_HOME}/python/__pycache__"
