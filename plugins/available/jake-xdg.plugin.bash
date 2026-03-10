@@ -97,7 +97,7 @@ if grep -s -q "cookie-jar.*${XDG_CACHE_HOME}/curl" "$CURL_HOME/.curlrc" "$XDG_CO
 	# SPECULATIVE!!!
 	# curlrc might contain a line like `--cookie-jar /home/jakebman/.cache/curl/cookie-jar`
 	# (mine does)
-	# I'd like to automatically creat that file
+	# I'd like to automatically create that file
 	mkdir -p "${XDG_CACHE_HOME}/curl"
 fi
 
