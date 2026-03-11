@@ -76,6 +76,7 @@ function pull {
 		GIT_CONFIG_KEY_0=color.ui
 		GIT_CONFIG_VALUE_0=always
 
+		# TODO: can I refactor *this* to a git setting, accessible via `git pager mr-up`?
 		local -a PAGER=(cat) # Normally, we don't have to do paging
 		if [[ "x$(basename "$PWD")" == *junk-drawer* ]]; then
 			# Directly within a Junk Drawer. Allow updating it
@@ -198,6 +199,7 @@ function status {
 			}
 		' | bat --style=plain --paging=never --language "Git Attributes" # good enough
 		# TODO: did I harm this exit code with the awk processing?
+		# TODO: can I refactor this to a git setting, accessible via `git pager mr-status`?
 		status="$?"
 
 		echo "git repo status:"
