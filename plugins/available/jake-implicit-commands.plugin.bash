@@ -148,10 +148,6 @@ alias winget=_winget-implicit
 
 
 function stat {
-	time _stat_impl "$@"
-}
-
-function _stat_impl {
 	about "allow you to type the bare word 'stat' and get an automatic (implicit-git) status, while not harming the stat command"
 	if [[ "$#" -eq 0 ]]; then
 		status "$@"
