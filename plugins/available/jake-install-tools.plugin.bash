@@ -725,6 +725,22 @@ function _jake-check-optional-tools() {
 		echo -en "\t"
 		echo "rakubrew build-zef && zef install Linenoise # for line-reading"
 	fi
+
+	if ! _command_exists redis-cli; then
+		echo "Nothing to do to update apt-sources for redis-cli. (We don't have redis-cli)"
+	elif [ -f /etc/apt/sources.list.d/redis.list ]; then
+		echo "Nothing to do for apt-sources for redis-cli - we have redis's apt list"
+	else
+		echo "Your redis-cli might be out of date! Fix it with the instructions at https://redis.io/docs/latest/operate/oss_and_stack/install/install-stack/apt/":
+		echo -en "\t"
+		echo "curl -fsSL https://packages.redis.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg"
+		echo -en "\t"
+		echo "sudo chmod 644 /usr/share/keyrings/redis-archive-keyring.gpg"
+		echo -en "\t"
+		echo 'echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/redis.list'
+		echo -en "\t"
+		echo 'apt-up'
+	fi
 }
 
 # TODO: both users of this method would like progressive filtering
