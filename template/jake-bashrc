@@ -71,12 +71,16 @@ candidates=(
 	"${HOME}"/*-projects
 	"${HOME}/ms"
 	"${HOME}/foo" # because throwaways
-	"${XDG_CONFIG_HOME:-${HOME}/.config}/jake/pj-quick-access"
 	"${HOME}/wsl-projects/remarkable/repos"
 	"${HOME}/wsl-projects/junk-drawer"
 	"${HOME}/wsl-projects/home-junk-drawer"
 	"${HOME}/wsl-projects/espruino"
 )
+
+# Store disambiguous names here
+BASH_IT_PROJECT_ALIASES="${XDG_CONFIG_HOME:-${HOME}/.config}/jake/pj-quick-access"
+[ -d "$BASH_IT_PROJECT_ALIASES" ] || unset BASH_IT_PROJECT_ALIASES
+
 for candidate in "${candidates[@]}"; do
   if [[ -d "$candidate" ]]; then
     # magic: use the "use this value if this variable is set syntax (`:+`) to add a preceeding colon to each entry after the first

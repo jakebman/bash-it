@@ -20,6 +20,8 @@ _pj() {
 	if [[ 1 -eq "${#COMPREPLY[@]}" && -z "${COMPREPLY[0]}" ]]; then
 		COMPREPLY=()
 	fi
+
+	# TODO: if there's no results, check BASH_IT_PROJECT_ALIASES
 }
 
 complete -F _pj -o nospace pj

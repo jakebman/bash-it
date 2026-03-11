@@ -15,7 +15,12 @@ function pj() {
 	fi
 
 
-	local CDPATH=${BASH_IT_PROJECT_PATHS}
+	# Aliases are secondary, typo-like solutions. If you have projects foo-a and foo-b, you can create
+	# a symlink in one of the BASH_IT_PROJECT_ALIASES directories from foo- to foo-a so a quick jump
+	# will always reach foo-a instead of failing to find a project named foo-
+	# This feature leverages the `-P` behavior of `cd`, below
+	local CDPATH="${BASH_IT_PROJECT_PATHS}${BASH_IT_PROJECT_ALIASES+:}${BASH_IT_PROJECT_ALIASES}"
+
 	# TODO: the POSIX spec on cd specifically says "Use $PWD if cd can't find any other matches"
 	# This is not ideal, as I want to specifically exclude it from consideration
 	# I might have to re-implement cd, skipping step 7? https://pubs.opengroup.org/onlinepubs/9699919799/utilities/cd.html
