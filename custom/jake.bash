@@ -524,22 +524,21 @@ function fidget {
 		sleep 12
 	fi
 
-	( # subshell. Automatically undoes the cd ~
-		cd ~
-		jake-sdkman-update
-		pull # also does mr up, since ~/.mrconfig exists
-		apt-up
+	jake-sdkman-update
+	# subshell. Automatically undoes the cd ~
+	# also does mr up, since ~/.mrconfig exists
+	(cd ~ && pull)
+	apt-up
 
-		# relies on my aliases. Not necessarily the best plan
-		# OTOH, free --include-pinned
-		if _command_exists winget &> /dev/null; then
-			echo "winget exists - here's the update"
-			winget
-		fi
+	# relies on my aliases. Not necessarily the best plan
+	# OTOH, free --include-pinned
+	if _command_exists winget &> /dev/null; then
+		echo "winget exists - here's the update"
+		winget
+	fi
 
-		echo # spacing
-		_mr-able
-	)
+	echo # spacing
+	_mr-able
 	echo "update completed at $(date)"
 }
 alias fid=fidget
