@@ -197,9 +197,8 @@ function status {
 			END {
 				print_and_empty_info()
 			}
-		' | bat --style=plain --paging=never --language "Git Attributes" # good enough
+		' | git pager jake-custom-mr-status
 		# TODO: did I harm this exit code with the awk processing?
-		# TODO: can I refactor this to a git setting, accessible via `git pager mr-status`?
 		status="$?"
 
 		echo "git repo status:"
