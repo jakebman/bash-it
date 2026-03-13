@@ -39,6 +39,7 @@ function yqless {
 	if [ -t 1 ]; then
 		local -
 		set -o pipefail
+		# TODO: Eventually use a custom bat theme that matches jq's coloring
 		command yq "${args[@]}" | less --RAW-CONTROL-CHARS # Raw isn't necessary if we're not coloring output, but it doesn't *hurt* either
 	else
 		command yq "${args[@]}"
