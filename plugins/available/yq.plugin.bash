@@ -26,11 +26,6 @@ _command_exists delta && alias yqdelta="_yqify delta"
 function yqless {
 	local args
 
-	if [ -t 1 ]; then
-		# terminal output - color it
-		args+=(--color-output)
-	fi
-
 	if [[ $# -eq 0 ]] || [[ -f "$1" ]]; then
 		# If the user doesn't specify a filter as the first argument,
 		# which means:
