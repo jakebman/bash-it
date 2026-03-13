@@ -1,29 +1,29 @@
 #! /bin/bash
 
-function _jq-ify {
+function _yq-ify {
 	# TODO: try and actually respect the parameter orders of our parameters
 	# and figure out which is actually supposed to be the argument files
-	about "use \$JQ_FILTER to choose a smaller section of the files to compare!"
+	about "use \$YQ_FILTER to choose a smaller section of the files to compare!"
 	local cmd="$1"
 	local left="$2"
 	local right="$3"
-	local filter="${JQ_FILTER:-.}"
+	local filter="${YQ_FILTER:-.}"
 	shift 3
-	"$cmd" "$@" <(jq -S "$filter" < "$left") <(jq -S "$filter" < "$right")
+	"$cmd" "$@" <(yq -S "$filter" < "$left") <(yq -S "$filter" < "$right")
 }
 
 # TODO: there's an update-alternatives for jsondiff. It currently is won by this file:
 # python3-jsonpatch: /usr/bin/json-patch-jsondiff
-# ... Do I want to put jq's hat into the fray?
+# ... Do I want to put yq's hat into the fray?
 # decent info at https://dev.to/webduvet/how-to-manage-versions-using-update-alternatives-258e
 
-alias jqdiff="_jq-ify diff"
-alias jqvimdiff="_jq-ify vimdiff"
-alias vimjqdiff="_jq-ify vimdiff"
+alias yqdiff="_yq-ify diff"
+alias yqvimdiff="_yq-ify vimdiff"
+alias vimyqdiff="_yq-ify vimdiff"
 
-_command_exists delta && alias jqdelta="_jqify delta"
+_command_exists delta && alias yqdelta="_yqify delta"
 
-function jqless {
+function yqless {
 	local args
 
 	if [ -t 1 ]; then
@@ -36,47 +36,47 @@ function jqless {
 		# which means:
 		# * no arguments (presume STDIN) or
 		# * first argument is actually a file
-		# assume they wanted to use $JQ_FILTER
-		args+=("${JQ_FILTER:-.}")
+		# assume they wanted to use $YQ_FILTER
+		args+=("${YQ_FILTER:-.}")
 	fi
 
 	args+=("$@")
 	if [ -t 1 ]; then
 		local -
 		set -o pipefail
-		command jq "${args[@]}" | less --RAW-CONTROL-CHARS # Raw isn't necessary if we're not coloring output, but it doesn't *hurt* either
+		command yq "${args[@]}" | less --RAW-CONTROL-CHARS # Raw isn't necessary if we're not coloring output, but it doesn't *hurt* either
 	else
-		command jq "${args[@]}"
+		command yq "${args[@]}"
 	fi
 }
 
-if _command_exists ijq; then
-	function ijq {
-		local temp=$(mktemp ijq-JQ_FILTER_RESULT-XXXXXXXXXX --tmpdir)
+if _command_exists iyq; then
+	function iyq {
+		local temp=$(mktemp iyq-YQ_FILTER_RESULT-XXXXXXXXXX --tmpdir)
 		trap 'rm "$temp"' RETURN
-		# Alas, a here-string would be more verbose as an argument to -f. Something like: `/dev/fd/23 23<<<"$JQ_FILTER"`
+		# Alas, a here-string would be more verbose as an argument to -f. Something like: `/dev/fd/23 23<<<"$YQ_FILTER"`
 		# See https://unix.stackexchange.com/questions/505828/how-to-pass-a-string-to-a-command-that-expects-a-file
-		command ijq -f <(printf "%s" "${JQ_FILTER:-.}") "$@" 2>"$temp"
+		command iyq -f <(printf "%s" "${YQ_FILTER:-.}") "$@" 2>"$temp"
 		local return=$?
 		local filter=$(<"$temp")
 
 		if [ 0 != "$return" ]; then
-			>&2 echo "ijq failure. Not setting JQ_FILTER to ${filter@Q}"
+			>&2 echo "iyq failure. Not setting YQ_FILTER to ${filter@Q}"
 		elif [ -z "$filter" ]; then
-			>&2 echo "Empty result query. Not setting JQ_FILTER=${filter@Q}"
+			>&2 echo "Empty result query. Not setting YQ_FILTER=${filter@Q}"
 		else
-			# NB: this still won't work in cat foo.json | ijq, which is another good reason to print the filter below
-			>&2 echo "Set JQ_FILTER=${filter@Q}"
+			# NB: this still won't work in cat foo.json | iyq, which is another good reason to print the filter below
+			>&2 echo "Set YQ_FILTER=${filter@Q}"
 
 			# specifically and intentionally NOT LOCAL
-			JQ_FILTER=$filter
+			YQ_FILTER=$filter
 		fi
 		return $return
 	}
 fi
 
-function jqgrep {
-	about "grep for content in files, but implicity apply JQ_FILTER to the files we're grepping"
+function yqgrep {
+	about "grep for content in files, but implicity apply YQ_FILTER to the files we're grepping"
 	echo "TODO, sorry"
 	false
 }
