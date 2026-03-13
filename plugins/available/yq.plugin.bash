@@ -12,11 +12,6 @@ function _yq-ify {
 	"$cmd" "$@" <(yq -S "$filter" < "$left") <(yq -S "$filter" < "$right")
 }
 
-# TODO: there's an update-alternatives for jsondiff. It currently is won by this file:
-# python3-jsonpatch: /usr/bin/json-patch-jsondiff
-# ... Do I want to put yq's hat into the fray?
-# decent info at https://dev.to/webduvet/how-to-manage-versions-using-update-alternatives-258e
-
 alias yqdiff="_yq-ify diff"
 alias yqvimdiff="_yq-ify vimdiff"
 alias vimyqdiff="_yq-ify vimdiff"
@@ -49,31 +44,6 @@ function yqless {
 		command yq "${args[@]}"
 	fi
 }
-
-if _command_exists iyq; then
-	function iyq {
-		local temp=$(mktemp iyq-YQ_FILTER_RESULT-XXXXXXXXXX --tmpdir)
-		trap 'rm "$temp"' RETURN
-		# Alas, a here-string would be more verbose as an argument to -f. Something like: `/dev/fd/23 23<<<"$YQ_FILTER"`
-		# See https://unix.stackexchange.com/questions/505828/how-to-pass-a-string-to-a-command-that-expects-a-file
-		command iyq -f <(printf "%s" "${YQ_FILTER:-.}") "$@" 2>"$temp"
-		local return=$?
-		local filter=$(<"$temp")
-
-		if [ 0 != "$return" ]; then
-			>&2 echo "iyq failure. Not setting YQ_FILTER to ${filter@Q}"
-		elif [ -z "$filter" ]; then
-			>&2 echo "Empty result query. Not setting YQ_FILTER=${filter@Q}"
-		else
-			# NB: this still won't work in cat foo.json | iyq, which is another good reason to print the filter below
-			>&2 echo "Set YQ_FILTER=${filter@Q}"
-
-			# specifically and intentionally NOT LOCAL
-			YQ_FILTER=$filter
-		fi
-		return $return
-	}
-fi
 
 function yqgrep {
 	about "grep for content in files, but implicity apply YQ_FILTER to the files we're grepping"
