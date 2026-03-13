@@ -37,6 +37,7 @@ plugins rezipdoc
 plugins sdkman
 plugins type-through-aliases
 plugins wsl-fast
+plugins yq
 completion ack
 completion aws-ehancements
 completion awscli
@@ -59,3 +60,4 @@ aliases jake-aliases
 aliases jake-single-letter
 aliases jq-implicit-less
 aliases sudo-expands-aliases
+aliases yq-implicit-less
