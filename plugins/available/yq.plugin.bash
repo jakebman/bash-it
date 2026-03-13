@@ -1,5 +1,10 @@
 #! /bin/bash
 
+function _yq-filter {
+	about '$YQ_FILTER falls back to $JQ_FILTER, which falls back to "." That is unweildy. Use this method instead.'
+	printf "%s" "${YQ_FILTER:-${JQ_FILTER:-.}}"
+}
+
 function _yq-ify {
 	# TODO: try and actually respect the parameter orders of our parameters
 	# and figure out which is actually supposed to be the argument files
@@ -7,7 +12,7 @@ function _yq-ify {
 	local cmd="$1"
 	local left="$2"
 	local right="$3"
-	local filter="${YQ_FILTER:-.}"
+	local filter="$(_yq-filter)"
 	shift 3
 	"$cmd" "$@" <(yq -S "$filter" < "$left") <(yq -S "$filter" < "$right")
 }
@@ -32,7 +37,7 @@ function yqless {
 		# * no arguments (presume STDIN) or
 		# * first argument is actually a file
 		# assume they wanted to use $YQ_FILTER
-		args+=("${YQ_FILTER:-.}")
+		args+=("$(_yq-filter)")
 	fi
 
 	args+=("$@")
