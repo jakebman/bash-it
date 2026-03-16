@@ -278,6 +278,8 @@ function edit-base64-as-file {
 	echo -e "\n\n\n"
 
 	base64 -d <<< "$1" >"$temp"
+	# TODO: .bash-it isn't consistent with the right way to invoke the user's editor.
+	# And I myself have diverged. What is the 'one true' choice? (it's not to invoke vim, btw, @jake-typos)
 	"${EDITOR-edit}" "$temp"
 	base64 --wrap 0 "$temp"
 
