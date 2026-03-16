@@ -55,6 +55,7 @@ completion npm
 completion projects-CDPATH
 completion sdkman
 completion system
+completion vim
 aliases general
 aliases jake-aliases
 aliases jake-single-letter
