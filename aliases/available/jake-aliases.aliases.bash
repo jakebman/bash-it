@@ -118,7 +118,7 @@ function pull {
 				}
 				info = info $0
 			}
-			/Fetching / {
+			/^Fetching / {
 				$1 = ""
 				repo = repo "," $0;
 			}
