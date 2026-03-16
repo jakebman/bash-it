@@ -528,18 +528,6 @@ function wc {
 	fi
 }
 
-# Inspired by https://github.com/tpope/vim-obsession/issues/11
-function vim {
-	local file="${XDG_STATE_HOME:-${HOME?}/.local/state}/vim/jake-autosaved-session"
-	if [[ "$#" -eq 0 ]]; then
-		# $@ is unecessary, as it's empty. Keeps parallel structure, though.
-		command vim -S "$file" "$@"
-	else
-		command vim "$@"
-	fi
-}
-export -f vim # so that j receives it!
-
 function realpath {
 	about "allow you to type the bare word 'realpath' and automatically be cd'd there"
 	if [[ "$#" -ne 0 ]]; then
