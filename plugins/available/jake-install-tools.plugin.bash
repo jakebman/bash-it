@@ -751,7 +751,7 @@ function _jake-check-optional-tools() {
 		echo -en "\t"
 		echo "echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/8.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-8.2.list"
 		echo -en "\t"
-		echo 'apt-up; sudo apt install mongosh-mongosh'
+		echo 'apt-up; sudo apt install mongodb-mongosh'
 	fi
 }
 
