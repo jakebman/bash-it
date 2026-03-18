@@ -742,14 +742,14 @@ function _jake-check-optional-tools() {
 		echo 'apt-up'
 	fi
 
-	if _command_exists mongosh && [ -f '/etc/apt/sources.list.d/mongodb-org-8.2.list' ]; then
+	if _command_exists mongosh && [ -f '/etc/apt/sources.list.d/mongodb-org-8.0.list' ]; then
 		echo "Nothing to do to update apt-sources for mongosh."
 	else
-		echo "Consider installing mongosh via instructions from https://www.mongodb.com/docs/mongodb-shell/install/?operating-system=linux&linux-distribution=ubuntu&ubuntu-version=bionic"
+		echo "Consider installing mongosh via instructions from https://www.mongodb.com/docs/mongodb-shell/install/?operating-system=linux&linux-distribution=ubuntu&ubuntu-version=noble"
 		echo -en "\t"
 		echo "wget -qO- https://www.mongodb.org/static/pgp/server-8.0.asc | sudo tee /etc/apt/trusted.gpg.d/mongodb-org-server-8.0.asc"
 		echo -en "\t"
-		echo "echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/8.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-8.2.list"
+		echo 'echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu noble/mongodb-org/8.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-8.0.list'
 		echo -en "\t"
 		echo 'apt-up; sudo apt install mongodb-mongosh'
 	fi
