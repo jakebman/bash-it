@@ -61,7 +61,7 @@ alias untar='tar xf' # simply untar a file
 function pull {
 	if [ "$#" -ne 0 ]; then
 		# If we have arguments, it's because I'm thinking this is a git pull
-		git pull "$@"
+		git pull-unless-detached "$@"
 	elif [ ~ = "$PWD" ] || [ -f .mrconfig ]; then
 		# Get local coloring from git pull, even through mr up
 		# TODO: this eats mr error output like this:
