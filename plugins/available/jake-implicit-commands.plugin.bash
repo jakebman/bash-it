@@ -468,6 +468,15 @@ function browse {
 	fi
 }
 
+function pipeline {
+	about "easy access to git{lab,hub} pipelines in the browser"
+	if git remote -v | grep --quiet gitlab; then
+		glab ci view --web "$@"
+	else
+		gh workflow view --web "$@"
+	fi
+}
+
 # TODO: DUPLICATED CODE
 function _is_flag {
 	about "Succeeds if all arguments are flags (have a first character of '-'). Fails otherwise"
