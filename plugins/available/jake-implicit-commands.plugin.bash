@@ -462,7 +462,7 @@ function browse {
 		# Have arguments - send them to the original browse command
 		command browse "$@"
 	elif git remote -v | grep --quiet gitlab; then
-		glab repo view -w "$@"
+		glab repo view --web "$@"
 	else
 		gh browse "$@"
 	fi
