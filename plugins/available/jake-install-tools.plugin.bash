@@ -742,6 +742,15 @@ function _jake-check-optional-tools() {
 		echo 'apt-up'
 	fi
 
+	if _command_exists jdtls; then
+		echo "Nothing to do for jdtls java language server"
+	else
+		echo "Consider installing https://github.com/eclipse-jdtls/eclipse.jdt.ls"
+		echo "Grab a tar.gz from  http://download.eclipse.org/jdtls/milestones/"
+		echo "unzip it to ~/.local/bin/"
+		echo "then (cd ~/.local/bin; ln -s java-lang-server/bin/jdtls)"
+	fi
+
 	if _command_exists mongosh && [ -f '/etc/apt/sources.list.d/mongodb-org-8.0.list' ]; then
 		echo "Nothing to do to update apt-sources for mongosh."
 	else
