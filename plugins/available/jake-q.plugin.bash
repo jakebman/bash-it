@@ -44,6 +44,9 @@ function q() {
 		if _binary_exists q; then
 			echo 'Running `command q`, like you might want'
 			command q "$@"
+		elif _binary_exists kiro-cli; then
+			echo 'Running `kiro-cli`, like you might want'
+			kiro-cli "$@"
 		elif [ "x$PWD" != "x$HOME" ]; then
 			echo "Heading back to \$HOME, like you might want"
 			cd ~
