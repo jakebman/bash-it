@@ -426,6 +426,7 @@ function _mr-able {
 		_mr-able-impl "${args[@]}"
 	fi
 }
+alias mr-able=_mr-able
 
 function mr-run {
 	about 'A wrapper around mr run to run a git command, colored, unpaged, and then paged totally'
