@@ -2,12 +2,12 @@
 
 # plugins
 plugins base
+plugins bat-cat-batextras
 plugins browser
 plugins cht-sh
 plugins curl-enhancements
 plugins curl-logging
 plugins dircolors
-plugins dotfiles-via-bare-git-repo-with-config-alias
 plugins gitstatus
 plugins history-eternal
 plugins iotop
@@ -29,6 +29,7 @@ plugins jake-typos
 plugins jake-words
 plugins jake-xdg
 plugins jq
+plugins max-manwidth
 plugins projects-CDPATH
 plugins rakubrew
 plugins rezipdoc
@@ -48,6 +49,7 @@ completion maven
 completion projects-CDPATH
 completion sdkman
 completion system
+completion vim
 aliases general
 aliases jake-aliases
 aliases jake-single-letter
