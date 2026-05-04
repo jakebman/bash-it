@@ -114,6 +114,7 @@ function pull {
 			!/^mr update:/ &&
 				!/^Already up to date./ &&
 				!/^Junk Drawer: Skipping junk drawer project.$/ &&
+				!/^Not on a branch. Pull could accidentally merge. Fetching instead.$/ &&
 				!/^Fetching / {
 				if (info) {
 					info = info "\n"
