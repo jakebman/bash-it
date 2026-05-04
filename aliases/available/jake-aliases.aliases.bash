@@ -111,13 +111,16 @@ function pull {
 			# lines in a repo report. Beautifully, info remains empty/false if concatenates an empty line
 			# so any number of prefixed empty lines are all eaten into the empty string
 			# SUBTLE: the trailing empty string DOES get glommed in here, and is a natural separator between sections
-			!/^mr update:/ && !/^Already up to date./ &&
-				!/^Junk Drawer: Skipping junk drawer project.$/ && !/^Fetching / {
+			!/^mr update:/ &&
+				!/^Already up to date./ &&
+				!/^Junk Drawer: Skipping junk drawer project.$/ &&
+				!/^Fetching / {
 				if (info) {
 					info = info "\n"
 				}
 				info = info $0
 			}
+
 			/^Fetching / {
 				$1 = ""
 				repo = repo "," $0;
