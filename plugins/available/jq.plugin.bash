@@ -9,7 +9,7 @@ function _jq-ify {
 	local right="$3"
 	local filter="${JQ_FILTER:-.}"
 	shift 3
-	"$cmd" "$@" <(jq -S "$filter" < "$left") <(jq -S "$filter" < "$right")
+	"$cmd" "$@" <(jq --sort-keys "$filter" < "$left") <(jq --sort-keys "$filter" < "$right")
 }
 
 # TODO: there's an update-alternatives for jsondiff. It currently is won by this file:
