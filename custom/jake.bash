@@ -550,6 +550,10 @@ alias ff="fidget -f" # --fast
 alias ffa="fidget -fa"
 
 alias utc='date --utc'
+function epoch {
+	date -d @"$1"
+	date -d @"$(( $1 / 1000 ))"
+}
 
 alias jake-todo='ls-files | grep jake | j -x TODO'
 
