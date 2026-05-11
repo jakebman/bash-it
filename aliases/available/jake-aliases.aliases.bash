@@ -461,6 +461,7 @@ function reset {
 	fi
 }
 
+# TODO: if you're in an mr area, and the current name, *or remote* is already made, offer mr-unshallow
 function clone {
 	local git_command=clone
 	local retcode
