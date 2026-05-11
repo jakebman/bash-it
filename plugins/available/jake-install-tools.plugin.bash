@@ -108,6 +108,7 @@ function jake-install-tools() {
 	_jake-find-tool xmllint libxml2-utils # multi-function, but only used for --xpath queries, because --format makes --xpath return one-line results
 	_jake-find-tool redis-cli redis-tools
 	_jake-find-tool dpkg-buildapi build-essential "I'm picking an executable from the most-obscure-but-still-direct dependency of build-essential - I want the high-level package, not its minor dependecies"
+	_jake-find-tool nfs-common mount.nfs 'work tool to help mount efs. See aws cli aliases'
 	_jake-find-tool mkisofs genisoimage 'work tool to bundle rpms into an iso file'
 	_jake-find-tool ifconfig net-tools
 	_jake-find-tool nslookup dnsutils "for wsl-vpnkit, but I'm not certain nslookup is the required command. Could be dig or similar"
