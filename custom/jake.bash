@@ -782,3 +782,8 @@ function timing {
 	# nb: ts is from moreutils
 	time "$@" | ts -s
 }
+
+function docker-bash {
+	about "use docker-run with --entrypoint bash"
+	docker-run --entrypoint bash "$@"
+}
