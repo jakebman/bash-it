@@ -767,6 +767,11 @@ function xpath {
 }
 alias xmlpath=xpath
 
+function url-parts {
+	about "pipeline to swap & to newlines"
+	tr '?&' '\n'
+}
+
 function doctor {
 	about "just run bash-it doctor"
 	time bash-it doctor
