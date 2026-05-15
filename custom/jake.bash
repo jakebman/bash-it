@@ -443,6 +443,8 @@ function mr-stashes {
 	# TODO: this should use the `pull` tech to include the repo names
 	# (There's --src-prefix/diff.srcPrefix and --dst-prefix/diff.dstPrefix to give path prefixes
 	#  from the current directory)
+	# Update: Unfortunately, the --X-prefix flags don't seem to apply here
+	# stash-show-fullpath = !git stash show --dst-prefix=\"$PWD\" --src-prefix=\"$PWD\"
 	mr-run stash show 2>/dev/null | grep -v ^mr\ run | grep -v ^No\ stash | uniq | pager
 }
 
