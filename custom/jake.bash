@@ -438,6 +438,14 @@ function mr-run {
 	mr run "$@" | pager
 }
 
+function mr-stashes {
+	about 'Use mr-run to see stashes'
+	# TODO: this should use the `pull` tech to include the repo names
+	# (There's --src-prefix/diff.srcPrefix and --dst-prefix/diff.dstPrefix to give path prefixes
+	#  from the current directory)
+	mr-run stash show 2>/dev/null | grep -v ^mr\ run | grep -v ^No\ stash | uniq | pager
+}
+
 function cdgit {
 	# TODO: there is also cd-git in jake-cd-git-root
 	about 'cd into the root of a git repo/worktree for the current directory, or fail'
