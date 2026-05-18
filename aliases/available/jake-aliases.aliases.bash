@@ -177,14 +177,12 @@ function status {
 				repo = $0
 			}
 
-			# lines in a repo report. Beautifully, info remains empty/false if concatenates an empty line
-			# so any number of prefixed empty lines are all eaten into the empty string
-			# SUBTLE: the trailing empty string DOES get glommed in here, and is a natural separator between sections
-			!/^mr status:/ {
-				if (info) {
-					info = info "\n"
-				}
-				info = info $0
+			# Lines in a repo report.
+			# We only grab non-empty lines because something upstream is
+			# *sometimes* producing extra empty lines, and I cannot for
+			# the life of me figure out what.
+			!/^mr status:/ && !/^$/ {
+				info = info $0 "\n"
 			}
 
 			/^$/ {
