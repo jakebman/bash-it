@@ -175,23 +175,27 @@ function status {
 				# TODO: track repos which do not print
 				if (info) print_and_empty_info()
 				repo = $0
+
+				next
 			}
 
-			# Lines in a repo report.
-			# We only grab non-empty lines because something upstream is
-			# *sometimes* producing extra empty lines, and I cannot for
-			# the life of me figure out what.
-			!/^mr status:/ && !/^$/ {
-				info = info $0 "\n"
-			}
-
+			# Empty line. Usually between reports. Can be several between
+			# the end of one repo status and another. I dunno why.
+			# But, with a hundred tracked repos, I want some intermediate output
+			# So this is it:
 			/^$/ {
-				# with a hundred tracked repos, I want some intermediate output
 				emptyLine+=1
 				if(!(emptyLine % boredRatio)) {
 					repo=repo " (progress marker after " emptyLine " quiet entries)"
 					print_and_empty_info()
 				}
+
+				next
+			}
+
+			# Nonempty, non-start lines are the report for `repo`
+			{
+				info = info $0 "\n"
 			}
 
 			# When we are done, we print the last repo, even if it had empty info
