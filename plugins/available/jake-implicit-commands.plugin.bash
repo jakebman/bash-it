@@ -421,6 +421,15 @@ function du {
 	fi
 }
 
+function cp {
+	about "It'd be cool if cp of one argument brings it into ."
+	if [[ 1 -eq $# && -f "$1" ]]; then
+		set -- "$@" .
+	fi
+
+	command cp "$@"
+}
+
 function df {
 	about "implicit -h on df if stdout is a terminal"
 	if ! [[ -t 1 ]]; then
