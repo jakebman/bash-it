@@ -1,5 +1,6 @@
 # shellcheck shell=bash
 about-plugin 'set BASH_IT_PROJECT_PATHS from BASH_IT_PROJECT_PATHS_CANDIDATES for pj'
+# We need to load before the projects plugin, with default priority 250
 # BASH_IT_LOAD_PRIORITY: 240
 
 : "${BASH_IT_PROJECT_PATHS:=$HOME/Projects:$HOME/src:$HOME/work}"
