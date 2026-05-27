@@ -32,6 +32,7 @@ plugins jq
 plugins max-manwidth
 plugins node-trust-os-certs
 plugins projects-CDPATH
+plugins projects-candidates
 plugins pyenv
 plugins rezipdoc
 plugins sdkman
