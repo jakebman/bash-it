@@ -61,8 +61,8 @@ export IRC_CLIENT='irssi'
 # Set this to the command you use for todo.txt-cli
 export TODO="t"
 
-# Set this to the location of your work or project folders
-candidates=(
+# Set this to the locations of your work or project folders
+BASH_IT_PROJECT_PATHS_CANDIDATES=(
 	"${HOME}/wsl-projects"
 	# any other FOO-projects, in alphabetical order (work has uinode- and specflow-).
 	# Duplicates wsl-projects, which is above to have a higher priority
@@ -75,20 +75,12 @@ candidates=(
 	"${HOME}/wsl-projects/junk-drawer"
 	"${HOME}/wsl-projects/home-junk-drawer"
 	"${HOME}/wsl-projects/espruino"
+  # ":${HOME}/projects" # get too many duplicats if we include this
 )
 
 # Store disambiguous names here
 BASH_IT_PROJECT_ALIASES="${XDG_CONFIG_HOME:-${HOME}/.config}/jake/pj-quick-access"
 [ -d "$BASH_IT_PROJECT_ALIASES" ] || unset BASH_IT_PROJECT_ALIASES
-
-for candidate in "${candidates[@]}"; do
-  if [[ -d "$candidate" ]]; then
-    # magic: use the "use this value if this variable is set syntax (`:+`) to add a preceeding colon to each entry after the first
-    BASH_IT_PROJECT_PATHS+="${BASH_IT_PROJECT_PATHS:+:}${candidate}"
-  fi
-done
-unset -v candidate candidates
-# BASH_IT_PROJECT_PATHS+=":${HOME}/projects" # gets too many duplicats if we include :${HOME}/projects"
 
 # Set this to false to turn off version control status checking within the prompt for all themes
 export SCM_CHECK=true
