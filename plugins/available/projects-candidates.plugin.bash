@@ -14,4 +14,4 @@ for candidate in "${BASH_IT_PROJECT_PATHS_CANDIDATES[@]}"; do
 		BASH_IT_PROJECT_PATHS+="${BASH_IT_PROJECT_PATHS:+:}${candidate}"
 	fi
 done
-unset -v candidate candidates
+unset -v candidate
