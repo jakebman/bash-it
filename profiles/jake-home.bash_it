@@ -30,6 +30,7 @@ plugins jake-words
 plugins jake-xdg
 plugins jq
 plugins max-manwidth
+plugins projects-candidates
 plugins projects-CDPATH
 plugins rakubrew
 plugins rezipdoc
