@@ -427,7 +427,7 @@ function cp {
 		set -- "$@" .
 	fi
 
-	command cp "$@"
+	command cp -i "$@"
 }
 
 function df {
