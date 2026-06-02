@@ -21,7 +21,7 @@ alias yqdiff="_yq-ify diff"
 alias yqvimdiff="_yq-ify vimdiff"
 alias vimyqdiff="_yq-ify vimdiff"
 
-_command_exists delta && alias yqdelta="_yqify delta"
+_command_exists delta && alias yqdelta="_yq-ify delta"
 
 function yqless {
 	local args
