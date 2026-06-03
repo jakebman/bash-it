@@ -4,7 +4,7 @@ alias go-offline='mvn dependency:go-offline'
 alias effective-pom='mvn help:effective-pom'
 
 function mvn-colored {
-	command mvn "$@" -Dstyle.color=always
+	command mvn -Dstyle.color=always "$@"
 }
 
 # Implicit paging!
