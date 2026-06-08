@@ -482,7 +482,7 @@ function clone {
 		for dir; do :; done
 
 		# basename, stripping a suffix
-		dir="$(basename -s .git "$dir")"
+		dir="$(basename --suffix=.git "$dir")"
 
 		if [[ -d "$dir" ]]; then
 			mr register "$dir"
