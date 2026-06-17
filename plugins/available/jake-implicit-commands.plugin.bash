@@ -102,6 +102,7 @@ function ts {
 	fi
 }
 
+# TODO: would be cool to use getopt with known `command diff` flags, then any extras mean `git-diff`
 function diff {
 	about "allow you to type the bare word 'diff' and get an automatic git diff, while still not harming the diff command"
 	if [[ "$#" -eq 0 ]]; then
