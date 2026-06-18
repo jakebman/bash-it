@@ -478,6 +478,16 @@ function browse {
 	fi
 }
 
+function mrs {
+	about "gitlab or github [m]erge [r]equests"
+	if git remote -v | grep --quiet gitlab; then
+		glab mr list "$@"
+	else
+		gh pr list "$@"
+	fi
+}
+alias prs=mrs
+
 function pipeline {
 	about "easy access to git{lab,hub} pipelines in the browser"
 	if git remote -v | grep --quiet gitlab; then
