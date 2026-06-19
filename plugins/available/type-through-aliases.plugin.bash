@@ -61,7 +61,7 @@ _command_exists shfmt || return
 # TODO: when a resolved alias is to a fully-qualified path, there's no need to follow it
 # TODO: when a resolved alias is to itself (alias sudo='sudo '), the alias shouldn't be checked (type -P?)
 # TODO: what about printing additional info if a function shadows an executable file while we're at it
-function type {
+function jake_type {
 	about 'enhance the shell builtin `type` to try and see through aliases'
 
 	if ! [ -t 0 ] || ! [ -t 1 ]; then
@@ -85,6 +85,7 @@ function type {
 			;;
 	esac
 }
+alias type=jake_type
 
 function man {
 	about 'enhance the manual pages to try and see through typos'
