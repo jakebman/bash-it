@@ -479,7 +479,7 @@ function browse {
 }
 
 function mrs {
-	about "gitlab or github [m]erge [r]equests"
+	about "gitlab or github [m]erge/[p]ull [r]equest[s]"
 	if git remote -v | grep --quiet gitlab; then
 		glab mr list "$@"
 	else
