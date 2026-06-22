@@ -480,10 +480,16 @@ function browse {
 
 function mrs {
 	about "gitlab or github [m]erge/[p]ull [r]equest[s]"
+	local action=list # by default, list existing requests
+	if (( $# )); then
+		# Have args. Assume first is a numeric ID and/or we have flags
+		action=view
+	fi
+
 	if git remote -v | grep --quiet gitlab; then
-		glab mr list "$@"
+		glab mr "$action" "$@"
 	else
-		gh pr list "$@"
+		gh pr "$action" "$@"
 	fi
 }
 alias prs=mrs
