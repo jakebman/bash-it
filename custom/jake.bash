@@ -342,6 +342,9 @@ function lower {
 	_cat_or_cli_args "$@" | tr A-Z a-z
 }
 
+# disable paging across all(?) git invocations from mr
+alias mr='GIT_PAGER=cat mr'
+
 function _mr-isrepo-local {
 	about "succeeds if the current folder is a git repo tracked by mr. fails otherwise"
 	[[ -e .git ]] || return 1
