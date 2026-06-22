@@ -448,6 +448,14 @@ function mr-stashes {
 	mr-run stash show 2>/dev/null | grep -v ^mr\ run | grep -v ^No\ stash | uniq | pager
 }
 
+function glab {
+	about "glab sometimes (always) turns stty echo off; this automatically turns it back on"
+	command glab "$@"
+	local ret=$?
+	stty echo 2>/dev/null
+	return $ret
+}
+
 function cdgit {
 	# TODO: there is also cd-git in jake-cd-git-root
 	about 'cd into the root of a git repo/worktree for the current directory, or fail'
