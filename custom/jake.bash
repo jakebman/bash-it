@@ -452,7 +452,7 @@ function mr-stashes {
 		grep -v ^mr\ run |
 		grep -v ^No\ stash |
 		uniq |
-		pager
+		git pager stash
 }
 
 function mr-authors {
