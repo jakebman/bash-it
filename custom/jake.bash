@@ -437,8 +437,10 @@ function mr-run {
 		# allow the command to be a git command. Choose this *greedily*, because mr is git-like
 		# What I mean is: prefer mr-run ls to mean mr-run git ls
 		set -- git unpaged colored "$@"
+		mr run "$@" | git pager
+	else
+		mr run "$@" | pager
 	fi
-	mr run "$@" | pager
 }
 
 function mr-stashes {
