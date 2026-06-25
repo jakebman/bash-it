@@ -455,6 +455,16 @@ function mr-stashes {
 		pager
 }
 
+function mr-authors {
+	about 'Use mr-run to see all authors'
+	mr-run authors |
+		grep -v '^mr run: ' |
+		grep -v '^$' |
+		sort --ignore-case |
+		uniq --ignore-case |
+		git pager authors
+}
+
 function glab {
 	about "glab sometimes (always) turns stty echo off; this automatically turns it back on"
 	command glab "$@"
