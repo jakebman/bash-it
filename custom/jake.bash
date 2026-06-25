@@ -448,7 +448,11 @@ function mr-stashes {
 	#  from the current directory)
 	# Update: Unfortunately, the --X-prefix flags don't seem to apply here
 	# stash-show-fullpath = !git stash show --dst-prefix=\"$PWD\" --src-prefix=\"$PWD\"
-	mr-run stash show 2>/dev/null | grep -v ^mr\ run | grep -v ^No\ stash | uniq | pager
+	mr-run stash show 2>/dev/null |
+		grep -v ^mr\ run |
+		grep -v ^No\ stash |
+		uniq |
+		pager
 }
 
 function glab {
