@@ -28,6 +28,7 @@ prompt_setter() {
 	# Save history
 	_save-and-reload-history 1
 	# ${WSL_DISTRO_NAME} is provided by WSL
+	# ${VIRTUAL_ENV_PROMPT} is from python's venv
 	PS1="\n"
 	PS1+="($(clock_prompt))"
 	PS1+=" $(scm_char)"
@@ -35,7 +36,9 @@ prompt_setter() {
 	PS1+=" ${yellow}\w${reset_color}"
 	PS1+="$(scm_prompt_info)" # can be empty - adds its own preceeding space
 	PS1+="\n"
+	PS1+="${VIRTUAL_ENV_PROMPT+${bold_purple}}${VIRTUAL_ENV_PROMPT-}"
 	PS1+="${PROMPT_END}"
+	PS1+="${VIRTUAL_ENV_PROMPT+ ${bold_purple}→${reset_color}}"
 	PS1+=" "
 	PS2='> '
 	PS4='+ '
