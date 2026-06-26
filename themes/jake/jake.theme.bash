@@ -18,10 +18,6 @@
 PROMPT_END_CLEAN="${green}→${reset_color}"
 PROMPT_END_DIRTY="${red}→${reset_color}"
 
-function prompt_end() {
-	echo -e "$PROMPT_END"
-}
-
 prompt_setter() {
 	local exit_status=$?
 	if [[ $exit_status -eq 0 ]]; then
@@ -38,7 +34,7 @@ prompt_setter() {
 	PS1+=" [${blue}\u${reset_color}@${green}${WSL_DISTRO_NAME:-\H}${reset_color}]"
 	PS1+=" ${yellow}\w${reset_color}"
 	PS1+="$(scm_prompt_info)" # can be empty - adds its own preceeding space
-	PS1+="\n$(prompt_end) "
+	PS1+="\n${PROMPT_END} "
 	PS2='> '
 	PS4='+ '
 }
