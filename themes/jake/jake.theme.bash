@@ -34,7 +34,9 @@ prompt_setter() {
 	PS1+=" [${blue}\u${reset_color}@${green}${WSL_DISTRO_NAME:-\H}${reset_color}]"
 	PS1+=" ${yellow}\w${reset_color}"
 	PS1+="$(scm_prompt_info)" # can be empty - adds its own preceeding space
-	PS1+="\n${PROMPT_END} "
+	PS1+="\n"
+	PS1+="${PROMPT_END}"
+	PS1+=" "
 	PS2='> '
 	PS4='+ '
 }
