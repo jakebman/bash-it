@@ -489,7 +489,7 @@ function _jake-check-optional-tools() {
 		_jake-github-repo-release-urls junegunn/fzf | grep linux | grep amd | grep -v alligator # alligator is nonsense to remove highlighting
 		echo "plus the manpage:"
 		echo -en "\t"
-		echo 'wget --directory-prefix ${HOME}/bin/man/man1/ https://raw.githubusercontent.com/junegunn/fzf/master/man/man1/fzf.1 && mandb --user-db'
+		echo 'wget --timestamping --directory-prefix ${HOME}/bin/man/man1/ https://raw.githubusercontent.com/junegunn/fzf/master/man/man1/fzf.1 && mandb --user-db'
 	fi
 
 	if _command_exists helm; then
