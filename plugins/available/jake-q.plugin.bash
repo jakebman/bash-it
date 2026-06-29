@@ -92,6 +92,7 @@ if _command_exists kiro-cli; then
 		esac
 	}
 	alias Q=kiro
+	alias kiro-cli=kiro
 else
 	# Q can simply just be a safe quit
 	function Q {
