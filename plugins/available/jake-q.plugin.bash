@@ -51,11 +51,11 @@ function _kiro-cli-sessions-picker {
 			--accept-nth 1 \
 			--history "${JAKE_KIRO_HISTORY_FILE:-${XDG_STATE_HOME:-${HOME}/.local/state}/jake-j/kiro-history}" \
 			--header "Ctrl+Space to preview" \
-			--bind "ctrl-space:execute(echo preview: kiro-cli chat --resume-id {1} </dev/tty >/dev/tty)" \
+			--bind "ctrl-space:execute(kiro-cli chat --resume-id {1} </dev/tty >/dev/tty)" \
 			--bind "q:abort" \
 			--bind "change:unbind(q)" \
 			--bind "backward-eof:rebind(q)" \
-			--bind "enter:become(echo kiro-cli chat --resume-id {1} </dev/tty >/dev/tty)"
+			--bind "enter:become(kiro-cli chat --resume-id {1} </dev/tty >/dev/tty)"
 }
 function _kiro-cli-once {
 	about 'Run a single instance query to kiro; can use multiple bare words because of \$*'
