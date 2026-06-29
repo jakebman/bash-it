@@ -27,32 +27,34 @@ function _q-describe-parent() {
 	fi
 }
 
-# Easier access to Amazon Q, via the capital letter
-if _binary_exists q; then
-	alias Q='command q'
+if _command_exists kiro-cli; then
+	function kiro {
+		# TODO: enhancements to kiro-cli can be done here :D
+		kiro-cli "$@"
+	}
+	alias Q=kiro
+else
+	# Q can simply just be a safe quit
+	function Q {
+		echo "Heading back to \$HOME, like you might want"
+		echo "But probably please install kiro-cli"
+		if [ "x$PWD" != "x$HOME" ]; then
+			cd ~
+		fi
+	}
 fi
 
 unalias q
 function q() {
 	local parent_description
-	if [[ "$#" -ne 0 ]] && _binary_exists q; then
-		command q "$@"
+	if [[ "$#" -ne 0 ]]; then
+		# Trying to run a q/kiro-cli command
+		Q "$@"
 	elif shopt -q login_shell; then
 		# NB: this isn't *necessarily* the top-most bash. You can manually invoke a login shell
 		# wherever you like by invoking `bash --login`
 		echo "You're at a top-level or login shell. Exiting here will end the terminal session"
-		if _binary_exists q; then
-			echo 'Running `command q`, like you might want'
-			command q "$@"
-		elif _binary_exists kiro-cli; then
-			echo 'Running `kiro-cli`, like you might want'
-			kiro-cli "$@"
-		elif [ "x$PWD" != "x$HOME" ]; then
-			echo "Heading back to \$HOME, like you might want"
-			cd ~
-		else
-			echo "There's no Amazon Q, and you're \$HOME. If you know what you wanted to do, add it to this command!"
-		fi
+		Q "$@"
 		# or in terse phrasing like `logout` uses:
 		# echo "$0: is login shell. Use \`logout' or \`exit'"
 	elif parent_description=$(_q-describe-parent); then
