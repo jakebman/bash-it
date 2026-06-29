@@ -36,6 +36,27 @@ function _kiro-cli-sessions {
 				"    kiro-cli chat --resume-id \(.sessionId)"' |
 		bat --language=Markdown
 }
+function _kiro-cli-sessions-picker {
+	about "List the recent kiro sessions via fzf integration"
+	kiro-cli chat --list-sessions --format json |
+		jq --raw-output '.[0].sessions[] | "\(.sessionId)\t\(.title) (\(.source))"' |
+		fzf --delimiter="\t" \
+			--ansi \
+			--exit-0 \
+			--select-1 \
+			--no-sort \
+			--reverse \
+			--wrap \
+			--with-nth 2.. \
+			--accept-nth 1 \
+			--history "${JAKE_KIRO_HISTORY_FILE:-${XDG_STATE_HOME:-${HOME}/.local/state}/jake-j/kiro-history}" \
+			--header "Ctrl+Space to preview" \
+			--bind "ctrl-space:execute(echo preview: kiro-cli chat --resume-id {1} </dev/tty >/dev/tty)" \
+			--bind "q:abort" \
+			--bind "change:unbind(q)" \
+			--bind "backward-eof:rebind(q)" \
+			--bind "enter:become(echo kiro-cli chat --resume-id {1} </dev/tty >/dev/tty)"
+}
 function _kiro-cli-once {
 	about 'Run a single instance query to kiro; can use multiple bare words because of \$*'
 	kiro chat --no-interactive "$*"
@@ -53,6 +74,10 @@ if _command_exists kiro-cli; then
 				# known kiro command (or no command at all; or "DEFAULT", which would be odd(?), but works)
 				# List generated from `kiro-cli --help-all`
 				kiro-cli "$@"
+				;;
+			sessions-picker)
+				shift
+				_kiro-cli-sessions-picker "$@"
 				;;
 			sessions)
 				shift
