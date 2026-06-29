@@ -69,7 +69,7 @@ if _command_exists kiro-cli; then
 			init|theme|issue|login|logout|whoami|profile| \
 			user|doctor|launch|quit|restart|integrations| \
 			translate|dashboard|chat|mcp|inline|agent|acp| \
-			help|DEFAULT)
+			help|-*|DEFAULT)
 				# known kiro command (or no command at all; or "DEFAULT", which would be odd(?), but works)
 				# List generated from `kiro-cli --help-all`
 				kiro-cli "$@"
