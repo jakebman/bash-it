@@ -48,7 +48,6 @@ function _kiro-cli-sessions-picker {
 			--reverse \
 			--wrap \
 			--with-nth 2.. \
-			--accept-nth 1 \
 			--history "${JAKE_KIRO_HISTORY_FILE:-${XDG_STATE_HOME:-${HOME}/.local/state}/jake-j/kiro-history}" \
 			--header "Ctrl+Space to preview" \
 			--bind "ctrl-space:execute(kiro-cli chat --resume-id {1} </dev/tty >/dev/tty)" \
