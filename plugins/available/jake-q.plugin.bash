@@ -37,8 +37,8 @@ function _kiro-cli-sessions {
 		bat --language=Markdown
 }
 function _kiro-cli-once {
-	about "Run a single instance query to kiro"
-	kiro chat --no-interactive "$@"
+	about 'Run a single instance query to kiro; can use multiple bare words because of \$*'
+	kiro chat --no-interactive "$*"
 	# TODO: get the session id printed via _kiro-cli-sessions
 }
 
