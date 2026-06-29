@@ -27,10 +27,44 @@ function _q-describe-parent() {
 	fi
 }
 
+function _kiro-cli-sessions {
+	about "List the recent kiro sessions. TODO: fzf integration"
+	kiro-cli chat --list-sessions --format json |
+		jq --raw-output '.[0].sessions[:5][] |
+				"",
+				"# (\(.source|ascii_upcase)) \(.title)",
+				"    kiro-cli chat --resume-id \(.sessionId)"' |
+		bat --language=Markdown
+}
+function _kiro-cli-once {
+	about "Run a single instance query to kiro"
+	kiro chat --no-interactive "$@"
+	# TODO: get the session id printed via _kiro-cli-sessions
+}
+
 if _command_exists kiro-cli; then
 	function kiro {
-		# TODO: enhancements to kiro-cli can be done here :D
-		kiro-cli "$@"
+		case "${1-DEFAULT}" in
+			debug|settings|setup|update|diagnostic| \
+			init|theme|issue|login|logout|whoami|profile| \
+			user|doctor|launch|quit|restart|integrations| \
+			translate|dashboard|chat|mcp|inline|agent|acp| \
+			help|DEFAULT)
+				# known kiro command (or no command at all; or "DEFAULT", which would be odd(?), but works)
+				# List generated from `kiro-cli --help-all`
+				kiro-cli "$@"
+				;;
+			sessions)
+				shift
+				_kiro-cli-sessions "$@"
+				;;
+			once)
+				shift # to remove 'once'
+				;& # FALL-THROUGH!!!!
+			*)
+				_kiro-cli-once "$@"
+				;;
+		esac
 	}
 	alias Q=kiro
 else
