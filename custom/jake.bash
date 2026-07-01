@@ -538,6 +538,24 @@ function _fidget_options {
 	done
 }
 
+function _fidget_option_behaviors {
+	# Set by _fidget_options
+	local fast
+	_fidget_options "$@"
+
+	# local by our parent, but we output about it
+	if [ -n "$UPDATE_JUNK_DRAWER" ]; then
+		echo "Including Junk Drawer in update"
+	fi
+
+	if [[ -n "$fast" ]]; then
+		echo "$fast"
+	else
+		echo "Giving you a chance to cancel"
+		sleep 12
+	fi
+}
+
 function apt {
 	if [ 0 -eq "$#" ]; then
 		apt-up
@@ -551,18 +569,8 @@ function fidget {
 	echo "TODO: loop this into jake-maintain-system tech"
 
 	# set by _fidget_options. UPDATE_JUNK_DRAWER needs to be exported to mr up, invoked from `pull`
-	local fast
 	local -x UPDATE_JUNK_DRAWER
-	_fidget_options "$@"
-
-	[ -n "$UPDATE_JUNK_DRAWER" ] && echo "Including Junk Drawer in update"
-
-	if [[ -n "$fast" ]]; then
-		echo "$fast"
-	else
-		echo "Giving you a chance to cancel"
-		sleep 12
-	fi
+	_fidget_option_behaviors "$@"
 
 	jake-sdkman-update
 	# subshell. Automatically undoes the cd ~
