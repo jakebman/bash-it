@@ -326,6 +326,16 @@ function _is_flag {
 	return 0
 }
 
+# TODO: Duplicated code
+function _has_flags {
+	about "succeeds if any argument matches the /^-/ regex. Fails otherwise."
+	local arg
+	for arg; do # implicit in $@
+		[[ "x${arg}" =~ ^x- ]] && return 0
+	done
+	return 1
+}
+
 # TODO: this doesn't get automatic completion. Can we add some?
 function cherry-pick {
 	about "git cherry-pick, but if it's not a --continue/--abort/etc., try to include the (cherry picked from ...)"
@@ -336,10 +346,7 @@ function cherry-pick {
 	fi
 }
 
-# commit with one argument is either add/commit the file, or commit with the given message
-# TODO: in a situation where no flags are specified, -m is "$*", and we automatically add (addp?) any files mentioned.
-#        ... do we then addp, or call it good? I'd rather the second addp offer snippets rejected in the first
-#        Maybe only do the second addp if the stage is empty.
+# commit without any (non-transparent) flags means that any files mentioned are added and the -m is "$*"
 # TODO: move this function to a git-alias. Calling it will get the proper git squawking behavior
 # TODO: if no args, and the stage is empty, we should do an add -p, then continue on to the 'provide this commit message' step. Current behavior is 'status'
 # TODO: If this moves to a git alias (`git commit-like-jake-wants`), then I no longer need to suppress git squawk.
@@ -358,37 +365,38 @@ function commit {
 	# Internal banner note
 	local JAKE_BANNER_WHY="... TO COMMIT"
 
-	# exactly one argument, and it's not a flag. (don't eat --message=typo, for instance)
-	# TODO: if no args are flags, then the commit message is "$*", and any args-that-are-also-files are add-p'd
+	# No flags are passed - the commit message is "$*", and we implicitly addp any args that are files
 	# TODO: if there are no arguments at all, I want something like "here's the changes.. what's your message? what's to commit? are you sure you wanted that message?"
-	if [ "$#" -eq 1 ] && ! _is_flag "$1"; then
-		if [ -f "$1" ]; then
-			# is a file. add, then interactive commit
-			JAKE_SUPPRESS_GIT_SQUAWK=1 add "$1"
-			git commit
-		else
-			# is a commit message. Commit with that message
-
-			if [ -v args ]; then
-				: # TODO: this only really checks if I added *something* to args; not specifically '-a'
-			elif JAKE_SUPPRESS_GIT_SQUAWK=1 git diff --staged --no-renames --quiet; then
-				# No staged changes. Commit will fail. User probably wants to select some changes to add
-				# --no-renames tells git to identify a difference when one file is deleted and another added,
-				# even if those files "happen" to have the same contents. We positively want that behavior.
-				JAKE_SUPPRESS_GIT_SQUAWK=1 add # dunno which file you wanted, but go ahead and do an interactive add
-				# STILL no changes. Commit will obviously fail. User probably a little confused
-				if JAKE_SUPPRESS_GIT_SQUAWK=1 git diff --staged --no-renames --quiet; then
-					echo
-					echo "no changes for commit message '$1'. No commit created. Thank you."
-					echo
-					git diff --staged --quiet # get the git squawk, but only if the outer test failed
-					# TODO: no squawk occurs if Ctrl+C kills us
-					return 1
-				fi
+	if ! _has_flags "$@"; then
+		local arg added
+		for arg; do # implicit in "$@"
+			if [ -f "$arg" ]; then
+				# is a file. implicitly intend to add, then interactively add diffs from it
+				JAKE_SUPPRESS_GIT_SQUAWK=1 git add --intent-to-add "$arg"
+				JAKE_SUPPRESS_GIT_SQUAWK=1 addp "$arg"
+				added=yes
 			fi
-
-			git commit "${args[@]}" --message "$1"
+		done
+		if [ -v args ] || [ -v added ]; then
+			# We either have added flags, or specifically know we added files from $@
+			:
+		elif JAKE_SUPPRESS_GIT_SQUAWK=1 git diff --staged --no-renames --quiet; then
+			# No staged changes. Commit will fail. User probably wants to select some changes to add
+			# --no-renames tells git to identify a difference when one file is deleted and another added,
+			# even if those files "happen" to have the same contents. We positively want that behavior.
+			JAKE_SUPPRESS_GIT_SQUAWK=1 add # dunno which file you wanted, but go ahead and do an interactive add
+			# STILL no changes. Commit will obviously fail. User probably a little confused
+			if JAKE_SUPPRESS_GIT_SQUAWK=1 git diff --staged --no-renames --quiet; then
+				echo
+				echo "no changes for commit message '$1'. No commit created. Thank you."
+				echo
+				git diff --staged --quiet # get the git squawk, but only if the outer test failed
+				# TODO: no squawk occurs if Ctrl+C kills us
+				return 1
+			fi
 		fi
+
+		git commit "${args[@]}" --message "$*"
 	else
 		git commit "${args[@]}" "$@"
 	fi
