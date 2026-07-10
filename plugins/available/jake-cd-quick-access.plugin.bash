@@ -104,9 +104,20 @@ function _cd-to-single-completion {
 
 function _common-prefix-of-args {
 	about 'If an element of $@ is a common prefix of all others (modulo trailing slashes), print it'
-	local candidate="${1%/}" # with potential trailing slash removed
+	local candidate=${1%/} # with potential trailing slash removed
 	local elem
-	for elem in "$@"; do
+
+	# Start with (one of) the smalles string(s)
+	for elem; do # implicit in "$@"
+		# >= is *important*. We stripped candidate's trailing slash, but not elem's
+		# So elem could be specifically one character shorter than candidate, but have
+		# a trailing slash where candidate doesn't
+		if (( ${#candidate} >= ${#elem} )); then
+			candidate=${elem%/}
+		fi
+	done
+
+	for elem; do # implicit in "$@"
 		if [[ "$elem" != ${candidate}* ]]; then
 			elem="${elem%/}" # strip the potential trailing slash
 			if [[ "$candidate" != ${elem}* ]]; then
