@@ -2,6 +2,9 @@
 about-plugin "q - an exit that doesn't exit your login shell (this overrides the general q alias)"
 #NB: this is almost exactly the opposite behavior of bash's `logout` builtin
 
+# inspired by max-manwidth
+: ${MAX_KIROWIDTH:=100}
+
 function _q-describe-parent() {
 	about "figure out what the parent process is, describing it. Fail if it's a differen owner than this process"
 	local user cmd
@@ -64,6 +67,10 @@ function _kiro-cli-once {
 
 if _command_exists kiro-cli; then
 	function kiro {
+		if (( COLUMNS > MAX_KIROWIDTH )); then
+			local STTY_SAVED=$(stty --save)
+			stty columns "$MAX_KIROWIDTH"
+		fi
 		case "${1-DEFAULT}" in
 			debug|settings|setup|update|diagnostic| \
 			init|theme|issue|login|logout|whoami|profile| \
@@ -89,6 +96,10 @@ if _command_exists kiro-cli; then
 				_kiro-cli-once "$@"
 				;;
 		esac
+		if [ -v STTY_SAVED ]; then
+			# Restore previous stty settings
+			stty "$STTY_SAVED"
+		fi
 	}
 	alias Q=kiro
 	alias kiro-cli=kiro
