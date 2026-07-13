@@ -32,18 +32,18 @@ function _q-describe-parent() {
 
 function _kiro-cli-sessions {
 	about "List the recent kiro sessions. TODO: fzf integration"
-	kiro-cli chat --list-sessions --format json |
-		jq --raw-output '.[0].sessions[:5][] |
+	kiro-cli chat --list-sessions --format json \
+		| jq --raw-output '.[0].sessions[:5][] |
 				"",
 				"# (\(.source|ascii_upcase)) \(.title)",
-				"    kiro-cli chat --resume-id \(.sessionId)"' |
-		bat --language=Markdown
+				"    kiro-cli chat --resume-id \(.sessionId)"' \
+		| bat --language=Markdown
 }
 function _kiro-cli-sessions-picker {
 	about "List the recent kiro sessions via fzf integration"
-	kiro-cli chat --list-sessions --format json |
-		jq --raw-output '.[0].sessions[] | "\(.sessionId)\t\(.title) (\(.source))"' |
-		fzf --delimiter="\t" \
+	kiro-cli chat --list-sessions --format json \
+		| jq --raw-output '.[0].sessions[] | "\(.sessionId)\t\(.title) (\(.source))"' \
+		| fzf --delimiter="\t" \
 			--ansi \
 			--exit-0 \
 			--select-1 \
@@ -67,22 +67,22 @@ function _kiro-cli-once {
 
 if _command_exists kiro-cli; then
 	function kiro {
-		if (( COLUMNS > MAX_KIROWIDTH )); then
+		if ((COLUMNS > MAX_KIROWIDTH)); then
 			local STTY_SAVED=$(stty --save)
 			stty columns "$MAX_KIROWIDTH"
 		fi
 		case "${1-DEFAULT}" in
-			debug|settings|setup|update|diagnostic| \
-			init|theme|issue|login|logout|whoami|profile| \
-			user|doctor|launch|quit|restart|integrations| \
-			translate|dashboard|chat|mcp|inline|agent|acp| \
-			help|-*|DEFAULT)
+			debug | settings | setup | update | diagnostic | \
+				init | theme | issue | login | logout | whoami | profile | \
+				user | doctor | launch | quit | restart | integrations | \
+				translate | dashboard | chat | mcp | inline | agent | acp | \
+				help | -* | DEFAULT)
 				# known kiro command (or no command at all; or "DEFAULT", which would be odd(?), but works)
 				# List generated from `kiro-cli --help-all`
 				kiro-cli "$@"
 				;;
-			session-picker|sessions-picker|\
-			session-chooser|sessions-chooser)
+			session-picker | sessions-picker | \
+				session-chooser | sessions-chooser)
 				shift
 				_kiro-cli-sessions-picker "$@"
 				;;
@@ -92,7 +92,7 @@ if _command_exists kiro-cli; then
 				;;
 			once)
 				shift # to remove 'once'
-				;& # FALL-THROUGH!!!!
+				;&    # FALL-THROUGH!!!!
 			*)
 				_kiro-cli-once "$@"
 				;;
