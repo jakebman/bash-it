@@ -81,7 +81,8 @@ if _command_exists kiro-cli; then
 				# List generated from `kiro-cli --help-all`
 				kiro-cli "$@"
 				;;
-			session?(s)-picker|session?(s)-chooser)
+			session-picker|sessions-picker|\
+			session-chooser|sessions-chooser)
 				shift
 				_kiro-cli-sessions-picker "$@"
 				;;
