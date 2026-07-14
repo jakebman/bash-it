@@ -46,6 +46,14 @@ function xxd {
 	fi
 }
 
+function strings {
+	about 'automatically page strings output'
+	if [[ -t 1 ]]; then
+		command strings "$@" | pager
+	else
+		command strings "$@"
+	fi
+}
 
 # formerly a simple `alias cat='bat --plain'`, but that doesn't handle this no-args use case
 # There's also an "or cd into it if it's a directory" feature
