@@ -9,9 +9,15 @@ function mvn-colored {
 
 # Implicit paging!
 function mvn {
+	# default arguments
+	if [[ 0 -eq "$#" ]]; then
+		>&2 echo 'Jake: assuming `mvn clean install`'
+		set -- clean install
+	fi
+
 	# output to terminal
 	if [ -t 1 ]; then
-		echo "Jake: paging maven output :D"
+		>&2 echo "Jake: paging maven output :D"
 
 		local -
 		set -o pipefail
