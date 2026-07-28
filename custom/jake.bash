@@ -565,7 +565,7 @@ function apt {
 }
 
 function _fidget {
-	type fidget | bat --language bash --style=plain --paging=never
+	BAT_PAGER= type fidget
 	echo "TODO: loop this into jake-maintain-system tech"
 
 	# set by _fidget_options. UPDATE_JUNK_DRAWER needs to be exported to mr up, invoked from `pull`
