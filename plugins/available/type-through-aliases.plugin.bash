@@ -77,8 +77,8 @@ function jake_type {
 			_type_with_formatting "$@"
 			# shfmt seems to be my best parser to find the first word of the first command in the alias
 			# TODO: consider recursing into *all* statements in `alias a='foo; bar; baz'`. Use read -d "\0" and jq's --raw-output0
-			# TODO: this doesn't do well on `time foo` either
-			next=$(shfmt <<< "${BASH_ALIASES[${1}]}" --to-json | jq --raw-output '.Stmts[0].Cmd.Args[0].Parts[0].Value')
+			# NB: we check .Stmt.Cmd because `time foo` is a TimeClause which contains a CallExpr
+			next=$(shfmt <<< "${BASH_ALIASES[${1}]}" --to-json | jq --raw-output '.Stmts[0].Cmd|(.Stmt.Cmd // .).Args[0].Parts[0].Value')
 			_type_with_formatting "$next"
 			;;
 		*)

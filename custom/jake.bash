@@ -564,7 +564,7 @@ function apt {
 	fi
 }
 
-function fidget {
+function _fidget {
 	type fidget | bat --language bash --style=plain --paging=never
 	echo "TODO: loop this into jake-maintain-system tech"
 
@@ -587,8 +587,8 @@ function fidget {
 
 	echo # spacing
 	_mr-able
-	echo "update completed at $(date)"
 }
+alias fidget='time _fidget'
 alias fid=fidget
 alias f=fidget
 alias ff="fidget -f" # --fast
