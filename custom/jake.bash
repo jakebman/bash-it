@@ -58,6 +58,8 @@ _BASH_IT_AWS_AUTOLOGIN_EXCEPTIONS+=(login loggedin logout)
 alias iotop='sudo iotop'
 alias iftop='sudo iftop'
 
+alias snap='sudo snap' # Ditto, but not passwordless
+
 # Allow j!! to work for a previous ack query
 alias jack=j
 # I want j!! to work for a previous pj query, too
