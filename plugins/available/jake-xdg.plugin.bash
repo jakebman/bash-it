@@ -178,7 +178,7 @@ export COMPLETE_ALIAS_DIR="${JAKE_XDG_BIN_DIR}/complete-alias"
 export SDKMAN_DIR="${JAKE_XDG_BIN_DIR}/sdkman"
 
 # ref https://askubuntu.com/questions/882562/how-can-i-change-or-hide-the-snap-directory
-[ -d ~/snap ] && _log_warn 'consider hiding your ~/snap directory by running `sudo snap set system experimental.hidden-snap-folder=true`'
+[ -d ~/snap ] && _log_warning 'consider hiding your ~/snap directory by running `sudo snap set system experimental.hidden-snap-folder=true`'
 
 # XDG list:
 # .aws - not configurable. The AWS_CONFIG_FILE and AWS_SHARED_CREDENTIALS_FILE can be configured, but not for instance .aws/cli/alias
