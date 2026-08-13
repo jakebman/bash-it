@@ -29,7 +29,10 @@ prompt_setter() {
 	_save-and-reload-history 1
 	# ${WSL_DISTRO_NAME} is provided by WSL
 	# ${VIRTUAL_ENV_PROMPT} is from python's venv
-	PS1="\n"
+	PS1=""
+	if ! [ -v INTELLIJ_TERMINAL_COMMAND_BLOCKS_REWORKED ]; then
+		PS1+="\n"
+	fi
 	PS1+="($(clock_prompt))"
 	PS1+=" $(scm_char)"
 	PS1+=" [${blue}\u${reset_color}@${green}${WSL_DISTRO_NAME:-\H}${reset_color}]"
