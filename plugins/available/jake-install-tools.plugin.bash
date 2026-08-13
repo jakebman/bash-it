@@ -749,8 +749,11 @@ function _jake-check-optional-tools() {
 		echo "Nothing to do for jdtls java language server"
 	else
 		echo "Consider installing https://github.com/eclipse-jdtls/eclipse.jdt.ls for kiro-cli's /code integration"
+		echo -en "\t"
 		echo "Grab a tar.gz from  http://download.eclipse.org/jdtls/milestones/"
+		echo -en "\t"
 		echo "unzip it to ~/.local/bin/"
+		echo -en "\t"
 		echo "then (cd ~/.local/bin; ln -s java-lang-server/bin/jdtls)"
 	fi
 
