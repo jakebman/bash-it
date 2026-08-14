@@ -598,8 +598,13 @@ alias ffa="fidget -fa"
 
 alias utc='date --utc'
 function epoch {
-	date -d @"$1"
-	date -d @"$(( $1 / 1000 ))"
+	if (( $# )) ; then
+		date -d @"$1"
+		date -d @"$(( $1 / 1000 ))"
+	else
+		date +'%s'
+		utc
+	fi
 }
 
 alias jake-todo='ls-files | grep jake | j -x TODO'
