@@ -31,7 +31,13 @@ if NOTEPAD=$(PATH="/mnt/c/Program Files/Notepad++:/mnt/c/Program Files (x86)/Not
 fi
 unset NOTEPAD
 
-alias explorer=/mnt/c/Windows/explorer.exe
+function explorer {
+	if ! (( $# )); then
+		# no args - assume pwd
+		set -- .
+	fi
+	/mnt/c/Windows/explorer.exe "$@"
+}
 alias wsl=/mnt/c/Windows/System32/wsl.exe
 alias winmerge="/mnt/c/Program\\ Files/WinMerge/WinMergeU.exe"
 alias winget="${WSL_WINDOWS_USER_HOME}/AppData/Local/Microsoft/WindowsApps/winget.exe"
