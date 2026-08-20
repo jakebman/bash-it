@@ -495,8 +495,7 @@ function mrs {
 	fi
 
 	if git remote -v | grep --quiet gitlab; then
-		# view all online via:
-		# browser "$(glab repo view --output=json --jq='.web_url+"/-/merge_requests"')"
+		: "browse all online via:" browser "$(glab repo view --output=json --jq='.web_url+"/-/merge_requests"')"
 		glab mr "$action" "$@"
 	else
 		gh pr "$action" "$@"
