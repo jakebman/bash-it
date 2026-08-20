@@ -20,6 +20,22 @@ PROMPT_END_DIRTY="${red}→${reset_color}"
 
 prompt_setter() {
 	local exit_status=$?
+
+	# Microsoft Intelligent Terminal integration:
+	printf '\033]133;D;%s\007' "$exit_status"
+	printf '\033]9;9;%s\007' "${PWD:-}"
+	# Comment copied from ~/.intelligent-terminal/shell-integration_v3.sh:
+	# OSC 9001;ShellType — report shell identity each prompt so the terminal
+	# always knows which shell owns the pane, even after a nested shell exits.
+	# Under WSL, $WSL_DISTRO_NAME is set so we report "wsl:<distro>"; plain
+	# (Git) bash reports "bash".
+	if [ -n "${WSL_DISTRO_NAME:-}" ]; then
+		printf '\033]9001;ShellType;wsl:%s;%s\007' "$WSL_DISTRO_NAME" "${BASH_VERSION:-}"
+	else
+		printf '\033]9001;ShellType;bash;%s\007' "${BASH_VERSION:-}"
+	fi
+	printf '\033]133;A\007'
+
 	if [[ $exit_status -eq 0 ]]; then
 		PROMPT_END=$PROMPT_END_CLEAN
 	else
