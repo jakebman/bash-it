@@ -51,10 +51,10 @@ prompt_setter() {
 	fi
 	PS1+="($(clock_prompt))"
 	PS1+=" $(scm_char)"
-	PS1+=" [${blue}\u${reset_color}@${green}${WSL_DISTRO_NAME:-\H}${reset_color}]"
-	PS1+=" ${yellow}\w${reset_color}"
+	PS1+=" [${blue}\u${reset_color}@${green}${WSL_DISTRO_NAME:-\H}${reset_color}]" # username@hostname, but use ws
+	PS1+=" ${yellow}\w${reset_color}" # Working dir
 	PS1+="$(scm_prompt_info)" # can be empty - adds its own preceeding space
-	PS1+="\n"
+	PS1+="\n" # newline
 	PS1+="${VIRTUAL_ENV_PROMPT+${bold_purple}}${VIRTUAL_ENV_PROMPT-}"
 	PS1+="${PROMPT_END}"
 	PS1+="${VIRTUAL_ENV_PROMPT+ ${bold_purple}→${reset_color}}"
