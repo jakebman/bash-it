@@ -20,6 +20,21 @@ if [ -d "${XDG_CONFIG_HOME:-${HOME}/.config}/jake/windows-user-home" ]; then
 fi
 export KUBECONFIG
 
+function unsafe_source_envfile {
+	local -; # preserve set -o flags after this function ends
+	set -o allexport
+	source "${1?need a file}"
+}
+
+if [ -f ~/.kiro/mcp-secrets.env ]; then
+	# TODO: this is quick and dirty
+	if [[ "700 jakebman 755 jakebman 600 jakebman " = "$(stat --printf '%a %U ' ~ ~/.kiro ~/.kiro/mcp-secrets.env)" ]]; then
+		unsafe_source_envfile ~/.kiro/mcp-secrets.env
+	else
+		_log_warn "~/.kiro/mcp-secrets.env exists, but has the wrong permission or ownership up its parents"
+	fi
+fi
+
 if [ -d ~/wsl-projects/figlet ]; then
 	# this is a git repo (git@github.com:Sepatu-Bot/figlet.git) which has a lot of extra fonts
 	export FIGLET_FONTDIR=~/wsl-projects/figlet
