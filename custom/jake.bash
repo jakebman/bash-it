@@ -28,7 +28,7 @@ function unsafe_source_envfile {
 
 if [ -f ~/.kiro/mcp-secrets.env ]; then
 	# TODO: this is quick and dirty
-	if [[ "700 jakebman 755 jakebman 600 jakebman " = "$(stat --printf '%a %U ' ~ ~/.kiro ~/.kiro/mcp-secrets.env)" ]]; then
+	if [[ "700 [jakebman] [directory] 755 [jakebman] [directory] 600 [jakebman] [regular file] " = "$(stat --printf '%a [%U] [%F] ' ~ ~/.kiro ~/.kiro/mcp-secrets.env)" ]]; then
 		unsafe_source_envfile ~/.kiro/mcp-secrets.env
 	else
 		_log_warn "~/.kiro/mcp-secrets.env exists, but has the wrong permission or ownership up its parents"
