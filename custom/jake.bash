@@ -599,7 +599,7 @@ function _fidget {
 	# OTOH, free --include-pinned
 	if _command_exists winget &> /dev/null; then
 		echo "winget exists - here's the update"
-		winget
+		winget 2>/dev/null
 	fi
 
 	echo # spacing
