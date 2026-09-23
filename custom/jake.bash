@@ -62,7 +62,6 @@ fi
 
 # The python library `webbrowser` has some weird hiccups. Setting this environment variable
 # allows the aws cli and my ~/bin/splunk tool to avoid experiencing an `tcgetpgrp failed: Not a tty` error
-# (I no longer need to set AWS_BROWSER, as it defaults to BROWSER)
 export BROWSER=wslview
 
 _BASH_IT_AWS_AUTOLOGIN_EXCEPTIONS+=(login loggedin logout)
