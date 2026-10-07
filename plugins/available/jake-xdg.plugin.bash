@@ -21,7 +21,8 @@ about-plugin 'Set certain environment variables to make their corresponding apps
 # And instead relying on curl to use its primary choice for curlrc: `1) "$CURL_HOME/.curlrc"`, per the manpage
 export CURL_HOME="${XDG_CONFIG_HOME}/curl"
 export KIRO_HOME="${XDG_CONFIG_HOME}/kiro"
-# lol - less *isn't* documented to require XDG_CONFIG_HOME to be set... but it won't find ${XDG_CONFIG_HOME:-~/.config}/lesskey if XDG_CONFIG_HOME isn't set
+# lol - less *isn't* documented to require XDG_CONFIG_HOME to be exported to it...
+# but it won't find ${XDG_CONFIG_HOME:-~/.config}/lesskey if XDG_CONFIG_HOME isn't set (it will use ~/.lesskey)
 export LESSKEYIN="${XDG_CONFIG_HOME}/lesskey"
 export ACKRC="${XDG_CONFIG_HOME}/ack/ackrc"
 export WGETRC="${XDG_CONFIG_HOME}/wget/wgetrc"
@@ -37,6 +38,7 @@ export GG_USER_HOME_DIR="${XDG_CONFIG_HOME}/ggshield"
 export NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME}/npm/npmrc"
 
 # TODO: it'd be nice to have this set BEFORE bash starts, but hey, that's what `bind -f` is for!
+# TODO: dumb question, but why did I feel the need to export this? Please doc why, or don't export and doc why not
 export INPUTRC="${XDG_CONFIG_HOME}/inputrc"
 [ -f "$INPUTRC" ] && bind -f "$INPUTRC"
 
