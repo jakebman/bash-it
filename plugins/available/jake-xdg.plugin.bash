@@ -20,6 +20,7 @@ about-plugin 'Set certain environment variables to make their corresponding apps
 # So, I'm storing a symlink from "${XDG_CONFIG_HOME}/curl/.curlrc" to {the same, but without a dot} in my dotfiles repo
 # And instead relying on curl to use its primary choice for curlrc: `1) "$CURL_HOME/.curlrc"`, per the manpage
 export CURL_HOME="${XDG_CONFIG_HOME}/curl"
+export KIRO_HOME="${XDG_CONFIG_HOME}/kiro"
 # lol - less *isn't* documented to require XDG_CONFIG_HOME to be set... but it won't find ${XDG_CONFIG_HOME:-~/.config}/lesskey if XDG_CONFIG_HOME isn't set
 export LESSKEYIN="${XDG_CONFIG_HOME}/lesskey"
 export ACKRC="${XDG_CONFIG_HOME}/ack/ackrc"
