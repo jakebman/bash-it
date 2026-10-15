@@ -39,6 +39,7 @@ function explorer {
 	/mnt/c/Windows/explorer.exe "$@"
 }
 alias wsl=/mnt/c/Windows/System32/wsl.exe
+alias wslc='/mnt/c/Program\ Files/WSL/wslc.exe'
 alias winmerge='/mnt/c/Program\ Files/WinMerge/WinMergeU.exe'
 alias winget="${WSL_WINDOWS_USER_HOME}/AppData/Local/Microsoft/WindowsApps/winget.exe"
 alias clip=/mnt/c/Windows/System32/clip.exe
