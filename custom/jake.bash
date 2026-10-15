@@ -95,6 +95,7 @@ export MAVEN_ARGS="-T1C"
 
 # Get timing output in maven. Doesn't require maven >= 3.9 (sets java system properties, not maven switches)
 MAVEN_OPTS+=" -Dorg.slf4j.simpleLogger.showDateTime=true -Dorg.slf4j.simpleLogger.dateTimeFormat=HH:mm:ss.SSS"
+MAVEN_OPTS+=" -Daether.remoteRepositoryFilter.prefixes=false" # prevent issues if your artifactory (like Charter's) has a misbehaving prefix file
 export MAVEN_OPTS
 
 if [ -v LESS ]; then
