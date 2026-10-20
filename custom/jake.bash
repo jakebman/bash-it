@@ -2,7 +2,7 @@
 export EDITOR=vim
 export VISUAL=vim
 export PAGER=less
-export FIND_PAGER=jaketree # jake-implicit-commands
+export FIND_PAGER='JAKETREE_PAGER=${MANPAGER} jaketree' # jake-implicit-commands
 export BASH_IT_CURL_PAGER='bat --style=numbers'
 export BASH_IT_AWS_BROWSER=aws-login-browser
 [ -f "${HOME}/.config/lesskey-no-gotoend-on-q" ] && export MANPAGER="less --lesskey-src '${HOME}/.config/lesskey-no-gotoend-on-q'"
