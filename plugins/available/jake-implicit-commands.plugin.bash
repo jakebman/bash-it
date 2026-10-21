@@ -310,6 +310,19 @@ function delta {
 	fi
 }
 
+function _find_pager {
+	eval "${FIND_PAGER:-pager}"
+}
+
+function find {
+	about 'paginate (following ${FIND_PAGER-pager}) find output to the terminal'
+	if [ -t 1 ]; then
+		command find "$@" | _find_pager
+	else
+		command find "$@"
+	fi
+}
+
 function ltree {
 	about "paginate (colored) tree output through your pager"
 	# tree will be overwitten below, so 100% NEED to get past that with `command`
