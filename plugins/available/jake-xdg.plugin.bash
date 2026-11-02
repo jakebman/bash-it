@@ -68,7 +68,16 @@ export INPUTRC="${XDG_CONFIG_HOME}/inputrc"
 # Even more! AWS recommends this variable as well:
 # https://docs.aws.amazon.com/sdkref/latest/guide/jvm-system-properties.html#:~:text=With%20an%20environment%20variable
 # TODO: Some tools ref JAVA_OPTS, which is a conventional name for "args I'll add to my call to java (`java --my-args $JAVA_OPTS your.jar`)"
-JAVA_TOOL_OPTIONS+=" -Djava.util.prefs.userRoot='${XDG_CONFIG_HOME}'/java"
+java_config_home="${XDG_CONFIG_HOME}/java"
+JAVA_TOOL_OPTIONS+=" -Djava.util.prefs.userRoot='${java_config_home}'"
+java_fontconfig="${java_config_home}/fontconfig.properties"
+if [ -f "$java_fontconfig" ]; then
+	JAVA_TOOL_OPTIONS+=" -Dsun.awt.fontconfig='${java_fontconfig}'"
+else
+	_log_warning "Java UI commands (jmeter) might generate ~/.java/fonts if you don't have ${java_fontconfig}. Consider generating it via gen-fontconfig"
+fi
+
+unset java_config_home java_fontconfig
 export JAVA_TOOL_OPTIONS
 
 ## XDG_DATA_HOME
