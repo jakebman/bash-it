@@ -6,8 +6,13 @@ about-plugin 'Allow certain folders to always remain valid `cd` targets, from an
 # 2. Change cd so any single-word target that doesn't exist from `.` gets an implicit -P
 
 # "Append the quick-access folder to the cd path"
-# Notably, this also automagically creates CDPATH with the initial "." entry, because
-# "A null directory name is the same as the current directory", per `help cd`
+# We also default CDPATH to the default "." entry, because even though
+# "A null directory name is the same as the current directory", per `help cd`,
+# _comp_cmd_cd (found via `complete -p cd`) treats that as if it were the root directory. Boo :(.
+# This is cleaner as two lines instead of trying to cram all that into one unreadable line:
+# CDPATH="${CDPATH-.}:${XDG_CONFIG_HOME:-${HOME}/.config}/cd/quick-access"
+
+: ${CDPATH:=.}
 CDPATH+=":${XDG_CONFIG_HOME:-${HOME}/.config}/cd/quick-access"
 
 # TODO: this would be cool to accept the shortest suggestion if it's a prefix of all others
