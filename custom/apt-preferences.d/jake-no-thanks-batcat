@@ -5,5 +5,5 @@
 # Learn more from https://unix.stackexchange.com/questions/692634/restrict-which-packages-are-installable-from-a-repository
 
 Package: bat
-Pin: release n=noble
+Pin: release n=resolute
 Pin-Priority: 50
